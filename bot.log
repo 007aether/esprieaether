@@ -1,0 +1,587 @@
+nohup: les entrées sont ignorées
+[+] AETHER Autonomous Brain System is running 24/7...
+eaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 6, in <module>
+    from trading.trader import get_okx_market_data
+ImportError: cannot import name 'get_okx_market_data' from 'trading.trader' (/home/esprieaether/AETHER_V8/src/trading/trader.py)
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 8, in <module>
+    from sys_agent import execute_shell_command, take_system_screenshot
+  File "/home/esprieaether/AETHER_V8/src/sys_agent.py", line 3, in <module>
+    import pyautogui
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/pyautogui/__init__.py", line 246, in <module>
+    import mouseinfo
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/mouseinfo/__init__.py", line 223, in <module>
+    _display = Display(os.environ['DISPLAY'])
+                       ~~~~~~~~~~^^^^^^^^^^^
+  File "<frozen os>", line 717, in __getitem__
+KeyError: 'DISPLAY'
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 35, in my_wallet_cmd
+    w = get_existing_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 30, in get_existing_wallet
+    return create_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 11, in create_wallet
+    Account.enable_unaudited_hwtng()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 44, in new_wallet_cmd
+    w = create_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 11, in create_wallet
+    Account.enable_unaudited_hwtng()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 35, in my_wallet_cmd
+    w = get_existing_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 30, in get_existing_wallet
+    return create_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 11, in create_wallet
+    Account.enable_unaudited_hwtng()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 35, in my_wallet_cmd
+    w = get_existing_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 30, in get_existing_wallet
+    return create_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 11, in create_wallet
+    Account.enable_unaudited_hwtng()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
+[+] AETHER Autonomous Wallet System is running 24/7...
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 39, in structure_cmd
+    w = get_existing_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 30, in get_existing_wallet
+    return create_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 11, in create_wallet
+    Account.enable_unaudited_hwtng()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
+[+] AETHER Ultimate Stealth & Multi-Agent System is running 24/7...
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+[+] AETHER Lab & Software Factory is running 24/7...
+[+] AETHER Lab & Software Factory is running 24/7...
+[+] EsprieAether Jarvis Unified System is running 24/7...
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+fatal : ni ceci ni aucun de ses répertoires parents (jusqu'au point de montage /) n'est un dépôt git
+Arrêt à la limite du système de fichiers (GIT_DISCOVERY_ACROSS_FILESYSTEM n'est pas défini).
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 48, in structure_cmd
+    w = get_existing_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 30, in get_existing_wallet
+    return create_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 11, in create_wallet
+    Account.enable_unaudited_hwtng()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+    raise exc
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpcore/_async/connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/usr/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/request/_httpxrequest.py", line 279, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 72, in makelab_cmd
+    await u.message.reply_text(f"🧪 **[Jarvis Lab Factory]** جاري توليد الأداة (`{tool_type}`)...")
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/_message.py", line 2228, in reply_text
+    return await self.get_bot().send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<21 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_extbot.py", line 3150, in send_message
+    return await super().send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<23 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/_bot.py", line 1138, in send_message
+    return await self._send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<21 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_extbot.py", line 638, in _send_message
+    result = await super()._send_message(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<23 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/_bot.py", line 828, in _send_message
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/_bot.py", line 712, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_extbot.py", line 378, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/_bot.py", line 741, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 305, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/request/_httpxrequest.py", line 296, in do_request
+    raise TimedOut from err
+telegram.error.TimedOut: Timed out
