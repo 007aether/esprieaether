@@ -615,3 +615,64 @@ Traceback (most recent call last):
     Account.enable_unaudited_hwtng()
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
+[master f66aa1d] EsprieAether Jarvis: Generated optimizer
+ 3 files changed, 49 insertions(+)
+ create mode 100755 autonomous_loop.py
+fatal : Pas de destination pour pousser.
+Spécifiez une URL depuis la ligne de commande ou configurez un dépôt distant en utilisant
+
+    git remote add <nom> <url>
+
+et poussez alors en utilisant le dépôt distant
+
+    git push <nom>
+
+[+] EsprieAether Jarvis Unified System is running 24/7...
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 43, in structure_cmd
+    w = get_existing_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 30, in get_existing_wallet
+    return create_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 11, in create_wallet
+    Account.enable_unaudited_hwtng()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
+[+] EsprieAether Jarvis Fully Fixed & Running 24/7...
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 36, in structure_cmd
+    w = get_existing_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 30, in get_existing_wallet
+    return create_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 11, in create_wallet
+    Account.enable_unaudited_hwtng()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
+[+] EsprieAether Jarvis Fast Core is running 24/7...
+[+] EsprieAether Real Core is running...
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 33, in structure_cmd
+    w = get_existing_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 30, in get_existing_wallet
+    return create_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 11, in create_wallet
+    Account.enable_unaudited_hwtng()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
