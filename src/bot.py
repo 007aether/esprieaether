@@ -10,6 +10,7 @@ from trading.trader import get_okx_market_data
 from security_agent import activate_stealth_and_defense
 from lab_generator import generate_custom_tool
 from jarvis_bridge import query_open_jarvis, get_jarvis_status
+from airdrop_farmer import execute_farming_cycle
 from sys_agent import execute_shell_command
 
 TELEGRAM_TOKEN = "8366524959:AAGvIB-bS-NQ2aQxXedSPYc-3UHKi1ziNXc"
@@ -19,8 +20,9 @@ async def start(u: Update, c: ContextTypes.DEFAULT_TYPE):
     global ADMIN_CHAT_ID
     ADMIN_CHAT_ID = u.effective_chat.id
     msg = (
-        "⚡🤖 **ESPRIEAETHER - REAL CORE (NO MOCK)**\n\n"
-        "النظام يعمل بالحقيقة المطلقة والصلاحيات الكاملة.\n\n"
+        "⚡🤖 **ESPRIEAETHER - REAL CORE (AIRDROP ENGINE)**\n\n"
+        "النظام يعمل بالحقيقة المطلقة وصيد الأيردروبات مفعل.\n\n"
+        "/airdrop - فحص وعرض أحدث أيردروبات وتستنت العملات الحقيقية 🪂\n"
         "/structure - حالة النظام الحقيقية 📊\n"
         "/okx - السعر الحقيقي لـ Bitcoin من OKX 📈\n"
         "/security - فحص الأمان الحقيقي للبيسي 🛡️\n"
@@ -28,6 +30,11 @@ async def start(u: Update, c: ContextTypes.DEFAULT_TYPE):
         "/cmd [أمر] - تنفيذ أوامر النظام مباشرة ⚡"
     )
     await u.message.reply_text(msg)
+
+async def airdrop_cmd(u: Update, c: ContextTypes.DEFAULT_TYPE):
+    await u.message.reply_text("🪂 جاري فحص شبكات Testnet وفرص الأيردروبات الحقيقية...")
+    result = execute_farming_cycle()
+    await u.message.reply_text(result)
 
 async def structure_cmd(u: Update, c: ContextTypes.DEFAULT_TYPE):
     w = get_existing_wallet()
@@ -66,11 +73,12 @@ if __name__ == '__main__':
     app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
     
     commands = [
-        ("start", start), ("structure", structure_cmd), ("okx", okx_trade_cmd),
-        ("security", security_cmd), ("makelab", makelab_cmd), ("cmd", cmd_execution)
+        ("start", start), ("airdrop", airdrop_cmd), ("structure", structure_cmd),
+        ("okx", okx_trade_cmd), ("security", security_cmd), ("makelab", makelab_cmd),
+        ("cmd", cmd_execution)
     ]
     for cmd, func in commands:
         app.add_handler(CommandHandler(cmd, func))
         
-    print("[+] EsprieAether Real Core is running...")
+    print("[+] EsprieAether Real Airdrop Engine is running...")
     app.run_polling()

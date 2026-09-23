@@ -676,3 +676,32 @@ Traceback (most recent call last):
     Account.enable_unaudited_hwtng()
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
+[master 7c35063] EsprieAether Real Sync: optimizer
+ 6 files changed, 105 insertions(+), 113 deletions(-)
+fatal : Pas de destination pour pousser.
+Spécifiez une URL depuis la ligne de commande ou configurez un dépôt distant en utilisant
+
+    git remote add <nom> <url>
+
+et poussez alors en utilisant le dépôt distant
+
+    git push <nom>
+
+[+] EsprieAether Real Core is running...
+No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1315, in process_update
+    await coroutine
+  File "/home/esprieaether/AETHER_V8/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esprieaether/AETHER_V8/src/bot.py", line 36, in airdrop_cmd
+    result = execute_farming_cycle()
+  File "/home/esprieaether/AETHER_V8/src/airdrop_farmer.py", line 10, in execute_farming_cycle
+    wallet = get_existing_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 30, in get_existing_wallet
+    return create_wallet()
+  File "/home/esprieaether/AETHER_V8/src/wallet/manager.py", line 11, in create_wallet
+    Account.enable_unaudited_hwtng()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Account' has no attribute 'enable_unaudited_hwtng'
