@@ -8,9 +8,7 @@ from wallet.manager import get_existing_wallet
 from github_agent import get_github_status, auto_commit_and_push
 from trading.trader import get_okx_market_data
 from security_agent import activate_stealth_and_defense
-from lab_generator import generate_custom_tool
-from jarvis_bridge import query_open_jarvis, get_jarvis_status
-from airdrop_farmer import execute_farming_cycle
+from airdrop_executor import execute_testnet_interaction
 from sys_agent import execute_shell_command
 
 TELEGRAM_TOKEN = "8366524959:AAGvIB-bS-NQ2aQxXedSPYc-3UHKi1ziNXc"
@@ -20,21 +18,21 @@ async def start(u: Update, c: ContextTypes.DEFAULT_TYPE):
     global ADMIN_CHAT_ID
     ADMIN_CHAT_ID = u.effective_chat.id
     msg = (
-        "⚡🤖 **ESPRIEAETHER - REAL CORE (AIRDROP ENGINE)**\n\n"
-        "النظام يعمل بالحقيقة المطلقة وصيد الأيردروبات مفعل.\n\n"
-        "/airdrop - فحص وعرض أحدث أيردروبات وتستنت العملات الحقيقية 🪂\n"
+        "⚡🤖 **ESPRIEAETHER - REAL AGENT CORE**\n\n"
+        "النظام يعمل بالوكلاء البرمجيين الفعليين بدون عوائق.\n\n"
+        "/farm - تنفيذ معاملة وتوثيق المحفظة لأيردروبات Testnet 🪂\n"
         "/structure - حالة النظام الحقيقية 📊\n"
         "/okx - السعر الحقيقي لـ Bitcoin من OKX 📈\n"
         "/security - فحص الأمان الحقيقي للبيسي 🛡️\n"
-        "/makelab [optimizer] - إنشاء أداة برمجية حقيقية 🛠️\n"
         "/cmd [أمر] - تنفيذ أوامر النظام مباشرة ⚡"
     )
     await u.message.reply_text(msg)
 
-async def airdrop_cmd(u: Update, c: ContextTypes.DEFAULT_TYPE):
-    await u.message.reply_text("🪂 جاري فحص شبكات Testnet وفرص الأيردروبات الحقيقية...")
-    result = execute_farming_cycle()
-    await u.message.reply_text(result)
+async def farm_cmd(u: Update, c: ContextTypes.DEFAULT_TYPE):
+    await u.message.reply_text("🪂 جاري تنفيذ وكيل التفاعل مع الأيردروبات والتستنت...")
+    result = execute_testnet_interaction()
+    auto_commit_and_push("EsprieAether: Executed airdrop farming activity")
+    await u.message.reply_text(result + "\n\n✅ تم توثيق النشاط ورفع السجل بنجاح!")
 
 async def structure_cmd(u: Update, c: ContextTypes.DEFAULT_TYPE):
     w = get_existing_wallet()
@@ -42,26 +40,18 @@ async def structure_cmd(u: Update, c: ContextTypes.DEFAULT_TYPE):
     await u.message.reply_text(
         f"📊 **[حالة النظام الحقيقية]**\n\n"
         f"📍 محفظة Aether: `{w['address']}`\n"
-        f"👤 الهوية: `007aether@gmail.com`\n"
         f"{sec}"
     )
 
 async def okx_trade_cmd(u: Update, c: ContextTypes.DEFAULT_TYPE):
     data = get_okx_market_data("BTC/USDT")
     if data["success"]:
-        await u.message.reply_text(f"📊 **سعر Bitcoin الفعلي (OKX):** `${data['price']}` | التغير: `{data['change']}%`")
+        await u.message.reply_text(f"📊 **سعر Bitcoin الفعلي (OKX):** `${data['price']}`")
     else:
-        await u.message.reply_text(f"❌ خطأ في الاتصال بمنصة OKX: {data['error']}")
+        await u.message.reply_text(f"❌ خطأ: {data['error']}")
 
 async def security_cmd(u: Update, c: ContextTypes.DEFAULT_TYPE):
     await u.message.reply_text(activate_stealth_and_defense())
-
-async def makelab_cmd(u: Update, c: ContextTypes.DEFAULT_TYPE):
-    args = c.args
-    tool_type = args[0] if args else "optimizer"
-    res = generate_custom_tool(tool_type)
-    auto_commit_and_push(f"EsprieAether Real Sync: {tool_type}")
-    await u.message.reply_text(f"{res}\n\n✅ تم الحفظ والرفع لـ GitHub بنجاح.")
 
 async def cmd_execution(u: Update, c: ContextTypes.DEFAULT_TYPE):
     cmd = " ".join(c.args)
@@ -73,12 +63,11 @@ if __name__ == '__main__':
     app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
     
     commands = [
-        ("start", start), ("airdrop", airdrop_cmd), ("structure", structure_cmd),
-        ("okx", okx_trade_cmd), ("security", security_cmd), ("makelab", makelab_cmd),
-        ("cmd", cmd_execution)
+        ("start", start), ("farm", farm_cmd), ("structure", structure_cmd),
+        ("okx", okx_trade_cmd), ("security", security_cmd), ("cmd", cmd_execution)
     ]
     for cmd, func in commands:
         app.add_handler(CommandHandler(cmd, func))
         
-    print("[+] EsprieAether Real Airdrop Engine is running...")
+    print("[+] EsprieAether Real Agent Core is running...")
     app.run_polling()
