@@ -2396,3 +2396,17 @@ Traceback (most recent call last):
     raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
 telegram.error.NetworkError: httpx.ConnectError: [Errno -3] Temporary failure in name resolution
 [+] EsprieAether Real Airdrop Engine is running...
+[master 5d058c8] EsprieAether: Executed airdrop farming activity
+ 6 files changed, 1169 insertions(+), 25 deletions(-)
+ create mode 100644 airdrop_activity.json
+ create mode 100644 src/__pycache__/airdrop_executor.cpython-313.pyc
+ create mode 100644 src/airdrop_executor.py
+fatal : Pas de destination pour pousser.
+Spécifiez une URL depuis la ligne de commande ou configurez un dépôt distant en utilisant
+
+    git remote add <nom> <url>
+
+et poussez alors en utilisant le dépôt distant
+
+    git push <nom>
+
