@@ -1,51 +1,35 @@
 import os
 from pathlib import Path
 
-LAB_DIR = Path.home() / "AETHER_V8" / "src" / "lab"
-
-def generate_custom_tool(tool_type="scraper"):
-    """
-    توليد أدوات برمجية أوتوماتيكية متخصصة في الـ Lab
-    """
-    LAB_DIR.mkdir(parents=True, exist_ok=True)
+def generate_custom_tool(tool_type="security_scanner"):
+    lab_dir = Path("src/lab")
+    lab_dir.mkdir(parents=True, exist_ok=True)
     
-    if tool_type == "scraper":
-        tool_file = LAB_DIR / "auto_web_scraper.py"
-        code_content = '''# Auto-generated Web Scraper by AETHER Lab Agent
-import requests
+    if tool_type == "security_scanner":
+        tool_code = """import socket
 
-def run_scraper():
-    print("[*] Running AETHER Automated Data Scraper...")
-    # محاكاة جلب بيانات السوق أو الأخبار
-    return "✅ [Scraper Tool]: تم استخراج بيانات السوق وتحليلها بنجاح."
+def scan_local_ports():
+    print("[+] 🛡️ [Lab Tool] Running local security port scan...")
+    ports = [22, 80, 443, 8080]
+    results = {}
+    for port in ports:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(0.5)
+        res = s.connect_ex(('127.0.0.1', port))
+        results[port] = "Open" if res == 0 else "Closed/Filtered"
+        s.close()
+    print(f"[+] Scan Results: {results}")
+    return results
 
-if __name__ == "__main__":
-    print(run_scraper())
-'''
-    elif tool_type == "optimizer":
-        tool_file = LAB_DIR / "system_optimizer.py"
-        code_content = '''# Auto-generated System Optimizer by AETHER Lab Agent
-import psutil
-
-def optimize_system():
-    cpu = psutil.cpu_percent()
-    ram = psutil.virtual_memory().percent
-    return f"✅ [Optimizer Tool]: حالة النظام ممتازة. CPU: {cpu}% | RAM: {ram}%"
-
-if __name__ == "__main__":
-    print(optimize_system())
-'''
-    else:
-        tool_file = LAB_DIR / "generic_utility.py"
-        code_content = '''# Auto-generated Utility by AETHER Lab Agent
-def run_utility():
-    return "✅ [Utility]: الأداة العامة تعمل بكفاءة تامة."
+if __name__ == '__main__':
+    scan_local_ports()
+"""
+        filename = lab_dir / "port_scanner_utility.py"
+        with open(filename, "w") as f:
+            f.write(tool_code)
+        return f"تم ابتكر أداة فحص المنافذ الجديدة بنجاح في: {filename}"
+    
+    return "نوع الأداة غير معروف"
 
 if __name__ == "__main__":
-    print(run_utility())
-'''
-
-    with open(tool_file, "w") as f:
-        f.write(code_content)
-        
-    return f"🛠️ **[AETHER Lab]** تم ابتكار وتوليد الأداة البرمجية بنجاح في المسار:\n`src/lab/{tool_file.name}`"
+    print(generate_custom_tool("security_scanner"))

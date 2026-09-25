@@ -1,5 +1,8 @@
 {
     "address": "0x5F8a87459c291cA662b1AB770ca1be5F41cD8c8B",
     "private_key": "e9d5dbc60949f0fcaccca109d8c7b8cf68c04c91a952c1c7b1c071bfe534fdd7",
-    "mnemonic": "connect stamp replace base permit merry walk lake detect alone coin slab"
+    "mnemonic": "connect stamp replace base permit merry walk lake detect alone coin slab",
+    "coffre_1": "bc1qz7tlt0al4gecpedhhpkp9zruhe995lw7hlflvkr546psd67r5pgqv4ap9a",
+    "coffre_2": "16V3jAr98VQiju76nLX75X6C2hek68UghL",
+    "coffre_3": "bc1qvnmua9pemy0knegz42dx74xd66muvm2fa0ntd"
 }

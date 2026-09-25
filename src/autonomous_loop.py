@@ -33,3 +33,11 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             print("\n🛑 توقفت الحلقة المستمرة بناءً على طلب المستخدم.")
             break
+
+# إضافة وكيل صيد الأيردروبات التلقائي للحلقة المستمرة
+from testnet_farmer import simulate_testnet_tx
+
+def trigger_scheduled_farming():
+    print("[+] ⏰ تشغيل الدورة المجدولة لصيد الأيردروبات...")
+    simulate_testnet_tx()
+
