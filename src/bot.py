@@ -24,6 +24,8 @@ from dotenv import load_dotenv
 from jarvis_bridge import JarvisBridge
 
 from vpn_agent import VPNAgent
+from airdrop_agent import AirdropAgent
+
 # ─── الإعدادات ───
 load_dotenv(BASE_DIR / ".env")
 
@@ -46,6 +48,7 @@ logger = logging.getLogger("aether-bot")
 jarvis = JarvisBridge()
 
 vpn = VPNAgent()
+airdrop_agent = AirdropAgent()
 # ═══════════════════════════════════════
 #  حماية: فقط CHAT_ID المسموح
 # ═══════════════════════════════════════
@@ -67,6 +70,40 @@ def authorized_only(func):
 #  الأوامر
 # ═══════════════════════════════════════
 
+@authorized_only
+async def cmd_airdrops(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """عرض أحدث الإيردروبات"""
+    text = airdrop_agent.format_telegram(limit=5)
+    await update.message.reply_text(text, parse_mode="Markdown", disable_web_page_preview=True)
+
+
+@authorized_only
+async def cmd_airdrop_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """جلب الإيردروبات فوراً"""
+    msg = await update.message.reply_text("📡 جارٍ جلب الإيردروبات...")
+    try:
+        items = airdrop_agent.fetch_all()
+        new = airdrop_agent.save_airdrops(items)
+        total = airdrop_agent.count()
+        await msg.edit_text(
+            f"✅ *تم التحديث*\n\n"
+            f"📥 جُلب: `{len(items)}`\n"
+            f"🆕 جديد: `{new}`\n"
+            f"📊 الإجمالي: `{total}`",
+            parse_mode="Markdown"
+        )
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_pharos(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """حالة Pharos"""
+    await update.message.reply_text(
+        "🚧 *Pharos قيد التطوير*\n\n"
+        "_سيتم إضافته في التحديث القادم._",
+        parse_mode="Markdown"
+    )
 @authorized_only
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """رسالة الترحيب"""
@@ -510,6 +547,9 @@ async def set_commands(app: Application):
         BotCommand("services", "حالة الخدمات"),
         BotCommand("report", "تقرير فوري"),
         BotCommand("vpn", "التحكم بـ VPN"),
+        BotCommand("airdrops", "أحدث الإيردروبات"),
+        BotCommand("airdrop_sync", "جلب الإيردروبات فوراً"),
+        BotCommand("pharos", "حالة Pharos"),
         BotCommand("cmd", "تنفيذ أمر shell"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
@@ -553,6 +593,9 @@ def main():
     app.add_handler(CommandHandler("report", cmd_report))
     app.add_handler(CommandHandler("cmd", cmd_cmd))
     app.add_handler(CommandHandler("vpn", cmd_vpn))
+    app.add_handler(CommandHandler("airdrops", cmd_airdrops))
+    app.add_handler(CommandHandler("airdrop_sync", cmd_airdrop_sync))
+    app.add_handler(CommandHandler("pharos", cmd_pharos))
     # أي رسالة عادية → JARVIS
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 

@@ -21,6 +21,7 @@ load_dotenv(BASE_DIR / ".env")
 from jarvis_bridge import JarvisBridge
 from github_agent import GitHubAgent
 from vpn_agent import VPNAgent
+from airdrop_agent import AirdropAgent
 
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
@@ -38,6 +39,7 @@ logger = logging.getLogger("autonomous")
 jarvis = JarvisBridge()
 github = GitHubAgent()
 vpn = VPNAgent()
+airdrop_agent = AirdropAgent()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -207,6 +209,30 @@ def task_daily_report() -> dict:
         "status": "ok",
         "timestamp": datetime.now().isoformat(),
     }
+def task_airdrop_sync() -> dict:
+    """مزامنة الإيردروبات من RSS"""
+    result = {"name": "airdrop_sync", "status": "ok"}
+    try:
+        items = airdrop_agent.fetch_all()
+        new = airdrop_agent.save_airdrops(items)
+        total = airdrop_agent.count()
+
+        result["fetched"] = len(items)
+        result["new"] = new
+        result["total"] = total
+
+        # إشعار إذا كان هناك جديد
+        if new > 0:
+            send_telegram(
+                f"📡 *إيردروبات جديدة!*\n\n"
+                f"🆕 جديد: `{new}`\n"
+                f"📊 الإجمالي: `{total}`\n\n"
+                f"_أرسل /airdrops لعرض أحدث 5_"
+            )
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
 def task_vpn_check() -> dict:
     """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
     result = {"name": "vpn_check", "status": "ok"}
@@ -242,7 +268,8 @@ def task_vpn_check() -> dict:
 # ═══════════════════════════════════════
 
 SCHEDULE = {
-    "vpn_check": 5 * 60,           # كل 5 دقائق
+    "vpn_check": 5 * 60,
+    "airdrop_sync": 6 * 60 * 60,   # كل 6 ساعات
     "health_check": 5 * 60,        # كل 5 دقائق
     "security_scan": 60 * 60,      # كل ساعة
     "github_sync": 60 * 60,        # كل ساعة
