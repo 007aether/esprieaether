@@ -300,6 +300,7 @@ def run_cycle(state: dict):
 
     tasks = {
         "vpn_check": task_vpn_check,
+        "airdrop_sync": task_airdrop_sync,
         "health_check": task_health_check,
         "security_scan": task_security_scan,
         "github_sync": task_github_sync,
