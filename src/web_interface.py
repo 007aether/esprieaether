@@ -1,153 +1,282 @@
-from flask import Flask, render_template_string, jsonify, request
-import psutil
-import sqlite3
-from pathlib import Path
-from jarvis_bridge import query_open_jarvis
-from security_agent import activate_stealth_and_defense
-from airdrop_farmer import execute_farming_cycle
-
-app = Flask(__name__)
-
-HTML_TEMPLATE = """
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>EsprieAether - Jarvis Web Command Center</title>
-    <style>
-        body { background-color: #030712; color: #00ffcc; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
-        h1 { text-align: center; text-shadow: 0 0 15px #00ffcc; font-size: 28px; }
-        .container { display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
-        .panel { background: #0f172a; border: 1px solid #00ffcc; padding: 20px; border-radius: 12px; flex: 1; min-width: 300px; box-shadow: 0 0 20px rgba(0,255,204,0.15); }
-        .chat-box { height: 350px; overflow-y: scroll; border: 1px solid #1e293b; padding: 15px; background: #020617; border-radius: 8px; margin-bottom: 15px; font-size: 14px; line-height: 1.6; }
-        .chat-input-area { display: flex; gap: 10px; }
-        input[type="text"] { flex: 1; padding: 12px; background: #020617; border: 1px solid #00ffcc; color: #fff; border-radius: 6px; font-family: monospace; }
-        button { padding: 12px 20px; background: #00ffcc; color: #030712; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #00b388; box-shadow: 0 0 10px #00ffcc; }
-        .metric { font-size: 16px; margin: 15px 0; padding: 10px; background: #020617; border-right: 4px solid #00ffcc; border-radius: 4px; }
-        .badge { display: inline-block; padding: 4px 8px; background: #065f46; color: #34d399; border-radius: 4px; font-size: 12px; }
-        .quick-actions { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
-        .quick-btn { padding: 8px 12px; background: #1e293b; color: #00ffcc; border: 1px solid #00ffcc; border-radius: 4px; cursor: pointer; font-size: 12px; }
-        .quick-btn:hover { background: #00ffcc; color: #030712; }
-    </style>
-</head>
-<body>
-    <h1>⚡ ESPRIEAETHER - JARVIS COMMAND CENTER ⚡</h1>
-    <div class="container">
-        <!-- لوحة التحكم الحية -->
-        <div class="panel">
-            <h2>📊 مراقبة النظام والدرع الأمني</h2>
-            <div class="metric" id="cpu">CPU Usage: جاري التحميل...</div>
-            <div class="metric" id="ram">RAM Usage: جاري التحميل...</div>
-            <div class="metric">الهوية النشطة: <code>007aether@gmail.com</code></div>
-            <div class="metric">حالة الأمان: <span class="badge">🟢 مخفي ومحمي (Stealth Mode)</span></div>
-            <div class="metric">الخدمة الخلفية: <span class="badge">🟢 تعمل 24/24</span></div>
-            
-            <h3 style="margin-top: 25px;">⚡ إجراءات سريعة</h3>
-            <div class="quick-actions">
-                <button class="quick-btn" onclick="triggerAction('farm')">🪂 صيد الأيردروبات</button>
-                <button class="quick-btn" onclick="triggerAction('security')">🛡️ فحص الأمان</button>
-                <button class="quick-btn" onclick="triggerAction('status')">📊 تحديث الحالة</button>
-            </div>
-        </div>
-
-        <!-- نافذة الدردشة مع Jarvis -->
-        <div class="panel" style="flex: 2;">
-            <h2>💬 محادثة Jarvis المباشرة</h2>
-            <div class="chat-box" id="chatHistory">
-                <div><strong>EsprieAether Jarvis:</strong> أهلاً بك يا سيدي. أنا جاهز، مدمج مع محرك OpenJarvis، وأدير قلعتك السيبرانية 24/24. كيف أساعدك اليوم؟</div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="userInput" placeholder="اطرح سؤالك أو أمرك على Jarvis..." onkeydown="if(event.key==='Enter') sendMsg()">
-                <button onclick="sendMsg()">إرسال</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function updateMetrics() {
-            fetch('/metrics')
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById('cpu').innerText = 'CPU Usage: ' + data.cpu + '%';
-                    document.getElementById('ram').innerText = 'RAM Usage: ' + data.ram + '%';
-                });
-        }
-        setInterval(updateMetrics, 3000);
-
-        function sendMsg() {
-            let input = document.getElementById('userInput');
-            let chat = document.getElementById('chatHistory');
-            let txt = input.value.trim();
-            if(!txt) return;
-
-            chat.innerHTML += `<div style="margin: 8px 0;"><strong>أنت:</strong> ${txt}</div>`;
-            input.value = '';
-            chat.scrollTop = chat.scrollHeight;
-
-            fetch('/chat', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({message: txt})
-            })
-            .then(res => res.json())
-            .then(data => {
-                chat.innerHTML += `<div style="margin: 8px 0; color: #34d399;"><strong>Jarvis:</strong> ${data.reply}</div>`;
-                chat.scrollTop = chat.scrollHeight;
-            });
-        }
-
-        function triggerAction(action) {
-            let chat = document.getElementById('chatHistory');
-            chat.innerHTML += `<div style="margin: 8px 0; color: #fbbf24;"><strong>[نظام]:</strong> جاري تنفيذ أمر (${action})...</div>`;
-            
-            fetch('/action', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({action: action})
-            })
-            .then(res => res.json())
-            .then(data => {
-                chat.innerHTML += `<div style="margin: 8px 0; color: #34d399;"><strong>Jarvis:</strong> ${data.result}</div>`;
-                chat.scrollTop = chat.scrollHeight;
-            });
-        }
-    </script>
-</body>
-</html>
 """
+⚡ EsprieAether - JARVIS Command Center
+Flask Web Interface
+"""
+import os
+import json
+import time
+import platform
+import subprocess
+from datetime import datetime
+from pathlib import Path
+from functools import wraps
 
-@app.route('/')
-def home():
-    return render_template_string(HTML_TEMPLATE)
+import psutil
+from flask import (
+    Flask, render_template, request, jsonify,
+    Response, redirect, url_for, session
+)
+from dotenv import load_dotenv
 
-@app.route('/metrics')
-def metrics():
+# ─── تحميل الإعدادات ───
+BASE_DIR = Path(__file__).parent.parent
+load_dotenv(BASE_DIR / ".env")
+
+WEB_HOST = os.getenv("WEB_HOST", "127.0.0.1")
+WEB_PORT = int(os.getenv("WEB_PORT", "5000"))
+SECRET_KEY = os.getenv("WEB_SECRET_KEY", "aether_default_secret")
+
+# ─── استيراد الجسر ───
+import sys
+sys.path.insert(0, str(BASE_DIR / "src"))
+from jarvis_bridge import JarvisBridge
+
+# ─── إعداد Flask ───
+app = Flask(
+    __name__,
+    template_folder=str(BASE_DIR / "src" / "templates"),
+    static_folder=str(BASE_DIR / "src" / "static"),
+)
+app.secret_key = SECRET_KEY
+
+jarvis = JarvisBridge()
+
+# ─── متتبع وقت البدء ───
+START_TIME = time.time()
+
+
+# ═══════════════════════════════════════
+#  helpers
+# ═══════════════════════════════════════
+
+def get_system_metrics() -> dict:
+    """جلب مقاييس النظام الحية"""
+    cpu_percent = psutil.cpu_percent(interval=0.5)
+    mem = psutil.virtual_memory()
+    disk = psutil.disk_usage("/")
+    net = psutil.net_io_counters()
+    boot = datetime.fromtimestamp(psutil.boot_time())
+
+    try:
+        cpu_freq = psutil.cpu_freq()
+        freq_current = round(cpu_freq.current, 0) if cpu_freq else 0
+    except Exception:
+        freq_current = 0
+
+    return {
+        "cpu": {
+            "percent": cpu_percent,
+            "cores": psutil.cpu_count(logical=True),
+            "physical": psutil.cpu_count(logical=False),
+            "freq_mhz": freq_current,
+        },
+        "memory": {
+            "total_gb": round(mem.total / (1024**3), 2),
+            "used_gb": round(mem.used / (1024**3), 2),
+            "available_gb": round(mem.available / (1024**3), 2),
+            "percent": mem.percent,
+        },
+        "disk": {
+            "total_gb": round(disk.total / (1024**3), 2),
+            "used_gb": round(disk.used / (1024**3), 2),
+            "free_gb": round(disk.free / (1024**3), 2),
+            "percent": disk.percent,
+        },
+        "network": {
+            "bytes_sent_mb": round(net.bytes_sent / (1024**2), 2),
+            "bytes_recv_mb": round(net.bytes_recv / (1024**2), 2),
+        },
+        "system": {
+            "hostname": platform.node(),
+            "os": f"{platform.system()} {platform.release()}",
+            "arch": platform.machine(),
+            "python": platform.python_version(),
+            "boot_time": boot.strftime("%Y-%m-%d %H:%M:%S"),
+            "uptime_seconds": int(time.time() - START_TIME),
+        },
+    }
+
+
+def get_wallet_info() -> dict:
+    """قراءة ملف المحفظة"""
+    wallet_file = BASE_DIR / "aether_wallet.json"
+    if wallet_file.exists():
+        try:
+            with open(wallet_file, "r") as f:
+                data = json.load(f)
+                # أخفِ المفتاح الخاص
+                if "private_key" in data:
+                    data["private_key"] = "***hidden***"
+                return data
+        except Exception as e:
+            return {"error": str(e)}
+    return {"status": "not_found", "message": "لم يتم العثور على محفظة"}
+
+
+def get_ollama_status() -> dict:
+    """حالة Ollama"""
+    return jarvis.ping()
+
+
+# ═══════════════════════════════════════
+#  Routes
+# ═══════════════════════════════════════
+
+@app.route("/")
+def index():
+    """الصفحة الرئيسية — لوحة القيادة"""
+    return render_template(
+        "index.html",
+        metrics=get_system_metrics(),
+        ollama=get_ollama_status(),
+        wallet=get_wallet_info(),
+        aether_id=os.getenv("AETHER_ID", "007aether"),
+    )
+
+
+@app.route("/jarvis")
+def jarvis_page():
+    """صفحة المحادثة مع JARVIS"""
+    return render_template("jarvis.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/metrics")
+def metrics_page():
+    """صفحة المقاييس الحية"""
+    return render_template("metrics.html")
+
+
+@app.route("/security")
+def security_page():
+    """صفحة الأمن"""
+    return render_template("security.html")
+
+
+@app.route("/wallet")
+def wallet_page():
+    """صفحة المحفظة"""
+    return render_template("wallet.html", wallet=get_wallet_info())
+
+
+@app.route("/settings")
+def settings_page():
+    """صفحة الإعدادات"""
+    env_file = BASE_DIR / ".env"
+    env_content = env_file.read_text() if env_file.exists() else ""
+    return render_template("settings.html", env_content=env_content)
+
+
+# ─── API ───
+
+@app.route("/api/metrics")
+def api_metrics():
+    """API للمقاييس (JSON)"""
+    return jsonify(get_system_metrics())
+
+
+@app.route("/api/ollama")
+def api_ollama():
+    """API لحالة Ollama"""
+    return jsonify(get_ollama_status())
+
+
+@app.route("/api/wallet")
+def api_wallet():
+    """API للمحفظة"""
+    return jsonify(get_wallet_info())
+
+
+@app.route("/api/jarvis/chat", methods=["POST"])
+def api_jarvis_chat():
+    """محادثة عادية (بدون streaming)"""
+    data = request.get_json() or {}
+    prompt = data.get("prompt", "").strip()
+    if not prompt:
+        return jsonify({"error": "الرجاء كتابة سؤال"}), 400
+
+    answer = jarvis.ask(prompt)
     return jsonify({
-        "cpu": psutil.cpu_percent(),
-        "ram": psutil.virtual_memory().percent
+        "prompt": prompt,
+        "answer": answer,
+        "history_size": len(jarvis.get_history()),
+        "timestamp": datetime.now().isoformat(),
     })
 
-@app.route('/chat', methods=['POST'])
-def chat():
-    data = request.json
-    msg = data.get('message', '')
-    reply = query_open_jarvis(msg)
-    return jsonify({"reply": reply})
 
-@app.route('/action', methods=['POST'])
-def action():
-    data = request.json
-    act = data.get('action', '')
-    
-    if act == 'farm':
-        res = execute_farming_cycle()
-    elif act == 'security':
-        res = activate_stealth_and_defense()
+@app.route("/api/jarvis/stream", methods=["POST"])
+def api_jarvis_stream():
+    """محادثة متدفقة (streaming)"""
+    data = request.get_json() or {}
+    prompt = data.get("prompt", "").strip()
+    if not prompt:
+        return jsonify({"error": "الرجاء كتابة سؤال"}), 400
+
+    def generate():
+        try:
+            for token in jarvis.ask_stream(prompt):
+                yield f"data: {json.dumps({'token': token}, ensure_ascii=False)}\n\n"
+            yield f"data: {json.dumps({'done': True})}\n\n"
+        except Exception as e:
+            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+
+    return Response(generate(), mimetype="text/event-stream")
+
+
+@app.route("/api/jarvis/clear", methods=["POST"])
+def api_jarvis_clear():
+    """مسح سجل المحادثة"""
+    jarvis.clear_history()
+    return jsonify({"status": "cleared"})
+
+
+@app.route("/api/jarvis/history")
+def api_jarvis_history():
+    """إرجاع السجل"""
+    return jsonify({"history": jarvis.get_history()})
+
+
+@app.route("/api/security/ports")
+def api_security_ports():
+    """فحص المنافذ المفتوحة"""
+    try:
+        result = subprocess.run(
+            ["ss", "-tlnp"],
+            capture_output=True, text=True, timeout=10,
+        )
+        lines = result.stdout.strip().split("\n")[1:]
+        ports = []
+        for line in lines:
+            parts = line.split()
+            if len(parts) >= 4:
+                ports.append({
+                    "state": parts[0],
+                    "local": parts[3],
+                    "process": parts[5] if len(parts) > 5 else "—",
+                })
+        return jsonify({"status": "ok", "count": len(ports), "ports": ports})
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+
+# ═══════════════════════════════════════
+#  Main
+# ═══════════════════════════════════════
+
+if __name__ == "__main__":
+    print("═" * 60)
+    print("⚡ ESPRIEAETHER - JARVIS COMMAND CENTER")
+    print("═" * 60)
+    print(f"🌐 http://{WEB_HOST}:{WEB_PORT}")
+    print(f"🤖 Ollama: {os.getenv('OLLAMA_HOST')}")
+    print(f"🧠 Model: {os.getenv('OLLAMA_MODEL')}")
+    print("═" * 60)
+
+    # فحص Ollama عند البدء
+    status = jarvis.ping()
+    if status["status"] == "online":
+        print(f"✅ Ollama: متصل | النماذج: {status.get('models', [])}")
     else:
-        res = f"النظام يعمل بكفاءة تامة. استهلاك المعالج: {psutil.cpu_percent()}%"
-        
-    return jsonify({"result": res})
+        print(f"⚠️ Ollama: غير متصل | {status.get('error', '')}")
+    print("═" * 60)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host=WEB_HOST, port=WEB_PORT, debug=False, threaded=True)

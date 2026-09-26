@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}الإعدادات{% endblock %}
+{% block page_title %}⚙️ الإعدادات{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <h3 class="card-title">محتوى .env (للقراءة فقط حاليًا)</h3>
+  <pre class="code">{{ env_content }}</pre>
+  <p class="muted" style="margin-top: 12px;">لتعديل الإعدادات، استخدم محررًا مباشرًا: <code>nano ~/AETHER_V8/.env</code></p>
+</div>
+
+{% endblock %}

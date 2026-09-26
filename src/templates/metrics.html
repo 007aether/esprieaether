@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}المقاييس{% endblock %}
+{% block page_title %}📊 المقاييس الحية{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-2">
+  <div class="card">
+    <h3 class="card-title">CPU</h3>
+    <div class="big-value" id="m-cpu">—%</div>
+    <div class="bar big"><div class="bar-fill" id="m-cpu-bar"></div></div>
+  </div>
+  <div class="card">
+    <h3 class="card-title">RAM</h3>
+    <div class="big-value" id="m-mem">—%</div>
+    <div class="bar big"><div class="bar-fill" id="m-mem-bar"></div></div>
+    <div class="stat-sub" id="m-mem-sub">—</div>
+  </div>
+  <div class="card">
+    <h3 class="card-title">القرص</h3>
+    <div class="big-value" id="m-disk">—%</div>
+    <div class="bar big"><div class="bar-fill" id="m-disk-bar"></div></div>
+    <div class="stat-sub" id="m-disk-sub">—</div>
+  </div>
+  <div class="card">
+    <h3 class="card-title">الشبكة</h3>
+    <div class="info-row"><span>أُرسل:</span><b id="m-net-sent">—</b></div>
+    <div class="info-row"><span>استُقبل:</span><b id="m-net-recv">—</b></div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 class="card-title">سجل حي (آخر 30 قراءة)</h3>
+  <canvas id="chart" width="800" height="200"></canvas>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+const history = {cpu: [], mem: [], disk: []};
+const MAX = 30;
+
+function drawChart() {
+  const cv = document.getElementById('chart');
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.strokeStyle = '#2a3142';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = (H / 4) * i;
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+
+  const drawLine = (data, color) => {
+    if (data.length < 2) return;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    data.forEach((v, i) => {
+      const x = (W / MAX) * i;
+      const y = H - (v / 100) * H;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+  };
+
+  drawLine(history.cpu, '#00d9ff');
+  drawLine(history.mem, '#a855f7');
+  drawLine(history.disk, '#f59e0b');
+}
+
+async function refreshMetrics() {
+  try {
+    const r = await fetch('/api/metrics');
+    const m = await r.json();
+
+    document.getElementById('m-cpu').textContent = m.cpu.percent + '%';
+    document.getElementById('m-cpu-bar').style.width = m.cpu.percent + '%';
+    document.getElementById('m-mem').textContent = m.memory.percent + '%';
+    document.getElementById('m-mem-bar').style.width = m.memory.percent + '%';
+    document.getElementById('m-mem-sub').textContent = m.memory.used_gb + ' / ' + m.memory.total_gb + ' GB';
+    document.getElementById('m-disk').textContent = m.disk.percent + '%';
+    document.getElementById('m-disk-bar').style.width = m.disk.percent + '%';
+    document.getElementById('m-disk-sub').textContent = m.disk.used_gb + ' / ' + m.disk.total_gb + ' GB';
+    document.getElementById('m-net-sent').textContent = m.network.bytes_sent_mb + ' MB';
+    document.getElementById('m-net-recv').textContent = m.network.bytes_recv_mb + ' MB';
+
+    history.cpu.push(m.cpu.percent);
+    history.mem.push(m.memory.percent);
+    history.disk.push(m.disk.percent);
+    if (history.cpu.length > MAX) {
+      history.cpu.shift(); history.mem.shift(); history.disk.shift();
+    }
+    drawChart();
+  } catch(e) { console.error(e); }
+}
+
+refreshMetrics();
+setInterval(refreshMetrics, 2000);
+</script>
+{% endblock %}

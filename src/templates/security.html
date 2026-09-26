@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}الأمن{% endblock %}
+{% block page_title %}🔐 فحص الأمن{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <h3 class="card-title">المنافذ المفتوحة</h3>
+  <button class="btn btn-primary" onclick="scanPorts()">🔍 فحص الآن</button>
+  <div id="ports-result" style="margin-top: 16px;">
+    <p class="muted">اضغط "فحص الآن" لعرض المنافذ المفتوحة.</p>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function scanPorts() {
+  const el = document.getElementById('ports-result');
+  el.innerHTML = '<p class="muted">⏳ جارٍ الفحص...</p>';
+  try {
+    const r = await fetch('/api/security/ports');
+    const d = await r.json();
+    if (d.status !== 'ok') {
+      el.innerHTML = '<p class="danger">⚠️ ' + (d.error || 'فشل الفحص') + '</p>';
+      return;
+    }
+    let html = '<div class="info-row"><span>عدد المنافذ:</span><b>' + d.count + '</b></div>';
+    html += '<table class="table"><thead><tr><th>الحالة</th><th>العنوان</th><th>العملية</th></tr></thead><tbody>';
+    d.ports.forEach(p => {
+      html += '<tr><td>' + p.state + '</td><td class="mono">' + p.local + '</td><td class="mono">' + p.process + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    el.innerHTML = html;
+  } catch(e) {
+    el.innerHTML = '<p class="danger">⚠️ ' + e.message + '</p>';
+  }
+}
+</script>
+{% endblock %}

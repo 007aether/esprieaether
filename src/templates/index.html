@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}لوحة القيادة{% endblock %}
+{% block page_title %}🏠 لوحة القيادة{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-4">
+  <div class="card stat">
+    <div class="stat-label">المعالج</div>
+    <div class="stat-value" id="cpu-val">{{ metrics.cpu.percent }}%</div>
+    <div class="bar"><div class="bar-fill" id="cpu-bar" style="width: {{ metrics.cpu.percent }}%"></div></div>
+    <div class="stat-sub">{{ metrics.cpu.cores }} أنوية · {{ metrics.cpu.freq_mhz }} MHz</div>
+  </div>
+
+  <div class="card stat">
+    <div class="stat-label">الذاكرة</div>
+    <div class="stat-value" id="mem-val">{{ metrics.memory.percent }}%</div>
+    <div class="bar"><div class="bar-fill" id="mem-bar" style="width: {{ metrics.memory.percent }}%"></div></div>
+    <div class="stat-sub">{{ metrics.memory.used_gb }} / {{ metrics.memory.total_gb }} GB</div>
+  </div>
+
+  <div class="card stat">
+    <div class="stat-label">القرص</div>
+    <div class="stat-value" id="disk-val">{{ metrics.disk.percent }}%</div>
+    <div class="bar"><div class="bar-fill" id="disk-bar" style="width: {{ metrics.disk.percent }}%"></div></div>
+    <div class="stat-sub">{{ metrics.disk.used_gb }} / {{ metrics.disk.total_gb }} GB</div>
+  </div>
+
+  <div class="card stat">
+    <div class="stat-label">Ollama</div>
+    <div class="stat-value" id="ollama-val">
+      {% if ollama.status == 'online' %}✅ متصل{% else %}⚠️ غير متصل{% endif %}
+    </div>
+    <div class="stat-sub">{{ ollama.current_model or '—' }}</div>
+  </div>
+</div>
+
+<div class="grid grid-2">
+  <div class="card">
+    <h3 class="card-title">🤖 حالة JARVIS</h3>
+    <div class="info-row"><span>الحالة:</span><b class="ok">{{ ollama.status }}</b></div>
+    <div class="info-row"><span>المضيف:</span><b>{{ ollama.host }}</b></div>
+    <div class="info-row"><span>النموذج:</span><b>{{ ollama.current_model }}</b></div>
+    <div class="info-row"><span>النماذج المتاحة:</span><b>{{ ollama.models | join(', ') }}</b></div>
+    <a href="/jarvis" class="btn btn-primary" style="margin-top: 12px; display: inline-block;">💬 افتح المحادثة</a>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">💰 المحفظة</h3>
+    {% if wallet.address %}
+      <div class="info-row"><span>العنوان:</span><b class="mono">{{ wallet.address }}</b></div>
+      {% if wallet.balance %}<div class="info-row"><span>الرصيد:</span><b>{{ wallet.balance }}</b></div>{% endif %}
+      {% if wallet.network %}<div class="info-row"><span>الشبكة:</span><b>{{ wallet.network }}</b></div>{% endif %}
+    {% else %}
+      <p class="muted">لا توجد محفظة بعد</p>
+    {% endif %}
+    <a href="/wallet" class="btn" style="margin-top: 12px; display: inline-block;">التفاصيل</a>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">🖥️ النظام</h3>
+    <div class="info-row"><span>المضيف:</span><b>{{ metrics.system.hostname }}</b></div>
+    <div class="info-row"><span>النظام:</span><b>{{ metrics.system.os }}</b></div>
+    <div class="info-row"><span>المعمارية:</span><b>{{ metrics.system.arch }}</b></div>
+    <div class="info-row"><span>Python:</span><b>{{ metrics.system.python }}</b></div>
+    <div class="info-row"><span>وقت الإقلاع:</span><b>{{ metrics.system.boot_time }}</b></div>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">🌐 الشبكة</h3>
+    <div class="info-row"><span>أُرسل:</span><b>{{ metrics.network.bytes_sent_mb }} MB</b></div>
+    <div class="info-row"><span>استُقبل:</span><b>{{ metrics.network.bytes_recv_mb }} MB</b></div>
+    <div class="info-row"><span>مدة التشغيل:</span><b id="uptime">—</b></div>
+  </div>
+</div>
+
+{% endblock %}

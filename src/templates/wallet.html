@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}المحفظة{% endblock %}
+{% block page_title %}💰 المحفظة{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <h3 class="card-title">معلومات المحفظة</h3>
+  {% if wallet.address %}
+    <div class="info-row"><span>العنوان:</span><b class="mono">{{ wallet.address }}</b></div>
+    {% if wallet.network %}<div class="info-row"><span>الشبكة:</span><b>{{ wallet.network }}</b></div>{% endif %}
+    {% if wallet.balance %}<div class="info-row"><span>الرصيد:</span><b>{{ wallet.balance }}</b></div>{% endif %}
+  {% else %}
+    <p class="muted">لا توجد بيانات محفظة.</p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3 class="card-title">البيانات الخام</h3>
+  <pre class="code">{{ wallet | tojson(indent=2) }}</pre>
+</div>
+
+{% endblock %}
