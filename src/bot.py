@@ -23,6 +23,7 @@ from dotenv import load_dotenv
 
 from jarvis_bridge import JarvisBridge
 
+from vpn_agent import VPNAgent
 # ─── الإعدادات ───
 load_dotenv(BASE_DIR / ".env")
 
@@ -44,7 +45,7 @@ logger = logging.getLogger("aether-bot")
 # ─── JARVIS ───
 jarvis = JarvisBridge()
 
-
+vpn = VPNAgent()
 # ═══════════════════════════════════════
 #  حماية: فقط CHAT_ID المسموح
 # ═══════════════════════════════════════
@@ -248,6 +249,67 @@ async def cmd_wallet(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_vpn(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """التحكم بـ VPN"""
+    args = context.args or []
+    action = args[0].lower() if args else "status"
+
+    if action == "on":
+        msg = await update.message.reply_text("🔌 جارٍ تشغيل VPN...")
+        result = vpn.connect()
+        if result["status"] in ("connected", "already_active"):
+            text = vpn.format_telegram()
+            await msg.edit_text(f"✅ *تم التشغيل*\n\n{text}", parse_mode="Markdown")
+        else:
+            await msg.edit_text(f"❌ فشل: {result.get('message', 'خطأ')}")
+
+    elif action == "off":
+        msg = await update.message.reply_text("🔌 جارٍ إيقاف VPN...")
+        result = vpn.disconnect()
+        if result["status"] in ("disconnected", "already_down"):
+            await msg.edit_text("✅ *تم إيقاف VPN*", parse_mode="Markdown")
+        else:
+            await msg.edit_text(f"❌ فشل: {result.get('message', 'خطأ')}")
+
+    elif action == "restart":
+        msg = await update.message.reply_text("🔄 جارٍ إعادة التشغيل...")
+        result = vpn.restart()
+        if result["status"] == "connected":
+            text = vpn.format_telegram()
+            await msg.edit_text(f"✅ *تم إعادة التشغيل*\n\n{text}", parse_mode="Markdown")
+        else:
+            await msg.edit_text(f"❌ فشل: {result.get('message', 'خطأ')}")
+
+    elif action == "ip":
+        ip4 = vpn.get_ip(ipv4=True)
+        ip6 = vpn.get_ip(ipv4=False)
+        await update.message.reply_text(
+            f"🌍 *IP الحالي*\n\n"
+            f"IPv4: `{ip4}`\n"
+            f"IPv6: `{ip6}`",
+            parse_mode="Markdown"
+        )
+
+    else:  # status
+        text = vpn.format_telegram()
+        await update.message.reply_text(text, parse_mode="Markdown")
+
+
+@authorized_only
+async def cmd_vpn_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """مساعد VPN"""
+    text = """
+🔐 *أوامر VPN*
+
+• `/vpn` — عرض الحالة
+• `/vpn status` — الحالة الكاملة
+• `/vpn on` — تشغيل VPN
+• `/vpn off` — إيقاف VPN
+• `/vpn restart` — إعادة تشغيل
+• `/vpn ip` — عرض IP الحالي
+"""
+    await update.message.reply_text(text, parse_mode="Markdown")
+
 async def cmd_airdrop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """حالة الأيردروب"""
     await update.message.reply_text(
@@ -447,6 +509,7 @@ async def set_commands(app: Application):
         BotCommand("somnia", "حالة Somnia"),
         BotCommand("services", "حالة الخدمات"),
         BotCommand("report", "تقرير فوري"),
+        BotCommand("vpn", "التحكم بـ VPN"),
         BotCommand("cmd", "تنفيذ أمر shell"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
@@ -489,7 +552,7 @@ def main():
     app.add_handler(CommandHandler("services", cmd_services))
     app.add_handler(CommandHandler("report", cmd_report))
     app.add_handler(CommandHandler("cmd", cmd_cmd))
-
+    app.add_handler(CommandHandler("vpn", cmd_vpn))
     # أي رسالة عادية → JARVIS
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 

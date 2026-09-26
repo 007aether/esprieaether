@@ -1,1 +1,21 @@
-IyDimqEgRXNwcmllQWV0aGVyCgrZhti42KfZhSDYs9mK2KjYsdin2YbZiiDZhdit2YTZiiDZhdiq2YPYp9mF2YQg2YXYuSBKQVJWSVMgQ29tbWFuZCBDZW50ZXIuCgojIyDYp9mE2YXZg9mI2YbYp9iqCi0g8J+kliBKQVJWSVMgKE9sbGFtYSArIHF3ZW4yLjU6M2IpCi0g8J+SrCBUZWxlZ3JhbSBCb3QgKEBFc3ByaWVhZXRoZXJfYm90KQotIPCfjJAgV2ViIERhc2hib2FyZCAoRmxhc2sg2LnZhNmJIGxvY2FsaG9zdDo1MDAwKQotIPCflJAgU2VjdXJpdHkgQWdlbnQKLSDwn5KwIFNvbW5pYSBUZXN0bmV0IEF1dG9tYXRpb24KLSDwn5OhIEFpcmRyb3AgVHJhY2tlcgoKIyMg2KfZhNiq2LTYutmK2YQKc3VkbyBzeXN0ZW1jdGwgc3RhdHVzIGFldGhlci13ZWIgYWV0aGVyLWJvdAoKIyMg2KfZhNix2YjYp9io2LcKLSBEYXNoYm9hcmQ6IGh0dHA6Ly9sb2NhbGhvc3Q6NTAwMAotIFRlbGVncmFtOiBARXNwcmllYWV0aGVyX2JvdAoKLS0tCtii2K7YsSDYqtit2K/ZitirINiq2YTZgtin2KbZijogMjAyNi0wOS0yNlQyMTo1NjoyNy4xNDQ5NTA=
+# ⚡ EsprieAether
+
+نظام سيبراني محلي متكامل مع JARVIS Command Center.
+
+## المكونات
+- 🤖 JARVIS (Ollama + qwen2.5:3b)
+- 💬 Telegram Bot (@Esprieaether_bot)
+- 🌐 Web Dashboard (Flask على localhost:5000)
+- 🔐 Security Agent
+- 💰 Somnia Testnet Automation
+- 📡 Airdrop Tracker
+
+## التشغيل
+sudo systemctl status aether-web aether-bot
+
+## الروابط
+- Dashboard: http://localhost:5000
+- Telegram: @Esprieaether_bot
+
+---
+آخر تحديث تلقائي: 2026-09-26T21:56:27.144950

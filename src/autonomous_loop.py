@@ -20,6 +20,7 @@ load_dotenv(BASE_DIR / ".env")
 
 from jarvis_bridge import JarvisBridge
 from github_agent import GitHubAgent
+from vpn_agent import VPNAgent
 
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
@@ -36,6 +37,7 @@ logger = logging.getLogger("autonomous")
 # ─── الوكيلات ───
 jarvis = JarvisBridge()
 github = GitHubAgent()
+vpn = VPNAgent()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -80,7 +82,7 @@ def send_telegram(message: str):
                 "text": message,
                 "parse_mode": "Markdown",
             },
-            timeout=10,
+            timeout=30,
         )
     except Exception as e:
         logger.error(f"فشل إرسال Telegram: {e}")
@@ -205,6 +207,34 @@ def task_daily_report() -> dict:
         "status": "ok",
         "timestamp": datetime.now().isoformat(),
     }
+def task_vpn_check() -> dict:
+    """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
+    result = {"name": "vpn_check", "status": "ok"}
+
+    if not vpn.is_active():
+        logger.warning("⚠️ VPN متوقف — جارٍ إعادة التشغيل...")
+        restart_result = vpn.connect()
+
+        if restart_result["status"] == "connected":
+            result["action"] = "restarted"
+            result["status"] = "restarted"
+            send_telegram(
+                "🔄 *VPN أُعيد تشغيله تلقائياً*\n"
+                f"الواجهة: `{vpn.interface}`"
+            )
+        else:
+            result["status"] = "failed"
+            result["error"] = restart_result.get("message")
+            send_telegram(
+                f"⚠️ *VPN متوقف ولم يُعد تشغيله*\n"
+                f"السبب: `{restart_result.get('message', 'خطأ')}`"
+            )
+    else:
+        info = vpn.get_wg_info()
+        result["ip"] = vpn.get_ip(ipv4=True)
+        result["handshake"] = info.get("latest_handshake", "—")
+
+    return result
 
 
 # ═══════════════════════════════════════
@@ -212,6 +242,7 @@ def task_daily_report() -> dict:
 # ═══════════════════════════════════════
 
 SCHEDULE = {
+    "vpn_check": 5 * 60,           # كل 5 دقائق
     "health_check": 5 * 60,        # كل 5 دقائق
     "security_scan": 60 * 60,      # كل ساعة
     "github_sync": 60 * 60,        # كل ساعة
@@ -241,6 +272,7 @@ def run_cycle(state: dict):
     logger.info(f"═══ دورة #{state['cycles']} ═══")
 
     tasks = {
+        "vpn_check": task_vpn_check,
         "health_check": task_health_check,
         "security_scan": task_security_scan,
         "github_sync": task_github_sync,
@@ -271,7 +303,6 @@ def run_cycle(state: dict):
 
     state["cycles"] += 1
     save_state(state)
-
 
 def format_report(state: dict, report: dict) -> str:
     """تنسيق تقرير Telegram"""
