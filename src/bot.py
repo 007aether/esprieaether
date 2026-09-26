@@ -256,6 +256,123 @@ async def cmd_airdrop(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="Markdown"
     )
 
+@authorized_only
+async def cmd_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """مزامنة GitHub فورية"""
+    msg = await update.message.reply_text("🔄 جارٍ المزامنة مع GitHub...")
+    try:
+        from github_agent import GitHubAgent
+        agent = GitHubAgent()
+        if not agent.gh:
+            await msg.edit_text("⚠️ GitHub غير متصل")
+            return
+
+        files = [
+            BASE_DIR / "src" / "jarvis_bridge.py",
+            BASE_DIR / "src" / "web_interface.py",
+            BASE_DIR / "src" / "bot.py",
+            BASE_DIR / "src" / "github_agent.py",
+            BASE_DIR / "src" / "autonomous_loop.py",
+            BASE_DIR / "STATUS.md",
+        ]
+        existing = [f for f in files if f.exists()]
+        result = agent.push_files(existing, "⚡ Manual sync from Telegram")
+
+        if result.get("status") == "ok":
+            await msg.edit_text(
+                f"✅ *تمت المزامنة*\n\n"
+                f"📦 الملفات: `{result.get('files_count')}`\n"
+                f"🔗 [عرض الـ Commit]({result.get('url')})",
+                parse_mode="Markdown"
+            )
+        else:
+            await msg.edit_text(f"⚠️ فشل: {result.get('message')}")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_somnia(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """حالة Somnia"""
+    msg = await update.message.reply_text("🔍 جارٍ فحص Somnia...")
+    try:
+        import json
+        from web3 import Web3
+
+        w3 = Web3(Web3.HTTPProvider("https://dream-rpc.somnia.network"))
+        wallet_file = BASE_DIR / "test_wallets.json"
+
+        if not wallet_file.exists():
+            await msg.edit_text("⚠️ لا توجد محفظة")
+            return
+
+        wallet = json.loads(wallet_file.read_text())[0]
+        address = wallet["address"]
+        balance = w3.from_wei(w3.eth.get_balance(address), "ether")
+
+        text = f"""
+💰 *محفظة Somnia Shannon*
+
+📍 العنوان:
+`{address}`
+
+💵 الرصيد: `{balance} STT`
+🔗 متصل: `{w3.is_connected()}`
+📦 آخر بلوك: `{w3.eth.block_number}`
+
+🔍 [عرض في المستكشف](https://shannon-explorer.somnia.network/address/{address})
+"""
+        await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_services(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """حالة الخدمات"""
+    import subprocess
+    text = "⚙️ *حالة الخدمات*\n\n"
+    for svc in ["aether-web", "aether-bot", "aether-core", "ollama"]:
+        try:
+            r = subprocess.run(
+                ["systemctl", "is-active", svc],
+                capture_output=True, text=True, timeout=5
+            )
+            status = r.stdout.strip()
+            emoji = "🟢" if status == "active" else "🔴"
+            text += f"{emoji} `{svc}`: {status}\n"
+        except Exception:
+            text += f"⚠️ `{svc}`: unknown\n"
+    await update.message.reply_text(text, parse_mode="Markdown")
+
+
+@authorized_only
+async def cmd_report(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تقرير فوري"""
+    msg = await update.message.reply_text("📊 جارٍ إنشاء التقرير...")
+    try:
+        import json
+        from datetime import datetime
+
+        state_file = BASE_DIR / "autonomous_state.json"
+        state = json.loads(state_file.read_text()) if state_file.exists() else {}
+
+        last_runs = state.get("last_run", {})
+        text = f"""
+📊 *تقرير EsprieAether*
+
+🔄 الدورات: `{state.get('cycles', 0)}`
+⏰ البداية: `{state.get('started_at', '—')[:19]}`
+
+*آخر فحوصات:*
+• Health: `{last_runs.get('health_check', '—')[:19]}`
+• Security: `{last_runs.get('security_scan', '—')[:19]}`
+• GitHub: `{last_runs.get('github_sync', '—')[:19]}`
+• Somnia: `{last_runs.get('somnia_check', '—')[:19]}`
+"""
+        await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
 
 @authorized_only
 async def cmd_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -326,6 +443,10 @@ async def set_commands(app: Application):
         BotCommand("ollama", "حالة Ollama"),
         BotCommand("wallet", "المحافظ"),
         BotCommand("airdrop", "حالة الأيردروب"),
+        BotCommand("sync", "مزامنة GitHub"),
+        BotCommand("somnia", "حالة Somnia"),
+        BotCommand("services", "حالة الخدمات"),
+        BotCommand("report", "تقرير فوري"),
         BotCommand("cmd", "تنفيذ أمر shell"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
@@ -363,6 +484,10 @@ def main():
     app.add_handler(CommandHandler("ollama", cmd_ollama))
     app.add_handler(CommandHandler("wallet", cmd_wallet))
     app.add_handler(CommandHandler("airdrop", cmd_airdrop))
+    app.add_handler(CommandHandler("sync", cmd_sync))
+    app.add_handler(CommandHandler("somnia", cmd_somnia))
+    app.add_handler(CommandHandler("services", cmd_services))
+    app.add_handler(CommandHandler("report", cmd_report))
     app.add_handler(CommandHandler("cmd", cmd_cmd))
 
     # أي رسالة عادية → JARVIS
