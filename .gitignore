@@ -1,0 +1,14 @@
+
+# Sensitive files — NEVER commit
+test_wallets.json
+aether_wallet.json
+.env
+*.key
+pvkey.txt
+integrations/*/pvkey.txt
+integrations/*/proxies.txt
+integrations/*/address*.txt
+bot.log
+ollama*.log
+*.db
+AETHER_V8_backup_*.tar.gz
