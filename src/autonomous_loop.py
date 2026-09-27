@@ -178,31 +178,6 @@ def task_github_sync() -> dict:
     return result
 
 
-def task_somnia_check() -> dict:
-    """فحص حالة محفظة Somnia"""
-    result = {"name": "somnia_check", "status": "ok"}
-
-    try:
-        from web3 import Web3
-        w3 = Web3(Web3.HTTPProvider("https://dream-rpc.somnia.network"))
-
-        wallet_file = BASE_DIR / "test_wallets.json"
-        if not wallet_file.exists():
-            result["status"] = "no_wallet"
-            return result
-
-        wallet = json.loads(wallet_file.read_text())[0]
-        address = wallet["address"]
-        balance = w3.from_wei(w3.eth.get_balance(address), "ether")
-
-        result["address"] = address
-        result["balance_stt"] = str(balance)
-        result["connected"] = w3.is_connected()
-    except Exception as e:
-        result["status"] = "error"
-        result["error"] = str(e)
-
-    return result
 
 
 def task_daily_report() -> dict:
@@ -343,7 +318,6 @@ SCHEDULE = {
     "health_check": 5 * 60,
     "security_scan": 60 * 60,
     "github_sync": 60 * 60,
-    "somnia_check": 6 * 60 * 60,
     "daily_report": 6 * 60 * 60,
 }
 
@@ -359,8 +333,7 @@ def run_cycle(state: dict):
         "health_check": task_health_check,
         "security_scan": task_security_scan,
         "github_sync": task_github_sync,
-        "somnia_check": task_somnia_check,
-        "daily_report": task_daily_report,
+            "daily_report": task_daily_report,
     }
 
     for name, func in tasks.items():
