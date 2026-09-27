@@ -237,6 +237,93 @@ def api_somnia():
         return jsonify({"status": "error", "error": str(e)})
 
 
+@app.route("/stats")
+def stats_page():
+    """صفحة الإحصائيات"""
+    return render_template("stats.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/stats/full")
+def api_stats_full():
+    """API الإحصائيات الشاملة"""
+    try:
+        import json
+        from datetime import datetime
+        from pathlib import Path as P
+
+        result = {
+            "status": "ok",
+            "timestamp": datetime.now().isoformat(),
+            "system": {},
+            "agents": {},
+            "airdrops": {},
+            "github": {},
+            "vpn": {},
+        }
+
+        # النظام
+        try:
+            import psutil
+            result["system"] = {
+                "cpu": psutil.cpu_percent(interval=0.5),
+                "ram": psutil.virtual_memory().percent,
+                "disk": psutil.disk_usage("/").percent,
+                "uptime_seconds": int(datetime.now().timestamp() - psutil.boot_time()),
+            }
+        except Exception:
+            pass
+
+        # Airdrops
+        try:
+            from airdrop_agent import AirdropAgent
+            a = AirdropAgent()
+            result["airdrops"] = {
+                "total": a.count(),
+                "recent": len(a.get_recent(10)),
+            }
+        except Exception:
+            pass
+
+        # GitHub
+        try:
+            from github_agent import GitHubAgent
+            gh = GitHubAgent().ping()
+            result["github"] = {
+                "status": gh.get("status"),
+                "repo": gh.get("repo"),
+            }
+        except Exception:
+            pass
+
+        # VPN
+        try:
+            from vpn_agent import VPNAgent
+            v = VPNAgent()
+            result["vpn"] = {
+                "active": v.is_active(),
+                "ip": v.get_ip(),
+            }
+        except Exception:
+            pass
+
+        # Autonomous state
+        try:
+            state_file = BASE_DIR / "autonomous_state.json"
+            if state_file.exists():
+                state = json.loads(state_file.read_text())
+                result["agents"] = {
+                    "cycles": state.get("cycles", 0),
+                    "started_at": state.get("started_at", "—"),
+                    "tasks_count": len(state.get("last_run", {})),
+                }
+        except Exception:
+            pass
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+
 @app.route("/settings")
 def settings_page():
     """صفحة الإعدادات"""

@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block title %}الإحصائيات{% endblock %}
+{% block page_title %}📊 الإحصائيات الشاملة{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-4">
+  <div class="card stat">
+    <div class="stat-label">CPU</div>
+    <div class="stat-value" id="cpu-val">—%</div>
+    <div class="bar"><div class="bar-fill" id="cpu-bar"></div></div>
+  </div>
+  <div class="card stat">
+    <div class="stat-label">RAM</div>
+    <div class="stat-value" id="ram-val">—%</div>
+    <div class="bar"><div class="bar-fill" id="ram-bar"></div></div>
+  </div>
+  <div class="card stat">
+    <div class="stat-label">Disk</div>
+    <div class="stat-value" id="disk-val">—%</div>
+    <div class="bar"><div class="bar-fill" id="disk-bar"></div></div>
+  </div>
+  <div class="card stat">
+    <div class="stat-label">Uptime</div>
+    <div class="stat-value" id="uptime-val" style="font-size: 22px;">—</div>
+    <div class="stat-sub">منذ الإقلاع</div>
+  </div>
+</div>
+
+<div class="grid grid-3">
+  <div class="card">
+    <h3 class="card-title">📡 الإيردروبات</h3>
+    <div class="stat-value" id="airdrops-total">—</div>
+    <div class="stat-sub">إجمالي</div>
+    <div class="info-row" style="margin-top: 12px;">
+      <span>آخر 10:</span>
+      <b id="airdrops-recent">—</b>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">🔄 GitHub</h3>
+    <div class="stat-value" id="github-status" style="font-size: 22px;">—</div>
+    <div class="stat-sub" id="github-repo">—</div>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">🔐 VPN</h3>
+    <div class="stat-value" id="vpn-status" style="font-size: 22px;">—</div>
+    <div class="stat-sub" id="vpn-ip">—</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 class="card-title">🤖 Autonomous Loop</h3>
+  <div class="info-row">
+    <span>الدورات:</span>
+    <b id="agent-cycles">—</b>
+  </div>
+  <div class="info-row">
+    <span>المهام النشطة:</span>
+    <b id="agent-tasks">—</b>
+  </div>
+  <div class="info-row">
+    <span>البداية:</span>
+    <b id="agent-started">—</b>
+  </div>
+</div>
+
+<div class="card">
+  <button class="btn btn-primary" onclick="loadStats()">🔄 تحديث</button>
+  <div id="status" style="margin-top: 12px; color: var(--muted);"></div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function formatUptime(seconds) {
+  const days = Math.floor(seconds / 86400);
+  const hours = Math.floor((seconds % 86400) / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  if (days > 0) return `${days}d ${hours}h`;
+  if (hours > 0) return `${hours}h ${mins}m`;
+  return `${mins}m`;
+}
+
+async function loadStats() {
+  const status = document.getElementById('status');
+  status.textContent = '⏳ جارٍ التحديث...';
+
+  try {
+    const r = await fetch('/api/stats/full');
+    const d = await r.json();
+
+    if (d.status !== 'ok') {
+      status.textContent = '❌ ' + (d.error || 'فشل');
+      return;
+    }
+
+    // System
+    if (d.system) {
+      document.getElementById('cpu-val').textContent = d.system.cpu + '%';
+      document.getElementById('cpu-bar').style.width = d.system.cpu + '%';
+      document.getElementById('ram-val').textContent = d.system.ram + '%';
+      document.getElementById('ram-bar').style.width = d.system.ram + '%';
+      document.getElementById('disk-val').textContent = d.system.disk + '%';
+      document.getElementById('disk-bar').style.width = d.system.disk + '%';
+      document.getElementById('uptime-val').textContent = formatUptime(d.system.uptime_seconds);
+    }
+
+    // Airdrops
+    if (d.airdrops) {
+      document.getElementById('airdrops-total').textContent = d.airdrops.total;
+      document.getElementById('airdrops-recent').textContent = d.airdrops.recent;
+    }
+
+    // GitHub
+    if (d.github) {
+      const gh = d.github;
+      const el = document.getElementById('github-status');
+      if (gh.status === 'online') {
+        el.textContent = '🟢 متصل';
+        el.style.color = 'var(--success)';
+      } else {
+        el.textContent = '🔴 غير متصل';
+        el.style.color = 'var(--danger)';
+      }
+      document.getElementById('github-repo').textContent = gh.repo || '—';
+    }
+
+    // VPN
+    if (d.vpn) {
+      const v = d.vpn;
+      const el = document.getElementById('vpn-status');
+      if (v.active) {
+        el.textContent = '🟢 نشط';
+        el.style.color = 'var(--success)';
+      } else {
+        el.textContent = '🔴 معطل';
+        el.style.color = 'var(--danger)';
+      }
+      document.getElementById('vpn-ip').textContent = v.ip || '—';
+    }
+
+    // Agents
+    if (d.agents) {
+      document.getElementById('agent-cycles').textContent = d.agents.cycles || 0;
+      document.getElementById('agent-tasks').textContent = d.agents.tasks_count || 0;
+      document.getElementById('agent-started').textContent = (d.agents.started_at || '—').substring(0, 19);
+    }
+
+    status.textContent = '✅ ' + new Date().toLocaleTimeString('ar-EG');
+  } catch (e) {
+    status.textContent = '❌ ' + e.message;
+  }
+}
+
+loadStats();
+setInterval(loadStats, 10000);
+</script>
+{% endblock %}

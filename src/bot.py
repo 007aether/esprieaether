@@ -391,6 +391,47 @@ async def cmd_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """إحصائيات شاملة"""
+    msg = await update.message.reply_text("📊 جارٍ الفحص...")
+    try:
+        import requests
+        r = requests.get("http://127.0.0.1:5000/api/stats/full", timeout=10)
+        d = r.json()
+
+        if d.get("status") != "ok":
+            await msg.edit_text("❌ فشل")
+            return
+
+        s = d.get("system", {})
+        a = d.get("airdrops", {})
+        g = d.get("github", {})
+        v = d.get("vpn", {})
+        ag = d.get("agents", {})
+
+        text = f"""
+📊 *ESPRIEAETHER — إحصائيات*
+
+💻 *النظام*
+• CPU: `{s.get('cpu', '—')}%`
+• RAM: `{s.get('ram', '—')}%`
+• Disk: `{s.get('disk', '—')}%`
+
+📡 *الإيردروبات*: `{a.get('total', 0)}`
+
+🔄 *GitHub*: `{g.get('status', '—')}`
+🔐 *VPN*: `{'🟢' if v.get('active') else '🔴'} {v.get('ip', '—')}`
+
+🤖 *Autonomous*
+• الدورات: `{ag.get('cycles', 0)}`
+• المهام: `{ag.get('tasks_count', 0)}`
+"""
+        await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_somnia(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """حالة Somnia"""
     msg = await update.message.reply_text("🔍 جارٍ فحص Somnia...")
@@ -544,6 +585,7 @@ async def set_commands(app: Application):
         BotCommand("airdrop", "حالة الأيردروب"),
         BotCommand("sync", "مزامنة GitHub"),
         BotCommand("somnia", "حالة Somnia"),
+        BotCommand("stats", "الإحصائيات"),
         BotCommand("services", "حالة الخدمات"),
         BotCommand("report", "تقرير فوري"),
         BotCommand("vpn", "التحكم بـ VPN"),
@@ -589,6 +631,7 @@ def main():
     app.add_handler(CommandHandler("airdrop", cmd_airdrop))
     app.add_handler(CommandHandler("sync", cmd_sync))
     app.add_handler(CommandHandler("somnia", cmd_somnia))
+    app.add_handler(CommandHandler("stats", cmd_stats))
     app.add_handler(CommandHandler("services", cmd_services))
     app.add_handler(CommandHandler("report", cmd_report))
     app.add_handler(CommandHandler("cmd", cmd_cmd))
