@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}EsprieAether{% endblock %} ⚡</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/aether.css') }}">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">⚡</div>
+      <div>
+        <div class="brand-title">ESPRIEAETHER</div>
+        <div class="brand-sub">{{ aether_id or '007aether' }}</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="/" class="nav-item {% if request.path == '/' %}active{% endif %}">
+        <span class="ico">🏠</span><span>لوحة القيادة</span>
+      </a>
+      <a href="/jarvis" class="nav-item {% if request.path == '/jarvis' %}active{% endif %}">
+        <span class="ico">💬</span><span>JARVIS</span>
+      </a>
+      <a href="/metrics" class="nav-item {% if request.path == '/metrics' %}active{% endif %}">
+        <span class="ico">📊</span><span>المقاييس</span>
+      </a>
+      <a href="/airdrops" class="nav-item {% if request.path == '/airdrops' %}active{% endif %}">
+      <span class="ico">📡</span><span>الإيردروبات</span>
+      </a>
+      <a href="/security" class="nav-item {% if request.path == '/security' %}active{% endif %}">
+        <span class="ico">🔐</span><span>الأمن</span>
+      </a>
+      <a href="/somnia" class="nav-item {% if request.path == '/somnia' %}active{% endif %}">
+  <span class="ico">💰</span><span>Somnia</span>
+</a>
+<a href="/wallet" class="nav-item {% if request.path == '/wallet' %}active{% endif %}">
+        <span class="ico">💰</span><span>المحفظة</span>
+      </a>
+      <a href="/settings" class="nav-item {% if request.path == '/settings' %}active{% endif %}">
+        <span class="ico">⚙️</span><span>الإعدادات</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-dot" id="ollama-dot"></div>
+      <span id="ollama-status-text">جارٍ الفحص...</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1 class="page-title">{% block page_title %}لوحة القيادة{% endblock %}</h1>
+      <div class="topbar-right">
+        <div class="clock" id="clock">--:--:--</div>
+      </div>
+    </header>
+
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/aether.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

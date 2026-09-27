@@ -198,6 +198,67 @@ def wallet_page():
     return render_template("wallet.html", wallet=get_wallet_info())
 
 
+@app.route("/somnia")
+def somnia_page():
+    """صفحة Somnia"""
+    return render_template("somnia.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/somnia")
+def api_somnia():
+    """API لحالة Somnia"""
+    try:
+        import json
+        from web3 import Web3
+
+        w3 = Web3(Web3.HTTPProvider("https://dream-rpc.somnia.network"))
+        wallet_file = BASE_DIR / "test_wallets.json"
+
+        if not wallet_file.exists():
+            return jsonify({"status": "error", "error": "لا توجد محفظة"})
+
+        wallet = json.loads(wallet_file.read_text())[0]
+        address = wallet["address"]
+
+        # رصيد STT
+        stt_balance = w3.from_wei(w3.eth.get_balance(address), "ether")
+
+        # رموز ERC-20
+        PING = Web3.to_checksum_address("0xbecd9b5f373877881d91cbdbaf013d97eb532154")
+        PONG = Web3.to_checksum_address("0x7968ac15a72629e05f41b8271e4e7292e0cc9f90")
+
+        abi = [{
+            "constant": True,
+            "inputs": [{"name": "_owner", "type": "address"}],
+            "name": "balanceOf",
+            "outputs": [{"name": "balance", "type": "uint256"}],
+            "type": "function"
+        }]
+
+        tokens = {}
+        for name, addr in [("PING", PING), ("PONG", PONG)]:
+            try:
+                contract = w3.eth.contract(address=addr, abi=abi)
+                bal = contract.functions.balanceOf(address).call()
+                tokens[name] = str(w3.from_wei(bal, "ether"))
+            except Exception:
+                tokens[name] = "0"
+
+        return jsonify({
+            "status": "ok",
+            "address": address,
+            "stt": str(stt_balance),
+            "tokens": tokens,
+            "network": {
+                "connected": w3.is_connected(),
+                "block": w3.eth.block_number,
+                "chain_id": w3.eth.chain_id,
+            }
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+
 @app.route("/settings")
 def settings_page():
     """صفحة الإعدادات"""
