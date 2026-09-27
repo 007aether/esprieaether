@@ -23,6 +23,7 @@ from github_agent import GitHubAgent
 from vpn_agent import VPNAgent
 from airdrop_agent import AirdropAgent
 from email_agent import EmailAgent
+from notify_agent import NotifyAgent
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
 logging.basicConfig(
@@ -41,6 +42,7 @@ github = GitHubAgent()
 vpn = VPNAgent()
 airdrop_agent = AirdropAgent()
 email_agent = EmailAgent()
+notify = NotifyAgent()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -279,6 +281,12 @@ def task_airdrop_sync() -> dict:
     except Exception as e:
         result["status"] = "error"
         result["error"] = str(e)
+        # إشعار ntfy
+        if new > 0:
+            notify.info(
+                "📡 إيردروبات جديدة",
+                f"{new} إيردروب جديد | الإجمالي: {total}"
+            )  
     return result
 def task_vpn_check() -> dict:
     """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
@@ -295,6 +303,10 @@ def task_vpn_check() -> dict:
                 "🔄 *VPN أُعيد تشغيله تلقائياً*\n"
                 f"الواجهة: `{vpn.interface}`"
             )
+            notify.warning(
+                "🔐 VPN توقف",
+                f"تم إعادة التشغيل: {restart_result['status']}"
+            )
         else:
             result["status"] = "failed"
             result["error"] = restart_result.get("message")
@@ -308,24 +320,6 @@ def task_vpn_check() -> dict:
         result["handshake"] = info.get("latest_handshake", "—")
 
     return result
-
-
-# ═══════════════════════════════════════
-#  الجدولة
-# ═══════════════════════════════════════
-
-SCHEDULE = {
-    "vpn_check": 5 * 60,
-    "airdrop_sync": 6 * 60 * 60,   # كل 6 ساعات
-    "weekly_email": 60 * 60,
-    "health_check": 5 * 60,        # كل 5 دقائق
-    "security_scan": 60 * 60,      # كل ساعة
-    "github_sync": 60 * 60,        # كل ساعة
-    "somnia_check": 6 * 60 * 60,   # كل 6 ساعات
-    "daily_report": 6 * 60 * 60,   # كل 6 ساعات
-}
-
-
 def should_run(state: dict, task_name: str, interval: int) -> bool:
     """هل يجب تشغيل المهمة الآن؟"""
     last = state["last_run"].get(task_name)
@@ -341,6 +335,18 @@ def should_run(state: dict, task_name: str, interval: int) -> bool:
 # ═══════════════════════════════════════
 #  الحلقة الرئيسية
 # ═══════════════════════════════════════
+
+SCHEDULE = {
+    "vpn_check": 5 * 60,
+    "airdrop_sync": 6 * 60 * 60,
+    "weekly_email": 60 * 60,
+    "health_check": 5 * 60,
+    "security_scan": 60 * 60,
+    "github_sync": 60 * 60,
+    "somnia_check": 6 * 60 * 60,
+    "daily_report": 6 * 60 * 60,
+}
+
 
 def run_cycle(state: dict):
     """دورة واحدة"""
