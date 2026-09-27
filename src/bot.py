@@ -480,7 +480,16 @@ async def cmd_run(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "• `/run اعرض الإيردروبات`\n"
             "• `/run حالة الخدمات`\n"
             "• `/run إحصائيات النظام`\n"
-            "• `/run أعد تشغيل core`\n",
+            "• `/run أعد تشغيل core`\n"
+            "• `/run اعرض السجلات`\n"
+            "• `/run اعرض المهام`\n"
+            "• `/run اعرض الـ IP`\n"
+            "• `/run فحص الحرارة`\n"
+            "• `/run خذ نسخة احتياطية`\n"
+            "• `/run اعرض المساحة`\n"
+            "• `/run نظف السجلات`\n"
+            "• `/run أعد تشغيل البوت`\n"
+            "• `/run أوقف VPN`\n",
             parse_mode="Markdown"
         )
         return

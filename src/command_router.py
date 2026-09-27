@@ -47,9 +47,11 @@ COMMAND_PATTERNS = [
     (r"(حالة|status).*(خدمات|services|خدمة|systemd)", "get_services"),
     (r"(خدمات|services).*(حالة|status)", "get_services"),
 
-    # إعادة تشغيل core
-    (r"(أعد|اعد|restart|شغل).*(تشغيل|core|نواة|النواة)", "restart_core"),
-    (r"(restart|أعد).*(aether|core|esprieaether)", "restart_core"),
+    # إعادة تشغيل (محددة أولاً)
+    (r"(أعد|اعد|restart).*(تشغيل).*(بوت|bot)", "restart_bot"),
+    (r"(أعد|اعد|restart).*(تشغيل).*(ويب|web|dashboard)", "restart_web"),
+    (r"(أعد|اعد|restart).*(تشغيل).*(core|نواة|النواة)", "restart_core"),
+    (r"(أعد|اعد|restart).*(core|نواة)", "restart_core"),
 
     # إحصائيات
     (r"(احصائيات|إحصائيات|stats|ملخص).*(نظام|system)", "get_stats"),
@@ -70,6 +72,27 @@ COMMAND_PATTERNS = [
     # حالة Ollama
     (r"(ollama|أولاما|اولاما).*(حالة|status)", "get_ollama_status"),
     (r"(حالة|status).*(ollama|أولاما)", "get_ollama_status"),
+
+    # السجلات والمهام
+    (r"(اعرض|أظهر|هات|أرني|وريني).*(سجل|سجلات|logs)", "view_logs"),
+    (r"(اعرض|أظهر|هات).*(مهام|tasks|جدول)", "view_tasks"),
+    (r"(كم|ما).*(الساعة|الوقت|time)", "current_time"),
+    (r"(اعرض|أظهر|من).*(متصل|جلسات|sessions|users)", "view_sessions"),
+    (r"(فحص|حرارة|حراره|temp).*(حرارة|cpu|درجة)", "check_temperature"),
+
+    # الشبكة والبلوكشين
+    (r"(اعرض|هات|ما).*(ال ip|الايبي|ip|ايبي)", "get_ip"),
+    (r"(افحص|اختبر|test).*(اتصال|شبكة|net|ping)", "test_connection"),
+    (r"(اعرض|هات|جيب).*(ايردروب|airdrop).*(جديد|جديدة|حديث|أحدث)", "get_new_airdrops"),
+
+    # الملفات والنسخ
+    (r"(خذ|اعمل|سوي|انسخ).*(نسخة|backup|باكان)", "create_backup"),
+    (r"(اعرض|هات|كم).*(مساحة|space|disk|تخزين)", "get_space"),
+    (r"(نظف|امسح|قطع).*(سجل|سجلات|logs)", "clean_logs"),
+
+    # VPN
+    (r"(أوقف|اطفي|اقفل|stop|off).*(vpn|في بي)", "vpn_off"),
+    (r"(شغل|فعل|on|افتح).*(vpn|في بي)", "vpn_on"),
 ]
 
 
@@ -161,6 +184,21 @@ class CommandExecutor:
             "get_jarvis_status": self.get_jarvis_status,
             "count_airdrops": self.count_airdrops,
             "get_ollama_status": self.get_ollama_status,
+            "view_logs": self.view_logs,
+            "view_tasks": self.view_tasks,
+            "current_time": self.current_time,
+            "view_sessions": self.view_sessions,
+            "check_temperature": self.check_temperature,
+            "get_ip": self.get_ip,
+            "test_connection": self.test_connection,
+            "get_new_airdrops": self.get_new_airdrops,
+            "create_backup": self.create_backup,
+            "get_space": self.get_space,
+            "clean_logs": self.clean_logs,
+            "restart_bot": self.restart_bot,
+            "restart_web": self.restart_web,
+            "vpn_off": self.vpn_off,
+            "vpn_on": self.vpn_on,
         }
 
         handler = handlers.get(action)
@@ -264,6 +302,186 @@ class CommandExecutor:
             "ollama": result["status"],
             "models": result.get("models", []),
         }
+
+
+# ═══════════════════════════════════════
+#  دوال إضافية (v2)
+# ═══════════════════════════════════════
+
+def _view_logs(self) -> dict:
+    """آخر 20 سطر من autonomous.log"""
+    log_file = BASE_DIR / "autonomous.log"
+    if not log_file.exists():
+        return {"status": "error", "message": "لا يوجد سجل"}
+    lines = log_file.read_text().split("\n")[-20:]
+    return {"status": "ok", "lines": lines}
+
+def _view_tasks(self) -> dict:
+    """المهام المجدولة"""
+    import json
+    state_file = BASE_DIR / "autonomous_state.json"
+    if not state_file.exists():
+        return {"status": "error", "message": "لا توجد حالة"}
+    state = json.loads(state_file.read_text())
+    return {
+        "status": "ok",
+        "cycles": state.get("cycles", 0),
+        "tasks": list(state.get("last_run", {}).keys()),
+    }
+
+def _current_time(self) -> dict:
+    """الوقت الحالي"""
+    from datetime import datetime
+    import psutil
+    uptime = datetime.now().timestamp() - psutil.boot_time()
+    hours = int(uptime // 3600)
+    mins = int((uptime % 3600) // 60)
+    return {
+        "status": "ok",
+        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "uptime": f"{hours}h {mins}m",
+    }
+
+def _view_sessions(self) -> dict:
+    """المستخدمون المتصلون"""
+    r = subprocess.run(["who"], capture_output=True, text=True, timeout=5)
+    lines = [l for l in r.stdout.strip().split("\n") if l]
+    return {"status": "ok", "sessions": lines, "count": len(lines)}
+
+def _check_temperature(self) -> dict:
+    """حرارة CPU"""
+    try:
+        import psutil
+        temps = psutil.sensors_temperatures()
+        if not temps:
+            return {"status": "error", "message": "لا توجد حساسات"}
+        result = {}
+        for name, entries in temps.items():
+            result[name] = [{"label": e.label or "core", "current": e.current} for e in entries]
+        return {"status": "ok", "temps": result}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+def _get_ip(self) -> dict:
+    """IP العام + VPN"""
+    try:
+        ip = requests.get("https://ifconfig.me", timeout=10).text.strip()
+        from vpn_agent import VPNAgent
+        vpn = VPNAgent()
+        return {
+            "status": "ok",
+            "public_ip": ip,
+            "vpn_active": vpn.is_active(),
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+def _test_connection(self) -> dict:
+    """اختبار الاتصال"""
+    try:
+        r = subprocess.run(
+            ["ping", "-c", "3", "1.1.1.1"],
+            capture_output=True, text=True, timeout=15
+        )
+        lines = r.stdout.split("\n")
+        stats = [l for l in lines if "packets transmitted" in l or "rtt" in l]
+        return {"status": "ok", "result": stats}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+def _get_new_airdrops(self) -> dict:
+    """أحدث 10 إيردروبات"""
+    from airdrop_agent import AirdropAgent
+    agent = AirdropAgent()
+    return {
+        "status": "ok",
+        "items": agent.get_recent(10),
+        "total": agent.count(),
+    }
+
+def _create_backup(self) -> dict:
+    """نسخة احتياطية"""
+    import subprocess
+    from datetime import datetime
+    filename = f"/home/esprieaether/AETHER_BACKUP_{datetime.now().strftime('%Y%m%d_%H%M')}.tar.gz"
+    r = subprocess.run(
+        ["tar", "czf", filename, "--exclude=.venv", "--exclude=*.log",
+         "--exclude=*.db", "--exclude=*.tar.gz", "--exclude=OpenJarvis",
+         "-C", "/home/esprieaether", "AETHER_V8"],
+        capture_output=True, text=True, timeout=60
+    )
+    if r.returncode == 0:
+        size = Path(filename).stat().st_size
+        return {"status": "ok", "file": filename, "size_kb": size // 1024}
+    return {"status": "error", "message": r.stderr}
+
+def _get_space(self) -> dict:
+    """المساحة"""
+    import psutil
+    disk = psutil.disk_usage("/")
+    aether_size = subprocess.run(
+        ["du", "-sh", str(BASE_DIR)],
+        capture_output=True, text=True, timeout=10
+    ).stdout.split()[0]
+    return {
+        "status": "ok",
+        "aether_size": aether_size,
+        "disk_total_gb": round(disk.total / (1024**3), 1),
+        "disk_free_gb": round(disk.free / (1024**3), 1),
+        "disk_percent": disk.percent,
+    }
+
+def _clean_logs(self) -> dict:
+    """قطع السجلات"""
+    logs = [BASE_DIR / "bot.log", BASE_DIR / "autonomous.log"]
+    result = {}
+    for log in logs:
+        if log.exists():
+            size_before = log.stat().st_size
+            lines = log.read_text().split("\n")[-1000:]
+            log.write_text("\n".join(lines))
+            size_after = log.stat().st_size
+            result[log.name] = {
+                "before_kb": size_before // 1024,
+                "after_kb": size_after // 1024,
+            }
+    return {"status": "ok", "logs": result}
+
+def _restart_bot(self) -> dict:
+    r = subprocess.run(["sudo", "systemctl", "restart", "aether-bot"],
+                     capture_output=True, timeout=15)
+    return {"status": "ok" if r.returncode == 0 else "error"}
+
+def _restart_web(self) -> dict:
+    r = subprocess.run(["sudo", "systemctl", "restart", "aether-web"],
+                     capture_output=True, timeout=15)
+    return {"status": "ok" if r.returncode == 0 else "error"}
+
+def _vpn_off(self) -> dict:
+    from vpn_agent import VPNAgent
+    return VPNAgent().disconnect()
+
+def _vpn_on(self) -> dict:
+    from vpn_agent import VPNAgent
+    return VPNAgent().connect()
+
+
+# ربط الدوال بالفئة
+CommandExecutor.view_logs = _view_logs
+CommandExecutor.view_tasks = _view_tasks
+CommandExecutor.current_time = _current_time
+CommandExecutor.view_sessions = _view_sessions
+CommandExecutor.check_temperature = _check_temperature
+CommandExecutor.get_ip = _get_ip
+CommandExecutor.test_connection = _test_connection
+CommandExecutor.get_new_airdrops = _get_new_airdrops
+CommandExecutor.create_backup = _create_backup
+CommandExecutor.get_space = _get_space
+CommandExecutor.clean_logs = _clean_logs
+CommandExecutor.restart_bot = _restart_bot
+CommandExecutor.restart_web = _restart_web
+CommandExecutor.vpn_off = _vpn_off
+CommandExecutor.vpn_on = _vpn_on
 
 
 # ═══════════════════════════════════════
