@@ -468,6 +468,112 @@ async def cmd_somnia(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_run(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تنفيذ أمر ذكي بالعربية"""
+    if not context.args:
+        await update.message.reply_text(
+            "⚡ *الأوامر المدعومة:*\n\n"
+            "• `/run أرسل التقرير`\n"
+            "• `/run افحص المنافذ`\n"
+            "• `/run حالة VPN`\n"
+            "• `/run زامن GitHub`\n"
+            "• `/run اعرض الإيردروبات`\n"
+            "• `/run حالة الخدمات`\n"
+            "• `/run إحصائيات النظام`\n"
+            "• `/run أعد تشغيل core`\n",
+            parse_mode="Markdown"
+        )
+        return
+
+    text = " ".join(context.args)
+    msg = await update.message.reply_text(f"⚙️ *جارٍ التنفيذ:*\n`{text}`", parse_mode="Markdown")
+
+    # توجيه الأمر
+    route = router.route(text)
+
+    if route["status"] != "ok":
+        await msg.edit_text(
+            f"❌ لم أفهم الأمر: `{text}`\n\n"
+            f"_استخدم `/run` لعرض الأوامر المدعومة_",
+            parse_mode="Markdown"
+        )
+        return
+
+    action = route["action"]
+    source = route["source"]
+
+    # تنفيذ
+    result = executor.execute(action)
+
+    # تنسيق النتيجة
+    if result.get("status") == "ok":
+        output = format_run_result(action, result)
+        await msg.edit_text(
+            f"✅ *تم التنفيذ* ({source})\n\n{output}",
+            parse_mode="Markdown"
+        )
+    else:
+        await msg.edit_text(
+            f"⚠️ *فشل التنفيذ*\n\n"
+            f"الأمر: `{action}`\n"
+            f"الخطأ: `{result.get('message', 'غير معروف')}`",
+            parse_mode="Markdown"
+        )
+
+
+def format_run_result(action: str, result: dict) -> str:
+    """تنسيق نتيجة التنفيذ"""
+    if action == "send_report":
+        return f"📧 {result.get('message', 'تم')}"
+
+    if action == "scan_ports":
+        ports = result.get("ports", [])[:5]
+        return f"🔍 *المنافذ* ({result.get('count', 0)})\n" + "\n".join(f"• `{p}`" for p in ports)
+
+    if action == "get_vpn_status":
+        emoji = "🟢" if result.get("active") else "🔴"
+        return f"{emoji} *VPN*: `{result.get('ip', '—')}`"
+
+    if action == "sync_github":
+        return f"🔄 GitHub: `{result.get('sha', '—')}`"
+
+    if action == "get_airdrops":
+        recent = result.get("recent", [])[:3]
+        text = f"📡 *الإيردروبات* ({result.get('total', 0)})\n"
+        for item in recent:
+            text += f"• {item['title'][:50]}\n"
+        return text
+
+    if action == "get_services":
+        svcs = result.get("services", {})
+        text = "⚙️ *الخدمات*\n"
+        for name, status in svcs.items():
+            emoji = "🟢" if status == "active" else "🔴"
+            text += f"{emoji} `{name}`\n"
+        return text
+
+    if action == "get_stats":
+        return (
+            f"📊 *الإحصائيات*\n"
+            f"• CPU: `{result.get('cpu', '—')}%`\n"
+            f"• RAM: `{result.get('ram', '—')}%`\n"
+            f"• Disk: `{result.get('disk', '—')}%`"
+        )
+
+    if action == "count_airdrops":
+        return f"📡 *العدد*: `{result.get('count', 0)}` إيردروب"
+
+    if action == "get_jarvis_status":
+        emoji = "🟢" if result.get("jarvis") == "online" else "🔴"
+        return f"{emoji} *JARVIS*: `{result.get('jarvis', '—')}`"
+
+    if action == "restart_core":
+        return "♻️ *تم إعادة التشغيل*"
+
+    return f"✅ {result}"
+
+
+@authorized_only
 async def cmd_services(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """حالة الخدمات"""
     import subprocess
@@ -593,6 +699,7 @@ async def set_commands(app: Application):
         BotCommand("airdrop_sync", "جلب الإيردروبات فوراً"),
         BotCommand("pharos", "حالة Pharos"),
         BotCommand("cmd", "تنفيذ أمر shell"),
+        BotCommand("run", "تنفيذ أمر ذكي"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
     ]
@@ -635,6 +742,7 @@ def main():
     app.add_handler(CommandHandler("services", cmd_services))
     app.add_handler(CommandHandler("report", cmd_report))
     app.add_handler(CommandHandler("cmd", cmd_cmd))
+    app.add_handler(CommandHandler("run", cmd_run))
     app.add_handler(CommandHandler("vpn", cmd_vpn))
     app.add_handler(CommandHandler("airdrops", cmd_airdrops))
     app.add_handler(CommandHandler("airdrop_sync", cmd_airdrop_sync))
