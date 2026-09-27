@@ -122,6 +122,46 @@ def get_ollama_status() -> dict:
 #  Routes
 # ═══════════════════════════════════════
 
+@app.route("/airdrops")
+def airdrops_page():
+    """صفحة الإيردروبات"""
+    return render_template("airdrops.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/airdrops")
+def api_airdrops():
+    """API للإيردروبات"""
+    try:
+        from airdrop_agent import AirdropAgent
+        agent = AirdropAgent()
+        limit = int(request.args.get("limit", 20))
+        items = agent.get_recent(limit)
+        return jsonify({
+            "status": "ok",
+            "total": agent.count(),
+            "count": len(items),
+            "items": items,
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+
+@app.route("/api/airdrops/sync", methods=["POST"])
+def api_airdrops_sync():
+    """جلب الإيردروبات فوراً"""
+    try:
+        from airdrop_agent import AirdropAgent
+        agent = AirdropAgent()
+        items = agent.fetch_all()
+        new = agent.save_airdrops(items)
+        return jsonify({
+            "status": "ok",
+            "fetched": len(items),
+            "new": new,
+            "total": agent.count(),
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
 @app.route("/")
 def index():
     """الصفحة الرئيسية — لوحة القيادة"""
