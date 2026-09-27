@@ -1,29 +1,34 @@
 {% extends "base.html" %}
 {% block title %}Somnia{% endblock %}
-{% block page_title %}💰 Somnia Testnet{% endblock %}
+{% block page_title %}💰 Somnia Testnet — للعرض فقط{% endblock %}
 
 {% block content %}
 
-<div class="grid grid-4">
+<div class="card" style="border-left: 4px solid var(--warn); background: rgba(245, 158, 11, 0.05);">
+  <h3 class="card-title">⚠️ ملاحظة</h3>
+  <p style="color: var(--muted); line-height: 1.7;">
+    حملة Somnia Shannon Testnet <b>انتهت في أكتوبر 2025</b>.
+    عقود Mint PING/PONG/NFT <b>موقوفة</b>.
+    <br>
+    هذه الصفحة للعرض فقط — لعرض رصيد STT في محفظتك.
+  </p>
+</div>
+
+<div class="grid grid-3">
   <div class="card stat">
-    <div class="stat-label">STT</div>
+    <div class="stat-label">STT Balance</div>
     <div class="stat-value" id="stt-balance">—</div>
     <div class="stat-sub">رصيد الشبكة</div>
   </div>
   <div class="card stat">
-    <div class="stat-label">PING</div>
-    <div class="stat-value" id="ping-balance">—</div>
-    <div class="stat-sub">ERC-20</div>
-  </div>
-  <div class="card stat">
-    <div class="stat-label">PONG</div>
-    <div class="stat-value" id="pong-balance">—</div>
-    <div class="stat-sub">ERC-20</div>
+    <div class="stat-label">Block</div>
+    <div class="stat-value" id="block-number" style="font-size: 24px;">—</div>
+    <div class="stat-sub">آخر بلوك</div>
   </div>
   <div class="card stat">
     <div class="stat-label">الحالة</div>
     <div class="stat-value" id="network-status" style="font-size: 20px;">—</div>
-    <div class="stat-sub" id="block-number">—</div>
+    <div class="stat-sub">اتصال الشبكة</div>
   </div>
 </div>
 
@@ -33,28 +38,27 @@
     <span>Address:</span>
     <b class="mono" id="wallet-address">—</b>
   </div>
-  <button class="btn" style="margin-top: 12px;" onclick="copyAddress()">📋 نسخ العنوان</button>
+  <button class="btn" style="margin-top: 12px;" onclick="copyAddress()">📋 نسخ</button>
 </div>
 
 <div class="card">
-  <h3 class="card-title">🔗 روابط سريعة</h3>
+  <h3 class="card-title">🔗 روابط</h3>
   <div class="info-row">
     <span>Explorer:</span>
-    <b><a id="explorer-link" href="#" target="_blank" style="color: var(--primary);">فتح المستكشف</a></b>
+    <b><a id="explorer-link" href="#" target="_blank" style="color: var(--primary);">فتح</a></b>
   </div>
   <div class="info-row">
-    <span>Faucet:</span>
-    <b><a href="https://cloud.google.com/application/web3/faucet/somnia/shannon" target="_blank" style="color: var(--primary);">Google Cloud Faucet</a></b>
+    <span>Faucet (Google):</span>
+    <b><a href="https://cloud.google.com/application/web3/faucet/somnia/shannon" target="_blank" style="color: var(--primary);">Google Cloud</a></b>
   </div>
   <div class="info-row">
-    <span>RPC:</span>
-    <b class="mono">dream-rpc.somnia.network</b>
+    <span>الموقع الرسمي:</span>
+    <b><a href="https://somnia.network" target="_blank" style="color: var(--primary);">somnia.network</a></b>
   </div>
 </div>
 
 <div class="card">
-  <h3 class="card-title">🔄 تحديث</h3>
-  <button class="btn btn-primary" onclick="loadSomnia()">🔄 تحديث الآن</button>
+  <button class="btn btn-primary" onclick="loadSomnia()">🔄 تحديث</button>
   <div id="status" style="margin-top: 12px; color: var(--muted);"></div>
 </div>
 
@@ -76,9 +80,8 @@ async function loadSomnia() {
     }
 
     document.getElementById('stt-balance').textContent = d.stt;
-    document.getElementById('ping-balance').textContent = d.tokens.PING || '0';
-    document.getElementById('pong-balance').textContent = d.tokens.PONG || '0';
     document.getElementById('wallet-address').textContent = d.address;
+    document.getElementById('block-number').textContent = d.network.block.toLocaleString();
 
     if (d.network.connected) {
       document.getElementById('network-status').textContent = '🟢 متصل';
@@ -87,21 +90,19 @@ async function loadSomnia() {
       document.getElementById('network-status').textContent = '🔴 غير متصل';
       document.getElementById('network-status').style.color = 'var(--danger)';
     }
-    document.getElementById('block-number').textContent = 'Block: ' + d.network.block;
 
     document.getElementById('explorer-link').href =
       'https://shannon-explorer.somnia.network/address/' + d.address;
 
-    status.textContent = '✅ آخر تحديث: ' + new Date().toLocaleTimeString('ar-EG');
+    status.textContent = '✅ ' + new Date().toLocaleTimeString('ar-EG');
   } catch (e) {
     status.textContent = '❌ ' + e.message;
   }
 }
 
 function copyAddress() {
-  const addr = document.getElementById('wallet-address').textContent;
-  navigator.clipboard.writeText(addr);
-  alert('✅ تم نسخ العنوان');
+  navigator.clipboard.writeText(document.getElementById('wallet-address').textContent);
+  alert('✅ تم النسخ');
 }
 
 loadSomnia();

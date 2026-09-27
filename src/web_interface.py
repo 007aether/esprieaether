@@ -200,6 +200,43 @@ def wallet_page():
 
 
 
+@app.route("/somnia")
+def somnia_page():
+    """صفحة Somnia (للعرض فقط)"""
+    return render_template("somnia.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/somnia")
+def api_somnia():
+    """API لحالة Somnia (للعرض فقط)"""
+    try:
+        import json
+        from web3 import Web3
+
+        w3 = Web3(Web3.HTTPProvider("https://dream-rpc.somnia.network"))
+        wallet_file = BASE_DIR / "test_wallets.json"
+
+        if not wallet_file.exists():
+            return jsonify({"status": "error", "error": "لا توجد محفظة"})
+
+        wallet = json.loads(wallet_file.read_text())[0]
+        address = wallet["address"]
+        stt_balance = w3.from_wei(w3.eth.get_balance(address), "ether")
+
+        return jsonify({
+            "status": "ok",
+            "address": address,
+            "stt": str(stt_balance),
+            "network": {
+                "connected": w3.is_connected(),
+                "block": w3.eth.block_number,
+                "chain_id": w3.eth.chain_id,
+            }
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+
 @app.route("/settings")
 def settings_page():
     """صفحة الإعدادات"""
