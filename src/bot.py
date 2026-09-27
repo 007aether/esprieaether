@@ -468,6 +468,52 @@ async def cmd_somnia(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_evolve(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """اقتراحات التطوير الذاتي"""
+    msg = await update.message.reply_text("🧠 جارٍ التحليل...")
+    try:
+        suggestions = evolve.suggest_improvements()
+        if not suggestions:
+            await msg.edit_text("📭 لا توجد اقتراحات")
+            return
+
+        text = evolve.format_suggestions(limit=3)
+        await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """الموافقة على اقتراح"""
+    if not context.args:
+        await update.message.reply_text("⚠️ `/approve <id>`", parse_mode="Markdown")
+        return
+
+    sid = context.args[0]
+    msg = await update.message.reply_text(f"⚙️ جارٍ التنفيذ...")
+    try:
+        result = evolve.approve(sid)
+        if result["status"] == "ok":
+            await msg.edit_text(f"✅ *تم*\n\n{result['message']}", parse_mode="Markdown")
+        else:
+            await msg.edit_text(f"❌ {result['message']}")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_reject(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """رفض اقتراح"""
+    if not context.args:
+        await update.message.reply_text("⚠️ `/reject <id>`", parse_mode="Markdown")
+        return
+
+    result = evolve.reject(context.args[0])
+    await update.message.reply_text(f"✅ {result['message']}")
+
+
+@authorized_only
 async def cmd_run(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """تنفيذ أمر ذكي بالعربية"""
     if not context.args:
@@ -709,6 +755,9 @@ async def set_commands(app: Application):
         BotCommand("pharos", "حالة Pharos"),
         BotCommand("cmd", "تنفيذ أمر shell"),
         BotCommand("run", "تنفيذ أمر ذكي"),
+        BotCommand("evolve", "اقتراحات التطوير"),
+        BotCommand("approve", "الموافقة على اقتراح"),
+        BotCommand("reject", "رفض اقتراح"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
     ]
@@ -752,6 +801,9 @@ def main():
     app.add_handler(CommandHandler("report", cmd_report))
     app.add_handler(CommandHandler("cmd", cmd_cmd))
     app.add_handler(CommandHandler("run", cmd_run))
+    app.add_handler(CommandHandler("evolve", cmd_evolve))
+    app.add_handler(CommandHandler("approve", cmd_approve))
+    app.add_handler(CommandHandler("reject", cmd_reject))
     app.add_handler(CommandHandler("vpn", cmd_vpn))
     app.add_handler(CommandHandler("airdrops", cmd_airdrops))
     app.add_handler(CommandHandler("airdrop_sync", cmd_airdrop_sync))

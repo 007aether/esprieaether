@@ -24,6 +24,7 @@ from vpn_agent import VPNAgent
 from airdrop_agent import AirdropAgent
 from email_agent import EmailAgent
 from notify_agent import NotifyAgent
+from self_evolve import SelfEvolve
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
 logging.basicConfig(
@@ -43,6 +44,7 @@ vpn = VPNAgent()
 airdrop_agent = AirdropAgent()
 email_agent = EmailAgent()
 notify = NotifyAgent()
+evolve = SelfEvolve()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -263,6 +265,29 @@ def task_airdrop_sync() -> dict:
                 f"{new} إيردروب جديد | الإجمالي: {total}"
             )  
     return result
+def task_self_evolve() -> dict:
+    """تحليل وتوليد اقتراحات التطوير الذاتي"""
+    result = {"name": "self_evolve", "status": "ok"}
+    try:
+        suggestions = evolve.suggest_improvements()
+        result["suggestions_count"] = len(suggestions)
+
+        if suggestions:
+            notify.info(
+                "🧠 اقتراحات تطوير جديدة",
+                f"{len(suggestions)} اقتراح | استخدم /evolve في Telegram"
+            )
+            send_telegram(
+                f"🧠 *اقتراحات تطوير جديدة*\n\n"
+                f"📊 عدد: `{len(suggestions)}`\n\n"
+                f"_استخدم /evolve للعرض_"
+            )
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
 def task_vpn_check() -> dict:
     """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
     result = {"name": "vpn_check", "status": "ok"}
@@ -315,6 +340,7 @@ SCHEDULE = {
     "vpn_check": 5 * 60,
     "airdrop_sync": 6 * 60 * 60,
     "weekly_email": 60 * 60,
+    "self_evolve": 24 * 60 * 60,   # يومياً
     "health_check": 5 * 60,
     "security_scan": 60 * 60,
     "github_sync": 60 * 60,
@@ -330,6 +356,7 @@ def run_cycle(state: dict):
         "vpn_check": task_vpn_check,
         "airdrop_sync": task_airdrop_sync,
         "weekly_email": task_weekly_email,
+        "self_evolve": task_self_evolve,
         "health_check": task_health_check,
         "security_scan": task_security_scan,
         "github_sync": task_github_sync,
