@@ -22,7 +22,7 @@ from jarvis_bridge import JarvisBridge
 from github_agent import GitHubAgent
 from vpn_agent import VPNAgent
 from airdrop_agent import AirdropAgent
-
+from email_agent import EmailAgent
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
 logging.basicConfig(
@@ -40,6 +40,7 @@ jarvis = JarvisBridge()
 github = GitHubAgent()
 vpn = VPNAgent()
 airdrop_agent = AirdropAgent()
+email_agent = EmailAgent()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -209,6 +210,52 @@ def task_daily_report() -> dict:
         "status": "ok",
         "timestamp": datetime.now().isoformat(),
     }
+def task_weekly_email() -> dict:
+    """إرسال التقرير الأسبوعي بالبريد"""
+    result = {"name": "weekly_email", "status": "ok"}
+
+    if not email_agent.is_configured():
+        result["status"] = "skipped"
+        result["reason"] = "SMTP غير مُعدّ"
+        return result
+
+    # تحقق من اليوم والساعة
+    import datetime
+    now = datetime.datetime.now()
+    target_day = os.getenv("WEEKLY_REPORT_DAY", "monday").lower()
+    target_hour = int(os.getenv("WEEKLY_REPORT_HOUR", "9"))
+
+    days_map = {
+        "monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+        "friday": 4, "saturday": 5, "sunday": 6,
+    }
+    target_weekday = days_map.get(target_day, 0)
+
+    # إذا لم يكن اليوم والساعة، تخطَّ
+    if now.weekday() != target_weekday:
+        result["status"] = "skipped"
+        result["reason"] = f"ليس يوم {target_day}"
+        return result
+
+    if now.hour != target_hour:
+        result["status"] = "skipped"
+        result["reason"] = f"ليس الساعة {target_hour}"
+        return result
+
+    # أرسل البريد
+    try:
+        send_result = email_agent.send_weekly_report()
+        result["email"] = send_result
+
+        if send_result.get("status") == "ok":
+            send_telegram("📧 *تم إرسال التقرير الأسبوعي بالبريد*")
+        else:
+            result["status"] = "error"
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+
+    return result
 def task_airdrop_sync() -> dict:
     """مزامنة الإيردروبات من RSS"""
     result = {"name": "airdrop_sync", "status": "ok"}
@@ -270,6 +317,7 @@ def task_vpn_check() -> dict:
 SCHEDULE = {
     "vpn_check": 5 * 60,
     "airdrop_sync": 6 * 60 * 60,   # كل 6 ساعات
+    "weekly_email": 60 * 60,
     "health_check": 5 * 60,        # كل 5 دقائق
     "security_scan": 60 * 60,      # كل ساعة
     "github_sync": 60 * 60,        # كل ساعة
@@ -301,6 +349,7 @@ def run_cycle(state: dict):
     tasks = {
         "vpn_check": task_vpn_check,
         "airdrop_sync": task_airdrop_sync,
+        "weekly_email": task_weekly_email,
         "health_check": task_health_check,
         "security_scan": task_security_scan,
         "github_sync": task_github_sync,
