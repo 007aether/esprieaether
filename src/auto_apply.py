@@ -329,6 +329,65 @@ class AutoApply:
 
         return patch
 
+    def process_queue(self, max_items: int = 3, delay: int = 5) -> dict:
+        """معالجة طابور من الاقتراحات (بالتدريجي)"""
+        import time
+        from self_evolve import SelfEvolve
+
+        evo = SelfEvolve()
+        pending = evo.list_pending()
+
+        results = {
+            "processed": 0,
+            "success": 0,
+            "failed": 0,
+            "skipped": 0,
+            "details": [],
+        }
+
+        for s in pending[:max_items]:
+            # فحص is_simple
+            if not self.is_simple(s["action"]):
+                results["skipped"] += 1
+                results["details"].append({
+                    "id": s["id"][-15:],
+                    "status": "skipped",
+                    "reason": "غير بسيط",
+                })
+                continue
+
+            logger.info("▶ معالجة: " + s["id"][-15:])
+
+            try:
+                r = self.apply(s["id"])
+                results["processed"] += 1
+
+                if r["status"] == "ok":
+                    results["success"] += 1
+                elif r["status"] == "skipped":
+                    results["skipped"] += 1
+                else:
+                    results["failed"] += 1
+
+                results["details"].append({
+                    "id": s["id"][-15:],
+                    "status": r["status"],
+                    "message": r.get("message", r.get("reason", "")),
+                })
+            except Exception as e:
+                results["failed"] += 1
+                results["details"].append({
+                    "id": s["id"][-15:],
+                    "status": "error",
+                    "message": str(e)[:100],
+                })
+
+            # تأخير بين الطلبات
+            if delay > 0:
+                time.sleep(delay)
+
+        return results
+
     def sandbox_test(self, new_code: str) -> dict:
         """اختبار الكود في بيئة معزولة"""
         import tempfile

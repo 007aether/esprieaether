@@ -71,16 +71,13 @@ class CloudFallback:
         if not force and self.online is not None and (now - self.last_check) < CHECK_INTERVAL:
             return self.online
         try:
-            socket.create_connection(("1.1.1.1", 53), timeout=3)
+            socket.create_connection(("1.1.1.1", 53), timeout=5)
             self.online = True
         except Exception:
             self.online = False
         self.last_check = now
         return self.online
 
-    # ─────────────────────────────────────
-    #  المحاولات
-    # ─────────────────────────────────────
     def _try_openrouter(self, messages: list) -> dict:
         if not OPENROUTER_API_KEY:
             return {"status": "skip", "reason": "no key"}
@@ -91,20 +88,191 @@ class CloudFallback:
                     "Authorization": "Bearer " + OPENROUTER_API_KEY,
                     "Content-Type": "application/json",
                     "HTTP-Referer": "http://localhost:5000",
-                    "X-Title": "EsprieAether"
+                    "X-Title": "EsprieAether",
                 },
                 json={
                     "model": OPENROUTER_MODEL,
-                    "messages": messages
+                    "messages": messages,
+                    "temperature": 0.5,
+                    "max_tokens": 4000,
                 },
-                timeout=60
+                timeout=30,
+            )
+            if r.status_code == 200:
+                return {"status": "ok", "provider": "openrouter",
+                        "answer": r.json()["choices"][0]["message"]["content"]}
+            return {"status": "skip", "reason": "HTTP " + str(r.status_code)}
+        except Exception as e:
+            return {"status": "skip", "reason": str(e)[:100]}
+
+    def _try_groq(self, messages: list) -> dict:
+        if not GROQ_API_KEY:
+            return {"status": "skip", "reason": "no key"}
+        try:
+            r = requests.post(
+                GROQ_BASE_URL + "/chat/completions",
+                headers={
+                    "Authorization": "Bearer " + GROQ_API_KEY,
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": GROQ_MODEL,
+                    "messages": messages,
+                    "temperature": 0.5,
+                    "max_tokens": 4000,
+                },
+                timeout=30,
+            )
+            if r.status_code == 200:
+                return {"status": "ok", "provider": "groq",
+                        "answer": r.json()["choices"][0]["message"]["content"]}
+            return {"status": "skip", "reason": "HTTP " + str(r.status_code)}
+        except Exception as e:
+            return {"status": "skip", "reason": str(e)[:100]}
+
+    def _try_together(self, messages: list) -> dict:
+        if not TOGETHER_API_KEY:
+            return {"status": "skip", "reason": "no key"}
+        try:
+            r = requests.post(
+                TOGETHER_BASE_URL + "/chat/completions",
+                headers={
+                    "Authorization": "Bearer " + TOGETHER_API_KEY,
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": TOGETHER_MODEL,
+                    "messages": messages,
+                    "temperature": 0.5,
+                    "max_tokens": 4000,
+                },
+                timeout=30,
+            )
+            if r.status_code == 200:
+                return {"status": "ok", "provider": "together",
+                        "answer": r.json()["choices"][0]["message"]["content"]}
+            return {"status": "skip", "reason": "HTTP " + str(r.status_code)}
+        except Exception as e:
+            return {"status": "skip", "reason": str(e)[:100]}
+
+    def _try_local(self, messages: list) -> dict:
+        try:
+            r = requests.post(
+                OLLAMA_HOST + "/api/chat",
+                json={
+                    "model": OLLAMA_MODEL,
+                    "messages": messages,
+                    "stream": False,
+                    "options": {"temperature": 0.5, "num_ctx": 65536},
+                },
+                timeout=300,
             )
             r.raise_for_status()
-            data = r.json()
-            return {
-                "status": "success",
-                "provider": "openrouter",
-                "response": data["choices"][0]["message"]["content"]
-            }
+            return {"status": "ok", "provider": "local",
+                    "answer": r.json()["message"]["content"]}
         except Exception as e:
-            return {"status": "error", "provider": "openrouter", "reason": str(e)}
+            return {"status": "error", "reason": str(e)[:100]}
+
+    def ask(self, prompt: str, system: str = None, prefer: str = "auto") -> dict:
+        """إرسال مع Multi-Provider Fallback"""
+        # Local فقط
+        if prefer == "local":
+            messages = []
+            if system:
+                messages.append({"role": "system", "content": system})
+            messages.append({"role": "user", "content": prompt})
+            result = self._try_local(messages)
+            if result["status"] == "ok":
+                self._record("local", "ok")
+            else:
+                self._record("local", "error")
+            return result
+
+        # Cloud فقط
+        if prefer == "cloud":
+            messages = []
+            if system:
+                messages.append({"role": "system", "content": system})
+            messages.append({"role": "user", "content": prompt})
+
+            for func, name in [
+                (self._try_openrouter, "openrouter"),
+                (self._try_groq, "groq"),
+                (self._try_together, "together"),
+            ]:
+                result = func(messages)
+                if result["status"] == "ok":
+                    self._record(name, "ok")
+                    logger.info("☁️ " + name)
+                    return {"status": "ok", "source": name, "answer": result["answer"]}
+                self._record(name, "skip")
+
+            logger.warning("⚠️ كل المزودين فشلوا — Local")
+            result = self._try_local(messages)
+            if result["status"] == "ok":
+                self._record("local", "ok")
+                return {"status": "ok", "source": "local", "answer": result["answer"]}
+            return {"status": "error", "message": "كل المزودين فشلوا"}
+
+        # auto
+        if not self.is_online():
+            return self.ask(prompt, system, "local")
+        return self.ask(prompt, system, "cloud")
+
+    def _record(self, provider: str, status: str):
+        if provider not in self.state["requests"]:
+            self.state["requests"][provider] = 0
+            self.state["failures"][provider] = 0
+        if status == "ok":
+            self.state["requests"][provider] += 1
+        else:
+            self.state["failures"][provider] += 1
+        self.state["last_switch"] = datetime.now().isoformat()
+        self._save_state()
+
+    def status(self) -> dict:
+        return {
+            "online": self.is_online(force=True),
+            "providers": {
+                "openrouter": bool(OPENROUTER_API_KEY),
+                "groq": bool(GROQ_API_KEY),
+                "together": bool(TOGETHER_API_KEY),
+                "local": True,
+            },
+            "requests": self.state.get("requests", {}),
+            "failures": self.state.get("failures", {}),
+            "last_switch": self.state.get("last_switch"),
+        }
+
+    def format_telegram(self) -> str:
+        s = self.status()
+        emoji = "🟢" if s["online"] else "🔴"
+
+        text = "☁️ *Cloud Fallback v2*" + chr(10) + chr(10)
+        text += emoji + " الإنترنت: `" + ("متصل" if s["online"] else "منقطع") + "`" + chr(10) + chr(10)
+
+        text += "*المزودون:*" + chr(10)
+        for name, available in s["providers"].items():
+            e = "✅" if available else "❌"
+            reqs = s["requests"].get(name, 0)
+            fails = s["failures"].get(name, 0)
+            text += e + " `" + name + "`: " + str(reqs) + " نجاح, " + str(fails) + " فشل" + chr(10)
+
+        text += chr(10) + "_آخر تبديل: `" + str(s["last_switch"] or "—")[:19] + "`_"
+        return text
+
+
+if __name__ == "__main__":
+    print("═" * 60)
+    print("☁️ Cloud Fallback v2 Test")
+    print("═" * 60)
+
+    c = CloudFallback()
+    print(c.format_telegram())
+    print()
+
+    r = c.ask("قل: مرحبا", prefer="cloud")
+    print("▶ Cloud:", r.get("source"), "-", (r.get("answer") or "")[:50])
+
+    r = c.ask("قل: مرحبا", prefer="local")
+    print("▶ Local:", r.get("source"), "-", (r.get("answer") or "")[:50])
