@@ -9,6 +9,7 @@ import subprocess
 import logging
 from datetime import datetime
 from cloud_fallback import CloudFallback
+from self_evolve import SelfEvolve
 from pathlib import Path
 
 # مسار المشروع
@@ -48,6 +49,7 @@ logger = logging.getLogger("aether-bot")
 # ─── JARVIS ───
 jarvis = JarvisBridge()
 cloud = CloudFallback()
+evolve = SelfEvolve()
 
 vpn = VPNAgent()
 airdrop_agent = AirdropAgent()
@@ -489,19 +491,36 @@ async def cmd_evolve(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def cmd_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """الموافقة على اقتراح"""
     if not context.args:
-        await update.message.reply_text("⚠️ `/approve <id>`", parse_mode="Markdown")
+        await update.message.reply_text("استخدم: /approve <id>")
         return
 
-    sid = context.args[0]
-    msg = await update.message.reply_text(f"⚙️ جارٍ التنفيذ...")
+    sid = context.args[0].strip()
+
+    # ابحث عن تطابقات
+    matches = [s for s in evolve.suggestions if s["id"].endswith(sid)]
+
+    if not matches:
+        await update.message.reply_text("لم أجد اقتراحاً بـ " + sid)
+        return
+
+    if len(matches) > 1:
+        text = str(len(matches)) + " اقتراحات متطابقة:" + chr(10) + chr(10)
+        for m in matches[:5]:
+            text += "- " + m["id"] + chr(10)
+        text += chr(10) + "استخدم ID أطول"
+        await update.message.reply_text(text)
+        return
+
+    msg = await update.message.reply_text("جارٍ التنفيذ...")
     try:
         result = evolve.approve(sid)
         if result["status"] == "ok":
-            await msg.edit_text(f"✅ *تم*\n\n{result['message']}", parse_mode="Markdown")
+            await msg.edit_text("تم" + chr(10) + chr(10) + result["message"])
         else:
-            await msg.edit_text(f"❌ {result['message']}")
+            await msg.edit_text("فشل: " + result["message"])
     except Exception as e:
-        await msg.edit_text(f"❌ خطأ: {e}")
+        await msg.edit_text("خطأ: " + str(e))
+
 
 
 @authorized_only

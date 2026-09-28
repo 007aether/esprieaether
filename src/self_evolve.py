@@ -186,7 +186,7 @@ class SelfEvolve:
 
         text = f"🧠 *اقتراحات التطوير* ({len(self.list_pending())})\n\n"
         for i, s in enumerate(pending, 1):
-            text += f"*{i}.* `{s['id'][-8:]}`\n"
+            text += f"*{i}.* `{s['id'][-15:]}`\n"
             text += f"📁 `{s['file']}`\n"
             text += f"⚙️ {s['action'][:80]}\n\n"
 
