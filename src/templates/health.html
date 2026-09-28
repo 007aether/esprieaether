@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block title %}Health{% endblock %}
+{% block page_title %}📊 مراقبة شاملة{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-4">
+  <div class="card stat">
+    <div class="stat-label">الخدمات</div>
+    <div class="stat-value" id="services-active">—</div>
+    <div class="stat-sub">نشطة / 4</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-label">Guardian</div>
+    <div class="stat-value" id="guardian-fixes">—</div>
+    <div class="stat-sub">إصلاحات</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-label">التنبيهات</div>
+    <div class="stat-value" id="alerts-24h">—</div>
+    <div class="stat-sub">آخر 24 ساعة</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-label">الدورات</div>
+    <div class="stat-value" id="cycles">—</div>
+    <div class="stat-sub">Autonomous</div>
+  </div>
+</div>
+
+<div class="grid grid-2">
+  <div class="card">
+    <h3 class="card-title">🖥️ الخدمات الأربع</h3>
+    <div id="services-list"></div>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">💻 النظام</h3>
+    <div class="bar-row">
+      <span>CPU</span>
+      <div class="bar"><div class="bar-fill" id="cpu-bar"></div></div>
+      <span id="cpu-val">—%</span>
+    </div>
+    <div class="bar-row">
+      <span>RAM</span>
+      <div class="bar"><div class="bar-fill" id="ram-bar"></div></div>
+      <span id="ram-val">—%</span>
+    </div>
+    <div class="bar-row">
+      <span>Disk</span>
+      <div class="bar"><div class="bar-fill" id="disk-bar"></div></div>
+      <span id="disk-val">—%</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 class="card-title">🛡️ آخر إصلاحات Guardian</h3>
+  <div id="guardian-fixes-list"></div>
+</div>
+
+<div class="card">
+  <h3 class="card-title">📊 المهام (آخر تشغيل)</h3>
+  <div id="tasks-list"></div>
+</div>
+
+<button class="btn btn-primary" onclick="loadHealth()">🔄 تحديث</button>
+<div id="status" style="margin-top: 12px; color: var(--muted);"></div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function loadHealth() {
+  const status = document.getElementById('status');
+  status.textContent = '⏳ تحديث...';
+
+  try {
+    const r = await fetch('/api/health');
+    const d = await r.json();
+
+    if (d.status !== 'ok') {
+      status.textContent = '❌ ' + (d.error || 'فشل');
+      return;
+    }
+
+    // 1. الخدمات
+    const services = d.services || {};
+    const active = Object.values(services).filter(s => s === 'active').length;
+    document.getElementById('services-active').textContent = active;
+
+    let html = '';
+    for (const [name, st] of Object.entries(services)) {
+      const emoji = st === 'active' ? '🟢' : '🔴';
+      html += `<div class="info-row"><span>${emoji} ${name}</span><b>${st}</b></div>`;
+    }
+    document.getElementById('services-list').innerHTML = html;
+
+    // 2. Guardian
+    const g = d.guardian || {};
+    document.getElementById('guardian-fixes').textContent = g.errors_fixed || 0;
+
+    let gHtml = '';
+    if (g.fixes && g.fixes.length > 0) {
+      g.fixes.reverse().forEach(f => {
+        const emoji = f.result === 'ok' ? '✅' : '❌';
+        const time = f.timestamp ? f.timestamp.substring(11, 19) : '—';
+        gHtml += `<div class="info-row"><span>${emoji} ${f.target}</span><b>${time}</b></div>`;
+      });
+    } else {
+      gHtml = '<p class="muted">لا إصلاحات بعد</p>';
+    }
+    document.getElementById('guardian-fixes-list').innerHTML = gHtml;
+
+    // 3. Alerts
+    const a = d.alerts || {};
+    document.getElementById('alerts-24h').textContent = a.last_24h || 0;
+
+    // 4. Autonomous
+    const auto = d.autonomous || {};
+    document.getElementById('cycles').textContent = auto.cycles || 0;
+
+    let tHtml = '<table class="table"><thead><tr><th>المهمة</th><th>آخر تشغيل</th></tr></thead><tbody>';
+    if (auto.last_run) {
+      for (const [task, time] of Object.entries(auto.last_run)) {
+        const timeStr = time ? time.substring(11, 19) : '—';
+        tHtml += `<tr><td>${task}</td><td class="mono">${timeStr}</td></tr>`;
+      }
+    }
+    tHtml += '</tbody></table>';
+    document.getElementById('tasks-list').innerHTML = tHtml;
+
+    // 5. System
+    const s = d.system || {};
+    document.getElementById('cpu-val').textContent = (s.cpu || 0) + '%';
+    document.getElementById('cpu-bar').style.width = (s.cpu || 0) + '%';
+    document.getElementById('ram-val').textContent = (s.ram || 0) + '%';
+    document.getElementById('ram-bar').style.width = (s.ram || 0) + '%';
+    document.getElementById('disk-val').textContent = (s.disk || 0) + '%';
+    document.getElementById('disk-bar').style.width = (s.disk || 0) + '%';
+
+    status.textContent = '✅ ' + new Date().toLocaleTimeString('ar-EG');
+  } catch (e) {
+    status.textContent = '❌ ' + e.message;
+  }
+}
+
+loadHealth();
+setInterval(loadHealth, 10000);
+</script>
+{% endblock %}
