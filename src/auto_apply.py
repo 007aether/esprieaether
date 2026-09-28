@@ -283,6 +283,52 @@ class AutoApply:
     # ─────────────────────────────────────
     #  تطبيق
     # ─────────────────────────────────────
+    def hybrid_generate(self, file_path: Path, action: str) -> dict:
+        """Hybrid: Cloud يولّد + Local يتحقق + Cloud يصلح"""
+        import re as _re
+
+        # 1. Cloud يولّد
+        patch = self.generate_patch(file_path, action)
+        if patch["status"] != "ok":
+            return patch
+
+        # 2. Local يتحقق
+        try:
+            from cloud_fallback import CloudFallback
+            cloud = CloudFallback()
+
+            verify_prompt = (
+                "Is this Python code syntactically valid?" + chr(10) +
+                "Reply ONLY: YES or NO" + chr(10) + chr(10) +
+                "CODE:" + chr(10) +
+                patch["new_code"][:3000]
+            )
+
+            verify = cloud.ask(verify_prompt, prefer="local")
+
+            answer = (verify.get("answer") or "").strip().upper()
+
+            if "NO" in answer and "YES" not in answer:
+                # 3. Cloud يصلح
+                logger.warning("⚠️ Local رفض — جاري Cloud للتصحيح")
+                fix_prompt = (
+                    "Fix the syntax errors in this Python code." + chr(10) +
+                    "Return ONLY the fixed code, no markdown." + chr(10) + chr(10) +
+                    patch["new_code"][:3000]
+                )
+                fixed = cloud.ask(fix_prompt, prefer="cloud")
+                if fixed["status"] == "ok":
+                    fixed_code = (fixed.get("answer") or "").strip()
+                    if fixed_code.startswith("```"):
+                        lines = fixed_code.split(chr(10))
+                        fixed_code = chr(10).join(lines[1:-1])
+                    patch["new_code"] = fixed_code
+                    patch["fixed"] = True
+        except Exception as e:
+            logger.error("Hybrid: " + str(e))
+
+        return patch
+
     def sandbox_test(self, new_code: str) -> dict:
         """اختبار الكود في بيئة معزولة"""
         import tempfile
@@ -375,8 +421,8 @@ class AutoApply:
         # 5. نسخة احتياطية
         backup = self.backup(file_path)
 
-        # 6. ولّد التعديل
-        patch = self.generate_patch(file_path, sug["action"])
+        # 6. ولّد التعديل (Hybrid)
+        patch = self.hybrid_generate(file_path, sug["action"])
 
         if patch["status"] != "ok":
             return {

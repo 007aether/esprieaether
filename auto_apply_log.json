@@ -17,8 +17,14 @@
       "id": "sug_20260928_171207_1",
       "file": "autonomous_loop.py",
       "action": "زيادة فاصلة Time Sleep من 60 ثانية إلى 300 ثانية (5 دقيقة) في دالة run_loop لخفض تكرار الدورات غير ا"
+    },
+    {
+      "timestamp": "2026-09-28T23:08:15.081752",
+      "id": "sug_20260928_165837_1",
+      "file": "cloud_fallback.py",
+      "action": "تقليل حجم النسخBackup من 5GB إلى 3GB في دالة create_backup"
     }
   ],
   "rejected": [],
-  "total": 3
+  "total": 4
 }
