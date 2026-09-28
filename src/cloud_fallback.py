@@ -36,7 +36,10 @@ TOGETHER_BASE_URL = os.getenv("TOGETHER_BASE_URL", "https://api.together.xyz/v1"
 TOGETHER_MODEL = os.getenv("TOGETHER_MODEL", "meta-llama/Llama-3.3-70B-Instruct-Turbo")
 
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5:3b-64k")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "openbmb/MiniCPM5-2B")
+OLLAMA_MODEL_FAST = os.getenv("OLLAMA_MODEL_FAST", "qwen2.5:3b")
+OLLAMA_MODEL_BALANCED = os.getenv("OLLAMA_MODEL_BALANCED", "openbmb/MiniCPM5-2B")
+OLLAMA_MODEL_DEEP = os.getenv("OLLAMA_MODEL_DEEP", "hf.co/OrionLLM/GRM2-3b-GGUF:Q4_K_M")
 
 CHECK_INTERVAL = 30
 STATE_FILE = BASE_DIR / "cloud_fallback_state.json"
@@ -155,12 +158,34 @@ class CloudFallback:
         except Exception as e:
             return {"status": "skip", "reason": str(e)[:100]}
 
+    def _pick_model(self, prompt: str) -> str:
+        """اختيار النموذج حسب نوع المهمة"""
+        p = prompt.lower()
+        
+        # مهام الكود والتعديل → Balanced
+        code_keywords = ["def ", "class ", "return ", "import ", "python", 
+                         "code", "كود", "دالة", "ملف", "تعديل", "suggest"]
+        if any(kw in p for kw in code_keywords):
+            return OLLAMA_MODEL_BALANCED
+        
+        # مهام التحليل المعقد → Deep
+        deep_keywords = ["analyze", "explain", "why", "compare", "تحليل", "اشرح", "قارن"]
+        if any(kw in p for kw in deep_keywords):
+            return OLLAMA_MODEL_DEEP
+        
+        # الباقي → Fast
+        return OLLAMA_MODEL_FAST
+    
     def _try_local(self, messages: list) -> dict:
         try:
+            # اختر النموذج حسب آخر رسالة
+            last_msg = messages[-1].get("content", "") if messages else ""
+            model = self._pick_model(last_msg)
+            
             r = requests.post(
                 OLLAMA_HOST + "/api/chat",
                 json={
-                    "model": OLLAMA_MODEL,
+                    "model": model,
                     "messages": messages,
                     "stream": False,
                     "options": {"temperature": 0.5, "num_ctx": 65536},
