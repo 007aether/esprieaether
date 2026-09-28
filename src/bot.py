@@ -629,6 +629,52 @@ def format_run_result(action: str, result: dict) -> str:
 
 
 @authorized_only
+async def cmd_cloud(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """إدارة Cloud Fallback"""
+    import asyncio
+
+    args = context.args or []
+    action = args[0].lower() if args else "status"
+
+    if action == "test":
+        await update.message.reply_text(
+            "☁️ جارٍ اختبار Cloud... سيصلك الرد قريباً"
+        )
+        result = await asyncio.to_thread(cloud.ask, "قل فقط: مرحبا", None, "cloud")
+        if result["status"] == "ok":
+            await update.message.reply_text(
+                "✅ Cloud يعمل" + chr(10) + chr(10) +
+                "📡 المصدر: " + result["source"] + chr(10) +
+                "💬 الرد: " + result["answer"][:150]
+            )
+        else:
+            await update.message.reply_text(
+                "❌ فشل Cloud" + chr(10) + chr(10) +
+                "السبب: " + result.get("message", "unknown")[:200]
+            )
+
+    elif action == "local":
+        await update.message.reply_text(
+            "🏠 جارٍ اختبار Local..."
+        )
+        result = await asyncio.to_thread(cloud.ask, "قل فقط: مرحبا", None, "local")
+        if result["status"] == "ok":
+            await update.message.reply_text(
+                "✅ Local يعمل" + chr(10) + chr(10) +
+                "📡 المصدر: " + result["source"] + chr(10) +
+                "💬 الرد: " + result["answer"][:150]
+            )
+        else:
+            await update.message.reply_text(
+                "❌ فشل Local" + chr(10) + chr(10) +
+                "السبب: " + result.get("message", "unknown")[:200]
+            )
+
+    else:  # status
+        text = cloud.format_telegram()
+        await update.message.reply_text(text)
+
+@authorized_only
 async def cmd_services(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """حالة الخدمات"""
     import subprocess
@@ -756,6 +802,7 @@ async def set_commands(app: Application):
         BotCommand("cmd", "تنفيذ أمر shell"),
         BotCommand("run", "تنفيذ أمر ذكي"),
         BotCommand("evolve", "اقتراحات التطوير"),
+        BotCommand("cloud", "حالة Cloud"),
         BotCommand("approve", "الموافقة على اقتراح"),
         BotCommand("reject", "رفض اقتراح"),
         BotCommand("clear", "مسح سجل JARVIS"),
@@ -802,6 +849,7 @@ def main():
     app.add_handler(CommandHandler("cmd", cmd_cmd))
     app.add_handler(CommandHandler("run", cmd_run))
     app.add_handler(CommandHandler("evolve", cmd_evolve))
+    app.add_handler(CommandHandler("cloud", cmd_cloud))
     app.add_handler(CommandHandler("approve", cmd_approve))
     app.add_handler(CommandHandler("reject", cmd_reject))
     app.add_handler(CommandHandler("vpn", cmd_vpn))
