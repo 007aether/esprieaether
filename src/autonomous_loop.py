@@ -591,7 +591,7 @@ def main():
                 logger.error(f"خطأ في الدورة: {e}")
 
             # انتظار 60 ثانية بين الفحوصات
-            time.sleep(60)
+            time.sleep(300)
     except KeyboardInterrupt:
         logger.info("⏹️ إيقاف يدوي")
         send_telegram("⏹️ EsprieAether توقف يدوياً")

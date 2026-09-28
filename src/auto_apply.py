@@ -113,7 +113,7 @@ class AutoApply:
     #  توليد التعديل عبر Cloud
     # ─────────────────────────────────────
     def generate_patch(self, file_path: Path, action: str) -> dict:
-        """Cloud يولّد التعديل (السطر فقط — prompt مختصر)"""
+        """Cloud يولّد التعديل (السطر فقط — تجاهل النصوص)"""
         try:
             from cloud_fallback import CloudFallback
             cloud = CloudFallback()
@@ -121,10 +121,9 @@ class AutoApply:
             content = file_path.read_text()
             lines = content.split(chr(10))
 
-            # ابحث عن السطر الذي يحتوي على الرقم المطلوب تغييره
             import re as _re
 
-            # استخرج الرقمين من الـ action
+            # استخرج الرقمين
             numbers = _re.findall(r'\d+', action)
             if len(numbers) < 2:
                 return {"status": "skipped", "reason": "لا يوجد رقمان"}
@@ -132,22 +131,37 @@ class AutoApply:
             old_val = numbers[0]
             new_val = numbers[1]
 
-            # ابحث عن السطر الذي يحتوي على old_val
+            # ابحث عن سطر "كود فعلي" يحتوي على الرقم
             candidate_lines = []
             for i, line in enumerate(lines):
-                if old_val in line and ("=" in line or "(" in line):
-                    candidate_lines.append((i + 1, line.strip()))
+                stripped = line.strip()
+
+                # تجاهل التعليقات والسلاسل النصية
+                if stripped.startswith("#"):
+                    continue
+                if stripped.startswith('"""') or stripped.startswith("'''"):
+                    continue
+                # تجاهل أسطر النصوص (تبدأ بـ ")
+                if stripped.startswith('"') or stripped.startswith("'"):
+                    continue
+                # تجاهل الأسطر داخل prompt_lines (في قوائم)
+                if stripped.startswith('"-') or stripped.startswith("'-"):
+                    continue
+
+                # يجب أن يحتوي على الرقم + = أو ( أو ,
+                if old_val in line and ("=" in line or "(" in line or "," in line):
+                    candidate_lines.append((i + 1, stripped))
 
             if not candidate_lines:
-                return {"status": "skipped", "reason": "لم أجد السطر"}
+                return {"status": "skipped", "reason": "لم أجد سطر كود فعلي"}
 
-            # ابنِ prompt مختصر
+            # ابنِ prompt
             prompt_parts = [
                 "You are a Python code editor.",
                 "",
                 "TASK: Change value " + old_val + " to " + new_val,
                 "",
-                "Candidate lines from " + file_path.name + ":",
+                "Candidate lines from " + file_path.name + " (real code only):",
             ]
             for num, line in candidate_lines[:5]:
                 prompt_parts.append("  " + str(num) + ": " + line)
@@ -172,10 +186,9 @@ class AutoApply:
             if not answer or answer == "SKIP":
                 return {"status": "skipped", "reason": "Cloud رفض"}
 
-            # استخرج LINE_NUMBER: new_line
             match = _re.match(r'(\d+):\s*(.+)', answer)
             if not match:
-                return {"status": "skipped", "reason": "صيغة غير مفهومة: " + answer[:100]}
+                return {"status": "skipped", "reason": "صيغة غير مفهومة"}
 
             line_num = int(match.group(1))
             new_line = match.group(2).strip()
@@ -183,8 +196,13 @@ class AutoApply:
             if line_num < 1 or line_num > len(lines):
                 return {"status": "error", "message": "رقم السطر خارج النطاق"}
 
-            # استبدل
             old_line = lines[line_num - 1]
+
+            # تحقق أن السطر ليس نصاً
+            stripped_old = old_line.strip()
+            if stripped_old.startswith('"') or stripped_old.startswith("'"):
+                return {"status": "skipped", "reason": "السطر نص وليس كود"}
+
             indent = old_line[:len(old_line) - len(old_line.lstrip())]
             lines[line_num - 1] = indent + new_line
             new_code = chr(10).join(lines)
