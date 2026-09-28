@@ -15,6 +15,7 @@ from log_analyzer import LogAnalyzer
 from auto_apply import AutoApply
 from market_watcher import MarketWatcher
 from daily_digest import DailyDigest
+from bandwidth_agent import BandwidthAgent
 from self_evolve import SelfEvolve
 from pathlib import Path
 
@@ -61,6 +62,7 @@ analyzer = LogAnalyzer()
 auto_apply = AutoApply()
 market = MarketWatcher()
 digest = DailyDigest()
+bandwidth = BandwidthAgent()
 evolve = SelfEvolve()
 
 vpn = VPNAgent()
@@ -681,6 +683,15 @@ def format_run_result(action: str, result: dict) -> str:
 
 
 @authorized_only
+async def cmd_bandwidth(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """حالة مشاركة الإنترنت"""
+    try:
+        text = bandwidth.format_telegram()
+        await update.message.reply_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text("❌ خطأ: " + str(e))
+
+@authorized_only
 async def cmd_digest(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """تقرير يومي شامل"""
     msg = await update.message.reply_text("📊 جارٍ جمع البيانات...")
@@ -985,6 +996,7 @@ async def set_commands(app: Application):
         BotCommand("auto_apply", "تطبيق تلقائي"),
         BotCommand("market", "أسعار السوق"),
         BotCommand("digest", "التقرير اليومي"),
+        BotCommand("bandwidth", "مشاركة الإنترنت"),
         BotCommand("approve", "الموافقة على اقتراح"),
         BotCommand("reject", "رفض اقتراح"),
         BotCommand("clear", "مسح سجل JARVIS"),
@@ -1038,6 +1050,7 @@ def main():
     app.add_handler(CommandHandler("auto_apply", cmd_auto_apply))
     app.add_handler(CommandHandler("market", cmd_market))
     app.add_handler(CommandHandler("digest", cmd_digest))
+    app.add_handler(CommandHandler("bandwidth", cmd_bandwidth))
     app.add_handler(CommandHandler("approve", cmd_approve))
     app.add_handler(CommandHandler("reject", cmd_reject))
     app.add_handler(CommandHandler("vpn", cmd_vpn))
