@@ -283,6 +283,51 @@ class AutoApply:
     # ─────────────────────────────────────
     #  تطبيق
     # ─────────────────────────────────────
+    def sandbox_test(self, new_code: str) -> dict:
+        """اختبار الكود في بيئة معزولة"""
+        import tempfile
+        import py_compile
+        import os
+
+        try:
+            # 1. اكتب في ملف مؤقت
+            with tempfile.NamedTemporaryFile(mode="w", suffix=".py",
+                                            delete=False,
+                                            encoding="utf-8") as f:
+                f.write(new_code)
+                tmp_path = f.name
+
+            # 2. اختبار py_compile
+            try:
+                py_compile.compile(tmp_path, doraise=True)
+                compile_ok = True
+                compile_err = ""
+            except py_compile.PyCompileError as e:
+                compile_ok = False
+                compile_err = str(e)[:200]
+
+            # 3. نظّف
+            try:
+                os.unlink(tmp_path)
+            except Exception:
+                pass
+
+            if not compile_ok:
+                return {"status": "error", "reason": "py_compile: " + compile_err}
+
+            # 4. فحوصات إضافية (مخففة)
+            checks = {
+                "has_content": len(new_code) > 50,
+            }
+
+            failed_checks = [k for k, v in checks.items() if not v]
+            if failed_checks:
+                return {"status": "error", "reason": "فشل: " + ", ".join(failed_checks)}
+
+            return {"status": "ok"}
+        except Exception as e:
+            return {"status": "error", "reason": str(e)[:200]}
+
     def apply(self, suggestion_id: str) -> dict:
         """تطبيق اقتراح"""
         # 1. فحص الحد اليومي
@@ -339,10 +384,15 @@ class AutoApply:
                 "message": patch.get("reason", patch.get("message", "")),
             }
 
-        # 7. اكتب الكود الجديد
+        # 7. اختبار في Sandbox أولاً
+        sandbox = self.sandbox_test(patch["new_code"])
+        if sandbox["status"] != "ok":
+            return {"status": "skipped", "reason": "Sandbox: " + sandbox.get("reason", "")}
+
+        # 8. اكتب الكود الجديد
         file_path.write_text(patch["new_code"])
 
-        # 8. اختبار
+        # 9. اختبار
         if not self.test_file(file_path):
             self.restore(backup, file_path)
             return {"status": "error", "message": "فشل py_compile — rollback"}
