@@ -143,6 +143,28 @@ async def cmd_pharos(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """رسالة الترحيب"""
+    text = (
+        "⚡ *ESPRIEAETHER COMMAND CENTER*" + chr(10) + chr(10) +
+        "مرحباً! أنا JARVIS." + chr(10) + chr(10) +
+        "*الأوامر:*" + chr(10) +
+        "/ask — مساعد ذكي" + chr(10) +
+        "/airdrop — الإيردروبات" + chr(10) +
+        "/pharos — Pharos Testnet" + chr(10) +
+        "/bandwidth — مشاركة الإنترنت" + chr(10) +
+        "/market — أسعار السوق" + chr(10) +
+        "/digest — التقرير اليومي" + chr(10) +
+        "/services — حالة الخدمات" + chr(10) +
+        "/vpn — حالة VPN" + chr(10) +
+        "/report — تقرير" + chr(10) +
+        "/status — حالة النظام" + chr(10) +
+        "/jarvis — محادثة" + chr(10) +
+        "/help — مساعدة"
+    )
+    await update.message.reply_text(text, parse_mode="Markdown")
+
+@authorized_only
 async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await cmd_start(update, context)
 
