@@ -9,6 +9,7 @@ import subprocess
 import logging
 from datetime import datetime
 from cloud_fallback import CloudFallback
+from ask_agent import AskAgent
 from self_evolve import SelfEvolve
 from pathlib import Path
 
@@ -49,6 +50,7 @@ logger = logging.getLogger("aether-bot")
 # ─── JARVIS ───
 jarvis = JarvisBridge()
 cloud = CloudFallback()
+ask_agent = AskAgent()
 evolve = SelfEvolve()
 
 vpn = VPNAgent()
@@ -669,6 +671,33 @@ def format_run_result(action: str, result: dict) -> str:
 
 
 @authorized_only
+async def cmd_ask(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """مساعد ذكي شامل"""
+    if not context.args:
+        await update.message.reply_text(
+            "🤖 *Ask Agent*" + chr(10) + chr(10) +
+            "*أمثلة:*" + chr(10) +
+            "• `/ask كم إيردروب؟`" + chr(10) +
+            "• `/ask حالة VPN`" + chr(10) +
+            "• `/ask إحصائيات النظام`" + chr(10) +
+            "• `/ask حالة الخدمات`" + chr(10) +
+            "• `/ask رصيد Somnia`" + chr(10) +
+            "• `/ask اقتراحات التطوير`" + chr(10) +
+            "• `/ask خذ نسخة احتياطية`",
+            parse_mode="Markdown"
+        )
+        return
+
+    question = " ".join(context.args)
+    msg = await update.message.reply_text("🤔 جارٍ التحليل...")
+
+    try:
+        result = ask_agent.ask(question)
+        await msg.edit_text(result["answer"], parse_mode="Markdown", disable_web_page_preview=True)
+    except Exception as e:
+        await msg.edit_text("❌ خطأ: " + str(e))
+
+@authorized_only
 async def cmd_cloud(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """إدارة Cloud Fallback"""
     import concurrent.futures
@@ -849,6 +878,7 @@ async def set_commands(app: Application):
         BotCommand("run", "تنفيذ أمر ذكي"),
         BotCommand("evolve", "اقتراحات التطوير"),
         BotCommand("cloud", "حالة Cloud"),
+        BotCommand("ask", "مساعد ذكي شامل"),
         BotCommand("approve", "الموافقة على اقتراح"),
         BotCommand("reject", "رفض اقتراح"),
         BotCommand("clear", "مسح سجل JARVIS"),
@@ -896,6 +926,7 @@ def main():
     app.add_handler(CommandHandler("run", cmd_run))
     app.add_handler(CommandHandler("evolve", cmd_evolve))
     app.add_handler(CommandHandler("cloud", cmd_cloud))
+    app.add_handler(CommandHandler("ask", cmd_ask))
     app.add_handler(CommandHandler("approve", cmd_approve))
     app.add_handler(CommandHandler("reject", cmd_reject))
     app.add_handler(CommandHandler("vpn", cmd_vpn))
