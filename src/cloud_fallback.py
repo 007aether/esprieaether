@@ -1,6 +1,6 @@
 """
-⚡ EsprieAether - Cloud Fallback
-طبقة التبديل التلقائي: Cloud (DeepSeek) ↔ Local (Ollama)
+⚡ EsprieAether - Cloud Fallback v2
+Multi-Provider: OpenRouter → Groq → Together → Local
 """
 import os
 import time
@@ -22,34 +22,32 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s"
 )
 
-# ─── الإعدادات ───
+# ─── Providers ───
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
+OPENROUTER_BASE_URL = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
+OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "dots-studio/dots-3-note-preview:free")
+
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 GROQ_BASE_URL = os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1")
-GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
-OPENROUTER_BASE_URL = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
-OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "nvidia/nemotron-3.5-lightning:free")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")
 
-# نماذج احتياطية (تجربتها بالترتيب) - الأسرع أولاً
-OPENROUTER_MODELS_FALLBACK = [
-    "cohere/north-mini-code:free",           # 2s
-    "dots-studio/dots-3-note-preview:free",  # 2s
-    "nvidia/nemotron-3.5-lightning:free",    # بطيء لكن قوي
-]
+TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY", "")
+TOGETHER_BASE_URL = os.getenv("TOGETHER_BASE_URL", "https://api.together.xyz/v1")
+TOGETHER_MODEL = os.getenv("TOGETHER_MODEL", "meta-llama/Llama-3.3-70B-Instruct-Turbo")
 
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5:3b-64k")
 
-CHECK_INTERVAL = 30  # ثانية
+CHECK_INTERVAL = 30
 STATE_FILE = BASE_DIR / "cloud_fallback_state.json"
 
 
 class CloudFallback:
-    """مدير التبديل بين Cloud و Local"""
+    """Multi-Provider Fallback"""
 
     def __init__(self):
         self.last_check = 0
-        self.online = None  # None = لم يُفحص بعد
+        self.online = None
         self.state = self._load_state()
 
     def _load_state(self) -> dict:
@@ -60,156 +58,110 @@ class CloudFallback:
                 pass
         return {
             "started_at": datetime.now().isoformat(),
-            "cloud_requests": 0,
-            "local_requests": 0,
-            "cloud_failures": 0,
+            "requests": {},
+            "failures": {},
             "last_switch": None,
         }
 
     def _save_state(self):
         STATE_FILE.write_text(json.dumps(self.state, indent=2, ensure_ascii=False))
 
-    # ─────────────────────────────────────
-    #  فحص الإنترنت
-    # ─────────────────────────────────────
     def is_online(self, force: bool = False) -> bool:
-        """فحص الاتصال بالإنترنت (مع cache 30 ثانية)"""
         now = time.time()
         if not force and self.online is not None and (now - self.last_check) < CHECK_INTERVAL:
             return self.online
-
-        # افحص DeepSeek أولاً
         try:
-            r = requests.head(DEEPSEEK_BASE_URL, timeout=5)
-            self.online = r.status_code < 500
+            socket.create_connection(("1.1.1.1", 53), timeout=5)
+            self.online = True
         except Exception:
-            # افحص الإنترنت العام
-            try:
-                socket.create_connection(("1.1.1.1", 53), timeout=5)
-                self.online = True
-            except Exception:
-                self.online = False
-
+            self.online = False
         self.last_check = now
         return self.online
 
     # ─────────────────────────────────────
-    #  إرسال الطلبات
+    #  المحاولات
     # ─────────────────────────────────────
-    def ask(self, prompt: str, system: str = None, prefer: str = "auto") -> dict:
-        """
-        إرسال طلب مع تبديل تلقائي
-        
-        prefer: "auto" | "cloud" | "local"
-        """
-        online = self.is_online()
-
-        # القرار
-        if prefer == "local" or (prefer == "auto" and not online):
-            return self._ask_local(prompt, system)
-        else:
-            result = self._ask_cloud(prompt, system)
-            if result["status"] == "ok":
-                return result
-
-            # فشل Cloud → Local
-            logger.warning("⚠️ Cloud فشل — التبديل إلى Local")
-            self.state["cloud_failures"] += 1
-            self._save_state()
-            return self._ask_local(prompt, system)
-
-    def _ask_cloud(self, prompt: str, system: str = None) -> dict:
-        """إرسال إلى Cloud (OpenRouter أولاً، ثم Groq)"""
-
-        # 1. OpenRouter
-        if OPENROUTER_API_KEY:
-            try:
-                messages = []
-                if system:
-                    messages.append({"role": "system", "content": system})
-                messages.append({"role": "user", "content": prompt})
-
-                r = requests.post(
-                    OPENROUTER_BASE_URL + "/chat/completions",
-                    headers={
-                        "Authorization": "Bearer " + OPENROUTER_API_KEY,
-                        "Content-Type": "application/json",
-                        "HTTP-Referer": "http://localhost:5000",
-                        "X-Title": "EsprieAether",
-                    },
-                    json={
-                        "model": OPENROUTER_MODEL,
-                        "messages": messages,
-                        "temperature": 0.7,
-                        "max_tokens": 4000,
-                    },
-                    timeout=30,
-                )
-
-                if r.status_code == 200:
-                    data = r.json()
-                    answer = data["choices"][0]["message"]["content"]
-                    self.state["cloud_requests"] += 1
-                    self.state["last_switch"] = datetime.now().isoformat()
-                    self._save_state()
-                    logger.info("☁️ OpenRouter")
-                    return {"status": "ok", "source": "cloud", "answer": answer}
-                elif r.status_code == 429:
-                    logger.warning("⚠️ OpenRouter 429 — جاري Groq")
-                else:
-                    logger.warning("⚠️ OpenRouter " + str(r.status_code))
-            except Exception as e:
-                logger.error("OpenRouter: " + str(e))
-
-        # 2. Groq
-        if GROQ_API_KEY:
-            try:
-                messages = []
-                if system:
-                    messages.append({"role": "system", "content": system})
-                messages.append({"role": "user", "content": prompt})
-
-                r = requests.post(
-                    GROQ_BASE_URL + "/chat/completions",
-                    headers={
-                        "Authorization": "Bearer " + GROQ_API_KEY,
-                        "Content-Type": "application/json",
-                    },
-                    json={
-                        "model": GROQ_MODEL,
-                        "messages": messages,
-                        "temperature": 0.7,
-                        "max_tokens": 4000,
-                    },
-                    timeout=30,
-                )
-
-                if r.status_code == 200:
-                    data = r.json()
-                    answer = data["choices"][0]["message"]["content"]
-                    self.state["cloud_requests"] += 1
-                    self.state["last_switch"] = datetime.now().isoformat()
-                    self._save_state()
-                    logger.info("⚡ Groq")
-                    return {"status": "ok", "source": "cloud", "answer": answer}
-                else:
-                    logger.error("Groq " + str(r.status_code) + ": " + r.text[:200])
-            except Exception as e:
-                logger.error("Groq: " + str(e))
-
-        return {"status": "error", "message": "كل المزودين فشلوا"}
-
-
-    def _ask_local(self, prompt: str, system: str = None) -> dict:
-        """إرسال إلى Ollama المحلي"""
+    def _try_openrouter(self, messages: list) -> dict:
+        if not OPENROUTER_API_KEY:
+            return {"status": "skip", "reason": "no key"}
         try:
-            messages = []
-            if system:
-                messages.append({"role": "system", "content": system})
-            messages.append({"role": "user", "content": prompt})
-
             r = requests.post(
-                f"{OLLAMA_HOST}/api/chat",
+                OPENROUTER_BASE_URL + "/chat/completions",
+                headers={
+                    "Authorization": "Bearer " + OPENROUTER_API_KEY,
+                    "Content-Type": "application/json",
+                    "HTTP-Referer": "http://localhost:5000",
+                    "X-Title": "EsprieAether",
+                },
+                json={
+                    "model": OPENROUTER_MODEL,
+                    "messages": messages,
+                    "temperature": 0.5,
+                    "max_tokens": 4000,
+                },
+                timeout=30,
+            )
+            if r.status_code == 200:
+                return {"status": "ok", "provider": "openrouter",
+                        "answer": r.json()["choices"][0]["message"]["content"]}
+            return {"status": "skip", "reason": "HTTP " + str(r.status_code)}
+        except Exception as e:
+            return {"status": "skip", "reason": str(e)[:100]}
+
+    def _try_groq(self, messages: list) -> dict:
+        if not GROQ_API_KEY:
+            return {"status": "skip", "reason": "no key"}
+        try:
+            r = requests.post(
+                GROQ_BASE_URL + "/chat/completions",
+                headers={
+                    "Authorization": "Bearer " + GROQ_API_KEY,
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": GROQ_MODEL,
+                    "messages": messages,
+                    "temperature": 0.5,
+                    "max_tokens": 4000,
+                },
+                timeout=30,
+            )
+            if r.status_code == 200:
+                return {"status": "ok", "provider": "groq",
+                        "answer": r.json()["choices"][0]["message"]["content"]}
+            return {"status": "skip", "reason": "HTTP " + str(r.status_code)}
+        except Exception as e:
+            return {"status": "skip", "reason": str(e)[:100]}
+
+    def _try_together(self, messages: list) -> dict:
+        if not TOGETHER_API_KEY:
+            return {"status": "skip", "reason": "no key"}
+        try:
+            r = requests.post(
+                TOGETHER_BASE_URL + "/chat/completions",
+                headers={
+                    "Authorization": "Bearer " + TOGETHER_API_KEY,
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": TOGETHER_MODEL,
+                    "messages": messages,
+                    "temperature": 0.5,
+                    "max_tokens": 4000,
+                },
+                timeout=30,
+            )
+            if r.status_code == 200:
+                return {"status": "ok", "provider": "together",
+                        "answer": r.json()["choices"][0]["message"]["content"]}
+            return {"status": "skip", "reason": "HTTP " + str(r.status_code)}
+        except Exception as e:
+            return {"status": "skip", "reason": str(e)[:100]}
+
+    def _try_local(self, messages: list) -> dict:
+        try:
+            r = requests.post(
+                OLLAMA_HOST + "/api/chat",
                 json={
                     "model": OLLAMA_MODEL,
                     "messages": messages,
@@ -219,77 +171,117 @@ class CloudFallback:
                 timeout=300,
             )
             r.raise_for_status()
-            data = r.json()
-            answer = data["message"]["content"]
-
-            self.state["local_requests"] += 1
-            self.state["last_switch"] = datetime.now().isoformat()
-            self._save_state()
-
-            logger.info("🏠 Local (Ollama)")
-            return {"status": "ok", "source": "local", "answer": answer}
-
+            return {"status": "ok", "provider": "local",
+                    "answer": r.json()["message"]["content"]}
         except Exception as e:
-            logger.error(f"❌ Local: {e}")
-            return {"status": "error", "message": str(e)}
+            return {"status": "error", "reason": str(e)[:100]}
 
     # ─────────────────────────────────────
-    #  التقرير
+    #  الوظيفة الرئيسية
     # ─────────────────────────────────────
+    def ask(self, prompt: str, system: str = None, prefer: str = "auto") -> dict:
+        """إرسال مع Multi-Provider Fallback"""
+        # Local فقط
+        if prefer == "local":
+            messages = []
+            if system:
+                messages.append({"role": "system", "content": system})
+            messages.append({"role": "user", "content": prompt})
+            result = self._try_local(messages)
+            if result["status"] == "ok":
+                self._record("local", "ok")
+            else:
+                self._record("local", "error")
+            return result
+
+        # Cloud فقط
+        if prefer == "cloud":
+            messages = []
+            if system:
+                messages.append({"role": "system", "content": system})
+            messages.append({"role": "user", "content": prompt})
+
+            # جرّب بالترتيب
+            for func, name in [
+                (self._try_openrouter, "openrouter"),
+                (self._try_groq, "groq"),
+                (self._try_together, "together"),
+            ]:
+                result = func(messages)
+                if result["status"] == "ok":
+                    self._record(name, "ok")
+                    logger.info("☁️ " + name)
+                    return {"status": "ok", "source": name, "answer": result["answer"]}
+                self._record(name, "skip")
+
+            # fallback إلى Local
+            logger.warning("⚠️ كل المزودين فشلوا — Local")
+            result = self._try_local(messages)
+            if result["status"] == "ok":
+                self._record("local", "ok")
+                return {"status": "ok", "source": "local", "answer": result["answer"]}
+            return {"status": "error", "message": "كل المزودين فشلوا"}
+
+        # auto
+        if not self.is_online():
+            return self.ask(prompt, system, "local")
+        return self.ask(prompt, system, "cloud")
+
+    def _record(self, provider: str, status: str):
+        if provider not in self.state["requests"]:
+            self.state["requests"][provider] = 0
+            self.state["failures"][provider] = 0
+        if status == "ok":
+            self.state["requests"][provider] += 1
+        else:
+            self.state["failures"][provider] += 1
+        self.state["last_switch"] = datetime.now().isoformat()
+        self._save_state()
+
     def status(self) -> dict:
-        """حالة النظام"""
         return {
             "online": self.is_online(force=True),
-            "cloud_available": bool(OPENROUTER_API_KEY),
-            "cloud_model": OPENROUTER_MODEL,
-            "local_model": OLLAMA_MODEL,
-            "requests": {
-                "cloud": self.state["cloud_requests"],
-                "local": self.state["local_requests"],
-                "cloud_failures": self.state["cloud_failures"],
+            "providers": {
+                "openrouter": bool(OPENROUTER_API_KEY),
+                "groq": bool(GROQ_API_KEY),
+                "together": bool(TOGETHER_API_KEY),
+                "local": True,
             },
-            "last_switch": self.state["last_switch"],
+            "requests": self.state.get("requests", {}),
+            "failures": self.state.get("failures", {}),
+            "last_switch": self.state.get("last_switch"),
         }
 
     def format_telegram(self) -> str:
-        """تنسيق للـ Telegram"""
         s = self.status()
-        emoji_online = "🟢" if s["online"] else "🔴"
-        emoji_cloud = "✅" if s["cloud_available"] else "❌"
+        emoji = "🟢" if s["online"] else "🔴"
 
-        return f"""
-☁️ *Cloud Fallback*
+        text = "☁️ *Cloud Fallback v2*" + chr(10) + chr(10)
+        text += emoji + " الإنترنت: `" + ("متصل" if s["online"] else "منقطع") + "`" + chr(10) + chr(10)
 
-{emoji_online} الإنترنت: `{'متصل' if s['online'] else 'منقطع'}`
-{emoji_cloud} Cloud: `{'جاهز' if s['cloud_available'] else 'غير مُعدّ'}`
+        text += "*المزودون:*" + chr(10)
+        for name, available in s["providers"].items():
+            e = "✅" if available else "❌"
+            reqs = s["requests"].get(name, 0)
+            fails = s["failures"].get(name, 0)
+            text += e + " `" + name + "`: " + str(reqs) + " نجاح, " + str(fails) + " فشل" + chr(10)
 
-*النماذج:*
-• Cloud: `{s['cloud_model']}`
-• Local: `{s['local_model']}`
-
-*الإحصائيات:*
-• Cloud requests: `{s['requests']['cloud']}`
-• Local requests: `{s['requests']['local']}`
-• Cloud failures: `{s['requests']['cloud_failures']}`
-
-_آخر تبديل: `{s['last_switch'] or '—'}`_
-"""
+        text += chr(10) + "_آخر تبديل: `" + str(s["last_switch"] or "—")[:19] + "`_"
+        return text
 
 
-# ─── اختبار ───
 if __name__ == "__main__":
     print("═" * 60)
-    print("☁️ Cloud Fallback Test")
+    print("☁️ Cloud Fallback v2 Test")
     print("═" * 60)
 
-    fb = CloudFallback()
-    print(f"\n▶ الحالة:\n{fb.format_telegram()}")
+    c = CloudFallback()
+    print(c.format_telegram())
+    print()
 
-    if OPENROUTER_API_KEY:
-        print("\n▶ اختبار Cloud...")
-        result = fb.ask("قل: مرحبا", prefer="cloud")
-        print(f"  {result}")
-    else:
-        print("\n⚠️ DEEPSEEK_API_KEY غير موجود — اختبار Local فقط")
-        result = fb.ask("قل: مرحبا", prefer="local")
-        print(f"  {result}")
+    # اختبار
+    r = c.ask("قل: مرحبا", prefer="cloud")
+    print("▶ Cloud:", r.get("source"), "-", r.get("answer", "")[:50])
+
+    r = c.ask("قل: مرحبا", prefer="local")
+    print("▶ Local:", r.get("source"), "-", r.get("answer", "")[:50])
