@@ -28,6 +28,7 @@ from self_evolve import SelfEvolve
 from cloud_fallback import CloudFallback
 from github_evolve import GitHubEvolve
 from guardian_agent import GuardianAgent
+from log_analyzer import LogAnalyzer
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
 logging.basicConfig(
@@ -51,6 +52,7 @@ evolve = SelfEvolve()
 cloud = CloudFallback()
 github_evolve = GitHubEvolve()
 guardian = GuardianAgent()
+analyzer = LogAnalyzer()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -369,6 +371,32 @@ def task_guardian() -> dict:
         result["error"] = str(e)
     return result
 
+def task_log_analysis() -> dict:
+    """تحليل السجلات - يومياً"""
+    result = {"name": "log_analysis", "status": "ok"}
+    try:
+        r = analyzer.analyze()
+        result["status"] = r.get("status", "unknown")
+
+        if r.get("status") == "ok":
+            stats = r["report"]["stats"]
+            analysis = r["report"].get("analysis", "")[:300]
+
+            send_telegram(
+                "📊 *تحليل السجلات*" + chr(10) + chr(10) +
+                f"أخطاء: `{stats['errors']}`" + chr(10) +
+                f"تحذيرات: `{stats['warnings']}`" + chr(10) + chr(10) +
+                analysis
+            )
+            notify.info(
+                "📊 تحليل السجلات",
+                f"{stats['errors']} خطأ، {stats['warnings']} تحذير"
+            )
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
 def task_vpn_check() -> dict:
     """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
     result = {"name": "vpn_check", "status": "ok"}
@@ -420,7 +448,8 @@ def should_run(state: dict, task_name: str, interval: int) -> bool:
 SCHEDULE = {
     "vpn_check": 5 * 60,
     "cloud_health": 5 * 60,
-    "guardian": 5 * 60,   # كل 5 دقائق
+    "guardian": 5 * 60,
+    "log_analysis": 24 * 60 * 60,
     "airdrop_sync": 6 * 60 * 60,
     "weekly_email": 60 * 60,
     "self_evolve": 24 * 60 * 60,
@@ -439,6 +468,7 @@ def run_cycle(state: dict):
     tasks = {
         "vpn_check": task_vpn_check,
         "guardian": task_guardian,
+        "log_analysis": task_log_analysis,
         "cloud_health": task_cloud_health,
         "airdrop_sync": task_airdrop_sync,
         "weekly_email": task_weekly_email,

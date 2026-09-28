@@ -11,6 +11,7 @@ from datetime import datetime
 from cloud_fallback import CloudFallback
 from ask_agent import AskAgent
 from smart_alerts import SmartAlerts
+from log_analyzer import LogAnalyzer
 from self_evolve import SelfEvolve
 from pathlib import Path
 
@@ -53,6 +54,7 @@ jarvis = JarvisBridge()
 cloud = CloudFallback()
 ask_agent = AskAgent()
 alerts = SmartAlerts()
+analyzer = LogAnalyzer()
 evolve = SelfEvolve()
 
 vpn = VPNAgent()
@@ -673,6 +675,29 @@ def format_run_result(action: str, result: dict) -> str:
 
 
 @authorized_only
+async def cmd_analyze(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تحليل السجلات عبر Cloud"""
+    msg = await update.message.reply_text("📊 جارٍ التحليل...")
+
+    try:
+        result = analyzer.analyze()
+
+        if result["status"] == "ok":
+            text = analyzer.format_telegram()
+            await msg.edit_text(text, parse_mode="Markdown")
+        elif result["status"] == "local_only":
+            s = result["stats"]
+            text = "📊 *تحليل محلي*" + chr(10) + chr(10)
+            text += f"• إجمالي: `{s['total']}`" + chr(10)
+            text += f"• أخطاء: `{s['errors']}`" + chr(10) + chr(10)
+            text += "_Cloud فشل — استخدم /cloud test_"
+            await msg.edit_text(text, parse_mode="Markdown")
+        else:
+            await msg.edit_text("📭 لا توجد سجلات للتحليل")
+    except Exception as e:
+        await msg.edit_text("❌ خطأ: " + str(e))
+
+@authorized_only
 async def cmd_alerts(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """تنبيهات ذكية"""
     try:
@@ -891,6 +916,7 @@ async def set_commands(app: Application):
         BotCommand("cloud", "حالة Cloud"),
         BotCommand("ask", "مساعد ذكي شامل"),
         BotCommand("alerts", "تنبيهات ذكية"),
+        BotCommand("analyze", "تحليل السجلات"),
         BotCommand("approve", "الموافقة على اقتراح"),
         BotCommand("reject", "رفض اقتراح"),
         BotCommand("clear", "مسح سجل JARVIS"),
@@ -940,6 +966,7 @@ def main():
     app.add_handler(CommandHandler("cloud", cmd_cloud))
     app.add_handler(CommandHandler("ask", cmd_ask))
     app.add_handler(CommandHandler("alerts", cmd_alerts))
+    app.add_handler(CommandHandler("analyze", cmd_analyze))
     app.add_handler(CommandHandler("approve", cmd_approve))
     app.add_handler(CommandHandler("reject", cmd_reject))
     app.add_handler(CommandHandler("vpn", cmd_vpn))
