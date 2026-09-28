@@ -21,6 +21,10 @@ logging.basicConfig(
 TOOLS_SCHEMA = "الأدوات: get_airdrops, get_vpn_status, get_stats, get_services, get_cloud_status, get_evolve_suggestions, get_somnia_balance, get_bandwidth_status, run_backup"
 
 
+import asyncio
+from mcp_client import MCPClient
+
+
 class AskAgent:
     """مساعد ذكي شامل"""
 
@@ -254,6 +258,47 @@ class AskAgent:
         return "✅ " + json.dumps(data, ensure_ascii=False)[:300]
 
     # ─── الوظيفة ───
+    def ask_mcp(self, question: str) -> dict:
+        """استخدم MCP للأدوات"""
+        try:
+            client = MCPClient()
+
+            # اكتشف الأداة
+            plan = self.plan(question)
+            tool = plan.get("tool", "none")
+
+            # حول أسماء الأدوات لتطابق MCP
+            tool_map = {
+                "get_airdrops": "get_airdrops",
+                "get_vpn_status": "get_vpn_status",
+                "get_stats": "get_stats",
+                "get_services": "get_services",
+                "get_somnia_balance": "get_somnia_balance",
+                "get_market": "get_market",
+                "get_daily_digest": "get_daily_digest",
+                "get_evolve_suggestions": "get_evolve_suggestions",
+                "get_cost_report": "get_cost_report",
+                "get_pharos_balance": "get_pharos_balance",
+            }
+
+            mcp_tool = tool_map.get(tool)
+            if not mcp_tool:
+                return self.ask(question)
+
+            # استدعِ عبر MCP
+            result = asyncio.run(client.call_tool(mcp_tool))
+
+            return {
+                "status": "ok",
+                "question": question,
+                "tool": tool,
+                "source": "mcp",
+                "answer": result,
+            }
+        except Exception as e:
+            # fallback
+            return self.ask(question)
+
     def ask(self, question: str) -> dict:
         self.last_question = question
         plan = self.plan(question)
