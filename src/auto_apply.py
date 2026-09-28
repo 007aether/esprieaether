@@ -113,51 +113,81 @@ class AutoApply:
     #  توليد التعديل عبر Cloud
     # ─────────────────────────────────────
     def generate_patch(self, file_path: Path, action: str) -> dict:
-        """Cloud يولّد التعديل (prompt محدّد)"""
+        """Cloud يولّد التعديل (السطر فقط — prompt مختصر)"""
         try:
             from cloud_fallback import CloudFallback
             cloud = CloudFallback()
 
             content = file_path.read_text()
+            lines = content.split(chr(10))
 
-            # prompt محدّد للقيمة
-            prompt_lines = [
-                "أنت تعدّل قيمة واحدة فقط في ملف Python.",
+            # ابحث عن السطر الذي يحتوي على الرقم المطلوب تغييره
+            import re as _re
+
+            # استخرج الرقمين من الـ action
+            numbers = _re.findall(r'\d+', action)
+            if len(numbers) < 2:
+                return {"status": "skipped", "reason": "لا يوجد رقمان"}
+
+            old_val = numbers[0]
+            new_val = numbers[1]
+
+            # ابحث عن السطر الذي يحتوي على old_val
+            candidate_lines = []
+            for i, line in enumerate(lines):
+                if old_val in line and ("=" in line or "(" in line):
+                    candidate_lines.append((i + 1, line.strip()))
+
+            if not candidate_lines:
+                return {"status": "skipped", "reason": "لم أجد السطر"}
+
+            # ابنِ prompt مختصر
+            prompt_parts = [
+                "You are a Python code editor.",
                 "",
-                "التعديل المطلوب: " + action,
+                "TASK: Change value " + old_val + " to " + new_val,
                 "",
-                "الملف: " + file_path.name,
-                "",
-                "قواعد صارمة:",
-                "1. عدّل قيمة واحدة فقط (رقم، نص، إعداد)",
-                "2. لا تضف كوداً جديداً",
-                "3. لا تحذف كوداً موجوداً",
-                "4. أرجع الملف كاملاً بعد التعديل",
-                "5. بدون شرح، بدون ```",
-                "6. إذا لم تجد القيمة، أرجع: SKIP",
-                "",
-                "الكود الحالي:",
-                content,
+                "Candidate lines from " + file_path.name + ":",
             ]
+            for num, line in candidate_lines[:5]:
+                prompt_parts.append("  " + str(num) + ": " + line)
 
-            prompt = chr(10).join(prompt_lines)
+            prompt_parts.extend([
+                "",
+                "Return ONLY the new version of the best candidate line.",
+                "Format: LINE_NUMBER: new line",
+                "Example: 86: timeout=180,",
+                "No explanation, no markdown.",
+                "If none match, return: SKIP",
+            ])
+
+            prompt = chr(10).join(prompt_parts)
             result = cloud.ask(prompt, prefer="cloud")
 
             if result["status"] != "ok":
                 return {"status": "error", "message": "Cloud فشل"}
 
-            answer = result.get("answer") or ""
-            if not answer:
-                return {"status": "skipped", "reason": "Cloud أرجع رداً فارغاً"}
+            answer = (result.get("answer") or "").strip()
 
-            new_code = answer.strip()
-
-            if new_code.startswith("```"):
-                lines = new_code.split(chr(10))
-                new_code = chr(10).join(lines[1:-1])
-
-            if new_code == "SKIP" or len(new_code) < 100:
+            if not answer or answer == "SKIP":
                 return {"status": "skipped", "reason": "Cloud رفض"}
+
+            # استخرج LINE_NUMBER: new_line
+            match = _re.match(r'(\d+):\s*(.+)', answer)
+            if not match:
+                return {"status": "skipped", "reason": "صيغة غير مفهومة: " + answer[:100]}
+
+            line_num = int(match.group(1))
+            new_line = match.group(2).strip()
+
+            if line_num < 1 or line_num > len(lines):
+                return {"status": "error", "message": "رقم السطر خارج النطاق"}
+
+            # استبدل
+            old_line = lines[line_num - 1]
+            indent = old_line[:len(old_line) - len(old_line.lstrip())]
+            lines[line_num - 1] = indent + new_line
+            new_code = chr(10).join(lines)
 
             if new_code == content:
                 return {"status": "no_change"}
@@ -168,10 +198,10 @@ class AutoApply:
                 "new_code": new_code,
                 "old_size": len(content),
                 "new_size": len(new_code),
+                "line_changed": line_num,
             }
         except Exception as e:
             return {"status": "error", "message": str(e)}
-
 
     # ─────────────────────────────────────
     #  إعادة صياغة

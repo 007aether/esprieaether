@@ -85,87 +85,101 @@ class SelfEvolve:
     #  اقتراح تحسينات (عبر JARVIS)
     # ─────────────────────────────────────
     def suggest_improvements(self) -> list:
-        """استخدام JARVIS لاقتراح تحسينات"""
+        """استخدام JARVIS لاقتراح تحسينات رقمية فقط"""
         from jarvis_bridge import JarvisBridge
+        import re as _re
 
         analysis = self.analyze_logs()
         if analysis["status"] != "ok":
             return []
 
-        # احصل على قائمة ملفاتك الحقيقية
+        # احصل على الملفات الحقيقية
         src_files = [f.name for f in (BASE_DIR / "src").glob("*.py")]
+
+        # احصل على محتوى كل ملف للتحقق
+        file_contents = {}
+        for f in (BASE_DIR / "src").glob("*.py"):
+            try:
+                file_contents[f.name] = f.read_text()
+            except Exception:
+                file_contents[f.name] = ""
 
         jarvis = JarvisBridge()
 
-        prompt = f"""أنت مساعد تطوير لـ EsprieAether.
+        prompt_parts = [
+            "أنت مساعد تطوير لـ EsprieAether.",
+            "",
+            "الملفات الموجودة:",
+        ]
+        for f in src_files:
+            prompt_parts.append("- " + f)
+        prompt_parts.extend([
+            "",
+            "حالة السجلات:",
+            "- إجمالي: " + str(analysis["total_lines"]),
+            "- أخطاء: " + str(analysis["errors"]),
+            "- تحذيرات: " + str(analysis["warnings"]),
+            "",
+            "أنواع الأخطاء المتكررة:",
+            json.dumps(analysis["error_patterns"], ensure_ascii=False, indent=2),
+            "",
+            "اقترح 3 تعديلات **رقمية فقط** (تغيير قيمة موجودة).",
+            "",
+            "قواعد صارمة:",
+            "1. يجب أن يحتوي الاقتراح على رقمين (من X إلى Y)",
+            "2. الملف يجب أن يكون من القائمة أعلاه",
+            "3. الدالة/المتغير يجب أن يكون موجوداً",
+            "4. لا تقترح إضافة كود جديد",
+            "5. لا تقترح تعديلات معقدة",
+            "",
+            "أمثلة مقبولة:",
+            "- زيادة timeout من 120 إلى 180 في jarvis_bridge.py",
+            "- تقليل max_iterations من 5 إلى 3 في autonomous_loop.py",
+            "",
+            "أمثلة مرفوضة:",
+            "- إضافة retry mechanism",
+            "- دمج Self-Learning",
+            "- تحسين الأداء",
+            "",
+            "الصيغة:",
+            "[FILE: اسم_ملف] [ACTION: من X إلى Y في دالة/متغير]",
+        ])
 
-الملفات الحقيقية في المشروع (استخدم فقط هذه الأسماء):
-{chr(10).join('- ' + f for f in src_files)}
-
-حالة السجلات (آخر 200 سطر):
-- إجمالي: {analysis['total_lines']}
-- أخطاء: {analysis['errors']}
-- تحذيرات: {analysis['warnings']}
-- نجاحات: {analysis['successes']}
-
-أنواع الأخطاء المتكررة:
-{json.dumps(analysis['error_patterns'], ensure_ascii=False, indent=2)}
-
-آخر 3 أخطاء:
-{chr(10).join(analysis['sample_errors'][-3:])}
-
-اقترح حتى 3 تعديلات محددة جداً (واحدة لكل سطر).
-
-**قواعد صارمة:**
-1. كل اقتراح يجب أن يحدد الملف بالضبط
-2. كل اقتراح يجب أن يصف التغيير بدقة (ماذا، أين، كيف)
-3. لا تستخدم كلمات عامة مثل "تحسين"، "إضافة" بدون تحديد
-4. مثال مقبول: "jarvis_bridge.py: زيادة timeout من 120 إلى 180 في دالة ask"
-5. مثال مرفوض: "إضافة مزيد من التحقق"
-
-الصيغة:
-[FILE: اسم_ملف_دقيق] [ACTION: وصف_دقيق_مع_الأرقام_والمواضع]
-"""
+        prompt = chr(10).join(prompt_parts)
 
         try:
-            # استخدم Cloud أولاً، ثم Local
+            response = jarvis.ask(prompt, use_history=False)
 
-            try:
-
-                from cloud_fallback import CloudFallback
-
-                cloud = CloudFallback()
-
-                result = cloud.ask(prompt, prefer="auto")
-
-                if result["status"] == "ok":
-
-                    response = result["answer"]
-
-                    logger.info(f"✅ اقتراحات من: {result['source']}")
-
-                else:
-
-                    response = jarvis.ask(prompt, use_history=False)
-
-            except Exception as e:
-
-                logger.warning(f"Cloud فشل: {e}")
-
-                response = jarvis.ask(prompt, use_history=False)
-
-            # استخرج الاقتراحات
             suggestions = []
-            for line in response.split("\n"):
+            for line in response.split(chr(10)):
                 if "[FILE:" in line and "[ACTION:" in line:
-                    file_match = re.search(r'\[FILE:\s*([^\]]+)\]', line)
-                    action_match = re.search(r'\[ACTION:\s*([^\]]+)\]', line)
+                    file_match = _re.search(r'\[FILE:\s*([^\]]+)\]', line)
+                    action_match = _re.search(r'\[ACTION:\s*([^\]]+)\]', line)
+
                     if file_match and action_match:
+                        file_name = file_match.group(1).strip()
+                        action = action_match.group(1).strip()
+
+                        # ✅ D: تحقق من وجود الملف
+                        if file_name not in src_files:
+                            logger.warning("⚠️ ملف غير موجود: " + file_name)
+                            continue
+
+                        # ✅ D: تحقق من وجود رقمين (تعديل رقمي)
+                        if not _re.search(r'\d+', action):
+                            logger.warning("⚠️ لا يوجد أرقام: " + action)
+                            continue
+
+                        # ✅ A: تحقق من "من X إلى Y"
+                        if not _re.search(r'(\d+).*?(?:إلى|to|→).*?(\d+)', action, _re.IGNORECASE):
+                            logger.warning("⚠️ ليس تعديلاً رقمياً: " + action)
+                            continue
+
                         suggestions.append({
-                            "id": f"sug_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{len(suggestions)}",
+                            "id": "sug_" + datetime.now().strftime('%Y%m%d_%H%M%S') + "_" + str(len(suggestions)),
                             "timestamp": datetime.now().isoformat(),
-                            "file": file_match.group(1).strip(),
-                            "action": action_match.group(1).strip(),
+                            "file": file_name,
+                            "action": action,
                             "raw": line.strip(),
                             "status": "pending",
                             "analysis": analysis,
@@ -175,9 +189,10 @@ class SelfEvolve:
                 self.suggestions.extend(suggestions)
                 self._save_suggestions()
 
+            logger.info("✅ " + str(len(suggestions)) + " اقتراح رقمي")
             return suggestions
         except Exception as e:
-            logger.error(f"فشل توليد الاقتراحات: {e}")
+            logger.error("فشل التوليد: " + str(e))
             return []
 
     # ─────────────────────────────────────
@@ -373,7 +388,7 @@ class SelfEvolve:
             for svc in ["aether-core", "aether-bot", "aether-web"]:
                 s = subprocess.run(
                     ["systemctl", "is-active", svc],
-                    capture_output=True, text=True, timeout=5
+                    capture_output=True, text=True, timeout=3
                 )
                 if s.stdout.strip() != "active":
                     return {"status": "error", "message": f"{svc} ليس نشطاً"}

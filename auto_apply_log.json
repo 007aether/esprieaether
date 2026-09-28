@@ -5,8 +5,14 @@
       "id": "sug_20260928_165837_0",
       "file": "jarvis_bridge.py",
       "action": "زيادة timeout من 120 إلى 180 ثانية في دالة ask عند الاتصال بـ Jarvis API"
+    },
+    {
+      "timestamp": "2026-09-28T22:50:23.108421",
+      "id": "sug_20260928_180848_2",
+      "file": "self_evolve.py",
+      "action": "تغيير المعامل max_iterations من 5 إلى 3 في دالة evolve_code لتحديد عدد مرات التكرار التلقائي"
     }
   ],
   "rejected": [],
-  "total": 1
+  "total": 2
 }
