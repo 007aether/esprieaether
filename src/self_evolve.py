@@ -85,9 +85,10 @@ class SelfEvolve:
     #  اقتراح تحسينات (عبر JARVIS)
     # ─────────────────────────────────────
     def suggest_improvements(self) -> list:
-        """استخدام JARVIS لاقتراح تحسينات رقمية فقط"""
-        from jarvis_bridge import JarvisBridge
+        """اقتراحات ذكية باستخدام Multi-Model + تحقق من الملفات"""
+        from cloud_fallback import CloudFallback
         import re as _re
+        import time
 
         analysis = self.analyze_logs()
         if analysis["status"] != "ok":
@@ -96,59 +97,81 @@ class SelfEvolve:
         # احصل على الملفات الحقيقية
         src_files = [f.name for f in (BASE_DIR / "src").glob("*.py")]
 
-        # احصل على محتوى كل ملف للتحقق
-        file_contents = {}
+        # ابنِ قائمة الأسطر القابلة للتعديل
+        editable_lines = {}
         for f in (BASE_DIR / "src").glob("*.py"):
             try:
-                file_contents[f.name] = f.read_text()
+                content = f.read_text()
+                lines = content.split(chr(10))
+                candidates = []
+                for i, line in enumerate(lines, 1):
+                    stripped = line.strip()
+                    # تجاهل التعليقات والنصوص
+                    if stripped.startswith("#") or stripped.startswith('"') or stripped.startswith("'"):
+                        continue
+                    if stripped.startswith('"""') or stripped.startswith("'''"):
+                        continue
+                    # احتفظ بالأسطر التي تحتوي أرقام + إعدادات
+                    if _re.search(r'\d+', line) and ("=" in line or "(" in line or "sleep" in line.lower()):
+                        candidates.append(str(i) + ": " + stripped[:80])
+                editable_lines[f.name] = candidates[:20]
             except Exception:
-                file_contents[f.name] = ""
+                editable_lines[f.name] = []
 
-        jarvis = JarvisBridge()
+        # استخدم Cloud مع Multi-Model
+        cloud = CloudFallback()
 
         prompt_parts = [
-            "أنت مساعد تطوير لـ EsprieAether.",
+            "You are a code optimization assistant for EsprieAether.",
             "",
-            "الملفات الموجودة:",
+            "Available files and their editable lines (with line numbers):",
         ]
-        for f in src_files:
-            prompt_parts.append("- " + f)
+
+        for fname, lines in editable_lines.items():
+            if lines:
+                prompt_parts.append("")
+                prompt_parts.append("FILE: " + fname)
+                for ln in lines[:10]:
+                    prompt_parts.append("  " + ln)
+
         prompt_parts.extend([
             "",
-            "حالة السجلات:",
-            "- إجمالي: " + str(analysis["total_lines"]),
-            "- أخطاء: " + str(analysis["errors"]),
-            "- تحذيرات: " + str(analysis["warnings"]),
+            "TASK: Suggest 3 NUMERIC changes (from X to Y) in these files.",
             "",
-            "أنواع الأخطاء المتكررة:",
-            json.dumps(analysis["error_patterns"], ensure_ascii=False, indent=2),
+            "RULES (strict):",
+            "1. Each suggestion MUST have two numbers: from X to Y",
+            "2. The file MUST be from the list above",
+            "3. The line MUST exist (check the line number)",
+            "4. Do NOT suggest adding new code",
+            "5. Do NOT suggest complex changes",
             "",
-            "اقترح 3 تعديلات **رقمية فقط** (تغيير قيمة موجودة).",
+            "GOOD examples:",
+            "- increase timeout from 60 to 120 in jarvis_bridge.py",
+            "- change retry count from 3 to 5 in github_agent.py",
             "",
-            "قواعد صارمة:",
-            "1. يجب أن يحتوي الاقتراح على رقمين (من X إلى Y)",
-            "2. الملف يجب أن يكون من القائمة أعلاه",
-            "3. الدالة/المتغير يجب أن يكون موجوداً",
-            "4. لا تقترح إضافة كود جديد",
-            "5. لا تقترح تعديلات معقدة",
+            "BAD examples:",
+            "- add retry mechanism",
+            "- implement self-learning",
+            "- improve performance",
             "",
-            "أمثلة مقبولة:",
-            "- زيادة timeout من 120 إلى 180 في jarvis_bridge.py",
-            "- تقليل max_iterations من 5 إلى 3 في autonomous_loop.py",
-            "",
-            "أمثلة مرفوضة:",
-            "- إضافة retry mechanism",
-            "- دمج Self-Learning",
-            "- تحسين الأداء",
-            "",
-            "الصيغة:",
-            "[FILE: اسم_ملف] [ACTION: من X إلى Y في دالة/متغير]",
+            "FORMAT (strict):",
+            "[FILE: filename.py] [ACTION: change X to Y in ...]",
         ])
 
         prompt = chr(10).join(prompt_parts)
 
         try:
-            response = jarvis.ask(prompt, use_history=False)
+            start_time = time.time()
+            result = cloud.ask(prompt, prefer="auto")
+            elapsed = time.time() - start_time
+
+            if result["status"] != "ok":
+                logger.warning("⚠️ Cloud فشل: " + str(result.get("message", "")))
+                return []
+
+            response = result.get("answer", "") or ""
+            source = result.get("source", "unknown")
+            logger.info("🧠 اقتراحات من: " + source + " (" + str(round(elapsed, 1)) + "s)")
 
             suggestions = []
             for line in response.split(chr(10)):
@@ -160,19 +183,14 @@ class SelfEvolve:
                         file_name = file_match.group(1).strip()
                         action = action_match.group(1).strip()
 
-                        # ✅ D: تحقق من وجود الملف
+                        # تحقق من الملف
                         if file_name not in src_files:
                             logger.warning("⚠️ ملف غير موجود: " + file_name)
                             continue
 
-                        # ✅ D: تحقق من وجود رقمين (تعديل رقمي)
-                        if not _re.search(r'\d+', action):
-                            logger.warning("⚠️ لا يوجد أرقام: " + action)
-                            continue
-
-                        # ✅ A: تحقق من "من X إلى Y"
-                        if not _re.search(r'(\d+).*?(?:إلى|to|→).*?(\d+)', action, _re.IGNORECASE):
-                            logger.warning("⚠️ ليس تعديلاً رقمياً: " + action)
+                        # تحقق من الأرقام
+                        if not _re.search(r'(\d+).*?(?:to|إلى|→).*?(\d+)', action, _re.IGNORECASE):
+                            logger.warning("⚠️ ليس رقمياً: " + action[:50])
                             continue
 
                         suggestions.append({
@@ -182,6 +200,7 @@ class SelfEvolve:
                             "action": action,
                             "raw": line.strip(),
                             "status": "pending",
+                            "source": source,
                             "analysis": analysis,
                         })
 

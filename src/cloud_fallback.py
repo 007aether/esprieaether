@@ -296,6 +296,50 @@ class CloudFallback:
         self.state["last_switch"] = datetime.now().isoformat()
         self._save_state()
 
+    def get_cost_report(self) -> dict:
+        """تقرير استخدام المزودين"""
+        report = {
+            "total_requests": 0,
+            "total_failures": 0,
+            "success_rate": 0,
+            "by_provider": {},
+        }
+
+        for provider, count in self.state.get("requests", {}).items():
+            fails = self.state.get("failures", {}).get(provider, 0)
+            total = count + fails
+            rate = round((count / total * 100), 1) if total > 0 else 0
+            report["by_provider"][provider] = {
+                "success": count,
+                "failures": fails,
+                "success_rate": rate,
+            }
+            report["total_requests"] += count
+            report["total_failures"] += fails
+
+        total = report["total_requests"] + report["total_failures"]
+        if total > 0:
+            report["success_rate"] = round(report["total_requests"] / total * 100, 1)
+
+        return report
+
+    def format_cost_report(self) -> str:
+        """تنسيق للتلغرام"""
+        r = self.get_cost_report()
+
+        text = "💰 *Cost Report*" + chr(10) + chr(10)
+        text += "📊 إجمالي: `" + str(r["total_requests"]) + "` نجاح" + chr(10)
+        text += "❌ فشل: `" + str(r["total_failures"]) + "`" + chr(10)
+        text += "✅ معدل النجاح: `" + str(r["success_rate"]) + "%`" + chr(10)
+        text += chr(10)
+
+        if r["by_provider"]:
+            text += "*حسب المزود:*" + chr(10)
+            for p, data in r["by_provider"].items():
+                text += "• `" + p + "`: " + str(data["success"]) + " نجاح, " + str(data["failures"]) + " فشل (" + str(data["success_rate"]) + "%)" + chr(10)
+
+        return text
+
     def status(self) -> dict:
         return {
             "online": self.is_online(force=True),
