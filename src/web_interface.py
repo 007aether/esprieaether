@@ -361,6 +361,87 @@ def api_earnings():
         return jsonify({"status": "error", "error": str(e)})
 
 
+@app.route("/health")
+def health_page():
+    """صفحة المراقبة الشاملة"""
+    return render_template("health.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/health")
+def api_health():
+    """API المراقبة الشاملة"""
+    try:
+        from datetime import datetime
+        import subprocess
+
+        result = {
+            "status": "ok",
+            "timestamp": datetime.now().isoformat(),
+        }
+
+        # 1. الخدمات
+        services = {}
+        for svc in ["aether-web", "aether-bot", "aether-core", "ollama"]:
+            try:
+                r = subprocess.run(
+                    ["/usr/bin/systemctl", "is-active", svc],
+                    capture_output=True, text=True, timeout=5
+                )
+                services[svc] = r.stdout.strip()
+            except Exception:
+                services[svc] = "unknown"
+        result["services"] = services
+
+        # 2. Guardian State
+        try:
+            from guardian_agent import GuardianAgent
+            g = GuardianAgent()
+            result["guardian"] = {
+                "checks": g.state.get("checks", 0),
+                "errors_detected": g.state.get("errors_detected", 0),
+                "errors_fixed": g.state.get("errors_fixed", 0),
+                "fixes": g.state.get("fixes", [])[-10:],
+            }
+        except Exception:
+            result["guardian"] = {}
+
+        # 3. Smart Alerts
+        try:
+            from smart_alerts import SmartAlerts
+            a = SmartAlerts()
+            result["alerts"] = a.get_stats()
+        except Exception:
+            result["alerts"] = {}
+
+        # 4. Autonomous State
+        try:
+            import json as j
+            state_file = BASE_DIR / "autonomous_state.json"
+            if state_file.exists():
+                state = j.loads(state_file.read_text())
+                result["autonomous"] = {
+                    "cycles": state.get("cycles", 0),
+                    "tasks_count": len(state.get("last_run", {})),
+                    "last_run": state.get("last_run", {}),
+                }
+        except Exception:
+            result["autonomous"] = {}
+
+        # 5. System Metrics
+        try:
+            import psutil
+            result["system"] = {
+                "cpu": psutil.cpu_percent(interval=0.5),
+                "ram": psutil.virtual_memory().percent,
+                "disk": psutil.disk_usage("/").percent,
+            }
+        except Exception:
+            result["system"] = {}
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
 @app.route("/settings")
 def settings_page():
     """صفحة الإعدادات"""

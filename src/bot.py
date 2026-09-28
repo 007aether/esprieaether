@@ -10,6 +10,7 @@ import logging
 from datetime import datetime
 from cloud_fallback import CloudFallback
 from ask_agent import AskAgent
+from smart_alerts import SmartAlerts
 from self_evolve import SelfEvolve
 from pathlib import Path
 
@@ -51,6 +52,7 @@ logger = logging.getLogger("aether-bot")
 jarvis = JarvisBridge()
 cloud = CloudFallback()
 ask_agent = AskAgent()
+alerts = SmartAlerts()
 evolve = SelfEvolve()
 
 vpn = VPNAgent()
@@ -671,6 +673,15 @@ def format_run_result(action: str, result: dict) -> str:
 
 
 @authorized_only
+async def cmd_alerts(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تنبيهات ذكية"""
+    try:
+        text = alerts.format_telegram()
+        await update.message.reply_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text("❌ خطأ: " + str(e))
+
+@authorized_only
 async def cmd_ask(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """مساعد ذكي شامل"""
     if not context.args:
@@ -879,6 +890,7 @@ async def set_commands(app: Application):
         BotCommand("evolve", "اقتراحات التطوير"),
         BotCommand("cloud", "حالة Cloud"),
         BotCommand("ask", "مساعد ذكي شامل"),
+        BotCommand("alerts", "تنبيهات ذكية"),
         BotCommand("approve", "الموافقة على اقتراح"),
         BotCommand("reject", "رفض اقتراح"),
         BotCommand("clear", "مسح سجل JARVIS"),
@@ -927,6 +939,7 @@ def main():
     app.add_handler(CommandHandler("evolve", cmd_evolve))
     app.add_handler(CommandHandler("cloud", cmd_cloud))
     app.add_handler(CommandHandler("ask", cmd_ask))
+    app.add_handler(CommandHandler("alerts", cmd_alerts))
     app.add_handler(CommandHandler("approve", cmd_approve))
     app.add_handler(CommandHandler("reject", cmd_reject))
     app.add_handler(CommandHandler("vpn", cmd_vpn))
