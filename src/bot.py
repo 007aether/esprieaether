@@ -353,11 +353,30 @@ async def cmd_vpn_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def cmd_airdrop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """حالة الأيردروب"""
-    await update.message.reply_text(
-        "📡 *حالة الأيردروب*\n\n"
-        "_سيتم تفعيل هذه الميزة قريباً مع وكلاء Somnia._",
-        parse_mode="Markdown"
-    )
+    try:
+        from airdrop_agent import AirdropAgent
+        agent = AirdropAgent()
+        total = agent.count()
+        recent = agent.get_recent(5)
+
+        text = "📡 *حالة الأيردروب*" + chr(10) + chr(10)
+        text += f"📊 الإجمالي: `{total}`" + chr(10) + chr(10)
+        text += "*أحدث 5:*" + chr(10)
+
+        for i, item in enumerate(recent, 1):
+            title = item["title"][:60]
+            text += f"{i}. {title}" + chr(10)
+            text += f"   [رابط]({item['link']})" + chr(10)
+
+        await update.message.reply_text(
+            text,
+            parse_mode="Markdown",
+            disable_web_page_preview=True
+        )
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
 
 @authorized_only
 async def cmd_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):

@@ -324,6 +324,43 @@ def api_stats_full():
         return jsonify({"status": "error", "error": str(e)})
 
 
+@app.route("/earnings")
+def earnings_page():
+    """صفحة الأرباح"""
+    return render_template("earnings.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/earnings")
+def api_earnings():
+    """API الأرباح"""
+    try:
+        import json
+        from airdrop_agent import AirdropAgent
+
+        airdrop = AirdropAgent()
+
+        result = {
+            "status": "ok",
+            "airdrops": {
+                "total": airdrop.count(),
+                "recent": airdrop.get_recent(10),
+            },
+            "bandwidth": {},
+        }
+
+        # Bandwidth
+        try:
+            from bandwidth_agent import BandwidthAgent
+            bw = BandwidthAgent()
+            result["bandwidth"] = bw.status()
+        except Exception:
+            pass
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+
 @app.route("/settings")
 def settings_page():
     """صفحة الإعدادات"""

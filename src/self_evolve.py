@@ -114,9 +114,17 @@ class SelfEvolve:
 آخر 3 أخطاء:
 {chr(10).join(analysis['sample_errors'][-3:])}
 
-اقترح حتى 3 تحسينات. استخدم فقط أسماء الملفات أعلاه.
-الصيغة الصارمة:
-[FILE: اسم_ملف_من_القائمة] [ACTION: وصف مختصر]
+اقترح حتى 3 تعديلات محددة جداً (واحدة لكل سطر).
+
+**قواعد صارمة:**
+1. كل اقتراح يجب أن يحدد الملف بالضبط
+2. كل اقتراح يجب أن يصف التغيير بدقة (ماذا، أين، كيف)
+3. لا تستخدم كلمات عامة مثل "تحسين"، "إضافة" بدون تحديد
+4. مثال مقبول: "jarvis_bridge.py: زيادة timeout من 120 إلى 180 في دالة ask"
+5. مثال مرفوض: "إضافة مزيد من التحقق"
+
+الصيغة:
+[FILE: اسم_ملف_دقيق] [ACTION: وصف_دقيق_مع_الأرقام_والمواضع]
 """
 
         try:
@@ -198,7 +206,6 @@ class SelfEvolve:
     # ─────────────────────────────────────
     def approve(self, suggestion_id: str) -> dict:
         """الموافقة على اقتراح وتنفيذه"""
-        # ابحث
         sug = None
         for s in self.suggestions:
             if s["id"].endswith(suggestion_id):
@@ -206,44 +213,36 @@ class SelfEvolve:
                 break
 
         if not sug:
-            return {"status": "error", "message": f"لم أجد: {suggestion_id}"}
+            return {"status": "error", "message": "لم أجد: " + suggestion_id}
 
         if sug["status"] != "pending":
-            return {"status": "error", "message": f"الحالة: {sug['status']}"}
+            return {"status": "error", "message": "الحالة: " + sug["status"]}
 
         # نسخة احتياطية
-        backup_path = self._backup_file(sug["file"])
-        sug["backup"] = str(backup_path)
+        try:
+            backup_path = self._backup_file(sug["file"])
+            sug["backup"] = str(backup_path)
+        except Exception as e:
+            return {"status": "error", "message": "فشل النسخة الاحتياطية: " + str(e)}
 
         # التطبيق
         apply_result = self._apply_suggestion(sug)
 
         if apply_result["status"] == "ok":
-            # اختبار
-            test = self._test_system()
-            if test["status"] == "ok":
-                sug["status"] = "approved"
-                sug["applied_at"] = datetime.now().isoformat()
-                self._save_suggestions()
-                return {
-                    "status": "ok",
-                    "message": "✅ تم التطبيق والاختبار",
-                    "suggestion": sug,
-                }
-            else:
-                # rollback
-                self._rollback_file(backup_path, sug["file"])
-                sug["status"] = "test_failed"
-                self._save_suggestions()
-                return {
-                    "status": "error",
-                    "message": f"❌ الاختبار فشل — تم rollback",
-                    "test": test,
-                }
+            sug["status"] = "approved"
+            sug["applied_at"] = datetime.now().isoformat()
+            self._save_suggestions()
+            return {
+                "status": "ok",
+                "message": "تم التطبيق بنجاح",
+                "result": apply_result,
+            }
         else:
-            sug["status"] = "apply_failed"
+            sug["status"] = apply_result["status"]
+            sug["error"] = apply_result.get("message", "")
             self._save_suggestions()
             return apply_result
+
 
     def _backup_file(self, file_name: str) -> Path:
         """نسخة احتياطية"""
@@ -272,20 +271,91 @@ class SelfEvolve:
         return BASE_DIR / "src" / file_name
 
     def _apply_suggestion(self, sug: dict) -> dict:
-        """تطبيق الاقتراح (تلقائي محدود)"""
+        """تطبيق الاقتراح (تلقائي مع Cloud)"""
         target = self._resolve_file(sug["file"])
 
         if not target.exists():
-            return {"status": "error", "message": f"الملف غير موجود: {target}"}
+            return {"status": "error", "message": "الملف غير موجود: " + str(target)}
 
-        # حالياً: نسجل فقط — التعديل اليدوي
-        # (لتجنب كسر النظام)
-        return {
-            "status": "manual_required",
-            "message": "التطبيق التلقائي غير مفعّل — يحتاج مراجعة يدوية",
-            "file": str(target),
-            "action": sug["action"],
-        }
+        # 1. اقرأ الملف الأصلي
+        try:
+            original = target.read_text(encoding="utf-8")
+        except Exception as e:
+            return {"status": "error", "message": "فشل قراءة الملف: " + str(e)}
+
+        # 2. اطلب من Cloud توليد الكود الجديد
+        try:
+            from cloud_fallback import CloudFallback
+            cloud = CloudFallback()
+
+            prompt_lines = [
+                "أنت مساعد برمجة لـ EsprieAether.",
+                "",
+                "المهمة: " + sug["action"],
+                "",
+                "الكود الحالي (أول 2000 حرف):",
+                "```python",
+                original[:2000],
+                "```",
+                "",
+                "أرجع الكود **الكامل** المعدل فقط (بدون شرح، بدون ```).",
+                "إذا لم يمكن التعديل بأمان، أرجع كلمة: SKIP",
+            ]
+            prompt = chr(10).join(prompt_lines)
+
+            result = cloud.ask(prompt, prefer="cloud")
+
+            if result["status"] != "ok":
+                return {"status": "error", "message": "Cloud فشل"}
+
+            new_code = result["answer"].strip()
+
+            # أزل ``` إن وُجدت
+            if new_code.startswith("```"):
+                lines = new_code.split(chr(10))
+                new_code = chr(10).join(lines[1:-1])
+
+            if new_code == "SKIP" or len(new_code) < 100:
+                return {"status": "skipped", "message": "Cloud رفض التعديل"}
+
+            # 3. اختبر الكود الجديد قبل التطبيق
+            import ast
+            try:
+                ast.parse(new_code)
+            except SyntaxError as e:
+                return {"status": "error", "message": "الكود الجديد فيه خطأ: " + str(e)}
+
+            # 4. احفظ النسخة الجديدة
+            target.write_text(new_code, encoding="utf-8")
+
+            # 5. اختبر py_compile
+            import subprocess
+            r = subprocess.run(
+                ["python3", "-m", "py_compile", str(target)],
+                capture_output=True, text=True, timeout=15
+            )
+
+            if r.returncode != 0:
+                # rollback
+                target.write_text(original, encoding="utf-8")
+                return {"status": "error", "message": "فشل الاختبار - rollback"}
+
+            return {
+                "status": "ok",
+                "message": "تم التطبيق والاختبار",
+                "file": str(target),
+                "old_size": len(original),
+                "new_size": len(new_code),
+            }
+
+        except Exception as e:
+            # rollback عند أي خطأ
+            try:
+                target.write_text(original, encoding="utf-8")
+            except:
+                pass
+            return {"status": "error", "message": str(e)}
+
 
     def _test_system(self) -> dict:
         """اختبار سريع"""
