@@ -26,6 +26,7 @@ from email_agent import EmailAgent
 from notify_agent import NotifyAgent
 from self_evolve import SelfEvolve
 from cloud_fallback import CloudFallback
+from github_evolve import GitHubEvolve
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
 logging.basicConfig(
@@ -47,6 +48,7 @@ email_agent = EmailAgent()
 notify = NotifyAgent()
 evolve = SelfEvolve()
 cloud = CloudFallback()
+github_evolve = GitHubEvolve()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -267,6 +269,30 @@ def task_airdrop_sync() -> dict:
                 f"{new} إيردروب جديد | الإجمالي: {total}"
             )  
     return result
+def task_github_evolve() -> dict:
+    """البحث في GitHub عن تحسينات - كل 24 ساعة"""
+    result = {"name": "github_evolve", "status": "ok"}
+    try:
+        run_result = github_evolve.run()
+        result.update(run_result)
+
+        if run_result.get("status") == "ok" and run_result.get("suggestions_count", 0) > 0:
+            count = run_result["suggestions_count"]
+            send_telegram(
+                f"🔍 *GitHub Evolve*\n\n"
+                f"📊 مستودعات: `{run_result['results_count']}`\n"
+                f"🧬 اقتراحات جديدة: `{count}`\n\n"
+                f"_استخدم /evolve للعرض_"
+            )
+            notify.info(
+                "🔍 GitHub Evolve",
+                f"{count} اقتراح جديد من GitHub"
+            )
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
 def task_self_evolve() -> dict:
     """تحليل وتوليد اقتراحات التطوير الذاتي"""
     result = {"name": "self_evolve", "status": "ok"}
@@ -365,7 +391,8 @@ SCHEDULE = {
     "cloud_health": 5 * 60,
     "airdrop_sync": 6 * 60 * 60,
     "weekly_email": 60 * 60,
-    "self_evolve": 24 * 60 * 60,   # يومياً
+    "self_evolve": 24 * 60 * 60,
+    "github_evolve": 24 * 60 * 60,   # يومياً
     "health_check": 5 * 60,
     "security_scan": 60 * 60,
     "github_sync": 60 * 60,
@@ -383,6 +410,7 @@ def run_cycle(state: dict):
         "airdrop_sync": task_airdrop_sync,
         "weekly_email": task_weekly_email,
         "self_evolve": task_self_evolve,
+        "github_evolve": task_github_evolve,
         "health_check": task_health_check,
         "security_scan": task_security_scan,
         "github_sync": task_github_sync,
