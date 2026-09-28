@@ -388,6 +388,74 @@ class AutoApply:
 
         return results
 
+    # ─────────────────────────────────────
+    #  Self-Learning
+    # ─────────────────────────────────────
+    def get_learned_patterns(self) -> dict:
+        """استخراج أنماط من الاقتراحات الناجحة"""
+        patterns = {
+            "files": {},
+            "actions": [],
+            "total_success": 0,
+        }
+
+        for entry in self.log.get("applied", []):
+            f = entry.get("file", "")
+            a = entry.get("action", "")
+
+            # احسب لكل ملف
+            if f:
+                if f not in patterns["files"]:
+                    patterns["files"][f] = {"count": 0, "actions": []}
+                patterns["files"][f]["count"] += 1
+                patterns["files"][f]["actions"].append(a[:80])
+
+            patterns["total_success"] += 1
+
+        # رتب الملفات
+        sorted_files = sorted(
+            patterns["files"].items(),
+            key=lambda x: -x[1]["count"],
+        )
+        patterns["files"] = dict(sorted_files)
+
+        return patterns
+
+    def suggest_next(self, limit: int = 3) -> list:
+        """اقتراح الخطوات التالية (بناءً على الأنماط)"""
+        patterns = self.get_learned_patterns()
+        suggestions = []
+
+        # إذا نجح تعديل على ملف، اقترح ملفات مشابهة
+        top_files = list(patterns["files"].keys())[:limit]
+
+        for f in top_files:
+            count = patterns["files"][f]["count"]
+            suggestions.append({
+                "file": f,
+                "reason": "نجح " + str(count) + " تعديل سابق على هذا الملف",
+                "priority": "high" if count > 1 else "normal",
+            })
+
+        return suggestions
+
+    def format_learning(self) -> str:
+        """تنسيق للتلغرام"""
+        patterns = self.get_learned_patterns()
+
+        text = "🧠 *Self-Learning*" + chr(10) + chr(10)
+        text += "📊 نجاحات: `" + str(patterns["total_success"]) + "`" + chr(10)
+        text += chr(10)
+
+        if patterns["files"]:
+            text += "*أكثر الملفات تعديلاً:*" + chr(10)
+            for f, data in list(patterns["files"].items())[:5]:
+                text += "• `" + f + "`: " + str(data["count"]) + " نجاح" + chr(10)
+        else:
+            text += "_لا توجد بيانات بعد_"
+
+        return text
+
     def sandbox_test(self, new_code: str) -> dict:
         """اختبار الكود في بيئة معزولة"""
         import tempfile
