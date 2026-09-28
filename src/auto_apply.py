@@ -66,9 +66,30 @@ class AutoApply:
             if kw in action_lower:
                 return True
 
-        # أو يحتوي على رقم (تغيير قيمة)
+        # شرط أساسي: يجب أن يحتوي على "من X إلى Y" أو أرقام صريحة
         if re.search(r'\d+\s*(to|إلى|من)\s*\d+', action_lower):
             return True
+
+        # أو يحتوي على تغيير في قيمة رقمية صريحة
+        numeric_changes = [
+            r'\d+\s*(ثانية|second|s)',
+            r'\d+\s*(مرة|time|times)',
+            r'\d+\s*(gigabyte|gb|mb|kb)',
+            r'\d+\s*(percent|%)',
+        ]
+        for p in numeric_changes:
+            if re.search(p, action_lower):
+                return True
+
+        # الاقتراحات التي تحتوي على "إضافة" أو "تطبيق" أو "تحسين" → معقدة
+        complex_keywords = [
+            "إضافة", "أضف", "تطبيق", "دمج", "إنشاء",
+            "add", "implement", "integrate", "create",
+            "تحسين", "improve", "enhance",
+        ]
+        for kw in complex_keywords:
+            if kw in action_lower:
+                return False
 
         return False
 
@@ -92,33 +113,31 @@ class AutoApply:
     #  توليد التعديل عبر Cloud
     # ─────────────────────────────────────
     def generate_patch(self, file_path: Path, action: str) -> dict:
-        """Cloud يولّد التعديل"""
+        """Cloud يولّد التعديل (prompt محدّد)"""
         try:
             from cloud_fallback import CloudFallback
             cloud = CloudFallback()
 
             content = file_path.read_text()
 
-            # ابحث عن السطور ذات الصلة
-            keywords = [w for w in SIMPLE_KEYWORDS if w in action.lower()]
-
-            # ابنِ prompt
+            # prompt محدّد للقيمة
             prompt_lines = [
-                "أنت مساعد برمجة. طبّق التعديل التالي:",
+                "أنت تعدّل قيمة واحدة فقط في ملف Python.",
                 "",
-                "التعديل: " + action,
+                "التعديل المطلوب: " + action,
                 "",
                 "الملف: " + file_path.name,
                 "",
-                "الكود الحالي (ابحث عن السطر المناسب):",
-                "```python",
-                content,
-                "```",
+                "قواعد صارمة:",
+                "1. عدّل قيمة واحدة فقط (رقم، نص، إعداد)",
+                "2. لا تضف كوداً جديداً",
+                "3. لا تحذف كوداً موجوداً",
+                "4. أرجع الملف كاملاً بعد التعديل",
+                "5. بدون شرح، بدون ```",
+                "6. إذا لم تجد القيمة، أرجع: SKIP",
                 "",
-                "المطلوب:",
-                "أرجع الكود **الكامل** بعد التعديل فقط.",
-                "بدون شرح، بدون ```.",
-                "إذا لم يمكن التعديل بأمان، أرجع فقط: SKIP",
+                "الكود الحالي:",
+                content,
             ]
 
             prompt = chr(10).join(prompt_lines)
@@ -127,33 +146,19 @@ class AutoApply:
             if result["status"] != "ok":
                 return {"status": "error", "message": "Cloud فشل"}
 
-            new_code = result["answer"].strip()
+            answer = result.get("answer") or ""
+            if not answer:
+                return {"status": "skipped", "reason": "Cloud أرجع رداً فارغاً"}
 
-            # نظّف
+            new_code = answer.strip()
+
             if new_code.startswith("```"):
                 lines = new_code.split(chr(10))
                 new_code = chr(10).join(lines[1:-1])
 
             if new_code == "SKIP" or len(new_code) < 100:
-                # حاول مرة أخرى بنموذج أخر
-                try:
-                    result2 = cloud.ask(prompt, prefer="local")
-                    if result2["status"] == "ok":
-                        new_code2 = result2["answer"].strip()
-                        if new_code2.startswith("```"):
-                            lines2 = new_code2.split(chr(10))
-                            new_code2 = chr(10).join(lines2[1:-1])
-                        if new_code2 != "SKIP" and len(new_code2) >= 100:
-                            new_code = new_code2
-                            # نجح مع Local
-                        else:
-                            return {"status": "skipped", "reason": "Cloud + Local رفضا"}
-                    else:
-                        return {"status": "skipped", "reason": "Cloud رفض"}
-                except Exception:
-                    return {"status": "skipped", "reason": "Cloud رفض"}
+                return {"status": "skipped", "reason": "Cloud رفض"}
 
-            # قارن
             if new_code == content:
                 return {"status": "no_change"}
 
@@ -166,6 +171,7 @@ class AutoApply:
             }
         except Exception as e:
             return {"status": "error", "message": str(e)}
+
 
     # ─────────────────────────────────────
     #  إعادة صياغة
@@ -191,7 +197,9 @@ class AutoApply:
             result = cloud.ask(chr(10).join(prompt_parts), prefer="cloud")
 
             if result["status"] == "ok":
-                return result["answer"].strip()[:200]
+                ans = result.get("answer") or ""
+                if ans:
+                    return ans.strip()[:200]
         except Exception:
             pass
         return action

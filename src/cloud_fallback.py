@@ -24,6 +24,9 @@ logging.basicConfig(
 
 # ─── الإعدادات ───
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_BASE_URL = os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 OPENROUTER_BASE_URL = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
 OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "nvidia/nemotron-3.5-lightning:free")
 
@@ -116,46 +119,86 @@ class CloudFallback:
             return self._ask_local(prompt, system)
 
     def _ask_cloud(self, prompt: str, system: str = None) -> dict:
-        """إرسال إلى DeepSeek"""
-        if not OPENROUTER_API_KEY:
-            return {"status": "error", "message": "DEEPSEEK_API_KEY غير موجود"}
+        """إرسال إلى Cloud (OpenRouter أولاً، ثم Groq)"""
 
-        try:
-            messages = []
-            if system:
-                messages.append({"role": "system", "content": system})
-            messages.append({"role": "user", "content": prompt})
+        # 1. OpenRouter
+        if OPENROUTER_API_KEY:
+            try:
+                messages = []
+                if system:
+                    messages.append({"role": "system", "content": system})
+                messages.append({"role": "user", "content": prompt})
 
-            r = requests.post(
-                f"{OPENROUTER_BASE_URL}/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-                    "HTTP-Referer": "http://localhost:5000",
-                    "X-Title": "EsprieAether",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "model": OPENROUTER_MODEL,
-                    "messages": messages,
-                    "temperature": 0.7,
-                    "max_tokens": 2000,
-                },
-                timeout=30,
-            )
-            r.raise_for_status()
-            data = r.json()
-            answer = data["choices"][0]["message"]["content"]
+                r = requests.post(
+                    OPENROUTER_BASE_URL + "/chat/completions",
+                    headers={
+                        "Authorization": "Bearer " + OPENROUTER_API_KEY,
+                        "Content-Type": "application/json",
+                        "HTTP-Referer": "http://localhost:5000",
+                        "X-Title": "EsprieAether",
+                    },
+                    json={
+                        "model": OPENROUTER_MODEL,
+                        "messages": messages,
+                        "temperature": 0.7,
+                        "max_tokens": 4000,
+                    },
+                    timeout=30,
+                )
 
-            self.state["cloud_requests"] += 1
-            self.state["last_switch"] = datetime.now().isoformat()
-            self._save_state()
+                if r.status_code == 200:
+                    data = r.json()
+                    answer = data["choices"][0]["message"]["content"]
+                    self.state["cloud_requests"] += 1
+                    self.state["last_switch"] = datetime.now().isoformat()
+                    self._save_state()
+                    logger.info("☁️ OpenRouter")
+                    return {"status": "ok", "source": "cloud", "answer": answer}
+                elif r.status_code == 429:
+                    logger.warning("⚠️ OpenRouter 429 — جاري Groq")
+                else:
+                    logger.warning("⚠️ OpenRouter " + str(r.status_code))
+            except Exception as e:
+                logger.error("OpenRouter: " + str(e))
 
-            logger.info(f"☁️ Cloud ({OPENROUTER_MODEL.split("/")[-1]})")
-            return {"status": "ok", "source": "cloud", "answer": answer}
+        # 2. Groq
+        if GROQ_API_KEY:
+            try:
+                messages = []
+                if system:
+                    messages.append({"role": "system", "content": system})
+                messages.append({"role": "user", "content": prompt})
 
-        except Exception as e:
-            logger.error(f"❌ Cloud: {e}")
-            return {"status": "error", "message": str(e)}
+                r = requests.post(
+                    GROQ_BASE_URL + "/chat/completions",
+                    headers={
+                        "Authorization": "Bearer " + GROQ_API_KEY,
+                        "Content-Type": "application/json",
+                    },
+                    json={
+                        "model": GROQ_MODEL,
+                        "messages": messages,
+                        "temperature": 0.7,
+                        "max_tokens": 4000,
+                    },
+                    timeout=30,
+                )
+
+                if r.status_code == 200:
+                    data = r.json()
+                    answer = data["choices"][0]["message"]["content"]
+                    self.state["cloud_requests"] += 1
+                    self.state["last_switch"] = datetime.now().isoformat()
+                    self._save_state()
+                    logger.info("⚡ Groq")
+                    return {"status": "ok", "source": "cloud", "answer": answer}
+                else:
+                    logger.error("Groq " + str(r.status_code) + ": " + r.text[:200])
+            except Exception as e:
+                logger.error("Groq: " + str(e))
+
+        return {"status": "error", "message": "كل المزودين فشلوا"}
+
 
     def _ask_local(self, prompt: str, system: str = None) -> dict:
         """إرسال إلى Ollama المحلي"""
