@@ -27,6 +27,7 @@ from notify_agent import NotifyAgent
 from self_evolve import SelfEvolve
 from cloud_fallback import CloudFallback
 from github_evolve import GitHubEvolve
+from guardian_agent import GuardianAgent
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
 logging.basicConfig(
@@ -49,6 +50,7 @@ notify = NotifyAgent()
 evolve = SelfEvolve()
 cloud = CloudFallback()
 github_evolve = GitHubEvolve()
+guardian = GuardianAgent()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -338,6 +340,35 @@ def task_cloud_health() -> dict:
     return result
 
 
+def task_guardian() -> dict:
+    """حراسة وإصلاح تلقائي - كل 5 دقائق"""
+    result = {"name": "guardian", "status": "ok"}
+    try:
+        check = guardian.full_check()
+        result["errors"] = check["errors_count"]
+        result["fixes"] = len(check["fixes"])
+
+        # إشعار فقط عند وجود إصلاحات
+        if check["fixes"]:
+            fixes_text = chr(10).join("- " + f["action"] for f in check["fixes"])
+            send_telegram(
+                "🛡️ *Guardian أصلح أخطاء*" + chr(10) + chr(10) +
+                "🔧 " + str(len(check["fixes"])) + " إصلاح" + chr(10) +
+                fixes_text
+            )
+            notify.info(
+                "🛡️ Guardian",
+                str(len(check["fixes"])) + " إصلاح تلقائي"
+            )
+
+        # إشعار عند أخطاء لم تُصلح
+        if check["errors_count"] > 0 and not check["fixes"]:
+            logger.warning(f"⚠️ {check['errors_count']} خطأ بدون إصلاح")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
 def task_vpn_check() -> dict:
     """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
     result = {"name": "vpn_check", "status": "ok"}
@@ -389,10 +420,11 @@ def should_run(state: dict, task_name: str, interval: int) -> bool:
 SCHEDULE = {
     "vpn_check": 5 * 60,
     "cloud_health": 5 * 60,
+    "guardian": 5 * 60,   # كل 5 دقائق
     "airdrop_sync": 6 * 60 * 60,
     "weekly_email": 60 * 60,
     "self_evolve": 24 * 60 * 60,
-    "github_evolve": 24 * 60 * 60,   # يومياً
+    "github_evolve": 24 * 60 * 60,
     "health_check": 5 * 60,
     "security_scan": 60 * 60,
     "github_sync": 60 * 60,
@@ -406,6 +438,7 @@ def run_cycle(state: dict):
 
     tasks = {
         "vpn_check": task_vpn_check,
+        "guardian": task_guardian,
         "cloud_health": task_cloud_health,
         "airdrop_sync": task_airdrop_sync,
         "weekly_email": task_weekly_email,
