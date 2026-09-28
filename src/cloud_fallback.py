@@ -32,6 +32,9 @@ GROQ_BASE_URL = os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1")
 GROQ_MODEL = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")
 
 TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY", "")
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 TOGETHER_BASE_URL = os.getenv("TOGETHER_BASE_URL", "https://api.together.xyz/v1")
 TOGETHER_MODEL = os.getenv("TOGETHER_MODEL", "meta-llama/Llama-3.3-70B-Instruct-Turbo")
 
@@ -176,6 +179,44 @@ class CloudFallback:
         # الباقي → Fast
         return OLLAMA_MODEL_FAST
     
+    def _try_gemini(self, messages: list) -> dict:
+        if not GEMINI_API_KEY:
+            return {"status": "skip", "reason": "no key"}
+        try:
+            from google import genai
+
+            client = genai.Client(api_key=GEMINI_API_KEY)
+
+            # ابنِ النص
+            text_parts = []
+            for m in messages:
+                text_parts.append(m.get("content", ""))
+            prompt = chr(10).join(text_parts)
+
+            # جرّب النماذج المتاحة
+            models = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
+            last_error = ""
+
+            for model_name in models:
+                try:
+                    response = client.models.generate_content(
+                        model=model_name,
+                        contents=prompt,
+                    )
+                    answer = response.text if response.text else ""
+                    if answer:
+                        return {"status": "ok", "provider": "gemini", "answer": answer}
+                except Exception as e:
+                    last_error = str(e)[:150]
+                    continue
+
+            return {"status": "skip", "reason": last_error}
+        except ImportError:
+            return {"status": "skip", "reason": "google-genai not installed"}
+        except Exception as e:
+            return {"status": "skip", "reason": str(e)[:150]}
+
+
     def _try_local(self, messages: list) -> dict:
         try:
             # اختر النموذج حسب آخر رسالة
@@ -262,6 +303,7 @@ class CloudFallback:
                 "openrouter": bool(OPENROUTER_API_KEY),
                 "groq": bool(GROQ_API_KEY),
                 "together": bool(TOGETHER_API_KEY),
+                "gemini": bool(GEMINI_API_KEY),
                 "local": True,
             },
             "requests": self.state.get("requests", {}),
