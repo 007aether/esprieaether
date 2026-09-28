@@ -513,19 +513,52 @@ async def cmd_somnia(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @authorized_only
 async def cmd_evolve(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """اقتراحات التطوير الذاتي"""
-    msg = await update.message.reply_text("🧠 جارٍ التحليل...")
+    """اقتراحات التطوير"""
+    args = context.args or []
+    action = args[0].lower() if args else "list"
+
     try:
-        suggestions = evolve.suggest_improvements()
-        if not suggestions:
-            await msg.edit_text("📭 لا توجد اقتراحات")
-            return
+        from self_evolve import SelfEvolve
+        evo = SelfEvolve()
 
-        text = evolve.format_suggestions(limit=3)
-        await msg.edit_text(text, parse_mode="Markdown")
+        if action in ("list", "show", "all"):
+            pending = evo.list_pending()
+
+            if not pending:
+                await update.message.reply_text(
+                    "لا توجد اقتراحات. جرب: /evolve new"
+                )
+                return
+
+            text = "اقتراحات التطوير (" + str(len(pending)) + ")" + chr(10) + chr(10)
+            for i, s in enumerate(pending[:5], 1):
+                short_id = s["id"][-15:]
+                text += str(i) + ". " + short_id + chr(10)
+                text += "📁 " + s["file"] + chr(10)
+                text += "⚙️ " + s["action"][:70] + chr(10) + chr(10)
+
+            text += "للموافقة: /approve <id>" + chr(10)
+            text += "للرفض: /reject <id>"
+
+            await update.message.reply_text(text)
+
+        elif action == "new":
+            msg = await update.message.reply_text("🧠 جارٍ التوليد...")
+            suggestions = evo.suggest_improvements()
+            if suggestions:
+                await msg.edit_text("✅ تم توليد " + str(len(suggestions)) + " اقتراح. استخدم /evolve للعرض.")
+            else:
+                await msg.edit_text("❌ فشل التوليد. تحقق من Cloud.")
+
+        else:
+            await update.message.reply_text(
+                "استخدم:" + chr(10) +
+                "• /evolve — عرض الموجود" + chr(10) +
+                "• /evolve new — توليد جديد"
+            )
+
     except Exception as e:
-        await msg.edit_text(f"❌ خطأ: {e}")
-
+        await update.message.reply_text("❌ خطأ: " + str(e))
 
 @authorized_only
 async def cmd_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):

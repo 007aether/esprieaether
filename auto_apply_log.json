@@ -1,0 +1,12 @@
+{
+  "applied": [
+    {
+      "timestamp": "2026-09-28T21:35:37.221037",
+      "id": "sug_20260928_165837_0",
+      "file": "jarvis_bridge.py",
+      "action": "زيادة timeout من 120 إلى 180 ثانية في دالة ask عند الاتصال بـ Jarvis API"
+    }
+  ],
+  "rejected": [],
+  "total": 1
+}

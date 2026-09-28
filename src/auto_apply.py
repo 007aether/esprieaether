@@ -135,7 +135,23 @@ class AutoApply:
                 new_code = chr(10).join(lines[1:-1])
 
             if new_code == "SKIP" or len(new_code) < 100:
-                return {"status": "skipped", "reason": "Cloud رفض"}
+                # حاول مرة أخرى بنموذج أخر
+                try:
+                    result2 = cloud.ask(prompt, prefer="local")
+                    if result2["status"] == "ok":
+                        new_code2 = result2["answer"].strip()
+                        if new_code2.startswith("```"):
+                            lines2 = new_code2.split(chr(10))
+                            new_code2 = chr(10).join(lines2[1:-1])
+                        if new_code2 != "SKIP" and len(new_code2) >= 100:
+                            new_code = new_code2
+                            # نجح مع Local
+                        else:
+                            return {"status": "skipped", "reason": "Cloud + Local رفضا"}
+                    else:
+                        return {"status": "skipped", "reason": "Cloud رفض"}
+                except Exception:
+                    return {"status": "skipped", "reason": "Cloud رفض"}
 
             # قارن
             if new_code == content:
@@ -150,6 +166,35 @@ class AutoApply:
             }
         except Exception as e:
             return {"status": "error", "message": str(e)}
+
+    # ─────────────────────────────────────
+    #  إعادة صياغة
+    # ─────────────────────────────────────
+    def reformulate(self, action: str) -> str:
+        """إعادة صياغة اقتراح مرفوض"""
+        try:
+            from cloud_fallback import CloudFallback
+            cloud = CloudFallback()
+
+            prompt_parts = [
+                "أعد صياغة الاقتراح التالي ليكون أكثر تحديداً:",
+                "",
+                "الاقتراح: " + action,
+                "",
+                "اجعلها محددة مع:",
+                "- اسم الملف بالضبط",
+                "- السطر أو الدالة",
+                "- التغيير بالأرقام",
+                "",
+                "أجب بجملة واحدة فقط.",
+            ]
+            result = cloud.ask(chr(10).join(prompt_parts), prefer="cloud")
+
+            if result["status"] == "ok":
+                return result["answer"].strip()[:200]
+        except Exception:
+            pass
+        return action
 
     # ─────────────────────────────────────
     #  اختبار
