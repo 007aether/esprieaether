@@ -258,6 +258,35 @@ class AskAgent:
         return "✅ " + json.dumps(data, ensure_ascii=False)[:300]
 
     # ─── الوظيفة ───
+    def ask_cognitive(self, question: str) -> dict:
+        """استخدم الطبقة المعرفية الكاملة (Planner + Memory + Executor)"""
+        try:
+            from complex_executor import ComplexExecutor
+
+            ex = ComplexExecutor()
+            result = ex.execute_goal(question)
+
+            # استخرج النص
+            answer_parts = []
+            for r in result.get("results", []):
+                answer_parts.append(str(r.get("result", "")))
+
+            answer = chr(10).join(answer_parts)
+            if not answer:
+                answer = "✅ تم التنفيذ"
+
+            return {
+                "status": "ok",
+                "question": question,
+                "tool": "cognitive_layer",
+                "source": "planner+memory+executor",
+                "answer": answer,
+                "complexity": result.get("steps_count", 0),
+            }
+        except Exception as e:
+            # fallback
+            return self.ask_mcp(question)
+
     def ask_mcp(self, question: str) -> dict:
         """استخدم MCP للأدوات"""
         try:

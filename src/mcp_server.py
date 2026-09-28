@@ -172,6 +172,38 @@ def get_pharos_balance() -> str:
 
 
 @mcp.tool()
+def apply_suggestion(suggestion_id: str) -> str:
+    """تطبيق اقتراح تطوير"""
+    try:
+        from auto_apply import AutoApply
+        aa = AutoApply()
+        result = aa.apply(suggestion_id)
+        return str(result)[:500]
+    except Exception as e:
+        return "❌ خطأ: " + str(e)[:200]
+
+
+@mcp.tool()
+def restart_service(service_name: str) -> str:
+    """إعادة تشغيل خدمة"""
+    try:
+        import subprocess
+        # حماية
+        allowed = ["aether-web", "aether-bot", "aether-core", "ollama"]
+        if service_name not in allowed:
+            return "⛔ خدمة غير مسموحة: " + service_name
+        r = subprocess.run(
+            ["/usr/bin/sudo", "-n", "/usr/bin/systemctl", "restart", service_name],
+            capture_output=True, text=True, timeout=30,
+        )
+        if r.returncode == 0:
+            return "✅ تم إعادة تشغيل " + service_name
+        return "❌ فشل: " + r.stderr[:200]
+    except Exception as e:
+        return "❌ خطأ: " + str(e)[:200]
+
+
+@mcp.tool()
 def run_command(command: str) -> str:
     """تنفيذ أمر shell آمن"""
     try:
