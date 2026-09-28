@@ -10,6 +10,8 @@ import logging
 from datetime import datetime
 from cloud_fallback import CloudFallback
 from ask_agent import AskAgent
+from complex_executor import ComplexExecutor
+from memory_layer import SemanticMemory
 from smart_alerts import SmartAlerts
 from log_analyzer import LogAnalyzer
 from auto_apply import AutoApply
@@ -58,6 +60,8 @@ logger = logging.getLogger("aether-bot")
 jarvis = JarvisBridge()
 cloud = CloudFallback()
 ask_agent = AskAgent()
+executor = ComplexExecutor()
+memory = SemanticMemory()
 alerts = SmartAlerts()
 analyzer = LogAnalyzer()
 auto_apply = AutoApply()
@@ -814,6 +818,54 @@ async def cmd_analyze(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.edit_text("❌ خطأ: " + str(e))
 
 @authorized_only
+async def cmd_plan(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تخطيط مهمة"""
+    if not context.args:
+        await update.message.reply_text(
+            "🎯 استخدم: /plan <مهمة>" + chr(10) + chr(10) +
+            "مثال: /plan حلل النظام وأصلح المشاكل"
+        )
+        return
+
+    goal = " ".join(context.args)
+    msg = await update.message.reply_text("🎯 جارٍ التخطيط...")
+
+    try:
+        result = executor.execute_goal(goal)
+        from planner import HierarchicalPlanner
+        p = HierarchicalPlanner()
+
+        # ابنِ النص
+        text = "🎯 *تنفيذ مهمة*" + chr(10) + chr(10)
+        text += "📊 الحالة: `" + str(result.get("status")) + "`" + chr(10)
+        text += "📝 الخطوات: `" + str(result.get("steps_count", 0)) + "`" + chr(10) + chr(10)
+
+        for i, r in enumerate(result.get("results", []), 1):
+            text += str(i) + ". " + str(r.get("step", ""))[:60] + chr(10)
+            text += "   " + str(r.get("result", ""))[:100] + chr(10)
+
+        # قسّم إن طويل
+        if len(text) > 4000:
+            parts = [text[i:i+4000] for i in range(0, len(text), 4000)]
+            await msg.edit_text(parts[0], parse_mode="Markdown")
+            for part in parts[1:]:
+                await update.message.reply_text(part, parse_mode="Markdown")
+        else:
+            await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text("❌ خطأ: " + str(e)[:200])
+
+
+@authorized_only
+async def cmd_memory(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """عرض الذاكرة الدلالية"""
+    try:
+        text = memory.format_telegram()
+        await update.message.reply_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text("❌ خطأ: " + str(e)[:200])
+
+@authorized_only
 async def cmd_alerts(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """تنبيهات ذكية"""
     try:
@@ -1032,6 +1084,8 @@ async def set_commands(app: Application):
         BotCommand("cloud", "حالة Cloud"),
         BotCommand("ask", "مساعد ذكي شامل"),
         BotCommand("alerts", "تنبيهات ذكية"),
+        BotCommand("plan", "تخطيط مهمة"),
+        BotCommand("memory", "الذاكرة الدلالية"),
         BotCommand("analyze", "تحليل السجلات"),
         BotCommand("auto_apply", "تطبيق تلقائي"),
         BotCommand("market", "أسعار السوق"),
@@ -1086,6 +1140,8 @@ def main():
     app.add_handler(CommandHandler("cloud", cmd_cloud))
     app.add_handler(CommandHandler("ask", cmd_ask))
     app.add_handler(CommandHandler("alerts", cmd_alerts))
+    app.add_handler(CommandHandler("plan", cmd_plan))
+    app.add_handler(CommandHandler("memory", cmd_memory))
     app.add_handler(CommandHandler("analyze", cmd_analyze))
     app.add_handler(CommandHandler("auto_apply", cmd_auto_apply))
     app.add_handler(CommandHandler("market", cmd_market))
