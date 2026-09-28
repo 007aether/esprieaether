@@ -16,6 +16,7 @@ from auto_apply import AutoApply
 from market_watcher import MarketWatcher
 from daily_digest import DailyDigest
 from bandwidth_agent import BandwidthAgent
+from pharos_agent import PharosAgent
 from self_evolve import SelfEvolve
 from pathlib import Path
 
@@ -63,6 +64,7 @@ auto_apply = AutoApply()
 market = MarketWatcher()
 digest = DailyDigest()
 bandwidth = BandwidthAgent()
+pharos = PharosAgent()
 evolve = SelfEvolve()
 
 vpn = VPNAgent()
@@ -116,45 +118,28 @@ async def cmd_airdrop_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @authorized_only
 async def cmd_pharos(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """حالة Pharos"""
-    await update.message.reply_text(
-        "🚧 *Pharos قيد التطوير*\n\n"
-        "_سيتم إضافته في التحديث القادم._",
-        parse_mode="Markdown"
-    )
-@authorized_only
-async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """رسالة الترحيب"""
-    text = f"""
-⚡ *ESPRIEAETHER COMMAND CENTER* ⚡
+    """حالة Pharos Testnet"""
+    args = context.args or []
+    action = args[0].lower() if args else "status"
 
-مرحباً بك في نظامك السيبراني المحلي.
-الهوية: `{AETHER_ID}`
-التاريخ: `{datetime.now().strftime('%Y-%m-%d %H:%M')}`
+    if action == "claim":
+        msg = await update.message.reply_text("🔷 جارٍ ادعاء Faucet...")
+        result = pharos.claim_faucet()
+        if result["status"] == "ok":
+            await msg.edit_text("✅ تم ادعاء 0.01 PHRS!")
+        elif result["status"] == "cooldown":
+            await msg.edit_text("⏳ " + result["message"])
+        else:
+            await msg.edit_text(
+                "⚠️ يحتاج المتصفح" + chr(10) + chr(10) +
+                "افتح: https://testnet.pharosnetwork.xyz",
+                disable_web_page_preview=True
+            )
+        return
 
-*الأوامر المتاحة:*
-
-🤖 *JARVIS*
-• `/jarvis <سؤال>` — اسأل الذكاء المحلي
-• `/clear` — مسح سجل المحادثة
-
-📊 *النظام*
-• `/status` — حالة النظام الكاملة
-• `/metrics` — CPU/RAM/Disk
-• `/web` — رابط لوحة التحكم
-
-🛠️ *الأدوات*
-• `/cmd <أمر>` — تنفيذ أمر shell
-• `/ping` — اختبار سريع
-
-💰 *البلوكشين*
-• `/wallet` — معلومات المحفظة
-• `/airdrop` — حالة الأيردروب
-• `/ollama` — حالة Ollama
-
-_اكتب /help لعرض هذه القائمة_
-"""
+    text = pharos.format_telegram()
     await update.message.reply_text(text, parse_mode="Markdown")
+
 
 
 @authorized_only

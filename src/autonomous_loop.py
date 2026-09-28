@@ -30,6 +30,7 @@ from github_evolve import GitHubEvolve
 from guardian_agent import GuardianAgent
 from log_analyzer import LogAnalyzer
 from daily_digest import DailyDigest
+from pharos_agent import PharosAgent
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
 logging.basicConfig(
@@ -55,6 +56,7 @@ github_evolve = GitHubEvolve()
 guardian = GuardianAgent()
 analyzer = LogAnalyzer()
 digest = DailyDigest()
+pharos = PharosAgent()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -416,6 +418,25 @@ def task_daily_digest() -> dict:
         result["error"] = str(e)
     return result
 
+def task_pharos() -> dict:
+    """مراقبة Pharos Testnet - كل ساعة"""
+    result = {"name": "pharos", "status": "ok"}
+    try:
+        balance = pharos.get_balance()
+        result["balance"] = balance.get("balance", "0")
+        result["connected"] = balance.get("connected", False)
+
+        # إشعار إذا كان Faucet جاهزاً
+        if pharos.can_claim():
+            notify.info(
+                "🔷 Pharos Faucet جاهز",
+                "افتح: https://testnet.pharosnetwork.xyz"
+            )
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
 def task_vpn_check() -> dict:
     """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
     result = {"name": "vpn_check", "status": "ok"}
@@ -469,6 +490,7 @@ SCHEDULE = {
     "cloud_health": 5 * 60,
     "guardian": 5 * 60,
     "log_analysis": 24 * 60 * 60,
+    "pharos": 60 * 60,
     "airdrop_sync": 6 * 60 * 60,
     "weekly_email": 60 * 60,
     "self_evolve": 24 * 60 * 60,
@@ -489,6 +511,7 @@ def run_cycle(state: dict):
         "vpn_check": task_vpn_check,
         "guardian": task_guardian,
         "log_analysis": task_log_analysis,
+        "pharos": task_pharos,
         "daily_digest": task_daily_digest,
         "cloud_health": task_cloud_health,
         "airdrop_sync": task_airdrop_sync,
