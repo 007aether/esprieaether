@@ -139,7 +139,23 @@ class GuardianAgent:
     # ─────────────────────────────────────
     def can_fix(self) -> bool:
         """هل يمكن الإصلاح الآن؟"""
-        # فحص الحد اليومي
+        # 1. فحص أولاً: هل هناك خدمة متوقفة؟
+        services = self.check_services()
+        has_down_service = any(s != "active" for s in services.values())
+
+        # إذا كانت هناك خدمة متوقفة → اسمح بالإصلاح (لكن مع حد أدنى)
+        if has_down_service:
+            # لكن احترم حد 5 إصلاحات/ساعة
+            recent_fixes = [
+                f for f in self.state["fixes"]
+                if datetime.fromisoformat(f["timestamp"]) > datetime.now() - timedelta(hours=1)
+            ]
+            if len(recent_fixes) >= MAX_FIXES_PER_HOUR:
+                return False
+            # اسمح بالإصلاح (بدون cooldown صارم)
+            return True
+
+        # 2. لا توجد خدمة متوقفة → طبق cooldown عادي
         recent_fixes = [
             f for f in self.state["fixes"]
             if datetime.fromisoformat(f["timestamp"]) > datetime.now() - timedelta(hours=1)
@@ -148,7 +164,6 @@ class GuardianAgent:
         if len(recent_fixes) >= MAX_FIXES_PER_HOUR:
             return False
 
-        # فحص cooldown
         if recent_fixes:
             last_fix = max(
                 datetime.fromisoformat(f["timestamp"]) for f in recent_fixes
@@ -158,14 +173,16 @@ class GuardianAgent:
 
         return True
 
+
     def fix_service(self, service: str) -> dict:
         """إصلاح خدمة متوقفة"""
         if not self.can_fix():
             return {"status": "cooldown"}
 
         try:
+            # استخدم مسارات كاملة + -n (non-interactive) لضمان العمل من systemd
             r = subprocess.run(
-                ["sudo", "systemctl", "restart", service],
+                ["/usr/bin/sudo", "-n", "/usr/bin/systemctl", "restart", service],
                 capture_output=True, text=True, timeout=30
             )
 
@@ -174,6 +191,7 @@ class GuardianAgent:
                 "type": "restart_service",
                 "target": service,
                 "result": "ok" if r.returncode == 0 else "failed",
+                "stderr": r.stderr.strip()[:200] if r.returncode != 0 else "",
             })
             self._save_state()
 
@@ -183,14 +201,13 @@ class GuardianAgent:
                 return {"status": "ok", "action": f"restart {service}"}
             else:
                 self.state["errors_failed"] += 1
-                return {"status": "error", "message": r.stderr[:200]}
+                logger.error(f"❌ فشل إعادة تشغيل {service}: {r.stderr.strip()[:100]}")
+                return {"status": "error", "message": r.stderr.strip()[:200]}
 
         except Exception as e:
             return {"status": "error", "message": str(e)}
 
-    # ─────────────────────────────────────
-    #  الفحص الشامل
-    # ─────────────────────────────────────
+
     def full_check(self) -> dict:
         """فحص شامل + إصلاح تلقائي"""
         self.state["checks"] += 1
