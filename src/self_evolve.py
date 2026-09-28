@@ -120,7 +120,31 @@ class SelfEvolve:
 """
 
         try:
-            response = jarvis.ask(prompt, use_history=False)
+            # استخدم Cloud أولاً، ثم Local
+
+            try:
+
+                from cloud_fallback import CloudFallback
+
+                cloud = CloudFallback()
+
+                result = cloud.ask(prompt, prefer="auto")
+
+                if result["status"] == "ok":
+
+                    response = result["answer"]
+
+                    logger.info(f"✅ اقتراحات من: {result['source']}")
+
+                else:
+
+                    response = jarvis.ask(prompt, use_history=False)
+
+            except Exception as e:
+
+                logger.warning(f"Cloud فشل: {e}")
+
+                response = jarvis.ask(prompt, use_history=False)
 
             # استخرج الاقتراحات
             suggestions = []

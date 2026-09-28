@@ -25,6 +25,7 @@ from airdrop_agent import AirdropAgent
 from email_agent import EmailAgent
 from notify_agent import NotifyAgent
 from self_evolve import SelfEvolve
+from cloud_fallback import CloudFallback
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
 logging.basicConfig(
@@ -45,6 +46,7 @@ airdrop_agent = AirdropAgent()
 email_agent = EmailAgent()
 notify = NotifyAgent()
 evolve = SelfEvolve()
+cloud = CloudFallback()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -288,6 +290,28 @@ def task_self_evolve() -> dict:
     return result
 
 
+def task_cloud_health() -> dict:
+    """مراقبة حالة Cloud/Internet"""
+    result = {"name": "cloud_health", "status": "ok"}
+    try:
+        online = cloud.is_online(force=True)
+        result["online"] = online
+
+        if not online:
+            # إشعار عند انقطاع الإنترنت
+            notify.warning(
+                "⚠️ الإنترنت مقطوع",
+                "التبديل إلى Local (qwen2.5:3b)"
+            )
+            result["status"] = "offline"
+        else:
+            result["cloud_model"] = cloud.state.get("cloud_requests", 0)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
 def task_vpn_check() -> dict:
     """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
     result = {"name": "vpn_check", "status": "ok"}
@@ -338,6 +362,7 @@ def should_run(state: dict, task_name: str, interval: int) -> bool:
 
 SCHEDULE = {
     "vpn_check": 5 * 60,
+    "cloud_health": 5 * 60,
     "airdrop_sync": 6 * 60 * 60,
     "weekly_email": 60 * 60,
     "self_evolve": 24 * 60 * 60,   # يومياً
@@ -354,6 +379,7 @@ def run_cycle(state: dict):
 
     tasks = {
         "vpn_check": task_vpn_check,
+        "cloud_health": task_cloud_health,
         "airdrop_sync": task_airdrop_sync,
         "weekly_email": task_weekly_email,
         "self_evolve": task_self_evolve,

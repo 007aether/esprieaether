@@ -8,6 +8,7 @@ import json
 import subprocess
 import logging
 from datetime import datetime
+from cloud_fallback import CloudFallback
 from pathlib import Path
 
 # مسار المشروع
@@ -46,6 +47,7 @@ logger = logging.getLogger("aether-bot")
 
 # ─── JARVIS ───
 jarvis = JarvisBridge()
+cloud = CloudFallback()
 
 vpn = VPNAgent()
 airdrop_agent = AirdropAgent()
@@ -631,48 +633,54 @@ def format_run_result(action: str, result: dict) -> str:
 @authorized_only
 async def cmd_cloud(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """إدارة Cloud Fallback"""
-    import asyncio
+    import concurrent.futures
 
     args = context.args or []
     action = args[0].lower() if args else "status"
 
     if action == "test":
         await update.message.reply_text(
-            "☁️ جارٍ اختبار Cloud... سيصلك الرد قريباً"
+            "☁️ جارٍ اختبار Cloud..."
         )
-        result = await asyncio.to_thread(cloud.ask, "قل فقط: مرحبا", None, "cloud")
-        if result["status"] == "ok":
-            await update.message.reply_text(
-                "✅ Cloud يعمل" + chr(10) + chr(10) +
-                "📡 المصدر: " + result["source"] + chr(10) +
-                "💬 الرد: " + result["answer"][:150]
-            )
-        else:
-            await update.message.reply_text(
-                "❌ فشل Cloud" + chr(10) + chr(10) +
-                "السبب: " + result.get("message", "unknown")[:200]
-            )
+        try:
+            loop = __import__('asyncio').get_event_loop()
+            with concurrent.futures.ThreadPoolExecutor() as pool:
+                result = await loop.run_in_executor(pool, lambda: cloud.ask("قل: مرحبا", None, "cloud"))
+            if result["status"] == "ok":
+                await update.message.reply_text(
+                    "✅ Cloud يعمل" + chr(10) + "📡 المصدر: " + result["source"] + chr(10) + "💬 الرد: " + result["answer"][:150]
+                )
+            else:
+                await update.message.reply_text(
+                    "❌ فشل Cloud: " + result.get("message", "unknown")[:200]
+                )
+        except Exception as e:
+            await update.message.reply_text("❌ خطأ: " + str(e)[:200])
 
     elif action == "local":
         await update.message.reply_text(
             "🏠 جارٍ اختبار Local..."
         )
-        result = await asyncio.to_thread(cloud.ask, "قل فقط: مرحبا", None, "local")
-        if result["status"] == "ok":
-            await update.message.reply_text(
-                "✅ Local يعمل" + chr(10) + chr(10) +
-                "📡 المصدر: " + result["source"] + chr(10) +
-                "💬 الرد: " + result["answer"][:150]
-            )
-        else:
-            await update.message.reply_text(
-                "❌ فشل Local" + chr(10) + chr(10) +
-                "السبب: " + result.get("message", "unknown")[:200]
-            )
+        try:
+            loop = __import__('asyncio').get_event_loop()
+            with concurrent.futures.ThreadPoolExecutor() as pool:
+                result = await loop.run_in_executor(pool, lambda: cloud.ask("قل: مرحبا", None, "local"))
+            if result["status"] == "ok":
+                await update.message.reply_text(
+                    "✅ Local يعمل" + chr(10) + "📡 المصدر: " + result["source"] + chr(10) + "💬 الرد: " + result["answer"][:150]
+                )
+            else:
+                await update.message.reply_text(
+                    "❌ فشل Local: " + result.get("message", "unknown")[:200]
+                )
+        except Exception as e:
+            await update.message.reply_text("❌ خطأ: " + str(e)[:200])
 
     else:  # status
         text = cloud.format_telegram()
         await update.message.reply_text(text)
+
+
 
 @authorized_only
 async def cmd_services(update: Update, context: ContextTypes.DEFAULT_TYPE):
