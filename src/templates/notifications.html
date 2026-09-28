@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}التنبيهات{% endblock %}
+{% block page_title %}🔔 مركز التنبيهات{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-4">
+  <div class="card stat">
+    <div class="stat-label">الكل</div>
+    <div class="stat-value" id="total">—</div>
+    <div class="stat-sub">إجمالي</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-label">حرجة</div>
+    <div class="stat-value" id="urgent" style="color: var(--danger);">—</div>
+    <div class="stat-sub">Urgent</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-label">عالية</div>
+    <div class="stat-value" id="high" style="color: var(--warn);">—</div>
+    <div class="stat-sub">High</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-label">عادية</div>
+    <div class="stat-value" id="normal" style="color: var(--success);">—</div>
+    <div class="stat-sub">Default</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 class="card-title">🔔 كل التنبيهات</h3>
+  <div id="notifications-list"></div>
+</div>
+
+<button class="btn btn-primary" onclick="loadNotifications()">🔄 تحديث</button>
+<div id="status" style="margin-top: 12px; color: var(--muted);"></div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function formatTime(iso) {
+  if (!iso) return '—';
+  try {
+    const d = new Date(iso);
+    return d.toLocaleString('ar-EG');
+  } catch(e) {
+    return iso.substring(0, 19);
+  }
+}
+
+async function loadNotifications() {
+  const status = document.getElementById('status');
+  status.textContent = '⏳ تحديث...';
+
+  try {
+    const r = await fetch('/api/notifications');
+    const d = await r.json();
+
+    if (d.status !== 'ok') {
+      status.textContent = '❌ ' + (d.error || 'فشل');
+      return;
+    }
+
+    const notifications = d.notifications || [];
+
+    // Count by priority
+    const urgent = notifications.filter(n => n.priority === 'urgent').length;
+    const high = notifications.filter(n => n.priority === 'high').length;
+    const normal = notifications.filter(n => !n.priority || n.priority === 'default').length;
+
+    document.getElementById('total').textContent = notifications.length;
+    document.getElementById('urgent').textContent = urgent;
+    document.getElementById('high').textContent = high;
+    document.getElementById('normal').textContent = normal;
+
+    // List
+    if (notifications.length === 0) {
+      document.getElementById('notifications-list').innerHTML = '<p class="muted">لا تنبيهات</p>';
+      status.textContent = '✅ ' + new Date().toLocaleTimeString('ar-EG');
+      return;
+    }
+
+    let html = '';
+    notifications.slice(0, 50).forEach(n => {
+      const priorityClass = n.priority === 'urgent' ? 'danger' :
+                            n.priority === 'high' ? 'warn' : '';
+      html += `
+        <div class="info-row" style="padding: 12px 0; border-bottom: 1px solid var(--border);">
+          <span>
+            <span style="font-size: 18px;">${n.icon || '🔔'}</span>
+            <b class="${priorityClass}" style="margin-right: 8px;">${n.category}</b>
+            <span class="muted" style="font-size: 12px;">${n.type}</span>
+          </span>
+          <span style="text-align: left; max-width: 60%;">
+            <div>${n.message}</div>
+            <div class="muted" style="font-size: 11px;">${formatTime(n.timestamp)}</div>
+          </span>
+        </div>
+      `;
+    });
+    document.getElementById('notifications-list').innerHTML = html;
+
+    status.textContent = '✅ ' + new Date().toLocaleTimeString('ar-EG');
+  } catch (e) {
+    status.textContent = '❌ ' + e.message;
+  }
+}
+
+loadNotifications();
+setInterval(loadNotifications, 15000);
+</script>
+{% endblock %}

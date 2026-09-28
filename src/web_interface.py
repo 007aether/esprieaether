@@ -442,6 +442,94 @@ def api_health():
     except Exception as e:
         return jsonify({"status": "error", "error": str(e)})
 
+@app.route("/notifications")
+def notifications_page():
+    """صفحة مركز التنبيهات"""
+    return render_template("notifications.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/notifications")
+def api_notifications():
+    """API مركز التنبيهات"""
+    try:
+        from datetime import datetime
+        result = {"status": "ok", "notifications": []}
+
+        # 1. Smart Alerts
+        try:
+            from smart_alerts import SmartAlerts
+            s = SmartAlerts()
+            for a in s.state.get("alerts", [])[-20:]:
+                result["notifications"].append({
+                    "timestamp": a.get("timestamp", ""),
+                    "type": "smart_alert",
+                    "category": a.get("type", "general"),
+                    "message": a.get("message", ""),
+                    "priority": a.get("priority", "default"),
+                    "icon": "🔔",
+                })
+        except Exception:
+            pass
+
+        # 2. Guardian Fixes
+        try:
+            from guardian_agent import GuardianAgent
+            g = GuardianAgent()
+            for f in g.state.get("fixes", [])[-20:]:
+                result["notifications"].append({
+                    "timestamp": f.get("timestamp", ""),
+                    "type": "guardian_fix",
+                    "category": f.get("type", "restart"),
+                    "message": "إصلاح " + f.get("target", "?"),
+                    "priority": "high" if f.get("result") == "ok" else "urgent",
+                    "icon": "🛡️",
+                })
+        except Exception:
+            pass
+
+        # 3. Market Opportunities
+        try:
+            from market_watcher import MarketWatcher
+            m = MarketWatcher()
+            for o in m.find_opportunities()[:5]:
+                result["notifications"].append({
+                    "timestamp": datetime.now().isoformat(),
+                    "type": "market",
+                    "category": o.get("type", "info"),
+                    "message": o.get("message", ""),
+                    "priority": "default",
+                    "icon": "📈",
+                })
+        except Exception:
+            pass
+
+        # 4. Log Analyzer
+        try:
+            from log_analyzer import LogAnalyzer
+            la = LogAnalyzer()
+            if la.reports:
+                last = la.reports[-1]
+                result["notifications"].append({
+                    "timestamp": last.get("timestamp", ""),
+                    "type": "log_analysis",
+                    "category": "report",
+                    "message": "تحليل السجلات: " + str(last.get("stats", {}).get("errors", 0)) + " خطأ",
+                    "priority": "default",
+                    "icon": "📊",
+                })
+        except Exception:
+            pass
+
+        # رتب بحسب الوقت (الأحدث أولاً)
+        result["notifications"].sort(
+            key=lambda x: x.get("timestamp", ""),
+            reverse=True
+        )
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
 @app.route("/settings")
 def settings_page():
     """صفحة الإعدادات"""

@@ -29,6 +29,7 @@ from cloud_fallback import CloudFallback
 from github_evolve import GitHubEvolve
 from guardian_agent import GuardianAgent
 from log_analyzer import LogAnalyzer
+from daily_digest import DailyDigest
 # ─── Logger ───
 LOG_FILE = BASE_DIR / "autonomous.log"
 logging.basicConfig(
@@ -53,6 +54,7 @@ cloud = CloudFallback()
 github_evolve = GitHubEvolve()
 guardian = GuardianAgent()
 analyzer = LogAnalyzer()
+digest = DailyDigest()
 
 # ─── المسارات ───
 STATE_FILE = BASE_DIR / "autonomous_state.json"
@@ -397,6 +399,23 @@ def task_log_analysis() -> dict:
         result["error"] = str(e)
     return result
 
+def task_daily_digest() -> dict:
+    """تقرير يومي شامل - كل 24 ساعة"""
+    result = {"name": "daily_digest", "status": "ok"}
+    try:
+        text = digest.format_telegram()
+        send_telegram(text)
+
+        # نسخة بالبريد
+        email_result = digest.send_email()
+        result["email"] = email_result.get("status", "unknown")
+
+        notify.info("📊 التقرير اليومي", "تم الإرسال")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
 def task_vpn_check() -> dict:
     """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
     result = {"name": "vpn_check", "status": "ok"}
@@ -454,6 +473,7 @@ SCHEDULE = {
     "weekly_email": 60 * 60,
     "self_evolve": 24 * 60 * 60,
     "github_evolve": 24 * 60 * 60,
+    "daily_digest": 24 * 60 * 60,
     "health_check": 5 * 60,
     "security_scan": 60 * 60,
     "github_sync": 60 * 60,
@@ -469,6 +489,7 @@ def run_cycle(state: dict):
         "vpn_check": task_vpn_check,
         "guardian": task_guardian,
         "log_analysis": task_log_analysis,
+        "daily_digest": task_daily_digest,
         "cloud_health": task_cloud_health,
         "airdrop_sync": task_airdrop_sync,
         "weekly_email": task_weekly_email,

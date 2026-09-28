@@ -12,6 +12,9 @@ from cloud_fallback import CloudFallback
 from ask_agent import AskAgent
 from smart_alerts import SmartAlerts
 from log_analyzer import LogAnalyzer
+from auto_apply import AutoApply
+from market_watcher import MarketWatcher
+from daily_digest import DailyDigest
 from self_evolve import SelfEvolve
 from pathlib import Path
 
@@ -55,6 +58,9 @@ cloud = CloudFallback()
 ask_agent = AskAgent()
 alerts = SmartAlerts()
 analyzer = LogAnalyzer()
+auto_apply = AutoApply()
+market = MarketWatcher()
+digest = DailyDigest()
 evolve = SelfEvolve()
 
 vpn = VPNAgent()
@@ -675,6 +681,65 @@ def format_run_result(action: str, result: dict) -> str:
 
 
 @authorized_only
+async def cmd_digest(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تقرير يومي شامل"""
+    msg = await update.message.reply_text("📊 جارٍ جمع البيانات...")
+
+    try:
+        text = digest.format_telegram()
+        # Telegram محدود بـ 4096 حرف
+        if len(text) > 4000:
+            parts = [text[i:i+4000] for i in range(0, len(text), 4000)]
+            await msg.edit_text(parts[0], parse_mode="Markdown")
+            for part in parts[1:]:
+                await update.message.reply_text(part, parse_mode="Markdown")
+        else:
+            await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text("❌ خطأ: " + str(e))
+
+@authorized_only
+async def cmd_market(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """أسعار السوق"""
+    msg = await update.message.reply_text("📊 جارٍ جلب الأسعار...")
+
+    try:
+        market.fetch_prices()
+        text = market.format_telegram()
+        await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text("❌ خطأ: " + str(e))
+
+@authorized_only
+async def cmd_auto_apply(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تطبيق اقتراح تلقائياً"""
+    if not context.args:
+        text = auto_apply.format_telegram()
+        await update.message.reply_text(text, parse_mode="Markdown")
+        return
+
+    sid = context.args[0].strip()
+    msg = await update.message.reply_text("🤖 جارٍ التطبيق...")
+
+    try:
+        result = auto_apply.apply(sid)
+
+        if result["status"] == "ok":
+            await msg.edit_text(
+                "✅ *تم التطبيق بنجاح*" + chr(10) + chr(10) +
+                "📁 `" + result["file"] + "`" + chr(10) +
+                "📊 " + str(result["old_size"]) + " → " + str(result["new_size"]) + " حرف",
+                parse_mode="Markdown"
+            )
+        else:
+            await msg.edit_text(
+                "❌ " + result.get("message", result["status"]),
+                parse_mode="Markdown"
+            )
+    except Exception as e:
+        await msg.edit_text("❌ خطأ: " + str(e))
+
+@authorized_only
 async def cmd_analyze(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """تحليل السجلات عبر Cloud"""
     msg = await update.message.reply_text("📊 جارٍ التحليل...")
@@ -917,6 +982,9 @@ async def set_commands(app: Application):
         BotCommand("ask", "مساعد ذكي شامل"),
         BotCommand("alerts", "تنبيهات ذكية"),
         BotCommand("analyze", "تحليل السجلات"),
+        BotCommand("auto_apply", "تطبيق تلقائي"),
+        BotCommand("market", "أسعار السوق"),
+        BotCommand("digest", "التقرير اليومي"),
         BotCommand("approve", "الموافقة على اقتراح"),
         BotCommand("reject", "رفض اقتراح"),
         BotCommand("clear", "مسح سجل JARVIS"),
@@ -967,6 +1035,9 @@ def main():
     app.add_handler(CommandHandler("ask", cmd_ask))
     app.add_handler(CommandHandler("alerts", cmd_alerts))
     app.add_handler(CommandHandler("analyze", cmd_analyze))
+    app.add_handler(CommandHandler("auto_apply", cmd_auto_apply))
+    app.add_handler(CommandHandler("market", cmd_market))
+    app.add_handler(CommandHandler("digest", cmd_digest))
     app.add_handler(CommandHandler("approve", cmd_approve))
     app.add_handler(CommandHandler("reject", cmd_reject))
     app.add_handler(CommandHandler("vpn", cmd_vpn))
