@@ -207,3 +207,22 @@ def analytics_page():
         )
     except Exception as e:
         return f"خطأ: {e}", 500
+
+
+@app.route("/analytics")
+def analytics_page():
+    try:
+        from analytics import Analytics
+        from semantic_memory_v2 import SemanticMemory
+        from guardian_v2 import Guardian
+        a = Analytics()
+        sm = SemanticMemory()
+        g = Guardian()
+        return render_template(
+            "analytics.html",
+            total_events=len(a.data.get("events", [])),
+            memory_count=sm.stats()["total"],
+            guardian_stats=g.stats(),
+        )
+    except Exception as e:
+        return f"خطأ: {e}", 500
