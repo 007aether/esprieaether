@@ -1,3 +1,7 @@
+# Copyright (c) 2026 EsprieAmine / EsprieAether
+# All rights reserved.
+# ESPRIE AETHER V8 — Autonomous AI System
+
 """
 ⚡ EsprieAether - Autonomous Loop
 الحلقة الذكية التي تشغّل كل الوكلاء تلقائياً 24/7

@@ -1,3 +1,7 @@
+# Copyright (c) 2026 EsprieAmine / EsprieAether
+# All rights reserved.
+# ESPRIE AETHER V8 — Autonomous AI System
+
 """
 ⚡ EsprieAether - JARVIS Command Center
 Flask Web Interface
@@ -316,6 +320,73 @@ def analytics_page():
         return render_template("analytics.html",
             total_events=0, memory_count=0,
             guardian_stats={"blocked": 0, "total_checks": 0}), 200
+
+
+
+# ═══════════════════════════════════════════════════════════════
+#  ⚙️ Settings Page
+# ═══════════════════════════════════════════════════════════════
+
+@app.route("/settings")
+def settings_page():
+    """صفحة الإعدادات"""
+    try:
+        from dotenv import load_dotenv
+        import os
+        load_dotenv(os.path.expanduser("~/AETHER_V8/.env"), override=True)
+        
+        # اقرأ الإعدادات (بدون كشف المفاتيح)
+        settings = {
+            "aether_id": os.getenv("AETHER_ID", "007aether"),
+            "aether_email": os.getenv("AETHER_EMAIL", ""),
+            "ollama_host": os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434"),
+            "ollama_model": os.getenv("OLLAMA_MODEL", ""),
+            "web_host": os.getenv("WEB_HOST", "127.0.0.1"),
+            "web_port": os.getenv("WEB_PORT", "5000"),
+            "github_user": os.getenv("GITHUB_USERNAME", ""),
+            "github_repo": os.getenv("GITHUB_REPO", ""),
+            "github_branch": os.getenv("GITHUB_BRANCH", "main"),
+            "log_level": os.getenv("LOG_LEVEL", "INFO"),
+            "ntfy_topic": os.getenv("NTFY_TOPIC", ""),
+            "vpn_interface": os.getenv("VPN_INTERFACE", ""),
+            # حالات المفاتيح (بدون كشف القيم)
+            "has_openrouter": bool(os.getenv("OPENROUTER_API_KEY")),
+            "has_groq": bool(os.getenv("GROQ_API_KEY")),
+            "has_telegram": bool(os.getenv("TELEGRAM_BOT_TOKEN")),
+            "has_github_token": bool(os.getenv("GITHUB_TOKEN")),
+            "has_smtp": bool(os.getenv("SMTP_PASSWORD")),
+        }
+        
+        return render_template("settings.html", settings=settings)
+    except Exception as e:
+        return render_template("settings.html", settings={}), 200
+
+
+# ═══════════════════════════════════════════════════════════════
+#  🤖 JARVIS Page
+# ═══════════════════════════════════════════════════════════════
+
+@app.route("/jarvis")
+def jarvis_page():
+    """صفحة JARVIS"""
+    try:
+        # جرّب تحميل JarvisBridge إذا كان موجودًا
+        try:
+            from jarvis_bridge import JarvisBridge
+            bridge = JarvisBridge()
+            jarvis_status = bridge.status() if hasattr(bridge, "status") else {}
+        except Exception:
+            jarvis_status = {}
+        
+        return render_template(
+            "jarvis.html",
+            jarvis=jarvis_status,
+            status=jarvis_status,
+            aether_id=os.getenv("AETHER_ID", "007aether"),
+        )
+    except Exception as e:
+        return render_template("jarvis.html", jarvis={}, status={}), 200
+
 
 if __name__ == "__main__":
     print(f"🚀 Server running on http://{WEB_HOST}:{WEB_PORT}")
