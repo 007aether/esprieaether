@@ -51,6 +51,17 @@
       "importance": 0.3,
       "created": "2026-09-29T23:18:59.168504",
       "accessed": 0
+    },
+    {
+      "id": "876ff859b1f0",
+      "content": "دورة في 2026-09-29T23:25:11.339690",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-29T23:25:11.339792",
+      "accessed": 0
     }
   ],
   "skills": []

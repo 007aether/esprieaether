@@ -500,6 +500,12 @@ SCHEDULE = {
     "security_scan": 60 * 60,
     "github_sync": 60 * 60,
     "daily_report": 6 * 60 * 60,
+    # ═══ المهام الجديدة v2 ═══
+    "research_monitor": 6 * 60 * 60,       # كل 6 ساعات
+    "semantic_memory": 60 * 60,            # كل ساعة
+    "analytics_report": 12 * 60 * 60,      # كل 12 ساعة
+    "guardian_check": 60 * 60,             # كل ساعة
+    "inference_test": 2 * 60 * 60,         # كل ساعتين
 }
 
 
@@ -521,18 +527,12 @@ def run_cycle(state: dict):
         "health_check": task_health_check,
         "security_scan": task_security_scan,
         "github_sync": task_github_sync,
+        "research_monitor": task_research_monitor,
+        "semantic_memory": task_semantic_memory,
+        "analytics_report": task_analytics_report,
+        "guardian_check": task_guardian_check,
+        "inference_test": task_inference_test,
             "daily_report": task_daily_report,
-    # ═══ المهام الجديدة v2 ═══
-    if should_run(state, "research_monitor", 21600):  # كل 6 ساعات
-        report["research_monitor"] = task_research_monitor()
-    if should_run(state, "semantic_memory", 3600):     # كل ساعة
-        report["semantic_memory"] = task_semantic_memory()
-    if should_run(state, "analytics_report", 43200):   # كل 12 ساعة
-        report["analytics_report"] = task_analytics_report()
-    if should_run(state, "guardian_check", 3600):      # كل ساعة
-        report["guardian_check"] = task_guardian_check()
-    if should_run(state, "inference_test", 7200):      # كل ساعتين
-        report["inference_test"] = task_inference_test()
     }
 
     for name, func in tasks.items():
@@ -612,82 +612,6 @@ if __name__ == "__main__":
     main()
 
 
-# ═══════════════════════════════════════════════════════════════
-#  🆕 المهام الجديدة — AETHER v2 (2026-09-29)
-# ═══════════════════════════════════════════════════════════════
-
-def task_research_monitor() -> dict:
-    """يفحص arXiv + HackerNews + Reddit + GitHub Trending"""
-    try:
-        from research_monitor import ResearchMonitor
-        rm = ResearchMonitor()
-        report = rm.run()
-        return {
-            "status": "ok",
-            "new_items": report["total_new"],
-            "sources": ["arxiv", "hackernews", "reddit", "github"],
-        }
-    except Exception as e:
-        return {"status": "error", "error": str(e)}
-
-
-def task_semantic_memory() -> dict:
-    """يحفظ ملخص الدورة في الذاكرة الدلالية"""
-    try:
-        from semantic_memory_v2 import SemanticMemory
-        from datetime import datetime
-        sm = SemanticMemory()
-        sm.remember(
-            f"دورة autonomous_loop اكتملت في {datetime.now().isoformat()}",
-            category="conversation",
-            tags=["autonomous", "cycle"],
-            importance=0.3,
-        )
-        return {"status": "ok", "total_memories": sm.stats()["total"]}
-    except Exception as e:
-        return {"status": "error", "error": str(e)}
-
-
-def task_analytics_report() -> dict:
-    """يولّد تقرير تحليلات"""
-    try:
-        from analytics import Analytics
-        a = Analytics()
-        report = a.report(days=1)
-        return {"status": "ok", "total_events": report["total_events"]}
-    except Exception as e:
-        return {"status": "error", "error": str(e)}
-
-
-def task_guardian_check() -> dict:
-    """يفحص الحماية"""
-    try:
-        from guardian_v2 import Guardian
-        g = Guardian()
-        return {"status": "ok", "stats": g.stats()}
-    except Exception as e:
-        return {"status": "error", "error": str(e)}
-
-
-def task_inference_test() -> dict:
-    """يختبر Inference Router بشكل دوري"""
-    try:
-        from inference_router import get_provider
-        tests = {
-            "simple": get_provider("مرحبا")["provider"],
-            "medium": get_provider("اكتب مقالة عن AI")["provider"],
-            "complex": get_provider("حلل وصمم نظامًا معقدًا")["provider"],
-            "sensitive": get_provider("محفظتي الخاصة")["provider"],
-        }
-        return {"status": "ok", "routing": tests}
-    except Exception as e:
-        return {"status": "error", "error": str(e)}
-
-
-# ═══════════════════════════════════════════════════════════════
-#  🆕 المهام الجديدة — AETHER v2
-# ═══════════════════════════════════════════════════════════════
-
 def task_research_monitor() -> dict:
     try:
         from research_monitor import ResearchMonitor
@@ -703,12 +627,7 @@ def task_semantic_memory() -> dict:
         from semantic_memory_v2 import SemanticMemory
         from datetime import datetime
         sm = SemanticMemory()
-        sm.remember(
-            f"دورة autonomous_loop في {datetime.now().isoformat()}",
-            category="conversation",
-            tags=["autonomous"],
-            importance=0.3,
-        )
+        sm.remember(f"دورة {datetime.now().isoformat()}", category="conversation", tags=["auto"], importance=0.3)
         return {"status": "ok", "total": sm.stats()["total"]}
     except Exception as e:
         return {"status": "error", "error": str(e)}
@@ -735,14 +654,11 @@ def task_guardian_check() -> dict:
 def task_inference_test() -> dict:
     try:
         from inference_router import get_provider
-        return {
-            "status": "ok",
-            "routing": {
-                "simple": get_provider("مرحبا")["provider"],
-                "medium": get_provider("اكتب مقالة")["provider"],
-                "complex": get_provider("حلل وصمم")["provider"],
-                "sensitive": get_provider("محفظتي")["provider"],
-            },
-        }
+        return {"status": "ok", "routing": {
+            "simple": get_provider("hi")["provider"],
+            "medium": get_provider("مقالة")["provider"],
+            "complex": get_provider("حلل")["provider"],
+            "sensitive": get_provider("محفظة")["provider"],
+        }}
     except Exception as e:
         return {"status": "error", "error": str(e)}
