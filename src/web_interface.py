@@ -162,7 +162,7 @@ def api_airdrops_sync():
         })
     except Exception as e:
         return jsonify({"status": "error", "error": str(e)})
-@app.route("/")
+@app.route("/analytics")def analytics_page():    try:        from analytics import Analytics        from semantic_memory_v2 import SemanticMemory        from guardian_v2 import Guardian                a = Analytics()        sm = SemanticMemory()        g = Guardian()                report = a.report(days=7)        total = len(a.data.get("events", []))                return render_template(            "analytics.html",            total_events=total,            memory_count=sm.stats()["total"],            guardian_stats=g.stats(),        )    except Exception as e:        return f"خطأ: {e}", 500
 def index():
     """الصفحة الرئيسية — لوحة القيادة"""
     return render_template(
