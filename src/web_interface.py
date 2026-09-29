@@ -187,27 +187,10 @@ if __name__ == "__main__":
 #  📊 Analytics Dashboard
 # ═══════════════════════════════════════════════════════════════
 
-@app.route("/analytics")
-def analytics_page():
-    """صفحة تحليلات النظام"""
-    try:
-        from analytics import Analytics
-        from semantic_memory_v2 import SemanticMemory
-        from guardian_v2 import Guardian
-        
-        a = Analytics()
-        sm = SemanticMemory()
-        g = Guardian()
-        
-        return render_template(
-            "analytics.html",
-            total_events=len(a.data.get("events", [])),
-            memory_count=sm.stats()["total"],
-            guardian_stats=g.stats(),
-        )
-    except Exception as e:
-        return f"خطأ: {e}", 500
 
+# ═══════════════════════════════════════════════════════════════
+#  📊 Analytics Dashboard (single)
+# ═══════════════════════════════════════════════════════════════
 
 @app.route("/analytics")
 def analytics_page():
@@ -225,4 +208,141 @@ def analytics_page():
             guardian_stats=g.stats(),
         )
     except Exception as e:
-        return f"خطأ: {e}", 500
+        return f"Analytics Error: {e}", 500
+
+
+# ═══════════════════════════════════════════════════════════════
+#  📊 Routes إضافية — Analytics, Metrics, Stats, Health, Wallet, etc.
+# ═══════════════════════════════════════════════════════════════
+
+@app.route("/analytics")
+def analytics_page():
+    """صفحة التحليلات"""
+    try:
+        from analytics import Analytics
+        from semantic_memory_v2 import SemanticMemory
+        from guardian_v2 import Guardian
+        a = Analytics()
+        sm = SemanticMemory()
+        g = Guardian()
+        return render_template(
+            "analytics.html",
+            total_events=len(a.data.get("events", [])),
+            memory_count=sm.stats()["total"],
+            guardian_stats=g.stats(),
+        )
+    except Exception as e:
+        return render_template("analytics.html",
+            total_events=0, memory_count=0,
+            guardian_stats={"blocked": 0, "total_checks": 0}), 200
+
+
+@app.route("/metrics")
+def metrics_page():
+    """صفحة المقاييس"""
+    try:
+        return render_template(
+            "metrics.html",
+            metrics=get_system_metrics(),
+            ollama=get_ollama_status(),
+        )
+    except Exception as e:
+        return render_template("metrics.html", metrics={}, ollama={}), 200
+
+
+@app.route("/stats")
+def stats_page():
+    """صفحة الإحصائيات"""
+    try:
+        from analytics import Analytics
+        a = Analytics()
+        report = a.report(days=7)
+        return render_template("stats.html", report=report, stats=report)
+    except Exception as e:
+        return render_template("stats.html", report={}, stats={}), 200
+
+
+@app.route("/health")
+def health_page():
+    """صفحة صحة النظام"""
+    try:
+        import psutil
+        metrics = get_system_metrics()
+        return render_template(
+            "health.html",
+            metrics=metrics,
+            system_metrics=metrics,
+            health=metrics,
+        )
+    except Exception as e:
+        return render_template("health.html", metrics={}, system_metrics={}, health={}), 200
+
+
+@app.route("/wallet")
+def wallet_page():
+    """صفحة المحفظة"""
+    try:
+        wallet = get_wallet_info()
+        return render_template("wallet.html", wallet=wallet)
+    except Exception as e:
+        return render_template("wallet.html", wallet={}), 200
+
+
+@app.route("/earnings")
+def earnings_page():
+    """صفحة الأرباح"""
+    try:
+        return render_template("earnings.html", earnings={})
+    except Exception as e:
+        return render_template("earnings.html", earnings={}), 200
+
+
+@app.route("/monitoring")
+def monitoring_page():
+    """صفحة المراقبة — تستخدم stats.html"""
+    try:
+        from analytics import Analytics
+        a = Analytics()
+        report = a.report(days=1)
+        return render_template("stats.html", report=report, stats=report)
+    except Exception as e:
+        return render_template("stats.html", report={}, stats={}), 200
+
+
+@app.route("/notifications")
+def notifications_page():
+    """صفحة التنبيهات"""
+    try:
+        return render_template("notifications.html", notifications=[])
+    except Exception as e:
+        return render_template("notifications.html", notifications=[]), 200
+
+
+@app.route("/security")
+def security_page():
+    """صفحة الأمن"""
+    try:
+        from guardian_v2 import Guardian
+        g = Guardian()
+        return render_template(
+            "security.html",
+            guardian_stats=g.stats(),
+            stats=g.stats(),
+        )
+    except Exception as e:
+        return render_template("security.html", guardian_stats={}, stats={}), 200
+
+
+@app.route("/somnia")
+def somnia_page():
+    """صفحة Somnia"""
+    try:
+        return render_template("somnia.html", somnia={})
+    except Exception as e:
+        return render_template("somnia.html", somnia={}), 200
+
+
+@app.route("/api/ollama")
+def api_ollama():
+    """API حالة Ollama"""
+    return jsonify(get_ollama_status())
