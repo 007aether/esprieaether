@@ -39,6 +39,19 @@
       "_score": 0.3157894736842105
     }
   ],
-  "conversations": [],
+  "conversations": [
+    {
+      "id": "5c90d031bacf",
+      "content": "دورة autonomous_loop اكتملت في 2026-09-29T23:18:59.168424",
+      "category": "conversation",
+      "tags": [
+        "autonomous",
+        "cycle"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-29T23:18:59.168504",
+      "accessed": 0
+    }
+  ],
   "skills": []
 }
