@@ -500,7 +500,65 @@ SCHEDULE = {
     "security_scan": 60 * 60,
     "github_sync": 60 * 60,
     "daily_report": 6 * 60 * 60,
+    # ═══ المهام الجديدة v2 ═══
+    "research_monitor": 6 * 60 * 60,       # كل 6 ساعات
+    "semantic_memory": 60 * 60,            # كل ساعة
+    "analytics_report": 12 * 60 * 60,      # كل 12 ساعة
+    "guardian_check": 60 * 60,             # كل ساعة
+    "inference_test": 2 * 60 * 60,         # كل ساعتين
 }
+
+
+def task_research_monitor() -> dict:
+    try:
+        from research_monitor import ResearchMonitor
+        rm = ResearchMonitor()
+        report = rm.run()
+        return {"status": "ok", "new_items": report["total_new"]}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_semantic_memory() -> dict:
+    try:
+        from semantic_memory_v2 import SemanticMemory
+        from datetime import datetime
+        sm = SemanticMemory()
+        sm.remember(f"دورة {datetime.now().isoformat()}", category="conversation", tags=["auto"], importance=0.3)
+        return {"status": "ok", "total": sm.stats()["total"]}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_analytics_report() -> dict:
+    try:
+        from analytics import Analytics
+        a = Analytics()
+        return {"status": "ok", "total_events": a.report(days=1)["total_events"]}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_guardian_check() -> dict:
+    try:
+        from guardian_v2 import Guardian
+        g = Guardian()
+        return {"status": "ok", "stats": g.stats()}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_inference_test() -> dict:
+    try:
+        from inference_router import get_provider
+        return {"status": "ok", "routing": {
+            "simple": get_provider("hi")["provider"],
+            "medium": get_provider("مقالة")["provider"],
+            "complex": get_provider("حلل")["provider"],
+            "sensitive": get_provider("محفظة")["provider"],
+        }}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
 
 
 def run_cycle(state: dict):
@@ -521,6 +579,11 @@ def run_cycle(state: dict):
         "health_check": task_health_check,
         "security_scan": task_security_scan,
         "github_sync": task_github_sync,
+        "research_monitor": task_research_monitor,
+        "semantic_memory": task_semantic_memory,
+        "analytics_report": task_analytics_report,
+        "guardian_check": task_guardian_check,
+        "inference_test": task_inference_test,
             "daily_report": task_daily_report,
     }
 
@@ -599,3 +662,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
