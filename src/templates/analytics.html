@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h1>📊 Analytics Dashboard</h1>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3>الأحداث</h3>
+      <p class="big-number">{{ total_events }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>الذاكرة</h3>
+      <p class="big-number">{{ memory_count }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>محظورة</h3>
+      <p class="big-number">{{ guardian_stats.blocked }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
