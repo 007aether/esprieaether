@@ -1,0 +1,54 @@
+{
+  "blocked": [
+    {
+      "command": "rm -rf /tmp/test",
+      "timestamp": "2026-09-29T22:45:50.839304",
+      "dangerous": true,
+      "pattern": "rm\\s+-rf\\s+/",
+      "approved": false,
+      "blocked": true
+    },
+    {
+      "command": "rm -rf /",
+      "timestamp": "2026-09-29T22:45:50.839570",
+      "dangerous": true,
+      "pattern": "rm\\s+-rf\\s+/",
+      "approved": false,
+      "blocked": true
+    },
+    {
+      "command": "systemctl stop nginx",
+      "timestamp": "2026-09-29T22:45:50.839749",
+      "dangerous": true,
+      "pattern": "systemctl\\s+stop",
+      "approved": false,
+      "blocked": true
+    },
+    {
+      "command": "rm -rf /tmp/test",
+      "timestamp": "2026-09-29T22:46:07.057912",
+      "dangerous": true,
+      "pattern": "rm\\s+-rf\\s+/",
+      "approved": false,
+      "blocked": true
+    },
+    {
+      "command": "rm -rf /",
+      "timestamp": "2026-09-29T22:46:07.058155",
+      "dangerous": true,
+      "pattern": "rm\\s+-rf\\s+/",
+      "approved": false,
+      "blocked": true
+    },
+    {
+      "command": "systemctl stop nginx",
+      "timestamp": "2026-09-29T22:46:07.058337",
+      "dangerous": true,
+      "pattern": "systemctl\\s+stop",
+      "approved": false,
+      "blocked": true
+    }
+  ],
+  "approved": [],
+  "checks": 12
+}

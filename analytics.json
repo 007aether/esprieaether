@@ -1,0 +1,41 @@
+{
+  "events": [
+    {
+      "type": "task_received",
+      "details": {
+        "source": "telegram"
+      },
+      "timestamp": "2026-09-29T22:43:06.524891"
+    },
+    {
+      "type": "task_completed",
+      "details": {
+        "duration": 5.2
+      },
+      "timestamp": "2026-09-29T22:43:06.525194"
+    },
+    {
+      "type": "llm_call",
+      "details": {
+        "provider": "groq",
+        "tokens": 150
+      },
+      "timestamp": "2026-09-29T22:43:06.525362"
+    },
+    {
+      "type": "error",
+      "details": {
+        "type": "timeout"
+      },
+      "timestamp": "2026-09-29T22:43:06.525505"
+    }
+  ],
+  "daily_stats": {
+    "2026-09-29": {
+      "task_received": 1,
+      "task_completed": 1,
+      "llm_call": 1,
+      "error": 1
+    }
+  }
+}

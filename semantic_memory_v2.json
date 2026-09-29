@@ -1,0 +1,44 @@
+{
+  "facts": [
+    {
+      "id": "b9122a376f7a",
+      "content": "EsprieAether يستخدم OpenRouter و Groq و Ollama",
+      "category": "fact",
+      "tags": [
+        "ai",
+        "providers"
+      ],
+      "importance": 0.9,
+      "created": "2026-09-29T22:42:11.582912",
+      "accessed": 1,
+      "_score": 1.0
+    },
+    {
+      "id": "50d3661962cd",
+      "content": "البوت يعمل على Telegram ويدعم 28 أداة",
+      "category": "fact",
+      "tags": [
+        "telegram",
+        "bot"
+      ],
+      "importance": 0.8,
+      "created": "2026-09-29T22:42:11.583216",
+      "accessed": 1,
+      "_score": 0.3333333333333333
+    },
+    {
+      "id": "45da1755ab9e",
+      "content": "محرك التطور الذاتي self_evolve يعمل تلقائيًا",
+      "category": "fact",
+      "tags": [
+        "evolution"
+      ],
+      "importance": 0.85,
+      "created": "2026-09-29T22:42:11.583382",
+      "accessed": 1,
+      "_score": 0.3157894736842105
+    }
+  ],
+  "conversations": [],
+  "skills": []
+}
