@@ -1,3 +1,7 @@
+# Copyright (c) 2026 EsprieAmine / EsprieAether
+# All rights reserved.
+# ESPRIE AETHER V8 — Autonomous AI System
+
 """
 ⚡ EsprieAether - Pharos Agent
 وكيل Pharos Testnet: Faucet + النقاط + المراقبة

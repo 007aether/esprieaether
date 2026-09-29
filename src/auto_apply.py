@@ -1,3 +1,7 @@
+# Copyright (c) 2026 EsprieAmine / EsprieAether
+# All rights reserved.
+# ESPRIE AETHER V8 — Autonomous AI System
+
 """
 ⚡ EsprieAether - Auto Apply Engine
 تطبيق آمن للاقتراحات مع اختبار و rollback

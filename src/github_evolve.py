@@ -1,3 +1,7 @@
+# Copyright (c) 2026 EsprieAmine / EsprieAether
+# All rights reserved.
+# ESPRIE AETHER V8 — Autonomous AI System
+
 """
 ⚡ EsprieAether - GitHub Evolve
 البحث في GitHub عن تحسينات وتطبيقها

@@ -1,3 +1,7 @@
+# Copyright (c) 2026 EsprieAmine / EsprieAether
+# All rights reserved.
+# ESPRIE AETHER V8 — Autonomous AI System
+
 """
 ⚡ EsprieAether — Semantic Memory v2
 ذاكرة دلالية مع بحث بالمعنى (بدون مكتبات ثقيلة)

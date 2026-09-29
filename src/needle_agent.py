@@ -1,3 +1,7 @@
+# Copyright (c) 2026 EsprieAmine / EsprieAether
+# All rights reserved.
+# ESPRIE AETHER V8 — Autonomous AI System
+
 """
 ⚡ EsprieAether - Needle Agent (v2)
 وكيل تحويل الأوامر إلى أفعال عبر Needle 2

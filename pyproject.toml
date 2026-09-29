@@ -1,0 +1,20 @@
+cd ~/AETHER_V8
+
+# 1) أضف الترخيص
+cat > LICENSE << 'EOF'
+MIT License
+Copyright (c) 2026 EsprieAmine / EsprieAether
+...
+EOF
+
+# 2) حدّث pyproject.toml
+nano pyproject.toml
+# أضف: authors = [{name = "EsprieAmine"}]
+
+# 3) حدّث README
+nano README.md
+
+# 4) Commit كل شيء
+git add -A
+git commit -m "ESPRIE AETHER: Add LICENSE and copyright by EsprieAmine"
+git push
