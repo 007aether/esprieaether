@@ -178,65 +178,6 @@ def index():
         return f"خطأ: {e}", 500
 
 
-if __name__ == "__main__":
-    print(f"🚀 Server running on http://{WEB_HOST}:{WEB_PORT}")
-    app.run(host=WEB_HOST, port=WEB_PORT, debug=False, use_reloader=False)
-
-
-# ═══════════════════════════════════════════════════════════════
-#  📊 Analytics Dashboard
-# ═══════════════════════════════════════════════════════════════
-
-
-# ═══════════════════════════════════════════════════════════════
-#  📊 Analytics Dashboard (single)
-# ═══════════════════════════════════════════════════════════════
-
-@app.route("/analytics")
-def analytics_page():
-    try:
-        from analytics import Analytics
-        from semantic_memory_v2 import SemanticMemory
-        from guardian_v2 import Guardian
-        a = Analytics()
-        sm = SemanticMemory()
-        g = Guardian()
-        return render_template(
-            "analytics.html",
-            total_events=len(a.data.get("events", [])),
-            memory_count=sm.stats()["total"],
-            guardian_stats=g.stats(),
-        )
-    except Exception as e:
-        return f"Analytics Error: {e}", 500
-
-
-# ═══════════════════════════════════════════════════════════════
-#  📊 Routes إضافية — Analytics, Metrics, Stats, Health, Wallet, etc.
-# ═══════════════════════════════════════════════════════════════
-
-@app.route("/analytics")
-def analytics_page():
-    """صفحة التحليلات"""
-    try:
-        from analytics import Analytics
-        from semantic_memory_v2 import SemanticMemory
-        from guardian_v2 import Guardian
-        a = Analytics()
-        sm = SemanticMemory()
-        g = Guardian()
-        return render_template(
-            "analytics.html",
-            total_events=len(a.data.get("events", [])),
-            memory_count=sm.stats()["total"],
-            guardian_stats=g.stats(),
-        )
-    except Exception as e:
-        return render_template("analytics.html",
-            total_events=0, memory_count=0,
-            guardian_stats={"blocked": 0, "total_checks": 0}), 200
-
-
 @app.route("/metrics")
 def metrics_page():
     """صفحة المقاييس"""
@@ -346,3 +287,37 @@ def somnia_page():
 def api_ollama():
     """API حالة Ollama"""
     return jsonify(get_ollama_status())
+
+
+# ═══════════════════════════════════════════════════════════════
+#  🚀 Main Entry Point — يجب أن يكون في نهاية الملف
+# ═══════════════════════════════════════════════════════════════
+
+
+
+
+@app.route("/analytics")
+def analytics_page():
+    """صفحة التحليلات"""
+    try:
+        from analytics import Analytics
+        from semantic_memory_v2 import SemanticMemory
+        from guardian_v2 import Guardian
+        a = Analytics()
+        sm = SemanticMemory()
+        g = Guardian()
+        return render_template(
+            "analytics.html",
+            total_events=len(a.data.get("events", [])),
+            memory_count=sm.stats()["total"],
+            guardian_stats=g.stats(),
+        )
+    except Exception as e:
+        return render_template("analytics.html",
+            total_events=0, memory_count=0,
+            guardian_stats={"blocked": 0, "total_checks": 0}), 200
+
+if __name__ == "__main__":
+    print(f"🚀 Server running on http://{WEB_HOST}:{WEB_PORT}")
+    print(f"📊 Total routes: {len(list(app.url_map.iter_rules()))}")
+    app.run(host=WEB_HOST, port=WEB_PORT, debug=False, use_reloader=False)
