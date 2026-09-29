@@ -1,0 +1,14 @@
+{
+  "started_at": "2026-09-28T23:00:42.248951",
+  "requests": {
+    "openrouter": 0,
+    "groq": 1,
+    "local": 1
+  },
+  "failures": {
+    "openrouter": 1,
+    "groq": 0,
+    "local": 0
+  },
+  "last_switch": "2026-09-28T23:00:48.797654"
+}

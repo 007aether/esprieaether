@@ -1,0 +1,244 @@
+"""
+⚡ EsprieAether - MCP Server
+يحول الوكلاء إلى MCP tools قياسية
+"""
+import asyncio
+import json
+import logging
+from pathlib import Path
+from datetime import datetime
+
+from mcp.server import Server
+from mcp.server.stdio import stdio_server
+from mcp.types import Tool, TextContent
+
+BASE_DIR = Path.home() / "AETHER_V8"
+
+logger = logging.getLogger("mcp_server")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+)
+
+# ─── إنشاء Server ───
+app = Server("esprieaether")
+
+
+# ═══════════════════════════════════════
+#  قائمة الأدوات
+# ═══════════════════════════════════════
+@app.list_tools()
+async def list_tools() -> list[Tool]:
+    """الأدوات المتاحة"""
+    return [
+        Tool(
+            name="get_airdrops",
+            description="احصل على أحدث الإيردروبات من قاعدة البيانات",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "limit": {"type": "integer", "description": "عدد الإيردروبات", "default": 5}
+                }
+            }
+        ),
+        Tool(
+            name="get_vpn_status",
+            description="حالة VPN + IP الحالي",
+            inputSchema={"type": "object", "properties": {}}
+        ),
+        Tool(
+            name="get_stats",
+            description="إحصائيات النظام (CPU/RAM/Disk)",
+            inputSchema={"type": "object", "properties": {}}
+        ),
+        Tool(
+            name="get_services",
+            description="حالة الخدمات الأربع",
+            inputSchema={"type": "object", "properties": {}}
+        ),
+        Tool(
+            name="get_somnia_balance",
+            description="رصيد Somnia STT",
+            inputSchema={"type": "object", "properties": {}}
+        ),
+        Tool(
+            name="get_market",
+            description="أسعار العملات الرقمية",
+            inputSchema={"type": "object", "properties": {}}
+        ),
+        Tool(
+            name="get_daily_digest",
+            description="التقرير اليومي الشامل",
+            inputSchema={"type": "object", "properties": {}}
+        ),
+        Tool(
+            name="get_evolve_suggestions",
+            description="اقتراحات التطوير الذاتي",
+            inputSchema={"type": "object", "properties": {}}
+        ),
+        Tool(
+            name="get_cost_report",
+            description="تقرير استخدام المزودين",
+            inputSchema={"type": "object", "properties": {}}
+        ),
+        Tool(
+            name="get_pharos_balance",
+            description="رصيد Pharos Testnet",
+            inputSchema={"type": "object", "properties": {}}
+        ),
+        Tool(
+            name="run_command",
+            description="تنفيذ أمر shell آمن",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "command": {"type": "string", "description": "الأمر"}
+                },
+                "required": ["command"]
+            }
+        ),
+    ]
+
+
+# ═══════════════════════════════════════
+#  تنفيذ الأدوات
+# ═══════════════════════════════════════
+@app.call_tool()
+async def call_tool(name: str, arguments: dict) -> list[TextContent]:
+    """تنفيذ الأداة"""
+    logger.info("🔧 " + name)
+
+    try:
+        # 1. Airdrops
+        if name == "get_airdrops":
+            from airdrop_agent import AirdropAgent
+            limit = arguments.get("limit", 5)
+            a = AirdropAgent()
+            recent = a.get_recent(limit)
+            text = "📡 الإيردروبات (" + str(a.count()) + "):" + chr(10)
+            for i, item in enumerate(recent, 1):
+                text += str(i) + ". " + item["title"][:80] + chr(10)
+            return [TextContent(type="text", text=text)]
+
+        # 2. VPN
+        elif name == "get_vpn_status":
+            from vpn_agent import VPNAgent
+            v = VPNAgent()
+            status = "🟢 نشط" if v.is_active() else "🔴 متوقف"
+            text = status + " | IP: " + v.get_ip()
+            return [TextContent(type="text", text=text)]
+
+        # 3. Stats
+        elif name == "get_stats":
+            import psutil
+            text = (
+                "📊 CPU: " + str(psutil.cpu_percent(interval=0.5)) + "%" + chr(10) +
+                "💾 RAM: " + str(psutil.virtual_memory().percent) + "%" + chr(10) +
+                "💿 Disk: " + str(psutil.disk_usage("/").percent) + "%"
+            )
+            return [TextContent(type="text", text=text)]
+
+        # 4. Services
+        elif name == "get_services":
+            import subprocess
+            text = "⚙️ الخدمات:" + chr(10)
+            for svc in ["aether-web", "aether-bot", "aether-core", "ollama"]:
+                r = subprocess.run(
+                    ["/usr/bin/systemctl", "is-active", svc],
+                    capture_output=True, text=True, timeout=5
+                )
+                emoji = "🟢" if r.stdout.strip() == "active" else "🔴"
+                text += emoji + " " + svc + ": " + r.stdout.strip() + chr(10)
+            return [TextContent(type="text", text=text)]
+
+        # 5. Somnia
+        elif name == "get_somnia_balance":
+            from web3 import Web3
+            w3 = Web3(Web3.HTTPProvider("https://dream-rpc.somnia.network"))
+            wallet = json.loads((BASE_DIR / "test_wallets.json").read_text())[0]
+            stt = w3.from_wei(w3.eth.get_balance(wallet["address"]), "ether")
+            text = "💰 Somnia STT: " + str(stt)
+            return [TextContent(type="text", text=text)]
+
+        # 6. Market
+        elif name == "get_market":
+            from market_watcher import MarketWatcher
+            m = MarketWatcher()
+            m.fetch_prices()
+            text = "📈 أعلى التحركات:" + chr(10)
+            for mover in m.get_top_movers(5):
+                arrow = "🟢" if mover["change"] > 0 else "🔴"
+                text += arrow + " " + mover["coin"] + ": " + str(mover["change"]) + "%" + chr(10)
+            return [TextContent(type="text", text=text)]
+
+        # 7. Daily Digest
+        elif name == "get_daily_digest":
+            from daily_digest import DailyDigest
+            d = DailyDigest()
+            text = d.format_telegram()
+            return [TextContent(type="text", text=text)]
+
+        # 8. Evolve
+        elif name == "get_evolve_suggestions":
+            from self_evolve import SelfEvolve
+            evo = SelfEvolve()
+            pending = evo.list_pending()
+            text = "🧬 اقتراحات (" + str(len(pending)) + "):" + chr(10)
+            for s in pending[:5]:
+                text += "• " + s["file"] + ": " + s["action"][:60] + chr(10)
+            return [TextContent(type="text", text=text)]
+
+        # 9. Cost Report
+        elif name == "get_cost_report":
+            from cloud_fallback import CloudFallback
+            c = CloudFallback()
+            text = c.format_cost_report()
+            return [TextContent(type="text", text=text)]
+
+        # 10. Pharos
+        elif name == "get_pharos_balance":
+            from pharos_agent import PharosAgent
+            p = PharosAgent()
+            b = p.get_balance()
+            text = "🔷 Pharos: " + str(b.get("balance", "0")) + " PHRS"
+            return [TextContent(type="text", text=text)]
+
+        # 11. Run Command
+        elif name == "run_command":
+            import subprocess
+            cmd = arguments.get("command", "")
+
+            # حماية
+            forbidden = ["rm -rf /", "mkfs", "dd if=", ":(){:|:&};:", "> /dev/sda"]
+            if any(f in cmd for f in forbidden):
+                return [TextContent(type="text", text="⛔ أمر محظور")]
+
+            r = subprocess.run(
+                cmd, shell=True, capture_output=True, text=True, timeout=30,
+                cwd=str(BASE_DIR)
+            )
+            output = (r.stdout + r.stderr)[:2000]
+            return [TextContent(type="text", text=output or "(no output)")]
+
+        return [TextContent(type="text", text="❌ أداة غير معروفة: " + name)]
+
+    except Exception as e:
+        logger.error("❌ " + name + ": " + str(e))
+        return [TextContent(type="text", text="❌ خطأ: " + str(e)[:200])]
+
+
+# ═══════════════════════════════════════
+#  Main
+# ═══════════════════════════════════════
+async def main():
+    """بدء MCP Server عبر stdio"""
+    async with stdio_server() as (read_stream, write_stream):
+        await app.run(
+            read_stream,
+            write_stream,
+            app.create_initialization_options()
+        )
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

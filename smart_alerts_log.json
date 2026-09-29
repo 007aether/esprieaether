@@ -1,0 +1,17 @@
+{
+  "alerts": [
+    {
+      "timestamp": "2026-09-28T18:18:13.445836",
+      "type": "service_down",
+      "message": "الخدمة aether-bot متوقفة",
+      "priority": "high"
+    },
+    {
+      "timestamp": "2026-09-28T18:18:21.508442",
+      "type": "internet_down",
+      "message": "الإنترنت مقطوع — التبديل إلى Local",
+      "priority": "high"
+    }
+  ],
+  "suppressed": []
+}

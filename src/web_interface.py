@@ -122,6 +122,46 @@ def get_ollama_status() -> dict:
 #  Routes
 # ═══════════════════════════════════════
 
+@app.route("/airdrops")
+def airdrops_page():
+    """صفحة الإيردروبات"""
+    return render_template("airdrops.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/airdrops")
+def api_airdrops():
+    """API للإيردروبات"""
+    try:
+        from airdrop_agent import AirdropAgent
+        agent = AirdropAgent()
+        limit = int(request.args.get("limit", 20))
+        items = agent.get_recent(limit)
+        return jsonify({
+            "status": "ok",
+            "total": agent.count(),
+            "count": len(items),
+            "items": items,
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+
+@app.route("/api/airdrops/sync", methods=["POST"])
+def api_airdrops_sync():
+    """جلب الإيردروبات فوراً"""
+    try:
+        from airdrop_agent import AirdropAgent
+        agent = AirdropAgent()
+        items = agent.fetch_all()
+        new = agent.save_airdrops(items)
+        return jsonify({
+            "status": "ok",
+            "fetched": len(items),
+            "new": new,
+            "total": agent.count(),
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
 @app.route("/")
 def index():
     """الصفحة الرئيسية — لوحة القيادة"""
@@ -157,6 +197,338 @@ def wallet_page():
     """صفحة المحفظة"""
     return render_template("wallet.html", wallet=get_wallet_info())
 
+
+
+
+@app.route("/somnia")
+def somnia_page():
+    """صفحة Somnia (للعرض فقط)"""
+    return render_template("somnia.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/somnia")
+def api_somnia():
+    """API لحالة Somnia (للعرض فقط)"""
+    try:
+        import json
+        from web3 import Web3
+
+        w3 = Web3(Web3.HTTPProvider("https://dream-rpc.somnia.network"))
+        wallet_file = BASE_DIR / "test_wallets.json"
+
+        if not wallet_file.exists():
+            return jsonify({"status": "error", "error": "لا توجد محفظة"})
+
+        wallet = json.loads(wallet_file.read_text())[0]
+        address = wallet["address"]
+        stt_balance = w3.from_wei(w3.eth.get_balance(address), "ether")
+
+        return jsonify({
+            "status": "ok",
+            "address": address,
+            "stt": str(stt_balance),
+            "network": {
+                "connected": w3.is_connected(),
+                "block": w3.eth.block_number,
+                "chain_id": w3.eth.chain_id,
+            }
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+
+@app.route("/stats")
+def stats_page():
+    """صفحة الإحصائيات"""
+    return render_template("stats.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/stats/full")
+def api_stats_full():
+    """API الإحصائيات الشاملة"""
+    try:
+        import json
+        from datetime import datetime
+        from pathlib import Path as P
+
+        result = {
+            "status": "ok",
+            "timestamp": datetime.now().isoformat(),
+            "system": {},
+            "agents": {},
+            "airdrops": {},
+            "github": {},
+            "vpn": {},
+        }
+
+        # النظام
+        try:
+            import psutil
+            result["system"] = {
+                "cpu": psutil.cpu_percent(interval=0.5),
+                "ram": psutil.virtual_memory().percent,
+                "disk": psutil.disk_usage("/").percent,
+                "uptime_seconds": int(datetime.now().timestamp() - psutil.boot_time()),
+            }
+        except Exception:
+            pass
+
+        # Airdrops
+        try:
+            from airdrop_agent import AirdropAgent
+            a = AirdropAgent()
+            result["airdrops"] = {
+                "total": a.count(),
+                "recent": len(a.get_recent(10)),
+            }
+        except Exception:
+            pass
+
+        # GitHub
+        try:
+            from github_agent import GitHubAgent
+            gh = GitHubAgent().ping()
+            result["github"] = {
+                "status": gh.get("status"),
+                "repo": gh.get("repo"),
+            }
+        except Exception:
+            pass
+
+        # VPN
+        try:
+            from vpn_agent import VPNAgent
+            v = VPNAgent()
+            result["vpn"] = {
+                "active": v.is_active(),
+                "ip": v.get_ip(),
+            }
+        except Exception:
+            pass
+
+        # Autonomous state
+        try:
+            state_file = BASE_DIR / "autonomous_state.json"
+            if state_file.exists():
+                state = json.loads(state_file.read_text())
+                result["agents"] = {
+                    "cycles": state.get("cycles", 0),
+                    "started_at": state.get("started_at", "—"),
+                    "tasks_count": len(state.get("last_run", {})),
+                }
+        except Exception:
+            pass
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+
+@app.route("/earnings")
+def earnings_page():
+    """صفحة الأرباح"""
+    return render_template("earnings.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/earnings")
+def api_earnings():
+    """API الأرباح"""
+    try:
+        import json
+        from airdrop_agent import AirdropAgent
+
+        airdrop = AirdropAgent()
+
+        result = {
+            "status": "ok",
+            "airdrops": {
+                "total": airdrop.count(),
+                "recent": airdrop.get_recent(10),
+            },
+            "bandwidth": {},
+        }
+
+        # Bandwidth
+        try:
+            from bandwidth_agent import BandwidthAgent
+            bw = BandwidthAgent()
+            result["bandwidth"] = bw.status()
+        except Exception:
+            pass
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+
+@app.route("/health")
+def health_page():
+    """صفحة المراقبة الشاملة"""
+    return render_template("health.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/health")
+def api_health():
+    """API المراقبة الشاملة"""
+    try:
+        from datetime import datetime
+        import subprocess
+
+        result = {
+            "status": "ok",
+            "timestamp": datetime.now().isoformat(),
+        }
+
+        # 1. الخدمات
+        services = {}
+        for svc in ["aether-web", "aether-bot", "aether-core", "ollama"]:
+            try:
+                r = subprocess.run(
+                    ["/usr/bin/systemctl", "is-active", svc],
+                    capture_output=True, text=True, timeout=5
+                )
+                services[svc] = r.stdout.strip()
+            except Exception:
+                services[svc] = "unknown"
+        result["services"] = services
+
+        # 2. Guardian State
+        try:
+            from guardian_agent import GuardianAgent
+            g = GuardianAgent()
+            result["guardian"] = {
+                "checks": g.state.get("checks", 0),
+                "errors_detected": g.state.get("errors_detected", 0),
+                "errors_fixed": g.state.get("errors_fixed", 0),
+                "fixes": g.state.get("fixes", [])[-10:],
+            }
+        except Exception:
+            result["guardian"] = {}
+
+        # 3. Smart Alerts
+        try:
+            from smart_alerts import SmartAlerts
+            a = SmartAlerts()
+            result["alerts"] = a.get_stats()
+        except Exception:
+            result["alerts"] = {}
+
+        # 4. Autonomous State
+        try:
+            import json as j
+            state_file = BASE_DIR / "autonomous_state.json"
+            if state_file.exists():
+                state = j.loads(state_file.read_text())
+                result["autonomous"] = {
+                    "cycles": state.get("cycles", 0),
+                    "tasks_count": len(state.get("last_run", {})),
+                    "last_run": state.get("last_run", {}),
+                }
+        except Exception:
+            result["autonomous"] = {}
+
+        # 5. System Metrics
+        try:
+            import psutil
+            result["system"] = {
+                "cpu": psutil.cpu_percent(interval=0.5),
+                "ram": psutil.virtual_memory().percent,
+                "disk": psutil.disk_usage("/").percent,
+            }
+        except Exception:
+            result["system"] = {}
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+@app.route("/notifications")
+def notifications_page():
+    """صفحة مركز التنبيهات"""
+    return render_template("notifications.html", aether_id=os.getenv("AETHER_ID", "007aether"))
+
+
+@app.route("/api/notifications")
+def api_notifications():
+    """API مركز التنبيهات"""
+    try:
+        from datetime import datetime
+        result = {"status": "ok", "notifications": []}
+
+        # 1. Smart Alerts
+        try:
+            from smart_alerts import SmartAlerts
+            s = SmartAlerts()
+            for a in s.state.get("alerts", [])[-20:]:
+                result["notifications"].append({
+                    "timestamp": a.get("timestamp", ""),
+                    "type": "smart_alert",
+                    "category": a.get("type", "general"),
+                    "message": a.get("message", ""),
+                    "priority": a.get("priority", "default"),
+                    "icon": "🔔",
+                })
+        except Exception:
+            pass
+
+        # 2. Guardian Fixes
+        try:
+            from guardian_agent import GuardianAgent
+            g = GuardianAgent()
+            for f in g.state.get("fixes", [])[-20:]:
+                result["notifications"].append({
+                    "timestamp": f.get("timestamp", ""),
+                    "type": "guardian_fix",
+                    "category": f.get("type", "restart"),
+                    "message": "إصلاح " + f.get("target", "?"),
+                    "priority": "high" if f.get("result") == "ok" else "urgent",
+                    "icon": "🛡️",
+                })
+        except Exception:
+            pass
+
+        # 3. Market Opportunities
+        try:
+            from market_watcher import MarketWatcher
+            m = MarketWatcher()
+            for o in m.find_opportunities()[:5]:
+                result["notifications"].append({
+                    "timestamp": datetime.now().isoformat(),
+                    "type": "market",
+                    "category": o.get("type", "info"),
+                    "message": o.get("message", ""),
+                    "priority": "default",
+                    "icon": "📈",
+                })
+        except Exception:
+            pass
+
+        # 4. Log Analyzer
+        try:
+            from log_analyzer import LogAnalyzer
+            la = LogAnalyzer()
+            if la.reports:
+                last = la.reports[-1]
+                result["notifications"].append({
+                    "timestamp": last.get("timestamp", ""),
+                    "type": "log_analysis",
+                    "category": "report",
+                    "message": "تحليل السجلات: " + str(last.get("stats", {}).get("errors", 0)) + " خطأ",
+                    "priority": "default",
+                    "icon": "📊",
+                })
+        except Exception:
+            pass
+
+        # رتب بحسب الوقت (الأحدث أولاً)
+        result["notifications"].sort(
+            key=lambda x: x.get("timestamp", ""),
+            reverse=True
+        )
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
 
 @app.route("/settings")
 def settings_page():

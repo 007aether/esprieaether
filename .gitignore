@@ -1,14 +1,50 @@
-
-# Sensitive files — NEVER commit
-test_wallets.json
-aether_wallet.json
+# Secrets
 .env
+.env.*
 *.key
-pvkey.txt
-integrations/*/pvkey.txt
-integrations/*/proxies.txt
-integrations/*/address*.txt
+*.pem
+mykey.py
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.venv/
+venv/
+
+# Logs
+*.log
+logs/
 bot.log
 ollama*.log
-*.db
-AETHER_V8_backup_*.tar.gz
+
+# Backups
+*.bak
+*.bak.*
+*.broken
+_backups/
+_self_evolve_backups/
+_auto_apply_backups/
+
+# State files
+*_state.json
+*_history.json
+*_suggestions.json
+*_reports.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+weights/
+airdrops.json
+plans.json

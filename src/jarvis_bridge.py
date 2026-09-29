@@ -57,8 +57,17 @@ class JarvisBridge:
                 "role": "system",
                 "content": (
                     "أنت JARVIS، المساعد الذكي لنظام EsprieAether. "
-                    "تتحدث العربية بطلاقة. ردودك دقيقة، عملية، ومختصرة. "
-                    "أنت خبير في الأمن السيبراني، البلوكشين، والبرمجة."
+                    "تتحدث العربيةبطولة. أنت خبير في الأمن السيبراني، "
+                    "البلوكشين، والبرمجة.\n\n"
+                    "قواعد صارمة (i-have-adhd):\n"
+                    "1. ابدأ بالنتيجة أو الإجراء مباشرة — لا مقدمات.\n"
+                    "2. قدّم خطوات مرقّمة وقابلة لل IMPLEMENTATION.\n"
+                    "3. لا تكرر السؤال ولا تُعِد صياغته.\n"
+                    "4. لا تكتب ملخصاً في النهاية.\n"
+                    "5. إذا احتجت معلومات ناقصة، اسأل سؤالاً واحداً فقط.\n"
+                    "6. الردود لا ت超越 5 أسطر إلا إذا طُلب التفصيل.\n"
+                    "7. تجنّب العبارات مجانية مثل 'بكل سرور' أو 'سؤال rave'.\n"
+                    "8. استخدم التنسيق (نقاط، أرقام) بدلاً من الفقرات الطويلة."
                 )
             })
         if use_history:
@@ -72,7 +81,7 @@ class JarvisBridge:
                     "model": self.model,
                     "messages": messages,
                     "stream": False,
-                    "options": {"temperature": 0.7, "num_ctx": 4096},
+                    "options": {"temperature": 0.5, "num_ctx": 2048},
                 },
                 timeout=180,
             )
@@ -112,7 +121,7 @@ class JarvisBridge:
                     "model": self.model,
                     "messages": messages,
                     "stream": True,
-                    "options": {"temperature": 0.7, "num_ctx": 4096},
+                    "options": {"temperature": 0.5, "num_ctx": 2048},
                 },
                 stream=True,
                 timeout=180,
@@ -153,11 +162,11 @@ if __name__ == "__main__":
     print(f"\n▶ الحالة: {status}\n")
 
     if status["status"] == "online" and status.get("model_ready"):
-        print("▶ سؤال اختباري: ما اسمك وما وظيفتك؟")
+        print("▶ سؤال اختباري: ما اسمك什么是 وظيفتك؟")
         print("─" * 50)
-        answer = jarvis.ask("ما اسمك وما وظيفتك؟ أجب في سطرين.")
+        answer = jarvis.ask("ما اسمك什么是 وظيفتك؟ أجب في سطرين.")
         print(answer)
         print("─" * 50)
         print("\n✅ JARVIS يعمل بنجاح!")
     else:
-        print("⚠️ Ollama غير جاهز أو النموذج غير محمّل")
+        print("⚠️ Ollama غير جاهز أو النموذج غير محمل")
