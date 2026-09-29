@@ -682,3 +682,67 @@ def task_inference_test() -> dict:
         return {"status": "ok", "routing": tests}
     except Exception as e:
         return {"status": "error", "error": str(e)}
+
+
+# ═══════════════════════════════════════════════════════════════
+#  🆕 المهام الجديدة — AETHER v2
+# ═══════════════════════════════════════════════════════════════
+
+def task_research_monitor() -> dict:
+    try:
+        from research_monitor import ResearchMonitor
+        rm = ResearchMonitor()
+        report = rm.run()
+        return {"status": "ok", "new_items": report["total_new"]}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_semantic_memory() -> dict:
+    try:
+        from semantic_memory_v2 import SemanticMemory
+        from datetime import datetime
+        sm = SemanticMemory()
+        sm.remember(
+            f"دورة autonomous_loop في {datetime.now().isoformat()}",
+            category="conversation",
+            tags=["autonomous"],
+            importance=0.3,
+        )
+        return {"status": "ok", "total": sm.stats()["total"]}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_analytics_report() -> dict:
+    try:
+        from analytics import Analytics
+        a = Analytics()
+        return {"status": "ok", "total_events": a.report(days=1)["total_events"]}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_guardian_check() -> dict:
+    try:
+        from guardian_v2 import Guardian
+        g = Guardian()
+        return {"status": "ok", "stats": g.stats()}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_inference_test() -> dict:
+    try:
+        from inference_router import get_provider
+        return {
+            "status": "ok",
+            "routing": {
+                "simple": get_provider("مرحبا")["provider"],
+                "medium": get_provider("اكتب مقالة")["provider"],
+                "complex": get_provider("حلل وصمم")["provider"],
+                "sensitive": get_provider("محفظتي")["provider"],
+            },
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
