@@ -16,6 +16,14 @@ ENV_PATH = Path.home() / "AETHER_V8" / ".env"
 if ENV_PATH.exists():
     load_dotenv(dotenv_path=str(ENV_PATH), override=True)
 
+# ═══════════════════════════════════════════════════════════════
+#  🆓 FreeLLM — مجاني للأبد (15+ مزود)
+# ═══════════════════════════════════════════════════════════════
+FREELLM_URL = os.getenv("FREELLM_URL", "http://localhost:3000/v1")
+FREELLM_KEY = os.getenv("FREELLM_KEY", "")
+FREELLM_ENABLED = bool(FREELLM_KEY)
+
+
 logger = logging.getLogger("inference_router")
 
 
@@ -76,10 +84,10 @@ def _get_providers():
     """يعيد خريطة المزودين"""
     return {
         Complexity.SIMPLE: {
-            "provider": "groq",
-            "model": _read_env_key("GROQ_MODEL") or "llama-3.1-70b-versatile",
-            "api_key": _read_env_key("GROQ_API_KEY"),
-            "base_url": _read_env_key("GROQ_BASE_URL") or "https://api.groq.com/openai/v1",
+            "provider": "freellm" if FREELLM_ENABLED else "groq",
+            "model": "llama-3.1-70b-versatile" if FREELLM_ENABLED else (_read_env_key("GROQ_MODEL") or "llama-3.1-70b-versatile"),
+            "api_key": FREELLM_KEY if FREELLM_ENABLED else _read_env_key("GROQ_API_KEY"),
+            "base_url": FREELLM_URL if FREELLM_ENABLED else (_read_env_key("GROQ_BASE_URL") or "https://api.groq.com/openai/v1"),
         },
         Complexity.MEDIUM: {
             "provider": "openrouter",

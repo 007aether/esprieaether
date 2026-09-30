@@ -161,6 +161,50 @@
       "importance": 0.3,
       "created": "2026-09-30T16:17:06.011027",
       "accessed": 0
+    },
+    {
+      "id": "5afa403f9090",
+      "content": "دورة 2026-09-30T17:17:49.157441",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T17:17:49.157490",
+      "accessed": 0
+    },
+    {
+      "id": "d9ef430743ee",
+      "content": "دورة 2026-09-30T17:18:20.371655",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T17:18:20.371719",
+      "accessed": 0
+    },
+    {
+      "id": "f6febaa76ec2",
+      "content": "دورة 2026-09-30T18:18:16.936716",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T18:18:16.936794",
+      "accessed": 0
+    },
+    {
+      "id": "b96519e4866f",
+      "content": "دورة 2026-09-30T18:18:47.048222",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T18:18:47.048312",
+      "accessed": 0
     }
   ],
   "skills": []
