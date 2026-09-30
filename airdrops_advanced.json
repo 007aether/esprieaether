@@ -1,0 +1,279 @@
+{
+  "scans": [
+    {
+      "timestamp": "2026-09-30T16:41:54.725752",
+      "feeds": [
+        {
+          "source": "airdrops_io",
+          "count": 10,
+          "items": [
+            {
+              "title": "Best crypto airdrops to farm right now",
+              "url": "https://airdrops.io/blog/best-crypto-airdrops/"
+            },
+            {
+              "title": "Crypto airdrops explained: types, qualifying and safety",
+              "url": "https://airdrops.io/blog/crypto-airdrops-explained-types-qualifying-and-safety/"
+            },
+            {
+              "title": "xStocks Points Farming: The Pendle YT Strategy",
+              "url": "https://airdrops.io/blog/xstocks-yt-farm-strategy/"
+            },
+            {
+              "title": "Perp DEX Farming 2026: 4 Proven Strategies",
+              "url": "https://airdrops.io/blog/perp-dex-farming-strategies-2026/"
+            },
+            {
+              "title": "Ondo Points: what will one point be worth?",
+              "url": "https://airdrops.io/blog/ondo-points-value-analysis/"
+            }
+          ]
+        },
+        {
+          "source": "airdropalert",
+          "count": 10,
+          "items": [
+            {
+              "title": "PCE Inflation Sends Bitcoin Above $85K: My Trades and What Comes Next",
+              "url": "https://airdropalert.com/blogs/pce-inflation-bitcoin/"
+            },
+            {
+              "title": "Shuffle Review 2026: The Crypto Casino With Its Own Token",
+              "url": "https://airdropalert.com/blogs/shuffle-review/"
+            },
+            {
+              "title": "Hyperliquid Insider Trading Probe: Congress Wants Jeff Yan’s Records by October 13",
+              "url": "https://airdropalert.com/blogs/hyperliquid-insider-trading-probe/"
+            },
+            {
+              "title": "Best Perp DEXes in 2026: 7 Platforms That Actually Have Volume",
+              "url": "https://airdropalert.com/blogs/best-perp-dex/"
+            },
+            {
+              "title": "Aave Tokenized Stocks Go Live on Base as AAVE Jumps 17%",
+              "url": "https://airdropalert.com/blogs/aave-tokenized-stocks-aave-jumps-17/"
+            }
+          ]
+        }
+      ],
+      "networks": [
+        {
+          "name": "pharos",
+          "url": "https://pharos.network",
+          "chain": "pharos",
+          "status": 0,
+          "active": false
+        },
+        {
+          "name": "somnia",
+          "url": "https://somnia.network",
+          "chain": "somnia",
+          "status": 200,
+          "active": true
+        },
+        {
+          "name": "linea",
+          "url": "https://linea.build",
+          "chain": "linea",
+          "status": 200,
+          "active": true
+        },
+        {
+          "name": "scroll",
+          "url": "https://scroll.io",
+          "chain": "scroll",
+          "status": 200,
+          "active": true
+        },
+        {
+          "name": "zksync",
+          "url": "https://zksync.io",
+          "chain": "zksync",
+          "status": 200,
+          "active": true
+        },
+        {
+          "name": "starknet",
+          "url": "https://starknet.io",
+          "chain": "starknet",
+          "status": 200,
+          "active": true
+        },
+        {
+          "name": "base",
+          "url": "https://base.org",
+          "chain": "base",
+          "status": 200,
+          "active": true
+        },
+        {
+          "name": "arbitrum",
+          "url": "https://arbitrum.io",
+          "chain": "arbitrum",
+          "status": 403,
+          "active": false
+        },
+        {
+          "name": "optimism",
+          "url": "https://optimism.io",
+          "chain": "optimism",
+          "status": 200,
+          "active": true
+        },
+        {
+          "name": "manta",
+          "url": "https://manta.network",
+          "chain": "manta",
+          "status": 200,
+          "active": true
+        },
+        {
+          "name": "blast",
+          "url": "https://blast.io",
+          "chain": "blast",
+          "status": 200,
+          "active": true
+        },
+        {
+          "name": "eigenlayer",
+          "url": "https://eigenlayer.xyz",
+          "chain": "ethereum",
+          "status": 200,
+          "active": true
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-30T16:42:59.391637",
+      "results": {
+        "airdrops_io": [
+          {
+            "title": "Best crypto airdrops to farm right now"
+          },
+          {
+            "title": "Crypto airdrops explained: types, qualifying and safety"
+          },
+          {
+            "title": "xStocks Points Farming: The Pendle YT Strategy"
+          },
+          {
+            "title": "Perp DEX Farming 2026: 4 Proven Strategies"
+          },
+          {
+            "title": "Ondo Points: what will one point be worth?"
+          },
+          {
+            "title": "The 15 biggest airdrops ever: HYPE eclipsed the next five combined"
+          },
+          {
+            "title": "Top 5 passive airdrop farms: deposit once and let it work"
+          },
+          {
+            "title": "Best crypto testnets to farm right now: 6 free airdrop plays"
+          },
+          {
+            "title": "Nado x xStocks: one deposit, two potential airdrops"
+          },
+          {
+            "title": "Crypto Casino Airdrops: Why Withdrawals Matter Before Farming Rewards"
+          }
+        ],
+        "airdropalert": [
+          {
+            "title": "PCE Inflation Sends Bitcoin Above $85K: My Trades and What Comes Next"
+          },
+          {
+            "title": "Shuffle Review 2026: The Crypto Casino With Its Own Token"
+          },
+          {
+            "title": "Hyperliquid Insider Trading Probe: Congress Wants Jeff Yan’s Records by October 13"
+          },
+          {
+            "title": "Best Perp DEXes in 2026: 7 Platforms That Actually Have Volume"
+          },
+          {
+            "title": "Aave Tokenized Stocks Go Live on Base as AAVE Jumps 17%"
+          },
+          {
+            "title": "Stuck Crypto Funds: $135M Sits Unclaimed in Bridges. Here’s How to Check Your Wallet"
+          },
+          {
+            "title": "Moonshot Review 2026: The Normie Door Into Meme Coins"
+          },
+          {
+            "title": "How to Buy Solana (SOL) for the First Time"
+          },
+          {
+            "title": "What Is the Next Pepe? Hunting the Meme Coin That Runs to Billions"
+          },
+          {
+            "title": "Ethena October 5 Unlock: 1.41B ENA, Binance Equity Perps, and the Last Airdrop"
+          }
+        ]
+      }
+    }
+  ],
+  "networks": [
+    {
+      "name": "pharos",
+      "url": "https://pharos.network",
+      "chain": "pharos"
+    },
+    {
+      "name": "somnia",
+      "url": "https://somnia.network",
+      "chain": "somnia"
+    },
+    {
+      "name": "linea",
+      "url": "https://linea.build",
+      "chain": "linea"
+    },
+    {
+      "name": "scroll",
+      "url": "https://scroll.io",
+      "chain": "scroll"
+    },
+    {
+      "name": "zksync",
+      "url": "https://zksync.io",
+      "chain": "zksync"
+    },
+    {
+      "name": "starknet",
+      "url": "https://starknet.io",
+      "chain": "starknet"
+    },
+    {
+      "name": "base",
+      "url": "https://base.org",
+      "chain": "base"
+    },
+    {
+      "name": "arbitrum",
+      "url": "https://arbitrum.io",
+      "chain": "arbitrum"
+    },
+    {
+      "name": "optimism",
+      "url": "https://optimism.io",
+      "chain": "optimism"
+    },
+    {
+      "name": "manta",
+      "url": "https://manta.network",
+      "chain": "manta"
+    },
+    {
+      "name": "blast",
+      "url": "https://blast.io",
+      "chain": "blast"
+    },
+    {
+      "name": "eigenlayer",
+      "url": "https://eigenlayer.xyz",
+      "chain": "ethereum"
+    }
+  ],
+  "found": []
+}
