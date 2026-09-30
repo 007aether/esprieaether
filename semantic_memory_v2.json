@@ -73,6 +73,94 @@
       "importance": 0.3,
       "created": "2026-09-29T23:31:25.838482",
       "accessed": 0
+    },
+    {
+      "id": "e61ab6e5d9ae",
+      "content": "دورة 2026-09-30T00:32:58.266991",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T00:32:58.267044",
+      "accessed": 0
+    },
+    {
+      "id": "2fabc3466326",
+      "content": "دورة 2026-09-30T00:32:58.273054",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T00:32:58.273124",
+      "accessed": 0
+    },
+    {
+      "id": "cc0c2ba56934",
+      "content": "دورة 2026-09-30T12:25:58.787479",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T12:25:58.787545",
+      "accessed": 0
+    },
+    {
+      "id": "1166d284824f",
+      "content": "دورة 2026-09-30T12:26:00.583952",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T12:26:00.584003",
+      "accessed": 0
+    },
+    {
+      "id": "353612cce8df",
+      "content": "دورة 2026-09-30T13:29:18.853087",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T13:29:18.853126",
+      "accessed": 0
+    },
+    {
+      "id": "ef6e2fdc8b68",
+      "content": "دورة 2026-09-30T13:29:19.426377",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T13:29:19.426438",
+      "accessed": 0
+    },
+    {
+      "id": "592cf74d8c6b",
+      "content": "دورة 2026-09-30T16:17:05.945886",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T16:17:05.945936",
+      "accessed": 0
+    },
+    {
+      "id": "60d990193017",
+      "content": "دورة 2026-09-30T16:17:06.010980",
+      "category": "conversation",
+      "tags": [
+        "auto"
+      ],
+      "importance": 0.3,
+      "created": "2026-09-30T16:17:06.011027",
+      "accessed": 0
     }
   ],
   "skills": []
