@@ -62,115 +62,52 @@ class JarvisBridge:
                 "content": (
                     "أنت JARVIS، المساعد الذكي لنظام EsprieAether. "
                     "تتحدث العربيةبطولة. أنت خبير في الأمن السيبراني، "
-                    "البلوكشين، والبرمجة.\n\n"
-                    "قواعد صارمة (i-have-adhd):\n"
-                    "1. ابدأ بالنتيجة أو الإجراء مباشرة — لا مقدمات.\n"
-                    "2. قدّم خطوات مرقّمة وقابلة لل IMPLEMENTATION.\n"
-                    "3. لا تكرر السؤال ولا تُعِد صياغته.\n"
-                    "4. لا تكتب ملخصاً في النهاية.\n"
-                    "5. إذا احتجت معلومات ناقصة، اسأل سؤالاً واحداً فقط.\n"
-                    "6. الردود لا ت超越 5 أسطر إلا إذا طُلب التفصيل.\n"
-                    "7. تجنّب العبارات مجانية مثل 'بكل سرور' أو 'سؤال rave'.\n"
-                    "8. استخدم التنسيق (نقاط، أرقام) بدلاً من الفقرات الطويلة."
+                    "الذكاء الاصطناعي، وتحليل البيانات. أجب بدقة واحترافية."
                 )
             })
-        if use_history:
+        
+        if use_history and self.history:
             messages.extend(self.history[-self.max_history:])
+        
         messages.append({"role": "user", "content": prompt})
-
+        
+        payload = {
+            "model": self.model,
+            "messages": messages,
+            "stream": False,
+            "options": {
+                "temperature": 0.7,
+                "top_p": 0.9,
+            }
+        }
+        
         try:
             r = requests.post(
                 f"{self.host}/api/chat",
-                json={
-                    "model": self.model,
-                    "messages": messages,
-                    "stream": False,
-                    "options": {"temperature": 0.5, "num_ctx": 2048},
-                },
-                timeout=180,
+                json=payload,
+                timeout=180
             )
             r.raise_for_status()
             data = r.json()
-            answer = data.get("message", {}).get("content", "").strip()
-
+            response_text = data.get("message", {}).get("content", "")
+            
             self.history.append({"role": "user", "content": prompt})
-            self.history.append({"role": "assistant", "content": answer})
+            self.history.append({"role": "assistant", "content": response_text})
+            
             if len(self.history) > self.max_history * 2:
-                self.history = self.history[-self.max_history:]
-
-            return answer
+                self.history = self.history[-self.max_history * 2:]
+            
+            return response_text.strip()
+            
         except requests.exceptions.Timeout:
-            return "⚠️ انتهت مهلة الاتصال بـ Ollama."
+            logger.error("Timeout after 180 seconds")
+            return "⚠️ انتهاك 时间 (180 ثانية). يرجى تقليل طول الاستفسار أو زيادة timeout."
         except requests.exceptions.ConnectionError:
-            return "⚠️ لا يمكن الاتصال بـ Ollama. تأكد من تشغيل الخدمة."
+            logger.error("Connection error")
+            return "⚠️ فشل الاتصال بـ Jarvis. تأكد من تشغيل Ollama."
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Request error: {e}")
+            return f"⚠️ خطأ في الطلب: {str(e)}"
         except Exception as e:
-            logger.error(f"خطأ في ask: {e}")
-            return f"⚠️ خطأ: {e}"
-
-    def ask_stream(self, prompt: str, system: Optional[str] = None) -> Generator[str, None, None]:
-        messages = []
-        if system:
-            messages.append({"role": "system", "content": system})
-        else:
-            messages.append({
-                "role": "system",
-                "content": "أنت JARVIS، مساعد EsprieAether الذكي. تجيب بالعربية بدقة وإيجاز."
-            })
-        messages.append({"role": "user", "content": prompt})
-
-        try:
-            with requests.post(
-                f"{self.host}/api/chat",
-                json={
-                    "model": self.model,
-                    "messages": messages,
-                    "stream": True,
-                    "options": {"temperature": 0.5, "num_ctx": 2048},
-                },
-                stream=True,
-                timeout=180,
-            ) as r:
-                r.raise_for_status()
-                for line in r.iter_lines():
-                    if line:
-                        try:
-                            chunk = json.loads(line.decode("utf-8"))
-                            token = chunk.get("message", {}).get("content", "")
-                            if token:
-                                yield token
-                            if chunk.get("done"):
-                                break
-                        except json.JSONDecodeError:
-                            continue
-        except Exception as e:
-            yield f"\n⚠️ خطأ في الاتصال: {e}"
-
-    def clear_history(self):
-        self.history = []
-
-    def get_history(self) -> list:
-        return self.history.copy()
-
-    def reload_config(self):
-        load_dotenv(Path(__file__).parent.parent / ".env", override=True)
-        self.host = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip("/")
-        self.model = os.getenv("OLLAMA_MODEL", "qwen2.5:3b")
-        return {"host": self.host, "model": self.model}
-
-
-if __name__ == "__main__":
-    print("⚡ EsprieAether - Jarvis Bridge Test")
-    print("═" * 50)
-    jarvis = JarvisBridge()
-    status = jarvis.ping()
-    print(f"\n▶ الحالة: {status}\n")
-
-    if status["status"] == "online" and status.get("model_ready"):
-        print("▶ سؤال اختباري: ما اسمك什么是 وظيفتك؟")
-        print("─" * 50)
-        answer = jarvis.ask("ما اسمك什么是 وظيفتك؟ أجب في سطرين.")
-        print(answer)
-        print("─" * 50)
-        print("\n✅ JARVIS يعمل بنجاح!")
-    else:
-        print("⚠️ Ollama غير جاهز أو النموذج غير محمل")
+            logger.error(f"Unexpected error: {e}")
+            return f"⚠️ خطأ غير متوقع: {str(e)}"
