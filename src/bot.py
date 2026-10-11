@@ -43,22 +43,28 @@ from vpn_agent import VPNAgent
 from airdrop_agent import AirdropAgent
 
 # ─── الإعدادات ───
-load_dotenv(BASE_DIR / ".env")
+# BOT_ENV: يسمح بتشغيل بوتات متعددة ف نفس الوقت (كل واحد env خاص)
+# مثال: BOT_ENV=.env.bot1 uv run python src/bot.py
+# override=True: .env.botX يفوق .env الأساسي (uv run كيقرا .env تلقائياً)
+BOT_ENV = os.getenv("BOT_ENV", ".env")
+load_dotenv(BASE_DIR / BOT_ENV, override=True)
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 CHAT_ID = int(os.getenv("TELEGRAM_CHAT_ID", "0"))
 AETHER_ID = os.getenv("AETHER_ID", "007aether")
+# اسم البوت ف الـ log (باش نفرّق بين البوتات)
+BOT_NAME = os.getenv("BOT_NAME", "aether")
 
-# ─── Logger ───
+# ─── Logger (log خاص بكل بوت) ───
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
     handlers=[
-        logging.FileHandler(BASE_DIR / "bot.log", encoding="utf-8"),
+        logging.FileHandler(BASE_DIR / f"bot_{BOT_NAME}.log", encoding="utf-8"),
         logging.StreamHandler(),
     ],
 )
-logger = logging.getLogger("aether-bot")
+logger = logging.getLogger(f"aether-bot-{BOT_NAME}")
 
 
 def md_escape(text: str) -> str:
@@ -1186,7 +1192,9 @@ def main():
     print("═" * 60)
     print("⚡ ESPRIEAETHER TELEGRAM BOT")
     print("═" * 60)
-    print(f"🤖 Bot: @ESPRIEXAETHER_bot")
+    bot_username = os.getenv("BOT_USERNAME", "ESPRIEXAETHER_bot")
+    print(f"🤖 Bot: @{bot_username}")
+    print(f"📋 Instance: {BOT_NAME} (env: {BOT_ENV})")
     print(f"👤 Authorized Chat ID: {CHAT_ID}")
     # المحرك النشط
     try:
