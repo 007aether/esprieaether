@@ -13,13 +13,12 @@ import os
 import json
 import logging
 import time
+import urllib.request
+import urllib.error
 from pathlib import Path
 from typing import Optional
 
-import requests
 from dotenv import load_dotenv
-
-load_dotenv(Path(__file__).parent.parent / ".env")
 
 logger = logging.getLogger("hermes_bridge")
 logging.basicConfig(
@@ -38,6 +37,10 @@ class HermesBridge:
     """
 
     def __init__(self):
+        # حمّل .env من جذر المشروع (حتى عند التشغيل من مسار مختلف)
+        # override=True: يتيح تغيير الإعدادات بلا إعادة تشغيل البروسيس
+        load_dotenv(Path(__file__).parent.parent / ".env", override=True)
+
         self.base_url = os.getenv("HERMES_BASE_URL", "").rstrip("/")
         self.api_key = os.getenv("HERMES_API_KEY", "unused")
         self.model = os.getenv("HERMES_MODEL", "gpt-oss:20b")
@@ -54,16 +57,25 @@ class HermesBridge:
 
     def ping(self) -> dict:
         """فحص الاتصال بالـ endpoint الخارجي"""
+        # أعد قراءة .env عند كل فحص (يتيح تغيير الإعداد بلا إعادة تشغيل)
+        load_dotenv(Path(__file__).parent.parent / ".env", override=True)
+        self.base_url = os.getenv("HERMES_BASE_URL", "").rstrip("/")
+        self.api_key = os.getenv("HERMES_API_KEY", "unused")
+        self.model = os.getenv("HERMES_MODEL", "gpt-oss:20b")
+
         if not self.base_url:
             return {"status": "not_configured", "base_url": None}
-        try:
-            r = requests.get(
-                f"{self.base_url}/models",
-                headers={"Authorization": f"Bearer {self.api_key}"},
-                timeout=10,
-            )
-            if r.status_code == 200:
-                models = [m.get("id") for m in r.json().get("data", [])]
+        # جرّب مرتين (الـ proxy المحلي قد يكون بطيئة في أول نداء)
+        last_err = None
+        for attempt in range(2):
+            try:
+                req = urllib.request.Request(
+                    f"{self.base_url}/models",
+                    headers={"Authorization": f"Bearer {self.api_key}"},
+                )
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    data = json.loads(resp.read())
+                models = [m.get("id") for m in data.get("data", [])]
                 return {
                     "status": "online",
                     "base_url": self.base_url,
@@ -71,14 +83,17 @@ class HermesBridge:
                     "model_ready": any(self.model in (m or "") for m in models),
                     "models_count": len(models),
                 }
-            return {"status": "error", "code": r.status_code}
-        except Exception as e:
-            return {"status": "offline", "error": str(e)}
+            except Exception as e:
+                last_err = e
+                if attempt == 0:
+                    time.sleep(2)
+        return {"status": "offline", "error": str(last_err)}
 
     def _ollama_available(self) -> bool:
         try:
-            r = requests.get(f"{self.ollama_host}/api/tags", timeout=3)
-            return r.status_code == 200
+            req = urllib.request.Request(f"{self.ollama_host}/api/tags")
+            with urllib.request.urlopen(req, timeout=3) as resp:
+                return resp.status == 200
         except Exception:
             return False
 
@@ -89,6 +104,12 @@ class HermesBridge:
         """
         اسأل Hermes. إذا فشل/غير مُعد، يرجع تلقائياً لـ Ollama المحلي.
         """
+        # أعد قراءة .env (config قد يتغير)
+        load_dotenv(Path(__file__).parent.parent / ".env", override=True)
+        self.base_url = os.getenv("HERMES_BASE_URL", "").rstrip("/")
+        self.api_key = os.getenv("HERMES_API_KEY", "unused")
+        self.model = os.getenv("HERMES_MODEL", "gpt-oss:20b")
+
         messages = [{
             "role": "system",
             "content": system or (
@@ -105,25 +126,29 @@ class HermesBridge:
         # ── المسار 1: endpoint خارجي (Hermes / gateway) ──
         if self.base_url:
             try:
-                r = requests.post(
+                payload = json.dumps({
+                    "model": self.model,
+                    "messages": messages,
+                    "stream": False,
+                }).encode("utf-8")
+                req = urllib.request.Request(
                     f"{self.base_url}/chat/completions",
+                    data=payload,
                     headers={
                         "Authorization": f"Bearer {self.api_key}",
                         "Content-Type": "application/json",
                     },
-                    json={
-                        "model": self.model,
-                        "messages": messages,
-                        "stream": False,
-                    },
-                    timeout=self.timeout,
+                    method="POST",
                 )
-                r.raise_for_status()
-                text = r.json()["choices"][0]["message"]["content"]
+                with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+                    data = json.loads(resp.read())
+                text = data["choices"][0]["message"].get("content") or ""
+                if not text:
+                    text = (data["choices"][0]["message"].get("reasoning") or "").strip()
                 self._remember(prompt, text)
                 return text.strip()
-            except requests.exceptions.Timeout:
-                logger.warning("Hermes timeout — falling back to Ollama")
+            except urllib.error.URLError as e:
+                logger.warning("Hermes failed (%s) — falling back to Ollama", e)
             except Exception as e:
                 logger.warning("Hermes failed (%s) — falling back to Ollama", e)
 
@@ -148,18 +173,21 @@ class HermesBridge:
         messages.append({"role": "user", "content": prompt})
 
         try:
-            r = requests.post(
+            payload = json.dumps({
+                "model": self.ollama_model,
+                "messages": messages,
+                "stream": False,
+                "options": {"temperature": 0.7},
+            }).encode("utf-8")
+            req = urllib.request.Request(
                 f"{self.ollama_host}/api/chat",
-                json={
-                    "model": self.ollama_model,
-                    "messages": messages,
-                    "stream": False,
-                    "options": {"temperature": 0.7},
-                },
-                timeout=180,
+                data=payload,
+                headers={"Content-Type": "application/json"},
+                method="POST",
             )
-            r.raise_for_status()
-            text = r.json().get("message", {}).get("content", "")
+            with urllib.request.urlopen(req, timeout=180) as resp:
+                data = json.loads(resp.read())
+            text = data.get("message", {}).get("content", "")
             self._remember(prompt, text)
             return text.strip()
         except Exception as e:
