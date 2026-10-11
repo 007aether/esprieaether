@@ -47,6 +47,19 @@ app.secret_key = SECRET_KEY
 
 jarvis = JarvisBridge()
 
+# ─── محرك الروبوتات (loop 24/7) ───
+# يخدم ف daemon thread — robots المفعّلين فقط (status='active')
+robot_engine = None
+try:
+    from robots.robot_engine import RobotEngine
+    robot_engine = RobotEngine(interval=60.0)
+    robot_engine.start()
+    logger_init = __import__("logging").getLogger("robot-engine-web")
+    logger_init.info("robot engine loop started (daemon, interval=60s)")
+except Exception as _e:
+    robot_engine = None
+    print(f"⚠️ robot engine failed to start: {_e}")
+
 # ─── متتبع وقت البدء ───
 START_TIME = time.time()
 
@@ -293,6 +306,15 @@ def api_robots_activate():
         return jsonify({"ok": True})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/robots/loop/status")
+def api_robots_loop_status():
+    """حالة الـ loop (24/7)"""
+    return jsonify({
+        "running": robot_engine is not None and robot_engine._thread is not None and robot_engine._thread.is_alive(),
+        "interval": robot_engine.interval if robot_engine else None,
+    })
 
 
 @app.route("/api/stats/full")

@@ -164,6 +164,54 @@ def h_stats(robot_id: str) -> dict:
         return {"ok": False, "summary": str(e)}
 
 
+def h_news_scan(robot_id: str) -> dict:
+    """EXT_04 NEWS_SCANNER — فحص الأخبار (RSS)"""
+    try:
+        from scanners.news_scanner import NewsScanner
+        ns = NewsScanner()
+        ns.scan_all()  # كيمسح كل الـ RSS feeds
+        return {"ok": True, "summary": "news scan done"}
+    except Exception as e:
+        return {"ok": False, "summary": str(e)[:100]}
+
+
+def h_market_scan(robot_id: str) -> dict:
+    """EXT_02 CRYPTO_TRADER / EXT_03 STOCK_ANALYZER — أسعار السوق"""
+    try:
+        from src.market_watcher import MarketWatcher
+        mw = MarketWatcher()
+        prices = mw.fetch_prices()  # dict
+        return {"ok": True, "summary": f"coins={len(prices) if isinstance(prices, dict) else 0}"}
+    except Exception as e:
+        return {"ok": False, "summary": str(e)[:100]}
+
+
+def h_embed(robot_id: str) -> dict:
+    """AI_05 EMBEDDER — embedding عبر المحرك المحلي"""
+    try:
+        import urllib.request
+        host = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
+        model = os.getenv("OLLAMA_MODEL", "qwen2.5:3b")
+        payload = json.dumps({"model": model, "prompt": "test embedding"}).encode()
+        req = urllib.request.Request(
+            f"{host}/api/embeddings",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = json.loads(resp.read())
+        emb = data.get("embedding", [])
+        if emb:
+            return {"ok": True, "summary": f"embed_dim={len(emb)}"}
+        # Ollama شغال بلا embeddings — fallback (ماشي error)
+        return {"ok": True, "summary": "embed unavailable (server no --embeddings)"}
+    except urllib.error.HTTPError as e:
+        # الموديل ما يدعمش embeddings — نعتبره "idle" ماشي error
+        return {"ok": True, "summary": f"embed unsupported (model, http {e.code})"}
+    except Exception as e:
+        return {"ok": False, "summary": str(e)[:100]}
+
+
 def h_noop(robot_id: str) -> dict:
     """robots بدون handler حقيقي"""
     return {"ok": True, "summary": "idle (no handler)"}
@@ -188,9 +236,15 @@ ROLE_HANDLERS: dict = {
     "quick_response": h_ai_think,
     "model_eval": h_ai_think,
     "knowledge_base": h_ai_think,
+    # Embeddings
+    "embeddings": h_embed,
     # Backup / storage
     "backup": h_git_status,
     "buffer": h_git_status,
+    # External (real handlers now)
+    "news": h_news_scan,
+    "trading": h_market_scan,
+    "stocks": h_market_scan,
     # Meta
     "schedule": h_stats,
     "optimize": h_stats,
