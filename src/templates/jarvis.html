@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}JARVIS{% endblock %}
+{% block page_title %}💬 JARVIS — مساعد EsprieAether{% endblock %}
+
+{% block content %}
+<div class="chat-wrap">
+  <div class="chat-box" id="chat-box">
+    <div class="msg bot">مرحباً! أنا JARVIS. اسألني أي شيء.</div>
+  </div>
+  <form class="chat-form" id="chat-form">
+    <input type="text" id="chat-input" placeholder="اكتب رسالتك…" autocomplete="off" />
+    <button type="submit">إرسال</button>
+  </form>
+</div>
+
+<script>
+document.getElementById("chat-form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const input = document.getElementById("chat-input");
+  const box = document.getElementById("chat-box");
+  const text = input.value.trim();
+  if (!text) return;
+  box.insertAdjacentHTML("beforeend", `<div class="msg user">${text}</div>`);
+  input.value = "";
+  box.scrollTop = box.scrollHeight;
+  try {
+    const r = await fetch("/api/jarvis", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: text }),
+    });
+    const d = await r.json();
+    box.insertAdjacentHTML("beforeend", `<div class="msg bot">${d.response || d.error || "…"}</div>`);
+  } catch (err) {
+    box.insertAdjacentHTML("beforeend", `<div class="msg bot">⚠️ ${err}</div>`);
+  }
+  box.scrollTop = box.scrollHeight;
+});
+</script>
+{% endblock %}

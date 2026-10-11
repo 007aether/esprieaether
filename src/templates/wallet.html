@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}المحفظة{% endblock %}
+{% block page_title %}👛 المحفظة{% endblock %}
+{% block content %}
+<div class="card"><h2>معلومات المحفظة</h2>
+<div class="kv"><span>Status</span><b>{{ wallet.get('status', 'found') }}</b></div>
+<div class="kv"><span>Message</span><b>{{ wallet.get('message', '') }}</b></div>
+{% if wallet.get('address') %}
+<div class="kv"><span>Address</span><b>{{ wallet.address }}</b></div>
+{% endif %}
+</div>
+{% endblock %}

@@ -293,6 +293,22 @@ def api_ollama():
     return jsonify(get_ollama_status())
 
 
+@app.route("/api/jarvis", methods=["POST"])
+def api_jarvis():
+    """API محادثة JARVIS"""
+    try:
+        data = request.get_json(silent=True) or {}
+        prompt = (data.get("prompt") or "").strip()
+        if not prompt:
+            return jsonify({"error": "empty prompt"}), 400
+        from jarvis_bridge import JarvisBridge
+        bridge = JarvisBridge()
+        response = bridge.ask(prompt)
+        return jsonify({"response": response})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 # ═══════════════════════════════════════════════════════════════
 #  🚀 Main Entry Point — يجب أن يكون في نهاية الملف
 # ═══════════════════════════════════════════════════════════════
@@ -372,9 +388,9 @@ def jarvis_page():
     try:
         # جرّب تحميل JarvisBridge إذا كان موجودًا
         try:
-            from jarvis_bridge import JarvisBridge
+            from src.jarvis_bridge import JarvisBridge
             bridge = JarvisBridge()
-            jarvis_status = bridge.status() if hasattr(bridge, "status") else {}
+            jarvis_status = bridge.ping()
         except Exception:
             jarvis_status = {}
         

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}لوحة القيادة{% endblock %}
+{% block page_title %}لوحة القيادة — {{ aether_id }}{% endblock %}
+
+{% block content %}
+<div class="grid">
+
+  <!-- System metrics -->
+  <section class="card">
+    <h2>🖥️ حالة النظام</h2>
+    <div class="kv"><span>CPU</span><b>{{ metrics.cpu.percent }}% ({{ metrics.cpu.cores }} cores)</b></div>
+    <div class="kv"><span>RAM</span><b>{{ metrics.memory.used_gb }} / {{ metrics.memory.total_gb }} GB ({{ metrics.memory.percent }}%)</b></div>
+    <div class="kv"><span>Disk</span><b>{{ metrics.disk.used_gb }} / {{ metrics.disk.total_gb }} GB ({{ metrics.disk.percent }}%)</b></div>
+    <div class="kv"><span>Net ↑↓</span><b>{{ metrics.network.bytes_sent_mb }} / {{ metrics.network.bytes_recv_mb }} MB</b></div>
+    <div class="kv"><span>Host</span><b>{{ metrics.system.hostname }} — {{ metrics.system.os }}</b></div>
+    <div class="kv"><span>Uptime</span><b>{{ metrics.system.uptime_seconds }}s</b></div>
+  </section>
+
+  <!-- JARVIS / Ollama -->
+  <section class="card">
+    <h2>🧠 JARVIS</h2>
+    <div class="kv"><span>Status</span><b>{{ ollama.status }}</b></div>
+    <div class="kv"><span>Host</span><b>{{ ollama.host }}</b></div>
+    <div class="kv"><span>Model</span><b>{{ ollama.current_model }}</b></div>
+    <div class="kv"><span>Ready</span><b>{{ '✅' if ollama.model_ready else '❌' }}</b></div>
+    {% if ollama.models %}
+    <div class="kv"><span>Models</span><b>{{ ollama.models | join(', ') }}</b></div>
+    {% endif %}
+  </section>
+
+  <!-- Wallet -->
+  <section class="card">
+    <h2>👛 المحفظة</h2>
+    <div class="kv"><span>Status</span><b>{{ wallet.get('status', 'found') }}</b></div>
+    <div class="kv"><span>Message</span><b>{{ wallet.get('message', '') }}</b></div>
+    {% if wallet.get('address') %}
+    <div class="kv"><span>Address</span><b>{{ wallet.address[:16] }}…</b></div>
+    {% endif %}
+  </section>
+
+  <!-- Quick links -->
+  <section class="card">
+    <h2>🔗 روابط سريعة</h2>
+    <div class="links">
+      <a href="/jarvis">💬 JARVIS Chat</a>
+      <a href="/airdrops">📡 Airdrops</a>
+      <a href="/earnings">💰 Earnings</a>
+      <a href="/stats">📊 Stats</a>
+      <a href="/health">🩺 Health</a>
+      <a href="/security">🔐 Security</a>
+      <a href="/settings">⚙️ Settings</a>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

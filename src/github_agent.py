@@ -14,11 +14,11 @@ from datetime import datetime
 from pathlib import Path
 
 from github import Github, GithubException, InputGitTreeElement, Auth
-from dotenv import load_dot_env
+from dotenv import load_dotenv
 
 # ─── الإعدادات ───
 BASE_DIR = Path(__file__).parent.parent
-load_dot_env(BASE_DIR / ".env")
+load_dotenv(BASE_DIR / ".env")
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 GITHUB_REPO = os.getenv("GITHUB_REPO", "ather007/esprieaether")

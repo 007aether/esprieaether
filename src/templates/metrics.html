@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}المقاييس{% endblock %}
+{% block page_title %}📊 مقاييس النظام{% endblock %}
+{% block content %}
+<div class="card"><h2>مقاييس حية</h2>
+<div class="kv"><span>CPU</span><b>{{ metrics.cpu.percent }}%</b></div>
+<div class="kv"><span>RAM</span><b>{{ metrics.memory.used_gb }} / {{ metrics.memory.total_gb }} GB</b></div>
+<div class="kv"><span>Disk</span><b>{{ metrics.disk.used_gb }} / {{ metrics.disk.total_gb }} GB</b></div>
+<div class="kv"><span>Uptime</span><b>{{ metrics.system.uptime_seconds }}s</b></div>
+</div>
+{% endblock %}

@@ -22,7 +22,10 @@ TOOLS_SCHEMA = "الأدوات: get_airdrops, get_vpn_status, get_stats, get_ser
 
 
 import asyncio
-from mcp_client import MCPClient
+try:
+    from mcp_client import MCPClient
+except ImportError:
+    from src.mcp_client import MCPClient
 
 
 class AskAgent:
