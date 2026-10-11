@@ -60,6 +60,24 @@ logging.basicConfig(
 )
 logger = logging.getLogger("aether-bot")
 
+
+def md_escape(text: str) -> str:
+    """يهرّب رموز Markdown ف المحتوى الديناميكي (ردود AI، أسعار...)
+    باش Telegram ما يرفضش الرسالة بـ 'Can't parse entities'."""
+    if not text:
+        return ""
+    # رموز Markdown classic: _ * ` [
+    for ch in ("_", "*", "`", "["):
+        text = text.replace(ch, "\\" + ch)
+    return text
+
+
+def md_safe(text: str, parse_mode: str = "Markdown") -> tuple:
+    """يرجع (text, parse_mode) — إذا فشل الـ escape، يرجع بلا parse_mode
+    حتى ما يطيحش الـ handler الكل."""
+    return md_escape(text), parse_mode
+
+
 # ─── JARVIS ───
 jarvis = JarvisBridge()
 cloud = CloudFallback()
@@ -169,6 +187,8 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/hermes — محرك Hermes (محلي/سحابي)" + chr(10) +
         "/help — مساعدة"
     )
+    # اهرّب _ حتى ما يرفضش Telegram (مثل "الإيردروبات" فيها _)
+    text = text.replace("_", "\\_")
     await update.message.reply_text(text, parse_mode="Markdown")
 
 @authorized_only
@@ -198,7 +218,7 @@ async def cmd_jarvis(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         answer = jarvis.ask(prompt)
         # تنسيق الرد
-        response = f"🤖 *JARVIS:*\n\n{answer}"
+        response = f"🤖 *JARVIS:*\n\n{md_escape(answer)}"
         # إذا كان الرد طويلاً، قسّمه
         if len(response) > 4000:
             parts = [response[i:i+4000] for i in range(0, len(response), 4000)]
@@ -231,7 +251,7 @@ async def cmd_hermes(update: Update, context: ContextTypes.DEFAULT_TYPE):
         answer = bridge.ask(prompt)
         engine = bridge.status().get("active_engine", "?")
         engine_label = {"ollama": "🖥️ محلي", "hermes": "☁️ Hermes"}.get(engine, engine)
-        response = f"⚡ *HERMES* ({engine_label}):\n\n{answer}"
+        response = f"⚡ *HERMES* ({engine_label}):\n\n{md_escape(answer)}"
         if len(response) > 4000:
             parts = [response[i:i+4000] for i in range(0, len(response), 4000)]
             await msg.edit_text(parts[0])
@@ -851,7 +871,7 @@ async def cmd_ask(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     try:
         result = ask_agent.ask(question)
-        await msg.edit_text(result["answer"], parse_mode="Markdown", disable_web_page_preview=True)
+        await msg.edit_text(md_escape(result["answer"]), parse_mode="Markdown", disable_web_page_preview=True)
     except Exception as e:
         await msg.edit_text("❌ خطأ: " + str(e))
 
@@ -957,6 +977,13 @@ async def cmd_report(update: Update, context: ContextTypes.DEFAULT_TYPE):
 @authorized_only
 async def cmd_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """تنفيذ أمر shell — بحذر"""
+    # حماية: بلا CHAT_ID مضبوط، ما نسمحوش بـ /cmd (أي واحد يقدر يتحكم)
+    if not CHAT_ID:
+        await update.message.reply_text(
+            "⛔ /cmd معطّل: ضيّق TELEGRAM_CHAT_ID ف .env أولاً (أمان)."
+        )
+        logger.warning("cmd blocked: CHAT_ID not set")
+        return
     if not context.args:
         await update.message.reply_text("⚠️ اكتب الأمر:\n`/cmd ls -la`", parse_mode="Markdown")
         return
@@ -1000,7 +1027,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = await update.message.reply_text("🤖 JARVIS يفكر...")
     try:
         answer = jarvis.ask(text)
-        response = f"🤖 *JARVIS:*\n\n{answer}"
+        response = f"🤖 *JARVIS:*\n\n{md_escape(answer)}"
         if len(response) > 4000:
             response = response[:4000] + "\n\n... (تم قص الباقي)"
         await msg.edit_text(response, parse_mode="Markdown")
