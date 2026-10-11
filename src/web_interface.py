@@ -245,6 +245,56 @@ def api_robots():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/api/robots/engine/stats")
+def api_robots_engine_stats():
+    """API إحصائيات محرك الروبوتات (تنفيذ حقيقي)"""
+    try:
+        from robots.robot_engine import RobotEngine
+        eng = RobotEngine()
+        return jsonify(eng.get_stats())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/robots/run", methods=["POST"])
+def api_robots_run():
+    """API تشغيل دورة روبوتات"""
+    try:
+        from robots.robot_engine import RobotEngine
+        eng = RobotEngine()
+        system = (request.get_json(silent=True) or {}).get("system")
+        result = eng.run_once(system=system)
+        # نرجع ملخّص فقط (results كبيرة)
+        return jsonify({
+            "cycle": result["cycle"],
+            "total": result["total"],
+            "ok": result["ok"],
+            "error": result["error"],
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/robots/activate", methods=["POST"])
+def api_robots_activate():
+    """API تفعيل نظام روبوتات"""
+    try:
+        from robots.robot_engine import RobotEngine
+        eng = RobotEngine()
+        data = request.get_json(silent=True) or {}
+        system = data.get("system")
+        robot_id = data.get("robot_id")
+        if robot_id:
+            eng.activate(robot_id=robot_id)
+        elif system:
+            eng.activate(system=system)
+        else:
+            return jsonify({"error": "system or robot_id required"}), 400
+        return jsonify({"ok": True})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route("/api/stats/full")
 def api_stats_full():
     """API إحصائيات شاملة (يستهلكها /stats)"""

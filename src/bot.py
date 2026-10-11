@@ -372,6 +372,16 @@ async def cmd_wallet(update: Update, context: ContextTypes.DEFAULT_TYPE):
 @authorized_only
 async def cmd_vpn(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """التحكم بـ VPN"""
+    # Windows: wireguard/sudo ماشي متوفر — رسالة واضحة
+    if os.name == "nt":
+        await update.message.reply_text(
+            "⚠️ *VPN غير مدعوم على Windows*\n\n"
+            "التحكم بـ VPN (wireguard + sudo) متوفر على Linux فقط.\n"
+            "على Windows، استخدم تطبيق WireGuard مباشرة.",
+            parse_mode="Markdown"
+        )
+        return
+
     args = context.args or []
     action = args[0].lower() if args else "status"
 
@@ -456,6 +466,49 @@ async def cmd_airdrop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         await update.message.reply_text(f"❌ خطأ: {e}")
 
+
+
+@authorized_only
+async def cmd_robots(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """إحصائيات الروبوتات (محرك حقيقي)"""
+    msg = await update.message.reply_text("🤖 جارٍ الفحص...")
+    try:
+        from robots.robot_engine import RobotEngine
+        eng = RobotEngine()
+        st = eng.get_stats()
+        by_status = st.get("robots_by_status", {})
+        results = st.get("results_by_status", {})
+        text = (
+            "🤖 *محرك الروبوتات*\n\n"
+            f"• الدورات: `{st.get('cycles', 0)}`\n"
+            f"• Robots نشطة: `{by_status.get('active', 0)}`\n"
+            f"• Robots idle: `{by_status.get('idle', 0)}`\n\n"
+            f"✅ نتائج ناجحة: `{results.get('ok', 0)}`\n"
+            f"❌ أخطاء: `{results.get('error', 0)}`\n"
+        )
+        await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_robots_run(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تشغيل دورة روبوتات فوراً"""
+    msg = await update.message.reply_text("⚙️ جارٍ تشغيل الروبوتات...")
+    try:
+        from robots.robot_engine import RobotEngine
+        eng = RobotEngine()
+        system = context.args[0] if context.args else None
+        r = eng.run_once(system=system)
+        text = (
+            f"✅ *دورة #{r['cycle']}* تمّت\n\n"
+            f"• المجموع: `{r['total']}`\n"
+            f"• ناجح: `{r['ok']}`\n"
+            f"• خطأ: `{r['error']}`"
+        )
+        await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
 
 
 @authorized_only
@@ -926,20 +979,52 @@ async def cmd_cloud(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @authorized_only
 async def cmd_services(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """حالة الخدمات"""
-    import subprocess
+    """حالة الخدمات (Windows + Linux)"""
     text = "⚙️ *حالة الخدمات*\n\n"
-    for svc in ["aether-web", "aether-bot", "aether-core", "ollama"]:
+    # Windows: services via tasklist / sc query
+    # Linux: systemctl is-active
+    is_windows = os.name == "nt"
+
+    services = ["aether-web", "aether-bot", "aether-core", "ollama"]
+    for svc in services:
         try:
-            r = subprocess.run(
-                ["systemctl", "is-active", svc],
-                capture_output=True, text=True, timeout=5
-            )
-            status = r.stdout.strip()
+            if is_windows:
+                # Windows: sc query
+                r = subprocess.run(
+                    ["sc", "query", svc],
+                    capture_output=True, text=True, timeout=5
+                )
+                out = (r.stdout or "").lower()
+                if "running" in out:
+                    status = "active"
+                elif "failed" in out or "does not exist" in out:
+                    status = "not found"
+                else:
+                    status = "stopped"
+            else:
+                r = subprocess.run(
+                    ["systemctl", "is-active", svc],
+                    capture_output=True, text=True, timeout=5
+                )
+                status = r.stdout.strip() or "unknown"
+
             emoji = "🟢" if status == "active" else "🔴"
             text += f"{emoji} `{svc}`: {status}\n"
         except Exception:
             text += f"⚠️ `{svc}`: unknown\n"
+
+    # Ollama دايماً: ping مباشر (كيدوز على systemctl)
+    try:
+        import requests
+        r = requests.get("http://127.0.0.1:11434/api/tags", timeout=3)
+        if r.status_code == 200:
+            models = r.json().get("models", [])
+            text += f"🟢 `ollama` (ping): {len(models)} models\n"
+        else:
+            text += "🔴 `ollama` (ping): error\n"
+    except Exception:
+        text += "🔴 `ollama` (ping): offline\n"
+
     await update.message.reply_text(text, parse_mode="Markdown")
 
 
@@ -1057,6 +1142,8 @@ async def set_commands(app: Application):
         BotCommand("airdrops", "أحدث الإيردروبات"),
         BotCommand("airdrop_sync", "جلب الإيردروبات فوراً"),
         BotCommand("pharos", "حالة Pharos"),
+        BotCommand("robots", "محرك الروبوتات"),
+        BotCommand("robots_run", "تشغيل دورة روبوتات"),
         BotCommand("cmd", "تنفيذ أمر shell"),
         BotCommand("run", "تنفيذ أمر ذكي"),
         BotCommand("evolve", "اقتراحات التطوير"),
@@ -1129,6 +1216,8 @@ def main():
     app.add_handler(CommandHandler("airdrops", cmd_airdrops))
     app.add_handler(CommandHandler("airdrop_sync", cmd_airdrop_sync))
     app.add_handler(CommandHandler("pharos", cmd_pharos))
+    app.add_handler(CommandHandler("robots", cmd_robots))
+    app.add_handler(CommandHandler("robots_run", cmd_robots_run))
     # أي رسالة عادية → JARVIS
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
