@@ -124,18 +124,39 @@ def h_log_scan(robot_id: str) -> dict:
 
 
 def h_ai_think(robot_id: str) -> dict:
-    """فكر عبر المحرك المحلي (Ollama)"""
+    """فكر عبر المحرك المحلي (Ollama) — بلا limit (LLM7 429)"""
     try:
-        from src.hermes_bridge import HermesBridge
-        hb = HermesBridge()
-        st = hb.status()
-        engine = st.get("active_engine", "none")
-        if engine == "none":
-            return {"ok": False, "summary": "no engine available"}
-        r = hb.ask("قل OK فقط")
-        return {"ok": True, "summary": f"engine={engine} reply={r[:50]}"}
+        import urllib.request
+        host = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
+        model = os.getenv("OLLAMA_MODEL", "qwen2.5:3b")
+        # Ollama مباشرة — بلا LLM7 (free tier محدود 10 req/min)
+        payload = json.dumps({
+            "model": model,
+            "messages": [
+                {"role": "system", "content": "أنت JARVIS، مساعد EsprieAether. أجب باختصار."},
+                {"role": "user", "content": "قل OK فقط"},
+            ],
+            "stream": False,
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"{host}/api/chat",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = json.loads(resp.read())
+        text = data.get("message", {}).get("content", "").strip()
+        return {"ok": True, "summary": f"engine=ollama reply={text[:40]}"}
     except Exception as e:
-        return {"ok": False, "summary": str(e)[:100]}
+        # Ollama offline — fallback LLM7 (بما أن الباقي services كتحتاجو)
+        try:
+            from src.hermes_bridge import HermesBridge
+            hb = HermesBridge()
+            r = hb.ask("قل OK فقط")
+            return {"ok": True, "summary": f"engine=llm7 reply={r[:40]}"}
+        except Exception:
+            return {"ok": False, "summary": f"no engine: {str(e)[:60]}"}
 
 
 def h_git_status(robot_id: str) -> dict:
