@@ -78,8 +78,15 @@ def md_safe(text: str, parse_mode: str = "Markdown") -> tuple:
     return md_escape(text), parse_mode
 
 
-# ─── JARVIS ───
-jarvis = JarvisBridge()
+# ─── JARVIS (المحرك الموحّد: LLM7 مجاني → Ollama محلي) ───
+# HermesBridge = fallback chain (LLM7 free cloud → Ollama local)
+# JarvisBridge = Ollama فقط (fallback)
+try:
+    from src.hermes_bridge import HermesBridge
+    jarvis = HermesBridge()
+except Exception:
+    from jarvis_bridge import JarvisBridge
+    jarvis = JarvisBridge()
 cloud = CloudFallback()
 ask_agent = AskAgent()
 alerts = SmartAlerts()
@@ -250,7 +257,7 @@ async def cmd_hermes(update: Update, context: ContextTypes.DEFAULT_TYPE):
         bridge = HermesBridge()
         answer = bridge.ask(prompt)
         engine = bridge.status().get("active_engine", "?")
-        engine_label = {"ollama": "🖥️ محلي", "hermes": "☁️ Hermes"}.get(engine, engine)
+        engine_label = {"llm7": "☁️ LLM7 (مجاني)", "ollama": "🖥️ محلي", "hermes": "☁️ Hermes"}.get(engine, engine)
         response = f"⚡ *HERMES* ({engine_label}):\n\n{md_escape(answer)}"
         if len(response) > 4000:
             parts = [response[i:i+4000] for i in range(0, len(response), 4000)]
@@ -279,8 +286,15 @@ async def cmd_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
         mem = psutil.virtual_memory()
         disk = psutil.disk_usage("/")
 
-        ollama_status = jarvis.ping()
-        ollama_text = "🟢 متصل" if ollama_status["status"] == "online" else "🔴 غير متصل"
+        # حالة المحرك (universal: HermesBridge أو JarvisBridge)
+        try:
+            st = jarvis.status()
+            engine = st.get("active_engine", "?")
+            engine_label = {"llm7": "☁️ LLM7 (مجاني)", "ollama": "🖥️ محلي", "hermes": "☁️ Hermes"}.get(engine, engine)
+            model = st.get("model", "—")
+        except Exception:
+            engine_label = "🖥️ Ollama"
+            model = os.getenv("OLLAMA_MODEL", "qwen2.5:3b")
 
         text = f"""
 📊 *حالة ESPRIEAETHER*
@@ -297,9 +311,9 @@ async def cmd_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
 • الاستخدام: `{disk.percent}%`
 • متاح: `{round(disk.free/(1024**3), 2)} GB`
 
-*JARVIS*
-• Ollama: {ollama_text}
-• النموذج: `{ollama_status.get('current_model', '—')}`
+*المحرك*
+• النشط: {engine_label}
+• الموديل: `{model}`
 
 *الهوية*: `{AETHER_ID}`
 *الوقت*: `{datetime.now().strftime('%H:%M:%S')}`
@@ -332,19 +346,17 @@ _افتح الرابط في متصفح الحاسوب_
 
 @authorized_only
 async def cmd_ollama(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """حالة Ollama"""
-    status = jarvis.ping()
-    if status["status"] == "online":
-        text = f"""
-🤖 *Ollama*
-
-• الحالة: 🟢 متصل
-• المضيف: `{status['host']}`
-• النموذج الحالي: `{status['current_model']}`
-• النماذج المتاحة: `{', '.join(status['models'])}`
-"""
-    else:
-        text = f"🔴 *Ollama غير متصل*\n\n`{status.get('error', 'خطأ غير معروف')}`"
+    """حالة المحرك (LLM7 / Ollama)"""
+    st = jarvis.status()
+    engine = st.get("active_engine", "?")
+    engine_label = {"llm7": "☁️ LLM7 (مجاني)", "ollama": "🖥️ محلي", "hermes": "☁️ Hermes"}.get(engine, engine)
+    text = (
+        f"🤖 *حالة المحرك*\n\n"
+        f"• المحرك النشط: {engine_label}\n"
+        f"• الموديل: `{st.get('model', '—')}`\n"
+        f"• Ollama محلي: {'🟢' if st.get('ollama_available') else '🔴'}\n"
+        f"• LLM7 سحابي: {'🟢' if st.get('remote', {}).get('status') == 'online' else '🔴'}"
+    )
     await update.message.reply_text(text, parse_mode="Markdown")
 
 
@@ -1174,9 +1186,17 @@ def main():
     print("═" * 60)
     print("⚡ ESPRIEAETHER TELEGRAM BOT")
     print("═" * 60)
-    print(f"🤖 Bot: @Esprieaether_bot")
+    print(f"🤖 Bot: @ESPRIEXAETHER_bot")
     print(f"👤 Authorized Chat ID: {CHAT_ID}")
-    print(f"🧠 JARVIS: {os.getenv('OLLAMA_MODEL')}")
+    # المحرك النشط
+    try:
+        st = jarvis.status()
+        engine_label = {"llm7": "☁️ LLM7 (مجاني)", "ollama": "🖥️ Ollama محلي", "hermes": "☁️ Hermes"}.get(
+            st.get("active_engine"), st.get("active_engine", "?")
+        )
+        print(f"🧠 Engine: {engine_label} ({st.get('model')})")
+    except Exception:
+        print(f"🧠 Engine: 🖥️ Ollama ({os.getenv('OLLAMA_MODEL')})")
     print("═" * 60)
 
     app = Application.builder().token(TOKEN).build()

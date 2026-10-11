@@ -102,7 +102,9 @@ class HermesBridge:
     def ask(self, prompt: str, system: Optional[str] = None,
             use_history: bool = True) -> str:
         """
-        اسأل Hermes. إذا فشل/غير مُعد، يرجع تلقائياً لـ Ollama المحلي.
+        اسأل Hermes. الترتيب:
+          1. HERMES_BASE_URL (LLM7 مجاني، أو أي endpoint)
+          2. Ollama المحلي (JARVIS) كـ fallback
         """
         # أعد قراءة .env (config قد يتغير)
         load_dotenv(Path(__file__).parent.parent / ".env", override=True)
@@ -113,7 +115,7 @@ class HermesBridge:
         messages = [{
             "role": "system",
             "content": system or (
-                "أنت HERMES، المحرك السحابي لنظام EsprieAether. "
+                "أنت HERMES، المساعد الذكي لنظام EsprieAether. "
                 "تتحدث العربية بطلاقة. أنت خبير في الأمن السيبراني، "
                 "البرمجة، وتحليل البيانات. أجب بدقة واحترافية."
             ),
@@ -123,37 +125,39 @@ class HermesBridge:
             messages.extend(self.history[-self.max_history:])
         messages.append({"role": "user", "content": prompt})
 
-        # ── المسار 1: endpoint خارجي (Hermes / gateway) ──
+        # ── المسار 1: endpoint خارجي (LLM7 مجاني / gateway) ──
         if self.base_url:
             try:
-                payload = json.dumps({
-                    "model": self.model,
-                    "messages": messages,
-                    "stream": False,
-                }).encode("utf-8")
-                req = urllib.request.Request(
-                    f"{self.base_url}/chat/completions",
-                    data=payload,
-                    headers={
-                        "Authorization": f"Bearer {self.api_key}",
-                        "Content-Type": "application/json",
-                    },
-                    method="POST",
-                )
-                with urllib.request.urlopen(req, timeout=self.timeout) as resp:
-                    data = json.loads(resp.read())
-                text = data["choices"][0]["message"].get("content") or ""
-                if not text:
-                    text = (data["choices"][0]["message"].get("reasoning") or "").strip()
-                self._remember(prompt, text)
-                return text.strip()
-            except urllib.error.URLError as e:
-                logger.warning("Hermes failed (%s) — falling back to Ollama", e)
+                text = self._ask_openai_compatible(messages)
+                if text:
+                    self._remember(prompt, text)
+                    return text.strip()
             except Exception as e:
-                logger.warning("Hermes failed (%s) — falling back to Ollama", e)
+                logger.warning("Hermes endpoint failed (%s) — falling back to Ollama", e)
 
         # ── المسار 2: Ollama المحلي ──
         return self._ask_ollama(prompt, system, use_history)
+
+    def _ask_openai_compatible(self, messages: list) -> str:
+        """ينادي endpoint OpenAI-compatible (LLM7 أو غيره)"""
+        payload = json.dumps({
+            "model": self.model,
+            "messages": messages,
+            "stream": False,
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"{self.base_url}/chat/completions",
+            data=payload,
+            headers={
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+            data = json.loads(resp.read())
+        choice = data["choices"][0]["message"]
+        return choice.get("content") or (choice.get("reasoning") or "").strip()
 
     def _ask_ollama(self, prompt: str, system: Optional[str],
                     use_history: bool) -> str:
@@ -207,13 +211,26 @@ class HermesBridge:
 
     def status(self) -> dict:
         """تقرير حالة كامل"""
-        remote = self.ping()
+        # LLM7 / OpenAI-compatible: ping مباشر
+        remote_status = "offline"
+        if self.base_url:
+            try:
+                req = urllib.request.Request(f"{self.base_url}/models")
+                with urllib.request.urlopen(req, timeout=15) as resp:
+                    if resp.status == 200:
+                        remote_status = "online"
+            except Exception:
+                remote_status = "offline"
+
+        ollama_ok = self._ollama_available()
+        active = "llm7" if remote_status == "online" else (
+            "ollama" if ollama_ok else "none"
+        )
+
         return {
-            "remote": remote,
-            "ollama_available": self._ollama_available(),
-            "active_engine": "hermes" if remote.get("status") == "online" else (
-                "ollama" if self._ollama_available() else "none"
-            ),
+            "remote": {"status": remote_status, "base_url": self.base_url},
+            "ollama_available": ollama_ok,
+            "active_engine": active,
             "model": self.model,
             "history_len": len(self.history),
         }
