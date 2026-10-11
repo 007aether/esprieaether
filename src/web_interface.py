@@ -33,6 +33,7 @@ SECRET_KEY = os.getenv("WEB_SECRET_KEY", "aether_default_secret")
 # ─── استيراد الجسر ───
 import sys
 sys.path.insert(0, str(BASE_DIR / "src"))
+sys.path.insert(0, str(BASE_DIR))          # لاستيراد robots/ kanban/ scanners/
 from jarvis_bridge import JarvisBridge
 
 # ─── إعداد Flask ───
@@ -205,6 +206,42 @@ def stats_page():
         return render_template("stats.html", report=report, stats=report)
     except Exception as e:
         return render_template("stats.html", report={}, stats={}), 200
+
+
+@app.route("/robots")
+def robots_page():
+    """صفحة الروبوتات (60 robot عبر 7 أنظمة)"""
+    try:
+        from robots.robots_system import RobotsSystem
+        rs = RobotsSystem()
+        stats = rs.get_stats()
+        robots = rs.list_robots()
+        return render_template(
+            "robots.html",
+            robots=robots,
+            stats=stats,
+            total=stats["total"],
+            by_system=stats["by_system"],
+        )
+    except Exception as e:
+        return render_template("robots.html", robots=[], stats={}, total=0, by_system={}), 200
+
+
+@app.route("/api/robots")
+def api_robots():
+    """API قائمة الروبوتات"""
+    try:
+        from robots.robots_system import RobotsSystem
+        rs = RobotsSystem()
+        return jsonify({
+            "stats": rs.get_stats(),
+            "robots": [
+                {"id": r[0], "name": r[1], "system": r[2], "role": r[3], "status": r[4]}
+                for r in rs.list_robots()
+            ],
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/health")

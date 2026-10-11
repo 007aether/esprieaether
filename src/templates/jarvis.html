@@ -24,7 +24,7 @@ document.getElementById("chat-form").addEventListener("submit", async function (
   input.value = "";
   box.scrollTop = box.scrollHeight;
   try {
-    const r = await fetch("/api/jarvis", {
+    const r = await fetch("/api/hermes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt: text }),

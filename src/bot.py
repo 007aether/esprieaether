@@ -33,6 +33,12 @@ from dotenv import load_dotenv
 
 from jarvis_bridge import JarvisBridge
 
+# محرك Hermes (اختياري — يُحمّل عند الطلب)
+try:
+    from src.hermes_bridge import HermesBridge
+except ImportError:
+    HermesBridge = None
+
 from vpn_agent import VPNAgent
 from airdrop_agent import AirdropAgent
 
@@ -160,6 +166,7 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/report — تقرير" + chr(10) +
         "/status — حالة النظام" + chr(10) +
         "/jarvis — محادثة" + chr(10) +
+        "/hermes — محرك Hermes (محلي/سحابي)" + chr(10) +
         "/help — مساعدة"
     )
     await update.message.reply_text(text, parse_mode="Markdown")
@@ -193,6 +200,38 @@ async def cmd_jarvis(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # تنسيق الرد
         response = f"🤖 *JARVIS:*\n\n{answer}"
         # إذا كان الرد طويلاً، قسّمه
+        if len(response) > 4000:
+            parts = [response[i:i+4000] for i in range(0, len(response), 4000)]
+            await msg.edit_text(parts[0])
+            for part in parts[1:]:
+                await update.message.reply_text(part)
+        else:
+            await msg.edit_text(response, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"⚠️ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_hermes(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """محادثة مع محرك Hermes (Ollama محلي، أو endpoint خارجي إن وُجد)"""
+    prompt = " ".join(context.args) if context.args else ""
+
+    if not prompt:
+        await update.message.reply_text(
+            "⚡ اكتب سؤالك بعد الأمر:\nمثال: `/hermes كيف أحسّن أمان السيرفر؟`",
+            parse_mode="Markdown"
+        )
+        return
+
+    msg = await update.message.reply_text("⚡ Hermes يفكر...")
+
+    try:
+        from src.hermes_bridge import HermesBridge
+        bridge = HermesBridge()
+        answer = bridge.ask(prompt)
+        engine = bridge.status().get("active_engine", "?")
+        engine_label = {"ollama": "🖥️ محلي", "hermes": "☁️ Hermes"}.get(engine, engine)
+        response = f"⚡ *HERMES* ({engine_label}):\n\n{answer}"
         if len(response) > 4000:
             parts = [response[i:i+4000] for i in range(0, len(response), 4000)]
             await msg.edit_text(parts[0])
@@ -979,6 +1018,7 @@ async def set_commands(app: Application):
         BotCommand("start", "بدء البوت"),
         BotCommand("help", "المساعدة"),
         BotCommand("jarvis", "محادثة مع الذكاء المحلي"),
+        BotCommand("hermes", "محرك Hermes (محلي/سحابي)"),
         BotCommand("status", "حالة النظام"),
         BotCommand("web", "رابط لوحة التحكم"),
         BotCommand("ollama", "حالة Ollama"),
@@ -1035,6 +1075,7 @@ def main():
     app.add_handler(CommandHandler("help", cmd_help))
     app.add_handler(CommandHandler("ping", cmd_ping))
     app.add_handler(CommandHandler("jarvis", cmd_jarvis))
+    app.add_handler(CommandHandler("hermes", cmd_hermes))
     app.add_handler(CommandHandler("clear", cmd_clear))
     app.add_handler(CommandHandler("status", cmd_status))
     app.add_handler(CommandHandler("metrics", cmd_metrics))

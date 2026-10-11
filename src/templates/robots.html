@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}الروبوتات{% endblock %}
+{% block page_title %}🤖 الروبوتات — {{ total }} مسجل{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>📊 الإحصائيات</h2>
+  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">
+    {% for system, count in by_system.items() %}
+    <div class="kv"><span>{{ system }}</span><b>{{ count }}</b></div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="card">
+  <h2>🤖 قائمة الروبوتات</h2>
+  <table class="table">
+    <thead><tr><th>ID</th><th>الاسم</th><th>النظام</th><th>الدور</th><th>الحالة</th></tr></thead>
+    <tbody>
+    {% for r in robots %}
+      <tr>
+        <td><code>{{ r[0] }}</code></td>
+        <td><b>{{ r[1] }}</b></td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        <td>{{ '🟢' if r[4]=='active' else '⚪' }} {{ r[4] }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
