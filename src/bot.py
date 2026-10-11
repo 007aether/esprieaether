@@ -460,33 +460,30 @@ async def cmd_airdrop(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @authorized_only
 async def cmd_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """مزامنة GitHub فورية"""
+    """مزامنة GitHub فورية (git CLI)"""
     msg = await update.message.reply_text("🔄 جارٍ المزامنة مع GitHub...")
     try:
         from github_agent import GitHubAgent
         agent = GitHubAgent()
-        if not agent.gh:
-            await msg.edit_text("⚠️ GitHub غير متصل")
+
+        # تحقق أن git CLI شغال (remote موجود)
+        if not agent.git_status().get("remote"):
+            await msg.edit_text("⚠️ GitHub غير متصل (git remote ناقص)")
             return
 
-        files = [
-            BASE_DIR / "src" / "jarvis_bridge.py",
-            BASE_DIR / "src" / "web_interface.py",
-            BASE_DIR / "src" / "bot.py",
-            BASE_DIR / "src" / "github_agent.py",
-            BASE_DIR / "src" / "autonomous_loop.py",
-            BASE_DIR / "STATUS.md",
-        ]
-        existing = [f for f in files if f.exists()]
-        result = agent.push_files(existing, "⚡ Manual sync from Telegram")
+        # git CLI كيدير add -A (المشروع كامل) — أحسن من لستة ملفات
+        result = agent.push_files(message="⚡ Manual sync from Telegram")
 
         if result.get("status") == "ok":
-            await msg.edit_text(
-                f"✅ *تمت المزامنة*\n\n"
-                f"📦 الملفات: `{result.get('files_count')}`\n"
-                f"🔗 [عرض الـ Commit]({result.get('url')})",
-                parse_mode="Markdown"
-            )
+            if result.get("sha"):
+                await msg.edit_text(
+                    f"✅ *تمت المزامنة*\n\n"
+                    f"📦 Commit: `{result.get('sha')}`\n"
+                    f"🔗 [عرض الـ Commit]({result.get('url')})",
+                    parse_mode="Markdown"
+                )
+            else:
+                await msg.edit_text("✅ " + result.get("message", "تمت"))
         else:
             await msg.edit_text(f"⚠️ فشل: {result.get('message')}")
     except Exception as e:

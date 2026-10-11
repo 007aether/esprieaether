@@ -170,27 +170,18 @@ def task_security_scan() -> dict:
 
 
 def task_github_sync() -> dict:
-    """مزامنة GitHub"""
+    """مزامنة GitHub (git CLI)"""
     result = {"name": "github_sync", "status": "ok"}
 
-    if not github.gh:
+    # git CLI شغال دايماً (PyGithub اختياري)
+    if not github.git_status().get("remote"):
         result["status"] = "skipped"
-        result["reason"] = "GitHub غير متصل"
+        result["reason"] = "GitHub remote ناقص"
         return result
 
-    files = [
-        BASE_DIR / "src" / "jarvis_bridge.py",
-        BASE_DIR / "src" / "web_interface.py",
-        BASE_DIR / "src" / "bot.py",
-        BASE_DIR / "src" / "github_agent.py",
-        BASE_DIR / "src" / "autonomous_loop.py",
-        BASE_DIR / "STATUS.md",
-    ]
-    existing = [f for f in files if f.exists()]
-
+    # git CLI كيدير add -A (المشروع كامل)
     push = github.push_files(
-        existing,
-        commit_message=f"⚡ Auto-sync {len(existing)} files ({datetime.now().strftime('%Y-%m-%d %H:%M')})"
+        message=f"⚡ Auto-sync ({datetime.now().strftime('%Y-%m-%d %H:%M')})"
     )
     result["push"] = push
     return result
