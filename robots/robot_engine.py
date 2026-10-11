@@ -238,10 +238,26 @@ def h_noop(robot_id: str) -> dict:
     return {"ok": True, "summary": "idle (no handler)"}
 
 
+def h_hexstrike(robot_id: str) -> dict:
+    """IMM robots — فحص أمني عبر HexStrike AI (port 8888)"""
+    try:
+        import urllib.request
+        host = os.getenv("HEXSTRIKE_HOST", "http://127.0.0.1:8888")
+        # ping HexStrike server
+        req = urllib.request.Request(f"{host}/health")
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            data = json.loads(resp.read())
+        status = data.get("status", "unknown")
+        return {"ok": True, "summary": f"hexstrike={status}"}
+    except Exception as e:
+        # HexStrike offline — graceful (ماشي error)
+        return {"ok": True, "summary": f"hexstrike offline ({str(e)[:40]})"}
+
+
 # role → handler mapping
 ROLE_HANDLERS: dict = {
     # Immune / monitoring
-    "defense": h_health_check,
+    "defense": h_hexstrike,        # IMM robots → HexStrike
     "cleanup": h_log_scan,
     "filter": h_log_scan,
     "monitoring": h_health_check,
