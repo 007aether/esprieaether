@@ -290,8 +290,9 @@ class RobotEngine:
 
     # ─── Execution ───
 
-    def run_robot(self, robot_id: str) -> dict:
-        """ينفّذ robot واحد حسب الـ role"""
+    def run_robot(self, robot_id: str, keep_active: bool = False) -> dict:
+        """ينفّذ robot واحد حسب الـ role.
+        keep_active=True: يحافظ status='active' من بعد (للـ loop)."""
         info = _get_robot_info(robot_id)
         if not info:
             return {"robot_id": robot_id, "status": "error", "summary": "unknown robot"}
@@ -309,7 +310,9 @@ class RobotEngine:
             summary = str(e)[:200]
 
         self._record_result(robot_id, role, status, summary)
-        self._set_status(robot_id, "idle")
+        # loop: نرجعو active باش يدوز ف الدورة الجاية
+        # manual: نرجعو idle
+        self._set_status(robot_id, "active" if keep_active else "idle")
         return {"robot_id": robot_id, "name": info["name"], "role": role, "status": status, "summary": summary}
 
     def run_once(self, system: str = None) -> dict:
@@ -332,15 +335,16 @@ class RobotEngine:
         return {"cycle": self.cycles, "total": len(results), "ok": ok, "error": err, "results": results}
 
     def run_active(self) -> dict:
-        """غير robots المفعّلين (status='active')"""
+        """غير robots المفعّلين (status='active') — يحافظ active للدورة الجاية"""
         conn = sqlite3.connect(DB)
         rows = conn.execute("SELECT id, role FROM robots WHERE status='active'").fetchall()
         conn.close()
         results = []
         for robot_id, role in rows:
-            results.append(self.run_robot(robot_id))
+            results.append(self.run_robot(robot_id, keep_active=True))
         if results:
             self.cycles += 1
+            logger.info(f"cycle #{self.cycles}: {len(results)} active robots ran")
         return {"cycle": self.cycles, "ran": len(results), "results": results}
 
     # ─── Activation ───
