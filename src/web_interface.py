@@ -11,6 +11,7 @@ import json
 import time
 import platform
 import subprocess
+import urllib.request
 from datetime import datetime
 from pathlib import Path
 from functools import wraps
@@ -244,6 +245,212 @@ def api_robots():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/api/stats/full")
+def api_stats_full():
+    """API إحصائيات شاملة (يستهلكها /stats)"""
+    try:
+        m = get_system_metrics()
+
+        # Airdrops
+        airdrops = {"total": 0, "recent": []}
+        try:
+            from src.airdrop_agent import AirdropAgent
+            aa = AirdropAgent()
+            all_ad = aa.get_all() if hasattr(aa, "get_all") else aa.list_airdrops() if hasattr(aa, "list_airdrops") else []
+            airdrops = {
+                "total": len(all_ad),
+                "recent": all_ad[-10:] if isinstance(all_ad, list) else [],
+            }
+        except Exception:
+            pass
+
+        return jsonify({
+            "status": "ok",
+            "system": {
+                "cpu": m["cpu"]["percent"],
+                "ram": m["memory"]["percent"],
+                "disk": m["disk"]["percent"],
+                "uptime_seconds": m["system"]["uptime_seconds"],
+            },
+            "airdrops": airdrops,
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)}), 500
+
+
+@app.route("/api/earnings")
+def api_earnings():
+    """API الأرباح (airdrops + bandwidth)"""
+    try:
+        # Airdrops
+        airdrops_data = {"total": 0, "recent": []}
+        try:
+            from scanners.airdrop_scanner import AirdropScanner
+            scanner = AirdropScanner()
+            items = scanner.get_cached() if hasattr(scanner, "get_cached") else []
+            airdrops_data = {
+                "total": len(items),
+                "recent": items[:10],
+            }
+        except Exception:
+            pass
+
+        # Bandwidth
+        bandwidth = {
+            "docker_available": False,
+            "providers": [],
+        }
+        try:
+            from src.bandwidth_agent import BandwidthAgent
+            ba = BandwidthAgent()
+            bandwidth = ba.get_status() if hasattr(ba, "get_status") else bandwidth
+        except Exception:
+            pass
+
+        return jsonify({
+            "status": "ok",
+            "airdrops": airdrops_data,
+            "bandwidth": bandwidth,
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)}), 500
+
+
+@app.route("/api/notifications")
+def api_notifications():
+    """API التنبيهات (يستهلكها /notifications)"""
+    try:
+        notifications = []
+        try:
+            from src.notify_agent import NotifyAgent
+            na = NotifyAgent()
+            notifications = na.get_recent(limit=50) if hasattr(na, "get_recent") else []
+        except Exception:
+            pass
+
+        # SmartAlerts
+        try:
+            from src.smart_alerts import SmartAlerts
+            sa = SmartAlerts()
+            if hasattr(sa, "get_recent"):
+                notifications.extend(sa.get_recent(limit=50))
+        except Exception:
+            pass
+
+        return jsonify({"status": "ok", "notifications": notifications})
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)}), 500
+
+
+@app.route("/api/somnia")
+def api_somnia():
+    """API Somnia (محفظة + شبكة)"""
+    try:
+        # المحفظة
+        wallet_file = BASE_DIR / "pharos_wallet.json"
+        address = "—"
+        stt_balance = "0"
+        if wallet_file.exists():
+            try:
+                with open(wallet_file, "r", encoding="utf-8") as f:
+                    wdata = json.load(f)
+                address = wdata.get("address", "—")
+                stt_balance = str(wdata.get("stt_balance", "0"))
+            except Exception:
+                pass
+
+        # الشبكة
+        network = {"connected": False, "block": 0}
+        try:
+            rpc = os.getenv("SOMNIA_RPC", "https://dream-rpc.somnia.network")
+            req = urllib.request.Request(rpc, data=json.dumps({
+                "jsonrpc": "2.0", "method": "eth_blockNumber",
+                "params": [], "id": 1,
+            }).encode(), headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                rdata = json.loads(resp.read())
+            hex_block = rdata.get("result", "0x0")
+            network = {"connected": True, "block": int(hex_block, 16)}
+        except Exception:
+            pass
+
+        return jsonify({
+            "status": "ok",
+            "address": address,
+            "stt": stt_balance,
+            "network": network,
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)}), 500
+
+
+@app.route("/api/health")
+def api_health():
+    try:
+        # 1. الخدمات
+        services = {
+            "ollama": "active" if get_ollama_status().get("status") == "online" else "inactive",
+            "web": "active",
+            "jarvis": "active" if get_ollama_status().get("status") == "online" else "inactive",
+        }
+
+        # 2. Guardian
+        guardian = {"errors_fixed": 0, "fixes": []}
+        try:
+            from src.guardian_agent import GuardianAgent
+            ga = GuardianAgent()
+            stats = ga.get_stats() if hasattr(ga, "get_stats") else {}
+            guardian = {
+                "errors_fixed": stats.get("total_fixes", 0),
+                "fixes": stats.get("recent_fixes", [])[-10:],
+            }
+        except Exception:
+            pass
+
+        # 3. Alerts (آخر 24 ساعة)
+        alerts = {"last_24h": 0}
+        try:
+            from src.smart_alerts import SmartAlerts
+            sa = SmartAlerts()
+            if hasattr(sa, "count_recent"):
+                alerts = {"last_24h": sa.count_recent(hours=24)}
+        except Exception:
+            pass
+
+        # 4. Autonomous loop
+        autonomous = {"cycles": 0, "last_run": {}}
+        try:
+            state_file = BASE_DIR / "autonomous_state.json"
+            if state_file.exists():
+                with open(state_file, "r", encoding="utf-8") as f:
+                    state = json.load(f)
+                autonomous = {
+                    "cycles": state.get("cycles", 0),
+                    "last_run": state.get("last_run", {}),
+                }
+        except Exception:
+            pass
+
+        # 5. النظام (CPU / RAM / Disk)
+        m = get_system_metrics()
+        system = {
+            "cpu": m["cpu"]["percent"],
+            "ram": m["memory"]["percent"],
+            "disk": m["disk"]["percent"],
+        }
+
+        return jsonify({
+            "status": "ok",
+            "services": services,
+            "guardian": guardian,
+            "alerts": alerts,
+            "autonomous": autonomous,
+            "system": system,
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)}), 500
+
+
 @app.route("/health")
 def health_page():
     """صفحة صحة النظام"""
@@ -417,8 +624,11 @@ def settings_page():
     """صفحة الإعدادات"""
     try:
         from dotenv import load_dotenv
-        import os
-        load_dotenv(os.path.expanduser("~/AETHER_V8/.env"), override=True)
+        # حمّل .env المحلي أولاً، ثم ~/AETHER_V8/.env إن وُجد (توافق مع النسخة القديمة)
+        load_dotenv(BASE_DIR / ".env", override=False)
+        legacy_env = os.path.expanduser("~/AETHER_V8/.env")
+        if os.path.exists(legacy_env):
+            load_dotenv(legacy_env, override=False)
         
         # اقرأ الإعدادات (بدون كشف المفاتيح)
         settings = {
