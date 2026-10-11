@@ -309,6 +309,38 @@ def api_jarvis():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/api/hermes", methods=["POST"])
+def api_hermes():
+    """API محادثة HERMES (محرك سحابي مع fallback لـ Ollama)"""
+    try:
+        data = request.get_json(silent=True) or {}
+        prompt = (data.get("prompt") or "").strip()
+        if not prompt:
+            return jsonify({"error": "empty prompt"}), 400
+        try:
+            from hermes_bridge import HermesBridge
+        except ImportError:
+            from src.hermes_bridge import HermesBridge
+        bridge = HermesBridge()
+        response = bridge.ask(prompt)
+        return jsonify({"response": response, "engine": bridge.status()["active_engine"]})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/hermes/status")
+def api_hermes_status():
+    """حالة محرك Hermes"""
+    try:
+        try:
+            from hermes_bridge import HermesBridge
+        except ImportError:
+            from src.hermes_bridge import HermesBridge
+        return jsonify(HermesBridge().status())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 # ═══════════════════════════════════════════════════════════════
 #  🚀 Main Entry Point — يجب أن يكون في نهاية الملف
 # ═══════════════════════════════════════════════════════════════

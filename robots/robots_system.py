@@ -78,6 +78,18 @@ ROBOTS = {
     "EXT_18": {"name": "QUEUE_MANAGER", "system": "queue", "role": "queue"},
     "EXT_19": {"name": "NOTIFICATION_CENTER", "system": "notifications", "role": "notify"},
     "EXT_20": {"name": "SYSTEM_OPTIMIZER", "system": "optimization", "role": "optimize"},
+
+    # ── NEW: AI / AUTOMATION GENERATION (10) ──
+    "AI_01": {"name": "HERMES_LINK", "system": "ai", "role": "hermes_bridge"},
+    "AI_02": {"name": "PROMPT_ENGINEER", "system": "ai", "role": "prompt_craft"},
+    "AI_03": {"name": "AGENT_SPAWNER", "system": "ai", "role": "spawn_agents"},
+    "AI_04": {"name": "MODEL_ROUTER", "system": "ai", "role": "route_models"},
+    "AI_05": {"name": "EMBEDDER", "system": "ai", "role": "embeddings"},
+    "AI_06": {"name": "RAG_KEEPER", "system": "ai", "role": "knowledge_base"},
+    "AI_07": {"name": "FINE_TUNER", "system": "ai", "role": "finetuning"},
+    "AI_08": {"name": "EVAL_JUDGE", "system": "ai", "role": "model_eval"},
+    "AI_09": {"name": "PROXY_MASTER", "system": "ai", "role": "api_proxy"},
+    "AI_10": {"name": "TOOL_FORGE", "system": "ai", "role": "tool_builder"},
 }
 
 
