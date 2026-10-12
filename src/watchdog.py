@@ -4,7 +4,8 @@ watchdog.py — 24/7 self-healing for EsprieAether + DSH stack.
 
 Checks every 60s, restarts anything dead:
   - ollama   (11434)
-  - router   (11435)  ← Aether AI Router (3 brains)
+  - router   (11435)  ← Aether AI Router (5 brains + 6 agents)
+  - orchestrator (11436) ← 7-agent orchestrator
   - web      (5000)
   - hexstrike(8888)
   - bot      (telegram process)
@@ -47,6 +48,12 @@ SERVICES = {
         "url": "http://127.0.0.1:11435/health",
         "cwd": PROJECT,
         "cmd": [_PY, "src/ai_router.py"],
+    },
+    "orchestrator": {
+        "kind": "http",
+        "url": "http://127.0.0.1:11436/health",
+        "cwd": PROJECT,
+        "cmd": [_PY, "src/orchestrator.py"],
     },
     "web": {
         "kind": "http",
