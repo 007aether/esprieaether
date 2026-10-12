@@ -103,6 +103,10 @@ AGENT_MODELS = {
         "system": "أنت محرك تطوير ذاتي. تحلل الأداء وتقترح تحسينات.",
         "chain": ["ollama-local", "llm7-fast"],
     },
+    "aether-quality": {
+        "system": "أنت مراقب جودة. تصفّي المخرجات وتحسّنها عبر antislop.",
+        "chain": ["ollama-local", "llm7-fast"],
+    },
     "aether-general": {
         "system": "أنت مساعد عام. تجيب على أي سؤال بوضوح.",
         "chain": ["ollama-local", "llm7-fast", "groq"],
@@ -116,6 +120,7 @@ AGENT_ROUTES = {
     "aether-market": ["سوق", "أسهم", "أسعار", "تداول", "stock", "market", "price", "crypto", "trading", "bourse"],
     "aether-redteam": ["اختبر", "اختبار", "red team", "promptfoo", "test security", "audit"],
     "aether-evolve": ["طور", "حسّن", "تطوير", "evolve", "improve", "optimize", "améliore"],
+    "aether-quality": ["جودة", "راجع", "مراجعة", "quality", "review", "antislop", "check", "تصفية"],
 }
 
 VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "qwen2.5:3b"] + list(AGENT_MODELS.keys())

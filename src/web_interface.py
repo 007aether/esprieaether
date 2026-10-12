@@ -197,6 +197,12 @@ def index():
         return f"خطأ: {e}", 500
 
 
+@app.route("/dashboard")
+def dashboard():
+    """Alias for the index page."""
+    return redirect(url_for("index"))
+
+
 @app.route("/metrics")
 def metrics_page():
     """صفحة المقاييس"""

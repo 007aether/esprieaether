@@ -7,7 +7,6 @@ Checks every 60s, restarts anything dead:
   - router   (11435)  ← Aether AI Router (5 brains + 6 agents)
   - orchestrator (11436) ← 7-agent orchestrator
   - web      (5000)
-  - hexstrike(8888)
   - bot      (telegram process)
 
 Logs to ~/ESPRIEAETHER/data/watchdog.log
@@ -61,23 +60,28 @@ SERVICES = {
         "cwd": PROJECT,
         "cmd": [_PY, "src/web_interface.py"],
     },
-    "hexstrike": {
-        "kind": "http",
-        "url": "http://127.0.0.1:8888/health",
-        "cwd": PROJECT.parent / "hexstrike-ai",
-        "cmd": [HEXPY, "hexstrike_server.py"],
-        "grace": 420,  # ~7 min: heavy imports + tshark probe + process pool (restart loop)
-    },
     "bot": {
         "kind": "process",
         "match": "bot.py",
         "cwd": PROJECT,
         "cmd": [_PY, "src/bot.py"],
     },
+    # hexstrike intentionally NOT watched: startup takes ~2+ min (process pool +
+    # tshark probe) and the watchdog's restart loop kills it mid-startup.
+    # Start it manually when needed: cd ../hexstrike-ai && uv run python hexstrike_server.py
 }
 
 _restarts = {name: deque() for name in SERVICES}
 _last_restart = {name: 0.0 for name in SERVICES}
+
+# ── Scheduled jobs (run at HH:MM, once per day) ──
+SUNNA = PROJECT.parent / "deepseek-harness" / "default-workspace" / "Sunna-Equipe-Industrial"
+SCHEDULE = {
+    "sunna-offres": {"hour": 9, "minute": 0, "cwd": SUNNA, "cmd": [_PY, "bots/offres_bot.py"]},
+    "sunna-pinterest": {"hour": 20, "minute": 0, "cwd": SUNNA, "cmd": [_PY, "bots/pinterest_bot.py"]},
+}
+_last_run: dict = {name: None for name in SCHEDULE}  # date string last run
+DISK_ALERT_PCT = 80
 
 
 def log(msg: str):
@@ -161,12 +165,53 @@ def check_once() -> dict:
     return results
 
 
+def check_disk():
+    """Alert when disk usage exceeds threshold."""
+    try:
+        import shutil
+        usage = shutil.disk_usage(str(HOME))
+        pct = usage.used / usage.total * 100
+        if pct >= DISK_ALERT_PCT:
+            log(f"💾 DISK ALERT: {pct:.0f}% used ({usage.used // (2**30)}GB / {usage.total // (2**30)}GB)")
+    except Exception as e:
+        log(f"❌ disk check error: {e}")
+
+
+def check_schedule():
+    """Run scheduled jobs at their HH:MM once per day."""
+    now = datetime.now()
+    today = now.strftime("%Y-%m-%d")
+    for name, job in SCHEDULE.items():
+        if now.hour == job["hour"] and now.minute == job["minute"]:
+            if _last_run[name] == today:
+                continue  # already ran today
+            _last_run[name] = today
+            cwd = job.get("cwd") or PROJECT
+            log(f"⏰ running scheduled: {name}")
+            try:
+                kwargs = {
+                    "cwd": str(cwd),
+                    "env": {**os.environ, "OLLAMA_MODELS": OLLAMA_MODELS},
+                    "stdout": subprocess.DEVNULL,
+                    "stderr": subprocess.DEVNULL,
+                }
+                if os.name == "nt":
+                    kwargs["creationflags"] = 0x00000200 | 0x00000008
+                subprocess.Popen([str(c) for c in job["cmd"]], **kwargs)
+                log(f"✅ scheduled: {name} started")
+            except Exception as e:
+                log(f"❌ scheduled {name} failed: {e}")
+
+
 def main():
     log("═" * 50)
     log("🐕 Aether Watchdog started — 24/7 self-healing")
     for name, svc in SERVICES.items():
         kind = svc["kind"]
         log(f"   watching: {name} ({kind})")
+    for name, job in SCHEDULE.items():
+        log(f"   scheduled: {name} at {job['hour']:02d}:{job['minute']:02d}")
+    log(f"   disk alert: {DISK_ALERT_PCT}%")
     log("═" * 50)
 
     while True:
@@ -177,6 +222,8 @@ def main():
                 log(f"⚠️ dead: {dead} → restart issued")
             else:
                 log("✅ all services alive")
+            check_schedule()
+            check_disk()
         except Exception as e:
             log(f"❌ watchdog error: {e}")
         time.sleep(INTERVAL)
