@@ -75,10 +75,12 @@ _restarts = {name: deque() for name in SERVICES}
 _last_restart = {name: 0.0 for name in SERVICES}
 
 # ── Scheduled jobs (run at HH:MM, once per day) ──
-SUNNA = PROJECT.parent / "deepseek-harness" / "default-workspace" / "Sunna-Equipe-Industrial"
+SUNNA = Path(os.path.expanduser("~")) / "Desktop" / "Sunna-Equipe-Industrial"
 SCHEDULE = {
     "sunna-offres": {"hour": 9, "minute": 0, "cwd": SUNNA, "cmd": [_PY, "bots/offres_bot.py"]},
     "sunna-pinterest": {"hour": 20, "minute": 0, "cwd": SUNNA, "cmd": [_PY, "bots/pinterest_bot.py"]},
+    "sunna-veille": {"hour": 8, "minute": 30, "cwd": SUNNA, "cmd": [_PY, "bots/veille_bot.py", "run"]},
+    "sunna-souk": {"hour": 21, "minute": 0, "cwd": SUNNA, "cmd": [_PY, "bots/souk_bot.py"]},
 }
 _last_run: dict = {name: None for name in SCHEDULE}  # date string last run
 DISK_ALERT_PCT = 80

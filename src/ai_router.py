@@ -28,6 +28,7 @@ import threading
 import time
 import urllib.request
 import urllib.error
+from pathlib import Path
 
 from flask import Flask, request, Response, jsonify
 
@@ -112,6 +113,80 @@ AGENT_MODELS = {
         "chain": ["ollama-local", "llm7-fast", "groq"],
     },
 }
+
+# ── Skill loading (hack-skills + claude-red + integrations) ──
+# Loads skills from integrations/ so agents can reference them
+INTEGRATIONS = Path(__file__).parent.parent / "integrations"
+SKILLS_CACHE = {}  # skill_name -> {description, content_preview}
+
+
+def load_skills():
+    """Load skill metadata from integrations (hack-skills + claude-red)."""
+    global SKILLS_CACHE
+    if SKILLS_CACHE:
+        return SKILLS_CACHE
+
+    # hack-skills: site/data/skills.json
+    hs = INTEGRATIONS / "hack-skills" / "site" / "data" / "skills.json"
+    if hs.exists():
+        try:
+            data = json.loads(hs.read_text(encoding="utf-8"))
+            for s in (data if isinstance(data, list) else data.get("skills", [])):
+                name = s.get("name", "")
+                if name:
+                    SKILLS_CACHE[name] = {
+                        "source": "hack-skills",
+                        "description": s.get("description", "")[:200],
+                    }
+        except Exception:
+            pass
+
+    # claude-red: claude-skills.json
+    cr = INTEGRATIONS / "claude-red" / "claude-skills.json"
+    if cr.exists():
+        try:
+            data = json.loads(cr.read_text(encoding="utf-8"))
+            for s in data.get("skills", []):
+                name = s.get("name", "")
+                if name:
+                    SKILLS_CACHE[name] = {
+                        "source": "claude-red",
+                        "description": s.get("description", "")[:200],
+                    }
+        except Exception:
+            pass
+
+    return SKILLS_CACHE
+
+
+def skills_for_agent(agent_name: str) -> str:
+    """Return a formatted skill list to inject into an agent's system prompt."""
+    skills = load_skills()
+    if not skills:
+        return ""
+
+    # filter by agent domain
+    domain_map = {
+        "aether-security": ["offensive", "pentest", "ad-", "api-", "cloud", "container", "k8s", "jwt", "oauth", "crypto", "mobile"],
+        "aether-redteam": ["offensive", "ai-security", "prompt", "jwt", "oauth", "cicd"],
+        "aether-research": ["ai-ml", "research"],
+        "aether-market": [],
+        "aether-evolve": [],
+        "aether-quality": [],
+        "aether-general": [],
+    }
+    kws = domain_map.get(agent_name, [])
+    matched = []
+    for name, meta in skills.items():
+        if any(kw in name for kw in kws):
+            matched.append(f"- {name} ({meta['source']})")
+
+    if not matched:
+        return ""
+
+    header = f"\n\nAvailable skills ({len(matched)}):"
+    return header + "\n" + "\n".join(matched[:30]) + "\n"
+
 
 # keyword -> agent (for auto-routing)
 AGENT_ROUTES = {
