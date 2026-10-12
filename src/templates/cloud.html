@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>☁️ Cloud Desktop — EsprieAether</title>
+<style>
+  :root { --bg:#0d1117; --fg:#e6edf3; --mut:#8b949e; --card:#161b22; --brd:#30363d; --acc:#2f81f7; --ok:#3fb950; --err:#f85149; --warn:#d29922; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--fg); font:14px/1.6 -apple-system,'Segoe UI',Roboto,sans-serif; padding:20px; }
+  h1 { font-size:20px; margin-bottom:4px; }
+  .sub { color:var(--mut); margin-bottom:20px; font-size:13px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-bottom:14px; }
+  .card { background:var(--card); border:1px solid var(--brd); border-radius:10px; padding:16px; }
+  .card h2 { font-size:14px; color:var(--mut); text-transform:uppercase; letter-spacing:.5px; margin-bottom:12px; }
+  .row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--brd); }
+  .row:last-child { border-bottom:none; }
+  .name { color:var(--fg); }
+  .val { font-family:ui-monospace,monospace; }
+  .ok { color:var(--ok); } .err { color:var(--err); } .warn { color:var(--warn); }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-inline-end:6px; }
+  button { background:var(--acc); color:#fff; border:none; padding:7px 14px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button:hover { opacity:.85; }
+  input { background:var(--bg); color:var(--fg); border:1px solid var(--brd); border-radius:6px; padding:7px 10px; font-size:13px; width:100%; margin:4px 0; font-family:ui-monospace,monospace; }
+  pre { background:var(--bg); border:1px solid var(--brd); border-radius:6px; padding:10px; font-size:12px; overflow:auto; max-height:200px; white-space:pre-wrap; }
+  .tag { display:inline-block; background:var(--brd); color:var(--fg); padding:2px 8px; border-radius:12px; font-size:11px; margin:2px; }
+</style>
+</head>
+<body>
+<h1>☁️ Cloud Desktop</h1>
+<div class="sub">EsprieAether — remote access · <span id="clock"></span></div>
+
+<div class="grid">
+  <div class="card">
+    <h2>🖥️ Services</h2>
+    <div id="services"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>⚙️ Processes</h2>
+    <div id="procs"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>🔗 SSH Tunnel</h2>
+    <div id="tunnel"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>👥 Group</h2>
+    <div id="group"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>⚡ Remote Exec</h2>
+  <input id="cmd" placeholder="أمر shell — مثال: echo hello" onkeydown="if(event.key==='Enter')runExec()">
+  <div style="margin:8px 0"><button onclick="runExec()">تنفيذ</button> <button onclick="refresh()">🔄 تحديث</button></div>
+  <pre id="out">—</pre>
+</div>
+
+<script>
+const B = 'http://127.0.0.1:5001';
+
+async function j(u, opt) { const r = await fetch(u, opt); return r.json(); }
+
+function row(name, val, cls) {
+  return `<div class="row"><span class="name">${name}</span><span class="val ${cls||''}">${val}</span></div>`;
+}
+function dot(on) { return `<span class="dot" style="background:${on?'var(--ok)':'var(--err)'}"></span>`; }
+
+async function refresh() {
+  document.getElementById('clock').textContent = new Date().toLocaleString('ar');
+  try {
+    const s = await j(B + '/status');
+    const sv = s.services || {};
+    document.getElementById('services').innerHTML =
+      Object.entries(sv).map(([k, v]) => row(dot(v === 200) + k, v === 200 ? 'ok' : v)).join('');
+    const p = s.processes || {};
+    document.getElementById('procs').innerHTML =
+      Object.entries(p).map(([k, v]) => row(k, v, v > 0 ? 'ok' : 'err')).join('');
+    const t = s.tunnel || {};
+    document.getElementById('tunnel').innerHTML = t.pid
+      ? row(dot(true) + 'active', `${t.remote_host}:${t.remote_port}`, 'ok')
+      : row(dot(false) + 'inactive', '—', 'err');
+    const g = await j(B + '/group');
+    const m = g.members || [];
+    document.getElementById('group').innerHTML = m.length
+      ? m.map(x => `<span class="tag">${x.name} · ${x.role}</span>`).join('')
+      : row('no members', '—', 'warn');
+  } catch (e) {
+    document.getElementById('services').innerHTML = row(dot(false) + 'cloud desktop', 'offline', 'err');
+  }
+}
+
+async function runExec() {
+  const cmd = document.getElementById('cmd').value;
+  if (!cmd) return;
+  const out = document.getElementById('out');
+  out.textContent = '...';
+  try {
+    const r = await fetch(B + '/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Token': window.__TOKEN || '' },
+      body: JSON.stringify({ cmd, timeout: 60 }),
+    });
+    const res = await r.json();
+    out.textContent = res.error ? ('❌ ' + res.error) : (res.stdout || res.stderr || '(empty)') + `\n[exit ${res.exit_code}]`;
+  } catch (e) {
+    out.textContent = '❌ ' + e;
+  }
+}
+
+refresh();
+setInterval(refresh, 15000);
+</script>
+</body>
+</html>

@@ -1300,6 +1300,142 @@ async def cmd_integrations(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.edit_text(f"❌ خطأ: {e}")
 
 
+@authorized_only
+async def cmd_clouddesktop(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """☁️ /clouddesktop — cloud desktop agent info"""
+    try:
+        import urllib.request, json as _json
+        with urllib.request.urlopen("http://127.0.0.1:5001/health", timeout=5) as r:
+            _json.loads(r.read())
+        text = (
+            "☁️ *Cloud Desktop Agent*\n\n"
+            "✅ Online — port 5001\n\n"
+            "📋 *الأوامر:*\n"
+            "/cloudstatus — حالة كاملة\n"
+            "/tunnel — نفق SSH\n"
+            "/group — أعضاء المجموعة\n"
+            "/cloudexec — تنفيذ أمر\n\n"
+            "🔗 *Endpoints:*\n"
+            "`/status` · `/exec` · `/group`\n"
+            "`/tunnel/start` · `/tunnel/stop`"
+        )
+    except Exception:
+        text = "❌ Cloud Desktop offline\n\nشغّلو: `uv run python src/cloud_desktop_agent.py`"
+    await update.message.reply_text(text, parse_mode="Markdown")
+
+
+@authorized_only
+async def cmd_cloudstatus(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """📊 /cloudstatus — full cloud desktop status"""
+    msg = await update.message.reply_text("☁️ جارٍ الفحص...")
+    try:
+        import urllib.request, json as _json
+        with urllib.request.urlopen("http://127.0.0.1:5001/status", timeout=10) as r:
+            st = _json.loads(r.read())
+        svc = st.get("services", {})
+        procs = st.get("processes", {})
+        text = "📊 *Cloud Desktop Status*\n\n🖥️ *Services:*\n"
+        for name, code in svc.items():
+            text += f"{'✅' if code == 200 else '🔴'} `{name}`\n"
+        text += "\n⚙️ *Processes:*\n"
+        for name, count in procs.items():
+            text += f"• `{name}`: {count}\n"
+        t = st.get("tunnel", {})
+        if t.get("pid"):
+            text += f"\n🔗 *Tunnel:* active → {t.get('remote_host')}\n"
+        else:
+            text += "\n🔗 *Tunnel:* inactive\n"
+        await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_tunnel(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🔗 /tunnel — SSH reverse tunnel control"""
+    args = context.args
+    if not args:
+        await update.message.reply_text(
+            "🔗 *SSH Tunnel*\n\n"
+            "`/tunnel status` — الحالة\n"
+            "`/tunnel start` — تشغيل\n"
+            "`/tunnel stop` — إيقاف\n\n"
+            "⚙️ *Config* (في .env):\n"
+            "`TUNNEL_HOST` · `TUNNEL_USER`\n"
+            "`TUNNEL_KEY` · `TUNNEL_PORT`",
+            parse_mode="Markdown",
+        )
+        return
+    action = args[0].lower()
+    import subprocess as _sp
+    py = sys.executable
+    try:
+        if action == "status":
+            out = _sp.run([py, "src/setup_tunnel.py", "status"],
+                          capture_output=True, text=True, timeout=15, cwd=str(BASE_DIR))
+            await update.message.reply_text(f"```\n{out.stdout or out.stderr}\n```", parse_mode="Markdown")
+        elif action == "start":
+            await update.message.reply_text("🔗 تشغيل النفق...")
+            out = _sp.run([py, "src/setup_tunnel.py", "start"],
+                          capture_output=True, text=True, timeout=30, cwd=str(BASE_DIR))
+            await update.message.reply_text(f"```\n{out.stdout or out.stderr}\n```", parse_mode="Markdown")
+        elif action == "stop":
+            out = _sp.run([py, "src/setup_tunnel.py", "stop"],
+                          capture_output=True, text=True, timeout=15, cwd=str(BASE_DIR))
+            await update.message.reply_text(f"```\n{out.stdout or out.stderr}\n```", parse_mode="Markdown")
+        else:
+            await update.message.reply_text("❌ استعمل: status | start | stop")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_group(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """👥 /group — cloud desktop group members"""
+    try:
+        import urllib.request, json as _json
+        with urllib.request.urlopen("http://127.0.0.1:5001/group", timeout=5) as r:
+            g = _json.loads(r.read())
+        members = g.get("members", [])
+        text = f"👥 *Group* ({len(members)} members)\n\n"
+        for m in members:
+            text += f"• *{m.get('name')}* — {m.get('role')}\n"
+        text += "\n➕ `/group add <name> [role]`"
+        await update.message.reply_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_cloudexec(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """⚡ /cloudexec — run a shell command via cloud desktop (token required)"""
+    args = context.args
+    if not args:
+        await update.message.reply_text(
+            "⚡ *Cloud Exec*\n\n`/cloudexec <command>`\n\n⚠️ يشفّر عبر token"
+        )
+        return
+    cmd = " ".join(args)
+    msg = await update.message.reply_text(f"⚡ `{cmd}`")
+    try:
+        import urllib.request, json as _json, os
+        token = os.getenv("CLOUD_DESKTOP_TOKEN", "")
+        payload = _json.dumps({"cmd": cmd, "timeout": 60}).encode()
+        req = urllib.request.Request(
+            "http://127.0.0.1:5001/exec", data=payload,
+            headers={"Content-Type": "application/json", "X-Token": token},
+        )
+        with urllib.request.urlopen(req, timeout=90) as r:
+            res = _json.loads(r.read())
+        if "error" in res:
+            await msg.edit_text(f"❌ {res['error']}")
+            return
+        text = f"```\n{res.get('stdout','') or res.get('stderr','')}\n```\nexit: {res.get('exit_code')}"
+        await msg.edit_text(text[:4000], parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
 # ═══════════════════════════════════
 #  Main
 # ═══════════════════════════════════
@@ -1425,6 +1561,13 @@ def main():
     app.add_handler(CommandHandler("browse", cmd_browse))
     app.add_handler(CommandHandler("sysinfo", cmd_sysinfo))
     app.add_handler(CommandHandler("integrations", cmd_integrations))
+
+    # cloud desktop commands
+    app.add_handler(CommandHandler("clouddesktop", cmd_clouddesktop))
+    app.add_handler(CommandHandler("tunnel", cmd_tunnel))
+    app.add_handler(CommandHandler("group", cmd_group))
+    app.add_handler(CommandHandler("cloudexec", cmd_cloudexec))
+    app.add_handler(CommandHandler("cloudstatus", cmd_cloudstatus))
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 

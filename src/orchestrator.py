@@ -177,6 +177,40 @@ def chat():
     return jsonify(result)
 
 
+@app.route("/")
+def index():
+    """Root: show agent list + endpoints."""
+    return jsonify({
+        "service": "Aether Orchestrator",
+        "agents": list(AGENTS.keys()),
+        "brains": ["ollama-local", "llm7-fast", "llm7-big", "groq", "minimax"],
+        "endpoints": {
+            "/health": "health check",
+            "/v1/models": "list agent models",
+            "/v1/chat/completions": "chat (POST)",
+            "/group": "group members",
+            "/agents": "agent registry",
+        },
+        "dsh": "baseURL http://localhost:11436/v1",
+    })
+
+
+@app.route("/agents")
+def agents():
+    """Agent registry with skills."""
+    return jsonify({name: {"skill": a["skill"], "brain": a["brain"]} for name, a in AGENTS.items()})
+
+
+@app.route("/group")
+def group():
+    """Group members (from cloud desktop agent)."""
+    try:
+        with urllib.request.urlopen("http://127.0.0.1:5001/group", timeout=4) as r:
+            return jsonify(json.loads(r.read()))
+    except Exception:
+        return jsonify({"members": [], "note": "cloud desktop offline"})
+
+
 if __name__ == "__main__":
     port = int(os.getenv("AETHER_ORCH_PORT", "11436"))
     print(f"🎯 Aether Orchestrator — {len(AGENTS)} agents, 5 brains — port {port}")

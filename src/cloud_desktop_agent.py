@@ -29,7 +29,7 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).parent.parent / ".env")
@@ -89,6 +89,12 @@ def save_group(g: dict):
 
 
 # ── Endpoints ──
+
+@app.route("/", methods=["GET"])
+def dashboard():
+    """Dashboard page."""
+    return render_template("cloud.html")
+
 
 @app.route("/health")
 def health():
