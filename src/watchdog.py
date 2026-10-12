@@ -59,7 +59,7 @@ SERVICES = {
         "url": "http://127.0.0.1:8888/health",
         "cwd": PROJECT.parent / "hexstrike-ai",
         "cmd": [HEXPY, "hexstrike_server.py"],
-        "grace": 180,  # slow startup (~3 min on this box)
+        "grace": 300,  # very slow startup (process pool + heavy imports)
     },
     "bot": {
         "kind": "process",
