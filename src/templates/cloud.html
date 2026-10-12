@@ -57,6 +57,7 @@
 </div>
 
 <script>
+window.__TOKEN = '{{ token }}';
 const B = 'http://127.0.0.1:5001';
 
 async function j(u, opt) { const r = await fetch(u, opt); return r.json(); }

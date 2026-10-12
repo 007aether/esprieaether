@@ -92,8 +92,8 @@ def save_group(g: dict):
 
 @app.route("/", methods=["GET"])
 def dashboard():
-    """Dashboard page."""
-    return render_template("cloud.html")
+    """Dashboard page (inject token so /exec works from the page)."""
+    return render_template("cloud.html", token=TOKEN)
 
 
 @app.route("/health")
