@@ -1436,6 +1436,48 @@ async def cmd_cloudexec(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.edit_text(f"❌ خطأ: {e}")
 
 
+@authorized_only
+async def cmd_tm(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """💰 /tm — TraffMonetizer status"""
+    try:
+        import json as _json
+        sfile = Path(os.environ["APPDATA"]) / "Traffmonetizer" / "settings.json"
+        dfile = Path(os.environ["APPDATA"]) / "Traffmonetizer" / "storage.json"
+        s = _json.loads(sfile.read_text()) if sfile.exists() else {}
+        d = _json.loads(dfile.read_text()) if dfile.exists() else {}
+        tok = s.get("Token", "")
+        tok_short = f"{tok[:8]}...{tok[-4:]}" if tok else "(none)"
+        text = (
+            "💰 *TraffMonetizer*\n\n"
+            f"🔑 Token: `{tok_short}`\n"
+            f"✅ Accepting: {s.get('Accepting', '?')}\n"
+            f"🚀 StartWithWindows: {s.get('StartWithWindows', '?')}\n"
+            f"🆔 Device ID: `{d.get('id', '?')}`\n\n"
+            "📊 Dashboard: https://app.traffmonetizer.com/dashboard\n"
+            "🔄 `/tmrestart` — إعادة التشغيل\n"
+            "🐕 watchdog: auto-restart 24/7"
+        )
+    except Exception as e:
+        text = f"❌ خطأ: {e}"
+    await update.message.reply_text(text, parse_mode="Markdown")
+
+
+@authorized_only
+async def cmd_tmrestart(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🔄 /tmrestart — restart TraffMonetizer"""
+    msg = await update.message.reply_text("🔄 إعادة تشغيل TraffMonetizer...")
+    try:
+        import subprocess as _sp
+        import time as _time
+        _sp.run(["taskkill", "/F", "/IM", "Traffmonetizer.exe"],
+                capture_output=True, timeout=10)
+        _time.sleep(2)
+        _sp.Popen([str(Path(os.environ["APPDATA"]) / "Traffmonetizer" / "app" / "Traffmonetizer.exe")])
+        await msg.edit_text("✅ TraffMonetizer restarted")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
 # ═══════════════════════════════════
 #  Main
 # ═══════════════════════════════════
@@ -1568,6 +1610,10 @@ def main():
     app.add_handler(CommandHandler("group", cmd_group))
     app.add_handler(CommandHandler("cloudexec", cmd_cloudexec))
     app.add_handler(CommandHandler("cloudstatus", cmd_cloudstatus))
+
+    # TraffMonetizer commands
+    app.add_handler(CommandHandler("tm", cmd_tm))
+    app.add_handler(CommandHandler("tmrestart", cmd_tmrestart))
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 

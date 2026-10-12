@@ -66,6 +66,11 @@ SERVICES = {
         "cwd": PROJECT,
         "cmd": [_PY, "src/cloud_desktop_agent.py"],
     },
+    "traffmonetizer": {
+        "kind": "process",
+        "match": "Traffmonetizer.exe",
+        "cmd": ["C:\\Users\\ESPRIEAETHER\\AppData\\Roaming\\Traffmonetizer\\app\\Traffmonetizer.exe"],
+    },
     "cloud-desktop": {
         "url": "http://127.0.0.1:5001/health",
         "label": "Cloud Desktop Agent (remote access)",
