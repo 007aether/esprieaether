@@ -1268,6 +1268,38 @@ async def cmd_sysinfo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text, parse_mode="Markdown")
 
 
+@authorized_only
+async def cmd_integrations(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🔌 integrations — status of 11 GitHub integrations"""
+    msg = await update.message.reply_text("🔌 جارٍ الفحص...")
+    try:
+        from integrations import scan_integrations
+        report = scan_integrations()
+        text = "🔌 *Integrations*\n\n"
+        for name, info in report.items():
+            status = info.get("status", "?")
+            if status == "ready":
+                text += f"✅ `{name}` — {info.get('files',0)} files\n"
+            else:
+                text += f"⚠️ `{name}` — {status}\n"
+        # brain stats
+        text += "\n🧠 *AI Brains:*\n"
+        try:
+            import urllib.request, json as _json
+            with urllib.request.urlopen("http://127.0.0.1:11435/stats", timeout=5) as r:
+                stats = _json.loads(r.read())
+            for brain, st in stats.get("brains", {}).items():
+                ok = st.get("ok", 0)
+                fail = st.get("fail", 0)
+                healthy = "🟢" if st.get("healthy") else "🔴"
+                text += f"{healthy} `{brain}` — ok:{ok} fail:{fail}\n"
+        except Exception:
+            text += "⚠️ router offline\n"
+        await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
 # ═══════════════════════════════════
 #  Main
 # ═══════════════════════════════════
@@ -1315,6 +1347,7 @@ async def set_commands(app: Application):
         BotCommand("vault", "خزنة كلمات السر"),
         BotCommand("browse", "فتح صفحة ويب"),
         BotCommand("sysinfo", "معلومات النظام"),
+        BotCommand("integrations", "حالة 11 تكامل + أدمغة AI"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
     ]
@@ -1391,6 +1424,7 @@ def main():
     app.add_handler(CommandHandler("vault", cmd_vault))
     app.add_handler(CommandHandler("browse", cmd_browse))
     app.add_handler(CommandHandler("sysinfo", cmd_sysinfo))
+    app.add_handler(CommandHandler("integrations", cmd_integrations))
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
