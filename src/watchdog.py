@@ -60,6 +60,16 @@ SERVICES = {
         "cwd": PROJECT,
         "cmd": [_PY, "src/web_interface.py"],
     },
+    "cloud-desktop": {
+        "kind": "http",
+        "url": "http://127.0.0.1:5001/health",
+        "cwd": PROJECT,
+        "cmd": [_PY, "src/cloud_desktop_agent.py"],
+    },
+    "cloud-desktop": {
+        "url": "http://127.0.0.1:5001/health",
+        "label": "Cloud Desktop Agent (remote access)",
+    },
     "bot": {
         "kind": "process",
         "match": "bot.py",
