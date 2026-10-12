@@ -179,6 +179,15 @@ def check_once() -> dict:
                 continue
             if restart(name, svc):
                 _last_restart[name] = now
+                if name == "traffmonetizer":
+                    log("💰 traffmonetizer restarted — earning continues")
+    # TraffMonetizer stats snapshot (for earnings tracking)
+    if "traffmonetizer" in results and results["traffmonetizer"]:
+        try:
+            subprocess.run([sys.executable, "src/tm_stats.py", "once"],
+                           cwd=str(PROJECT), capture_output=True, timeout=20)
+        except Exception:
+            pass
     return results
 
 

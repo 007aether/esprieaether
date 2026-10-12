@@ -47,6 +47,11 @@
     <h2>👥 Group</h2>
     <div id="group"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
   </div>
+  <div class="card">
+    <h2>💰 TraffMonetizer</h2>
+    <div id="tm"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div style="margin-top:8px"><a href="https://app.traffmonetizer.com/dashboard" target="_blank" style="color:var(--acc);text-decoration:none">📊 Dashboard ↗</a></div>
+  </div>
 </div>
 
 <div class="card">
@@ -86,6 +91,12 @@ async function refresh() {
     document.getElementById('group').innerHTML = m.length
       ? m.map(x => `<span class="tag">${x.name} · ${x.role}</span>`).join('')
       : row('no members', '—', 'warn');
+
+    const tm = await j(B + '/tm');
+    document.getElementById('tm').innerHTML =
+      row(dot(tm.running) + 'TraffMonetizer', tm.running ? `${tm.connections} conn` : 'offline', tm.running ? 'ok' : 'err') +
+      row('accepting', tm.accepting ? 'yes' : 'no', tm.accepting ? 'ok' : 'warn') +
+      row('device', (tm.device_id || '').slice(0, 13) + '…', '');
   } catch (e) {
     document.getElementById('services').innerHTML = row(dot(false) + 'cloud desktop', 'offline', 'err');
   }

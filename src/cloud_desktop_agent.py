@@ -238,6 +238,51 @@ def tunnel_status():
     return jsonify(TUNNEL)
 
 
+@app.route("/tm")
+def tm_status():
+    """TraffMonetizer status (process + settings)."""
+    import subprocess as _sp
+    sfile = Path(os.environ.get("APPDATA", "")) / "Traffmonetizer" / "settings.json"
+    dfile = Path(os.environ.get("APPDATA", "")) / "Traffmonetizer" / "storage.json"
+    s = {}
+    if sfile.exists():
+        try:
+            s = json.loads(sfile.read_text())
+        except Exception:
+            pass
+    d = {}
+    if dfile.exists():
+        try:
+            d = json.loads(dfile.read_text())
+        except Exception:
+            pass
+    pid = ""
+    try:
+        pid = _sp.run(["powershell", "-NoProfile", "-Command",
+                       "(Get-Process -Name 'Traffmonetizer*' -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Id)"],
+                      capture_output=True, text=True, timeout=15).stdout.strip()
+    except Exception:
+        pass
+    conns = ""
+    if pid:
+        try:
+            conns = _sp.run(["powershell", "-NoProfile", "-Command",
+                             f"(Get-NetTCPConnection -OwningProcess {pid} -ErrorAction SilentlyContinue | Measure-Object).Count"],
+                            capture_output=True, text=True, timeout=15).stdout.strip()
+        except Exception:
+            pass
+    return jsonify({
+        "running": bool(pid),
+        "pid": int(pid) if pid.isdigit() else None,
+        "connections": int(conns) if conns.isdigit() else None,
+        "accepting": s.get("Accepting"),
+        "start_with_windows": s.get("StartWithWindows"),
+        "token_prefix": (s.get("Token", "")[:8] + "...") if s.get("Token") else None,
+        "device_id": d.get("id"),
+        "dashboard": "https://app.traffmonetizer.com/dashboard",
+    })
+
+
 if __name__ == "__main__":
     if not TOKEN:
         log("⚠️  CLOUD_DESKTOP_TOKEN not set — exec/tunnel endpoints will deny all requests")
