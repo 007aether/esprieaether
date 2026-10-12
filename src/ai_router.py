@@ -62,9 +62,11 @@ CHAINS = {
     "aether-auto": ["ollama-local", "llm7-fast", "llm7-big"],
     "aether-local": ["ollama-local"],
     "aether-cloud": ["llm7-fast", "llm7-big"],
+    # aliases so DSH's own default (qwen2.5:3b) also routes through the chain
+    "qwen2.5:3b": ["ollama-local", "llm7-fast"],
 }
 
-VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud"]
+VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "qwen2.5:3b"]
 
 _lock = threading.Lock()
 _state = {
