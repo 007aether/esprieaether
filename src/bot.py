@@ -1135,9 +1135,142 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.edit_text(f"⚠️ خطأ: {e}")
 
 
-# ═══════════════════════════════════════
+@authorized_only
+async def cmd_files(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """📁 file manager — /files [path]"""
+    try:
+        from src.file_manager import list_dir, read_file, delete_file, write_file
+        if not context.args:
+            r = list_dir(".")
+            items = r.get("items", [])[:20]
+            text = "📁 *Files* (root)\n\n"
+            for it in items:
+                icon = "📁" if it["type"] == "dir" else "📄"
+                text += f"{icon} `{it['name']}`\n"
+            await update.message.reply_text(text, parse_mode="Markdown")
+            return
+        sub = context.args[0]
+        if sub == "read" and len(context.args) > 1:
+            r = read_file(context.args[1])
+            text = f"📄 `{context.args[1]}` ({r.get('size',0)}B)\n\n{r.get('content','')}"
+        elif sub == "delete" and len(context.args) > 1:
+            r = delete_file(context.args[1])
+            text = f"🗑️ deleted: `{context.args[1]}`" if r.get("ok") else f"❌ {r.get('error')}"
+        else:
+            r = list_dir(sub)
+            items = r.get("items", [])
+            text = f"📁 `{sub}`\n\n"
+            for it in items[:30]:
+                icon = "📁" if it["type"] == "dir" else "📄"
+                text += f"{icon} `{it['name']}`\n"
+        await update.message.reply_text(text[:4000], parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_tasks(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """📅 calendar/tasks — /task [add|list|done]"""
+    try:
+        from src.calendar_agent import add_task, list_tasks, complete_task
+        if not context.args:
+            r = list_tasks()
+            tasks = r.get("tasks", [])
+            if not tasks:
+                await update.message.reply_text("📅 ما كاينش tasks.")
+                return
+            text = "📅 *Tasks*\n\n"
+            for t in tasks[:20]:
+                due = f" ⏰{t['due']}" if t.get("due") else ""
+                text += f"`{t['id']}` {t['title']}{due}\n"
+            await update.message.reply_text(text, parse_mode="Markdown")
+            return
+        sub = context.args[0]
+        if sub == "add" and len(context.args) > 1:
+            due = context.args[2] if len(context.args) > 2 else None
+            r = add_task(" ".join(context.args[1:2]), due)
+            await update.message.reply_text(f"✅ task #{r.get('id')}: {context.args[1]}")
+        elif sub == "done" and len(context.args) > 1:
+            r = complete_task(int(context.args[1]))
+            await update.message.reply_text(f"✅ done: #{context.args[1]}")
+        else:
+            await update.message.reply_text("⚠️ /task [add|done|list]")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_vault(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🔐 password vault — /vault [get|store|list]"""
+    try:
+        from src.vault_agent import store, retrieve, list_secrets, delete_secret
+        if not context.args:
+            r = list_secrets()
+            names = r.get("names", [])
+            text = "🔐 *Vault*\n\n" + ("\n".join(f"• `{n}`" for n in names) if names else "فارغ")
+            await update.message.reply_text(text, parse_mode="Markdown")
+            return
+        sub = context.args[0]
+        if sub == "store" and len(context.args) > 2:
+            r = store(context.args[1], context.args[2])
+            await update.message.reply_text(f"✅ stored: `{context.args[1]}`")
+        elif sub == "get" and len(context.args) > 1:
+            r = retrieve(context.args[1])
+            if r.get("ok"):
+                await update.message.reply_text(f"🔐 `{r['name']}`:\n`{r['value']}`", parse_mode="Markdown")
+            else:
+                await update.message.reply_text(f"❌ {r.get('error')}")
+        elif sub == "delete" and len(context.args) > 1:
+            r = delete_secret(context.args[1])
+            await update.message.reply_text(f"🗑️ deleted: `{context.args[1]}`")
+        else:
+            await update.message.reply_text("⚠️ /vault [store|get|delete|list]")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_browse(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🌐 browser — /browse <url>"""
+    if not context.args:
+        await update.message.reply_text("⚠️ /browse <url>")
+        return
+    url = context.args[0]
+    msg = await update.message.reply_text(f"🌐 جارٍ فتح {url}...")
+    try:
+        from src.browser_agent import extract, screenshot
+        r = extract(url)
+        if r.get("ok"):
+            text = f"🌐 *{r.get('title', url)}*\n\n{r.get('text', '')[:2500]}"
+            await msg.edit_text(text, parse_mode="Markdown")
+        else:
+            await msg.edit_text(f"❌ {r.get('error')}")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_sysinfo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """💻 system info — /sysinfo"""
+    import platform, shutil
+    text = "💻 *System Info*\n\n"
+    text += f"• OS: `{platform.system()} {platform.release()}`\n"
+    text += f"• Machine: `{platform.machine()}`\n"
+    text += f"• Processor: `{platform.processor()[:40]}`\n"
+    disk = shutil.disk_usage("/")
+    text += f"• Disk: `{disk.used // (2**30)}/{disk.total // (2**30)} GB`\n"
+    try:
+        import psutil
+        text += f"• CPU: `{psutil.cpu_percent(interval=1)}%`\n"
+        text += f"• RAM: `{psutil.virtual_memory().percent}%`\n"
+    except Exception:
+        pass
+    await update.message.reply_text(text, parse_mode="Markdown")
+
+
+# ═══════════════════════════════════
 #  Main
-# ═══════════════════════════════════════
+# ═══════════════════════════════════
 
 async def set_commands(app: Application):
     """ضبط قائمة الأوامر في Telegram"""
@@ -1175,6 +1308,13 @@ async def set_commands(app: Application):
         BotCommand("bandwidth", "مشاركة الإنترنت"),
         BotCommand("approve", "الموافقة على اقتراح"),
         BotCommand("reject", "رفض اقتراح"),
+        BotCommand("robots", "حالة الروبوتات"),
+        BotCommand("robots_run", "تشغيل دورة روبوتات"),
+        BotCommand("files", "مدير الملفات"),
+        BotCommand("task", "المهام والتذكيرات"),
+        BotCommand("vault", "خزنة كلمات السر"),
+        BotCommand("browse", "فتح صفحة ويب"),
+        BotCommand("sysinfo", "معلومات النظام"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
     ]
@@ -1246,7 +1386,12 @@ def main():
     app.add_handler(CommandHandler("pharos", cmd_pharos))
     app.add_handler(CommandHandler("robots", cmd_robots))
     app.add_handler(CommandHandler("robots_run", cmd_robots_run))
-    # أي رسالة عادية → JARVIS
+    app.add_handler(CommandHandler("files", cmd_files))
+    app.add_handler(CommandHandler("task", cmd_tasks))
+    app.add_handler(CommandHandler("vault", cmd_vault))
+    app.add_handler(CommandHandler("browse", cmd_browse))
+    app.add_handler(CommandHandler("sysinfo", cmd_sysinfo))
+
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
     # ضبط قائمة الأوامر عند البدء
