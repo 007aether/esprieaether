@@ -56,12 +56,26 @@ BRAINS = {
         "min_interval": 6.5,
         "label": "LLM7 gpt-oss-20b (cloud)",
     },
+    "groq": {
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "key": os.getenv("GROQ_API_KEY"),  # free tier, needs signup
+        "model": "llama-3.3-70b-versatile",
+        "min_interval": 2.0,
+        "label": "Groq llama-3.3-70b (cloud, fast)",
+    },
+    "minimax": {
+        "url": os.getenv("MINIMAX_BASE_URL", "https://api.minimax.chat/v1") + "/chat/completions",
+        "key": os.getenv("MINIMAX_API_KEY"),
+        "model": os.getenv("MINIMAX_MODEL", "abab6.5s-chat"),
+        "min_interval": 2.0,
+        "label": "MiniMax abab6.5s (cloud, free tier)",
+    },
 }
 
 CHAINS = {
-    "aether-auto": ["ollama-local", "llm7-fast", "llm7-big"],
+    "aether-auto": ["ollama-local", "llm7-fast", "llm7-big", "groq", "minimax"],
     "aether-local": ["ollama-local"],
-    "aether-cloud": ["llm7-fast", "llm7-big"],
+    "aether-cloud": ["llm7-fast", "llm7-big", "groq", "minimax"],
     # aliases so DSH's own default (qwen2.5:3b) also routes through the chain
     "qwen2.5:3b": ["ollama-local", "llm7-fast"],
 }
