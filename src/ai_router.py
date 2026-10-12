@@ -58,10 +58,10 @@ BRAINS = {
     },
     "groq": {
         "url": "https://api.groq.com/openai/v1/chat/completions",
-        "key": os.getenv("GROQ_API_KEY"),  # free tier, needs signup
-        "model": "llama-3.3-70b-versatile",
+        "key": os.getenv("GROQ_API_KEY"),  # free tier
+        "model": "openai/gpt-oss-120b",  # strongest free groq model
         "min_interval": 2.0,
-        "label": "Groq llama-3.3-70b (cloud, fast)",
+        "label": "Groq gpt-oss-120b (cloud, fast)",
     },
     "minimax": {
         "url": os.getenv("MINIMAX_BASE_URL", "https://api.minimax.chat/v1") + "/chat/completions",
@@ -80,7 +80,54 @@ CHAINS = {
     "qwen2.5:3b": ["ollama-local", "llm7-fast"],
 }
 
-VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "qwen2.5:3b"]
+# ── Agent routing (orchestrator merged into router) ──
+# each agent model -> {system prompt, brain chain}
+AGENT_MODELS = {
+    "aether-security": {
+        "system": "أنت وكيل أمن سيبراني. تستعمل hack-skills و claude-red و hexstrike للفحص الأمني.",
+        "chain": ["ollama-local", "groq", "llm7-big"],
+    },
+    "aether-research": {
+        "system": "أنت باحث. تحلل وتلخص المعلومات من مصادر متعددة.",
+        "chain": ["ollama-local", "llm7-fast", "groq"],
+    },
+    "aether-market": {
+        "system": "أنت محلل أسواق. تحلل البيانات المالية والأسهم.",
+        "chain": ["groq", "ollama-local", "llm7-fast"],
+    },
+    "aether-redteam": {
+        "system": "أنت مختبر اختراق. تختبر نقاط الضعف عبر promptfoo.",
+        "chain": ["groq", "llm7-big", "ollama-local"],
+    },
+    "aether-evolve": {
+        "system": "أنت محرك تطوير ذاتي. تحلل الأداء وتقترح تحسينات.",
+        "chain": ["ollama-local", "llm7-fast"],
+    },
+    "aether-general": {
+        "system": "أنت مساعد عام. تجيب على أي سؤال بوضوح.",
+        "chain": ["ollama-local", "llm7-fast", "groq"],
+    },
+}
+
+# keyword -> agent (for auto-routing)
+AGENT_ROUTES = {
+    "aether-security": ["أمن", "اختراق", "ثغرة", "فحص", "pentest", "vuln", "exploit", "hack", "scan", "nmap", "sqlmap", "sécurité"],
+    "aether-research": ["ابحث", "بحث", "لخص", "تلخيص", "research", "analyze", "summarize", "find", "cherche"],
+    "aether-market": ["سوق", "أسهم", "أسعار", "تداول", "stock", "market", "price", "crypto", "trading", "bourse"],
+    "aether-redteam": ["اختبر", "اختبار", "red team", "promptfoo", "test security", "audit"],
+    "aether-evolve": ["طور", "حسّن", "تطوير", "evolve", "improve", "optimize", "améliore"],
+}
+
+VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "qwen2.5:3b"] + list(AGENT_MODELS.keys())
+
+
+def pick_agent(text: str) -> str:
+    """Pick the best agent model for the task text."""
+    text_lower = text.lower()
+    for agent, keywords in AGENT_ROUTES.items():
+        if any(kw in text_lower for kw in keywords):
+            return agent
+    return "aether-general"
 
 _lock = threading.Lock()
 _state = {
@@ -180,7 +227,17 @@ def health():
 def chat():
     payload = request.get_json(force=True, silent=True) or {}
     model = payload.get("model", "aether-auto")
-    chain = list(CHAINS.get(model, CHAINS["aether-auto"]))
+
+    # agent model? inject system prompt + use agent chain
+    if model in AGENT_MODELS:
+        agent = AGENT_MODELS[model]
+        messages = payload.get("messages", [])
+        # inject system prompt if not present
+        if not any(m.get("role") == "system" for m in messages):
+            payload = {**payload, "messages": [{"role": "system", "content": agent["system"]}] + messages}
+        chain = list(agent["chain"])
+    else:
+        chain = list(CHAINS.get(model, CHAINS["aether-auto"]))
 
     # smart routing: long prompts → big brain first
     if model == "aether-auto" and total_chars(payload.get("messages")) > 8000 and "llm7-big" in chain:
@@ -213,7 +270,7 @@ def chat():
                 generate(),
                 status=200,
                 content_type="text/event-stream",
-                headers={"Cache-Control": "no-cache", "X-Aether-Brain": name},
+                headers={"Cache-Control": "no-cache", "X-Aether-Brain": name, "X-Aether-Model": model},
             )
         else:
             try:
@@ -224,7 +281,7 @@ def chat():
                 data,
                 status=200,
                 content_type="application/json",
-                headers={"X-Aether-Brain": name},
+                headers={"X-Aether-Brain": name, "X-Aether-Model": model},
             )
 
     return jsonify({
@@ -237,7 +294,10 @@ def chat():
 
 if __name__ == "__main__":
     port = int(os.getenv("AETHER_ROUTER_PORT", "11435"))
-    print(f"🧠 Aether AI Router — ONE mind, THREE brains — port {port}")
+    print(f"🧠 Aether AI Router — {len(BRAINS)} brains, {len(AGENT_MODELS)} agents — port {port}")
     for m in VIRTUAL_MODELS:
-        print(f"   model: {m} → {CHAINS[m]}")
+        if m in AGENT_MODELS:
+            print(f"   agent: {m} → {AGENT_MODELS[m]['chain']}")
+        else:
+            print(f"   model: {m} → {CHAINS[m]}")
     app.run(host="127.0.0.1", port=port, threaded=True)
