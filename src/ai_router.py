@@ -77,6 +77,7 @@ CHAINS = {
     "aether-auto": ["ollama-local", "llm7-fast", "llm7-big", "groq", "minimax"],
     "aether-local": ["ollama-local"],
     "aether-cloud": ["llm7-fast", "llm7-big", "groq", "minimax"],
+    "aether-groq": ["groq", "llm7-big", "minimax"],
     # aliases so DSH's own default (qwen2.5:3b) also routes through the chain
     "qwen2.5:3b": ["ollama-local", "llm7-fast"],
 }
@@ -198,7 +199,7 @@ AGENT_ROUTES = {
     "aether-quality": ["جودة", "راجع", "مراجعة", "quality", "review", "antislop", "check", "تصفية"],
 }
 
-VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "qwen2.5:3b"] + list(AGENT_MODELS.keys())
+VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "aether-groq", "qwen2.5:3b"] + list(AGENT_MODELS.keys())
 
 
 def pick_agent(text: str) -> str:
