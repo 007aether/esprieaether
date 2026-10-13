@@ -281,6 +281,24 @@ def api_robots_engine_stats():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/api/okx")
+def api_okx():
+    """API OKX — balance + BTC price (read+trade only, no withdrawal)"""
+    try:
+        import sys
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from okx_client import balance, price, OKXError
+        b = balance()
+        return jsonify({
+            "connected": True,
+            "total_equity": b[0].get("totalEq", "0") if b else "0",
+            "btc_usdt": price("BTC-USDT"),
+            "eth_usdt": price("ETH-USDT"),
+        })
+    except Exception as e:
+        return jsonify({"connected": False, "error": str(e)}), 200
+
+
 @app.route("/api/robots/run", methods=["POST"])
 def api_robots_run():
     """API تشغيل دورة روبوتات"""

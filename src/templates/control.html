@@ -93,6 +93,17 @@
     </div>
   </div>
   <div class="card">
+    <h2>💰 OKX Exchange</h2>
+    <div id="okx"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="https://www.okx.com/trade-spot/btc-usdt" target="_blank">OKX BTC-USDT ↗</a>
+      <a href="https://www.okx.com/account/my-api" target="_blank">API Management ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag grn">read+trade</span><span class="tag">no withdrawal</span>
+    </div>
+  </div>
+  <div class="card">
     <h2>🧠 JEV Decisions</h2>
     <div class="stats">
       <div class="stat"><div class="n pur">6</div><div class="l">Brains</div></div>
@@ -103,6 +114,22 @@
     <div class="links">
       <a href="http://localhost:11435/stats" target="_blank">Router Stats ↗</a>
       <a href="http://localhost:11435/decide" target="_blank">JEV /decide ↗</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🤖 Trading Bot</h2>
+    <div class="stats">
+      <div class="stat"><div class="n grn">spot</div><div class="l">Mode</div></div>
+      <div class="stat"><div class="n cya">JEV</div><div class="l">Brain</div></div>
+      <div class="stat"><div class="n org">2%</div><div class="l">Daily cap</div></div>
+      <div class="stat"><div class="n pur">10%</div><div class="l">Max pos</div></div>
+    </div>
+    <div class="links">
+      <a href="https://github.com/007aether/esprieaether/blob/main/src/okx_trading_bot.py" target="_blank">Bot Code ↗</a>
+      <a href="https://www.okx.com/trade-spot/btc-usdt" target="_blank">OKX BTC ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag grn">DRY-RUN</span><span class="tag">no leverage</span><span class="tag">no short</span>
     </div>
   </div>
   <div class="card">
@@ -200,6 +227,20 @@ async function refresh() {
   } catch (e) {
     document.getElementById('robots').innerHTML = row('60 robots', 'via /robots page', '');
   }
+
+  // OKX
+  try {
+    const o = await j(CD + '/api/okx');
+    if (o && o.connected) {
+      document.getElementById('okx').innerHTML =
+        row(dot(true) + 'API', 'connected', 'ok') +
+        row('BTC-USDT', '$' + Number(o.btc_usdt).toLocaleString(), 'pur') +
+        row('ETH-USDT', '$' + Number(o.eth_usdt).toLocaleString(), 'cya') +
+        row('Equity', '$' + (Number(o.total_equity) || 0).toFixed(2), Number(o.total_equity) > 0 ? 'ok' : 'warn');
+    } else {
+      document.getElementById('okx').innerHTML = row(dot(false) + 'API', o.error || 'disconnected', 'err');
+    }
+  } catch (e) {}
 
   // JARVIS
   try {
