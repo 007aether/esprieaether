@@ -107,6 +107,12 @@ SERVICES = {
         "cwd": PROJECT,
         "cmd": [_PY, "src/veritas_kanban.py"],
     },
+    "homedock": {
+        "kind": "http",
+        "url": "http://127.0.0.1:5104/health",
+        "cwd": PROJECT,
+        "cmd": [_PY, "src/homedock_dashboard.py"],
+    },
     # hexstrike intentionally NOT watched: startup takes ~2+ min (process pool +
     # tshark probe) and the watchdog's restart loop kills it mid-startup.
     # Start it manually when needed: cd ../hexstrike-ai && uv run python hexstrike_server.py
