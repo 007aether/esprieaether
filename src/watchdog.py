@@ -95,6 +95,12 @@ SERVICES = {
         "cwd": str(JARVIS_DIR),
         "cmd": [str(JARVIS_DIR / ".venv" / "Scripts" / "python.exe"), "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"],
     },
+    "integrations": {
+        "kind": "http",
+        "url": "http://127.0.0.1:5102/health",
+        "cwd": PROJECT,
+        "cmd": [_PY, "src/integrations_adapter.py"],
+    },
     # hexstrike intentionally NOT watched: startup takes ~2+ min (process pool +
     # tshark probe) and the watchdog's restart loop kills it mid-startup.
     # Start it manually when needed: cd ../hexstrike-ai && uv run python hexstrike_server.py

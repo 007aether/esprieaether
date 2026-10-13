@@ -95,6 +95,17 @@
     </div>
   </div>
   <div class="card">
+    <h2>🧩 Integrations</h2>
+    <div id="integrations"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="http://localhost:5102/list" target="_blank">List ↗</a>
+      <a href="http://localhost:5102/scan" target="_blank">Port Scan ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag pur">15 catalog</span><span class="tag grn">checkmate</span><span class="tag cya">portracker</span>
+    </div>
+  </div>
+  <div class="card">
     <h2>🎯 JARVIS OSINT</h2>
     <div id="jarvis"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
     <div class="links">
@@ -281,6 +292,22 @@ async function refresh() {
     } else {
       document.getElementById('okx').innerHTML = row(dot(false) + 'API', o.error || 'disconnected', 'err');
     }
+  } catch (e) {}
+
+  // Integrations
+  try {
+    const ig = await j('http://127.0.0.1:5102/list');
+    const sc = await j('http://127.0.0.1:5102/scan');
+    let iRow = '';
+    if (ig && ig.integrations) {
+      iRow = row(dot(ig.linked > 0) + 'Linked', ig.linked + '/' + ig.total, ig.linked > 0 ? 'ok' : 'warn');
+      const hp = (ig.integrations || []).filter(o => o.priority === 'high');
+      for (const o of hp) iRow += row((o.linked ? dot(true) : dot(false)) + o.name, o.use, o.linked ? 'ok' : 'warn');
+      if (sc && sc.ports) iRow += row('Ports up', sc.up_count + '/' + Object.keys(sc.ports).length, 'pur');
+    } else {
+      iRow = row(dot(false) + 'adapter', 'offline', 'err');
+    }
+    document.getElementById('integrations').innerHTML = iRow;
   } catch (e) {}
 
   // JARVIS
