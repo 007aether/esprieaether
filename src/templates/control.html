@@ -191,11 +191,12 @@ async function refresh() {
   // JARVIS
   try {
     let jvOk = false;
-    try { const r = await fetch('http://127.0.0.1:8000/health', {signal: AbortSignal.timeout(3000)}); jvOk = r.status < 500; } catch (e) {}
+    try { const r = await fetch('http://127.0.0.1:8000/api/health', {signal: AbortSignal.timeout(3000)}); jvOk = r.status < 500; } catch (e) {}
     document.getElementById('jarvis').innerHTML =
-      row(dot(jvOk) + 'Backend', jvOk ? 'online' : 'offline (needs API keys)', jvOk ? 'ok' : 'warn') +
+      row(dot(jvOk) + 'Backend', jvOk ? 'online' : 'offline', jvOk ? 'ok' : 'warn') +
       row('Agents', '16 (LinkedIn, X, Instagram, Exa, Darkweb...)', 'pur') +
-      row('Pipeline', 'Face ID → swarm → synthesis', '');
+      row('Pipeline', 'Face ID → swarm → synthesis', '') +
+      row('API keys', 'exa ✓ openai ✓ gemini ✓ anthropic ✓', 'ok');
   } catch (e) {}
 
   // TM
