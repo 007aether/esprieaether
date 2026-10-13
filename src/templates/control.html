@@ -82,6 +82,17 @@
     </div>
   </div>
   <div class="card">
+    <h2>🎯 JARVIS OSINT</h2>
+    <div id="jarvis"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="https://github.com/affaan-m/JARVIS" target="_blank">JARVIS Repo ↗</a>
+      <a href="http://localhost:8000/docs" target="_blank">API Docs ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag pur">16 agents</span><span class="tag cyan">OSINT</span><span class="tag">Face ID</span>
+    </div>
+  </div>
+  <div class="card">
     <h2>💰 TraffMonetizer</h2>
     <div id="tm"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
     <div class="links"><a href="https://app.traffmonetizer.com/dashboard" target="_blank">📊 Dashboard ↗</a></div>
@@ -176,6 +187,16 @@ async function refresh() {
   } catch (e) {
     document.getElementById('robots').innerHTML = row('60 robots', 'via /robots page', '');
   }
+
+  // JARVIS
+  try {
+    let jvOk = false;
+    try { const r = await fetch('http://127.0.0.1:8000/health', {signal: AbortSignal.timeout(3000)}); jvOk = r.status < 500; } catch (e) {}
+    document.getElementById('jarvis').innerHTML =
+      row(dot(jvOk) + 'Backend', jvOk ? 'online' : 'offline (needs API keys)', jvOk ? 'ok' : 'warn') +
+      row('Agents', '16 (LinkedIn, X, Instagram, Exa, Darkweb...)', 'pur') +
+      row('Pipeline', 'Face ID → swarm → synthesis', '');
+  } catch (e) {}
 
   // TM
   try {
