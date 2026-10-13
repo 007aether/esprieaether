@@ -30,6 +30,12 @@ import urllib.request
 import urllib.error
 from pathlib import Path
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+except ImportError:
+    pass
+
 from flask import Flask, request, Response, jsonify
 
 app = Flask(__name__)
@@ -70,6 +76,15 @@ BRAINS = {
         "model": os.getenv("MINIMAX_MODEL", "abab6.5s-chat"),
         "min_interval": 2.0,
         "label": "MiniMax abab6.5s (cloud, free tier)",
+    },
+    # JEV — TypeSafe System One decision brain (typed choices, not chat)
+    # Exposed as a special virtual model; /decide endpoint uses it directly.
+    "jev": {
+        "url": "https://openrouter.ai/api/alpha/decisions",
+        "key": os.getenv("OPENROUTER_API_KEY"),
+        "model": os.getenv("JEV_MODEL", "~typesafe/jev-latest"),
+        "min_interval": 0.0,
+        "label": "JEV System One (typed decisions)",
     },
 }
 
@@ -199,7 +214,7 @@ AGENT_ROUTES = {
     "aether-quality": ["جودة", "راجع", "مراجعة", "quality", "review", "antislop", "check", "تصفية"],
 }
 
-VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "aether-groq", "qwen2.5:3b"] + list(AGENT_MODELS.keys())
+VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "aether-groq", "qwen2.5:3b", "aether-decide"] + list(AGENT_MODELS.keys())
 
 
 def pick_agent(text: str) -> str:
@@ -373,12 +388,50 @@ def chat():
     }), 502
 
 
+@app.route("/decide", methods=["POST"])
+def decide():
+    """JEV typed-decision endpoint — pass through to TypeSafe System One.
+
+    Body: {"state": {...}, "questions": {name: {type: choice|noul|score, instructions, criteria}}}
+    Returns the raw JEV answer (typed choices + probabilities + confidence).
+    """
+    if not BRAINS["jev"]["key"]:
+        return jsonify({"error": {"message": "OPENROUTER_API_KEY not set", "type": "aether_router_error"}}), 503
+
+    payload = request.get_json(force=True, silent=True) or {}
+    state = payload.get("state")
+    questions = payload.get("questions")
+    if not isinstance(state, dict) or not isinstance(questions, dict):
+        return jsonify({"error": {"message": "state and questions must be objects", "type": "bad_request"}}), 400
+
+    body = {
+        "model": payload.get("model", BRAINS["jev"]["model"]),
+        "state": state,
+        "questions": questions,
+    }
+    try:
+        resp = open_brain("jev", body, 30)
+    except BrainError as e:
+        mark_result("jev", False, str(e))
+        return jsonify({"error": {"message": str(e), "type": "aether_router_error"}}), 502
+
+    mark_result("jev", True)
+    try:
+        data = resp.read()
+    finally:
+        resp.close()
+    return Response(data, status=200, content_type="application/json",
+                    headers={"X-Aether-Brain": "jev", "X-Aether-Model": body["model"]})
+
+
 if __name__ == "__main__":
     port = int(os.getenv("AETHER_ROUTER_PORT", "11435"))
     print(f"🧠 Aether AI Router — {len(BRAINS)} brains, {len(AGENT_MODELS)} agents — port {port}")
     for m in VIRTUAL_MODELS:
         if m in AGENT_MODELS:
             print(f"   agent: {m} → {AGENT_MODELS[m]['chain']}")
-        else:
+        elif m in CHAINS:
             print(f"   model: {m} → {CHAINS[m]}")
+        else:
+            print(f"   model: {m} → (direct brain)")
     app.run(host="127.0.0.1", port=port, threaded=True)
