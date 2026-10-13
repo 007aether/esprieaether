@@ -9,3 +9,8 @@ logs/
 .DS_Store
 integrations/
 .env.bak
+
+# ECC junctions (Windows junction points, not real dirs)
+.ecc/skills
+.ecc/agents
+.ecc/commands

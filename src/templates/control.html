@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🧠 EsprieAether — Unified Control Center</title>
+<style>
+  :root { --bg:#0a0e14; --fg:#e6edf3; --mut:#7d8590; --card:#11161d; --brd:#21262d; --acc:#2f81f7; --ok:#3fb950; --err:#f85149; --warn:#d29922; --pur:#a371f7; --cyan:#39c5cf; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--fg); font:14px/1.6 -apple-system,'Segoe UI',Roboto,'Noto Sans Arabic',sans-serif; padding:24px; max-width:1500px; margin:0 auto; }
+  h1 { font-size:22px; margin-bottom:2px; }
+  h1 .logo { color:var(--acc); }
+  .sub { color:var(--mut); margin-bottom:22px; font-size:13px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; margin-bottom:14px; }
+  .card { background:var(--card); border:1px solid var(--brd); border-radius:12px; padding:18px; }
+  .card h2 { font-size:12px; color:var(--mut); text-transform:uppercase; letter-spacing:1px; margin-bottom:14px; display:flex; align-items:center; gap:6px; }
+  .row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--brd); }
+  .row:last-child { border-bottom:none; }
+  .name { color:var(--fg); font-weight:500; }
+  .val { font-family:ui-monospace,'Cascadia Code',monospace; font-size:12px; color:var(--mut); }
+  .ok { color:var(--ok); } .err { color:var(--err); } .warn { color:var(--warn); } .pur { color:var(--pur); } .cyan { color:var(--cyan); }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-inline-end:7px; vertical-align:middle; }
+  .big { font-size:28px; font-weight:700; }
+  .stats { display:flex; gap:18px; flex-wrap:wrap; }
+  .stat { text-align:center; }
+  .stat .n { font-size:24px; font-weight:700; }
+  .stat .l { font-size:11px; color:var(--mut); text-transform:uppercase; letter-spacing:.5px; }
+  a { color:var(--acc); text-decoration:none; } a:hover { text-decoration:underline; }
+  .tag { display:inline-block; background:var(--brd); color:var(--fg); padding:3px 10px; border-radius:14px; font-size:11px; margin:2px; }
+  .tag.pur { background:#a371f722; color:var(--pur); }
+  .tag.cyan { background:#39c5cf22; color:var(--cyan); }
+  button { background:var(--acc); color:#fff; border:none; padding:7px 14px; border-radius:7px; cursor:pointer; font-size:13px; }
+  button:hover { opacity:.85; }
+  input { background:var(--bg); color:var(--fg); border:1px solid var(--brd); border-radius:7px; padding:7px 10px; font-size:13px; width:100%; margin:4px 0; font-family:ui-monospace,monospace; }
+  pre { background:var(--bg); border:1px solid var(--brd); border-radius:7px; padding:10px; font-size:12px; overflow:auto; max-height:180px; white-space:pre-wrap; }
+  .bar { height:6px; background:var(--brd); border-radius:3px; overflow:hidden; margin-top:4px; }
+  .bar > div { height:100%; background:var(--ok); border-radius:3px; transition:width .5s; }
+  .links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  .links a { background:var(--brd); padding:5px 12px; border-radius:7px; font-size:12px; }
+  .links a:hover { background:var(--acc); color:#fff; text-decoration:none; }
+  .harness { display:inline-block; padding:2px 8px; border-radius:5px; font-size:10px; font-weight:600; margin-inline-end:4px; }
+  .h-hermes { background:#2f81f722; color:var(--acc); } .h-ecc { background:#a371f722; color:var(--pur); }
+  .h-sunna { background:#3fb95022; color:var(--ok); } .h-dsh { background:#d2992222; color:var(--warn); }
+  .h-aether { background:#39c5cf22; color:var(--cyan); }
+</style>
+</head>
+<body>
+<h1><span class="logo">🧠</span> EsprieAether — Unified Control Center</h1>
+<div class="sub">5 harnesses · 1 system · <span id="clock"></span></div>
+
+<div class="grid">
+  <div class="card">
+    <h2>🖥️ Services</h2>
+    <div id="services"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>🧠 AI Brains (5)</h2>
+    <div id="brains"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>🎯 Agents (7)</h2>
+    <div id="agents"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>🤖 Robots (60)</h2>
+    <div id="robots"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>🧩 ECC Substrate</h2>
+    <div class="stats">
+      <div class="stat"><div class="n pur">311</div><div class="l">Skills</div></div>
+      <div class="stat"><div class="n pur">71</div><div class="l">Agents</div></div>
+      <div class="stat"><div class="n pur">97</div><div class="l">Commands</div></div>
+      <div class="stat"><div class="n pur">7</div><div class="l">Hooks</div></div>
+    </div>
+    <div class="links">
+      <a href="https://github.com/affaan-m/ECC" target="_blank">ECC Repo ↗</a>
+      <a href="https://ecc.tools" target="_blank">ecc.tools ↗</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>💰 TraffMonetizer</h2>
+    <div id="tm"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links"><a href="https://app.traffmonetizer.com/dashboard" target="_blank">📊 Dashboard ↗</a></div>
+  </div>
+  <div class="card">
+    <h2>👥 Group</h2>
+    <div id="group"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>🔗 SSH Tunnel</h2>
+    <div id="tunnel"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>🏗️ Harness Topology</h2>
+  <div style="line-height:2.2; font-size:13px;">
+    <span class="harness h-hermes">HERMES</span> operator shell (front door)<br>
+    &nbsp;&nbsp;↳ <span class="harness h-ecc">ECC</span> 311 skills + 71 agents + 97 commands<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;↳ <span class="harness h-aether">AETHER</span> router (5 brains, 12 models)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ <span class="harness h-sunna">SUNNA</span> team workspace<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ <span class="harness h-dsh">DSH</span> headless + desktop UI<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ 60 robots · 7 agents · Telegram · Cloud desktop
+  </div>
+</div>
+
+<div class="grid" style="margin-top:14px;">
+  <div class="card">
+    <h2>⚡ Remote Exec</h2>
+    <input id="cmd" placeholder="أمر shell — مثال: dir" onkeydown="if(event.key==='Enter')runExec()">
+    <div style="margin:8px 0"><button onclick="runExec()">تنفيذ</button> <button onclick="refresh()">🔄 تحديث</button></div>
+    <pre id="out">—</pre>
+  </div>
+  <div class="card">
+    <h2>📊 System Metrics</h2>
+    <div id="metrics"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+</div>
+
+<script>
+window.__TOKEN = window.__TOKEN || '';
+const CD = 'http://127.0.0.1:5001';
+
+async function j(u, opt) { const r = await fetch(u, opt); return r.json(); }
+function row(name, val, cls) { return `<div class="row"><span class="name">${name}</span><span class="val ${cls||''}">${val}</span></div>`; }
+function dot(on) { return `<span class="dot" style="background:${on?'var(--ok)':'var(--err)'}"></span>`; }
+
+async function refresh() {
+  document.getElementById('clock').textContent = new Date().toLocaleString('ar');
+
+  // Services (direct health checks)
+  const svcs = [
+    ['Ollama', 'http://127.0.0.1:11434/api/tags'],
+    ['Router', 'http://127.0.0.1:11435/health'],
+    ['Orchestrator', 'http://127.0.0.1:11436/health'],
+    ['Web', 'http://127.0.0.1:5000/health'],
+    ['Cloud Desktop', 'http://127.0.0.1:5001/health'],
+  ];
+  let svcHtml = '';
+  for (const [n, u] of svcs) {
+    let ok = false;
+    try { const r = await fetch(u, {signal: AbortSignal.timeout(4000)}); ok = r.status < 500; } catch (e) {}
+    svcHtml += row(dot(ok) + n, ok ? '✅ 200' : '❌ down', ok ? 'ok' : 'err');
+  }
+  document.getElementById('services').innerHTML = svcHtml;
+
+  // Brains
+  try {
+    const b = await j('http://127.0.0.1:11435/stats');
+    document.getElementById('brains').innerHTML = Object.entries(b.brains || {}).map(([k, v]) =>
+      row(dot(v.healthy) + v.label || k, `ok:${v.ok} fail:${v.fail}`, v.healthy ? 'ok' : 'err')).join('');
+  } catch (e) {
+    document.getElementById('brains').innerHTML = row(dot(false) + 'router', 'offline', 'err');
+  }
+
+  // Agents
+  try {
+    const a = await j('http://127.0.0.1:11436/agents');
+    document.getElementById('agents').innerHTML = Object.entries(a).map(([k, v]) =>
+      row(k, v.skill, 'pur')).join('');
+  } catch (e) {
+    document.getElementById('agents').innerHTML = row(dot(false) + 'orchestrator', 'offline', 'err');
+  }
+
+  // Robots
+  try {
+    const r = await j('http://127.0.0.1:5000/api/robots/engine/stats');
+    document.getElementById('robots').innerHTML =
+      `<div class="stats"><div class="stat"><div class="n ok">${r.ok||60}</div><div class="l">OK</div></div>` +
+      `<div class="stat"><div class="n err">${r.error||0}</div><div class="l">Errors</div></div>` +
+      `<div class="stat"><div class="n">${r.cycle||1}</div><div class="l">Cycles</div></div></div>`;
+  } catch (e) {
+    document.getElementById('robots').innerHTML = row('60 robots', 'via /robots page', '');
+  }
+
+  // TM
+  try {
+    const t = await j(CD + '/tm');
+    document.getElementById('tm').innerHTML =
+      row(dot(t.running) + 'TraffMonetizer', t.running ? `${t.connections} conn` : 'offline', t.running ? 'ok' : 'err') +
+      row('accepting', t.accepting ? 'yes ✅' : 'no', t.accepting ? 'ok' : 'warn') +
+      row('device', (t.device_id || '').slice(0, 16) + '…', '');
+  } catch (e) {}
+
+  // Group
+  try {
+    const g = await j(CD + '/group');
+    document.getElementById('group').innerHTML = (g.members || []).map(m =>
+      `<span class="tag">${m.name} · ${m.role}</span>`).join('');
+  } catch (e) {}
+
+  // Tunnel
+  try {
+    const t = await j(CD + '/tunnel/status');
+    document.getElementById('tunnel').innerHTML = t.pid
+      ? row(dot(true) + 'active', `${t.remote_host}:${t.remote_port}`, 'ok')
+      : row(dot(false) + 'inactive', 'configure TUNNEL_HOST/USER', 'warn');
+  } catch (e) {}
+
+  // Metrics (disk)
+  try {
+    const s = await j(CD + '/status');
+    const p = s.processes || {};
+    document.getElementById('metrics').innerHTML =
+      Object.entries(p).map(([k, v]) => row(k, v, v > 0 ? 'ok' : 'err')).join('');
+  } catch (e) {}
+}
+
+async function runExec() {
+  const cmd = document.getElementById('cmd').value;
+  if (!cmd) return;
+  const out = document.getElementById('out');
+  out.textContent = '...';
+  try {
+    const r = await fetch(CD + '/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Token': window.__TOKEN || '' },
+      body: JSON.stringify({ cmd, timeout: 60 }),
+    });
+    const res = await r.json();
+    out.textContent = res.error ? ('❌ ' + res.error) : (res.stdout || res.stderr || '(empty)') + `\n[exit ${res.exit_code}]`;
+  } catch (e) { out.textContent = '❌ ' + e; }
+}
+
+refresh();
+setInterval(refresh, 20000);
+</script>
+</body>
+</html>

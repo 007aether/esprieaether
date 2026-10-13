@@ -203,6 +203,12 @@ def dashboard():
     return redirect(url_for("index"))
 
 
+@app.route("/control")
+def control():
+    """Unified Control Center — services, brains, agents, robots, ECC, TM, tunnel."""
+    return render_template("control.html")
+
+
 @app.route("/metrics")
 def metrics_page():
     """صفحة المقاييس"""
