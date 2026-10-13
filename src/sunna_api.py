@@ -195,6 +195,18 @@ def netlify():
         return jsonify({"deployed": False})
 
 
+@app.route("/prices")
+def prices():
+    """Live material prices (steel/galva/zinc) from the price tracker."""
+    pj = SUNNA / "Recherche" / "live_prices.json"
+    if not pj.exists():
+        return jsonify({"tracked": False})
+    try:
+        return jsonify({"tracked": True, "prices": json.loads(pj.read_text(encoding="utf-8"))})
+    except Exception:
+        return jsonify({"tracked": False})
+
+
 if __name__ == "__main__":
     print(f"📋 Sunna API bridge — {SUNNA} — port {PORT}")
     print(f"   sunna dir exists: {SUNNA.exists()}")

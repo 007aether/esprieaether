@@ -69,6 +69,17 @@
 
 <div class="grid">
   <div class="card">
+    <h2>📈 Sunna Prices</h2>
+    <div id="sunnaprix"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="http://localhost:5100/status" target="_blank">Sunna API ↗</a>
+      <a href="https://github.com/clucraft/PriceGhost" target="_blank">PriceGhost ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag grn">live</span><span class="tag">6h refresh</span><span class="tag cya">devis feed</span>
+    </div>
+  </div>
+  <div class="card">
     <h2>🏭 SUNNA Company</h2>
     <div id="sunna"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
     <div id="sunnaweb" style="margin-top:8px"></div>
@@ -276,6 +287,20 @@ async function refresh() {
           row('URL', nf.url.replace('https://', ''), 'cya');
       } else {
         document.getElementById('sunnaweb').innerHTML = row(dot(false) + 'Site', 'not deployed', 'err');
+      }
+    } catch (e) {}
+    try {
+      const pr = await j('http://127.0.0.1:5100/prices');
+      if (pr && pr.tracked && pr.prices) {
+        let pRow = '';
+        for (const [k, v] of Object.entries(pr.prices)) {
+          if (v.price == null) continue;
+          const ch = (typeof v.change_pct === 'number') ? ' (' + (v.change_pct > 0 ? '+' : '') + v.change_pct + '%)' : '';
+          pRow += row(k, v.price + ' ' + (v.unit || '') + ch, 'cya');
+        }
+        document.getElementById('sunnaprix').innerHTML = pRow || row('Prices', 'collecting...', 'warn');
+      } else {
+        document.getElementById('sunnaprix').innerHTML = row(dot(false) + 'Tracker', 'starting', 'warn');
       }
     } catch (e) {}
   } catch (e) {}

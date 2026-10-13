@@ -1587,6 +1587,31 @@ async def cmd_sunnanetlify(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
 
 
+@authorized_only
+async def cmd_sunnaprix(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """📈 /sunnaprix — live material prices (steel/galva/zinc)"""
+    pj = SUNNA_DIR / "Recherche" / "live_prices.json"
+    if not pj.exists():
+        await update.message.reply_text("📈 ما كاين حتى بيانات — شغّل `sunna_price_tracker.py`")
+        return
+    try:
+        d = json.loads(pj.read_text(encoding="utf-8"))
+    except Exception:
+        d = {}
+    lines = ["📈 *أثمنة المواد (live)*", ""]
+    for k, v in d.items():
+        p = v.get("price")
+        unit = v.get("unit", "")
+        ch = v.get("change_pct")
+        if p is None:
+            lines.append(f"• {k}: —")
+        else:
+            arrow = f" ({ch:+.1f}%)" if isinstance(ch, (int, float)) else ""
+            lines.append(f"• {k}: *{p}* {unit}{arrow}")
+    lines += ["", "🔄 tracker كايحدّث كل 6 ساعات", "🧾 `/sunnadevis` كايستعمل هاد الأثمنة"]
+    await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
+
+
 # ═══════════════════════════════════
 #  Main
 # ═══════════════════════════════════
@@ -1639,6 +1664,7 @@ async def set_commands(app: Application):
         BotCommand("sunnabilan", "تقرير Sunna اليومي"),
         BotCommand("sunnadevis", "إنشاء devis (عرض ثمن)"),
         BotCommand("sunnanetlify", "رابط موقع Sunna المباشر"),
+        BotCommand("sunnaprix", "أثمنة المواد الحية (حديد/غلفنة)"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
     ]
@@ -1733,6 +1759,7 @@ def main():
     app.add_handler(CommandHandler("sunnabilan", cmd_sunnabilan))
     app.add_handler(CommandHandler("sunnadevis", cmd_sunnadevis))
     app.add_handler(CommandHandler("sunnanetlify", cmd_sunnanetlify))
+    app.add_handler(CommandHandler("sunnaprix", cmd_sunnaprix))
 
     # register /sunna* in the Telegram command menu
     try:
