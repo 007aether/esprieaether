@@ -37,18 +37,29 @@ CATALOG = {
     "portracker":       ("mostafa-wahied/Portracker",      "port/service discovery",   "easy",   "live port map"),
     "ask4me":           ("easychen/ask4me",                "human-in-the-loop",        "med",    "approve risky actions"),
     "PriceGhost":       ("clucraft/PriceGhost",            "AI price tracker",         "high",   "track steel/galva prices"),
-    "invoice-builder":  ("piratuks/invoice-builder",       "offline invoicing",        "high",   "real PDF invoices"),
-    "cronpulse":        ("techfort/cronpulse-community",   "cron monitor + alerts",    "high",   "alert if bots die"),
+    "invoice-builder":  ("piratuks/invoice-builder",       "offline invoicing",        "high",   "PDF invoices (devis+facture, folded)"),
+    "cronpulse":        ("techfort/cronpulse-community",   "cron monitor + alerts",    "high",   "alert if bots die (heartbeat)"),
     "octelium":         ("octelium/octelium",              "zero-trust access",        "med",    "secure services"),
-    "veritas-kanban":   ("BradGroux/veritas-kanban",       "markdown kanban + agents", "med",    "task board"),
+    "veritas-kanban":   ("BradGroux/veritas-kanban",       "markdown kanban + agents", "med",    "task board (:5103, folded)"),
     "FrankMD":          ("akitaonrails/FrankMD",           "markdown blog editor",     "easy",   "Sunna blog (SEO)"),
     "homescreen-hero":  ("trentferguson/homescreen-hero",  "media dashboard",          "easy",   "media widgets"),
     "kino":             ("mmcdole/kino",                   "terminal Plex client",     "easy",   "media control"),
     "mimic":            ("littledivy/mimic",               "app→python client",        "med",    "auto API clients"),
     "xprivo":           ("xprivo/ai-chat",                 "privacy AI chat",          "med",    "customer AI assistant"),
     "outline":          ("easychen/outline",               "knowledge base",           "med",    "team wiki/SOPs"),
-    "homedock":         ("BansheeTech/HomeDockOS",         "homelab OS dashboard",      "easy",   "widget dashboard (folded in, :5104)"),
-    "apollo":           ("manasseh-zw/apollo",             "deep research meta-agent",  "high",   "research coordinator (Athena+Hermes)"),
+    "homedock":         ("BansheeTech/HomeDockOS",         "homelab OS dashboard",     "easy",   "widget dashboard (:5104, folded)"),
+    "apollo":           ("manasseh-zw/apollo",             "deep research meta-agent", "high",   "research coordinator (aether-apollo)"),
+}
+
+# integrations that are FOLDED into our stack (native adapter, no external clone)
+FOLDED = {
+    "invoice-builder": 5103,   # no — invoices via devis/facture builder
+}
+# actual folded services (native, running in-stack):
+FOLDED_SERVICES = {
+    "invoice-builder": None,       # bots/devis_builder.py + facture_builder.py (PDF)
+    "veritas-kanban": "http://127.0.0.1:5103/health",
+    "homedock": "http://127.0.0.1:5104/health",
 }
 
 # known stack ports (what we map)
@@ -87,10 +98,19 @@ def list_all():
     for name, (repo, role, prio, use) in CATALOG.items():
         d = INT_DIR / name
         linked = d.exists() and len(list(d.iterdir())) > 0 if d.exists() else False
+        folded = name in FOLDED_SERVICES
+        # folded kanban/homedock are linked if their service is up
+        if name == "veritas-kanban":
+            linked = linked or port_open(5103)
+        elif name == "homedock":
+            linked = linked or port_open(5104)
+        elif name == "invoice-builder":
+            # folded: devis + facture builders exist
+            linked = True
         out.append({
             "name": name, "repo": repo, "role": role, "priority": prio,
-            "use": use, "linked": linked,
-            "languages": stack_languages(d) if linked else [],
+            "use": use, "linked": linked, "folded": folded,
+            "languages": stack_languages(d) if linked and d.exists() else (["folded"] if folded else []),
         })
     return jsonify({"integrations": out, "total": len(out),
                     "linked": sum(1 for o in out if o["linked"])})
