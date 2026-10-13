@@ -48,13 +48,14 @@ CATALOG = {
     "xprivo":           ("xprivo/ai-chat",                 "privacy AI chat",          "med",    "customer AI assistant"),
     "outline":          ("easychen/outline",               "knowledge base",           "med",    "team wiki/SOPs"),
     "homedock":         ("homedock-os/homedock-os",        "homelab OS",               "easy",   "alt dashboard"),
+    "apollo":           ("manasseh-zw/apollo",             "deep research meta-agent",  "high",   "research coordinator (Athena+Hermes)"),
 }
 
 # known stack ports (what we map)
 STACK_PORTS = {
     11434: "ollama", 11435: "router", 11436: "orchestrator",
     5000: "web", 5001: "cloud-desktop", 5100: "sunna-api",
-    5101: "dsh-bridge", 5102: "integrations", 8000: "jarvis",
+    5101: "dsh-bridge", 5102: "integrations", 5103: "kanban", 8000: "jarvis",
 }
 
 

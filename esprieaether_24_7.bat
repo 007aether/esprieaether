@@ -53,6 +53,10 @@ echo [+] starting bot heartbeat (cronpulse-style alerts)...
 start "" /min "%PY%" srcot_heartbeat.py
 
 timeout /t 2 /nobreak >nul
+echo [+] starting kanban board (5103)...
+start "" /min "%PY%" srceritas_kanban.py
+
+timeout /t 2 /nobreak >nul
 echo [+] starting integrations adapter (5102)...
 start "" /min "%PY%" src\integrations_adapter.py
 

@@ -1612,6 +1612,32 @@ async def cmd_sunnaprix(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
 
 
+@authorized_only
+async def cmd_sunnakanban(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """📋 /sunnakanban — Sunna kanban board (todo/doing/done)"""
+    kb = _sunna_api("/kanban") if False else None  # kanban is on 5103, not 5100
+    import urllib.request as _u
+    try:
+        with _u.urlopen("http://127.0.0.1:5103/board", timeout=8) as r:
+            import json as _j
+            kb = _j.loads(r.read().decode())
+    except Exception:
+        kb = None
+    if not kb:
+        await update.message.reply_text("📋 kanban ماشي شغال — شغّل `veritas_kanban.py`")
+        return
+    lines = ["📋 *Sunna Kanban*", ""]
+    for col, emoji in [("todo", "🔴"), ("doing", "🟡"), ("done", "🟢")]:
+        items = kb.get(col, [])
+        lines.append(f"{emoji} *{col}* ({len(items)})")
+        for it in items[:6]:
+            t = it["title"][:45]
+            lines.append(f"  • {t}")
+        lines.append("")
+    lines.append("🔗 http://localhost:5103/board")
+    await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
+
+
 # ═══════════════════════════════════
 #  Main
 # ═══════════════════════════════════
@@ -1665,6 +1691,7 @@ async def set_commands(app: Application):
         BotCommand("sunnadevis", "إنشاء devis (عرض ثمن)"),
         BotCommand("sunnanetlify", "رابط موقع Sunna المباشر"),
         BotCommand("sunnaprix", "أثمنة المواد الحية (حديد/غلفنة)"),
+        BotCommand("sunnakanban", "لوحة Sunna kanban"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
     ]
@@ -1760,6 +1787,7 @@ def main():
     app.add_handler(CommandHandler("sunnadevis", cmd_sunnadevis))
     app.add_handler(CommandHandler("sunnanetlify", cmd_sunnanetlify))
     app.add_handler(CommandHandler("sunnaprix", cmd_sunnaprix))
+    app.add_handler(CommandHandler("sunnakanban", cmd_sunnakanban))
 
     # register /sunna* in the Telegram command menu
     try:

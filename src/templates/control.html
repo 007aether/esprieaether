@@ -69,6 +69,17 @@
 
 <div class="grid">
   <div class="card">
+    <h2>📋 Sunna Kanban</h2>
+    <div id="kanban"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="http://localhost:5103/board" target="_blank">Board ↗</a>
+      <a href="https://github.com/BradGroux/veritas-kanban" target="_blank">Veritas ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag pur">markdown</span><span class="tag grn">no DB</span>
+    </div>
+  </div>
+  <div class="card">
     <h2>📈 Sunna Prices</h2>
     <div id="sunnaprix"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
     <div class="links">
@@ -262,6 +273,22 @@ async function refresh() {
   } catch (e) {
     document.getElementById('robots').innerHTML = row('60 robots', 'via /robots page', '');
   }
+
+  // Kanban
+  try {
+    const kb = await j('http://127.0.0.1:5103/board');
+    if (kb) {
+      const t = (kb.todo || []).length, d = (kb.doing || []).length, dn = (kb.done || []).length;
+      let kRow = row('todo', t + ' items', t > 0 ? 'org' : '') +
+                 row('doing', d + ' items', d > 0 ? 'cya' : '') +
+                 row('done', dn + ' items', 'grn');
+      // show top 2 todo titles
+      for (const it of (kb.todo || []).slice(0, 2)) kRow += row('•', it.title.slice(0, 40), '');
+      document.getElementById('kanban').innerHTML = kRow;
+    } else {
+      document.getElementById('kanban').innerHTML = row(dot(false) + 'board', 'offline', 'err');
+    }
+  } catch (e) {}
 
   // SUNNA
   try {

@@ -108,6 +108,16 @@ AGENT_MODELS = {
         "system": "أنت باحث. تحلل وتلخص المعلومات من مصادر متعددة.",
         "chain": ["ollama-local", "llm7-fast", "groq"],
     },
+    "aether-apollo": {
+        "system": (
+            "أنت Apollo — deep research meta-agent (coordinateur). "
+            "You break a complex query into fundamental sub-questions, "
+            "delegate research to sub-agents, then synthesize a cited report. "
+            "Think like Athena (research engine) + Hermes (analyzer). "
+            "Always cite sources and structure the final answer."
+        ),
+        "chain": ["llm7-big", "groq", "ollama-local"],
+    },
     "aether-market": {
         "system": "أنت محلل أسواق. تحلل البيانات المالية والأسهم.",
         "chain": ["groq", "ollama-local", "llm7-fast"],
@@ -186,6 +196,7 @@ def skills_for_agent(agent_name: str) -> str:
         "aether-security": ["offensive", "pentest", "ad-", "api-", "cloud", "container", "k8s", "jwt", "oauth", "crypto", "mobile"],
         "aether-redteam": ["offensive", "ai-security", "prompt", "jwt", "oauth", "cicd"],
         "aether-research": ["ai-ml", "research"],
+        "aether-apollo": ["ai-ml", "research"],
         "aether-market": [],
         "aether-evolve": [],
         "aether-quality": [],
@@ -208,6 +219,7 @@ def skills_for_agent(agent_name: str) -> str:
 AGENT_ROUTES = {
     "aether-security": ["أمن", "اختراق", "ثغرة", "فحص", "pentest", "vuln", "exploit", "hack", "scan", "nmap", "sqlmap", "sécurité"],
     "aether-research": ["ابحث", "بحث", "لخص", "تلخيص", "research", "analyze", "summarize", "find", "cherche"],
+    "aether-apollo": ["deep research", "تقرير مفصل", "بحث عميق", "apollo", "athena", "hermes", "comprehensive report", "cite", "synthesize"],
     "aether-market": ["سوق", "أسهم", "أسعار", "تداول", "stock", "market", "price", "crypto", "trading", "bourse"],
     "aether-redteam": ["اختبر", "اختبار", "red team", "promptfoo", "test security", "audit"],
     "aether-evolve": ["طور", "حسّن", "تطوير", "evolve", "improve", "optimize", "améliore"],

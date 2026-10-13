@@ -101,6 +101,12 @@ SERVICES = {
         "cwd": PROJECT,
         "cmd": [_PY, "src/integrations_adapter.py"],
     },
+    "kanban": {
+        "kind": "http",
+        "url": "http://127.0.0.1:5103/health",
+        "cwd": PROJECT,
+        "cmd": [_PY, "src/veritas_kanban.py"],
+    },
     # hexstrike intentionally NOT watched: startup takes ~2+ min (process pool +
     # tshark probe) and the watchdog's restart loop kills it mid-startup.
     # Start it manually when needed: cd ../hexstrike-ai && uv run python hexstrike_server.py
