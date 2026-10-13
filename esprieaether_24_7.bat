@@ -49,6 +49,10 @@ echo [+] starting Sunna API bridge (5100)...
 start "" /min "%PY%" src\sunna_api.py
 
 timeout /t 3 /nobreak >nul
+echo [+] starting bot heartbeat (cronpulse-style alerts)...
+start "" /min "%PY%" srcot_heartbeat.py
+
+timeout /t 2 /nobreak >nul
 echo [+] starting integrations adapter (5102)...
 start "" /min "%PY%" src\integrations_adapter.py
 
