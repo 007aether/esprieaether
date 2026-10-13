@@ -67,13 +67,9 @@ SERVICES = {
         "cmd": [_PY, "src/cloud_desktop_agent.py"],
     },
     "traffmonetizer": {
-        "kind": "process",
-        "match": "Traffmonetizer.exe",
+        "kind": "exists",
+        "match": "Traffmonetizer",
         "cmd": ["C:\\Users\\ESPRIEAETHER\\AppData\\Roaming\\Traffmonetizer\\app\\Traffmonetizer.exe"],
-    },
-    "cloud-desktop": {
-        "url": "http://127.0.0.1:5001/health",
-        "label": "Cloud Desktop Agent (remote access)",
     },
     "bot": {
         "kind": "process",
@@ -120,11 +116,24 @@ def http_ok(url: str, timeout: int = 6) -> bool:
         return False
 
 
-def process_alive(match: str) -> bool:
+def process_alive(match: str, name: str = "python.exe") -> bool:
     try:
         out = subprocess.run(
             ["powershell", "-NoProfile", "-Command",
-             f"(Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" | Where-Object {{ $_.CommandLine -like '*{match}*' }} | Measure-Object).Count"],
+             f"(Get-CimInstance Win32_Process -Filter \"Name='{name}'\" | Where-Object {{ $_.CommandLine -like '*{match}*' }} | Measure-Object).Count"],
+            capture_output=True, text=True, timeout=30,
+        )
+        return out.stdout.strip() not in ("", "0")
+    except Exception:
+        return True  # don't restart if we can't check
+
+
+def process_exists(name: str) -> bool:
+    """Check if any process with this exact name is running."""
+    try:
+        out = subprocess.run(
+            ["powershell", "-NoProfile", "-Command",
+             f"(Get-Process -Name '{name}' -ErrorAction SilentlyContinue | Measure-Object).Count"],
             capture_output=True, text=True, timeout=30,
         )
         return out.stdout.strip() not in ("", "0")
@@ -169,6 +178,8 @@ def check_once() -> dict:
     for name, svc in SERVICES.items():
         if svc["kind"] == "http":
             alive = http_ok(svc["url"])
+        elif svc["kind"] == "exists":
+            alive = process_exists(svc["match"])
         else:
             alive = process_alive(svc["match"])
         results[name] = alive
