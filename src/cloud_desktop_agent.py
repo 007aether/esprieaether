@@ -238,6 +238,48 @@ def tunnel_status():
     return jsonify(TUNNEL)
 
 
+@app.route("/tor")
+def tor_status():
+    """Tor SOCKS5 status — checks 127.0.0.1:9050 and reports exit IP if up."""
+    import socket
+    result = {"running": False, "socks": "127.0.0.1:9050", "exit_ip": None, "note": "start: cd ~/AppData/Local/Temp/tor2 && ./tor/tor.exe -f torrc"}
+    try:
+        s = socket.create_connection(("127.0.0.1", 9050), timeout=3)
+        s.close()
+        result["running"] = True
+    except Exception:
+        return jsonify(result)
+    try:
+        import requests
+        r = requests.get("https://check.torproject.org/api/ip",
+                         proxies={"http": "socks5h://127.0.0.1:9050", "https": "socks5h://127.0.0.1:9050"},
+                         timeout=15)
+        result["exit_ip"] = r.json().get("IP")
+        result["is_tor"] = r.json().get("IsTor")
+    except Exception as e:
+        result["note"] = f"socks up but exit check failed: {e}"
+    return jsonify(result)
+
+
+@app.route("/integrations")
+def integrations_status():
+    """Which external integrations are linked + running."""
+    linked = []
+    int_dir = PROJECT / "integrations"
+    if int_dir.exists():
+        linked = [d.name for d in int_dir.iterdir() if d.is_dir()]
+    # docker check
+    docker_up = False
+    try:
+        r = subprocess.run(["docker", "version", "--format", "{{.Server.Version}}"],
+                           capture_output=True, text=True, timeout=8)
+        docker_up = r.returncode == 0 and bool(r.stdout.strip())
+        docker_ver = r.stdout.strip()
+    except Exception:
+        docker_ver = None
+    return jsonify({"linked": linked, "docker": {"up": docker_up, "version": docker_ver}})
+
+
 @app.route("/tm")
 def tm_status():
     """TraffMonetizer status (process + settings)."""
