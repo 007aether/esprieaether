@@ -1567,6 +1567,26 @@ async def cmd_sunnadevis(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.edit_text(f"❌ خطأ: {md_escape(str(e))}")
 
 
+@authorized_only
+async def cmd_sunnanetlify(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🌐 /sunnanetlify — live site URL + claim status"""
+    nf = _sunna_api("/netlify")
+    if not nf or not nf.get("deployed"):
+        await update.message.reply_text("🌐 الموقع مازال ماشي منشور — شغّل `netlify_deploy_bot.py`")
+        return
+    claimed = "✅ دائم" if nf.get("claimed") else "⏰ مؤقت (خاص claim)"
+    lines = [
+        "🌐 *Sunna — الموقع*",
+        "",
+        f"🔗 {nf.get('url')}",
+        f"🔑 password: `{nf.get('password', '—')}`",
+        f"📌 {claimed}",
+        "",
+        "باش يولي دائم: app.netlify.com → sign up (sunnaequipeindustrial@gmail.com) → Claim",
+    ]
+    await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
+
+
 # ═══════════════════════════════════
 #  Main
 # ═══════════════════════════════════
@@ -1618,6 +1638,7 @@ async def set_commands(app: Application):
         BotCommand("sunna", "حالة شركة Sunna"),
         BotCommand("sunnabilan", "تقرير Sunna اليومي"),
         BotCommand("sunnadevis", "إنشاء devis (عرض ثمن)"),
+        BotCommand("sunnanetlify", "رابط موقع Sunna المباشر"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
     ]
@@ -1711,6 +1732,7 @@ def main():
     app.add_handler(CommandHandler("sunna", cmd_sunna))
     app.add_handler(CommandHandler("sunnabilan", cmd_sunnabilan))
     app.add_handler(CommandHandler("sunnadevis", cmd_sunnadevis))
+    app.add_handler(CommandHandler("sunnanetlify", cmd_sunnanetlify))
 
     # register /sunna* in the Telegram command menu
     try:

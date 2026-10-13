@@ -71,9 +71,11 @@
   <div class="card">
     <h2>🏭 SUNNA Company</h2>
     <div id="sunna"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div id="sunnaweb" style="margin-top:8px"></div>
     <div class="links">
       <a href="http://localhost:5100/status" target="_blank">Sunna API ↗</a>
       <a href="http://localhost:5100/bots" target="_blank">Bots ↗</a>
+      <a href="https://hilarious-panda-dea573.netlify.app" target="_blank">Live Site ↗</a>
     </div>
     <div style="margin-top:6px">
       <span class="tag grn">SARL AU</span><span class="tag">5 bots</span><span class="tag">7 agents</span>
@@ -254,6 +256,17 @@ async function refresh() {
       } catch (e) {}
     }
     document.getElementById('sunna').innerHTML = sRow;
+    try {
+      const nf = await j('http://127.0.0.1:5100/netlify');
+      if (nf && nf.deployed) {
+        const c = nf.claimed ? 'دائم' : 'مؤقت (claim)';
+        document.getElementById('sunnaweb').innerHTML =
+          row(dot(nf.claimed) + 'Site', c, nf.claimed ? 'ok' : 'warn') +
+          row('URL', nf.url.replace('https://', ''), 'cya');
+      } else {
+        document.getElementById('sunnaweb').innerHTML = row(dot(false) + 'Site', 'not deployed', 'err');
+      }
+    } catch (e) {}
   } catch (e) {}
 
   // OKX

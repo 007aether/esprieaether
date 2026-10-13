@@ -183,6 +183,18 @@ def bilans():
     return jsonify({"bilans": out})
 
 
+@app.route("/netlify")
+def netlify():
+    """Sunna live site URL + claim status."""
+    nf = SUNNA / "Coordination" / "netlify_url.json"
+    if not nf.exists():
+        return jsonify({"deployed": False})
+    try:
+        return jsonify({"deployed": True, **json.loads(nf.read_text(encoding="utf-8"))})
+    except Exception:
+        return jsonify({"deployed": False})
+
+
 if __name__ == "__main__":
     print(f"📋 Sunna API bridge — {SUNNA} — port {PORT}")
     print(f"   sunna dir exists: {SUNNA.exists()}")
