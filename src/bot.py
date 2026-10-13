@@ -1478,6 +1478,95 @@ async def cmd_tmrestart(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.edit_text(f"❌ خطأ: {e}")
 
 
+SUNNA_DIR = Path.home() / "Desktop" / "Sunna-Equipe-Industrial"
+SUNNA_API = "http://127.0.0.1:5100"
+
+
+def _sunna_api(path: str) -> dict:
+    import urllib.request
+    import json as _json
+    try:
+        with urllib.request.urlopen(SUNNA_API + path, timeout=8) as r:
+            return _json.loads(r.read().decode("utf-8"))
+    except Exception:
+        return {}
+
+
+@authorized_only
+async def cmd_sunna(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🏭 /sunna — Sunna company status (bots + agents + counts)"""
+    st = _sunna_api("/status")
+    bots = _sunna_api("/bots")
+    lines = ["🏭 *SUNNA ÉQUIPE INDUSTRIAL*", ""]
+    if not st:
+        lines.append("⚠️ bridge offline — `sunna_api.py` ماشي شغال")
+    else:
+        c = st.get("company", {})
+        t = st.get("team", {})
+        cnt = st.get("counts", {})
+        lines += [
+            f"🏢 {c.get('name', 'SUNNA')} — {c.get('type', '')}",
+            f"🆔 ICE: `{c.get('ice', '')}`",
+            f"🏗️ {c.get('workshop', '')}",
+            "",
+            f"📂 بحث: {cnt.get('research_files', '?')} · وثائق: {cnt.get('docs', '?')} · كتالوج: {cnt.get('catalogue', '?')}",
+            f"🤖 بوتات: {len(bots.get('bots', [])) if bots else '?'} · وكلاء: {len(t.get('agents', []))}",
+            "",
+            "📋 `/sunnabilan` — التقرير اليومي",
+            "🧾 `/sunnadevis <client> <produit> <qty>` — devis جديد",
+        ]
+    await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
+
+
+@authorized_only
+async def cmd_sunnabilan(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """📋 /sunnabilan — latest Sunna bilan report"""
+    candidates = sorted(SUNNA_DIR.glob("Bilan_Journee_*.md"), reverse=True)
+    if not candidates:
+        candidates = sorted(SUNNA_DIR.glob("Etat_du_Projet*.md"), reverse=True)
+    if not candidates:
+        await update.message.reply_text("📭 ما كاين حتى bilan — شغّل `Al_Afdal` أولاً")
+        return
+    txt = candidates[0].read_text(encoding="utf-8", errors="replace")
+    head = txt[:1800]
+    msg = await update.message.reply_text("📋 ...")
+    try:
+        await msg.edit_text(f"📋 *{candidates[0].name}*\n\n{md_escape(head)}", parse_mode="Markdown")
+    except Exception:
+        await msg.edit_text(f"📋 {candidates[0].name}\n\n{head}")
+
+
+@authorized_only
+async def cmd_sunnadevis(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🧾 /sunnadevis <client> <produit> <qty> — build a devis via Sunna bot"""
+    args = context.args or []
+    if len(args) < 3:
+        await update.message.reply_text(
+            "🧾 الاستعمال: `/sunnadevis \"Nom Client\" \"Produit\" 5`\n"
+            "مثال: `/sunnadevis \"Amine\" \"Abreuvoir 200L\" 5`\n\n"
+            "المنتجات المعروفة: `/sunnadevis list`",
+            parse_mode="Markdown")
+        return
+    if args[0].lower() == "list":
+        import subprocess as _sp
+        r = _sp.run([sys.executable, str(SUNNA_DIR / "bots" / "devis_builder.py"), "--list"],
+                    capture_output=True, text=True, timeout=30)
+        out = r.stdout[:1500] or r.stderr[:500]
+        await update.message.reply_text(f"📦 *Produits:*\n\n{md_escape(out)}", parse_mode="Markdown")
+        return
+    client, produit, qty = args[0], " ".join(args[1:-1]), args[-1]
+    msg = await update.message.reply_text("🧾 كنعمّر الـ devis...")
+    try:
+        import subprocess as _sp
+        r = _sp.run([sys.executable, str(SUNNA_DIR / "bots" / "devis_builder.py"),
+                     "--client", client, "--product", produit, "--qty", qty],
+                    capture_output=True, text=True, timeout=60)
+        out = (r.stdout or r.stderr)[:1200]
+        await msg.edit_text(f"🧾 *Devis*\n\n{md_escape(out)}", parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {md_escape(str(e))}")
+
+
 # ═══════════════════════════════════
 #  Main
 # ═══════════════════════════════════
@@ -1526,6 +1615,9 @@ async def set_commands(app: Application):
         BotCommand("browse", "فتح صفحة ويب"),
         BotCommand("sysinfo", "معلومات النظام"),
         BotCommand("integrations", "حالة 11 تكامل + أدمغة AI"),
+        BotCommand("sunna", "حالة شركة Sunna"),
+        BotCommand("sunnabilan", "تقرير Sunna اليومي"),
+        BotCommand("sunnadevis", "إنشاء devis (عرض ثمن)"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
     ]
@@ -1614,6 +1706,17 @@ def main():
     # TraffMonetizer commands
     app.add_handler(CommandHandler("tm", cmd_tm))
     app.add_handler(CommandHandler("tmrestart", cmd_tmrestart))
+
+    # Sunna company commands
+    app.add_handler(CommandHandler("sunna", cmd_sunna))
+    app.add_handler(CommandHandler("sunnabilan", cmd_sunnabilan))
+    app.add_handler(CommandHandler("sunnadevis", cmd_sunnadevis))
+
+    # register /sunna* in the Telegram command menu
+    try:
+        app.post_init = set_commands
+    except Exception:
+        pass
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 

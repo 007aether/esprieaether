@@ -45,6 +45,10 @@ echo [+] starting JARVIS OSINT (8000)...
 start "" /min "%LOCALAPPDATA%\Temp\JARVIS_repoackend\.venv\Scripts\python.exe" -m uvicorn main:app --host 0.0.0.0 --port 8000 --app-dir "%LOCALAPPDATA%\Temp\JARVIS_repoackend"
 
 timeout /t 3 /nobreak >nul
+echo [+] starting Sunna API bridge (5100)...
+start "" /min "%PY%" src\sunna_api.py
+
+timeout /t 3 /nobreak >nul
 echo [+] starting watchdog (self-healing)...
 start "" /min "%PY%" src\watchdog.py
 

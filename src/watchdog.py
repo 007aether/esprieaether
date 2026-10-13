@@ -35,6 +35,7 @@ WINDOW = 600              # 10 min
 _PY = sys.executable
 OLLAMA_BIN = str(HOME / ".local" / "bin" / "ollama")
 HEXPY = str(PROJECT.parent / "hexstrike-ai" / ".venv" / "Scripts" / "python.exe")
+JARVIS_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / "Temp" / "JARVIS_repo" / "backend"
 
 SERVICES = {
     "ollama": {
@@ -71,11 +72,28 @@ SERVICES = {
         "match": "Traffmonetizer",
         "cmd": ["C:\\Users\\ESPRIEAETHER\\AppData\\Roaming\\Traffmonetizer\\app\\Traffmonetizer.exe"],
     },
+    "github-desktop": {
+        "kind": "exists",
+        "match": "GitHubDesktop",
+        "cmd": ["C:\\Users\\ESPRIEAETHER\\AppData\\Local\\GitHubDesktop\\app-3.6.7\\GitHubDesktop.exe"],
+    },
     "bot": {
         "kind": "process",
         "match": "bot.py",
         "cwd": PROJECT,
         "cmd": [_PY, "src/bot.py"],
+    },
+    "sunna-api": {
+        "kind": "http",
+        "url": "http://127.0.0.1:5100/health",
+        "cwd": PROJECT,
+        "cmd": [_PY, "src/sunna_api.py"],
+    },
+    "jarvis": {
+        "kind": "http",
+        "url": "http://127.0.0.1:8000/api/health",
+        "cwd": str(JARVIS_DIR),
+        "cmd": [str(JARVIS_DIR / ".venv" / "Scripts" / "python.exe"), "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"],
     },
     # hexstrike intentionally NOT watched: startup takes ~2+ min (process pool +
     # tshark probe) and the watchdog's restart loop kills it mid-startup.

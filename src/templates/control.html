@@ -69,6 +69,17 @@
 
 <div class="grid">
   <div class="card">
+    <h2>🏭 SUNNA Company</h2>
+    <div id="sunna"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="http://localhost:5100/status" target="_blank">Sunna API ↗</a>
+      <a href="http://localhost:5100/bots" target="_blank">Bots ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag grn">SARL AU</span><span class="tag">5 bots</span><span class="tag">7 agents</span>
+    </div>
+  </div>
+  <div class="card">
     <h2>🧩 ECC Substrate</h2>
     <div class="stats">
       <div class="stat"><div class="n pur">311</div><div class="l">Skills</div></div>
@@ -227,6 +238,23 @@ async function refresh() {
   } catch (e) {
     document.getElementById('robots').innerHTML = row('60 robots', 'via /robots page', '');
   }
+
+  // SUNNA
+  try {
+    let sOk = false;
+    try { const r = await fetch('http://127.0.0.1:5100/health', {signal: AbortSignal.timeout(3000)}); sOk = r.status < 500; } catch (e) {}
+    let sRow = row(dot(sOk) + 'Bridge', sOk ? 'online' : 'offline', sOk ? 'ok' : 'err');
+    if (sOk) {
+      try {
+        const b = await j('http://127.0.0.1:5100/bots');
+        const n = (b && b.bots ? b.bots.length : 0);
+        sRow += row('Bots', n + ' scheduled', 'grn') +
+                row('Agents', '7 research', 'pur') +
+                row('Bilan', 'daily 07:30', '');
+      } catch (e) {}
+    }
+    document.getElementById('sunna').innerHTML = sRow;
+  } catch (e) {}
 
   // OKX
   try {
