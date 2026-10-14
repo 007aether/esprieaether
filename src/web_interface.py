@@ -785,6 +785,25 @@ def jarvis_page():
         return render_template("jarvis.html", jarvis={}, status={}), 200
 
 
+@app.route("/obsidian")
+def obsidian_page():
+    """🧠 obsidian — knowledge-graph (build vault + graph.html on demand)"""
+    try:
+        from obsidian_vault_builder import main as build_vault
+        build_vault()
+    except Exception:
+        pass
+    try:
+        from obsidian_graph_web import main as render_graph
+        render_graph()
+    except Exception:
+        pass
+    graph = Path.home() / "ObsidianVault" / "EsprieAether" / "graph.html"
+    if graph.exists():
+        return graph.read_text(encoding="utf-8"), 200, {"Content-Type": "text/html; charset=utf-8"}
+    return "<h1>🧠 vault not found</h1><p>run: python src/obsidian_vault_builder.py</p>", 200
+
+
 if __name__ == "__main__":
     print(f"🚀 Server running on http://{WEB_HOST}:{WEB_PORT}")
     print(f"📊 Total routes: {len(list(app.url_map.iter_rules()))}")
