@@ -121,8 +121,8 @@ SERVICES = {
         "cmd": [_PY, "src/homedock_dashboard.py"],
     },
     "governor-edr": {
-        "kind": "process",
-        "match": "governor-edr",
+        "kind": "http",
+        "url": "http://127.0.0.1:11123/",
         "cwd": str(GOVERNOR_DIR),
         "cmd": [_PY, "main.py"],
     },
