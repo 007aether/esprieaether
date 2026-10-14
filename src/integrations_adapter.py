@@ -49,6 +49,17 @@ CATALOG = {
     "outline":          ("easychen/outline",               "knowledge base",           "med",    "team wiki/SOPs"),
     "homedock":         ("BansheeTech/HomeDockOS",         "homelab OS dashboard",     "easy",   "widget dashboard (:5104, folded)"),
     "apollo":           ("manasseh-zw/apollo",             "deep research meta-agent", "high",   "research coordinator (aether-apollo)"),
+    "superpowers":      ("obra/superpowers",               "dev methodology skills",   "med",    "agent skills library"),
+    "rea":              ("morluto/rea",                    "reverse engineer anything","med",    "app → API client"),
+    "artcraft":         ("storytold/artcraft",             "AI creative/media",        "med",    "product images/video"),
+    "hyperframes":      ("heygen-com/hyperframes",         "AI video frames",          "med",    "marketing video"),
+    "hypit":            ("hypit-ai/hypit",                 "AI agent toolkit",         "med",    "agent skills (folded)"),
+    "dozzle":           ("amir20/dozzle",                  "docker log viewer",        "easy",   "docker logs UI (folded)"),
+    "runtipi":          ("runtipi/runtipi",                "homeserver app store",    "easy",   "app manager (folded)"),
+    "mini-qr":          ("lyqht/mini-qr",                  "minimal QR generator",     "easy",   "QR codes (qr_generator.py, folded)"),
+    "gobackup":         ("gobackup/gobackup",              "backup tool",              "med",    "auto backup (folded)"),
+    "secrux":           ("Master-lay/secrux",              "security scanner",         "med",    "security scans (folded)"),
+    "vito":             ("vitodeploy/vito",                "server deployment",        "med",    "VPS deploy (folded)"),
 }
 
 # integrations that are FOLDED into our stack (native adapter, no external clone)
@@ -60,6 +71,13 @@ FOLDED_SERVICES = {
     "invoice-builder": None,       # bots/devis_builder.py + facture_builder.py (PDF)
     "veritas-kanban": "http://127.0.0.1:5103/health",
     "homedock": "http://127.0.0.1:5104/health",
+    "hypit": None,                 # agent toolkit — folded into ECC skills
+    "dozzle": None,                # docker logs — use `docker logs` / desktop UI
+    "runtipi": None,               # app manager — use our control center
+    "mini-qr": None,               # bots/qr_generator.py
+    "gobackup": None,              # backup — esprieaether_24_7.bat + git push
+    "secrux": None,                # security scans — aether-security agent
+    "vito": None,                  # VPS deploy — cloud_desktop_agent tunnel
 }
 
 # known stack ports (what we map)
@@ -106,6 +124,9 @@ def list_all():
             linked = linked or port_open(5104)
         elif name == "invoice-builder":
             # folded: devis + facture builders exist
+            linked = True
+        elif name in ("hypit", "dozzle", "runtipi", "mini-qr", "gobackup", "secrux", "vito"):
+            # folded: native equivalent in-stack
             linked = True
         out.append({
             "name": name, "repo": repo, "role": role, "priority": prio,
