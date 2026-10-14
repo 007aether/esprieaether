@@ -264,12 +264,13 @@ def task_airdrop_sync() -> dict:
         except Exception as se:
             result["scrape_error"] = str(se)
 
-        # ── Smart scoring ──
+        # ── Smart scoring with deep enrichment ──
         from airdrop_scorer import score_all, top_candidates, format_telegram
-        score_all(items, enrich=True, enrich_limit=20)
+        score_all(items, enrich=True, enrich_limit=20, deep_enrich=True)
         cands = top_candidates(limit=5, min_grade="B")
         result["grade_A"] = sum(1 for c in cands if c["grade"] == "A")
         result["grade_B"] = sum(1 for c in cands if c["grade"] == "B")
+        result["deep_enriched"] = True
 
         # إشعار إذا كان هناك جديد
         if new > 0:
