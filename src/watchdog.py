@@ -36,6 +36,7 @@ _PY = sys.executable
 OLLAMA_BIN = str(HOME / ".local" / "bin" / "ollama")
 HEXPY = str(PROJECT.parent / "hexstrike-ai" / ".venv" / "Scripts" / "python.exe")
 JARVIS_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / "Temp" / "JARVIS_repo" / "backend"
+GOVERNOR_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / "Temp" / "new_repos" / "governor-edr"
 
 SERVICES = {
     "ollama": {
@@ -112,6 +113,12 @@ SERVICES = {
         "url": "http://127.0.0.1:5104/health",
         "cwd": PROJECT,
         "cmd": [_PY, "src/homedock_dashboard.py"],
+    },
+    "governor-edr": {
+        "kind": "process",
+        "match": "governor-edr",
+        "cwd": str(GOVERNOR_DIR),
+        "cmd": [_PY, "main.py"],
     },
     # hexstrike intentionally NOT watched: startup takes ~2+ min (process pool +
     # tshark probe) and the watchdog's restart loop kills it mid-startup.
