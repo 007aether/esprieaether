@@ -33,21 +33,15 @@ def parse_vault():
     nodes, edges = {}, []
     files = list(VAULT.rglob("*.md"))
     for f in files:
-        if f.name.startswith("_") or ".graphify" in str(f):
+        if f.name.startswith("_") or ".graphify" in str(f) or "graph" in f.stem:
             continue
         name = f.stem
         rel = str(f.relative_to(VAULT))
         parts = Path(rel).parts
-        # category = first dir (Services/Bots/Integrations) or frontmatter tag
+        # category = first dir (Services/Bots/...) or frontmatter tag
         cat = "meta"
         if len(parts) > 1:
-            cat = parts[0].lower().rstrip("s")
-            if cat == "servic":
-                cat = "service"
-            if cat == "integration":
-                cat = "integration"
-            if cat == "bot":
-                cat = "bot"
+            cat = parts[0].lower()
         nodes[name] = {"id": name, "label": name, "group": cat, "size": 12}
         text = f.read_text(encoding="utf-8", errors="ignore")
         links = re.findall(r"\[\[([^\]|]+)(?:\|[^\]]*)?\]\]", text)

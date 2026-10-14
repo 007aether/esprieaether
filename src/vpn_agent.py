@@ -5,6 +5,7 @@
 import os
 import re
 import json
+import sys
 import subprocess
 import logging
 from datetime import datetime
@@ -206,3 +207,43 @@ if __name__ == "__main__":
 
     print("\n▶ تنسيق Telegram:")
     print(agent.format_telegram())
+
+
+# ─────────────────────────────────────
+#  VPN auto-reconnect daemon
+# ─────────────────────────────────────
+def run_vpn_daemon(interval: int = 60):
+    """Keep the VPN alive — reconnect if it drops, log every cycle."""
+    import time
+    agent = VPNAgent()
+    log = HOME_LOG = Path(__file__).resolve().parent.parent / "ESPRIEAETHER" / "data" / "vpn_daemon.log"
+    try:
+        log.parent.mkdir(parents=True, exist_ok=True)
+    except Exception:
+        log = Path(__file__).resolve().parent / "vpn_daemon.log"
+
+    def _log(msg: str):
+        line = f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | {msg}"
+        print(line)
+        try:
+            with log.open("a", encoding="utf-8") as fh:
+                fh.write(line + "\n")
+        except Exception:
+            pass
+
+    _log(f"🟢 vpn daemon started — interval {interval}s, iface {agent.interface}")
+    while True:
+        try:
+            if agent.is_active():
+                _log("✅ VPN active")
+            else:
+                _log("🔴 VPN down — reconnecting...")
+                res = agent.connect()
+                _log(f"   → {res.get('status', res)}")
+        except Exception as e:
+            _log(f"❌ daemon error: {e}")
+        time.sleep(interval)
+
+
+if __name__ == "__main__" and "--daemon" in sys.argv:
+    run_vpn_daemon()

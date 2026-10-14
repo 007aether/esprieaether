@@ -25,7 +25,8 @@ $svcs = @(
   @{ n="kanban";       c="$py src/veritas_kanban.py" },
   @{ n="bot";          c="$py src/bot.py" },
   @{ n="watchdog";     c="$py src/watchdog.py" },
-  @{ n="autonomous";   c="$py src/autonomous_loop.py" }
+  @{ n="autonomous";   c="$py src/autonomous_loop.py" },
+  @{ n="vpn-daemon";   c="$py src/vpn_agent.py --daemon" }
 )
 foreach ($s in $svcs) {
   Start-Process -FilePath "powershell" -ArgumentList "-NoProfile","-WindowStyle","Hidden","-Command","Set-Location '$repo'; & $($s.c)" -WindowStyle Hidden

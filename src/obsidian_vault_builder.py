@@ -50,7 +50,70 @@ INTEGRATIONS = ["Checkmate", "Portracker", "Ask4Me", "PriceGhost", "Cronpulse",
                 "Octelium", "Veritas-Kanban", "FrankMD", "Homescreen-hero", "Kino",
                 "Mimic", "xPrivo", "Outline", "HomeDock", "Apollo", "Superpowers",
                 "REA", "Artcraft", "Hyperframes", "Hypit", "Dozzle", "Runtipi",
-                "mini-qr", "GoBackup", "Secrux", "Vito"]
+                "mini-qr", "GoBackup", "Secrux", "Vito", "obsidian-graphify",
+                "freqtrade", "openstock", "promptfoo", "antislop", "openclaude",
+                "openresearch", "claude-red", "hack-skills", "pwnproxy"]
+
+# agents: name -> links
+AGENTS = {
+    "airdrop": ["crypto"], "ask": ["router"], "bandwidth": ["infra"],
+    "browser": ["infra"], "calendar": ["productivity"], "cloud": ["VPS"],
+    "email": ["Sunna", "productivity"], "file": ["productivity"],
+    "github": ["github"], "guardian": ["infra"], "hermes": ["router"],
+    "jarvis-bridge": ["jarvis"], "market": ["crypto"], "needle": ["crypto"],
+    "pharos": ["crypto"], "planner": ["productivity"],
+    "terminal": ["infra"], "vault": ["security"], "vpn": ["VPN"],
+    "research-monitor": ["research"], "semantic-memory": ["memory"],
+}
+
+# sunna topics: name -> (body, links)
+SUNNA = {
+    "Sunna": ("SARL AU — ICE 004054044000074 — Casablanca — 0770720602",
+              ["sunna-api", "devis", "netlify", "GMB", "kanban", "prices"]),
+    "devis": ("Devis + facture builder (PDF). `bots/devis_builder.py` + `facture_builder.py`",
+              ["Sunna", "price-tracker", "prices"]),
+    "prices": ("Live steel/galva/zinc. `Recherche/live_prices.json`",
+               ["price-tracker", "PriceGhost", "Sunna"]),
+    "netlify": ("Live site + keepalive. `Coordination/netlify_url.json`",
+                ["netlify-keepalive", "Sunna"]),
+    "GMB": ("Google Business Profile. `Devis/gmb_profile.json`", ["Sunna"]),
+    "email": ("`bots/email_sender.py` — Gmail SMTP + .eml drafts. cc 007aether@gmail.com",
+              ["Sunna", "devis"]),
+    "qr": ("`bots/qr_generator.py` — QR for site + devis", ["Sunna", "netlify"]),
+}
+
+# brains: name -> (body, links)
+BRAINS = {
+    "JEV": ("System One typed decisions. `/decide` endpoint", ["router"]),
+    "Apollo-agent": ("Deep research meta-agent. `aether-apollo`", ["router", "Apollo"]),
+    "OSINT": ("16 agents — face ID + swarm + synthesis", ["jarvis", "Exa"]),
+    "OKX": ("Connector + trading bot (DRY-RUN). withdrawal refused by code", ["router"]),
+    "DeepSeek-Harness": ("DSH — browser-capable agent", ["dsh-bridge"]),
+}
+
+# infra: name -> (body, links)
+INFRA = {
+    "VPS": ("SSH tunnel + zero-trust. `docs/VPS_TOR_DOCKER.md`", ["cloud-desktop", "Octelium"]),
+    "Tor": ("3 documented fixes. `docs/VPS_TOR_DOCKER.md`", ["cloud-desktop", "VPS"]),
+    "VPN": ("WireGuard — `vpn_agent.py` + auto-reconnect daemon", ["infra", "cloud-desktop"]),
+    "docker": ("homedock + dozzle + runtipi", ["homedock"]),
+}
+
+# meta: name -> (body, links)
+META = {
+    "control-center": ("http://localhost:5000/control", ["web", "homedock"]),
+    "knowledge-graph": ("http://localhost:5000/obsidian — vis-network 64+ notes", ["obsidian-graphify", "web"]),
+    "Telegram": ("Commands: /sunna /sunnabilan /sunnadevis /sunnaprix /sunnanetlify /sunnakanban /jarvis /tm /integrations /okx /obsidian", ["bot-heartbeat", "Sunna"]),
+    "Anthropic": ("Claude key", ["jarvis"]),
+    "Gemini": ("Gemini key", ["jarvis"]),
+    "Exa": ("Neural search key", ["jarvis", "OSINT"]),
+    "github": ("007aether — git CLI auth (no REST tokens)", ["github"]),
+    "security": ("vault_agent — encrypted credential store", ["vault"]),
+    "productivity": ("calendar + file + planner agents", ["calendar", "file", "planner"]),
+    "memory": ("semantic-memory — persistent context", ["semantic-memory"]),
+    "research": ("research-monitor — news 24/7", ["research-monitor"]),
+    "crypto": ("airdrop + market + needle + pharos", ["airdrop", "market", "needle", "pharos"]),
+}
 
 
 def w(path: Path, text: str):
@@ -68,62 +131,80 @@ def main():
     VAULT.mkdir(parents=True, exist_ok=True)
     (VAULT / ".obsidian").mkdir(exist_ok=True)
 
-    # index
-    idx = ["# 🧠 EsprieAether Vault", "",
-           "## Services", ""] + [f"- [[{n}]] :{p}" for n, (p, _) in SERVICES.items()]
-    idx += ["", "## Bots", ""] + [f"- [[{n}]]" for n in BOTS]
-    idx += ["", "## Integrations", ""] + [f"- [[{n}]]" for n in INTEGRATIONS]
-    idx += ["", "## Sunna", "", "- [[Sunna]]", "- [[devis]]", "- [[GMB]]", "- [[Netlify]]"]
+    # ── index ──
+    idx = ["# 🧠 EsprieAether — Knowledge Graph", "",
+           "## ⚙️ Services", ""] + [f"- [[{n}]] — :{p}" for n, (p, _) in SERVICES.items()]
+    idx += ["", "## 🤖 Bots", ""] + [f"- [[{n}]]" for n in BOTS]
+    idx += ["", "## 🧩 Agents", ""] + [f"- [[{n}]]" for n in AGENTS]
+    idx += ["", "## 🔌 Integrations", ""] + [f"- [[{n}]]" for n in INTEGRATIONS]
+    idx += ["", "## ☀️ Sunna", ""] + [f"- [[{n}]]" for n in SUNNA]
+    idx += ["", "## 🧠 Brains", ""] + [f"- [[{n}]]" for n in BRAINS]
+    idx += ["", "## 🔴 Infra", ""] + [f"- [[{n}]]" for n in INFRA]
+    idx += ["", "## 📚 Docs", "", "- [[SOP_WIKI]]", "- [[GAP_ANALYSIS]]"]
+    idx += ["", "## 🔗 Meta", ""] + [f"- [[{n}]]" for n in META]
     w(VAULT / "_Index.md", "\n".join(idx) + "\n")
 
-    # services
+    # ── services ──
     for name, (port, links) in SERVICES.items():
         w(VAULT / "Services" / f"{name}.md",
-          note(name, ["service"], f"Port **{port}**.", links))
+          note(name, ["service", "core"], f"Port **{port}** — http://localhost:{port}/", links))
 
-    # bots
+    # ── bots ──
     for name, links in BOTS.items():
-        w(VAULT / "Bots" / f"{name}.md", note(name, ["bot"], "24/7 bot.", links))
+        w(VAULT / "Bots" / f"{name}.md", note(name, ["bot", "core"], "24/7 bot.", links))
 
-    # integrations (one note each)
+    # ── agents ──
+    for name, links in AGENTS.items():
+        w(VAULT / "Agents" / f"{name}.md",
+          note(name, ["agent", "core"], f"Agent `src/{name.replace('-', '_')}_agent.py`", links))
+
+    # ── integrations ──
     for name in INTEGRATIONS:
         w(VAULT / "Integrations" / f"{name}.md",
-          note(name, ["integration"], "Linked integration.", ["integrations", "control-center"]))
+          note(name, ["integration"], "Linked integration — `integrations/`", ["integrations", "control-center"]))
 
-    # core concepts
-    w(VAULT / "Sunna.md", note("Sunna", ["company"], "SARL AU — ICE 004054044000074 — Casablanca — 0770720602",
-                                        ["sunna-api", "devis", "Netlify", "GMB", "kanban", "prices"]))
-    w(VAULT / "devis.md", note("devis", ["sunna"], "Devis + facture builder (PDF). `bots/devis_builder.py` + `facture_builder.py`",
-                                    ["Sunna", "price-tracker", "prices"]))
-    w(VAULT / "Netlify.md", note("Netlify", ["web"], "Live site + keepalive. `Coordination/netlify_url.json`",
-                                      ["netlify-keepalive", "Sunna"]))
-    w(VAULT / "GMB.md", note("GMB", ["google"], "Google Business Profile. `Devis/gmb_profile.json`", ["Sunna"]))
-    w(VAULT / "JEV.md", note("JEV", ["brain"], "System One typed decisions. `/decide` endpoint", ["router"]))
-    w(VAULT / "Apollo-agent.md", note("Apollo-agent", ["agent"], "Deep research meta-agent. `aether-apollo`", ["router", "Apollo"]))
-    w(VAULT / "OSINT.md", note("OSINT", ["jarvis"], "16 agents — face ID + swarm + synthesis", ["jarvis", "Exa"]))
-    w(VAULT / "OKX.md", note("OKX", ["trading"], "Connector + trading bot (DRY-RUN). withdrawal refused by code", ["router"]))
-    w(VAULT / "VPS.md", note("VPS", ["infra"], "SSH tunnel + zero-trust. `docs/VPS_TOR_DOCKER.md`", ["cloud-desktop", "Octelium"]))
-    w(VAULT / "Tor.md", note("Tor", ["infra"], "3 documented fixes. `docs/VPS_TOR_DOCKER.md`", ["cloud-desktop", "VPS"]))
-    w(VAULT / "DeepSeek-Harness.md", note("DeepSeek-Harness", ["agent"], "DSH — browser-capable agent", ["dsh-bridge"]))
-    w(VAULT / "prices.md", note("prices", ["sunna"], "Live steel/galva/zinc. `Recherche/live_prices.json`", ["price-tracker", "PriceGhost"]))
-    w(VAULT / "Exa.md", note("Exa", ["api"], "Neural search key", ["jarvis", "OSINT"]))
-    w(VAULT / "Telegram.md", note("Telegram", ["bot"], "Commands: /sunna /sunnabilan /sunnadevis /sunnaprix /sunnanetlify /sunnakanban /jarvis /tm /integrations /okx", ["bot-heartbeat", "Sunna"]))
-    w(VAULT / "control-center.md", note("control-center", ["web"], "http://localhost:5000/control", ["web", "homedock"]))
-    w(VAULT / "all-services.md", note("all-services", ["meta"], "\n".join(f"[[{n}]]" for n in SERVICES), ["watchdog"]))
-    w(VAULT / "all-integrations.md", note("all-integrations", ["meta"], "\n".join(f"[[{n}]]" for n in INTEGRATIONS), ["integrations"]))
-    w(VAULT / "Anthropic.md", note("Anthropic", ["api"], "Claude key", ["jarvis"]))
-    w(VAULT / "Gemini.md", note("Gemini", ["api"], "Gemini key", ["jarvis"]))
+    # ── sunna ──
+    for name, (body, links) in SUNNA.items():
+        w(VAULT / "Sunna" / f"{name}.md", note(name, ["sunna", "company"], body, links))
 
-    # copy SOP + gap docs
-    for src in ["SOP_WIKI.md", "GAP_ANALYSIS.md"]:
-        s = ESPRIE / "docs" / src
+    # ── brains ──
+    for name, (body, links) in BRAINS.items():
+        w(VAULT / "Brains" / f"{name}.md", note(name, ["brain", "core"], body, links))
+
+    # ── infra ──
+    for name, (body, links) in INFRA.items():
+        w(VAULT / "Infra" / f"{name}.md", note(name, ["infra", "core"], body, links))
+
+    # ── meta ──
+    for name, (body, links) in META.items():
+        w(VAULT / "Meta" / f"{name}.md", note(name, ["meta"], body, links))
+
+    # ── docs (SOP + GAP — filed under Docs/, tagged) ──
+    for src_name, tags in [("SOP_WIKI.md", ["doc", "sop"]), ("GAP_ANALYSIS.md", ["doc", "gap"])]:
+        s = ESPRIE / "docs" / src_name
+        stem = src_name.replace(".md", "")
         if s.exists():
-            w(VAULT / s.name, s.read_text(encoding="utf-8"))
+            body = s.read_text(encoding="utf-8", errors="ignore")
+            fm = "---\ntags: [" + ", ".join(tags) + "]\nupdated: " + datetime.now(timezone.utc).strftime("%Y-%m-%d") + "\n---\n\n"
+            if not body.startswith("---"):
+                body = fm + body
+            w(VAULT / "Docs" / f"{stem}.md", body)
+        else:
+            w(VAULT / "Docs" / f"{stem}.md", note(stem, tags, "_not found_", ["_Index"]))
+
+    # ── remove stale root-level doc copies (now under Docs/) ──
+    for stale in ["SOP_WIKI.md", "GAP_ANALYSIS.md"]:
+        p = VAULT / stale
+        if p.exists():
+            p.unlink()
 
     n_notes = len(list(VAULT.rglob("*.md")))
     print(f"✅ Obsidian vault: {VAULT}")
-    print(f"   {n_notes} notes — open it in Obsidian → graph view")
-    print(f"   then: python integrations/obsidian-graphify (render graph.html)")
+    print(f"   {n_notes} notes")
+    for d in ["Services", "Bots", "Agents", "Integrations", "Sunna", "Brains", "Infra", "Docs", "Meta"]:
+        cnt = len(list((VAULT / d).glob("*.md")))
+        print(f"   {d}: {cnt}")
+    print(f"   graph: python src/obsidian_graph_web.py")
 
 
 if __name__ == "__main__":
