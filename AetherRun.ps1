@@ -30,7 +30,8 @@ $svcs = @(
   @{ n="bot";           s="src/bot.py" },
   @{ n="watchdog";      s="src/watchdog.py" },
   @{ n="autonomous";    s="src/autonomous_loop.py" },
-  @{ n="vpn-daemon";    s="src/vpn_agent.py"; a="--daemon" }
+  @{ n="vpn-daemon";    s="src/vpn_agent.py"; a="--daemon" },
+  @{ n="governor-edr";  s="main.py"; a=""; d="$env:LOCALAPPDATA\Temp\new_repos\governor-edr" }
 )
 
 foreach ($s in $svcs) {
@@ -41,7 +42,8 @@ foreach ($s in $svcs) {
   # start detached: python directly, hidden, log to file
   $args = @($s.s)
   if ($s.a) { $args += $s.a }
-  Start-Process -FilePath $py -ArgumentList $args -WorkingDirectory $repo `
+  $wd = if ($s.d) { $s.d } else { $repo }
+  Start-Process -FilePath $py -ArgumentList $args -WorkingDirectory $wd `
     -WindowStyle Hidden -RedirectStandardOutput "$logs\$($s.n).log" `
     -RedirectStandardError "$logs\$($s.n).err"
 }
