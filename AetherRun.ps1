@@ -40,9 +40,17 @@ if (Test-Path "$frontendDir\package.json") {
   Get-CimInstance Win32_Process -Filter "Name='node.exe'" |
     Where-Object { $_.CommandLine -like "*next dev*" } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-  Start-Process -FilePath "cmd.exe" -ArgumentList "/c","npx next dev --port 3000" `
-    -WorkingDirectory $frontendDir -WindowStyle Hidden `
-    -RedirectStandardOutput "$logs\jarvis-frontend.log" -RedirectStandardError "$logs\jarvis-frontend.err"
+  $fpsi = New-Object System.Diagnostics.ProcessStartInfo
+  $fpsi.FileName = "cmd.exe"
+  $fpsi.Arguments = "/c npx next dev --port 3000"
+  $fpsi.WorkingDirectory = $frontendDir
+  $fpsi.UseShellExecute = $false
+  $fpsi.CreateNoWindow = $true
+  $fpsi.RedirectStandardOutput = $true
+  $fpsi.RedirectStandardError = $true
+  $fp = [System.Diagnostics.Process]::Start($fpsi)
+  $null = $fp.StandardOutput.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\jarvis-frontend.log"))
+  $null = $fp.StandardError.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\jarvis-frontend.err"))
 }
 
 foreach ($s in $svcs) {
@@ -50,13 +58,22 @@ foreach ($s in $svcs) {
   Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
     Where-Object { $_.CommandLine -like "*$($s.s)*" } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-  # start detached: python directly, hidden, log to file
+  # start detached: python directly, minimized, log to file
   $args = @($s.s)
   if ($s.a) { $args += $s.a }
   $wd = if ($s.d) { $s.d } else { $repo }
-  Start-Process -FilePath $py -ArgumentList $args -WorkingDirectory $wd `
-    -WindowStyle Hidden -RedirectStandardOutput "$logs\$($s.n).log" `
-    -RedirectStandardError "$logs\$($s.n).err"
+  $psi = New-Object System.Diagnostics.ProcessStartInfo
+  $psi.FileName = $py
+  $psi.Arguments = ($args | ForEach-Object { '"' + $_ + '"' }) -join ' '
+  $psi.WorkingDirectory = $wd
+  $psi.UseShellExecute = $false
+  $psi.CreateNoWindow = $true
+  $psi.RedirectStandardOutput = $true
+  $psi.RedirectStandardError = $true
+  $p = [System.Diagnostics.Process]::Start($psi)
+  # redirect logs via jobs
+  $null = $p.StandardOutput.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\$($s.n).log"))
+  $null = $p.StandardError.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\$($s.n).err"))
 }
 
 # JARVIS (separate venv, port 8000)
@@ -64,9 +81,17 @@ if (Test-Path $jpy) {
   Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
     Where-Object { $_.CommandLine -like "*uvicorn main:app*" } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-  Start-Process -FilePath $jpy -ArgumentList "-m","uvicorn","main:app","--host","0.0.0.0","--port","8000" `
-    -WorkingDirectory "$env:LOCALAPPDATA\Temp\JARVIS_repo\backend" -WindowStyle Hidden `
-    -RedirectStandardOutput "$logs\jarvis.log" -RedirectStandardError "$logs\jarvis.err"
+  $jpsi = New-Object System.Diagnostics.ProcessStartInfo
+  $jpsi.FileName = $jpy
+  $jpsi.Arguments = '-m uvicorn main:app --host 0.0.0.0 --port 8000'
+  $jpsi.WorkingDirectory = "$env:LOCALAPPDATA\Temp\JARVIS_repo\backend"
+  $jpsi.UseShellExecute = $false
+  $jpsi.CreateNoWindow = $true
+  $jpsi.RedirectStandardOutput = $true
+  $jpsi.RedirectStandardError = $true
+  $jp = [System.Diagnostics.Process]::Start($jpsi)
+  $null = $jp.StandardOutput.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\jarvis.log"))
+  $null = $jp.StandardError.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\jarvis.err"))
 }
 
 Start-Sleep -Seconds 20
