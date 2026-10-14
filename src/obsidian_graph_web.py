@@ -18,13 +18,15 @@ OUT_HTML = Path(os.path.expanduser("~")) / "ObsidianVault" / "EsprieAether" / "g
 COLORS = {
     "service": "#22d3ee",     # cyan
     "bot": "#a78bfa",         # violet
+    "agent": "#818cf8",       # indigo
     "integration": "#34d399", # green
-    "company": "#f59e0b",     # amber (Sunna)
+    "sunna": "#f59e0b",       # amber (Sunna)
     "brain": "#f472b6",       # pink
     "infra": "#f87171",       # red
+    "docs": "#eab308",        # yellow
+    "meta": "#94a3b8",        # slate
     "api": "#60a5fa",         # blue
     "web": "#fb923c",         # orange
-    "meta": "#94a3b8",        # slate
 }
 
 

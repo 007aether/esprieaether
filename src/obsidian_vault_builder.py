@@ -52,7 +52,8 @@ INTEGRATIONS = ["Checkmate", "Portracker", "Ask4Me", "PriceGhost", "Cronpulse",
                 "REA", "Artcraft", "Hyperframes", "Hypit", "Dozzle", "Runtipi",
                 "mini-qr", "GoBackup", "Secrux", "Vito", "obsidian-graphify",
                 "freqtrade", "openstock", "promptfoo", "antislop", "openclaude",
-                "openresearch", "claude-red", "hack-skills", "pwnproxy"]
+                "openresearch", "claude-red", "hack-skills", "pwnproxy",
+                "TraffMonetizer", "Pinterest", "Facebook", "YouTube"]
 
 # agents: name -> links
 AGENTS = {
@@ -80,6 +81,10 @@ SUNNA = {
     "email": ("`bots/email_sender.py` — Gmail SMTP + .eml drafts. cc 007aether@gmail.com",
               ["Sunna", "devis"]),
     "qr": ("`bots/qr_generator.py` — QR for site + devis", ["Sunna", "netlify"]),
+    "Pinterest": ("Social channel — `bots/pinterest_bot.py` (Hermes-driven pins). sunnaequipeindustrial@gmail.com", ["Sunna", "bandwidth", "social"]),
+    "Facebook": ("Social channel — page + posts (browser/agent driven)", ["Sunna", "social"]),
+    "YouTube": ("Social channel — video (browser/agent driven)", ["Sunna", "social"]),
+    "social": ("Sunna social channels: Pinterest · Facebook · YouTube", ["Sunna", "Pinterest", "Facebook", "YouTube"]),
 }
 
 # brains: name -> (body, links)
@@ -113,6 +118,7 @@ META = {
     "memory": ("semantic-memory — persistent context", ["semantic-memory"]),
     "research": ("research-monitor — news 24/7", ["research-monitor"]),
     "crypto": ("airdrop + market + needle + pharos", ["airdrop", "market", "needle", "pharos"]),
+    "bandwidth": ("bandwidth_agent + TraffMonetizer — passive income from traffic", ["TraffMonetizer", "infra"]),
 }
 
 
