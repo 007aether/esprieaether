@@ -90,6 +90,11 @@ def write_board(board: dict) -> None:
     KANBAN.write_text("\n".join(lines), encoding="utf-8")
 
 
+@app.route("/")
+def root():
+    return """<h1>📋 Veritas Kanban</h1><p>board: <a href="/board">/board</a> · health: <a href="/health">/health</a></p>"""
+
+
 @app.route("/health")
 def health():
     return jsonify({"status": "ok", "board": str(KANBAN)})

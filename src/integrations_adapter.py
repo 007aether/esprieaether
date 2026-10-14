@@ -106,6 +106,11 @@ def stack_languages(d: Path) -> list:
     return sorted(langs)
 
 
+@app.route("/")
+def root():
+    return """<h1>🔌 Integrations</h1><p>list: <a href="/list">/list</a> · scan: <a href="/scan">/scan</a> · health: <a href="/health">/health</a></p>"""
+
+
 @app.route("/health")
 def health():
     return jsonify({"status": "ok", "integrations_dir": str(INT_DIR)})

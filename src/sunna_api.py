@@ -65,6 +65,11 @@ def _list_files(d: Path, exts=(".md", ".txt", ".json", ".html", ".docx", ".xlsx"
 
 # ── Endpoints ──
 
+@app.route("/")
+def root():
+    return """<h1>☀️ Sunna API</h1><p>status: <a href="/status">/status</a> · bots: <a href="/bots">/bots</a> · health: <a href="/health">/health</a></p>"""
+
+
 @app.route("/health")
 def health():
     return jsonify({"status": "ok", "sunna_dir": str(SUNNA), "exists": SUNNA.exists()})
