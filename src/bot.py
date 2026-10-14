@@ -129,8 +129,14 @@ def authorized_only(func):
 
 @authorized_only
 async def cmd_airdrops(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """عرض أحدث الإيردروبات"""
-    text = airdrop_agent.format_telegram(limit=5)
+    """أفضل فرص Airdrop (scored)"""
+    from airdrop_scorer import format_telegram, top_candidates
+    text = format_telegram(limit=5)
+    cands = top_candidates(limit=5, min_grade="B")
+    if cands:
+        a = sum(1 for c in cands if c["grade"] == "A")
+        b = sum(1 for c in cands if c["grade"] == "B")
+        text += f"\n\n📊 المؤهلة: 🟢 A=`{a}` · 🔵 B=`{b}`"
     await update.message.reply_text(text, parse_mode="Markdown", disable_web_page_preview=True)
 
 

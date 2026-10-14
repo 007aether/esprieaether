@@ -21,6 +21,14 @@ logging.basicConfig(
 RSS_FEEDS = [
     "https://airdrops.io/feed/",
     "https://airdropalert.com/feed/",
+    "https://airdropalert.com/feed/?post_type=airdrop",
+    "https://cointelegraph.com/rss/tag/airdrop",
+    "https://decrypt.co/feed",
+    "https://www.theblock.co/rss.xml",
+    "https://cryptopotato.com/feed/",
+    "https://bitcoinist.com/feed/",
+    "https://u.today/rss",
+    "https://news.bitcoin.com/feed/",
 ]
 
 AIRDROP_DB = BASE_DIR / "airdrops.json"

@@ -243,7 +243,7 @@ def task_weekly_email() -> dict:
 
     return result
 def task_airdrop_sync() -> dict:
-    """مزامنة الإيردروبات من RSS"""
+    """مزامنة الإيردروبات من RSS + scoring ذكي"""
     result = {"name": "airdrop_sync", "status": "ok"}
     try:
         items = airdrop_agent.fetch_all()
@@ -254,6 +254,13 @@ def task_airdrop_sync() -> dict:
         result["new"] = new
         result["total"] = total
 
+        # ── Smart scoring ──
+        from airdrop_scorer import score_all, top_candidates, format_telegram
+        score_all(items, enrich=True, enrich_limit=20)
+        cands = top_candidates(limit=5, min_grade="B")
+        result["grade_A"] = sum(1 for c in cands if c["grade"] == "A")
+        result["grade_B"] = sum(1 for c in cands if c["grade"] == "B")
+
         # إشعار إذا كان هناك جديد
         if new > 0:
             send_telegram(
@@ -262,6 +269,11 @@ def task_airdrop_sync() -> dict:
                 f"📊 الإجمالي: `{total}`\n\n"
                 f"_أرسل /airdrops لعرض أحدث 5_"
             )
+
+        # ── إشعار الفرص المؤهلة (Grade A/B) ──
+        if cands:
+            digest = format_telegram(limit=5)
+            send_telegram(digest)
     except Exception as e:
         result["status"] = "error"
         result["error"] = str(e)
