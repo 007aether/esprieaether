@@ -110,6 +110,23 @@ def score_airdrop(item: dict) -> ScoredAirdrop:
         scored.flags.append("SCAM_PATTERN")
         scored.score = max(0, scored.score - 50)
 
+    # ── airdrops.io project page = real opportunity ──
+    if "airdrops.io" in scored.link and not item.get("has_github"):
+        scored.score += 30
+        scored.signals.append("airdrops_io_listed")
+        # claim live = confirmed airdrop
+        if _find(body, [r"claim\s+live", r"claim\s+now", r"eligible", r"step-by-step"]):
+            scored.score += 20
+            scored.signals.append("claim_live")
+        # potential/confirmed airdrop mention
+        if _find(body, [r"potential\s+airdrop", r"how\s+to\s+be\s+eligible", r"confirmed\s+airdrop"]):
+            scored.score += 15
+            scored.signals.append("potential_airdrop")
+        # no token yet = higher upside
+        if _find(body, [r"no\s+token\s+yet", r"token\s+tbd", r"pre[-\s]?token", r"airdrop\s+is\s+live"]):
+            scored.score += 10
+            scored.signals.append("pre_token")
+
     # ── Positive signals ──
     if _find(text, SAFE_SIGNALS["audit"]):
         scored.score += 15
@@ -130,12 +147,10 @@ def score_airdrop(item: dict) -> ScoredAirdrop:
     # ── GitHub repo signal (only for airdrop-related repos) ──
     if "github.com" in text or item.get("has_github"):
         scored.has_github = True
-        # only count as positive if it's an airdrop/crypto project
         if _find(text, [r"airdrop", r"crypto", r"web3", r"blockchain", r"defi", r"token", r"tge", r"points"]):
             scored.score += 25
             scored.signals.append("has_github")
         else:
-            # generic repo — neutral, not positive
             scored.signals.append("generic_repo")
 
     # ── Negative signals ──
@@ -143,7 +158,7 @@ def score_airdrop(item: dict) -> ScoredAirdrop:
         scored.score = max(0, scored.score - 20)
         scored.pay_to_play = True
         scored.flags.append("pay_to_play")
-    if not scored.has_github:
+    if not scored.has_github and "airdrops.io" not in scored.link:
         scored.score = max(0, scored.score - 10)
         scored.flags.append("no_github")
 
@@ -167,11 +182,12 @@ def score_airdrop(item: dict) -> ScoredAirdrop:
     return scored
 
 
-def score_all(items: list, enrich: bool = True, enrich_limit: int = 25) -> list:
+def score_all(items: list, enrich: bool = True, enrich_limit: int = 25, deep_enrich: bool = False) -> list:
     """Score a batch and persist the ranked result.
 
     Enrichment (page fetch) is limited to the top N by raw recency to keep
     the run fast; the rest are scored on title+URL only.
+    deep_enrich=True also fetches airdrops.io project pages + GitHub stats.
     """
     if enrich:
         # enrich the freshest 25 (parsedate may fail; fallback = first N)
@@ -184,6 +200,30 @@ def score_all(items: list, enrich: bool = True, enrich_limit: int = 25) -> list:
         candidates = sorted(items, key=_age)[:enrich_limit]
         for it in candidates:
             enrich_item(it)
+
+    if deep_enrich:
+        try:
+            from airdrop_enricher import enrich_batch, enrich_airdrops_io, enrich_github
+            for it in items:
+                link = it.get("link", "")
+                # airdrops.io project page
+                if "airdrops.io" in link and not it.get("has_github"):
+                    extra = enrich_airdrops_io(link)
+                    it["body"] = (it.get("body", "") + " " + extra.get("description", "")).strip()
+                    if extra.get("github"):
+                        it["has_github"] = True
+                        it["github_url"] = extra["github"]
+                        it["body"] += " github.com " + extra["github"]
+                # GitHub repo stats
+                if "github.com" in link:
+                    stats = enrich_github(link)
+                    it["github_stats"] = stats
+                    if stats.get("description"):
+                        it["body"] = (it.get("body", "") + " " + stats["description"]).strip()
+                    if stats.get("stars", 0) > 100:
+                        it["body"] += " popular repo"
+        except Exception as e:
+            print(f"  ⚠ deep enrich: {e}")
 
     scored = [score_airdrop(i) for i in items]
     scored.sort(key=lambda s: s.score, reverse=True)
