@@ -1,12 +1,1136 @@
 {
-  "updated_at": "2026-10-14T22:09:01.738295+00:00",
-  "total": 0,
+  "updated_at": "2026-10-14T22:37:33.194792+00:00",
+  "total": 63,
   "by_grade": {
-    "A": 0,
+    "A": 28,
     "B": 0,
     "C": 0,
-    "D": 0
+    "D": 35
   },
   "scams_blocked": 0,
-  "items": []
+  "items": [
+    {
+      "title": "TxFlow",
+      "link": "https://airdrops.io/txflow/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.136679+00:00"
+    },
+    {
+      "title": "XStable",
+      "link": "https://airdrops.io/xstable/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.141156+00:00"
+    },
+    {
+      "title": "Catalyst",
+      "link": "https://airdrops.io/catalyst/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "vc_backed",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.142836+00:00"
+    },
+    {
+      "title": "PERPTools",
+      "link": "https://airdrops.io/perptools/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.145304+00:00"
+    },
+    {
+      "title": "Titan Exchange",
+      "link": "https://airdrops.io/titan-exchange/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "testnet",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.146803+00:00"
+    },
+    {
+      "title": "TastyCo",
+      "link": "https://airdrops.io/tastyco/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.148140+00:00"
+    },
+    {
+      "title": "Raycash",
+      "link": "https://airdrops.io/raycash/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.151670+00:00"
+    },
+    {
+      "title": "RWAPerp",
+      "link": "https://airdrops.io/rwaperp/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.153317+00:00"
+    },
+    {
+      "title": "Synthra",
+      "link": "https://airdrops.io/synthra/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "testnet",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.155073+00:00"
+    },
+    {
+      "title": "MindGames",
+      "link": "https://airdrops.io/mindgames/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.156654+00:00"
+    },
+    {
+      "title": "CZR",
+      "link": "https://airdrops.io/czr/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.158671+00:00"
+    },
+    {
+      "title": "PowerX OneWallet",
+      "link": "https://airdrops.io/powerx-onewallet/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.160532+00:00"
+    },
+    {
+      "title": "Arcus",
+      "link": "https://airdrops.io/arcus/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.162178+00:00"
+    },
+    {
+      "title": "Ink",
+      "link": "https://airdrops.io/ink/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.163596+00:00"
+    },
+    {
+      "title": "RISEx",
+      "link": "https://airdrops.io/risex/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.165343+00:00"
+    },
+    {
+      "title": "Amadeus Protocol",
+      "link": "https://airdrops.io/amadeus-protocol/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.166781+00:00"
+    },
+    {
+      "title": "Axis Robotics",
+      "link": "https://airdrops.io/axis-robotics/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.168235+00:00"
+    },
+    {
+      "title": "Variational",
+      "link": "https://airdrops.io/variational/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.169668+00:00"
+    },
+    {
+      "title": "BULK",
+      "link": "https://airdrops.io/bulk/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "mainnet_live",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.171087+00:00"
+    },
+    {
+      "title": "Extended",
+      "link": "https://airdrops.io/extended/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.173327+00:00"
+    },
+    {
+      "title": "Nado",
+      "link": "https://airdrops.io/nado/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.174834+00:00"
+    },
+    {
+      "title": "Cambria",
+      "link": "https://airdrops.io/cambria/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.176827+00:00"
+    },
+    {
+      "title": "Arc",
+      "link": "https://airdrops.io/arc/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "testnet",
+        "mainnet_live",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.178311+00:00"
+    },
+    {
+      "title": "Jumper Exchange",
+      "link": "https://airdrops.io/jumper-exchange/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.180331+00:00"
+    },
+    {
+      "title": "VOICE",
+      "link": "https://airdrops.io/voice/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.182036+00:00"
+    },
+    {
+      "title": "Jupiter",
+      "link": "https://airdrops.io/jupiter/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.184065+00:00"
+    },
+    {
+      "title": "Fables",
+      "link": "https://airdrops.io/fables/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.185730+00:00"
+    },
+    {
+      "title": "Surf",
+      "link": "https://airdrops.io/surf/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "pre_token",
+        "no_token_yet",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.187179+00:00"
+    },
+    {
+      "title": "Nous Research",
+      "link": "https://airdrops.io/nous-research/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 45,
+      "grade": "D",
+      "signals": [
+        "testnet",
+        "has_github",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.144037+00:00"
+    },
+    {
+      "title": "Updated Airdrops",
+      "link": "https://airdrops.io/updated-airdrops/",
+      "source": "airdrops.io",
+      "date": "Wed, 14 Oct 2026 22:36:51 GMT",
+      "score": 40,
+      "grade": "D",
+      "signals": [
+        "airdrops_io_listed",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.183467+00:00"
+    },
+    {
+      "title": "GitHub: noiramaster/noira1m",
+      "link": "https://github.com/noiramaster/noira1m",
+      "source": "github_search",
+      "date": "2026-10-14T22:14:25Z",
+      "score": 35,
+      "grade": "D",
+      "signals": [
+        "testnet",
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.192185+00:00"
+    },
+    {
+      "title": "GitHub: RUDRA17117/DAWN-ORCHESTRATOR",
+      "link": "https://github.com/RUDRA17117/DAWN-ORCHESTRATOR",
+      "source": "github_search",
+      "date": "2026-10-14T22:06:17Z",
+      "score": 35,
+      "grade": "D",
+      "signals": [
+        "testnet",
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.192273+00:00"
+    },
+    {
+      "title": "GitHub: deepakkankure/Gopher-Governance-Toolkit",
+      "link": "https://github.com/deepakkankure/Gopher-Governance-Toolkit",
+      "source": "github_search",
+      "date": "2026-10-14T19:04:29Z",
+      "score": 35,
+      "grade": "D",
+      "signals": [
+        "testnet",
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.193996+00:00"
+    },
+    {
+      "title": "GitHub: arturnery/airdrop-tracker",
+      "link": "https://github.com/arturnery/airdrop-tracker",
+      "source": "github_search",
+      "date": "2026-10-14T22:15:18Z",
+      "score": 25,
+      "grade": "D",
+      "signals": [
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.192055+00:00"
+    },
+    {
+      "title": "GitHub: AbhirajB-debug/acki-nacki-harvester",
+      "link": "https://github.com/AbhirajB-debug/acki-nacki-harvester",
+      "source": "github_search",
+      "date": "2026-10-14T22:06:12Z",
+      "score": 25,
+      "grade": "D",
+      "signals": [
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.192651+00:00"
+    },
+    {
+      "title": "GitHub: jjuliantt/KiteAI-Autopilot-Suite",
+      "link": "https://github.com/jjuliantt/KiteAI-Autopilot-Suite",
+      "source": "github_search",
+      "date": "2026-10-14T22:04:23Z",
+      "score": 25,
+      "grade": "D",
+      "signals": [
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.193057+00:00"
+    },
+    {
+      "title": "GitHub: ashidohonzu-bit/fintopio-automated-farmer",
+      "link": "https://github.com/ashidohonzu-bit/fintopio-automated-farmer",
+      "source": "github_search",
+      "date": "2026-10-14T21:10:52Z",
+      "score": 25,
+      "grade": "D",
+      "signals": [
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.193321+00:00"
+    },
+    {
+      "title": "GitHub: Srujan30x/Sui-Momentum-Trading-Bot",
+      "link": "https://github.com/Srujan30x/Sui-Momentum-Trading-Bot",
+      "source": "github_search",
+      "date": "2026-10-14T21:09:49Z",
+      "score": 25,
+      "grade": "D",
+      "signals": [
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.193494+00:00"
+    },
+    {
+      "title": "GitHub: Micael20055/Growth-Accelerator",
+      "link": "https://github.com/Micael20055/Growth-Accelerator",
+      "source": "github_search",
+      "date": "2026-10-14T20:27:30Z",
+      "score": 25,
+      "grade": "D",
+      "signals": [
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.193630+00:00"
+    },
+    {
+      "title": "GitHub: Yarzarhyo/Blum-Airdrop-Assistant",
+      "link": "https://github.com/Yarzarhyo/Blum-Airdrop-Assistant",
+      "source": "github_search",
+      "date": "2026-10-14T20:26:16Z",
+      "score": 25,
+      "grade": "D",
+      "signals": [
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.193763+00:00"
+    },
+    {
+      "title": "GitHub: kwaikwessam-prog/crypto-ops-vault",
+      "link": "https://github.com/kwaikwessam-prog/crypto-ops-vault",
+      "source": "github_search",
+      "date": "2026-10-14T20:24:45Z",
+      "score": 25,
+      "grade": "D",
+      "signals": [
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.193879+00:00"
+    },
+    {
+      "title": "GitHub: andrewhayter/bulk-airdrop-guide",
+      "link": "https://github.com/andrewhayter/bulk-airdrop-guide",
+      "source": "github_search",
+      "date": "2026-10-13T14:02:07Z",
+      "score": 25,
+      "grade": "D",
+      "signals": [
+        "has_github"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.194280+00:00"
+    },
+    {
+      "title": "Project",
+      "link": "https://coinmarketcap.com/currencies/project/",
+      "source": "coinmarketcap",
+      "date": "Wed, 14 Oct 2026 22:36:56 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.189347+00:00"
+    },
+    {
+      "title": "Participants",
+      "link": "https://coinmarketcap.com/currencies/participants/",
+      "source": "coinmarketcap",
+      "date": "Wed, 14 Oct 2026 22:36:56 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.189458+00:00"
+    },
+    {
+      "title": "Winners",
+      "link": "https://coinmarketcap.com/currencies/winners/",
+      "source": "coinmarketcap",
+      "date": "Wed, 14 Oct 2026 22:36:56 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.189535+00:00"
+    },
+    {
+      "title": "Rewards pool",
+      "link": "https://coinmarketcap.com/currencies/rewards-pool/",
+      "source": "coinmarketcap",
+      "date": "Wed, 14 Oct 2026 22:36:56 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.189603+00:00"
+    },
+    {
+      "title": "Started",
+      "link": "https://coinmarketcap.com/currencies/started/",
+      "source": "coinmarketcap",
+      "date": "Wed, 14 Oct 2026 22:36:56 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.189735+00:00"
+    },
+    {
+      "title": "Ended",
+      "link": "https://coinmarketcap.com/currencies/ended/",
+      "source": "coinmarketcap",
+      "date": "Wed, 14 Oct 2026 22:36:56 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.189911+00:00"
+    },
+    {
+      "title": "GitHub: morluto /",
+      "link": "https://github.com/morluto/rea",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.189987+00:00"
+    },
+    {
+      "title": "GitHub: debpalash /",
+      "link": "https://github.com/debpalash/VoiceStudio",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.190439+00:00"
+    },
+    {
+      "title": "GitHub: mksglu /",
+      "link": "https://github.com/mksglu/context-mode",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.190651+00:00"
+    },
+    {
+      "title": "GitHub: nvm-sh /",
+      "link": "https://github.com/nvm-sh/nvm",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.190819+00:00"
+    },
+    {
+      "title": "GitHub: K-Dense-AI /",
+      "link": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.190945+00:00"
+    },
+    {
+      "title": "GitHub: HKUDS /",
+      "link": "https://github.com/HKUDS/CLI-Anything",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.191130+00:00"
+    },
+    {
+      "title": "GitHub: ifixai-ai /",
+      "link": "https://github.com/ifixai-ai/iFixAi",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.191253+00:00"
+    },
+    {
+      "title": "GitHub: vxcontrol /",
+      "link": "https://github.com/vxcontrol/pentagi",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.191430+00:00"
+    },
+    {
+      "title": "GitHub: rust-lang /",
+      "link": "https://github.com/rust-lang/rust",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.191555+00:00"
+    },
+    {
+      "title": "GitHub: xtool-org /",
+      "link": "https://github.com/xtool-org/xtool",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.191665+00:00"
+    },
+    {
+      "title": "GitHub: ntdevlabs /",
+      "link": "https://github.com/ntdevlabs/tiny11builder",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.191820+00:00"
+    },
+    {
+      "title": "GitHub: NationalSecurityAgency /",
+      "link": "https://github.com/NationalSecurityAgency/ghidra",
+      "source": "github_trending",
+      "date": "Wed, 14 Oct 2026 22:36:58 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.191935+00:00"
+    },
+    {
+      "title": "GitHub: FernSalamanca/JuneAI-Farmhand",
+      "link": "https://github.com/FernSalamanca/JuneAI-Farmhand",
+      "source": "github_search",
+      "date": "2026-10-14T22:05:08Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.192907+00:00"
+    },
+    {
+      "title": "GitHub: zsaif516-oss/Auto-Farm-Steward",
+      "link": "https://github.com/zsaif516-oss/Auto-Farm-Steward",
+      "source": "github_search",
+      "date": "2026-10-14T21:26:51Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.193188+00:00"
+    },
+    {
+      "title": "GitHub: Navaneeth-07251/Gata-Auto-Farmer",
+      "link": "https://github.com/Navaneeth-07251/Gata-Auto-Farmer",
+      "source": "github_search",
+      "date": "2026-10-14T19:00:47Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-14T22:37:33.194105+00:00"
+    }
+  ]
 }
