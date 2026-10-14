@@ -53,7 +53,8 @@ INTEGRATIONS = ["Checkmate", "Portracker", "Ask4Me", "PriceGhost", "Cronpulse",
                 "mini-qr", "GoBackup", "Secrux", "Vito", "obsidian-graphify",
                 "freqtrade", "openstock", "promptfoo", "antislop", "openclaude",
                 "openresearch", "claude-red", "hack-skills", "pwnproxy",
-                "TraffMonetizer", "Pinterest", "Facebook", "YouTube"]
+                "TraffMonetizer", "Pinterest", "Facebook", "YouTube",
+                "governor-edr"]
 
 # agents: name -> links
 AGENTS = {
@@ -119,6 +120,7 @@ META = {
     "research": ("research-monitor — news 24/7", ["research-monitor"]),
     "crypto": ("airdrop + market + needle + pharos", ["airdrop", "market", "needle", "pharos"]),
     "bandwidth": ("bandwidth_agent + TraffMonetizer — passive income from traffic", ["TraffMonetizer", "infra"]),
+    "governor-edr": ("Local-first Windows threat detection agent (4B LLM + MITRE + YARA + Telegram HITL). integrations/governor-edr", ["security", "guardian", "infra", "Telegram"]),
 }
 
 
