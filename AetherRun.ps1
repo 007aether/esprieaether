@@ -40,19 +40,23 @@ foreach ($svc in $svcs) {
   Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
     Where-Object { $_.CommandLine -like "*$s*" } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-  # launch detached via cmd start /b (survives PowerShell exit)
-  cmd /c "start /b cmd /c `"$py $s > $logs\$n.log 2>&1`""
+  # launch detached via Start-Process (survives PowerShell exit)
+  Start-Process -FilePath $py -ArgumentList $s -WorkingDirectory $repo `
+    -WindowStyle Hidden -RedirectStandardOutput "$logs\$n.log" -RedirectStandardError "$logs\$n.err"
 }
 
-Start-Sleep -Seconds 20
+Start-Sleep -Seconds 15
 
 # governor-edr (different working dir)
 $govDir = "$env:LOCALAPPDATA\Temp\new_repos\governor-edr"
+$gpy = "$govDir\.venv\Scripts\python.exe"
+if (-not (Test-Path $gpy)) { $gpy = $py }
 if (Test-Path "$govDir\main.py") {
   Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
     Where-Object { $_.CommandLine -like "*governor*main*" } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-  cmd /c "start /b cmd /c `"cd /d $govDir && $py main.py > $logs\governor.log 2>&1`""
+  Start-Process -FilePath $gpy -ArgumentList "main.py" -WorkingDirectory $govDir `
+    -WindowStyle Hidden -RedirectStandardOutput "$logs\governor.log" -RedirectStandardError "$logs\governor.err"
 }
 
 # JARVIS Next.js frontend (node, port 3000)
@@ -61,7 +65,8 @@ if (Test-Path "$frontendDir\package.json") {
   Get-CimInstance Win32_Process -Filter "Name='node.exe'" |
     Where-Object { $_.CommandLine -like "*next dev*" } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-  cmd /c "start /b cmd /c `"cd /d $frontendDir && npx next dev --port 3000 > $logs\jarvis-fe.log 2>&1`""
+  Start-Process -FilePath "cmd.exe" -ArgumentList "/c","npx next dev --port 3000" -WorkingDirectory $frontendDir `
+    -WindowStyle Hidden -RedirectStandardOutput "$logs\jarvis-fe.log" -RedirectStandardError "$logs\jarvis-fe.err"
 }
 
 # JARVIS backend (uvicorn, port 8000)
@@ -69,7 +74,9 @@ if (Test-Path $jpy) {
   Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
     Where-Object { $_.CommandLine -like "*uvicorn main:app*" } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-  cmd /c "start /b cmd /c `"cd /d $env:LOCALAPPDATA\Temp\JARVIS_repo\backend && $jpy -m uvicorn main:app --host 0.0.0.0 --port 8000 > $logs\jarvis.log 2>&1`""
+  Start-Process -FilePath $jpy -ArgumentList "-m","uvicorn","main:app","--host","0.0.0.0","--port","8000" `
+    -WorkingDirectory "$env:LOCALAPPDATA\Temp\JARVIS_repo\backend" -WindowStyle Hidden `
+    -RedirectStandardOutput "$logs\jarvis.log" -RedirectStandardError "$logs\jarvis.err"
 }
 
 Start-Sleep -Seconds 20
