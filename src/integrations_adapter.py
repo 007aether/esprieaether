@@ -60,6 +60,7 @@ CATALOG = {
     "gobackup":         ("gobackup/gobackup",              "backup tool",              "med",    "auto backup (folded)"),
     "secrux":           ("Master-lay/secrux",              "security scanner",         "med",    "security scans (folded)"),
     "vito":             ("vitodeploy/vito",                "server deployment",        "med",    "VPS deploy (folded)"),
+    "obsidian-graphify":("Chandlersn/obsidian-graphify",   "notes → knowledge graph",  "med",    "vault graph (obsidian_vault_builder.py)"),
 }
 
 # integrations that are FOLDED into our stack (native adapter, no external clone)

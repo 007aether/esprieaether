@@ -1300,6 +1300,30 @@ async def cmd_integrations(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.edit_text(f"❌ خطأ: {e}")
 
 
+async def cmd_obsidian(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🧠 obsidian — build/refresh the knowledge-graph vault + stats"""
+    msg = await update.message.reply_text("🧠 بناء الـ vault...")
+    try:
+        from obsidian_vault_builder import main as build_vault
+        build_vault()
+        vault = Path.home() / "ObsidianVault" / "EsprieAether"
+        n_notes = len(list(vault.rglob("*.md")))
+        n_services = len(list((vault / "Services").glob("*.md"))) if (vault / "Services").exists() else 0
+        n_bots = len(list((vault / "Bots").glob("*.md"))) if (vault / "Bots").exists() else 0
+        n_integ = len(list((vault / "Integrations").glob("*.md"))) if (vault / "Integrations").exists() else 0
+        text = (
+            "🧠 *Obsidian Vault* ✅\n\n"
+            f"📝 {n_notes} notes\n"
+            f"  ⚙️ {n_services} services · 🤖 {n_bots} bots · 🔌 {n_integ} integrations\n\n"
+            "📂 `~/ObsidianVault/EsprieAether`\n"
+            "افتح فالـ Obsidian → Graph View تشوف الخريطة كاملة.\n"
+            "graph.html: `python integrations/obsidian-graphify`"
+        )
+        await msg.edit_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"❌ خطأ: {e}")
+
+
 @authorized_only
 async def cmd_clouddesktop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """☁️ /clouddesktop — cloud desktop agent info"""
@@ -1692,6 +1716,7 @@ async def set_commands(app: Application):
         BotCommand("sunnanetlify", "رابط موقع Sunna المباشر"),
         BotCommand("sunnaprix", "أثمنة المواد الحية (حديد/غلفنة)"),
         BotCommand("sunnakanban", "لوحة Sunna kanban"),
+        BotCommand("obsidian", "خريطة المعرفة Obsidian"),
         BotCommand("clear", "مسح سجل JARVIS"),
         BotCommand("ping", "اختبار سريع"),
     ]
@@ -1788,6 +1813,7 @@ def main():
     app.add_handler(CommandHandler("sunnanetlify", cmd_sunnanetlify))
     app.add_handler(CommandHandler("sunnaprix", cmd_sunnaprix))
     app.add_handler(CommandHandler("sunnakanban", cmd_sunnakanban))
+    app.add_handler(CommandHandler("obsidian", cmd_obsidian))
 
     # register /sunna* in the Telegram command menu
     try:
