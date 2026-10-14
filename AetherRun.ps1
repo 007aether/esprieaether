@@ -18,80 +18,58 @@ if (-not (Get-Process ollama -ErrorAction SilentlyContinue)) {
 }
 Start-Sleep -Seconds 3
 
-# services: name -> script (+ optional args)
+# services: name -> script (colon-separated)
 $svcs = @(
-  @{ n="router";        s="src/ai_router.py" },
-  @{ n="web";           s="src/web_interface.py" },
-  @{ n="cloud-desktop"; s="src/cloud_desktop_agent.py" },
-  @{ n="homedock";      s="src/homedock_dashboard.py" },
-  @{ n="sunna";         s="src/sunna_api.py" },
-  @{ n="integrations";  s="src/integrations_adapter.py" },
-  @{ n="kanban";        s="src/veritas_kanban.py" },
-  @{ n="bot";           s="src/bot.py" },
-  @{ n="watchdog";      s="src/watchdog.py" },
-  @{ n="autonomous";    s="src/autonomous_loop.py" },
-  @{ n="vpn-daemon";    s="src/vpn_agent.py"; a="--daemon" },
-  @{ n="governor-edr";  s="main.py"; a=""; d="$env:LOCALAPPDATA\Temp\new_repos\governor-edr" }
+  "router:src/ai_router.py",
+  "web:src/web_interface.py",
+  "cloud-desktop:src/cloud_desktop_agent.py",
+  "homedock:src/homedock_dashboard.py",
+  "sunna:src/sunna_api.py",
+  "integrations:src/integrations_adapter.py",
+  "kanban:src/veritas_kanban.py",
+  "bot:src/bot.py",
+  "watchdog:src/watchdog.py",
+  "autonomous:src/autonomous_loop.py",
+  "vpn-daemon:src/vpn_agent.py --daemon"
 )
 
-# JARVIS Next.js frontend (node, port 3000) — separate launch
+foreach ($svc in $svcs) {
+  $n = $svc.Split(":")[0]
+  $s = $svc.Substring($n.Length + 1)
+  # kill existing instance (idempotent restart)
+  Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
+    Where-Object { $_.CommandLine -like "*$s*" } |
+    ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+  # launch detached via cmd start /b (survives PowerShell exit)
+  cmd /c "start /b cmd /c `"$py $s > $logs\$n.log 2>&1`""
+}
+
+Start-Sleep -Seconds 20
+
+# governor-edr (different working dir)
+$govDir = "$env:LOCALAPPDATA\Temp\new_repos\governor-edr"
+if (Test-Path "$govDir\main.py") {
+  Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
+    Where-Object { $_.CommandLine -like "*governor*main*" } |
+    ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+  cmd /c "start /b cmd /c `"cd /d $govDir && $py main.py > $logs\governor.log 2>&1`""
+}
+
+# JARVIS Next.js frontend (node, port 3000)
 $frontendDir = "$env:LOCALAPPDATA\Temp\JARVIS_repo\frontend"
 if (Test-Path "$frontendDir\package.json") {
   Get-CimInstance Win32_Process -Filter "Name='node.exe'" |
     Where-Object { $_.CommandLine -like "*next dev*" } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-  $fpsi = New-Object System.Diagnostics.ProcessStartInfo
-  $fpsi.FileName = "cmd.exe"
-  $fpsi.Arguments = "/c npx next dev --port 3000"
-  $fpsi.WorkingDirectory = $frontendDir
-  $fpsi.UseShellExecute = $false
-  $fpsi.CreateNoWindow = $true
-  $fpsi.RedirectStandardOutput = $true
-  $fpsi.RedirectStandardError = $true
-  $fp = [System.Diagnostics.Process]::Start($fpsi)
-  $null = $fp.StandardOutput.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\jarvis-frontend.log"))
-  $null = $fp.StandardError.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\jarvis-frontend.err"))
+  cmd /c "start /b cmd /c `"cd /d $frontendDir && npx next dev --port 3000 > $logs\jarvis-fe.log 2>&1`""
 }
 
-foreach ($s in $svcs) {
-  # kill existing instance of this script (idempotent restart)
-  Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
-    Where-Object { $_.CommandLine -like "*$($s.s)*" } |
-    ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-  # start detached: python directly, minimized, log to file
-  $args = @($s.s)
-  if ($s.a) { $args += $s.a }
-  $wd = if ($s.d) { $s.d } else { $repo }
-  $psi = New-Object System.Diagnostics.ProcessStartInfo
-  $psi.FileName = $py
-  $psi.Arguments = ($args | ForEach-Object { '"' + $_ + '"' }) -join ' '
-  $psi.WorkingDirectory = $wd
-  $psi.UseShellExecute = $false
-  $psi.CreateNoWindow = $true
-  $psi.RedirectStandardOutput = $true
-  $psi.RedirectStandardError = $true
-  $p = [System.Diagnostics.Process]::Start($psi)
-  # redirect logs via jobs
-  $null = $p.StandardOutput.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\$($s.n).log"))
-  $null = $p.StandardError.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\$($s.n).err"))
-}
-
-# JARVIS (separate venv, port 8000)
+# JARVIS backend (uvicorn, port 8000)
 if (Test-Path $jpy) {
   Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
     Where-Object { $_.CommandLine -like "*uvicorn main:app*" } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-  $jpsi = New-Object System.Diagnostics.ProcessStartInfo
-  $jpsi.FileName = $jpy
-  $jpsi.Arguments = '-m uvicorn main:app --host 0.0.0.0 --port 8000'
-  $jpsi.WorkingDirectory = "$env:LOCALAPPDATA\Temp\JARVIS_repo\backend"
-  $jpsi.UseShellExecute = $false
-  $jpsi.CreateNoWindow = $true
-  $jpsi.RedirectStandardOutput = $true
-  $jpsi.RedirectStandardError = $true
-  $jp = [System.Diagnostics.Process]::Start($jpsi)
-  $null = $jp.StandardOutput.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\jarvis.log"))
-  $null = $jp.StandardError.BaseStream.CopyToAsync([System.IO.File]::Create("$logs\jarvis.err"))
+  cmd /c "start /b cmd /c `"cd /d $env:LOCALAPPDATA\Temp\JARVIS_repo\backend && $jpy -m uvicorn main:app --host 0.0.0.0 --port 8000 > $logs\jarvis.log 2>&1`""
 }
 
 Start-Sleep -Seconds 20
