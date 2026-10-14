@@ -36,7 +36,7 @@ def _extract_text(html: str) -> str:
 
 def enrich_airdrops_io(url: str) -> dict:
     """Enrich one airdrops.io project page."""
-    out = {"github": None, "twitter": None, "description": "", "reward": "", "status": ""}
+    out = {"github": None, "twitter": None, "description": "", "reward": "", "status": "", "body": ""}
     try:
         r = requests.get(url, headers=UA, timeout=TIMEOUT)
         r.raise_for_status()
@@ -58,6 +58,9 @@ def enrich_airdrops_io(url: str) -> dict:
         meta = re.findall(r'<meta name="description" content="([^"]+)"', html)
         if meta:
             out["description"] = meta[0][:300]
+
+        # Body text for deeper scoring (claim live, confirmed, etc.)
+        out["body"] = text[:3000]
 
         # Reward hints
         rew = re.findall(r"(?:reward|airdrop|worth|value|est\.?\s*\$?[\d,]+)", text, re.IGNORECASE)

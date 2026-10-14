@@ -122,6 +122,14 @@ def score_airdrop(item: dict) -> ScoredAirdrop:
         if _find(body, [r"potential\s+airdrop", r"how\s+to\s+be\s+eligible", r"confirmed\s+airdrop"]):
             scored.score += 15
             scored.signals.append("potential_airdrop")
+        # confirmed airdrop = highest confidence
+        if _find(body, [r"airdrop\s+confirmed", r"airdrop\s+is\s+confirmed", r"tge\s+for"]):
+            scored.score += 15
+            scored.signals.append("confirmed_airdrop")
+        # waitlisted = demand signal
+        if _find(body, [r"wallets\s+waitlisted", r"waitlist", r"\d+K\s+users"]):
+            scored.score += 10
+            scored.signals.append("waitlisted")
         # no token yet = higher upside
         if _find(body, [r"no\s+token\s+yet", r"token\s+tbd", r"pre[-\s]?token", r"airdrop\s+is\s+live"]):
             scored.score += 10
@@ -209,7 +217,7 @@ def score_all(items: list, enrich: bool = True, enrich_limit: int = 25, deep_enr
                 # airdrops.io project page
                 if "airdrops.io" in link and not it.get("has_github"):
                     extra = enrich_airdrops_io(link)
-                    it["body"] = (it.get("body", "") + " " + extra.get("description", "")).strip()
+                    it["body"] = (it.get("body", "") + " " + extra.get("description", "") + " " + extra.get("body", "")).strip()
                     if extra.get("github"):
                         it["has_github"] = True
                         it["github_url"] = extra["github"]
