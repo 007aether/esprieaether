@@ -1,0 +1,29 @@
+{
+  "members": [
+    {
+      "name": "DSH",
+      "role": "orchestrator",
+      "url": "http://localhost:11436"
+    },
+    {
+      "name": "Hermes",
+      "role": "bridge",
+      "url": "local"
+    },
+    {
+      "name": "Sunna",
+      "role": "team",
+      "url": "local"
+    },
+    {
+      "name": "CloudDesktop",
+      "role": "remote",
+      "url": "local"
+    },
+    {
+      "name": "TestMember",
+      "role": "tester",
+      "url": "local"
+    }
+  ]
+}

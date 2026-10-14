@@ -239,13 +239,47 @@ def check_once() -> dict:
 
 
 def check_disk():
-    """Alert when disk usage exceeds threshold."""
+    """Alert + auto-clean when disk usage exceeds threshold.
+
+    When > 90%, auto-deletes old logs (>3 days) + tmp zips so services
+    never die from a full disk again.
+    """
     try:
         import shutil
         usage = shutil.disk_usage(str(HOME))
         pct = usage.used / usage.total * 100
         if pct >= DISK_ALERT_PCT:
             log(f"💾 DISK ALERT: {pct:.0f}% used ({usage.used // (2**30)}GB / {usage.total // (2**30)}GB)")
+        if pct >= 90:
+            log(f"🧹 disk {pct:.0f}% — auto-cleaning old logs + tmp...")
+            freed = 0
+            # old logs (>3 days)
+            for d in [HOME / "ESPRIEAETHER" / "data", PROJECT,
+                      HOME / "Desktop" / "Sunna-Equipe-Industrial"]:
+                for f in d.rglob("*.log"):
+                    try:
+                        if f.stat().st_mtime < time.time() - 3 * 86400:
+                            freed += f.stat().st_size
+                            f.unlink()
+                    except Exception:
+                        pass
+            # tmp archives
+            tmp = Path(os.environ.get("LOCALAPPDATA", "")) / "Temp"
+            if tmp.exists():
+                for f in tmp.glob("*.zip"):
+                    try:
+                        freed += f.stat().st_size
+                        f.unlink()
+                    except Exception:
+                        pass
+                for f in tmp.glob("*.tar.gz"):
+                    try:
+                        freed += f.stat().st_size
+                        f.unlink()
+                    except Exception:
+                        pass
+            u2 = shutil.disk_usage(str(HOME))
+            log(f"🧹 freed {freed // (2**20)}MB — disk now {u2.used / u2.total * 100:.0f}%")
     except Exception as e:
         log(f"❌ disk check error: {e}")
 
