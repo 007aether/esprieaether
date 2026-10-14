@@ -34,6 +34,17 @@ $svcs = @(
   @{ n="governor-edr";  s="main.py"; a=""; d="$env:LOCALAPPDATA\Temp\new_repos\governor-edr" }
 )
 
+# JARVIS Next.js frontend (node, port 3000) — separate launch
+$frontendDir = "$env:LOCALAPPDATA\Temp\JARVIS_repo\frontend"
+if (Test-Path "$frontendDir\package.json") {
+  Get-CimInstance Win32_Process -Filter "Name='node.exe'" |
+    Where-Object { $_.CommandLine -like "*next dev*" } |
+    ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+  Start-Process -FilePath "cmd.exe" -ArgumentList "/c","npx next dev --port 3000" `
+    -WorkingDirectory $frontendDir -WindowStyle Hidden `
+    -RedirectStandardOutput "$logs\jarvis-frontend.log" -RedirectStandardError "$logs\jarvis-frontend.err"
+}
+
 foreach ($s in $svcs) {
   # kill existing instance of this script (idempotent restart)
   Get-CimInstance Win32_Process -Filter "Name='python.exe'" |

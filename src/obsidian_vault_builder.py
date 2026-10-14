@@ -36,6 +36,7 @@ SERVICES = {
     "kanban": (5103, ["Sunna", "Veritas-Kanban"]),
     "homedock": (5104, ["all-integrations", "control-center"]),
     "jarvis": (8000, ["OSINT", "Exa", "Anthropic", "Gemini"]),
+    "jarvis-frontend": (3000, ["jarvis", "OSINT"]),
 }
 
 BOTS = {

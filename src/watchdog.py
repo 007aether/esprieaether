@@ -96,6 +96,12 @@ SERVICES = {
         "cwd": str(JARVIS_DIR),
         "cmd": [str(JARVIS_DIR / ".venv" / "Scripts" / "python.exe"), "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"],
     },
+    "jarvis-frontend": {
+        "kind": "http",
+        "url": "http://127.0.0.1:3000/",
+        "cwd": str(JARVIS_DIR.parent / "frontend"),
+        "cmd": ["cmd.exe", "/c", "npx next dev --port 3000"],
+    },
     "integrations": {
         "kind": "http",
         "url": "http://127.0.0.1:5102/health",
