@@ -243,9 +243,10 @@ def task_weekly_email() -> dict:
 
     return result
 def task_airdrop_sync() -> dict:
-    """مزامنة الإيردروبات من RSS + scoring ذكي"""
+    """مزامنة الإيردروبات من RSS + scrapers + scoring ذكي"""
     result = {"name": "airdrop_sync", "status": "ok"}
     try:
+        # ── RSS feeds ──
         items = airdrop_agent.fetch_all()
         new = airdrop_agent.save_airdrops(items)
         total = airdrop_agent.count()
@@ -253,6 +254,15 @@ def task_airdrop_sync() -> dict:
         result["fetched"] = len(items)
         result["new"] = new
         result["total"] = total
+
+        # ── Specialized scrapers (airdrops.io, CMC, GitHub) ──
+        try:
+            from airdrop_scraper import scrape_all
+            scraped = scrape_all()
+            result["scraped"] = len(scraped)
+            items = items + scraped
+        except Exception as se:
+            result["scrape_error"] = str(se)
 
         # ── Smart scoring ──
         from airdrop_scorer import score_all, top_candidates, format_telegram

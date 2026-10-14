@@ -127,16 +127,23 @@ def score_airdrop(item: dict) -> ScoredAirdrop:
         scored.score += 20
         scored.signals.append("no_token_yet")
 
+    # ── GitHub repo signal (only for airdrop-related repos) ──
+    if "github.com" in text or item.get("has_github"):
+        scored.has_github = True
+        # only count as positive if it's an airdrop/crypto project
+        if _find(text, [r"airdrop", r"crypto", r"web3", r"blockchain", r"defi", r"token", r"tge", r"points"]):
+            scored.score += 25
+            scored.signals.append("has_github")
+        else:
+            # generic repo — neutral, not positive
+            scored.signals.append("generic_repo")
+
     # ── Negative signals ──
     if _find(text, SAFE_SIGNALS["pay_to_play"]):
         scored.score = max(0, scored.score - 20)
         scored.pay_to_play = True
         scored.flags.append("pay_to_play")
-    if "github.com" in text or item.get("has_github"):
-        scored.has_github = True
-        scored.score += 25
-        scored.signals.append("has_github")
-    else:
+    if not scored.has_github:
         scored.score = max(0, scored.score - 10)
         scored.flags.append("no_github")
 
