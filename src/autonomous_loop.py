@@ -501,6 +501,11 @@ SCHEDULE = {
     "analytics_report": 12 * 60 * 60,      # كل 12 ساعة
     "guardian_check": 60 * 60,             # كل ساعة
     "inference_test": 2 * 60 * 60,         # كل ساعتين
+    # ═══ Sunna bots ═══
+    "sunna_veille": 6 * 60 * 60,           # كل 6 ساعات
+    "sunna_prices": 24 * 60 * 60,          # يومياً
+    "sunna_facture_check": 24 * 60 * 60,   # يومياً
+    "sunna_offres": 12 * 60 * 60,          # كل 12 ساعة
 }
 
 
@@ -556,6 +561,86 @@ def task_inference_test() -> dict:
         return {"status": "error", "error": str(e)}
 
 
+# ═══════════════════════════════════════
+#  Sunna bot tasks (wired from ~/Desktop/Sunna-Equipe-Industrial/bots)
+# ═══════════════════════════════════════
+SUNNA_BOTS = Path.home() / "Desktop" / "Sunna-Equipe-Industrial" / "bots"
+PY = str(BASE_DIR / ".venv" / "Scripts" / "python.exe")
+
+
+def _run_sunna_bot(script: str, args: list = None, timeout: int = 180) -> dict:
+    """Run a Sunna bot script and return its output."""
+    script_path = SUNNA_BOTS / script
+    if not script_path.exists():
+        return {"status": "error", "error": f"not found: {script}"}
+    cmd = [PY, str(script_path)] + (args or [])
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout,
+                           cwd=str(SUNNA_BOTS.parent))
+        out = (r.stdout or "").strip()
+        return {"status": "ok" if r.returncode == 0 else "error",
+                "output": out[-2000:], "returncode": r.returncode}
+    except subprocess.TimeoutExpired:
+        return {"status": "error", "error": "timeout"}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_sunna_veille() -> dict:
+    """Veille — GitHub repo monitoring (187→500 repos)."""
+    result = {"name": "sunna_veille", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("veille_bot.py", ["run"])
+        result.update(run_result)
+        if run_result.get("status") == "ok":
+            out = run_result.get("output", "")
+            # extract total line if present
+            for line in out.splitlines():
+                if "المجموع" in line or "جديد" in line:
+                    result["summary"] = line.strip()
+                    break
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_sunna_prices() -> dict:
+    """Live steel/galva/zinc price tracker."""
+    result = {"name": "sunna_prices", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("sunna_price_tracker.py", ["run"])
+        result.update(run_result)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_sunna_facture_check() -> dict:
+    """Check factures built today (facture_builder.py list)."""
+    result = {"name": "sunna_facture_check", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("facture_builder.py", ["--list"])
+        result.update(run_result)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_sunna_offres() -> dict:
+    """Offres bot — offers/scraping."""
+    result = {"name": "sunna_offres", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("offres_bot.py", ["run"])
+        result.update(run_result)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
 def run_cycle(state: dict):
     """دورة واحدة"""
     logger.info(f"═══ دورة #{state['cycles']} ═══")
@@ -579,7 +664,10 @@ def run_cycle(state: dict):
         "analytics_report": task_analytics_report,
         "guardian_check": task_guardian_check,
         "inference_test": task_inference_test,
-            "daily_report": task_daily_report,
+        "sunna_veille": task_sunna_veille,
+        "sunna_prices": task_sunna_prices,
+        "sunna_facture_check": task_sunna_facture_check,
+        "sunna_offres": task_sunna_offres,
     }
 
     for name, func in tasks.items():
