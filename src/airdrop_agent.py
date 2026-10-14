@@ -22,13 +22,19 @@ RSS_FEEDS = [
     "https://airdrops.io/feed/",
     "https://airdropalert.com/feed/",
     "https://airdropalert.com/feed/?post_type=airdrop",
-    "https://cointelegraph.com/rss/tag/airdrop",
     "https://decrypt.co/feed",
     "https://www.theblock.co/rss.xml",
     "https://cryptopotato.com/feed/",
-    "https://bitcoinist.com/feed/",
     "https://u.today/rss",
     "https://news.bitcoin.com/feed/",
+    "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "https://cointelegraph.com/rss",
+    "https://bitcoinmagazine.com/.rss/full/",
+    "https://www.newsbtc.com/feed/",
+    "https://cryptoslate.com/feed/",
+    "https://beincrypto.com/feed/",
+    "https://www.gemini.com/feed/",
+    "https://blog.ethereum.org/feed.xml",
 ]
 
 AIRDROP_DB = BASE_DIR / "airdrops.json"
