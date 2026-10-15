@@ -1,19 +1,26 @@
 {
  "seen": [
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ cherry_bridge: error",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ semantic_memory: error",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ sunna_offres: error",
-  "#-#-# #:#:#,# | ERROR | airdrop_agent | ❌ https://www.gemini.com/feed/: # Client Error: Not Found for url: https://www.g",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ analytics_report: error",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ guardian_check: error",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ inference_test: error",
+  "UnicodeDecodeError: 'utf-#' codec can't decode byte #x# in position #: invalid start byte",
+  "Traceback (most recent call last):",
   "#-#-# #:#:#,# | INFO | autonomous | ✅ sunna_veille: error",
-  "#-#-# #:#:#,# | ERROR | airdrop_agent | ❌ https://cryptoslate.com/feed/: # Client Error: Forbidden for url: https://cryp",
+  "#-#-# #:#:#,# | ERROR | airdrop_agent | ❌ https://www.gemini.com/feed/: # Client Error: Not Found for url: https://www.g",
+  "raise exception",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ guardian_check: error",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ cherry_bridge: error",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ security_scan: error",
+  "#-#-# #:#:#,# | ERROR | telegram.ext.Application | No error handlers are registered, logging exception.",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ sunna_offres: error",
+  "UnicodeDecodeError: 'utf-#' codec can't decode byte #xea in position #: invalid continuation byte",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ semantic_memory: error",
   "Error: Cannot find module 'C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\tools\\dsh\\node_modules\\@deepseek-ai\\dsh\\lib\\bin.js",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ analytics_report: error",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ inference_test: error",
   "#-#-# #:#:#,# | INFO | autonomous | ✅ research_monitor: error",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ security_scan: error"
+  "telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is runni",
+  "Exception in thread Thread-# (_readerthread):",
+  "#-#-# #:#:#,# | ERROR | airdrop_agent | ❌ https://cryptoslate.com/feed/: # Client Error: Forbidden for url: https://cryp"
  ],
- "diagnosed": 8,
- "fixes_proposed": 8,
- "last_run": "2026-10-15T18:35:36.275743+00:00"
+ "diagnosed": 11,
+ "fixes_proposed": 11,
+ "last_run": "2026-10-15T19:10:42.770126+00:00"
 }
