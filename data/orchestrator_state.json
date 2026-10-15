@@ -1,0 +1,33 @@
+{
+  "ts": "2026-10-15T08:18:42.071407+00:00",
+  "action": "wake",
+  "reason": "daemons ميتة: ['guardian_agent.py']",
+  "services": {
+    "router": 200,
+    "mesh": 200,
+    "web": 200,
+    "cloud-desktop": 200,
+    "sunna": 200,
+    "integrations": 200,
+    "kanban": 200,
+    "homedock": 200,
+    "jarvis-api": 200,
+    "jarvis-fe": 200,
+    "ollama": 200,
+    "governor": 0
+  },
+  "services_up": 11,
+  "services_total": 12,
+  "daemons": {
+    "bot.py": true,
+    "watchdog.py": true,
+    "autonomous_loop.py": true,
+    "cloud_poller.py": true,
+    "guardian_agent.py": false,
+    "vpn_agent.py": true
+  },
+  "daemons_up": 5,
+  "daemons_total": 6,
+  "mesh_board": 47,
+  "jarvis_configured": 5
+}
