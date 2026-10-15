@@ -512,6 +512,7 @@ SCHEDULE = {
     "airdrop_sync": 6 * 60 * 60,
     "agent_mesh": 3 * 60 * 60,
     "cloud_bridge": 10 * 60,
+    "veille": 24 * 60 * 60,
     "weekly_email": 60 * 60,
     "self_evolve": 24 * 60 * 60,
     "github_evolve": 24 * 60 * 60,
@@ -710,6 +711,24 @@ def task_cloud_bridge() -> dict:
     return result
 
 
+def task_veille() -> dict:
+    """24/7 tech watch — GitHub harvest across 25 categories."""
+    result = {"name": "veille", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import veille_agent
+        index = veille_agent.harvest(per_query=20, target="esprieaether")
+        total = sum(len(v) for v in index.values())
+        payload = veille_agent.save_index(index)
+        veille_agent.write_digest(payload)
+        result["harvested"] = total
+        result["index_total"] = payload["total"]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
 def run_cycle(state: dict):
     """دورة واحدة"""
     logger.info(f"═══ دورة #{state['cycles']} ═══")
@@ -724,6 +743,7 @@ def run_cycle(state: dict):
         "airdrop_sync": task_airdrop_sync,
         "agent_mesh": task_agent_mesh,
         "cloud_bridge": task_cloud_bridge,
+        "veille": task_veille,
         "weekly_email": task_weekly_email,
         "self_evolve": task_self_evolve,
         "github_evolve": task_github_evolve,
