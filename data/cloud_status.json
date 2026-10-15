@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-15T15:42:47.470525+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-15T10:25:12.813268+00:00",
+  "cloud_last_run": "2026-10-15T15:49:09.195390+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "PPI Hits 6.3%: Why Ethereum Fell and What It Means for Fed Hikes",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trade.xyz Review: Wall Street Perps on Hyperliquid, Around the Clock",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "How to Buy TRUMP Coin for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Evernorth XRPN: The XRP Treasury Stock Just Hit Nasdaq",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "MediaMarkt Pulls Ledger Wallets: I Opened My Own to Check",
       "source": "https://airdropalert.com/feed"
     },
     {
