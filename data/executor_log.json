@@ -142,5 +142,14 @@
   "kind": "info",
   "ok": true,
   "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T16:38:58.575129+00:00",
+  "task_id": "fix-1792081314059",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في autonomous.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
  }
 ]

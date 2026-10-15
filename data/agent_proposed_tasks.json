@@ -164,7 +164,9 @@
   "agent": "self_improve",
   "title": "إصلاح خطأ في autonomous.err",
   "description": "السبب الجذري: الخلل في مонitore的研究.monitor.\nالإصلاح المقترح: إعادة تحرير المتصفح monitor.\nهل هو خطر؟ لا، مجرد تثبيت تصحيح.",
-  "status": "proposed",
-  "ts": "2026-10-15T16:21:54.059901+00:00"
+  "status": "done",
+  "ts": "2026-10-15T16:21:54.059901+00:00",
+  "executed_ts": "2026-10-15T16:38:56.715059+00:00",
+  "result": "queued for auto_apply (sandboxed)"
  }
 ]
