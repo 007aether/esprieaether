@@ -40,6 +40,16 @@ from flask import Flask, request, Response, jsonify
 
 app = Flask(__name__)
 
+# ── CORS: the /control page (localhost:5000) fetches these APIs cross-origin ──
+# Without these headers the browser blocks every fetch (different port/origin),
+# so /control shows services as "down" even though curl sees 200.
+@app.after_request
+def _cors(resp):
+    resp.headers["Access-Control-Allow-Origin"] = "*"
+    resp.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    resp.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return resp
+
 # ── Brains ──
 BRAINS = {
     "ollama-local": {

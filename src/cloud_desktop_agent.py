@@ -36,6 +36,14 @@ load_dotenv(Path(__file__).parent.parent / ".env")
 
 app = Flask(__name__)
 
+# ── CORS: /control page fetches cross-origin ──
+@app.after_request
+def _cors(resp):
+    resp.headers["Access-Control-Allow-Origin"] = "*"
+    resp.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    resp.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return resp
+
 PORT = int(os.getenv("CLOUD_DESKTOP_PORT", "5001"))
 TOKEN = os.getenv("CLOUD_DESKTOP_TOKEN", "")
 PROJECT = Path(__file__).parent.parent

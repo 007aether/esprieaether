@@ -38,6 +38,14 @@ load_dotenv(Path(__file__).parent.parent / ".env")
 
 app = Flask(__name__)
 
+# ── CORS: /control page fetches cross-origin ──
+@app.after_request
+def _cors(resp):
+    resp.headers["Access-Control-Allow-Origin"] = "*"
+    resp.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    resp.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return resp
+
 ROUTER_URL = os.getenv("AETHER_ROUTER_URL", "http://127.0.0.1:11435")
 
 # ── Agent registry ──
