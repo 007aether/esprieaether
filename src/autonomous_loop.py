@@ -558,6 +558,7 @@ SCHEDULE = {
     "app_factory": 24 * 60 * 60,           # يومياً — generate 60 app ideas → top 20
     "colibri_autostart": 10 * 60,          # كل 10 دقائق — auto-start serve when ready
     "dsh_bridge": 5 * 60,                  # كل 5 دقائق — JARVIS⇄DSH relay health + DSH detect
+    "dsh_launcher": 10 * 60,               # كل 10 دقائق — auto-launch DSH web when installed
 }
 
 
@@ -859,6 +860,42 @@ def task_dsh_bridge() -> dict:
         except Exception:
             result["relay"] = "down"
             result["note"] = "relay not responding — watchdog will restart it"
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_dsh_launcher() -> dict:
+    """Auto-launch DSH web server once installed (every 10 min).
+    DSH gives JARVIS a real browser (CDP 19387) instead of local-fallback."""
+    result = {"name": "dsh_launcher", "status": "ok"}
+    try:
+        import urllib.request
+        # already running?
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:3080/", timeout=4) as r:
+                result["dsh_web"] = "already running"
+                return result
+        except Exception:
+            pass
+        # installed?
+        sys.path.insert(0, str(BASE_DIR / "bots"))
+        import dsh_launcher as dl
+        chk = dl.check()
+        result["bin_exists"] = chk.get("bin_exists")
+        if not chk.get("bin_exists"):
+            result["launched"] = False
+            result["reason"] = "DSH not installed yet (npm install running)"
+            return result
+        # launch
+        r = dl.launch()
+        result["launched"] = r.get("ok")
+        if r.get("ok"):
+            result["url"] = r.get("url")
+            logger.info("🚀 DSH web auto-launched (JARVIS⇄DSH relay now uses DSH)")
+        else:
+            result["error"] = r.get("error")
     except Exception as e:
         result["status"] = "error"
         result["error"] = str(e)[:200]
@@ -1258,6 +1295,7 @@ def run_cycle(state: dict):
         "app_factory": task_app_factory,
         "colibri_autostart": task_colibri_autostart,
         "dsh_bridge": task_dsh_bridge,
+        "dsh_launcher": task_dsh_launcher,
     }
 
     for name, func in tasks.items():
