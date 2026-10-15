@@ -1,0 +1,82 @@
+[
+  {
+    "name": "FitGymPro",
+    "slug": "fitgympro",
+    "category": "fitness",
+    "pitch": "AI-generated workout plans & progress tracking",
+    "monetization": "Advanced workout analysis and suggestions",
+    "audience": "Fitness professionals",
+    "id": 8,
+    "score": 85
+  },
+  {
+    "name": "TodoZen",
+    "slug": "todozen",
+    "category": "productivity",
+    "pitch": "Daily mindfulness tasks for stress relief",
+    "monetization": "Advanced daily meditation timer",
+    "audience": "Stressed professionals",
+    "id": 1,
+    "score": 80
+  },
+  {
+    "name": "FitSage",
+    "slug": "fitsage",
+    "category": "wellness",
+    "pitch": "AI diet & exercise plan for beginners",
+    "monetization": "Personalized AI diet & exercise plans",
+    "audience": "New to fitness",
+    "id": 2,
+    "score": 52
+  },
+  {
+    "name": "MealBot",
+    "slug": "mealbot",
+    "category": "food",
+    "pitch": "Recipe app with AI meal planner",
+    "monetization": "Meal planner integration with grocery shopping",
+    "audience": "Meal preppers",
+    "id": 4,
+    "score": 51
+  },
+  {
+    "name": "BookShelfIQ",
+    "slug": "bookshelfiq",
+    "category": "education",
+    "pitch": "AI-curated reading recommendations",
+    "monetization": "Expert-curated reading clubs",
+    "audience": "Book enthusiasts",
+    "id": 3,
+    "score": 45
+  },
+  {
+    "name": "VineMap",
+    "slug": "vitemap",
+    "category": "travel",
+    "pitch": "Real-time travel updates & reviews",
+    "monetization": "Travel tips by local experts",
+    "audience": "Travel influencers",
+    "id": 5,
+    "score": 41
+  },
+  {
+    "name": "GroceryGuru",
+    "slug": "groceryguru",
+    "category": "groceries",
+    "pitch": "AI-assisted grocery shopping assistant",
+    "monetization": "Grocery delivery integration",
+    "audience": "Grocery shoppers",
+    "id": 6,
+    "score": 40
+  },
+  {
+    "name": "TechTidbits",
+    "slug": "techtidbits",
+    "category": "tech",
+    "pitch": "AI-curated tech news & updates",
+    "monetization": "Tech tips and advice by experts",
+    "audience": "Tech enthusiasts",
+    "id": 7,
+    "score": 40
+  }
+]

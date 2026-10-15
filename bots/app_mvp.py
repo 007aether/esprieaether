@@ -49,7 +49,7 @@ def ask_router(prompt, system=None, max_tokens=3500, timeout=150):
     system = system or "You are a senior React Native + product engineer. Write concrete, working code and specs."
     messages = [{"role": "system", "content": system}, {"role": "user", "content": prompt}]
     try:
-        data = json.dumps({"model": "aether-cloud", "messages": messages,
+        data = json.dumps({"model": "aether-local", "messages": messages,
                            "max_tokens": max_tokens, "temperature": 0.6}).encode()
         req = urllib.request.Request(f"{ROUTER_URL}/v1/chat/completions", data=data, method="POST")
         req.add_header("Content-Type", "application/json")

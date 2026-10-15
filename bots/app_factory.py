@@ -71,29 +71,35 @@ def ask_router(prompt, system=None, max_tokens=3000, timeout=120):
         {"role": "system", "content": system},
         {"role": "user", "content": prompt},
     ]
-    try:
-        data = json.dumps({
-            "model": "aether-cloud", "messages": messages,
-            "max_tokens": max_tokens, "temperature": 0.8,
-        }).encode()
-        req = urllib.request.Request(f"{ROUTER_URL}/v1/chat/completions", data=data, method="POST")
-        req.add_header("Content-Type", "application/json")
-        with urllib.request.urlopen(req, timeout=timeout) as r:
-            result = json.loads(r.read().decode())
-            return result["choices"][0]["message"]["content"]
-    except Exception as e:
-        logger.error(f"router error: {e}")
-        return None
+    # WHY aether-local first, cloud fallback: llm7 free tier exhausts daily
+    # (500K tokens → 429 "retry after 61788s" = 17h). aether-local (colibri→
+    # cherry→ollama) keeps working on the local 3B brain. aether-cloud is the
+    # fallback when llm7 quota has reset.
+    for model in ("aether-local", "aether-cloud"):
+        try:
+            data = json.dumps({
+                "model": model, "messages": messages,
+                "max_tokens": max_tokens, "temperature": 0.8,
+            }).encode()
+            req = urllib.request.Request(f"{ROUTER_URL}/v1/chat/completions", data=data, method="POST")
+            req.add_header("Content-Type", "application/json")
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                result = json.loads(r.read().decode())
+                return result["choices"][0]["message"]["content"]
+        except Exception as e:
+            logger.warning(f"router {model} failed: {e} — trying next")
+            continue
+    logger.error("all router chains failed")
+    return None
 
 
 # ── STAGE 1: ideate ──────────────────────────────────────────────────
-# WHY batched: llm7 free tier (mistral-Nemo) 502s / quota-exhausts on a single
-# 60-idea request (~4000 tokens). Smaller batches (15) succeed. So we ask for
-# BATCH_SIZE ideas per call, N_BATCHES times, with a sleep between calls to let
-# the free-tier quota/rate-limit recover.
-BATCH_SIZE = 15
-N_BATCHES = 4  # 4 × 15 = 60
-BATCH_SLEEP = 70  # seconds — must exceed router's 60s unhealthy cooldown after a llm7 quota error
+# WHY batched: a single 60-idea request (~4000 tokens) 502s or exhausts llm7's
+# daily quota. We ask for BATCH_SIZE ideas per call, N_BATCHES times, with a
+# short sleep between calls. aether-local (ollama 3B) has no daily quota.
+BATCH_SIZE = 8
+N_BATCHES = 8  # 8 × 8 = 64 (dedupe → ~60)
+BATCH_SLEEP = 8  # seconds between batches (ollama-local, no llm7 quota)
 
 IDEATE_PROMPT = """Give me {n} SHORT mobile app ideas (batch {b} of {nb}, pick DIFFERENT
 categories/angles than a generic list). Each idea must be:
@@ -120,7 +126,7 @@ def ideate(n=N_IDEAS):
     for b in range(1, batches + 1):
         logger.info(f"💡 batch {b}/{batches} ({BATCH_SIZE} ideas)...")
         raw = ask_router(IDEATE_PROMPT.format(n=BATCH_SIZE, b=b, nb=batches),
-                         max_tokens=1400, timeout=120)
+                         max_tokens=1400, timeout=180)
         if not raw:
             logger.warning(f"batch {b} failed — skipping")
             continue
