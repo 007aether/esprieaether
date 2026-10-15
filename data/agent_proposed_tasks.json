@@ -204,7 +204,9 @@
   "agent": "self_improve",
   "title": "إصلاح خطأ في autonomous.err",
   "description": "(1) السبب الجذري:ромаوة 漏 weed.\n(2) الإصلاح المقترح: ترتيب البراكة.”\n(3) إنه خطر: False.",
-  "status": "proposed",
-  "ts": "2026-10-15T18:35:36.275024+00:00"
+  "status": "done",
+  "ts": "2026-10-15T18:35:36.275024+00:00",
+  "executed_ts": "2026-10-15T18:47:52.942016+00:00",
+  "result": "queued for auto_apply (sandboxed)"
  }
 ]
