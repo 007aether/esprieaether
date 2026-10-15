@@ -664,6 +664,34 @@ def task_sunna_offres() -> dict:
     return result
 
 
+def task_agent_mesh() -> dict:
+    """Agent mesh cycle — agents talk to each other and evolve the system."""
+    result = {"name": "agent_mesh", "status": "ok"}
+    try:
+        import urllib.request
+        req = urllib.request.Request(
+            "http://127.0.0.1:11437/cycle",
+            data=json.dumps({"rounds": 1}).encode(),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=180) as r:
+            mesh = json.loads(r.read())
+        result["agents_thought"] = mesh.get("agents_thought", 0)
+        result["board_total"] = mesh.get("board_total", 0)
+        # surface any proposed tasks
+        tasks = [r for r in mesh.get("results", []) if r.get("task")]
+        if tasks:
+            result["proposed_tasks"] = [
+                {"agent": t["agent"], "title": t["task"]["title"][:100]}
+                for t in tasks
+            ]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
 def run_cycle(state: dict):
     """دورة واحدة"""
     logger.info(f"═══ دورة #{state['cycles']} ═══")
