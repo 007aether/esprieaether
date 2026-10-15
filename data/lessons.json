@@ -1,11 +1,13 @@
 {
  "seen": [
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ inference_test: error",
   "#-#-# #:#:#,# | INFO | autonomous | ✅ semantic_memory: error",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ analytics_report: error",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ guardian_check: error",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ sunna_offres: error",
   "#-#-# #:#:#,# | INFO | autonomous | ✅ security_scan: error",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ guardian_check: error"
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ analytics_report: error"
  ],
- "diagnosed": 1,
- "fixes_proposed": 1,
- "last_run": "2026-10-15T14:03:24.581377+00:00"
+ "diagnosed": 3,
+ "fixes_proposed": 3,
+ "last_run": "2026-10-15T15:09:48.394532+00:00"
 }
