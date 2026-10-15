@@ -187,5 +187,23 @@
   "kind": "code",
   "ok": true,
   "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T19:30:52.737664+00:00",
+  "task_id": "fix-1792091372998",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في bot.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T19:30:53.180920+00:00",
+  "task_id": "fix-1792091394975",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في bot.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
  }
 ]
