@@ -30,12 +30,10 @@
 2026-10-15 03:45:41,348 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:45:41] "GET /health HTTP/1.1" 200 -
 2026-10-15 03:47:00,526 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:47:00] "GET /health HTTP/1.1" 200 -
 2026-10-15 03:48:20,743 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:48:20] "GET /health HTTP/1.1" 200 -
-�: sunna_bilan
-2026-10-15 03:25:22,609 | INFO | autonomous | ✅ sunna_bilan: ok
-2026-10-15 03:25:22,610 | INFO | autonomous | ▶ تشغيل: sunna_costing
-2026-10-15 03:25:23,394 | INFO | autonomous | ✅ sunna_costing: ok
-2026-10-15 03:25:23,394 | INFO | autonomous | ▶ تشغيل: cleanup
-2026-10-15 03:25:25,271 | INFO | autonomous | ✅ cleanup: ok
+2026-10-15 03:49:39,497 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:49:39] "GET /health HTTP/1.1" 200 -
+2026-10-15 03:51:00,093 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:51:00] "GET /health HTTP/1.1" 200 -
+2026-10-15 03:51:23,929 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:51:23] "GET /obsidian HTTP/1.1" 200 -
+tonomous | ✅ cleanup: ok
 2026-10-15 03:25:25,271 | INFO | autonomous | ▶ تشغيل: vector_memory
 2026-10-15 03:25:25,887 | INFO | autonomous | ✅ vector_memory: ok
 2026-10-15 03:25:25,888 | INFO | autonomous | ▶ تشغيل: backup
@@ -90,13 +88,19 @@
 2026-10-15 03:46:41,688 | INFO | autonomous | ✅ cloud_health: ok
 2026-10-15 03:46:41,688 | INFO | autonomous | ▶ تشغيل: health_check
 2026-10-15 03:46:42,211 | INFO | autonomous | ✅ health_check: ok
-est: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
-2026-10-15 03:23:33,345 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
-2026-10-15 03:23:43,441 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
-2026-10-15 03:23:53,536 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
-2026-10-15 03:24:03,640 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
-2026-10-15 03:24:14,055 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
-2026-10-15 03:24:24,174 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:51:42,219 | INFO | autonomous | ═══ دورة #251 ═══
+2026-10-15 03:51:42,224 | INFO | autonomous | ▶ تشغيل: vpn_check
+2026-10-15 03:51:42,228 | WARNING | autonomous | ⚠️ VPN متوقف — جارٍ إعادة التشغيل...
+2026-10-15 03:51:42,262 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à ]8;;ms-settings:developers\Developer Settings page]8;;\ dans l’application Paramètres
+
+2026-10-15 03:51:42,741 | INFO | autonomous | ✅ vpn_check: failed
+2026-10-15 03:51:42,742 | INFO | autonomous | ▶ تشغيل: guardian
+2026-10-15 03:51:42,813 | WARNING | autonomous | ⚠️ 4 خطأ بدون إصلاح
+2026-10-15 03:51:42,813 | INFO | autonomous | ✅ guardian: ok
+2026-10-15 03:51:42,813 | INFO | autonomous | ▶ تشغيل: cloud_health
+2026-10-15 03:51:42,860 | INFO | autonomous | ✅ cloud_health: ok
+2026-10-15 03:51:42,860 | INFO | autonomous | ▶ تشغيل: cloud_bridge
+m.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
 2026-10-15 03:24:34,312 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
 2026-10-15 03:24:44,403 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
 2026-10-15 03:24:54,490 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
@@ -216,3 +220,33 @@ est: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpK
 2026-10-15 03:44:07,101 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
 2026-10-15 03:44:17,173 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
 2026-10-15 03:44:27,255 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:44:37,331 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:44:47,410 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:44:57,517 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:45:07,595 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:45:17,682 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:45:27,757 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:45:37,835 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:45:47,910 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:45:57,991 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:46:08,066 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:46:18,138 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:46:28,224 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:46:38,313 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:46:48,385 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:46:58,456 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:47:08,537 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:47:18,606 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:47:28,688 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:47:38,762 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:47:48,836 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:47:58,923 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:48:08,995 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:48:19,064 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:48:29,150 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:48:39,223 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:48:49,296 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:48:59,374 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:49:09,451 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:49:19,533 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:49:29,600 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
