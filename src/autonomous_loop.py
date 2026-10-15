@@ -457,7 +457,13 @@ def task_pharos() -> dict:
 
 def task_vpn_check() -> dict:
     """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
-    result = {"name": "vpn_check", "status": "ok"}
+    result = {"name": "vpn_check", "status": "skipped"}
+
+    # Windows: WireGuard wg-quick/sudo غير متوفر — نمرّ المهمة بصمت
+    import platform
+    if platform.system() == "Windows":
+        result["reason"] = "windows — wireguard (wg-quick/sudo) غير متوفر"
+        return result
 
     if not vpn.is_active():
         logger.warning("⚠️ VPN متوقف — جارٍ إعادة التشغيل...")
