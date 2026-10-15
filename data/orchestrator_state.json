@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-15T21:57:50.540566+00:00",
-  "action": "wake",
-  "reason": "daemons ميتة: ['bot.py', 'watchdog.py', 'autonomous_loop.py', 'cloud_poller.py', 'guardian_agent.py', 'vpn_agent.py']",
+  "ts": "2026-10-15T23:24:14.654613+00:00",
+  "action": "critical",
+  "reason": "خدمات حرجة طايحة: ['router', 'governor']",
   "services": {
-    "router": 200,
+    "router": 0,
     "mesh": 200,
     "web": 200,
     "cloud-desktop": 200,
@@ -16,17 +16,17 @@
     "ollama": 200,
     "governor": 0
   },
-  "services_up": 11,
+  "services_up": 10,
   "services_total": 12,
   "daemons": {
-    "bot.py": false,
-    "watchdog.py": false,
-    "autonomous_loop.py": false,
-    "cloud_poller.py": false,
+    "bot.py": true,
+    "watchdog.py": true,
+    "autonomous_loop.py": true,
+    "cloud_poller.py": true,
     "guardian_agent.py": false,
-    "vpn_agent.py": false
+    "vpn_agent.py": true
   },
-  "daemons_up": 0,
+  "daemons_up": 5,
   "daemons_total": 6,
   "mesh_board": 94,
   "jarvis_configured": 5
