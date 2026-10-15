@@ -209,6 +209,21 @@ def control():
     return render_template("control.html")
 
 
+@app.route("/mobile")
+def mobile_page():
+    """Mobile PWA — phone control panel (also /mobile/manifest.json)."""
+    return render_template("mobile.html")
+
+
+@app.route("/mobile/manifest.json")
+def mobile_manifest():
+    """PWA manifest for install-to-home-screen."""
+    from flask import send_from_directory
+    return send_from_directory(
+        str(Path(__file__).parent / "static"), "manifest.json", mimetype="application/manifest+json"
+    )
+
+
 @app.route("/metrics")
 def metrics_page():
     """صفحة المقاييس"""

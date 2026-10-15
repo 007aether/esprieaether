@@ -160,6 +160,41 @@ async def cmd_airdrop_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Voice — /voice say <text> or /voice status"""
+    import asyncio
+    from voice_agent import speak_telegram, format_telegram
+    args = context.args or []
+    action = args[0].lower() if args else "status"
+
+    if action == "status" or not args:
+        await update.message.reply_text(format_telegram(), parse_mode="Markdown")
+        return
+
+    if action == "say":
+        text = " ".join(args[1:])
+        if not text:
+            await update.message.reply_text("مثال: /voice say السلام عليكم")
+            return
+        msg = await update.message.reply_text("🎙️ جارٍ التحويل إلى صوت...")
+        try:
+            voice = "ar-EG-SalmaNeural" if any("\u0600" <= c <= "\u06FF" for c in text) else "en-US-JennyNeural"
+            path = await asyncio.to_thread(speak_telegram, text, voice)
+            if path:
+                with open(path, "rb") as audio:
+                    await msg.edit_text("🎙️")
+                    await update.message.reply_voice(audio)
+                os.unlink(path)
+            else:
+                await msg.edit_text("❌ TTS مش متاح — pip install edge-tts")
+        except Exception as e:
+            await msg.edit_text(f"❌ خطأ: {e}")
+        return
+
+    await update.message.reply_text("الأوامر: /voice say <text> · /voice status")
+
+
+@authorized_only
 async def cmd_memory(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Vector memory — ذاكرة دلالية"""
     from pathlib import Path
@@ -1335,6 +1370,43 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def handle_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Voice note → STT → JARVIS answer"""
+    import asyncio
+    import tempfile
+    from pathlib import Path
+    from voice_agent import transcribe
+
+    msg = await update.message.reply_text("🎙️ جارٍ الاستماع...")
+    try:
+        voice = update.message.voice or update.message.audio
+        if not voice:
+            await msg.edit_text("❌ ما كاين حتى صوت")
+            return
+
+        tg_file = await context.bot.get_file(voice.file_id)
+        suffix = ".ogg" if update.message.voice else ".mp3"
+        tmp = Path(tempfile.gettempdir()) / f"aether_in_{voice.file_unique_id}{suffix}"
+        await tg_file.download_to_drive(str(tmp))
+
+        text, engine = await asyncio.to_thread(transcribe, str(tmp))
+        tmp.unlink(missing_ok=True)
+
+        if not text:
+            await msg.edit_text("❌ ما فهمتش — (STT محتاج مفتاح Groq أو LLM7)")
+            return
+
+        await msg.edit_text(f"🗣️ سمعت: {text}\n\n🤖 جارٍ الرد...")
+        answer = jarvis.ask(text)
+        response = f"🗣️ *سمعت:* {md_escape(text)}\n\n🤖 *JARVIS:*\n\n{md_escape(answer)}"
+        if len(response) > 4000:
+            response = response[:4000] + "..."
+        await msg.edit_text(response, parse_mode="Markdown")
+    except Exception as e:
+        await msg.edit_text(f"⚠️ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_files(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """📁 file manager — /files [path]"""
     try:
@@ -1888,6 +1960,7 @@ async def set_commands(app: Application):
         BotCommand("cloudnode", "GitHub Cloud Node — تحكم من التيليفون"),
         BotCommand("veille", "رصد GitHub — أفضل المستودعات"),
         BotCommand("memory", "الذاكرة الدلالية — تذكّر وابحث"),
+        BotCommand("voice", "الصوت — /voice say <text>"),
         BotCommand("airdrop_sync", "جلب الإيردروبات فوراً"),
         BotCommand("pharos", "حالة Pharos"),
         BotCommand("robots", "محرك الروبوتات"),
@@ -1991,6 +2064,7 @@ def main():
     app.add_handler(CommandHandler("cloudnode", cmd_cloudnode))
     app.add_handler(CommandHandler("veille", cmd_veille))
     app.add_handler(CommandHandler("memory", cmd_memory))
+    app.add_handler(CommandHandler("voice", cmd_voice))
     app.add_handler(CommandHandler("airdrop_sync", cmd_airdrop_sync))
     app.add_handler(CommandHandler("pharos", cmd_pharos))
     app.add_handler(CommandHandler("robots", cmd_robots))
@@ -2029,6 +2103,7 @@ def main():
         pass
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    app.add_handler(MessageHandler(filters.VOICE | filters.AUDIO, handle_voice))
 
     # ضبط قائمة الأوامر عند البدء
     app.post_init = set_commands
