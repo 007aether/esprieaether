@@ -62,7 +62,7 @@ AGENTS = {
     "airdrop": ["crypto"], "ask": ["router"], "bandwidth": ["infra"],
     "browser": ["infra"], "calendar": ["productivity"], "cloud": ["VPS"],
     "email": ["Sunna", "productivity"], "file": ["productivity"],
-    "github": ["github"], "guardian": ["infra"], "hermes": ["router"],
+    "github": ["cloud", "VPS", "Sunna"], "guardian": ["infra"], "hermes": ["router"],
     "jarvis-bridge": ["jarvis"], "market": ["crypto"], "needle": ["crypto"],
     "pharos": ["crypto"], "planner": ["productivity"],
     "terminal": ["infra"], "vault": ["security"], "vpn": ["VPN"],
@@ -125,7 +125,7 @@ META = {
     "Anthropic": ("Claude key", ["jarvis"]),
     "Gemini": ("Gemini key", ["jarvis"]),
     "Exa": ("Neural search key", ["jarvis", "OSINT"]),
-    "github": ("007aether — git CLI auth (no REST tokens)", ["github"]),
+    "github": ("007aether — git CLI auth (no REST tokens)", ["cloud", "VPS", "Sunna"]),
     "security": ("vault_agent — encrypted credential store", ["vault"]),
     "productivity": ("calendar + file + planner agents", ["calendar", "file", "planner"]),
     "memory": ("semantic-memory — persistent context", ["semantic-memory"]),
@@ -200,6 +200,13 @@ def main():
         w(VAULT / "Meta" / f"{name}.md", note(name, ["meta"], body, links))
 
     # ── docs (SOP + GAP — filed under Docs/, tagged) ──
+    # WHY links injected here: graph_fixer adds links to the VAULT copy, but this
+    # builder rewrites these notes from docs/ on every run, wiping them. Inject
+    # a Related section here so links survive rebuilds.
+    DOC_LINKS = {
+        "SOP_WIKI": ["devis", "Sunna", "prices", "factures", "kanban", "all-services"],
+        "GAP_ANALYSIS": ["all-services", "control-center", "SOP_WIKI", "all-integrations"],
+    }
     for src_name, tags in [("SOP_WIKI.md", ["doc", "sop"]), ("GAP_ANALYSIS.md", ["doc", "gap"])]:
         s = ESPRIE / "docs" / src_name
         stem = src_name.replace(".md", "")
@@ -208,6 +215,11 @@ def main():
             fm = "---\ntags: [" + ", ".join(tags) + "]\nupdated: " + datetime.now(timezone.utc).strftime("%Y-%m-%d") + "\n---\n\n"
             if not body.startswith("---"):
                 body = fm + body
+            # inject wiki-links so the note is part of the graph (survives rebuild)
+            rel = DOC_LINKS.get(stem, [])
+            if rel and "## 🔗 Related" not in body:
+                link_lines = "\n".join(f"- [[{l}]]" for l in rel)
+                body = body.rstrip() + f"\n\n---\n\n## 🔗 Related\n\n{link_lines}\n"
             w(VAULT / "Docs" / f"{stem}.md", body)
         else:
             w(VAULT / "Docs" / f"{stem}.md", note(stem, tags, "_not found_", ["_Index"]))

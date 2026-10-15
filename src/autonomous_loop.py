@@ -554,6 +554,7 @@ SCHEDULE = {
     "self_improve": 30 * 60,               # كل 30 دقيقة — learn from errors
     "cherry_bridge": 15 * 60,              # كل 15 دقيقة — cherry gateway + board mirror
     "jarvis_dev": 3 * 60 * 60,             # كل 3 ساعات — JARVIS writes a new agent
+    "graph_fixer": 24 * 60 * 60,           # يومياً — repair orphan notes + rebuild graph
     "colibri_autostart": 10 * 60,          # كل 10 دقائق — auto-start serve when ready
 }
 
@@ -929,6 +930,29 @@ def task_cherry_bridge() -> dict:
     return result
 
 
+def task_graph_fixer() -> dict:
+    """Repair knowledge graph: link orphan notes + rebuild graph (daily)."""
+    result = {"name": "graph_fixer", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "graph_fixer.py"), "--fix"],
+            capture_output=True, text=True, timeout=120,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            import json as _json
+            try:
+                data = _json.loads(r.stdout.strip().splitlines()[-1])
+                result["fixed"] = data.get("fixed", 0)
+                result["orphans_found"] = data.get("orphans_found", 0)
+            except Exception:
+                pass
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
 def task_obsidian_refresh() -> dict:
     """Rebuild the Obsidian knowledge graph daily (notes + links)."""
     result = {"name": "obsidian_refresh", "status": "ok"}
@@ -1178,6 +1202,7 @@ def run_cycle(state: dict):
         "self_improve": task_self_improve,
         "cherry_bridge": task_cherry_bridge,
         "jarvis_dev": task_jarvis_dev,
+        "graph_fixer": task_graph_fixer,
         "colibri_autostart": task_colibri_autostart,
     }
 

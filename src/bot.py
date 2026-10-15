@@ -2039,6 +2039,27 @@ async def cmd_cherry(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_graph(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🕸️ /graph — vault graph health | /graph fix — link orphans now"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "bots"))
+    try:
+        import graph_fixer as gf
+        args = context.args
+        if args and args[0] == "fix":
+            await update.message.reply_text("🕸️ كنربط الملاحظات المقطوعة...", parse_mode="Markdown")
+            r = gf.fix()
+            await update.message.reply_text(
+                f"🕸️ *Graph Fixer*\nربط: `{r.get('fixed',0)}` · orphans: `{r.get('orphans_found',0)}` · graph: `{'✅' if r.get('graph_rebuilt') else '❌'}`",
+                parse_mode="Markdown")
+        else:
+            await update.message.reply_text(gf.status(), parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_jarvisdev(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """🧠 /jarvisdev — JARVIS agent-developer status | /jarvisdev write — write a new agent"""
     from pathlib import Path
@@ -2218,6 +2239,7 @@ async def set_commands(app: Application):
         BotCommand("selfimprove", "التعلّم الذاتي — يشخّص الأخطاء ويقترح إصلاحات"),
         BotCommand("cherry", "جسر Cherry Studio — لوحة الويب + موديلات إضافية"),
         BotCommand("jarvisdev", "JARVIS المطوّر — يكتب agents جدد للمنظومة"),
+        BotCommand("graph", "شبكة المعرفة — صحة الـ vault | /graph fix يربط الملاحظات"),
         BotCommand("hermes", "محرك Hermes (محلي/سحابي)"),
         BotCommand("status", "حالة النظام"),
         BotCommand("web", "رابط لوحة التحكم"),
@@ -2317,6 +2339,7 @@ def main():
     app.add_handler(CommandHandler("selfimprove", cmd_selfimprove))
     app.add_handler(CommandHandler("cherry", cmd_cherry))
     app.add_handler(CommandHandler("jarvisdev", cmd_jarvisdev))
+    app.add_handler(CommandHandler("graph", cmd_graph))
     app.add_handler(CommandHandler("hermes", cmd_hermes))
     app.add_handler(CommandHandler("clear", cmd_clear))
     app.add_handler(CommandHandler("status", cmd_status))
