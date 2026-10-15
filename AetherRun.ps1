@@ -32,6 +32,7 @@ $svcs = @(
   "bot:src/bot.py",
   "watchdog:src/watchdog.py",
   "autonomous:src/autonomous_loop.py",
+  "guardian:src/guardian_agent.py",
   "vpn-daemon:src/vpn_agent.py --daemon"
 )
 
