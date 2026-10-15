@@ -1,5 +1,5 @@
 {
-  "ts": "2026-10-15T20:33:02.422789+00:00",
+  "ts": "2026-10-15T20:40:39.295917+00:00",
   "action": "wake",
   "reason": "daemons ميتة: ['bot.py', 'watchdog.py', 'autonomous_loop.py', 'cloud_poller.py', 'guardian_agent.py', 'vpn_agent.py']",
   "services": {
