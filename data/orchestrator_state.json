@@ -1,11 +1,11 @@
 {
-  "ts": "2026-10-15T18:11:05.373022+00:00",
+  "ts": "2026-10-15T18:24:57.251173+00:00",
   "action": "wake",
   "reason": "daemons ميتة: ['bot.py', 'watchdog.py', 'autonomous_loop.py', 'cloud_poller.py', 'guardian_agent.py', 'vpn_agent.py']",
   "services": {
     "router": 200,
     "mesh": 200,
-    "web": 200,
+    "web": 0,
     "cloud-desktop": 200,
     "sunna": 200,
     "integrations": 200,
@@ -16,7 +16,7 @@
     "ollama": 200,
     "governor": 0
   },
-  "services_up": 11,
+  "services_up": 10,
   "services_total": 12,
   "daemons": {
     "bot.py": false,
