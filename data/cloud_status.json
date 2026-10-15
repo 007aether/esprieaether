@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-15T20:29:06.888708+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-15T15:49:09.195390+00:00",
+  "cloud_last_run": "2026-10-15T20:35:26.621983+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trezor Reseller Cuts, Airdrop Updates and This Week’s Crypto News",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Ledger Atom: Does an $849 Android Signer Fix the Reseller Problem?",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Seed Phrase vs Private Key: What&#8217;s the Difference?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "FOMO vs GMGN: Social Trading or Wallet Radar?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy TRUMP Coin for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
