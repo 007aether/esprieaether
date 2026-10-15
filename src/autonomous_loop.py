@@ -539,6 +539,9 @@ SCHEDULE = {
     "backup": 24 * 60 * 60,                # يومياً
     "skill_harvest": 24 * 60 * 60,         # يومياً (after veille)
     "digest": 12 * 60 * 60,                # كل 12 ساعة
+    "voice_check": 24 * 60 * 60,           # يومياً — TTS engine
+    "colibri_check": 24 * 60 * 60,         # يومياً — model download
+    "mobile_pwa_check": 24 * 60 * 60,      # يومياً — PWA routes
 }
 
 
@@ -736,6 +739,70 @@ def task_vector_memory() -> dict:
     return result
 
 
+def task_voice_check() -> dict:
+    """Verify TTS engine + voice_agent availability (daily)."""
+    result = {"name": "voice_check", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import voice_agent
+        result["tts"] = getattr(voice_agent, "TTS_AVAILABLE", False)
+        result["stt"] = getattr(voice_agent, "STT_AVAILABLE", False)
+        # quick TTS smoke test (cached audio)
+        out = voice_agent.TTS_CACHE_DIR / "check.mp3"
+        if not out.exists():
+            voice_agent.tts_to_file("test", "check", "ar")
+        result["cache_files"] = len(list(voice_agent.TTS_CACHE_DIR.glob("*.mp3")))
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_colibri_check() -> dict:
+    """Check colibri model download + API availability (daily)."""
+    result = {"name": "colibri_check", "status": "ok"}
+    try:
+        model_dir = Path(os.environ.get("COLIBRI_MODEL_DIR", "D:/AetherData/colibri-models"))
+        qwen_dir = model_dir / "qwen3-coder-30b"
+        if qwen_dir.exists():
+            shards = list(qwen_dir.glob("*.safetensors"))
+            result["shards"] = len(shards)
+            result["total_gb"] = round(sum(s.stat().st_size for s in shards) / 1e9, 1)
+            result["complete"] = len(shards) >= 19
+        else:
+            result["status"] = "missing"
+            result["shards"] = 0
+        # API alive?
+        import urllib.request
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:11434/api/tags", timeout=4) as r:
+                result["ollama_models"] = len(json.loads(r.read()).get("models", []))
+        except Exception:
+            result["ollama_models"] = 0
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_mobile_pwa_check() -> dict:
+    """Verify PWA template + manifest are reachable (daily)."""
+    result = {"name": "mobile_pwa_check", "status": "ok"}
+    try:
+        import urllib.request
+        for name, url in (("pwa", "http://127.0.0.1:5000/mobile"),
+                          ("manifest", "http://127.0.0.1:5000/manifest.json")):
+            try:
+                with urllib.request.urlopen(url, timeout=4) as r:
+                    result[name] = r.status
+            except Exception:
+                result[name] = 0
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
 def task_backup() -> dict:
     """Encrypted local backup of both workspaces' data (daily)."""
     result = {"name": "backup", "status": "ok"}
@@ -904,6 +971,9 @@ def run_cycle(state: dict):
         "backup": task_backup,
         "skill_harvest": task_skill_harvest,
         "digest": task_digest,
+        "voice_check": task_voice_check,
+        "colibri_check": task_colibri_check,
+        "mobile_pwa_check": task_mobile_pwa_check,
     }
 
     for name, func in tasks.items():
