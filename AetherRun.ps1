@@ -26,6 +26,7 @@ $svcs = @(
   "web:src/web_interface.py",
   "cloud-desktop:src/cloud_desktop_agent.py",
   "homedock:src/homedock_dashboard.py",
+  "jarvis-dsh-relay:src/jarvis_dsh_relay.py",
   "sunna:src/sunna_api.py",
   "integrations:src/integrations_adapter.py",
   "kanban:src/veritas_kanban.py",

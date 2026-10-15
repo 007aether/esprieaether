@@ -126,6 +126,12 @@ SERVICES = {
         "cwd": PROJECT,
         "cmd": [_PY, "src/homedock_dashboard.py"],
     },
+    "jarvis-dsh-relay": {
+        "kind": "http",
+        "url": "http://127.0.0.1:5105/health",
+        "cwd": PROJECT,
+        "cmd": [_PY, "src/jarvis_dsh_relay.py"],
+    },
     "governor-edr": {
         "kind": "http",
         "url": "http://127.0.0.1:11123/",

@@ -2137,6 +2137,40 @@ async def cmd_jarvisdev(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_jarvisdsh(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🤖 /jarvisdsh — JARVIS⇄DSH relay status | /jarvisdsh task <url> — run a web task"""
+    import urllib.request, json as _json
+    args = context.args
+    if args and args[0] == "task" and len(args) > 1:
+        url = args[1]
+        try:
+            req = urllib.request.Request(
+                "http://127.0.0.1:5105/task",
+                data=_json.dumps({"url": url, "actions": []}).encode(),
+                headers={"Content-Type": "application/json"}, method="POST")
+            with urllib.request.urlopen(req, timeout=10) as r:
+                d = _json.loads(r.read().decode())
+            eng = d.get("engine", "?")
+            note = d.get("note", "")
+            await update.message.reply_text(
+                f"🤖 *JARVIS⇄DSH*\nengine: `{eng}`\nurl: `{url}`\n{note}",
+                parse_mode="Markdown")
+        except Exception as e:
+            await update.message.reply_text(f"❌ خطأ: {e}")
+        return
+    # status
+    try:
+        with urllib.request.urlopen("http://127.0.0.1:5105/health", timeout=5) as r:
+            h = _json.loads(r.read().decode())
+        dsh = "🟢 running" if h.get("dsh_running") else "🟡 local-fallback"
+        await update.message.reply_text(
+            f"🤖 *JARVIS⇄DSH relay*\nrelay: `{h.get('status')}`\nDSH: {dsh}\nfallback: `{h.get('fallback')}`\ntargets: `{h.get('targets')}`\n\n`/jarvisdsh task <url>` — run a web task",
+            parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ relay ما خدامش: {e}")
+
+
+@authorized_only
 async def cmd_executor(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """⚙️ /executor — task executor status | /executor run — execute now"""
     from pathlib import Path
@@ -2291,6 +2325,7 @@ async def set_commands(app: Application):
         BotCommand("selfimprove", "التعلّم الذاتي — يشخّص الأخطاء ويقترح إصلاحات"),
         BotCommand("cherry", "جسر Cherry Studio — لوحة الويب + موديلات إضافية"),
         BotCommand("jarvisdev", "JARVIS المطوّر — يكتب agents جدد للمنظومة"),
+        BotCommand("jarvisdsh", "JARVIS⇄DSH relay — تشغيل مهام الويب عبر DSH"),
         BotCommand("graph", "شبكة المعرفة — صحة الـ vault | /graph fix يربط الملاحظات"),
         BotCommand("apps", "مصنع التطبيقات — 60 فكرة→20→MVP→كود+RevenueCat"),
         BotCommand("hermes", "محرك Hermes (محلي/سحابي)"),
@@ -2392,6 +2427,7 @@ def main():
     app.add_handler(CommandHandler("selfimprove", cmd_selfimprove))
     app.add_handler(CommandHandler("cherry", cmd_cherry))
     app.add_handler(CommandHandler("jarvisdev", cmd_jarvisdev))
+    app.add_handler(CommandHandler("jarvisdsh", cmd_jarvisdsh))
     app.add_handler(CommandHandler("graph", cmd_graph))
     app.add_handler(CommandHandler("apps", cmd_apps))
     app.add_handler(CommandHandler("hermes", cmd_hermes))

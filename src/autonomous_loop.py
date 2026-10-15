@@ -557,6 +557,7 @@ SCHEDULE = {
     "graph_fixer": 24 * 60 * 60,           # يومياً — repair orphan notes + rebuild graph
     "app_factory": 24 * 60 * 60,           # يومياً — generate 60 app ideas → top 20
     "colibri_autostart": 10 * 60,          # كل 10 دقائق — auto-start serve when ready
+    "dsh_bridge": 5 * 60,                  # كل 5 دقائق — JARVIS⇄DSH relay health + DSH detect
 }
 
 
@@ -834,6 +835,30 @@ def task_colibri_autostart() -> dict:
         else:
             result["started"] = False
             result["reason"] = "download incomplete"
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_dsh_bridge() -> dict:
+    """JARVIS⇄DSH relay health + DSH detect (every 5 min).
+    Confirms the relay is alive and reports whether DSH itself is running
+    or the system is on local-fallback. Never blocks the mesh loop."""
+    result = {"name": "dsh_bridge", "status": "ok"}
+    try:
+        import urllib.request
+        # relay alive?
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:5105/health", timeout=4) as r:
+                import json as _json
+                h = _json.loads(r.read().decode())
+                result["relay"] = "up"
+                result["dsh_running"] = h.get("dsh_running")
+                result["fallback"] = h.get("fallback")
+        except Exception:
+            result["relay"] = "down"
+            result["note"] = "relay not responding — watchdog will restart it"
     except Exception as e:
         result["status"] = "error"
         result["error"] = str(e)[:200]
@@ -1232,6 +1257,7 @@ def run_cycle(state: dict):
         "graph_fixer": task_graph_fixer,
         "app_factory": task_app_factory,
         "colibri_autostart": task_colibri_autostart,
+        "dsh_bridge": task_dsh_bridge,
     }
 
     for name, func in tasks.items():
