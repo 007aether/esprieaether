@@ -45,6 +45,16 @@ app = Flask(
 )
 app.secret_key = SECRET_KEY
 
+# ── CORS: the /control page (this same app, but served at localhost:5000)
+# fetches sibling services cross-origin. Health self-check + any API consumer
+# needs these headers so the browser doesn't block them.
+@app.after_request
+def _cors(resp):
+    resp.headers["Access-Control-Allow-Origin"] = "*"
+    resp.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    resp.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return resp
+
 jarvis = JarvisBridge()
 
 # ─── محرك الروبوتات (loop 24/7) ───

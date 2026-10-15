@@ -29,6 +29,14 @@ load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 app = Flask(__name__)
 
+# ── CORS: /control page fetches this bridge cross-origin ──
+@app.after_request
+def _cors(resp):
+    resp.headers["Access-Control-Allow-Origin"] = "*"
+    resp.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    resp.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return resp
+
 PORT = int(os.getenv("SUNNA_API_PORT", "5100"))
 SUNNA = Path(os.getenv("SUNNA_DIR", str(Path.home() / "Desktop" / "Sunna-Equipe-Industrial")))
 
