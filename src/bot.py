@@ -1996,6 +1996,28 @@ async def cmd_jarvis_intel(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_executor(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """⚙️ /executor — task executor status | /executor run — execute now"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "bots"))
+    try:
+        import task_executor as te
+        args = context.args
+        if args and args[0] == "run":
+            await update.message.reply_text("⚙️ كننفّذ المهام المقترحة...", parse_mode="Markdown")
+            r = te.execute_once()
+            await update.message.reply_text(
+                f"⚙️ *Executor*\nنفّذ: `{r.get('executed',0)}` · باقي: `{r.get('pending',0)}`",
+                parse_mode="Markdown")
+        else:
+            text = te.status()
+            await update.message.reply_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_colibri(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """🧠 /colibri — colibri serve status | /colibri start — start 30B API"""
     from pathlib import Path
@@ -2124,6 +2146,7 @@ async def set_commands(app: Application):
         BotCommand("jarvisintel", "جسر JARVIS Intel — حالة + بحث"),
         BotCommand("rea", "REA — الهندسة العكسية (تحليل binaries/apps)"),
         BotCommand("colibri", "colibri serve — حالة 30B API المحلي"),
+        BotCommand("executor", "منفّذ المهام — ينفّذ ما يقترحه الوكلاء"),
         BotCommand("hermes", "محرك Hermes (محلي/سحابي)"),
         BotCommand("status", "حالة النظام"),
         BotCommand("web", "رابط لوحة التحكم"),
@@ -2219,6 +2242,7 @@ def main():
     app.add_handler(CommandHandler("jarvisintel", cmd_jarvis_intel))
     app.add_handler(CommandHandler("rea", cmd_rea))
     app.add_handler(CommandHandler("colibri", cmd_colibri))
+    app.add_handler(CommandHandler("executor", cmd_executor))
     app.add_handler(CommandHandler("hermes", cmd_hermes))
     app.add_handler(CommandHandler("clear", cmd_clear))
     app.add_handler(CommandHandler("status", cmd_status))

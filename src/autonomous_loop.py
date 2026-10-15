@@ -550,6 +550,7 @@ SCHEDULE = {
     "mobile_pwa_check": 24 * 60 * 60,      # يومياً — PWA routes
     "rea_check": 24 * 60 * 60,             # يومياً — REA CLI + engines
     "obsidian_refresh": 24 * 60 * 60,      # يومياً — knowledge graph rebuild
+    "task_executor": 15 * 60,              # كل 15 دقيقة — execute mesh-proposed tasks
     "colibri_autostart": 10 * 60,          # كل 10 دقائق — auto-start serve when ready
 }
 
@@ -874,6 +875,32 @@ def task_obsidian_refresh() -> dict:
     return result
 
 
+def task_task_executor() -> dict:
+    """Execute mesh-proposed tasks — close the loop (every 15 min)."""
+    result = {"name": "task_executor", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "task_executor.py"), "--once"],
+            capture_output=True, text=True, timeout=120,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            import json as _json
+            try:
+                data = _json.loads(r.stdout.strip().splitlines()[-1])
+                result["executed"] = data.get("executed", 0)
+                result["pending_left"] = data.get("pending", 0)
+            except Exception:
+                result["raw"] = r.stdout[:100]
+        else:
+            result["status"] = "error"
+            result["error"] = (r.stderr or r.stdout or "")[:150]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
 def task_rea_check() -> dict:
     """Verify REA CLI + analysis engine availability (daily)."""
     result = {"name": "rea_check", "status": "ok"}
@@ -1071,6 +1098,7 @@ def run_cycle(state: dict):
         "mobile_pwa_check": task_mobile_pwa_check,
         "rea_check": task_rea_check,
         "obsidian_refresh": task_obsidian_refresh,
+        "task_executor": task_task_executor,
         "colibri_autostart": task_colibri_autostart,
     }
 
