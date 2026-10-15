@@ -160,6 +160,42 @@ async def cmd_airdrop_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_memory(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Vector memory — ذاكرة دلالية"""
+    from pathlib import Path
+    args = context.args or []
+    action = args[0].lower() if args else "recent"
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "src"))
+
+    try:
+        from vector_memory_agent import VectorMemory
+        vm = VectorMemory()
+
+        if action == "stats":
+            st = vm.stats()
+            by_kind = st.get("by_kind", {})
+            kinds = " · ".join(f"{k}={v}" for k, v in by_kind.items()) or "—"
+            await update.message.reply_text(
+                f"🧠 *الذاكرة الدلالية*\n\n"
+                f"إجمالي: `{st['total']}` ذكرى\n"
+                f"الحجم: `{st['db_size_kb']}` KB\n"
+                f"الأنواع: {kinds}",
+                parse_mode="Markdown"
+            )
+        else:
+            query = " ".join(args) if args and action not in ("recent", "stats") else None
+            if query:
+                text = vm.format_telegram(query=query, limit=5)
+            else:
+                text = vm.format_telegram(limit=8)
+            await update.message.reply_text(text, parse_mode="Markdown")
+        vm.close()
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_veille(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Veille 24/7 — GitHub harvest (25 categories)"""
     from pathlib import Path
@@ -1851,6 +1887,7 @@ async def set_commands(app: Application):
         BotCommand("mesh", "شبكة الوكلاء — تواصل وتطوير"),
         BotCommand("cloudnode", "GitHub Cloud Node — تحكم من التيليفون"),
         BotCommand("veille", "رصد GitHub — أفضل المستودعات"),
+        BotCommand("memory", "الذاكرة الدلالية — تذكّر وابحث"),
         BotCommand("airdrop_sync", "جلب الإيردروبات فوراً"),
         BotCommand("pharos", "حالة Pharos"),
         BotCommand("robots", "محرك الروبوتات"),
@@ -1953,6 +1990,7 @@ def main():
     app.add_handler(CommandHandler("mesh", cmd_mesh))
     app.add_handler(CommandHandler("cloudnode", cmd_cloudnode))
     app.add_handler(CommandHandler("veille", cmd_veille))
+    app.add_handler(CommandHandler("memory", cmd_memory))
     app.add_handler(CommandHandler("airdrop_sync", cmd_airdrop_sync))
     app.add_handler(CommandHandler("pharos", cmd_pharos))
     app.add_handler(CommandHandler("robots", cmd_robots))

@@ -534,6 +534,7 @@ SCHEDULE = {
     "sunna_bilan": 24 * 60 * 60,           # يومياً
     "sunna_offres": 12 * 60 * 60,          # كل 12 ساعة
     "cleanup": 24 * 60 * 60,               # يومياً
+    "vector_memory": 6 * 60 * 60,          # كل 6 ساعات
 }
 
 
@@ -689,6 +690,36 @@ def task_cleanup() -> dict:
     return result
 
 
+def task_vector_memory() -> dict:
+    """Persist the latest mesh insights + daily digest into vector memory."""
+    result = {"name": "vector_memory", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        from vector_memory_agent import VectorMemory
+        vm = VectorMemory()
+        # remember the freshest board messages so they stay recallable
+        board_file = BASE_DIR / "data" / "agent_board.json"
+        remembered = 0
+        if board_file.exists():
+            board = json.loads(board_file.read_text(encoding="utf-8"))
+            for m in board[-10:]:
+                vm.remember(
+                    f"[{m.get('agent','?')}] {m.get('text','')[:300]}",
+                    kind="insight",
+                    source=f"mesh:{m.get('agent','?')}",
+                    importance=0.6,
+                    tags=m.get("tags", []),
+                )
+                remembered += 1
+        result["remembered"] = remembered
+        result["stats"] = vm.stats()
+        vm.close()
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
 def task_sunna_offres() -> dict:
     """Offres bot — offers/scraping."""
     result = {"name": "sunna_offres", "status": "ok"}
@@ -795,6 +826,7 @@ def run_cycle(state: dict):
         "sunna_bilan": task_sunna_bilan,
         "sunna_offres": task_sunna_offres,
         "cleanup": task_cleanup,
+        "vector_memory": task_vector_memory,
     }
 
     for name, func in tasks.items():
