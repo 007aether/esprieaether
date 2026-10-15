@@ -536,6 +536,7 @@ SCHEDULE = {
     "sunna_offres": 12 * 60 * 60,          # كل 12 ساعة
     "cleanup": 24 * 60 * 60,               # يومياً
     "vector_memory": 6 * 60 * 60,          # كل 6 ساعات
+    "backup": 24 * 60 * 60,                # يومياً
 }
 
 
@@ -733,6 +734,30 @@ def task_vector_memory() -> dict:
     return result
 
 
+def task_backup() -> dict:
+    """Encrypted local backup of both workspaces' data (daily)."""
+    result = {"name": "backup", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "src" / "backup_agent.py"), "--json"],
+            capture_output=True, text=True, timeout=300,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            data = json.loads(r.stdout.strip().splitlines()[-1])
+            result["files"] = data.get("files", 0)
+            result["archive_mb"] = data.get("archive_mb", 0)
+            result["engine"] = data.get("engine", "?")
+            result["path"] = data.get("path", "")
+        else:
+            result["status"] = "error"
+            result["error"] = (r.stderr or r.stdout or "")[:200]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
 def task_sunna_offres() -> dict:
     """Offres bot — offers/scraping."""
     result = {"name": "sunna_offres", "status": "ok"}
@@ -841,6 +866,7 @@ def run_cycle(state: dict):
         "sunna_offres": task_sunna_offres,
         "cleanup": task_cleanup,
         "vector_memory": task_vector_memory,
+        "backup": task_backup,
     }
 
     for name, func in tasks.items():

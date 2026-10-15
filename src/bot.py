@@ -1940,6 +1940,44 @@ async def cmd_sunnacout(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_backup(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """💾 /backup — encrypted backup of both workspaces"""
+    import subprocess
+    args = context.args or []
+    action = args[0].lower() if args else "run"
+    BASE = Path(__file__).resolve().parent.parent
+
+    try:
+        if action == "dry":
+            r = subprocess.run(
+                [sys.executable, str(BASE / "src" / "backup_agent.py"), "--dry-run"],
+                capture_output=True, text=True, timeout=60,
+            )
+            await update.message.reply_text(f"📦 *معاينة*\n```\n{r.stdout[:1500]}\n```", parse_mode="Markdown")
+            return
+
+        msg = await update.message.reply_text("💾 جارٍ النسخ الاحتياطي...")
+        r = subprocess.run(
+            [sys.executable, str(BASE / "src" / "backup_agent.py"), "--json"],
+            capture_output=True, text=True, timeout=300,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            data = json.loads(r.stdout.strip().splitlines()[-1])
+            await msg.edit_text(
+                f"✅ *نسخة احتياطية*\n\n"
+                f"📦 ملفات: `{data.get('files')}`\n"
+                f"💽 الحجم: `{data.get('archive_mb')}` MB → `{data.get('encrypted_mb')}` MB مشفّر\n"
+                f"🔐 التشفير: `{data.get('engine')}`\n"
+                f"📅 `{data.get('stamp')}`",
+                parse_mode="Markdown"
+            )
+        else:
+            await msg.edit_text(f"❌ خطأ: {(r.stderr or r.stdout or '')[:300]}")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_sunnakanban(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """📋 /sunnakanban — Sunna kanban board (todo/doing/done)"""
     kb = _sunna_api("/kanban") if False else None  # kanban is on 5103, not 5100
@@ -2024,6 +2062,7 @@ async def set_commands(app: Application):
         BotCommand("sunnanetlify", "رابط موقع Sunna المباشر"),
         BotCommand("sunnaprix", "أثمنة المواد الحية (حديد/غلفنة)"),
         BotCommand("sunnacout", "تقدير كلفة منتج (حديد+غلفنة+يد عاملة)"),
+        BotCommand("backup", "نسخة احتياطية مشفرة"),
         BotCommand("sunnakanban", "لوحة Sunna kanban"),
         BotCommand("obsidian", "خريطة المعرفة Obsidian"),
         BotCommand("clear", "مسح سجل JARVIS"),
@@ -2127,6 +2166,7 @@ def main():
     app.add_handler(CommandHandler("sunnanetlify", cmd_sunnanetlify))
     app.add_handler(CommandHandler("sunnaprix", cmd_sunnaprix))
     app.add_handler(CommandHandler("sunnacout", cmd_sunnacout))
+    app.add_handler(CommandHandler("backup", cmd_backup))
     app.add_handler(CommandHandler("sunnakanban", cmd_sunnakanban))
     app.add_handler(CommandHandler("obsidian", cmd_obsidian))
 
