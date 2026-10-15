@@ -160,6 +160,65 @@ async def cmd_airdrop_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_mesh(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Agent Mesh — وكيل الوكلاء كيتواصلو مع بعض"""
+    import urllib.request
+    import json as _json
+    args = context.args or []
+    action = args[0].lower() if args else "board"
+
+    if action == "cycle":
+        msg = await update.message.reply_text("🕸️ جارٍ تشغيل دورة الوكلاء...")
+        try:
+            req = urllib.request.Request(
+                "http://127.0.0.1:11437/cycle",
+                data=_json.dumps({"rounds": 1}).encode(),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=200) as r:
+                mesh = _json.loads(r.read())
+            lines = [f"✅ *دورة كاملة* — {mesh.get('agents_thought', 0)} وكيل خدّمو\n"]
+            for res in mesh.get("results", []):
+                icon = "✅" if res["ok"] else "❌"
+                lines.append(f"{icon} `{res['agent']}` — {res['text'][:70]}")
+            lines.append(f"\n📋 الرسائل: {mesh.get('board_total', 0)}")
+            await msg.edit_text("\n".join(lines), parse_mode="Markdown")
+        except Exception as e:
+            await msg.edit_text(f"❌ خطأ: {e}")
+
+    elif action == "tasks":
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:11437/tasks", timeout=10) as r:
+                tasks = _json.loads(r.read()).get("tasks", [])
+            if not tasks:
+                await update.message.reply_text("📭 ما كاين حتى مهمة مقترحة")
+                return
+            lines = ["📋 *مهام مقترحة من الوكلاء:*\n"]
+            for t in tasks[-10:]:
+                lines.append(f"• `{t['agent']}`: {t['title'][:70]}")
+            await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
+        except Exception as e:
+            await update.message.reply_text(f"❌ خطأ: {e}")
+
+    else:  # board (default)
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:11437/board?limit=8", timeout=10) as r:
+                board = _json.loads(r.read())
+            msgs = board.get("messages", [])
+            if not msgs:
+                await update.message.reply_text("📭 اللوحة فارغة. صيف `/mesh cycle` باش يبداو الوكلاء")
+                return
+            lines = ["🕸️ *لوحة الوكلاء* (آخر الرسائل):\n"]
+            for m in msgs[-8:]:
+                lines.append(f"`{m['agent']}`: {m['text'][:90]}")
+            lines.append(f"\n📊 الإجمالي: {board.get('total', 0)} رسالة")
+            await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
+        except Exception as e:
+            await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_pharos(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """حالة Pharos Testnet"""
     args = context.args or []
@@ -1691,6 +1750,7 @@ async def set_commands(app: Application):
         BotCommand("report", "تقرير فوري"),
         BotCommand("vpn", "التحكم بـ VPN"),
         BotCommand("airdrops", "أحدث الإيردروبات"),
+        BotCommand("mesh", "شبكة الوكلاء — تواصل وتطوير"),
         BotCommand("airdrop_sync", "جلب الإيردروبات فوراً"),
         BotCommand("pharos", "حالة Pharos"),
         BotCommand("robots", "محرك الروبوتات"),
@@ -1790,6 +1850,7 @@ def main():
     app.add_handler(CommandHandler("reject", cmd_reject))
     app.add_handler(CommandHandler("vpn", cmd_vpn))
     app.add_handler(CommandHandler("airdrops", cmd_airdrops))
+    app.add_handler(CommandHandler("mesh", cmd_mesh))
     app.add_handler(CommandHandler("airdrop_sync", cmd_airdrop_sync))
     app.add_handler(CommandHandler("pharos", cmd_pharos))
     app.add_handler(CommandHandler("robots", cmd_robots))

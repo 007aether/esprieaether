@@ -21,6 +21,7 @@ Start-Sleep -Seconds 3
 # services: name -> script (colon-separated)
 $svcs = @(
   "router:src/ai_router.py",
+  "agent-mesh:src/agent_mesh.py",
   "web:src/web_interface.py",
   "cloud-desktop:src/cloud_desktop_agent.py",
   "homedock:src/homedock_dashboard.py",

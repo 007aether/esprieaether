@@ -510,6 +510,7 @@ SCHEDULE = {
     "log_analysis": 24 * 60 * 60,
     "pharos": 60 * 60,
     "airdrop_sync": 6 * 60 * 60,
+    "agent_mesh": 3 * 60 * 60,
     "weekly_email": 60 * 60,
     "self_evolve": 24 * 60 * 60,
     "github_evolve": 24 * 60 * 60,
@@ -675,7 +676,7 @@ def task_agent_mesh() -> dict:
             headers={"Content-Type": "application/json"},
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=180) as r:
+        with urllib.request.urlopen(req, timeout=540) as r:
             mesh = json.loads(r.read())
         result["agents_thought"] = mesh.get("agents_thought", 0)
         result["board_total"] = mesh.get("board_total", 0)
@@ -704,6 +705,7 @@ def run_cycle(state: dict):
         "daily_digest": task_daily_digest,
         "cloud_health": task_cloud_health,
         "airdrop_sync": task_airdrop_sync,
+        "agent_mesh": task_agent_mesh,
         "weekly_email": task_weekly_email,
         "self_evolve": task_self_evolve,
         "github_evolve": task_github_evolve,

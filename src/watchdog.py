@@ -96,6 +96,12 @@ SERVICES = {
         "cwd": str(JARVIS_DIR),
         "cmd": [str(JARVIS_DIR / ".venv" / "Scripts" / "python.exe"), "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"],
     },
+    "agent-mesh": {
+        "kind": "http",
+        "url": "http://127.0.0.1:11437/health",
+        "cwd": PROJECT,
+        "cmd": [_PY, "src/agent_mesh.py"],
+    },
     "jarvis-frontend": {
         "kind": "http",
         "url": "http://127.0.0.1:3000/",
