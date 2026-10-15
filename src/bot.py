@@ -1968,6 +1968,34 @@ async def cmd_harvest(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_jarvis_intel(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🧠 /jarvisintel — JARVIS intel bridge status | /jarvisintel <name> — research"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "src"))
+    try:
+        import jarvis_intel_bridge as jib
+        args = context.args
+        if args:
+            name = " ".join(args)
+            await update.message.reply_text(f"🧠 JARVIS: كنجيب على `{name}`...", parse_mode="Markdown")
+            result = jib.research(name)
+            if result.get("status") == "complete":
+                dossier = json.dumps(result.get("dossier", {}), ensure_ascii=False)[:800]
+                text = f"🧠 *JARVIS — {name}*\n\n`{dossier}`"
+                await update.message.reply_text(text, parse_mode="Markdown")
+            else:
+                await update.message.reply_text(
+                    f"🧠 JARVIS `{name}`: {result.get('status')}\n`{json.dumps(result, ensure_ascii=False)[:400]}`",
+                    parse_mode="Markdown")
+        else:
+            text = jib.status_report()
+            await update.message.reply_text(text, parse_mode="Markdown", disable_web_page_preview=True)
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_backup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """💾 /backup — encrypted backup of both workspaces"""
     import subprocess
@@ -2041,6 +2069,7 @@ async def set_commands(app: Application):
         BotCommand("start", "بدء البوت"),
         BotCommand("help", "المساعدة"),
         BotCommand("jarvis", "محادثة مع الذكاء المحلي"),
+        BotCommand("jarvisintel", "جسر JARVIS Intel — حالة + بحث"),
         BotCommand("hermes", "محرك Hermes (محلي/سحابي)"),
         BotCommand("status", "حالة النظام"),
         BotCommand("web", "رابط لوحة التحكم"),
@@ -2133,7 +2162,7 @@ def main():
     app.add_handler(CommandHandler("start", cmd_start))
     app.add_handler(CommandHandler("help", cmd_help))
     app.add_handler(CommandHandler("ping", cmd_ping))
-    app.add_handler(CommandHandler("jarvis", cmd_jarvis))
+    app.add_handler(CommandHandler("jarvisintel", cmd_jarvis_intel))
     app.add_handler(CommandHandler("hermes", cmd_hermes))
     app.add_handler(CommandHandler("clear", cmd_clear))
     app.add_handler(CommandHandler("status", cmd_status))
