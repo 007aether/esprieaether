@@ -194,7 +194,9 @@
   "agent": "self_improve",
   "title": "إصلاح خطأ في autonomous.err",
   "description": "السبب الجذري: نشاط غير محدد في العطلة \"sunna_veille\".  \nالإصلاح المقترح: فحص وصيانة النظام ذاتى.  \nهل هو خطر؟: نعم، قد يتسبب في توقف مستخدمى الأنظمة.",
-  "status": "proposed",
-  "ts": "2026-10-15T16:56:46.530297+00:00"
+  "status": "done",
+  "ts": "2026-10-15T16:56:46.530297+00:00",
+  "executed_ts": "2026-10-15T17:33:30.317940+00:00",
+  "result": "queued for auto_apply (sandboxed)"
  }
 ]
