@@ -1,0 +1,5 @@
+{
+  "model_dir": "D:/AetherData/colibri-models",
+  "backend": "cpu",
+  "note": "models live on D: (117GB free); C: only has 24GB"
+}
