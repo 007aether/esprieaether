@@ -549,6 +549,7 @@ SCHEDULE = {
     "colibri_check": 24 * 60 * 60,         # يومياً — model download
     "mobile_pwa_check": 24 * 60 * 60,      # يومياً — PWA routes
     "rea_check": 24 * 60 * 60,             # يومياً — REA CLI + engines
+    "colibri_autostart": 10 * 60,          # كل 10 دقائق — auto-start serve when ready
 }
 
 
@@ -775,17 +776,57 @@ def task_colibri_check() -> dict:
             shards = list(qwen_dir.glob("*.safetensors"))
             result["shards"] = len(shards)
             result["total_gb"] = round(sum(s.stat().st_size for s in shards) / 1e9, 1)
-            result["complete"] = len(shards) >= 19
+            result["complete"] = len(shards) >= 50
         else:
             result["status"] = "missing"
             result["shards"] = 0
         # API alive?
         import urllib.request
         try:
+            with urllib.request.urlopen("http://127.0.0.1:8000/v1/models", timeout=4) as r:
+                result["serve"] = "running"
+        except Exception:
+            result["serve"] = "stopped"
+        # ollama models
+        try:
             with urllib.request.urlopen("http://127.0.0.1:11434/api/tags", timeout=4) as r:
                 result["ollama_models"] = len(json.loads(r.read()).get("models", []))
         except Exception:
             result["ollama_models"] = 0
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_colibri_autostart() -> dict:
+    """Auto-start coli serve once download completes (every 10 min)."""
+    result = {"name": "colibri_autostart", "status": "ok"}
+    try:
+        # already running?
+        import urllib.request
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:8000/v1/models", timeout=4) as r:
+                result["serve"] = "already running"
+                return result
+        except Exception:
+            pass
+        # download complete?
+        sys.path.insert(0, str(BASE_DIR / "bots"))
+        import colibri_launcher as cl
+        dl_ok, dl_msg = cl.download_complete()
+        result["download"] = dl_msg
+        if dl_ok:
+            ok = cl.start_serve(detached=True)
+            result["started"] = ok
+            if ok:
+                cl.save_state(status="running", url=cl.SERVE_URL,
+                              model=cl.MODEL_NAME,
+                              ts=time.strftime("%Y-%m-%dT%H:%M:%S%z"))
+                logger.info("🚀 colibri serve auto-started (download complete)")
+        else:
+            result["started"] = False
+            result["reason"] = "download incomplete"
     except Exception as e:
         result["status"] = "error"
         result["error"] = str(e)[:200]
@@ -1006,6 +1047,7 @@ def run_cycle(state: dict):
         "colibri_check": task_colibri_check,
         "mobile_pwa_check": task_mobile_pwa_check,
         "rea_check": task_rea_check,
+        "colibri_autostart": task_colibri_autostart,
     }
 
     for name, func in tasks.items():
