@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@deepseek-ai/cordis-plugin-group": "^1.0.4",
     "js-yaml": "^5.4.3"
   }
 }
