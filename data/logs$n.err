@@ -1,0 +1,31 @@
+2026-10-15 03:15:13,413 | WARNING | pharos | ⚠️ pharos_wallet.json غير موجود
+2026-10-15 03:15:13,414 | INFO | autonomous | ═══════════════2026-10-15 03:15:13,831 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getMe "HTTP/1.1 200 OK"
+2026-10-15 03:15:14,218 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/setMyCommands "HTTP/1.1 200 OK"
+2026-10-15 03:15:14,305 | INFO | httpx | HTTP Request: POST https://api.telegram.org/2026-10-15 03:15:31,245 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:15:31] "GET /health HTTP/1.1" 200 -
+2026-10-15 03:15:31,735 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:15:31] "GET /mobile HTTP/1.1" 200 -
+2026-10-15 03:16:20,597 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:16:20] "GET /obsidian HTTP/1.1" 200 -
+2026-10-15 03:16:33,860 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:16:33] "GET /health HTTP/1.1" 200 -
+2026-10-15 03:16:34,077 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:16:34] "GET /mobile HTTP/1.1" 200 -
+2026-10-15 03:16:38,979 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:16:38] "GET /health HTTP/1.1" 200 -22026-10-15 03:18:12,780 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:18:12] "GET /health HTTP/1.1" 200 -
+2026-10-15 03:19:44,911 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:19:44] "GET /health HTTP/1.1" 200 -
+2026-10-15 03:21:28,526 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:21:28] "GET /health HTTP/1.1" 200 -
+2026-10-15 03:23:07,544 | INFO | werkzeug | 127.0.0.1 - - [15/Oct/2026 03:23:07] "GET /health HTTP/1.1" 200 -
+026-10-15 03:19:16,646 | INFO | veille_agent |   voice_interface: 58 repos
+2026-10-15 03:19:32,898 | INFO | veille_agent |   messaging_bridge: 59 repos
+2026-10-15 03:19:46,141 | INFO | veille_agent |   metal_fabrication: 43 repos
+2026-10-15 03:20:10,287 | INFO | veille_agent |   cnc_laser_dxf: 43 repos
+2026-10-15 03:20:20,187 | WARNING | veille_agent |   rate limited on 'portail fer forge' — waiting 60s
+2026-10-15 03:21:22,194 | INFO | veille_agent |   gates_ironwork: 26 repos
+2026-10-15 03:21:30,661 | INFO | veille_agent |   steel_structures: 25 repos
+2026-10-15 03:21:38,101 | INFO | veille_agent |   farm_equipment: 0 repos
+2026-10-15 03:21:45,681 | INFO | veille_agent |   trailers_carts: 3 repos
+2026-10-15 03:21:49,468 | WARNING | veille_agent |   rate limited on 'powder coating diy' — waiting 60s
+2026-10-15 03:23:02,291 | INFO | veille_agent |   galvanizing_coating: 40 repos
+2026-10-15 03:23:27,522 | INFO | veille_agent |   workshop_tools: 51 repos
+| HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:17:25,735 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:17:35,828 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:17:45,921 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:17:56,299 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:18:06,405 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
+2026-10-15 03:18:16,486 | INFO | httpx | HTTP Request: POST https://api.telegram.org/bot8853973061:AAFim7HAINMEZAVWR9M7NwCALBxPJpKzJUc/getUpdates "HTTP/1.1 200 OK"
