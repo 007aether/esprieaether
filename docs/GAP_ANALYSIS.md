@@ -28,10 +28,22 @@
 | 4 | **Netlify claim** (دائم) | الموقع مؤقت (keepalive) | أمين (007aether login) |
 | 5 | **GMB** (business.google.com) | الخرائط + الزبناء | أمين (11 خطوة فالـ JSON) |
 
+## ✅ مكتمل اليوم (2026-10-15)
+- veille_agent.py — 25 فئات، 500 repos (SCHEDULE 24h)
+- bilan_bot.py (Sunna) — devis/factures/prices/catalogue
+- cost_estimator_agent.py (Sunna) — كلفة حقيقية (حديد+غلفنة+يد عاملة)
+- cleanup_bot.py — logs/caches/git gc (324MB محرّرة)
+- vector_memory_agent.py — SQLite + embeddings + cosine recall
+- voice_agent.py — TTS عربي (edge-tts) + STT (whisper)
+- backup_agent.py — Fernet encrypted backup (round-trip tested)
+- mobile PWA — /mobile + manifest
+- agent_mesh.py — 7 agents كيتواصلو (port 11437)
+- cloud_poller.py — GitHub Issues remote control
+
 ## 🟡 ناقص — تقني (نجم نكملّو)
 | # | شنو | الحل |
 |---|---|---|
-| 6 | **Veille 187 → 500 repos** | veille_bot محدّث (11 فئات + trending) — خاص يشد البيانات |
+| 6 ✅ | **DONE** | veille_bot محدّث (11 فئات + trending) — خاص يشد البيانات |
 | 7 | **Sunna auto-bilan يومي** | Al_Afdal bot موجود — خاص نجددو يخدم بـ live data |
 | 8 | **Devis PDF → email** | Hermes email (Gmail App Password) — يوصف devis تلقائياً |
 | 9 | **Pinterest auto-post** | pinterest_bot موجود — خاص API token |
