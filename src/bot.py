@@ -2039,6 +2039,58 @@ async def cmd_cherry(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_apps(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🏭 /apps — app factory status | /apps build <slug> — MVP+code | /apps ideate — regen"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "bots"))
+    try:
+        import app_factory as af
+        args = context.args or []
+        if not args:
+            await update.message.reply_text(af.status(), parse_mode="Markdown")
+            return
+        sub = args[0]
+        if sub == "ideate":
+            await update.message.reply_text("🏭 كنولّدو 60 فكرة... (يقدر ياخد 2-3 دقايق)", parse_mode="Markdown")
+            r = af.run_ideate()
+            if r.get("ok"):
+                await update.message.reply_text(
+                    f"🏭 *App Factory*\nولّد: `{r.get('generated',0)}` فكرة\nأحسن: `{r.get('top',0)}`\nالأول: `{r.get('best','')}`",
+                    parse_mode="Markdown")
+            else:
+                await update.message.reply_text(f"❌ {r.get('error','فشل')}")
+        elif sub == "build" and len(args) >= 2:
+            slug = args[1]
+            await update.message.reply_text(f"🏗️ كنبني `{slug}` (MVP + كود)...", parse_mode="Markdown")
+            from app_mvp import run_mvp, run_code
+            r1 = run_mvp(slug)
+            r2 = run_code(slug)
+            if r2.get("ok"):
+                await update.message.reply_text(
+                    f"✅ *{slug}* جاهز\n📁 `AppFactory/apps/{slug}/`\n\n"
+                    f"الملفات:\n" + "\n".join(f"• `{f}`" for f in r2.get("files", [])),
+                    parse_mode="Markdown")
+            else:
+                await update.message.reply_text(f"❌ {r2.get('error', r1.get('error','فشل'))}")
+        elif sub == "top":
+            top = af.load_top()
+            if not top:
+                await update.message.reply_text("ما كاينش أفكار — دير `/apps ideate`")
+                return
+            lines = ["🏆 *أحسن 20 تطبيق*", ""]
+            for a in top[:10]:
+                lines.append(f"• `{a['score']}` [{a.get('category','?')}] *{a['name']}*\n  _{a.get('pitch','')[:70]}_")
+            await update.message.reply_text("\n".join(lines), parse_mode="Markdown", disable_web_page_preview=True)
+        else:
+            await update.message.reply_text(
+                "استعمل:\n`/apps` — الحالة\n`/apps ideate` — ولّد 60 فكرة\n`/apps top` — أحسن 20\n`/apps build <slug>` — MVP + كود",
+                parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_graph(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """🕸️ /graph — vault graph health | /graph fix — link orphans now"""
     from pathlib import Path
@@ -2240,6 +2292,7 @@ async def set_commands(app: Application):
         BotCommand("cherry", "جسر Cherry Studio — لوحة الويب + موديلات إضافية"),
         BotCommand("jarvisdev", "JARVIS المطوّر — يكتب agents جدد للمنظومة"),
         BotCommand("graph", "شبكة المعرفة — صحة الـ vault | /graph fix يربط الملاحظات"),
+        BotCommand("apps", "مصنع التطبيقات — 60 فكرة→20→MVP→كود+RevenueCat"),
         BotCommand("hermes", "محرك Hermes (محلي/سحابي)"),
         BotCommand("status", "حالة النظام"),
         BotCommand("web", "رابط لوحة التحكم"),
@@ -2340,6 +2393,7 @@ def main():
     app.add_handler(CommandHandler("cherry", cmd_cherry))
     app.add_handler(CommandHandler("jarvisdev", cmd_jarvisdev))
     app.add_handler(CommandHandler("graph", cmd_graph))
+    app.add_handler(CommandHandler("apps", cmd_apps))
     app.add_handler(CommandHandler("hermes", cmd_hermes))
     app.add_handler(CommandHandler("clear", cmd_clear))
     app.add_handler(CommandHandler("status", cmd_status))

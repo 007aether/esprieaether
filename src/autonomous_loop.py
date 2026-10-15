@@ -555,6 +555,7 @@ SCHEDULE = {
     "cherry_bridge": 15 * 60,              # كل 15 دقيقة — cherry gateway + board mirror
     "jarvis_dev": 3 * 60 * 60,             # كل 3 ساعات — JARVIS writes a new agent
     "graph_fixer": 24 * 60 * 60,           # يومياً — repair orphan notes + rebuild graph
+    "app_factory": 24 * 60 * 60,           # يومياً — generate 60 app ideas → top 20
     "colibri_autostart": 10 * 60,          # كل 10 دقائق — auto-start serve when ready
 }
 
@@ -953,6 +954,32 @@ def task_graph_fixer() -> dict:
     return result
 
 
+def task_app_factory() -> dict:
+    """App Factory: regenerate 60 app ideas → top 20 (daily, autonomous pipeline)."""
+    result = {"name": "app_factory", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "app_factory.py"), "ideate"],
+            capture_output=True, text=True, timeout=600,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            import json as _json
+            try:
+                data = _json.loads(r.stdout.strip().splitlines()[-1])
+                result["generated"] = data.get("generated", 0)
+                result["top"] = data.get("top", 0)
+            except Exception:
+                pass
+        else:
+            result["status"] = "error"
+            result["error"] = (r.stderr or r.stdout or "")[:150]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
 def task_obsidian_refresh() -> dict:
     """Rebuild the Obsidian knowledge graph daily (notes + links)."""
     result = {"name": "obsidian_refresh", "status": "ok"}
@@ -1203,6 +1230,7 @@ def run_cycle(state: dict):
         "cherry_bridge": task_cherry_bridge,
         "jarvis_dev": task_jarvis_dev,
         "graph_fixer": task_graph_fixer,
+        "app_factory": task_app_factory,
         "colibri_autostart": task_colibri_autostart,
     }
 
