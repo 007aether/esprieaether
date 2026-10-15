@@ -160,6 +160,71 @@ async def cmd_airdrop_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_cloudnode(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """GitHub Cloud Node — التحكم من التيليفون عبر Issues"""
+    import urllib.request
+    import json as _json
+    from pathlib import Path
+    args = context.args or []
+    action = args[0].lower() if args else "status"
+
+    BASE = Path(__file__).resolve().parent.parent
+
+    if action == "poll":
+        msg = await update.message.reply_text("☁️ جارٍ سحب أوامر السحابة...")
+        try:
+            sys.path.insert(0, str(BASE))
+            import cloud_poller
+            rep = cloud_poller.poll_once()
+            n = len(rep.get("executed", []))
+            lines = [
+                "☁️ *جسر السحابة*\n",
+                f"📥 سحب: {'✅' if rep.get('pull') else '❌'}",
+                f"⚡ أوامر منفذة: `{n}`",
+                f"📤 رفع: {'✅' if rep.get('pushed') else '❌'}",
+            ]
+            for e in rep.get("executed", []):
+                lines.append(f"\n`{e['command']}`: {e['status']}")
+            await msg.edit_text("\n".join(lines), parse_mode="Markdown")
+        except Exception as e:
+            await msg.edit_text(f"❌ خطأ: {e}")
+
+    elif action == "url":
+        await update.message.reply_text(
+            "📱 *التحكم من التيليفون*\n\n"
+            "صوّب issue جديدة هنا:\n"
+            "https://github.com/007aether/esprieaether/issues/new\n\n"
+            "الأوامر: `mesh cycle` · `scan` · `status` · `board`",
+            parse_mode="Markdown", disable_web_page_preview=True
+        )
+
+    else:  # status
+        try:
+            status_file = BASE / "data" / "cloud_status.json"
+            if status_file.exists():
+                st = _json.loads(status_file.read_text(encoding="utf-8"))
+                pc_seen = st.get("pc_last_seen", "?")[:19]
+                cloud_seen = st.get("cloud_last_run", "?")[:19]
+                scan_n = st.get("last_scan_count", 0)
+                await update.message.reply_text(
+                    f"☁️ *GitHub Cloud Node*\n\n"
+                    f"🖥️ آخر ظهور للـ PC: `{pc_seen}`\n"
+                    f"☁️ آخر دورة سحابية: `{cloud_seen}`\n"
+                    f"📡 آخر فحص: `{scan_n}` عنصر\n\n"
+                    f"/cloud poll — سحب الأوامر الآن\n"
+                    f"/cloud url — رابط التحكم من التيليفون",
+                    parse_mode="Markdown"
+                )
+            else:
+                await update.message.reply_text(
+                    "☁️ ما كاين حتى cloud status بعد.\n"
+                    "صوّب issue فـ GitHub باش تبدأ الدورة السحابية."
+                )
+        except Exception as e:
+            await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_mesh(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Agent Mesh — وكيل الوكلاء كيتواصلو مع بعض"""
     import urllib.request
@@ -1751,6 +1816,7 @@ async def set_commands(app: Application):
         BotCommand("vpn", "التحكم بـ VPN"),
         BotCommand("airdrops", "أحدث الإيردروبات"),
         BotCommand("mesh", "شبكة الوكلاء — تواصل وتطوير"),
+        BotCommand("cloudnode", "GitHub Cloud Node — تحكم من التيليفون"),
         BotCommand("airdrop_sync", "جلب الإيردروبات فوراً"),
         BotCommand("pharos", "حالة Pharos"),
         BotCommand("robots", "محرك الروبوتات"),
@@ -1851,6 +1917,7 @@ def main():
     app.add_handler(CommandHandler("vpn", cmd_vpn))
     app.add_handler(CommandHandler("airdrops", cmd_airdrops))
     app.add_handler(CommandHandler("mesh", cmd_mesh))
+    app.add_handler(CommandHandler("cloudnode", cmd_cloudnode))
     app.add_handler(CommandHandler("airdrop_sync", cmd_airdrop_sync))
     app.add_handler(CommandHandler("pharos", cmd_pharos))
     app.add_handler(CommandHandler("robots", cmd_robots))

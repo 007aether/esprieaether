@@ -22,6 +22,7 @@ Start-Sleep -Seconds 3
 $svcs = @(
   "router:src/ai_router.py",
   "agent-mesh:src/agent_mesh.py",
+  "cloud-poller:src/cloud_poller.py --daemon",
   "web:src/web_interface.py",
   "cloud-desktop:src/cloud_desktop_agent.py",
   "homedock:src/homedock_dashboard.py",

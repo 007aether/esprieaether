@@ -511,6 +511,7 @@ SCHEDULE = {
     "pharos": 60 * 60,
     "airdrop_sync": 6 * 60 * 60,
     "agent_mesh": 3 * 60 * 60,
+    "cloud_bridge": 10 * 60,
     "weekly_email": 60 * 60,
     "self_evolve": 24 * 60 * 60,
     "github_evolve": 24 * 60 * 60,
@@ -693,6 +694,22 @@ def task_agent_mesh() -> dict:
     return result
 
 
+def task_cloud_bridge() -> dict:
+    """GitHub cloud bridge — pull cloud commands, execute them, push results."""
+    result = {"name": "cloud_bridge", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR))
+        import cloud_poller
+        report = cloud_poller.poll_once()
+        result["pulled"] = report.get("pull", False)
+        result["executed"] = len(report.get("executed", []))
+        result["pushed"] = report.get("pushed", False)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
 def run_cycle(state: dict):
     """دورة واحدة"""
     logger.info(f"═══ دورة #{state['cycles']} ═══")
@@ -706,6 +723,7 @@ def run_cycle(state: dict):
         "cloud_health": task_cloud_health,
         "airdrop_sync": task_airdrop_sync,
         "agent_mesh": task_agent_mesh,
+        "cloud_bridge": task_cloud_bridge,
         "weekly_email": task_weekly_email,
         "self_evolve": task_self_evolve,
         "github_evolve": task_github_evolve,
