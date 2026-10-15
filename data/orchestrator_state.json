@@ -1,5 +1,5 @@
 {
-  "ts": "2026-10-15T09:16:59.883613+00:00",
+  "ts": "2026-10-15T09:20:51.124497+00:00",
   "action": "wake",
   "reason": "daemons ميتة: ['guardian_agent.py']",
   "services": {
