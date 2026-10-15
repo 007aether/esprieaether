@@ -49,6 +49,13 @@ BRAINS = {
         "min_interval": 0.0,
         "label": "Ollama qwen2.5:3b (local)",
     },
+    "colibri-local": {
+        "url": "http://127.0.0.1:8000/v1/chat/completions",
+        "key": None,
+        "model": "qwen3-coder-30b",
+        "min_interval": 0.0,
+        "label": "Colibri Qwen3-Coder-30B (local D:)",
+    },
     "llm7-fast": {
         "url": "https://api.llm7.io/v1/chat/completions",
         "key": "ollama-local",  # keyless: any value works
@@ -89,8 +96,8 @@ BRAINS = {
 }
 
 CHAINS = {
-    "aether-auto": ["ollama-local", "llm7-fast", "llm7-big", "groq", "minimax"],
-    "aether-local": ["ollama-local"],
+    "aether-auto": ["colibri-local", "ollama-local", "llm7-fast", "llm7-big", "groq", "minimax"],
+    "aether-local": ["colibri-local", "ollama-local"],
     "aether-cloud": ["llm7-fast", "llm7-big", "groq", "minimax"],
     "aether-groq": ["groq", "llm7-big", "minimax"],
     # aliases so DSH's own default (qwen2.5:3b) also routes through the chain
@@ -102,11 +109,11 @@ CHAINS = {
 AGENT_MODELS = {
     "aether-security": {
         "system": "أنت وكيل أمن سيبراني. تستعمل hack-skills و claude-red و hexstrike للفحص الأمني.",
-        "chain": ["ollama-local", "groq", "llm7-big"],
+        "chain": ["colibri-local", "ollama-local", "groq", "llm7-big"],
     },
     "aether-research": {
         "system": "أنت باحث. تحلل وتلخص المعلومات من مصادر متعددة.",
-        "chain": ["ollama-local", "llm7-fast", "groq"],
+        "chain": ["colibri-local", "ollama-local", "llm7-fast", "groq"],
     },
     "aether-apollo": {
         "system": (
@@ -128,15 +135,15 @@ AGENT_MODELS = {
     },
     "aether-evolve": {
         "system": "أنت محرك تطوير ذاتي. تحلل الأداء وتقترح تحسينات.",
-        "chain": ["ollama-local", "llm7-fast"],
+        "chain": ["colibri-local", "ollama-local", "llm7-fast"],
     },
     "aether-quality": {
         "system": "أنت مراقب جودة. تصفّي المخرجات وتحسّنها عبر antislop.",
-        "chain": ["ollama-local", "llm7-fast"],
+        "chain": ["colibri-local", "ollama-local", "llm7-fast"],
     },
     "aether-general": {
         "system": "أنت مساعد عام. تجيب على أي سؤال بوضوح.",
-        "chain": ["ollama-local", "llm7-fast", "groq"],
+        "chain": ["colibri-local", "ollama-local", "llm7-fast", "groq"],
     },
 }
 
