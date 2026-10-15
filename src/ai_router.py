@@ -112,6 +112,16 @@ CHAINS = {
     "qwen2.5:3b": ["ollama-local", "llm7-fast"],
 }
 
+# ── per-agent chains: mesh agents use aether-<agent> ──
+# WHY: mesh (agent_mesh.py) calls aether-<agent> (aether-security, aether-evolve...).
+# Without explicit entries these fall back to aether-auto, which hangs on
+# colibri(stopped)/cherry(unreachable)/ollama(3B slow) before reaching llm7.
+# Chain order: local fast first when colibri is up, else llm7 (proven working now),
+# ollama as last-resort local. This lets agents TALK immediately.
+_AGENT_NAMES = ["security", "research", "market", "quality", "redteam", "evolve", "general", "rea"]
+for _a in _AGENT_NAMES:
+    CHAINS[f"aether-{_a}"] = ["colibri-local", "llm7-fast", "cherry-studio", "ollama-local", "llm7-big"]
+
 # ── Agent routing (orchestrator merged into router) ──
 # each agent model -> {system prompt, brain chain}
 AGENT_MODELS = {
