@@ -542,6 +542,7 @@ SCHEDULE = {
     "voice_check": 24 * 60 * 60,           # يومياً — TTS engine
     "colibri_check": 24 * 60 * 60,         # يومياً — model download
     "mobile_pwa_check": 24 * 60 * 60,      # يومياً — PWA routes
+    "rea_check": 24 * 60 * 60,             # يومياً — REA CLI + engines
 }
 
 
@@ -803,6 +804,30 @@ def task_mobile_pwa_check() -> dict:
     return result
 
 
+def task_rea_check() -> dict:
+    """Verify REA CLI + analysis engine availability (daily)."""
+    result = {"name": "rea_check", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import rea_agent
+        d = rea_agent.doctor()
+        result["rea_ok"] = d.get("ok", False)
+        if d.get("ok"):
+            checks = d.get("checks", {})
+            if isinstance(checks, dict):
+                result["healthy_checks"] = sum(1 for v in checks.get("scope_checks", []) if v.get("ok"))
+                result["total_checks"] = len(checks.get("scope_checks", []))
+                # ghidra ready?
+                result["ghidra"] = any(c.get("name") == "ghidra" and c.get("ok")
+                                       for c in checks.get("scope_checks", []))
+        else:
+            result["error"] = d.get("error", "?")[:150]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
 def task_backup() -> dict:
     """Encrypted local backup of both workspaces' data (daily)."""
     result = {"name": "backup", "status": "ok"}
@@ -974,6 +999,7 @@ def run_cycle(state: dict):
         "voice_check": task_voice_check,
         "colibri_check": task_colibri_check,
         "mobile_pwa_check": task_mobile_pwa_check,
+        "rea_check": task_rea_check,
     }
 
     for name, func in tasks.items():
