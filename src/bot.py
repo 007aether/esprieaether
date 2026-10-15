@@ -1996,6 +1996,34 @@ async def cmd_jarvis_intel(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_rea(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🔬 /rea — REA reverse-engineering bridge | /rea <path> — analyze a target"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "src"))
+    try:
+        import rea_agent
+        args = context.args
+        if args:
+            target = " ".join(args)
+            await update.message.reply_text(f"🔬 REA: كنحلّل `{target}`...", parse_mode="Markdown")
+            result = rea_agent.investigate(target)
+            if result.get("ok"):
+                await update.message.reply_text(
+                    f"🔬 *REA — تم التحليل*\n`{target}`\n\n"
+                    f"النتائج محفوظة فالذاكرة + معلنة فالـ mesh ✅",
+                    parse_mode="Markdown")
+            else:
+                await update.message.reply_text(
+                    f"❌ REA: {result.get('error', '?')[:200]}", parse_mode="Markdown")
+        else:
+            text = rea_agent.status_report()
+            await update.message.reply_text(text, parse_mode="Markdown", disable_web_page_preview=True)
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_backup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """💾 /backup — encrypted backup of both workspaces"""
     import subprocess
@@ -2070,6 +2098,7 @@ async def set_commands(app: Application):
         BotCommand("help", "المساعدة"),
         BotCommand("jarvis", "محادثة مع الذكاء المحلي"),
         BotCommand("jarvisintel", "جسر JARVIS Intel — حالة + بحث"),
+        BotCommand("rea", "REA — الهندسة العكسية (تحليل binaries/apps)"),
         BotCommand("hermes", "محرك Hermes (محلي/سحابي)"),
         BotCommand("status", "حالة النظام"),
         BotCommand("web", "رابط لوحة التحكم"),
@@ -2163,6 +2192,7 @@ def main():
     app.add_handler(CommandHandler("help", cmd_help))
     app.add_handler(CommandHandler("ping", cmd_ping))
     app.add_handler(CommandHandler("jarvisintel", cmd_jarvis_intel))
+    app.add_handler(CommandHandler("rea", cmd_rea))
     app.add_handler(CommandHandler("hermes", cmd_hermes))
     app.add_handler(CommandHandler("clear", cmd_clear))
     app.add_handler(CommandHandler("status", cmd_status))
