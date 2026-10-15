@@ -532,6 +532,7 @@ SCHEDULE = {
     "sunna_prices": 24 * 60 * 60,          # يومياً
     "sunna_facture_check": 24 * 60 * 60,   # يومياً
     "sunna_bilan": 24 * 60 * 60,           # يومياً
+    "sunna_costing": 12 * 60 * 60,         # كل 12 ساعة
     "sunna_offres": 12 * 60 * 60,          # كل 12 ساعة
     "cleanup": 24 * 60 * 60,               # يومياً
     "vector_memory": 6 * 60 * 60,          # كل 6 ساعات
@@ -663,6 +664,18 @@ def task_sunna_bilan() -> dict:
     result = {"name": "sunna_bilan", "status": "ok"}
     try:
         run_result = _run_sunna_bot("bilan_bot.py", ["--days", "7", "--json"])
+        result.update(run_result)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_sunna_costing() -> dict:
+    """Sunna cost engine — estimate every catalogue product against live prices."""
+    result = {"name": "sunna_costing", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("cost_estimator_agent.py", ["--estimate-all"])
         result.update(run_result)
     except Exception as e:
         result["status"] = "error"
@@ -824,6 +837,7 @@ def run_cycle(state: dict):
         "sunna_prices": task_sunna_prices,
         "sunna_facture_check": task_sunna_facture_check,
         "sunna_bilan": task_sunna_bilan,
+        "sunna_costing": task_sunna_costing,
         "sunna_offres": task_sunna_offres,
         "cleanup": task_cleanup,
         "vector_memory": task_vector_memory,

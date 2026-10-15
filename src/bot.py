@@ -1908,6 +1908,38 @@ async def cmd_sunnaprix(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_sunnacout(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🧮 /sunnacout [product] [qty] — cost estimate against live prices"""
+    args = context.args or []
+    try:
+        sys.path.insert(0, str(SUNNA_DIR / "bots"))
+        import importlib
+        ce = importlib.import_module("cost_estimator_agent")
+        if not args:
+            # estimate-all summary
+            results = ce.estimate_all()
+            lines = [f"🧮 *تقدير الكلفة* — {len(results)} produit\n"]
+            for r in results[:10]:
+                lines.append(f"• {r['product'][:32]}: `{r['price_ttc']:,.0f}` DH TTC")
+            lines += ["", f"الأسعار: حديد `{results[0]['prices_used']['steel_dh_kg']}` DH/kg · جلفنة `{results[0]['prices_used']['galva_dh_kg']}` DH/kg"]
+            await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
+            return
+        qty = 1
+        product_name = " ".join(args)
+        if args[-1].isdigit():
+            qty = int(args[-1])
+            product_name = " ".join(args[:-1])
+        p = ce.find_product(product_name)
+        if not p:
+            await update.message.reply_text(f"❌ produit introuvable: {product_name}")
+            return
+        est = ce.estimate_product(p, qty)
+        await update.message.reply_text(ce.format_telegram(est), parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_sunnakanban(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """📋 /sunnakanban — Sunna kanban board (todo/doing/done)"""
     kb = _sunna_api("/kanban") if False else None  # kanban is on 5103, not 5100
@@ -1991,6 +2023,7 @@ async def set_commands(app: Application):
         BotCommand("sunnadevis", "إنشاء devis (عرض ثمن)"),
         BotCommand("sunnanetlify", "رابط موقع Sunna المباشر"),
         BotCommand("sunnaprix", "أثمنة المواد الحية (حديد/غلفنة)"),
+        BotCommand("sunnacout", "تقدير كلفة منتج (حديد+غلفنة+يد عاملة)"),
         BotCommand("sunnakanban", "لوحة Sunna kanban"),
         BotCommand("obsidian", "خريطة المعرفة Obsidian"),
         BotCommand("clear", "مسح سجل JARVIS"),
@@ -2093,6 +2126,7 @@ def main():
     app.add_handler(CommandHandler("sunnadevis", cmd_sunnadevis))
     app.add_handler(CommandHandler("sunnanetlify", cmd_sunnanetlify))
     app.add_handler(CommandHandler("sunnaprix", cmd_sunnaprix))
+    app.add_handler(CommandHandler("sunnacout", cmd_sunnacout))
     app.add_handler(CommandHandler("sunnakanban", cmd_sunnakanban))
     app.add_handler(CommandHandler("obsidian", cmd_obsidian))
 
