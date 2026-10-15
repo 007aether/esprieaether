@@ -549,6 +549,7 @@ SCHEDULE = {
     "colibri_check": 24 * 60 * 60,         # يومياً — model download
     "mobile_pwa_check": 24 * 60 * 60,      # يومياً — PWA routes
     "rea_check": 24 * 60 * 60,             # يومياً — REA CLI + engines
+    "obsidian_refresh": 24 * 60 * 60,      # يومياً — knowledge graph rebuild
     "colibri_autostart": 10 * 60,          # كل 10 دقائق — auto-start serve when ready
 }
 
@@ -851,6 +852,28 @@ def task_mobile_pwa_check() -> dict:
     return result
 
 
+def task_obsidian_refresh() -> dict:
+    """Rebuild the Obsidian knowledge graph daily (notes + links)."""
+    result = {"name": "obsidian_refresh", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "src" / "obsidian_vault_builder.py")],
+            capture_output=True, text=True, timeout=120,
+        )
+        if r.returncode == 0:
+            out = r.stdout
+            # count notes from output
+            result["output"] = out.strip().splitlines()[-1] if out.strip() else ""
+        else:
+            result["status"] = "error"
+            result["error"] = (r.stderr or r.stdout or "")[:200]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
 def task_rea_check() -> dict:
     """Verify REA CLI + analysis engine availability (daily)."""
     result = {"name": "rea_check", "status": "ok"}
@@ -1047,6 +1070,7 @@ def run_cycle(state: dict):
         "colibri_check": task_colibri_check,
         "mobile_pwa_check": task_mobile_pwa_check,
         "rea_check": task_rea_check,
+        "obsidian_refresh": task_obsidian_refresh,
         "colibri_autostart": task_colibri_autostart,
     }
 

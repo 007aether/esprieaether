@@ -67,6 +67,11 @@ AGENTS = {
     "pharos": ["crypto"], "planner": ["productivity"],
     "terminal": ["infra"], "vault": ["security"], "vpn": ["VPN"],
     "research-monitor": ["research"], "semantic-memory": ["memory"],
+    "rea": ["REA", "Ghidra", "reverse-engineering"],
+    "colibri": ["colibri", "router"],
+    "orchestrator": ["mesh", "infra"],
+    "digest": ["mesh", "infra"],
+    "skill-harvester": ["mesh", "research"],
 }
 
 # sunna topics: name -> (body, links)
@@ -96,6 +101,12 @@ BRAINS = {
     "OSINT": ("16 agents — face ID + swarm + synthesis", ["jarvis", "Exa"]),
     "OKX": ("Connector + trading bot (DRY-RUN). withdrawal refused by code", ["router"]),
     "DeepSeek-Harness": ("DSH — browser-capable agent", ["dsh-bridge"]),
+    "colibri": ("Qwen3-Coder-30B-A3B MoE (19.4GB, D:) — `coli serve` :8000 — strongest local brain, wired to router", ["router", "ai_router", "colibri_launcher"]),
+    "ollama-local": ("qwen2.5:3b (1.9GB, C:) — fast local brain + fallback", ["router"]),
+    "mesh": ("7-agent mesh — evolve/security/research/market/quality/redteam/general — shared board :11437", ["router", "agent_mesh", "evolve", "security", "research"]),
+    "REA": ("Reverse Engineer Anything (morluto/rea 226K) — Ghidra 12.1.4 + JDK 25 — native PE + JS/Electron analysis", ["rea_agent", "Ghidra"]),
+    "JARVIS-intel": ("Real-time person intelligence — Next.js :3000 + FastAPI :8000 — capture/identify/research", ["jarvis", "IntelBoard"]),
+    "Ghidra": ("12.1.4 + JDK 25 — REA analysis engine (D:/AetherData/rea)", ["REA", "rea_agent"]),
 }
 
 # infra: name -> (body, links)
