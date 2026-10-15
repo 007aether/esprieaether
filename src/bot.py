@@ -1940,6 +1940,34 @@ async def cmd_sunnacout(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_digest(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """📊 /digest — observability digest (services + board + cloud + memory)"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "src"))
+    try:
+        from digest_agent import format_telegram
+        text = format_telegram()
+        await update.message.reply_text(text, parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_harvest(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🎯 /harvest — skill candidates from the veille index"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "src"))
+    try:
+        from skill_harvester import format_telegram
+        text = format_telegram(top=8)
+        await update.message.reply_text(text, parse_mode="Markdown", disable_web_page_preview=True)
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_backup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """💾 /backup — encrypted backup of both workspaces"""
     import subprocess
@@ -2063,6 +2091,8 @@ async def set_commands(app: Application):
         BotCommand("sunnaprix", "أثمنة المواد الحية (حديد/غلفنة)"),
         BotCommand("sunnacout", "تقدير كلفة منتج (حديد+غلفنة+يد عاملة)"),
         BotCommand("backup", "نسخة احتياطية مشفرة"),
+        BotCommand("digest", "ملخص النظام — خدمات + وكلاء + ذاكرة"),
+        BotCommand("harvest", "مرشحون من veille — أفكار للتبني"),
         BotCommand("sunnakanban", "لوحة Sunna kanban"),
         BotCommand("obsidian", "خريطة المعرفة Obsidian"),
         BotCommand("clear", "مسح سجل JARVIS"),
@@ -2167,6 +2197,8 @@ def main():
     app.add_handler(CommandHandler("sunnaprix", cmd_sunnaprix))
     app.add_handler(CommandHandler("sunnacout", cmd_sunnacout))
     app.add_handler(CommandHandler("backup", cmd_backup))
+    app.add_handler(CommandHandler("digest", cmd_digest))
+    app.add_handler(CommandHandler("harvest", cmd_harvest))
     app.add_handler(CommandHandler("sunnakanban", cmd_sunnakanban))
     app.add_handler(CommandHandler("obsidian", cmd_obsidian))
 

@@ -537,6 +537,8 @@ SCHEDULE = {
     "cleanup": 24 * 60 * 60,               # يومياً
     "vector_memory": 6 * 60 * 60,          # كل 6 ساعات
     "backup": 24 * 60 * 60,                # يومياً
+    "skill_harvest": 24 * 60 * 60,         # يومياً (after veille)
+    "digest": 12 * 60 * 60,                # كل 12 ساعة
 }
 
 
@@ -758,6 +760,39 @@ def task_backup() -> dict:
     return result
 
 
+def task_skill_harvest() -> dict:
+    """Harvest the veille index into adopt/reference skill candidates."""
+    result = {"name": "skill_harvest", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import skill_harvester
+        candidates = skill_harvester.harvest()
+        result["total"] = len(candidates)
+        result["adopt"] = sum(1 for c in candidates if c["decision"] == "adopt")
+        result["reference"] = sum(1 for c in candidates if c["decision"] == "reference")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_digest() -> dict:
+    """Daily observability digest — services + board + cloud + memory."""
+    result = {"name": "digest", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import digest_agent
+        digest = digest_agent.build_digest()
+        result["services_up"] = digest.get("services_up", 0)
+        result["services_total"] = digest.get("services_total", 0)
+        result["memory_total"] = digest.get("memory_total", 0)
+        result["digest_file"] = digest.get("digest_file", "")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
 def task_sunna_offres() -> dict:
     """Offres bot — offers/scraping."""
     result = {"name": "sunna_offres", "status": "ok"}
@@ -867,6 +902,8 @@ def run_cycle(state: dict):
         "cleanup": task_cleanup,
         "vector_memory": task_vector_memory,
         "backup": task_backup,
+        "skill_harvest": task_skill_harvest,
+        "digest": task_digest,
     }
 
     for name, func in tasks.items():
