@@ -179,19 +179,37 @@ def call_router(model, messages, timeout=90):
 
 
 def agent_think(agent_name, last_n=8):
-    """One agent reads the board and posts its reaction."""
+    """One agent reads the board + recalls memory and posts its reaction."""
     if agent_name not in AGENTS:
         return {"error": f"unknown agent: {agent_name}"}
 
     board = load_board()
     recent = board[-last_n:] if board else []
 
-    # build context from board
+    # ── recall relevant memories (vector memory) ──
+    memory_context = ""
+    try:
+        import vector_memory_agent as vma
+        vm = vma.VectorMemory()
+        # build a query from the agent's role + recent board
+        query = f"{AGENTS[agent_name]['role']} {' '.join(m['text'][:50] for m in recent[-3:])}"
+        hits = vm.recall(query, limit=3)
+        vm.close()
+        if hits:
+            memory_context = "\n".join(
+                f"- [{h.get('source','?')}] {h.get('text','')[:120]}" for h in hits
+            )
+    except Exception:
+        pass  # memory optional — never block the agent
+
+    # build context from board + memory
+    parts = []
     if recent:
-        context = "\n".join(f"[{m['agent']}]: {m['text']}" for m in recent)
-        user_msg = f"آخر ما قاله الوكلاء:\n{context}\n\n{AGENTS[agent_name]['prompt']}"
-    else:
-        user_msg = f"اللوحة فارغة. ابدأ أنت:\n{AGENTS[agent_name]['prompt']}"
+        parts.append("آخر ما قاله الوكلاء:\n" + "\n".join(f"[{m['agent']}]: {m['text']}" for m in recent))
+    if memory_context:
+        parts.append("ما نتذكره من الذاكرة:\n" + memory_context)
+    parts.append(AGENTS[agent_name]["prompt"])
+    user_msg = "\n\n".join(parts)
 
     messages = [
         {"role": "system", "content": f"أنت {AGENTS[agent_name]['role']} في نظام EsprieAether متعدد الوكلاء. أجيب بالعربية أو الدارجة، موجز."},
@@ -210,6 +228,15 @@ def agent_think(agent_name, last_n=8):
 
     if not text.strip():
         return {"error": "empty response from router"}
+
+    # ── store the thought in memory ──
+    try:
+        import vector_memory_agent as vma
+        vm = vma.VectorMemory()
+        vm.remember(f"[{agent_name}] {text.strip()[:200]}", source=f"mesh_{agent_name}")
+        vm.close()
+    except Exception:
+        pass
 
     msg = post_message(agent_name, text.strip(), AGENTS[agent_name]["tags"])
 
