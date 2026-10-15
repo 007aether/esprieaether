@@ -73,7 +73,7 @@ def ask_router(prompt, system=None, max_tokens=3000, timeout=120):
     ]
     try:
         data = json.dumps({
-            "model": "aether-auto", "messages": messages,
+            "model": "aether-cloud", "messages": messages,
             "max_tokens": max_tokens, "temperature": 0.8,
         }).encode()
         req = urllib.request.Request(f"{ROUTER_URL}/v1/chat/completions", data=data, method="POST")
@@ -87,54 +87,72 @@ def ask_router(prompt, system=None, max_tokens=3000, timeout=120):
 
 
 # ── STAGE 1: ideate ──────────────────────────────────────────────────
-IDEATE_PROMPT = """Generate {n} distinct mobile app ideas that are:
-- in HIGH demand (people actively pay for this category)
-- monetizable via subscription (RevenueCat-friendly: a clear pro feature)
+# WHY batched: llm7 free tier (mistral-Nemo) 502s / quota-exhausts on a single
+# 60-idea request (~4000 tokens). Smaller batches (15) succeed. So we ask for
+# BATCH_SIZE ideas per call, N_BATCHES times, with a sleep between calls to let
+# the free-tier quota/rate-limit recover.
+BATCH_SIZE = 15
+N_BATCHES = 4  # 4 × 15 = 60
+BATCH_SLEEP = 70  # seconds — must exceed router's 60s unhealthy cooldown after a llm7 quota error
+
+IDEATE_PROMPT = """Give me {n} SHORT mobile app ideas (batch {b} of {nb}, pick DIFFERENT
+categories/angles than a generic list). Each idea must be:
+- in HIGH demand (people pay for this category)
+- monetizable via subscription (a clear pro feature)
 - buildable as an MVP by a solo dev in 1-2 weeks (React Native / Expo)
-- NOT a clone of an existing saturated app, but a sharp niche wedge
+- a sharp niche wedge, NOT a generic clone
 
-Focus areas (pick across these, weight toward underserved niches):
-productivity, health/fitness, finance/budgeting, education/language,
-AI-utilities, creator tools, niche B2B tools, local/services,
-habit trackers, note-taking, meal/food, travel, sleep, focus, relationships.
-
-Respond with ONLY a JSON array (no prose, no fences):
+Keep each pitch under 15 words. Respond with ONLY a JSON array (no prose, no fences):
 [
   {{"name": "App Name", "slug": "app-name", "category": "productivity",
-    "pitch": "one sentence on what it does and for whom",
-    "monetization": "how it makes money (what the pro feature is)",
+    "pitch": "one sentence, what it does and for whom",
+    "monetization": "the pro feature people pay for",
     "audience": "who pays"}}
 ]
-Make every idea concrete and specific (no generic 'todo app'). {n} entries."""
+Exactly {n} entries."""
 
 
 def ideate(n=N_IDEAS):
-    """Generate n app ideas via the router."""
-    logger.info(f"💡 generating {n} app ideas...")
-    raw = ask_router(IDEATE_PROMPT.format(n=n), max_tokens=4000, timeout=180)
-    if not raw:
-        return []
-    # strip fences if present
+    """Generate n app ideas via batched router calls (llm7-free-tier safe)."""
+    import time
+    all_ideas = []
+    batches = max(1, (n + BATCH_SIZE - 1) // BATCH_SIZE)
+    for b in range(1, batches + 1):
+        logger.info(f"💡 batch {b}/{batches} ({BATCH_SIZE} ideas)...")
+        raw = ask_router(IDEATE_PROMPT.format(n=BATCH_SIZE, b=b, nb=batches),
+                         max_tokens=1400, timeout=120)
+        if not raw:
+            logger.warning(f"batch {b} failed — skipping")
+            continue
+        parsed = _parse_ideas(raw)
+        all_ideas.extend(parsed)
+        logger.info(f"  batch {b}: +{len(parsed)} (total {len(all_ideas)})")
+        if b < batches:
+            time.sleep(BATCH_SLEEP)  # let free-tier quota/rate-limit recover
+    logger.info(f"✅ generated {len(all_ideas)} ideas total")
+    return all_ideas
+
+
+def _parse_ideas(raw):
+    """Extract + normalize idea objects from router output."""
     raw = raw.strip()
     raw = re.sub(r"^```(json)?", "", raw).strip()
     raw = re.sub(r"```$", "", raw).strip()
-    # extract JSON array
     m = re.search(r"\[.*\]", raw, re.DOTALL)
     if not m:
-        logger.error("no JSON array in response")
         return []
     try:
         ideas = json.loads(m.group(0))
-    except Exception as e:
-        logger.error(f"JSON parse failed: {e}")
+    except Exception:
         return []
-    # normalize + slugify
-    for i, idea in enumerate(ideas):
-        idea["id"] = i + 1
-        slug = idea.get("slug") or idea.get("name", f"app-{i}")
+    out = []
+    for idea in ideas:
+        if not isinstance(idea, dict) or not idea.get("name"):
+            continue
+        slug = idea.get("slug") or idea.get("name", "")
         idea["slug"] = re.sub(r"[^a-z0-9]+", "-", slug.lower()).strip("-")
-    logger.info(f"✅ generated {len(ideas)} ideas")
-    return ideas
+        out.append(idea)
+    return out
 
 
 # ── STAGE 2: score ───────────────────────────────────────────────────
@@ -203,13 +221,23 @@ def run_ideate():
     ideas = ideate()
     if not ideas:
         return {"ok": False, "error": "router failed to generate ideas"}
-    top = rank(ideas)
+    # dedupe by slug (batches can overlap) + assign ids
+    seen = set()
+    deduped = []
+    for idea in ideas:
+        if idea["slug"] in seen:
+            continue
+        seen.add(idea["slug"])
+        deduped.append(idea)
+    for i, idea in enumerate(deduped):
+        idea["id"] = i + 1
+    top = rank(deduped)
     FACTORY_DIR.mkdir(exist_ok=True)
-    IDEAS_FILE.write_text(json.dumps(ideas, ensure_ascii=False, indent=2), encoding="utf-8")
+    IDEAS_FILE.write_text(json.dumps(deduped, ensure_ascii=False, indent=2), encoding="utf-8")
     TOP_FILE.write_text(json.dumps(top, ensure_ascii=False, indent=2), encoding="utf-8")
     log_action({"ts": datetime.now(timezone.utc).isoformat(),
-                "stage": "ideate", "generated": len(ideas), "top": len(top)})
-    return {"ok": True, "generated": len(ideas), "top": len(top),
+                "stage": "ideate", "generated": len(deduped), "top": len(top)})
+    return {"ok": True, "generated": len(deduped), "top": len(top),
             "best": top[0]["name"] if top else None}
 
 
