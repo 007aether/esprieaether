@@ -97,5 +97,14 @@
   "kind": "info",
   "ok": true,
   "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T13:11:42.510217+00:00",
+  "task_id": "task-1792069542615",
+  "agent": "evolve",
+  "title": "الآن نركز على تحديث وحدة معاينة البريد الإلكتروني بتفاصيل أمنية جديدة. يجب ترقية الوحدة لتكون أمانة ",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
  }
 ]
