@@ -160,6 +160,39 @@ async def cmd_airdrop_sync(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_veille(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Veille 24/7 — GitHub harvest (25 categories)"""
+    from pathlib import Path
+    from veille_agent import format_telegram
+    args = context.args or []
+    action = args[0].lower() if args else "top"
+
+    BASE = Path(__file__).resolve().parent.parent
+
+    if action == "run":
+        msg = await update.message.reply_text("📡 جارٍ الحصاد (قد يأخذ دقائق)...")
+        try:
+            sys.path.insert(0, str(BASE / "src"))
+            import veille_agent
+            index = veille_agent.harvest(per_query=20, target="esprieaether")
+            total = sum(len(v) for v in index.values())
+            payload = veille_agent.save_index(index)
+            await msg.edit_text(
+                f"✅ *حصاد كامل*\n\n"
+                f"📡 حُصد: `{total}` repo\n"
+                f"📚 الفهرس: `{payload['total']}` repo\n"
+                f"🗂️ الفئات: `{len(payload['categories'])}`",
+                parse_mode="Markdown"
+            )
+        except Exception as e:
+            await msg.edit_text(f"❌ خطأ: {e}")
+
+    else:  # top
+        text = format_telegram(top=8)
+        await update.message.reply_text(text, parse_mode="Markdown", disable_web_page_preview=True)
+
+
+@authorized_only
 async def cmd_cloudnode(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """GitHub Cloud Node — التحكم من التيليفون عبر Issues"""
     import urllib.request
@@ -1817,6 +1850,7 @@ async def set_commands(app: Application):
         BotCommand("airdrops", "أحدث الإيردروبات"),
         BotCommand("mesh", "شبكة الوكلاء — تواصل وتطوير"),
         BotCommand("cloudnode", "GitHub Cloud Node — تحكم من التيليفون"),
+        BotCommand("veille", "رصد GitHub — أفضل المستودعات"),
         BotCommand("airdrop_sync", "جلب الإيردروبات فوراً"),
         BotCommand("pharos", "حالة Pharos"),
         BotCommand("robots", "محرك الروبوتات"),
@@ -1918,6 +1952,7 @@ def main():
     app.add_handler(CommandHandler("airdrops", cmd_airdrops))
     app.add_handler(CommandHandler("mesh", cmd_mesh))
     app.add_handler(CommandHandler("cloudnode", cmd_cloudnode))
+    app.add_handler(CommandHandler("veille", cmd_veille))
     app.add_handler(CommandHandler("airdrop_sync", cmd_airdrop_sync))
     app.add_handler(CommandHandler("pharos", cmd_pharos))
     app.add_handler(CommandHandler("robots", cmd_robots))
