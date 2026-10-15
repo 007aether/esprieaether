@@ -1996,6 +1996,74 @@ async def cmd_jarvis_intel(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_selfimprove(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🧪 /selfimprove — self-improvement status | /selfimprove run — learn from errors now"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "bots"))
+    try:
+        import self_improve as si
+        args = context.args
+        if args and args[0] == "run":
+            await update.message.reply_text("🧪 كنشخّص الأخطاء...", parse_mode="Markdown")
+            r = si.improve_once()
+            await update.message.reply_text(
+                f"🧪 *Self-Improve*\nفحص: `{r.get('scanned',0)}` · جديد: `{r.get('new',0)}` · شخّص: `{r.get('diagnosed',0)}`",
+                parse_mode="Markdown")
+        else:
+            await update.message.reply_text(si.status(), parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_cherry(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🍒 /cherry — Cherry Studio bridge status | /cherry mirror — push board to web UI"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "bots"))
+    try:
+        import cherry_bridge as cb
+        args = context.args
+        if args and args[0] == "mirror":
+            r = cb.mirror_board()
+            if r.get("ok"):
+                await update.message.reply_text(
+                    f"🍒 تم إرسال `{r.get('mirrored',0)}` رسالة للوحة Cherry", parse_mode="Markdown")
+            else:
+                await update.message.reply_text(f"❌ {r.get('error','cherry not reachable')}")
+        else:
+            await update.message.reply_text(cb.status(), parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_jarvisdev(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🧠 /jarvisdev — JARVIS agent-developer status | /jarvisdev write — write a new agent"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "bots"))
+    try:
+        import jarvis_dev as jd
+        args = context.args
+        if args and args[0] == "write":
+            await update.message.reply_text("🧠 JARVIS كيكتب agent جديد... (يقدر ياخد شوية وقت)", parse_mode="Markdown")
+            idea = " ".join(args[1:]) if len(args) > 1 else None
+            r = jd.develop_once(idea_text=idea)
+            if r.get("written"):
+                await update.message.reply_text(
+                    f"🧠 *كتب agent جديد*\n`{r.get('module')}`\nالفكرة: `{r.get('idea')}`\nstaged: `src/_staged/`",
+                    parse_mode="Markdown")
+            else:
+                await update.message.reply_text(f"❌ {r.get('error','فشل')}")
+        else:
+            await update.message.reply_text(jd.status(), parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
 async def cmd_executor(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """⚙️ /executor — task executor status | /executor run — execute now"""
     from pathlib import Path
@@ -2147,6 +2215,9 @@ async def set_commands(app: Application):
         BotCommand("rea", "REA — الهندسة العكسية (تحليل binaries/apps)"),
         BotCommand("colibri", "colibri serve — حالة 30B API المحلي"),
         BotCommand("executor", "منفّذ المهام — ينفّذ ما يقترحه الوكلاء"),
+        BotCommand("selfimprove", "التعلّم الذاتي — يشخّص الأخطاء ويقترح إصلاحات"),
+        BotCommand("cherry", "جسر Cherry Studio — لوحة الويب + موديلات إضافية"),
+        BotCommand("jarvisdev", "JARVIS المطوّر — يكتب agents جدد للمنظومة"),
         BotCommand("hermes", "محرك Hermes (محلي/سحابي)"),
         BotCommand("status", "حالة النظام"),
         BotCommand("web", "رابط لوحة التحكم"),
@@ -2243,6 +2314,9 @@ def main():
     app.add_handler(CommandHandler("rea", cmd_rea))
     app.add_handler(CommandHandler("colibri", cmd_colibri))
     app.add_handler(CommandHandler("executor", cmd_executor))
+    app.add_handler(CommandHandler("selfimprove", cmd_selfimprove))
+    app.add_handler(CommandHandler("cherry", cmd_cherry))
+    app.add_handler(CommandHandler("jarvisdev", cmd_jarvisdev))
     app.add_handler(CommandHandler("hermes", cmd_hermes))
     app.add_handler(CommandHandler("clear", cmd_clear))
     app.add_handler(CommandHandler("status", cmd_status))

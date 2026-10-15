@@ -551,6 +551,9 @@ SCHEDULE = {
     "rea_check": 24 * 60 * 60,             # يومياً — REA CLI + engines
     "obsidian_refresh": 24 * 60 * 60,      # يومياً — knowledge graph rebuild
     "task_executor": 15 * 60,              # كل 15 دقيقة — execute mesh-proposed tasks
+    "self_improve": 30 * 60,               # كل 30 دقيقة — learn from errors
+    "cherry_bridge": 15 * 60,              # كل 15 دقيقة — cherry gateway + board mirror
+    "jarvis_dev": 3 * 60 * 60,             # كل 3 ساعات — JARVIS writes a new agent
     "colibri_autostart": 10 * 60,          # كل 10 دقائق — auto-start serve when ready
 }
 
@@ -853,6 +856,79 @@ def task_mobile_pwa_check() -> dict:
     return result
 
 
+def task_jarvis_dev() -> dict:
+    """JARVIS writes a NEW mesh agent from a veille/skill idea (every 3h)."""
+    result = {"name": "jarvis_dev", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "jarvis_dev.py"), "--once"],
+            capture_output=True, text=True, timeout=180,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            import json as _json
+            try:
+                data = _json.loads(r.stdout.strip().splitlines()[-1])
+                result["written"] = data.get("written", 0)
+                result["module"] = data.get("module", "")
+            except Exception:
+                pass
+        elif r.stderr:
+            result["status"] = "error"
+            result["error"] = r.stderr[:150]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
+def task_self_improve() -> dict:
+    """Learn from errors: scan logs → diagnose → remember → propose fixes (every 30min)."""
+    result = {"name": "self_improve", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "self_improve.py"), "--once"],
+            capture_output=True, text=True, timeout=180,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            import json as _json
+            try:
+                data = _json.loads(r.stdout.strip().splitlines()[-1])
+                result["diagnosed"] = data.get("diagnosed", 0)
+                result["scanned"] = data.get("scanned", 0)
+            except Exception:
+                pass
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
+def task_cherry_bridge() -> dict:
+    """Check Cherry Studio gateway + mirror mesh board into its web UI (every 15min)."""
+    result = {"name": "cherry_bridge", "status": "ok"}
+    try:
+        import subprocess
+        # check reachability (cheap); mirror only if connected
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "cherry_bridge.py"), "--check"],
+            capture_output=True, text=True, timeout=20,
+        )
+        if r.returncode == 0 and '"ok": true' in r.stdout:
+            r2 = subprocess.run(
+                [sys.executable, str(BASE_DIR / "bots" / "cherry_bridge.py"), "--mirror"],
+                capture_output=True, text=True, timeout=25,
+            )
+            result["connected"] = True
+        else:
+            result["connected"] = False
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
 def task_obsidian_refresh() -> dict:
     """Rebuild the Obsidian knowledge graph daily (notes + links)."""
     result = {"name": "obsidian_refresh", "status": "ok"}
@@ -1099,6 +1175,9 @@ def run_cycle(state: dict):
         "rea_check": task_rea_check,
         "obsidian_refresh": task_obsidian_refresh,
         "task_executor": task_task_executor,
+        "self_improve": task_self_improve,
+        "cherry_bridge": task_cherry_bridge,
+        "jarvis_dev": task_jarvis_dev,
         "colibri_autostart": task_colibri_autostart,
     }
 

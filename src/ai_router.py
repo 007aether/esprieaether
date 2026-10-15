@@ -56,6 +56,14 @@ BRAINS = {
         "min_interval": 0.0,
         "label": "Colibri Qwen3-Coder-30B (local D:)",
     },
+    "cherry-studio": {
+        "url": "http://127.0.0.1:23333/v1/chat/completions",
+        "key": None,  # set CHERRY_KEY in .env if cherry gateway auth is on
+        "model": "auto",
+        "min_interval": 0.0,
+        "label": "Cherry Studio gateway (multi-provider + web UI)",
+        "optional": True,  # only used when reachable; never hard-fails the chain
+    },
     "llm7-fast": {
         "url": "https://api.llm7.io/v1/chat/completions",
         "key": "ollama-local",  # keyless: any value works
@@ -96,8 +104,8 @@ BRAINS = {
 }
 
 CHAINS = {
-    "aether-auto": ["colibri-local", "ollama-local", "llm7-fast", "llm7-big", "groq", "minimax"],
-    "aether-local": ["colibri-local", "ollama-local"],
+    "aether-auto": ["colibri-local", "cherry-studio", "ollama-local", "llm7-fast", "llm7-big", "groq", "minimax"],
+    "aether-local": ["colibri-local", "cherry-studio", "ollama-local"],
     "aether-cloud": ["llm7-fast", "llm7-big", "groq", "minimax"],
     "aether-groq": ["groq", "llm7-big", "minimax"],
     # aliases so DSH's own default (qwen2.5:3b) also routes through the chain
