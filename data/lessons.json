@@ -1,14 +1,18 @@
 {
  "seen": [
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ research_monitor: error",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ inference_test: error",
+  "Error: Cannot find module 'C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\tools\\dsh\\node_modules\\@deepseek-ai\\dsh\\lib\\bin.js",
   "#-#-# #:#:#,# | INFO | autonomous | ✅ sunna_offres: error",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ semantic_memory: error",
-  "#-#-# #:#:#,# | INFO | autonomous | ✅ analytics_report: error",
   "#-#-# #:#:#,# | INFO | autonomous | ✅ security_scan: error",
+  "#-#-# #:#:#,# | ERROR | airdrop_agent | ❌ https://cryptoslate.com/feed/: # Client Error: Forbidden for url: https://cryp",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ research_monitor: error",
+  "#-#-# #:#:#,# | ERROR | airdrop_agent | ❌ https://www.gemini.com/feed/: # Client Error: Not Found for url: https://www.g",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ analytics_report: error",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ inference_test: error",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ sunna_veille: error",
+  "#-#-# #:#:#,# | INFO | autonomous | ✅ semantic_memory: error",
   "#-#-# #:#:#,# | INFO | autonomous | ✅ guardian_check: error"
  ],
- "diagnosed": 4,
- "fixes_proposed": 4,
- "last_run": "2026-10-15T16:21:54.060813+00:00"
+ "diagnosed": 7,
+ "fixes_proposed": 7,
+ "last_run": "2026-10-15T16:56:46.539028+00:00"
 }
