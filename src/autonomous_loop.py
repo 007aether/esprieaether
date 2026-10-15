@@ -531,7 +531,9 @@ SCHEDULE = {
     "sunna_veille": 6 * 60 * 60,           # كل 6 ساعات
     "sunna_prices": 24 * 60 * 60,          # يومياً
     "sunna_facture_check": 24 * 60 * 60,   # يومياً
+    "sunna_bilan": 24 * 60 * 60,           # يومياً
     "sunna_offres": 12 * 60 * 60,          # كل 12 ساعة
+    "cleanup": 24 * 60 * 60,               # يومياً
 }
 
 
@@ -644,7 +646,7 @@ def task_sunna_prices() -> dict:
 
 
 def task_sunna_facture_check() -> dict:
-    """Check factures built today (facture_builder.py list)."""
+    """Facture builder check."""
     result = {"name": "sunna_facture_check", "status": "ok"}
     try:
         run_result = _run_sunna_bot("facture_builder.py", ["--list"])
@@ -652,6 +654,38 @@ def task_sunna_facture_check() -> dict:
     except Exception as e:
         result["status"] = "error"
         result["error"] = str(e)
+    return result
+
+
+def task_sunna_bilan() -> dict:
+    """Sunna daily auto-bilan (revenue + catalogue + actions)."""
+    result = {"name": "sunna_bilan", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("bilan_bot.py", ["--days", "7", "--json"])
+        result.update(run_result)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_cleanup() -> dict:
+    """Disk cleanup — old logs, caches, git gc."""
+    result = {"name": "cleanup", "status": "ok"}
+    try:
+        import cleanup_bot
+        import io
+        import contextlib
+        buf = io.StringIO()
+        sys.argv = ["cleanup_bot.py", "--days", "3", "--apply", "--json"]
+        with contextlib.redirect_stdout(buf):
+            cleanup_bot.main()
+        data = json.loads(buf.getvalue())
+        result["freed_mb"] = data.get("freed_mb", 0)
+        result["removed_count"] = data.get("removed_count", 0)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
     return result
 
 
@@ -758,7 +792,9 @@ def run_cycle(state: dict):
         "sunna_veille": task_sunna_veille,
         "sunna_prices": task_sunna_prices,
         "sunna_facture_check": task_sunna_facture_check,
+        "sunna_bilan": task_sunna_bilan,
         "sunna_offres": task_sunna_offres,
+        "cleanup": task_cleanup,
     }
 
     for name, func in tasks.items():
