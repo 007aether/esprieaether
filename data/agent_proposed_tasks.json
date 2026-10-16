@@ -264,7 +264,9 @@
   "agent": "self_improve",
   "title": "إصلاح خطأ في web.err",
   "description": "السبب الجذري: خطاً في معالجة طلب سحابة.  \nالإصلاح المقترح: تحديث منظومة السحابة.  \nهل هو خطر؟ نعم, قد يؤدي إلى استنفاد recursos.",
-  "status": "proposed",
-  "ts": "2026-10-16T02:38:27.722799+00:00"
+  "status": "done",
+  "ts": "2026-10-16T02:38:27.722799+00:00",
+  "executed_ts": "2026-10-16T03:13:15.501458+00:00",
+  "result": "queued for auto_apply (sandboxed)"
  }
 ]
