@@ -1,13 +1,13 @@
 {
- "updated": "2026-10-15T03:59:39.098891+00:00",
- "total": 50,
+ "updated": "2026-10-16T04:03:04.526615+00:00",
+ "total": 48,
  "adopt": 10,
  "reference": 5,
  "candidates": [
   {
    "name": "CherryHQ/cherry-studio",
    "url": "https://github.com/CherryHQ/cherry-studio",
-   "stars": 52648,
+   "stars": 52668,
    "category": "ai_agent_framework",
    "lang": "TypeScript",
    "desc": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
@@ -20,7 +20,7 @@
   {
    "name": "HKUDS/nanobot",
    "url": "https://github.com/HKUDS/nanobot",
-   "stars": 49042,
+   "stars": 49068,
    "category": "ai_agent_framework",
    "lang": "Python",
    "desc": "Ultra-lightweight, open-source, self-hosted personal AI agent framework in Python with WebUI, tools, memory, MCP, multi-agent workflows, automation, a",
@@ -33,7 +33,7 @@
   {
    "name": "khoj-ai/khoj",
    "url": "https://github.com/khoj-ai/khoj",
-   "stars": 37684,
+   "stars": 37697,
    "category": "ai_agent_framework",
    "lang": "Python",
    "desc": "Your AI second brain. Self-hostable. Get answers from the web or your docs. Build custom agents, schedule automations, do deep research. Turn any onli",
@@ -46,7 +46,7 @@
   {
    "name": "thedotmack/claude-mem",
    "url": "https://github.com/thedotmack/claude-mem",
-   "stars": 100797,
+   "stars": 101084,
    "category": "rag_memory",
    "lang": "TypeScript",
    "desc": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant",
@@ -59,7 +59,7 @@
   {
    "name": "PrimeIntellect-ai/prime-agent",
    "url": "https://github.com/PrimeIntellect-ai/prime-agent",
-   "stars": 22034,
+   "stars": 22048,
    "category": "self_evolving",
    "lang": "Rust",
    "desc": "A self-improving RLM agent for coding workflows and long-running autonomous tasks.",
@@ -72,7 +72,7 @@
   {
    "name": "alibaba/zvec",
    "url": "https://github.com/alibaba/zvec",
-   "stars": 16117,
+   "stars": 16115,
    "category": "rag_memory",
    "lang": "C++",
    "desc": "A lightweight, lightning-fast, in-process vector database",
@@ -85,7 +85,7 @@
   {
    "name": "browseros-ai/BrowserOS",
    "url": "https://github.com/browseros-ai/BrowserOS",
-   "stars": 13918,
+   "stars": 13945,
    "category": "local_llm",
    "lang": "TypeScript",
    "desc": "🌐 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.",
@@ -111,7 +111,7 @@
   {
    "name": "Human-Agent-Society/reef",
    "url": "https://github.com/Human-Agent-Society/reef",
-   "stars": 7599,
+   "stars": 7609,
    "category": "self_evolving",
    "lang": "Python",
    "desc": "Infrastructure for continually self‑improving agents",
@@ -137,7 +137,7 @@
   {
    "name": "langfuse/langfuse",
    "url": "https://github.com/langfuse/langfuse",
-   "stars": 35834,
+   "stars": 35886,
    "category": "observability",
    "lang": "TypeScript",
    "desc": "🪢 Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform.",
@@ -150,7 +150,7 @@
   {
    "name": "swarmclawai/swarmclaw",
    "url": "https://github.com/swarmclawai/swarmclaw",
-   "stars": 690,
+   "stars": 689,
    "category": "local_llm",
    "lang": "TypeScript",
    "desc": "Open-source self-hosted AI agent runtime and multi-agent framework for autonomous agent swarms. Agent memory, MCP tools, schedules, delegation, and 23",
@@ -163,7 +163,7 @@
   {
    "name": "conductor-oss/conductor",
    "url": "https://github.com/conductor-oss/conductor",
-   "stars": 32302,
+   "stars": 32317,
    "category": "orchestration",
    "lang": "Java",
    "desc": "Conductor is an event driven agentic workflow engine providing durable and highly resilient execution engine for applications and AI Agents",
@@ -176,7 +176,7 @@
   {
    "name": "ccfos/nightingale",
    "url": "https://github.com/ccfos/nightingale",
-   "stars": 13350,
+   "stars": 13361,
    "category": "observability",
    "lang": "Go",
    "desc": "Open-source, self-hosted alerting for metrics, logs, and databases. Includes a built-in AI agent and MCP server.",
@@ -202,7 +202,7 @@
   {
    "name": "hatchet-dev/hatchet",
    "url": "https://github.com/hatchet-dev/hatchet",
-   "stars": 8118,
+   "stars": 8124,
    "category": "orchestration",
    "lang": "Go",
    "desc": "🪓 An orchestration engine for background tasks, AI agents, and durable workflows",
@@ -241,7 +241,7 @@
   {
    "name": "toby-bridges/api-relay-audit",
    "url": "https://github.com/toby-bridges/api-relay-audit",
-   "stars": 881,
+   "stars": 882,
    "category": "crypto_airdrop",
    "lang": "Python",
    "desc": "Local security audit for AI API relays and LLM proxies: detects prompt injection, model substitution, tool-call rewriting, SSE anomalies, error leakag",
@@ -254,7 +254,7 @@
   {
    "name": "aeonfun/aeon",
    "url": "https://github.com/aeonfun/aeon",
-   "stars": 774,
+   "stars": 775,
    "category": "cloud_free",
    "lang": "JavaScript",
    "desc": "The most autonomous AI agent framework: runs unattended on GitHub Actions, self-healing skills, drives Claude Code, Grok, Codex & more. No approval lo",
@@ -358,7 +358,7 @@
   {
    "name": "chrisneagu/FTC-Skystone-Dark-Angels-Romania-2020",
    "url": "https://github.com/chrisneagu/FTC-Skystone-Dark-Angels-Romania-2020",
-   "stars": 315,
+   "stars": 316,
    "category": "workshop_tools",
    "lang": "Java",
    "desc": "NOTICE This repository contains the public FTC SDK for the SKYSTONE (2019-2020) competition season. If you are looking for the current season's FTC SD",
@@ -369,22 +369,9 @@
    "score": 22.5
   },
   {
-   "name": "sayantann11/all-classification-templetes-for-ML",
-   "url": "https://github.com/sayantann11/all-classification-templetes-for-ML",
-   "stars": 303,
-   "category": "workshop_tools",
-   "lang": "Python",
-   "desc": "Classification - Machine Learning This is ‘Classification’ tutorial which is a part of the Machine Learning course offered by Simplilearn. We will lea",
-   "decision": "skip",
-   "reason": "low signal",
-   "target": "sunna",
-   "value": 15,
-   "score": 22.4
-  },
-  {
    "name": "Ronchy2000/epic-freebies-helper",
    "url": "https://github.com/Ronchy2000/epic-freebies-helper",
-   "stars": 259,
+   "stars": 260,
    "category": "cloud_free",
    "lang": "Python",
    "desc": "Automatically claim Epic Games weekly free titles with GitHub Actions and GLM-powered captcha solving.",
@@ -449,7 +436,7 @@
   {
    "name": "RajwanYair/WoodworkingShop",
    "url": "https://github.com/RajwanYair/WoodworkingShop",
-   "stars": 21,
+   "stars": 22,
    "category": "workshop_tools",
    "lang": "TypeScript",
    "desc": "Free online cabinet planner and woodworking cut-list optimizer with CNC exports and offline support",
@@ -499,19 +486,6 @@
    "score": 18.0
   },
   {
-   "name": "lsfusion-solutions/mycompany",
-   "url": "https://github.com/lsfusion-solutions/mycompany",
-   "stars": 353,
-   "category": "productivity",
-   "lang": "JavaScript",
-   "desc": "Free, open-source, self-hosted ERP and CRM for small businesses: inventory, invoicing, manufacturing, sales, projects, HR and POS. Built on lsFusion.",
-   "decision": "skip",
-   "reason": "low signal",
-   "target": "sunna",
-   "value": 10,
-   "score": 17.6
-  },
-  {
    "name": "tarunlnmiit/autopilot-jobhunt",
    "url": "https://github.com/tarunlnmiit/autopilot-jobhunt",
    "stars": 216,
@@ -527,7 +501,7 @@
   {
    "name": "tlgrcli/tlgr",
    "url": "https://github.com/tlgrcli/tlgr",
-   "stars": 193,
+   "stars": 194,
    "category": "telegram_bots",
    "lang": "Python",
    "desc": "CLI for Telegram — agent-friendly, daemon-based, with webhook event push.",
@@ -553,7 +527,7 @@
   {
    "name": "beatwad/LinkedIn-AI-Job-Applier-Ultimate",
    "url": "https://github.com/beatwad/LinkedIn-AI-Job-Applier-Ultimate",
-   "stars": 174,
+   "stars": 175,
    "category": "telegram_bots",
    "lang": "Python",
    "desc": "AI-powered LinkedIn and Indeed job application bot with Playwright automation, LLM integration, data anonymization, and Telegram reporting. Applies to",
