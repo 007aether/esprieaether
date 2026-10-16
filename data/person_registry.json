@@ -1,21 +1,28 @@
 {
   "id": "esprieaether",
   "name": "EsprieAether",
-  "role": "Sovereign Local AI system (JARVIS head)",
+  "role": "Sovereign Local AI system (JARVIS head) - personal intelligence platform",
   "core": {
-    "type": "linux-laptop/windowsv11",
+    "type": "windows11/laptop",
     "cpu": "AMD Ryzen 7 7840HS (x86_64)",
     "gpu": "AMD Radeon 780M",
     "ram": "32 GB",
     "storage": "117 GB NTFS (D:) + 32 GB (C:)",
     "os": "Windows 11 23H2"
   },
+  "communication": {
+    "web": "http://192.168.0.113:3000/ (Frontend Next.js)",
+    "api": "http://127.0.0.1:8000 (jarvis-api FastAPI)",
+    "mesh": "http://127.0.0.1:11437 (agent mesh)",
+    "router": "http://127.0.0.1:11435 (LLM router)",
+    "telegram": "Bot via src/bot.py"
+  },
   "services": {
     "web_interface": {
       "port": 5000,
       "status": "running"
     },
-    "jarvis-api": {
+    "jarvis_api": {
       "port": 8000,
       "status": "running"
     },
@@ -31,19 +38,12 @@
       "port": 5106,
       "status": "running"
     },
-    "jarvis_fe": {
-      "port": 3000,
+    "jarvis_dsh_relay": {
+      "port": 5105,
       "status": "running"
     }
   },
-  "endpoints": {
-    "health": "http://127.0.0.1:8000/api/health",
-    "services": "http://127.0.0.1:8000/api/services",
-    "talk": "http://127.0.0.1:8000/api/talk",
-    "pipeline_status": "http://127.0.0.1:8000/api/pipeline/status",
-    "research": "http://127.0.0.1:8000/api/research/esprieaether/stream"
-  },
-  "mesh_agents": [
+  "agents": [
     "evolve",
     "security",
     "research",
@@ -53,6 +53,27 @@
     "general",
     "rea"
   ],
-  "vector_memory": "data/vector_memory.db (113 records)",
-  "status": "active"
+  "subsystems": [
+    "airdrop_intelligence (28 Grade A)",
+    "sunna_catalogue (239 produits)",
+    "app_factory (FitGymPro 85/100)",
+    "veille (500 repos)",
+    "vector_memory (113 records)",
+    "rea/reverse-engines (Ghidra 12.1.4)",
+    "catalogue PDFs (Catalogue_Sunna_PRO.pdf)",
+    "agenticSeek (local agent)",
+    "DSH relay (:5105)",
+    "mobile PWA",
+    "obsidian vault (149 notes)",
+    "supervisor 24/7 (TaskScheduler + registry)"
+  ],
+  "endpoints": {
+    "health": "http://127.0.0.1:8000/api/health",
+    "services": "http://127.0.0.1:8000/api/services",
+    "talk": "http://127.0.0.1:8000/api/talk",
+    "person": "http://127.0.0.1:8000/api/person/esprieaether",
+    "pipeline": "http://127.0.0.1:8000/api/pipeline/status",
+    "research": "http://127.0.0.1:8000/api/research/esprieaether/stream"
+  },
+  "status": "ACTIVE"
 }
