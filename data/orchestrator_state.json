@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-16T02:16:13.729858+00:00",
-  "action": "critical",
-  "reason": "خدمات حرجة طايحة: ['router', 'governor']",
+  "ts": "2026-10-16T02:21:00.647869+00:00",
+  "action": "wake",
+  "reason": "daemons ميتة: ['guardian_agent.py']",
   "services": {
-    "router": 0,
+    "router": 200,
     "mesh": 200,
     "web": 200,
     "cloud-desktop": 200,
@@ -16,7 +16,7 @@
     "ollama": 200,
     "governor": 0
   },
-  "services_up": 10,
+  "services_up": 11,
   "services_total": 12,
   "daemons": {
     "bot.py": true,
