@@ -1,69 +1,69 @@
 # ⚡ Airdrop Intelligence — Digest
-- **updated_at**: 2026-10-16T08:53:42.603852+00:00
+- **updated_at**: 2026-10-16T09:05:54.613328+00:00
 - **total items**: 212
-- **Grade A**: 0
+- **Grade A**: 10
 - **scams blocked**: 0
 
 ## 🟢 Grade A (top 15)
 
-### 40 — Best crypto testnets to farm right now: 6 free airdrop plays
+### 100 — Best crypto testnets to farm right now: 6 free airdrop plays
 - **source**: https://airdrops.io/feed/
 - **date**: Tue, 21 Jul 2026 14:18:20 +0000
-- **signals**: airdrops_io_listed, testnet
+- **signals**: airdrops_io_listed, claim_live, potential_airdrop, confirmed_airdrop, waitlisted, vc_backed, testnet
 - [رابط](https://airdrops.io/blog/best-testnets-to-farm-airdrops/)
 
-### 30 — Quip Network Full Guide: Node & Airdrop Points
+### 90 — Quip Network Full Guide: Node & Airdrop Points
 - **source**: https://airdrops.io/feed/
 - **date**: Fri, 02 Oct 2026 16:59:32 +0000
-- **signals**: airdrops_io_listed
+- **signals**: airdrops_io_listed, claim_live, potential_airdrop, confirmed_airdrop, waitlisted
 - [رابط](https://airdrops.io/blog/quip-network-node/)
 
-### 30 — Best crypto airdrops to farm right now
+### 90 — Best crypto airdrops to farm right now
 - **source**: https://airdrops.io/feed/
 - **date**: Mon, 21 Sep 2026 17:48:23 +0000
-- **signals**: airdrops_io_listed
+- **signals**: airdrops_io_listed, claim_live, potential_airdrop, confirmed_airdrop, waitlisted
 - [رابط](https://airdrops.io/blog/best-crypto-airdrops/)
 
-### 30 — Crypto airdrops explained: types, qualifying and safety
+### 90 — Crypto airdrops explained: types, qualifying and safety
 - **source**: https://airdrops.io/feed/
 - **date**: Sat, 19 Sep 2026 09:04:28 +0000
-- **signals**: airdrops_io_listed
+- **signals**: airdrops_io_listed, claim_live, potential_airdrop, confirmed_airdrop, waitlisted
 - [رابط](https://airdrops.io/blog/crypto-airdrops-explained-types-qualifying-and-safety/)
 
-### 30 — xStocks Points Farming: The Pendle YT Strategy
+### 90 — xStocks Points Farming: The Pendle YT Strategy
 - **source**: https://airdrops.io/feed/
 - **date**: Fri, 04 Sep 2026 15:30:58 +0000
-- **signals**: airdrops_io_listed
+- **signals**: airdrops_io_listed, claim_live, potential_airdrop, confirmed_airdrop, waitlisted
 - [رابط](https://airdrops.io/blog/xstocks-yt-farm-strategy/)
 
-### 30 — Perp DEX Farming 2026: 4 Proven Strategies
+### 90 — Perp DEX Farming 2026: 4 Proven Strategies
 - **source**: https://airdrops.io/feed/
 - **date**: Thu, 06 Aug 2026 14:03:46 +0000
-- **signals**: airdrops_io_listed
+- **signals**: airdrops_io_listed, claim_live, potential_airdrop, confirmed_airdrop, waitlisted
 - [رابط](https://airdrops.io/blog/perp-dex-farming-strategies-2026/)
 
-### 30 — Ondo Points: what will one point be worth?
+### 90 — Ondo Points: what will one point be worth?
 - **source**: https://airdrops.io/feed/
 - **date**: Wed, 29 Jul 2026 11:04:03 +0000
-- **signals**: airdrops_io_listed
+- **signals**: airdrops_io_listed, claim_live, potential_airdrop, confirmed_airdrop, waitlisted
 - [رابط](https://airdrops.io/blog/ondo-points-value-analysis/)
 
-### 30 — The 15 biggest airdrops ever: HYPE eclipsed the next five combined
+### 90 — The 15 biggest airdrops ever: HYPE eclipsed the next five combined
 - **source**: https://airdrops.io/feed/
 - **date**: Wed, 29 Jul 2026 09:11:01 +0000
-- **signals**: airdrops_io_listed
+- **signals**: airdrops_io_listed, claim_live, potential_airdrop, confirmed_airdrop, waitlisted
 - [رابط](https://airdrops.io/blog/biggest-airdrops-ever/)
 
-### 30 — Top 5 passive airdrop farms: deposit once and let it work
+### 90 — Top 5 passive airdrop farms: deposit once and let it work
 - **source**: https://airdrops.io/feed/
 - **date**: Fri, 24 Jul 2026 15:51:17 +0000
-- **signals**: airdrops_io_listed
+- **signals**: airdrops_io_listed, claim_live, potential_airdrop, confirmed_airdrop, waitlisted
 - [رابط](https://airdrops.io/blog/passive-airdrop-farms-2026/)
 
-### 30 — Nado x xStocks: one deposit, two potential airdrops
+### 90 — Nado x xStocks: one deposit, two potential airdrops
 - **source**: https://airdrops.io/feed/
 - **date**: Wed, 15 Jul 2026 17:04:52 +0000
-- **signals**: airdrops_io_listed
+- **signals**: airdrops_io_listed, claim_live, potential_airdrop, confirmed_airdrop, waitlisted
 - [رابط](https://airdrops.io/blog/nado-xstocks-double-dip-airdrop/)
 
 ### 10 — How to Buy Shiba Inu (SHIB) for the First Time
