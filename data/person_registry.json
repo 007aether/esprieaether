@@ -1,0 +1,58 @@
+{
+  "id": "esprieaether",
+  "name": "EsprieAether",
+  "role": "Sovereign Local AI system (JARVIS head)",
+  "core": {
+    "type": "linux-laptop/windowsv11",
+    "cpu": "AMD Ryzen 7 7840HS (x86_64)",
+    "gpu": "AMD Radeon 780M",
+    "ram": "32 GB",
+    "storage": "117 GB NTFS (D:) + 32 GB (C:)",
+    "os": "Windows 11 23H2"
+  },
+  "services": {
+    "web_interface": {
+      "port": 5000,
+      "status": "running"
+    },
+    "jarvis-api": {
+      "port": 8000,
+      "status": "running"
+    },
+    "agent_mesh": {
+      "port": 11437,
+      "status": "running"
+    },
+    "ai_router": {
+      "port": 11435,
+      "status": "running"
+    },
+    "cloud_bridge": {
+      "port": 5106,
+      "status": "running"
+    },
+    "jarvis_fe": {
+      "port": 3000,
+      "status": "running"
+    }
+  },
+  "endpoints": {
+    "health": "http://127.0.0.1:8000/api/health",
+    "services": "http://127.0.0.1:8000/api/services",
+    "talk": "http://127.0.0.1:8000/api/talk",
+    "pipeline_status": "http://127.0.0.1:8000/api/pipeline/status",
+    "research": "http://127.0.0.1:8000/api/research/esprieaether/stream"
+  },
+  "mesh_agents": [
+    "evolve",
+    "security",
+    "research",
+    "market",
+    "quality",
+    "redteam",
+    "general",
+    "rea"
+  ],
+  "vector_memory": "data/vector_memory.db (113 records)",
+  "status": "active"
+}
