@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-16T11:21:40.040933+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-16T15:38:19.613317+00:00",
+  "cloud_last_run": "2026-10-16T20:08:46.459784+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Zcash Holds $1,000: My ZEC Long Setup After the 15% Flush",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Gamdom Hack: $3M Admitted, $4.2M Tracked, and the Casino Is Back Online",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Trade.xyz Review: Wall Street Perps on Hyperliquid, Around the Clock",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is Charles Hoskinson? The Cardano Founder Who Left Ethereum",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "StonkFun Rewards Explained: How Holders Get Paid",
       "source": "https://airdropalert.com/feed"
     },
     {
