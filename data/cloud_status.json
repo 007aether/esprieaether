@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-16T10:11:48.475362+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-15T20:35:26.621983+00:00",
+  "cloud_last_run": "2026-10-16T10:12:35.600422+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy Shiba Inu (SHIB) for the First Time",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Hyperliquid vs Variational: Order Book Giant vs RFQ Newcomer",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Robinhood Review: The Stock App That Became a Crypto Platform",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "Richard Heart Arrested: What It Means for HEX and PLS",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "CPI 3.7%: Bitcoin Dips on Hot Inflation, but My Longs Are Still Alive",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Robinhood Chain Hits 100 Days: $15B in Stock Token Volume, but Is It Real?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Seed Phrase vs Private Key: What&#8217;s the Difference?",
       "source": "https://airdropalert.com/feed"
     },
     {
