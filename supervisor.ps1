@@ -45,7 +45,9 @@ $daemons = @(
     @{ name = "bot";            script = "src\bot.py" },
     @{ name = "watchdog";       script = "src\watchdog.py" },
     @{ name = "autonomous_loop"; script = "src\autonomous_loop.py" },
-    @{ name = "cloud_poller";   script = "src\cloud_poller.py" }
+    @{ name = "cloud_poller";   script = "src\cloud_poller.py" },
+    @{ name = "work_organizer"; script = "bots\work_organizer.py" },
+    @{ name = "self_heal";      script = "bots\self_heal.py" }
 )
 
 foreach ($d in $daemons) {

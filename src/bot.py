@@ -2206,7 +2206,7 @@ async def cmd_colibri(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ok = cl.start_serve(detached=True)
             if ok:
                 await update.message.reply_text(
-                    f"✅ *colibri serve شغّال*\n`{cl.SERVE_URL}/v1`", parse_mode="Markdown")
+                    f"✅ *colibri serve شغّال*\\n`{cl.SERVE_URL}/v1`", parse_mode="Markdown")
             else:
                 await update.message.reply_text("❌ serve ما تشغّلش — التحميل مازال ناقص", parse_mode="Markdown")
         else:
@@ -2217,6 +2217,49 @@ async def cmd_colibri(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_work(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """📋 /work — الحالة العامة للمهام والتكاملات"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "bots"))
+    try:
+        import work_organizer as wo
+        text = wo.render_status(wo.build_status(wo.organize(wo.sort_items(wo.load_roadmap()))))
+        await update.message.reply_text(text, parse_mode="Markdown", disable_web_page_preview=True)
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
+
+@authorized_only
+async def cmd_selfheal(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """❤️ /heal — حالة الإصلاح والتشغيل الذاتي"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "bots"))
+    try:
+        import self_heal as sh
+        args = context.args
+        if args and args[0] == "run":
+            await update.message.reply_text("❤️ إجراء فحص الإصلاح...")
+            r = sh.heal()
+            up = sum(1 for v in r.get("services", {}).values() if v == "up")
+            total = len(r.get("services", {}))
+            m = "❤️ *تقرير الإصلاح*" + NL + NL + "⏰ " + str(r.get("checked_at")) + NL + "✅ " + str(up) + "/" + str(total)
+            await update.message.reply_text(m, parse_mode="Markdown", disable_web_page_preview=True)
+        else:
+            try:
+                r = json.loads(sh.REPORT_FILE.read_text())
+                up = sum(1 for v in r.get("services", {}).values() if v == "up")
+                total = len(r.get("services", {}))
+                lines = ["❤️ *تقرير الإصلاح*", "⏰ " + str(r.get("checked_at")), "✅ " + str(up) + "/" + str(total)]
+                if r.get("changed"):
+                    lines.append("🔧 إعادة تشغيل: " + ", ".join(r["restarts"]))
+                await update.message.reply_text(NL.join(lines), parse_mode="Markdown", disable_web_page_preview=True)
+            except Exception:
+                await update.message.reply_text("❤️ لا يوجد تقرير بعد. /heal run")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ: {e}")
+
 async def cmd_rea(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """🔬 /rea — REA reverse-engineering bridge | /rea <path> — analyze a target"""
     from pathlib import Path
@@ -2424,6 +2467,8 @@ def main():
     app.add_handler(CommandHandler("rea", cmd_rea))
     app.add_handler(CommandHandler("colibri", cmd_colibri))
     app.add_handler(CommandHandler("executor", cmd_executor))
+    app.add_handler(CommandHandler("work", cmd_work))
+    app.add_handler(CommandHandler("heal", cmd_selfheal))
     app.add_handler(CommandHandler("selfimprove", cmd_selfimprove))
     app.add_handler(CommandHandler("cherry", cmd_cherry))
     app.add_handler(CommandHandler("jarvisdev", cmd_jarvisdev))
@@ -2516,3 +2561,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

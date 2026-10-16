@@ -55,7 +55,9 @@ INTEGRATIONS = ["Checkmate", "Portracker", "Ask4Me", "PriceGhost", "Cronpulse",
                 "freqtrade", "openstock", "promptfoo", "antislop", "openclaude",
                 "openresearch", "claude-red", "hack-skills", "pwnproxy",
                 "TraffMonetizer", "Pinterest", "Facebook", "YouTube",
-                "governor-edr"]
+                "governor-edr",
+                "agent-skills", "21st-magic-mcp", "fish-audio", "free-llm-apis",
+                "strix", "claude-mem"]
 
 # agents: name -> links
 AGENTS = {
@@ -72,6 +74,8 @@ AGENTS = {
     "orchestrator": ["mesh", "infra"],
     "digest": ["mesh", "infra"],
     "skill-harvester": ["mesh", "research"],
+    "work-organizer": ["productivity"],
+    "self-heal": ["guardian", "infra"],
 }
 
 # sunna topics: name -> (body, links)
@@ -175,8 +179,15 @@ def main():
 
     # ── agents ──
     for name, links in AGENTS.items():
+        if name == "self-heal":
+            # note: bots/self_heal.py not yet present -> planned, not implemented
+            body = "Planned — self-heal agent (`bots/self_heal.py`). Not yet implemented."
+            tags = ["agent", "core", "planned"]
+        else:
+            body = f"Agent `src/{name.replace('-', '_')}_agent.py`"
+            tags = ["agent", "core"]
         w(VAULT / "Agents" / f"{name}.md",
-          note(name, ["agent", "core"], f"Agent `src/{name.replace('-', '_')}_agent.py`", links))
+          note(name, tags, body, links))
 
     # ── integrations ──
     for name in INTEGRATIONS:

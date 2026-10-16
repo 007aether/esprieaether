@@ -559,6 +559,8 @@ SCHEDULE = {
     "colibri_autostart": 10 * 60,          # كل 10 دقائق — auto-start serve when ready
     "dsh_bridge": 5 * 60,                  # كل 5 دقائق — JARVIS⇄DSH relay health + DSH detect
     "dsh_launcher": 10 * 60,               # كل 10 دقائق — auto-launch DSH web when installed
+    "work_organizer": 6 * 60 * 60,         # كل 6 ساعات — roadmap & work queue
+    "self_heal": 5 * 60,                   # كل 5 دقائق — self-healing
 }
 
 
@@ -1227,6 +1229,48 @@ def task_cloud_bridge() -> dict:
     return result
 
 
+def task_work_organizer() -> dict:
+    """INTEGRATION ROADMAP & WORK QUEUE organizer — runs bots/work_organizer.py."""
+    result = {"name": "work_organizer", "status": "ok"}
+    try:
+        import subprocess
+        proc = subprocess.run(
+            ["python", "bots/work_organizer.py", "--status"],
+            cwd=str(BASE_DIR), capture_output=True, text=True, timeout=120,
+        )
+        report = proc.stdout or proc.stderr
+        result["report"] = report
+        result["exit"] = proc.returncode
+        if proc.returncode != 0:
+            result["status"] = "error"
+            result["error"] = report[-500:]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_self_heal() -> dict:
+    """SELF-HEAL agent — checks services and restarts what went down (non-blocking)."""
+    result = {"name": "self_heal", "status": "ok"}
+    try:
+        import subprocess
+        proc = subprocess.run(
+            ["python", "bots/self_heal.py", "--check"],
+            cwd=str(BASE_DIR), capture_output=True, text=True, timeout=180,
+        )
+        report = proc.stdout or proc.stderr
+        result["report"] = report
+        result["exit"] = proc.returncode
+        if proc.returncode != 0:
+            result["status"] = "error"
+            result["error"] = report[-500:]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
 def task_veille() -> dict:
     """24/7 tech watch — GitHub harvest across 25 categories."""
     result = {"name": "veille", "status": "ok"}
@@ -1296,6 +1340,8 @@ def run_cycle(state: dict):
         "colibri_autostart": task_colibri_autostart,
         "dsh_bridge": task_dsh_bridge,
         "dsh_launcher": task_dsh_launcher,
+        "work_organizer": task_work_organizer,
+        "self_heal": task_self_heal,
     }
 
     for name, func in tasks.items():
