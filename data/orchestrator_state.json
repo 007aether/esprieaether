@@ -1,5 +1,5 @@
 {
-  "ts": "2026-10-16T07:21:42.571228+00:00",
+  "ts": "2026-10-16T07:22:51.509416+00:00",
   "action": "wake",
   "reason": "daemons ميتة: ['guardian_agent.py']",
   "services": {
@@ -12,11 +12,11 @@
     "kanban": 200,
     "homedock": 200,
     "jarvis-api": 200,
-    "jarvis-fe": 0,
+    "jarvis-fe": 200,
     "ollama": 200,
     "governor": 0
   },
-  "services_up": 10,
+  "services_up": 11,
   "services_total": 12,
   "daemons": {
     "bot.py": true,
