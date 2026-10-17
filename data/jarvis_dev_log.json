@@ -87,5 +87,11 @@
   "written": 0,
   "error": "router failed",
   "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-17T13:53:37.556747+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
  }
 ]
