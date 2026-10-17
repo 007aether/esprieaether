@@ -592,5 +592,23 @@
   "kind": "info",
   "ok": true,
   "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T15:13:56.105368+00:00",
+  "task_id": "task-1792235965800",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T15:14:00.876306+00:00",
+  "task_id": "task-1792245561239",
+  "agent": "evolve",
+  "title": "الخادم رصد تكرار تنفيذ مهمة معينة من قبل الوكلاء. نستثمر في زيادة كفاءة وتحسين استجابة النظام. تقنيا",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
  }
 ]
