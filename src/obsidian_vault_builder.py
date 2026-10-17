@@ -70,6 +70,7 @@ AGENTS = {
     "terminal": ["infra"], "vault": ["security"], "vpn": ["VPN"],
     "research-monitor": ["research"], "semantic-memory": ["memory"],
     "rea": ["REA", "Ghidra", "reverse-engineering"],
+    "deepseek-harness": ["deepseek", "brain", "ai", "skil"],
     "colibri": ["colibri", "router"],
     "orchestrator": ["mesh", "infra"],
     "digest": ["mesh", "infra"],
