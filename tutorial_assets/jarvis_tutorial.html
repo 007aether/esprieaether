@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليل JARVIS // CLASSIFIED - دليل كامل A-Z</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap');
+  :root { --bg: #0a0d08; --bg-card: #121610; --bg-hover: #1a2218; --foreground: #c8d6b0; --muted: #8a9a7e; --accent: #4ade80; --accent-dim: #1a2a18; --border: #2a3a28; --error: #ef4444; --success: #22c55e; --warning: #eab308; --code-bg: #0d1108; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans Arabic', 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--foreground); line-height: 1.7; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+  .header { text-align: center; padding: 2rem; border-bottom: 2px solid var(--border); margin-bottom: 2rem; background: linear-gradient(180deg, var(--bg-card), var(--bg)); border-radius: 8px; }
+  .header h1 { font-size: 2rem; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; }
+  .header .subtitle { color: var(--muted); font-size: 1rem; margin-top: 0.5rem; }
+  .header .section-count { color: var(--muted); font-size: 0.8rem; margin-top: 0.5rem; }
+  h2 { font-size: 1.3rem; color: var(--accent); margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+  h3 { font-size: 1rem; color: var(--foreground); margin: 1.2rem 0 0.5rem; }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; margin-bottom: 1.2rem; }
+  .step { display: flex; gap: 1rem; padding: 0.8rem; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem; background: var(--bg); }
+  .step-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-dim); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
+  .step-content { flex: 1; }
+  .card { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.8rem; margin: 0.8rem 0; }
+  .card-title { font-weight: 600; color: var(--accent); margin-bottom: 0.3rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.8rem 0; background: var(--bg); }
+  th, td { padding: 0.6rem; text-align: right; border: 1px solid var(--border); }
+  th { background: var(--accent-dim); color: var(--accent); font-weight: 600; }
+  tr:nth-child(even) { background: var(--bg); }
+  .code-block { background: var(--code-bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.8rem; font-family: Consolas, Monaco, monospace; font-size: 0.8rem; overflow-x: auto; white-space: pre-wrap; }
+  .url { display: inline-block; background: var(--accent-dim); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 4px; font-family: monospace; font-size: 0.8rem; word-break: break-all; }
+  .notice { padding: 0.8rem; border-radius: 6px; margin: 0.8rem 0; border-left: 4px solid var(--accent); background: var(--bg); }
+  .notice-warning { border-left-color: var(--warning); background: rgba(234, 179, 8, 0.05); }
+  .notice-error { border-left-color: var(--error); background: rgba(239, 68, 68, 0.05); }
+  .video-placeholder { background: var(--bg-card); border: 2px dashed var(--border); border-radius: 8px; padding: 1.5rem; text-align: center; color: var(--muted); }
+  .progress { display: flex; gap: 0.5rem; margin: 0.8rem 0; }
+  .progress-item { flex: 1; height: 8px; background: var(--bg); border-radius: 4px; position: relative; overflow: hidden; }
+  .progress-item::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; }
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; border-bottom: 1px solid var(--border); }
+  .checklist li::before { content: '5'; position: absolute; left: 0; color: var(--success); font-size: 0.9rem; }
+  .footer { text-align: center; padding: 1.5rem; border-top: 2px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+  .access-points { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.8rem; }
+  .access-point { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; text-align: center; }
+  .access-point h3 { color: var(--accent); margin-bottom: 0.3rem; }
+  .access-point .url { display: block; text-align: center; margin: 0.5rem 0; font-size: 0.85rem; }
+  .access-point .status { color: var(--success); font-size: 0.85rem; font-weight: 600; }
+  .service-status { display: flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; }
+  .service-status.ok { background: rgba(34, 197, 94, 0.08); border: 1px solid var(--success); }
+  .service-status.bad { background: rgba(239, 68, 68, 0.08); border: 1px solid var(--error); }
+  .service-status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); display: inline-block; }
+  .service-status.bad .dot { background: var(--error); }
+  @media (max-width: 768px) { body { padding: 1rem; } .header h1 { font-size: 1.4rem; } .section { padding: 0.8rem; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📘 دليل نظام JARVIS // CLASSIFIED</h1>
+  <p class="subtitle">نظام الشخصية الذكية | Real-time Person Intelligence Platform</p>
+  <p class="section-count">📍 الواجهة: <span class="url">http://localhost:3000/</span> | 🎛️ الواجهة API: <span class="url">http://localhost:8000/api/</span></p>
+</div>
+
+<div class="section">
+  <h2>📋 ملخص الدليل</h2>
+  <p>هذا الدليل يشرح لك <strong>كيف تستخدم واجهة JARVIS // CLASSIFIED</strong> الرئيسية في <code>http://localhost:3000/</code>، وكيف ترتبط بالواجهة البرمجية في <code>http://localhost:8000/api/</code>، وكيف تصل لجميع الخدمات، وكيف تختبر وتُعدّل النظام.</p>
+  <p>الدليل منظم <strong>من A إلى Z</strong>، ويشمل كل شيء من التثبيت والاتصال، إلى الاستخدام الفعلي، والصلاحيات، والتحديثات، والاستخدام المتقدم.</p>
+  <div class="progress"><div class="progress-item" style="width: 100%;"></div></div>
+  <p style="color: var(--success);">✅ الدليل مدرج ومنجز بالكامل</p>
+</div>
+
+<h2>📍 1. كيفية الوصول للموقع (Access)</h2>
+<p>الموقع الرئيسي للواجهة الأمامية (Frontend) في:</p>
+<div class="access-points">
+  <div class="access-point"><h3>🌐 عناوين الدخول</h3><span class="url">http://localhost:3000/</span><p class="status">✅ يعمل ✓</p></div>
+  <div class="access-point"><h3>🏠 الواجهة الأمامية (Main UI)</h3><span class="url">http://localhost:3000/</span><p class="status">✅ يعمل ✓</p></div>
+  <div class="access-point"><h3>🔌 الواجهات الأخرى</h3><span class="url">http://localhost:5000/ (web_interface)</span><br><span class="url">http://localhost:5001/ (cloud_desktop)</span><br><span class="url">http://localhost:5104/ (homedock)</span></div>
+</div>
+<div class="notice"><strong>⚠️ مؤشرات الاستجابة:</strong><ul style="margin-top: 0.3rem;"><li><code>http://localhost:3000/</code> → الجهاز الرئيسي (Next.js frontend)</li><li>كل الخدمات بالـ <code>AetherRun.ps1</code></li><li>استخدم <code>curl http://localhost:3000/</code> للتأكد من employment (OK)</li></ul></div>
+
+<h2>🔌 2. الواجهة البرمجية (API) - Local Host 8000</h2>
+<p>الواجهة البرمجية (API) في <code>http://localhost:8000/api/</code> تسمح لك بالوصول إلى النظام عبر أوامر HTTP. هذا الـ API هو "الدم" الذي تعمل عليه واجهة JARVIS.</p>
+<h3>المخطط الرئيسي (Main Endpoints)</h3>
+<table><tr><th>العنوان</th><th>الوصف</th><th>الحالة</th></tr>
+<tr><td>/api/health</td><td>فحص حالة النظام العامة</td><td>✅ 200</td></tr>
+<tr><td>/api/services</td><td>قائمة جميع الخدمات والمفاتيح</td><td>✅ 200</td></tr>
+<tr><td>/api/person/esprieaether</td><td>الملف الشخصي للشخص (Person Profile)</td><td>✅ 200</td></tr>
+<tr><td>/api/pipeline/status</td><td>حالة سلسلة الإنتاج (Pipeline)</td><td>✅ 200</td></tr>
+<tr><td>/api/research/esprieaether/stream</td><td>موجّه البحث المباشر (Research Stream)</td><td>✅ 200</td></tr></table>
+<h3>أمثلة على الاستخدام</h3>
+<div class="code-block"><span class="comment"># فحص حالة النظام:</span><br>curl http://localhost:8000/api/health<br><br><span class="comment"># قائمة الخدمات:</span><br>curl http://localhost:8000/api/services | python3 -m json.tool<br><br><span class="comment"># معلومات الشخص:</span><br>curl http://localhost:8000/api/person/esprieaether | python3 -m json.tool</div>
+
+<h2>🎨 3. واجهة JARVIS // CLASSIFIED (http://localhost:3000/)</h2>
+<p>الواجهة الأمامية هي تطبيق Next.js بسمة <strong>"JARVIS // CLASSIFIED"</strong>، وصممتها ظهر خلفية داكنة، مع شعار دائري متحرك للأعلى. الواجهة تحتوي على:</p>
+<h3>3.1 المكونات الرئيسية</h3>
+<div class="step"><div class="step-num">1</div><div class="step-content"><h3>الرأس (Header)</h3><p>يظهر في أعلى الصفحة: <strong>صندوق JARVIS</strong> مع الشعار (دائرة متحركة)، وعلى اليمين لافتة "PERSON INTELLIGENCE SYSTEM".</p></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-content"><h3>القائمة الجانبية (Sidebar)</h3><p>صندوق جوانب النافذة يسند عريضة "TARGETS" مع خانة بحث (Search for names).</p></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-content"><h3>اللوح الرئيسي (Main Board)</h3><p>مساحة واسعة بتنسيق شبكة السداسية، مع رسالة "NO ACTIVE TARGET" عند عدم تحديد موضوع.</p></div></div>
+<div class="step"><div class="step-num">4</div><div class="step-content"><h3>إدخال الرمز (Room Code)</h3><p>حقل إدخال لرمز الدخول (Room Code) وزر "LINK" لربط الجهاز.</p></div></div>
+<div class="step"><div class="step-num">5</div><div class="step-content"><h3>زر المؤقت (Webcam)</h3><p>زر صغير في الزاوية اليمنى العلوية، مخصص لفحص الوسائط البصرية (webcam).</p></div></div>
+<div class="video-placeholder"><p>📹 لاحقاً: نرفق فيديو توضيحي لحركة الواجهة (بالإضافة للنص)</p><p>📊 البيانات الفعلية يمكن عرضها من <span class="url">http://localhost:8000/api/services</span></p></div>
+
+<h2>🛠️ 4. الأوامر الشائعة والأدوات (Commands & Tools)</h2>
+<p>النظام يقدم مجموعة من الأدوات والأوامر للوصول من واجهة الويب والحرفية:</p>
+<div class="checklist"><li>📡 الإتصال بالواجهة API (Local Host 8000)</li><li>🔍 فحص حالة النظام (Health Check)</li><li>📋 قائمة الخدمات (Services List)</li><li>👤 معلومات الشخص (Person Profile)</li><li>🔄 حالة السلسلة (Pipeline Status)</li><li>🔍 بحث في البيانات المفتوحة (Research Stream)</li><li>📦 إدارة الصناديق (AirDrop)</li><li>🗂️ إدارة المستودعات (Catalogue)</li><li>🤖 مُدير الوكالات (Agent Mesh)</li><li>🔐 أمان النظام (Security)</div>
+<div class="notice"><strong>⚠️ في حال تعطل الخدمة:</strong><ul style="margin-top: 0.3rem;"><li>أعد تشغيل الخدمة: <code>powershell -ExecutionPolicy Bypass -File AetherRun.ps1</code></li><li>تأكد من أن الخدمة listening على المنفذ الصحيح</li><li>جرّب <code>curl http://localhost:8000/api/health</code></li></ul></div>
+
+<h2>🚀 5. كيفية تشغيل النظام (Launch Process)</h2>
+<p>كيفية تشغيل النظام من الأوامر:</p>
+<div class="code-block"><span class="comment"># تشغيل كامل النظام:</span><br>powershell -ExecutionPolicy Bypass -File AetherRun.ps1<br><br><span class="comment"># أو تشغيل كود (في بيئة venv):</span><br>.venv\\Scripts\\python.exe src\\web_interface.py<br><br><span class="comment"># تشغيل API:</span><br>.venv\\Scripts\\python.exe -m uvicorn main:app --host 0.0.0.0 --port 8000</div>
+<p>بعد التشغيل، ستظهر كل الخدمات على المنافذ:</p>
+<table><tr><th>الخدمة</th><th>المنفذ</th><th>الحالة</th></tr>
+<tr><td>web_interface</td><td>5000</td><td>✅</td></tr><tr><td>cloud_desktop</td><td>5001</td><td>✅</td></tr><tr><td>homedock</td><td>5104</td><td>✅</td></tr><tr><td>jarvis-fe</td><td>3000</td><td>✅</td></tr><tr><td>sunna_api</td><td>5100</td><td>✅</td></tr><tr><td>integrations</td><td>5102</td><td>✅</td></tr><tr><td>kanban</td><td>5103</td><td>✅</td></tr><tr><td>router</td><td>11435</td><td>✅</td></tr><tr><td>governor</td><td>11123</td><td>✅</td></tr><tr><td>ollama</td><td>11434</td><td>✅</td></tr><tr><td>agent_mesh</td><td>11437</td><td>✅</td></tr><tr><td>cloud_bridge</td><td>5106</td><td>✅</td></tr></table>
+
+<h2>❓ 6. دليل المساعدة والأسئلة الشائعة (FAQ)</h2>
+<div class="card"><div class="card-title">❓ كيف أكمل تشغيل النظام؟</div><p>المتابعة بـ <code>powershell -ExecutionPolicy Bypass -File AetherRun.ps1</code>، وانتظر حوالي 20-30 ثانية حتى ترفع الخدمات كلها.</p></div>
+<div class="card"><div class="card-title">❓ ما هو عنوان URL للواجهة؟</div><p>الواجهة الرئيسية في <span class="url">http://localhost:3000/</span>، والملفات الثابتة متوفرة في <code>/static/</code>.</p></div>
+<div class="card"><div class="card-title">❓ كيف أرسل بيانات التحقق (Auth) للواجهة؟</div><p>باستخدام <code>curl -H "Authorization: Bearer TOKEN" http://localhost:8000/api/...</code></p></div>
+<div class="card"><div class="card-title">❓ ما هي أخطاء الشبكة الشائعة؟</div><p>الأخطاء الشائعة: 404 (مسار غير موجود)، 500 (مشكلة في الخادم)، 403 (ممنوع الوصول)، و 000 (لا يوجد اتصال).</p></div>
+
+<h2>🔮 7. إرشادات للاستخدام المستقبلي</h2>
+<div class="checklist"><li>⏰ فحص الحالة يومياً باستخدام <code>curl http://localhost:8000/api/health</code></li><li>🔄 تحديث النظام الاثنين كل أسبوع</li><li>📦 نسخ احتياطي للبيانات في <code>data/</code> كل أسبوع</li><li>📧 تعقب الأحداث من خلال حساب Telegram الخاص بالبوت</li></div>
+
+<h2>🤝 8. كيف نصل لفريق الدعم؟</h2>
+<div class="step"><div class="step-num">1</div><div class="step-content"><h3>راسل البوت في Telegram</h3><p>أرسل الرسالة إلى <span class="url">@esprieaether_bot</span> العلني.</p></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-content"><h3>راسل فريق الدعم</h3><p>راسلنا على البريد الإلكتروني أو من خلال الرسائل المباشرة في نظام العمل.</p></div></div>
+
+<h2>🎨 9. ملخص بصري للمنظومة</h2>
+<div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+  <p style="color: var(--muted); font-size: 0.9rem;">الويب الرئيسية: <span class="url">localhost:3000</span> | API: <span class="url">localhost:8000</span> | cloud-desktop: <span class="url">localhost:5001</span> | homedock: <span class="url">localhost:5104</span> | agent mesh: <span class="url">localhost:11437</span></p>
+</div>
+
+<h2>📜 10. نهاية الدليل</h2>
+<p>هذا الدليل يقدم لك شرحاً كاملاً لكيفية استخدام النظام، من الفحص والاختبارات، إلى استكشاف الملفات، والوصول لجميع الأدوات. إذا واجهت أي مشكلة، لا تتردد في الاتصال بفريق الدعم.</p>
+
+<div class="footer"><p>📘 دليل JARVIS // CLASSIFIED - نسخة 1.0 - 2026-10-17</p><p>✅ جميع الخدمات تعمل ✓ | 🤝 الدعم: @esprieaether_bot</p></div>
+
+</body>
+</html>

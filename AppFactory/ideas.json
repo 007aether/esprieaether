@@ -1,82 +1,312 @@
 [
   {
-    "name": "TodoZen",
-    "slug": "todozen",
+    "name": "FocusFlow",
+    "slug": "focusflow",
     "category": "productivity",
-    "pitch": "Daily mindfulness tasks for stress relief",
-    "monetization": "Advanced daily meditation timer",
-    "audience": "Stressed professionals",
+    "pitch": "Pomodoro timer + distraction blocker for students",
+    "monetization": "Customizable themes and advanced stats",
+    "audience": "Students struggling to focus",
     "id": 1,
-    "score": 80
+    "score": 55
   },
   {
-    "name": "FitSage",
-    "slug": "fitsage",
-    "category": "wellness",
-    "pitch": "AI diet & exercise plan for beginners",
-    "monetization": "Personalized AI diet & exercise plans",
-    "audience": "New to fitness",
+    "name": "MealMate",
+    "slug": "mealmate",
+    "category": "lifestyle",
+    "pitch": "Meal prep planner for busy families",
+    "monetization": "Unlimited meal plans and Priority customer support",
+    "audience": "Busy families interested in meal prep",
     "id": 2,
     "score": 52
   },
   {
-    "name": "BookShelfIQ",
-    "slug": "bookshelfiq",
-    "category": "education",
-    "pitch": "AI-curated reading recommendations",
-    "monetization": "Expert-curated reading clubs",
-    "audience": "Book enthusiasts",
+    "name": "PetPulse",
+    "slug": "petpulse",
+    "category": "lifestyle",
+    "pitch": "Pet health tracker and coaching for new pet owners",
+    "monetization": "Personalized pet health plans and 24/7 vet chat",
+    "audience": "New pet owners concerned about pet health",
     "id": 3,
+    "score": 60
+  },
+  {
+    "name": "LearnLingo",
+    "slug": "learnlingo",
+    "category": "education",
+    "pitch": "Gamified language learning for travelers",
+    "monetization": "Offline learning and no ads experience",
+    "audience": "Travelers interested in language learning",
+    "id": 4,
+    "score": 47
+  },
+  {
+    "name": "GreenThumb",
+    "slug": "greenthumb",
+    "category": "lifestyle",
+    "pitch": "Indoor plant care assistant for beginners",
+    "monetization": "Detailed care guides and plant identification",
+    "audience": "New plant owners struggling with care",
+    "id": 5,
+    "score": 55
+  },
+  {
+    "name": "FitnessFlow",
+    "slug": "fitnessflow",
+    "category": "fitness",
+    "pitch": "Personalized home workouts for beginners",
+    "monetization": "Detailed workout plans and progress tracking",
+    "audience": "Beginners looking to start a home workout routine",
+    "id": 6,
+    "score": 79
+  },
+  {
+    "name": "FinanceFriend",
+    "slug": "financefriend",
+    "category": "finance",
+    "pitch": "Easy budgeting and saving goal tracker for young adults",
+    "monetization": "Advanced categorization and unlimited goals",
+    "audience": "Young adults looking to manage their money better",
+    "id": 7,
+    "score": 60
+  },
+  {
+    "name": "SleepSync",
+    "slug": "sleepsync",
+    "category": "health",
+    "pitch": "Sleep tracker and coach for better rest",
+    "monetization": "Custom sleep plans and advanced analytics",
+    "audience": "People struggling with sleep issues",
+    "id": 8,
+    "score": 64
+  },
+  {
+    "name": "NotesConnect",
+    "slug": "notes-connect",
+    "category": "productivity",
+    "pitch": "Collaborate on notes in real-time, perfect for teams and students",
+    "monetization": "Unlimited shared notes, priority access to new features",
+    "audience": "Remote workers, students, and teams",
+    "id": 9,
+    "score": 60
+  },
+  {
+    "name": "HabitTrack+",
+    "slug": "habit-track-plus",
+    "category": "health",
+    "pitch": "Track habits, get insights, and reach goals with ease",
+    "monetization": "Unlimited habit tracking, advanced analytics, and customizable insights",
+    "audience": "Health-conscious individuals and fitness enthusiasts",
+    "id": 10,
+    "score": 50
+  },
+  {
+    "name": "CookMate",
+    "slug": "cook-mate",
+    "category": "food",
+    "pitch": "Meal planning and shopping list generator, save time and money",
+    "monetization": "Unlimited recipes, automated grocery list sync, and custom meal plans",
+    "audience": "Busy families and food lovers",
+    "id": 11,
+    "score": 59
+  },
+  {
+    "name": "PlantPAL",
+    "slug": "plant-pal",
+    "category": "lifestyle",
+    "pitch": "Care for your plants with reminders, tips, and community",
+    "monetization": "Unlimited plants, detailed care guides, and exclusive plant swaps",
+    "audience": "Plant parents and garden enthusiasts",
+    "id": 12,
+    "score": 60
+  },
+  {
+    "name": "Evento",
+    "slug": "evento",
+    "category": "social",
+    "pitch": "Create and manage group events, simplified planning for friends and families",
+    "monetization": "Unlimited events, priority access to new features, and in-app messaging",
+    "audience": "Social groups, families, and event organizers",
+    "id": 13,
+    "score": 55
+  },
+  {
+    "name": "LearnLingo",
+    "slug": "learn-lingo",
+    "category": "education",
+    "pitch": "Learn new languages with personalized flashcards and quizzes",
+    "monetization": "Unlimited languages, advanced learning analytics, and offline access",
+    "audience": "Language learners and polyglots",
+    "id": 14,
+    "score": 48
+  },
+  {
+    "name": "BudgetBFF",
+    "slug": "budget-bff",
+    "category": "finance",
+    "pitch": "Track expenses, set budgets, and save money with ease",
+    "monetization": "Unlimited budget categories, automated expense tracking, and custom reports",
+    "audience": "Budget-conscious individuals and financial planners",
+    "id": 15,
+    "score": 63
+  },
+  {
+    "name": "PetPAL",
+    "slug": "pet-pal",
+    "category": "lifestyle",
+    "pitch": "Track pet health, send reminders, and connect with pet owners",
+    "monetization": "Unlimited pets, detailed health records, and access to pet-related services",
+    "audience": "Pet owners and animal lovers",
+    "id": 16,
+    "score": 48
+  },
+  {
+    "name": "FocusPro",
+    "slug": "focuspro",
+    "category": "productivity",
+    "pitch": "Enhanced Pomodoro timers for productivity and concentration",
+    "monetization": "Premium timers with personalized goals",
+    "audience": "Busy professionals",
+    "id": 17,
+    "score": 80
+  },
+  {
+    "name": "MemoMate",
+    "slug": "mementate",
+    "category": "productivity",
+    "pitch": "AI memo system for daily notes and reminders",
+    "monetization": "Advanced memo analysis and organization",
+    "audience": "Small business owners",
+    "id": 18,
+    "score": 65
+  },
+  {
+    "name": "FitMate",
+    "slug": "fitmate",
+    "category": "fitness",
+    "pitch": "AI-driven workout routines and nutrition plans",
+    "monetization": "Customized diet and exercise plans",
+    "audience": "Lifestyle enthusiasts",
+    "id": 19,
+    "score": 60
+  },
+  {
+    "name": "VoiceNote",
+    "slug": "voicenote",
+    "category": "notes",
+    "pitch": "Voice-to-text note taking with autocorrect",
+    "monetization": "Real-time autocorrect and suggestions",
+    "audience": "People who prefer voice inputs",
+    "id": 20,
     "score": 45
   },
   {
-    "name": "MealBot",
-    "slug": "mealbot",
-    "category": "food",
-    "pitch": "Recipe app with AI meal planner",
-    "monetization": "Meal planner integration with grocery shopping",
-    "audience": "Meal preppers",
-    "id": 4,
-    "score": 51
+    "name": "MindMapPro",
+    "slug": "mindmappro",
+    "category": "notes",
+    "pitch": "Advanced mind mapping for brainstorming and planning",
+    "monetization": "Pro version with advanced linking and search",
+    "audience": "Project managers and students",
+    "id": 21,
+    "score": 75
   },
   {
-    "name": "VineMap",
-    "slug": "vitemap",
+    "name": "WeatherX",
+    "slug": "weatherx",
+    "category": "weather",
+    "pitch": "Weather prediction with satellite imagery overlays",
+    "monetization": "Premium satellite imagery and historical data",
+    "audience": "Weather enthusiasts and farmers",
+    "id": 22,
+    "score": 63
+  },
+  {
+    "name": "PokeMate",
+    "slug": "pokemate",
+    "category": "gaming",
+    "pitch": "Pokemon-catching with augmented reality",
+    "monetization": "Rare Pokemon and Pro Evolution challenges",
+    "audience": "Pokémon fans and collectors",
+    "id": 23,
+    "score": 60
+  },
+  {
+    "name": "ReadlyPro",
+    "slug": "readlypro",
+    "category": "reading",
+    "pitch": "AI-driven personalized reading recommendations",
+    "monetization": "Premium access to exclusive book clubs",
+    "audience": "Book lovers and avid readers",
+    "id": 24,
+    "score": 63
+  },
+  {
+    "name": "TaskMaster Pro",
+    "slug": "taskmaster-pro",
+    "category": "productivity",
+    "pitch": "Turn recurring tasks into habits, boost productivity",
+    "monetization": "Unlimited tasks, priorities, and reminders",
+    "audience": "Busy professionals and students",
+    "id": 25,
+    "score": 83
+  },
+  {
+    "name": "Mealtime Mate",
+    "slug": "mealtime-mate",
+    "category": "food & drink",
+    "pitch": "Discover, plan, and track meals for specific diets",
+    "monetization": "Customizable meal plans and full recipe library",
+    "audience": "Health-conscious individuals",
+    "id": 26,
+    "score": 55
+  },
+  {
+    "name": "Pet Pal Pro",
+    "slug": "petpal-pro",
+    "category": "lifestyle",
+    "pitch": "Track pet health, meds, and appointments in one place",
+    "monetization": "Unlimited pets, alerts, and vet records",
+    "audience": "Pet owners",
+    "id": 27,
+    "score": 63
+  },
+  {
+    "name": "SleepScore Plus",
+    "slug": "sleepscore-plus",
+    "category": "health & fitness",
+    "pitch": "Improve sleep quality with personalized insights",
+    "monetization": "Advanced sleep analysis and tailored tips",
+    "audience": "Sleep trackers and health enthusiasts",
+    "id": 28,
+    "score": 68
+  },
+  {
+    "name": "LearnLane Pro",
+    "slug": "learnlane-pro",
+    "category": "education",
+    "pitch": "Curated learning paths for continuous skill development",
+    "monetization": "Unlimited learning paths and off-line courses",
+    "audience": "Professionals looking to upskill",
+    "id": 29,
+    "score": 75
+  },
+  {
+    "name": "JourneyJot",
+    "slug": "journeyjot",
     "category": "travel",
-    "pitch": "Real-time travel updates & reviews",
-    "monetization": "Travel tips by local experts",
-    "audience": "Travel influencers",
-    "id": 5,
-    "score": 41
+    "pitch": "Capture and organize travel memories in one place",
+    "monetization": "Unlimited entries, customizable itineraries, and offline access",
+    "audience": "Frequent travelers and adventurers",
+    "id": 30,
+    "score": 44
   },
   {
-    "name": "GroceryGuru",
-    "slug": "groceryguru",
-    "category": "groceries",
-    "pitch": "AI-assisted grocery shopping assistant",
-    "monetization": "Grocery delivery integration",
-    "audience": "Grocery shoppers",
-    "id": 6,
-    "score": 40
-  },
-  {
-    "name": "TechTidbits",
-    "slug": "techtidbits",
-    "category": "tech",
-    "pitch": "AI-curated tech news & updates",
-    "monetization": "Tech tips and advice by experts",
-    "audience": "Tech enthusiasts",
-    "id": 7,
-    "score": 40
-  },
-  {
-    "name": "FitGymPro",
-    "slug": "fitgympro",
-    "category": "fitness",
-    "pitch": "AI-generated workout plans & progress tracking",
-    "monetization": "Advanced workout analysis and suggestions",
-    "audience": "Fitness professionals",
-    "id": 8,
-    "score": 85
+    "name": "GardenGuru",
+    "slug": "gardenguru",
+    "category": "lifestyle",
+    "pitch": "Grow a thriving garden with personalized plant care",
+    "monetization": "Customizable garden plans, plant identification, and weather alerts",
+    "audience": "Plant enthusiasts and gardeners",
+    "id": 31,
+    "score": 53
   }
 ]
