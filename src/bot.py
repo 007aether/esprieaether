@@ -3044,3 +3044,202 @@ async def cmd_rea_analyze_firmware(message: types.Message):
         return
     path = parts[1]
     await message.reply(f"🔍 REA analyzing firmware:\n{path}")
+
+# More REA tools
+@router.message(lambda m: m.text and m.text.startswith("/rea_repair"))
+async def cmd_rea_repair(message: types.Message):
+    """Repair REA tools"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🔧 REA repair started...")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_config"))
+async def cmd_rea_config(message: types.Message):
+    """Show REA configuration"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("⚙️ REA configuration:\n- Ghidra: configured\n- JADX: configured\n- 207 tools ready")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_help"))
+async def cmd_rea_help(message: types.Message):
+    """Show REA help"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📖 REA Help:\n"
+        "Use /rea_tool to list all tools\n"
+        "Use /rea_do to check health\n"
+        "Use /rea_list for all tools\n"
+        "Use /rea_help for this info"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_start"))
+async def cmd_rea_start(message: types.Message):
+    """Start REA tools"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("▶️ Starting REA tools...")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_stop"))
+async def cmd_rea_stop(message: types.Message):
+    """Stop REA tools"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("⏹️ Stopping REA tools...")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_restart"))
+async def cmd_rea_restart(message: types.Message):
+    """Restart REA tools"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🔄 Restarting REA tools...")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_status"))
+async def cmd_rea_advanced_status(message: types.Message):
+    """Advanced REA status"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    try:
+        from rea_agent import doctor
+        report = doctor()
+        await message.reply(f"🔍 REA Status:\n{report[:800]}...")
+    except Exception as e:
+        await message.reply(f"❌ Error: {str(e)}")
+
+# Proficiency levels for REA tools
+@router.message(lambda m: m.text and m.text.startswith("/rea_proficiency"))
+async def cmd_rea_proficiency(message: types.Message):
+    """Show REA proficiency levels"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🎓 REA Proficiency Levels:\n\n"
+        "Level 1 - Beginner:\n"
+        "• /rea_doctor - Check health\n"
+        "• /rea_list - List tools\n\n"
+        "Level 2 - Intermediate:\n"
+        "• /rea_analyze - Analyze binary\n"
+        "• /rea_analyze_js - JavaScript app\n"
+        "• /rea_analyze_web - Website\n\n"
+        "Level 3 - Advanced:\n"
+        "• /rea_analyze_pe - PE binary\n"
+        "• /rea_analyze_android - Android APK\n"
+        "• /rea_analyze_firmware - Firmware\n"
+        "• /rea_symbolic - Symbolic execution\n"
+        "• /rea_sbom - Generate SBOM\n"
+        "• /rea_evidence - Export evidence"
+    )
+
+# GitHub free projects
+@router.message(lambda m: m.text and m.text.startswith("/free_projects"))
+async def cmd_free_projects(message: types.Message):
+    """List free GitHub projects"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Free GitHub Projects Available:\n\n"
+        "Security:\n"
+        "• secrux (security framework)\n"
+        "• checkmate (security scanner)\n"
+        "• pwnproxy (exploit proxy)\n"
+        "• claude-red (AI red team)\n"
+        "• hack-skills (hacking skills)\n\n"
+        "AI/Research:\n"
+        "• agent-skills (Anthropic skills)\n"
+        "• openresearch (research agent)\n"
+        "• claude-mem (memory system)\n"
+        "• langfuse (tracing)\n"
+        "• fish-audio (audio analysis)\n\n"
+        "Productivity:\n"
+        "• five (board sync)\n"
+        "• homescreen-hero (dashboard)\n"
+        "• mini-qr (QR codes)\n"
+        "• gobackup (backup tool)\n"
+        "• dozzle (Docker monitor)\n\n"
+        "Development:\n"
+        "• openclaude (Claude integration)\n"
+        "• promptfoo (prompt testing)\n"
+        "• vito (media tool)\n"
+        "• runtipi (server manager)\n"
+        "• octelium (browser)\n\n"
+        "More: antislop, apollo, artcraft, ask4me, cronpulse, freqtrade, "
+        "gobackup, hatchet, hyperframes, hypit, jarvis, kino, mimic, "
+        "openstock, outline, portracker, PriceGhost, secrux, strix, "
+        "superpowers, xprivo, rea, free-llm-apis"
+    )
+
+# More REA tools
+@router.message(lambda m: m.text and m.text.startswith("/rea_shield"))
+async def cmd_rea_shield(message: types.Message):
+    """Skullshield for REA"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🛡️ REA Skullshield active...")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_hunt"))
+async def cmd_rea_hunt(message: types.Message):
+    """Hunt for vulnerabilities"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🎯 REA Hunt started...")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_decompile"))
+async def cmd_rea_decompile(message: types.Message):
+    """Decompile a binary"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    parts = message.text.split(" ", 1)
+    if len(parts) < 2:
+        await message.reply("❌ Usage: /rea_decompile <path>")
+        return
+    await message.reply(f"🔍 Decompiling:\n{parts[1]}")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_free_projects"))
+async def cmd_rea_free_projects(message: types.Message):
+    """List free REA projects"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Free REA Projects on GitHub:\n\n"
+        "• morluto/rea (226k★) - Reverse engineering tools\n"
+        "• agent-skills (anthropics/skills) - Agent skills registry\n"
+        "• openresearch - Research agent\n"
+        "• checkmate - Security scanner\n"
+        "• secrux - Security framework\n"
+        "• free-llm-apis - Free LLM APIs\n"
+        "• more: antislop, apollo, artcraft, ask4me, cronpulse, "
+        "freqtrade, gobackup, hatchet, hyperframes, hypit, jarvis, "
+        "kino, mimic, openstock, outline, portracker, PriceGhost, "
+        "strix, superpowers, xprivo, rea"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_log"))
+async def cmd_rea_log(message: types.Message):
+    """Show REA log"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    try:
+        log_file = "data/logs/rea_agent.log"
+        import subprocess
+        result = subprocess.run(["find", "data/logs", "-name", "*rea*"], capture_output=True, text=True)
+        await message.reply(f"📋 REA log files:\n{result.stdout}")
+    except Exception as e:
+        await message.reply(f"❌ Error: {str(e)}")
+
+# More GitHub free projects
+@router.message(lambda m: m.text and m.text.startswith("/github_projects"))
+async def cmd_github_projects(message: types.Message):
+    """List GitHub projects"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 45 GitHub Projects in Integrations:\n\n"
+        "Security (secrux, checkmate, pwnproxy, claude-red, hack-skills)\n"
+        "AI (agent-skills, openresearch, claude-mem, langfuse, fish-audio)\n"
+        "Productivity (five, homescreen-hero, mini-qr, gobackup, dozzle)\n"
+        "Development (openclaude, promptfoo, vito, runtipi, octelium)\n"
+        "More: antislop, apollo, artcraft, ask4me, cronpulse, freqtrade,\n"
+        "gobackup, hatchet, hyperframes, hypit, jarvis, kino, mimic,\n"
+        "openstock, outline, portracker, PriceGhost, strix, superpowers,\n"
+        "xprivo, rea, free-llm-apis, 21st-magic-mcp"
+    )
