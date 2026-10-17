@@ -525,45 +525,56 @@ async def cmd_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
         cpu = psutil.cpu_percent(interval=0.5)
         mem = psutil.virtual_memory()
         disk = psutil.disk_usage("/")
-
-        # حالة المحرك (universal: HermesBridge أو JarvisBridge)
-        try:
-            st = jarvis.status()
-            engine = st.get("active_engine", "?")
-            engine_label = {"llm7": "☁️ LLM7 (مجاني)", "ollama": "🖥️ محلي", "hermes": "☁️ Hermes"}.get(engine, engine)
-            model = st.get("model", "—")
-        except Exception:
-            engine_label = "🖥️ Ollama"
-            model = os.getenv("OLLAMA_MODEL", "qwen2.5:3b")
-
-        text = f"""
-📊 *حالة ESPRIEAETHER*
-
-*المعالج*
-• الاستخدام: `{cpu}%`
-• الأنوية: `{psutil.cpu_count()}`
-
-*الذاكرة*
-• الاستخدام: `{mem.percent}%`
-• متاح: `{round(mem.available/(1024**3), 2)} GB` / `{round(mem.total/(1024**3), 2)} GB`
-
-*القرص*
-• الاستخدام: `{disk.percent}%`
-• متاح: `{round(disk.free/(1024**3), 2)} GB`
-
-*المحرك*
-• النشط: {engine_label}
-• الموديل: `{model}`
-
-*الهوية*: `{AETHER_ID}`
-*الوقت*: `{datetime.now().strftime('%H:%M:%S')}`
-"""
-        await update.message.reply_text(text, parse_mode="Markdown")
     except Exception as e:
-        await update.message.reply_text(f"⚠️ خطأ: {e}")
+        pass
 
+async def cmd_deepseek(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """DeepSeek Harness command - use universal brain + skill expander."""
+    user = update.effective_user
+    query = update.message.text.replace('/deepseek ', '').strip()
+    if not query:
+        await update.message.reply_text('اشرح لي الامر: /deepseek <message>')
+        return
+    try:
+        from src.deepseek_harness import DeepSeekHarness
+        harness = DeepSeekHarness()
+        msg = await update.message.reply_text('جاري التفكير...')
+        result = harness.chat(query)
+        if result.get('success'):
+            await update.message.reply_text('المصدر: ' + result.get('source') + '\nالرد: ' + result.get('response', '')[:500])
+        else:
+            await update.message.reply_text('مصدر الذكاء الاقوي متاح لكن التحميل مفطوع')
+    except Exception as e:
+        await update.message.reply_text(f'خطأ: {str(e)}')
 
-@authorized_only
+async def cmd_skills(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """List available skills."""
+    try:
+        from src.deepseek_harness import DeepSeekHarness
+        harness = DeepSeekHarness()
+        skills = harness.local_skills
+        if skills:
+            skill_list = chr(10).join(sorted(skills.keys())[:20])
+            await update.message.reply_text('المهارات المتاحة: ' + str(len(skills)) + chr(10) + skill_list)
+        else:
+            await update.message.reply_text('لا توجد مهارات مُثبتة حالياً')
+    except Exception as e:
+        await update.message.reply_text(f'خطأ: {str(e)}')
+
+async def cmd_expand(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Expand modules from GitHub."""
+    try:
+        from src.deepseek_harness import DeepSeekHarness
+        harness = DeepSeekHarness()
+        result = harness.expand_modules(force=True)
+        msg = 'مكتمل: ' + str(result['expanded']) + ' مهارة مضافة'
+        if result['added']:
+            msg += 'تمت: ' + ', '.join(result['added'][:5])
+        if result['errors']:
+            msg += chr(10) + 'أخطاء: ' + '; '.join(result['errors'])
+        await update.message.reply_text(msg)
+    except Exception as e:
+        await update.message.reply_text(f'خطأ: {str(e)}')
 async def cmd_metrics(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await cmd_status(update, context)
 
