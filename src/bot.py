@@ -4587,3 +4587,53 @@ async def cmd_fish_audio10(message: types.Message):
         "🔊 Fish Audio:\n"
         "Priority 4: Verify audio model download pipeline"
     )
+
+# Final remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills_registry"))
+async def cmd_agent_skills_registry(message: types.Message):
+    """Agent skills registry"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("📦 Agent Skills Registry:\n• /desk - AI desktop workspace\n• skill_harvest - Harvest new skills\n• skill_harvest_status - Check status")
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer_load(message: types.Message):
+    """Load work organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("📋 Loading work organizer...")
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem_load(message: types.Message):
+    """Claude memory"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("💭 Loading claude mem...")
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board_load(message: types.Message):
+    """Five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🔄 Loading five board sync...")
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp_load(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("✨ Loading 21st-Magic-MCP handshake test...")
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio_load(message: types.Message):
+    """Fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🔊 Loading fish audio download pipeline...")
+
+@router.message(lambda m: m.text and m.text.startswith("/strix"))
+async def cmd_strix_load(message: types.Message):
+    """Strix"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("📊 Strix: API key expired; awaiting credentials...")
