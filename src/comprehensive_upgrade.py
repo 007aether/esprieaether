@@ -154,19 +154,23 @@ def create_summary_doc():
     """Create a summary of the upgrade."""
     print_step("📝 Creating upgrade summary")
     try:
+        import json
+        data_dir = os.path.join(os.path.dirname(__file__), "data")
+        skill_tracker_path = os.path.join(data_dir, "skill_tracker.json")
+        knowledge_index_path = os.path.join(data_dir, "knowledge_base", "knowledge_index.json")
+        
         impact_path = BASE_DIR / "data" / "upgrade_impact.md"
         content = f"""# 📊 EsprieAether Comprehensive Upgrade Report
-
 *Last run: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')} UTC*
 
 ## 📊 System Stats
 
 | Metric | Value |
 |--------|-------|
-| Agents in mesh | {len([a for a in ["security", "research", "market", "quality", "redteam", "evolve", "knowledge", "general", "rea", "yomkino"]])} |
-| Knowledge items | {__import__('json').load(open('data/knowledge_base/knowledge_index.json', encoding='utf-8')).get('total', 0)} |
+| Agents in mesh | {len(["security", "research", "market", "quality", "redteam", "evolve", "knowledge", "general", "rea", "yomkino"])} |
+| Knowledge items | {json.load(open(knowledge_index_path, encoding='utf-8')).get('total', 0)} |
 | Test results | 10/10 passed |
-| Skills tracked | {len(__import__('json').load(open('data/skill_tracker.json', encoding='utf-8')).get('skills', []))} |
+| Skills tracked | {json.load(open(skill_tracker_path, encoding='utf-8')).get('skills', [])} |
 | Weekly report | Generated |
 
 ## 🔗 Connected Components
