@@ -25,7 +25,7 @@ import asyncio
 try:
     from mcp_client import MCPClient
 except ImportError:
-    from src.mcp_client import MCPClient
+    from mcp_client import MCPClient
 
 
 class AskAgent:

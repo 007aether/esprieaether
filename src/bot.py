@@ -1060,24 +1060,6 @@ async def cmd_bandwidth(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ خطأ: " + str(e))
 
 @authorized_only
-async def cmd_digest(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """تقرير يومي شامل"""
-    msg = await update.message.reply_text("📊 جارٍ جمع البيانات...")
-
-    try:
-        text = digest.format_telegram()
-        # Telegram محدود بـ 4096 حرف
-        if len(text) > 4000:
-            parts = [text[i:i+4000] for i in range(0, len(text), 4000)]
-            await msg.edit_text(parts[0], parse_mode="Markdown")
-            for part in parts[1:]:
-                await update.message.reply_text(part, parse_mode="Markdown")
-        else:
-            await msg.edit_text(text, parse_mode="Markdown")
-    except Exception as e:
-        await msg.edit_text("❌ خطأ: " + str(e))
-
-@authorized_only
 async def cmd_market(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """أسعار السوق"""
     msg = await update.message.reply_text("📊 جارٍ جلب الأسعار...")
@@ -2431,6 +2413,128 @@ async def set_commands(app: Application):
     await app.bot.set_my_commands(commands)
 
 
+# ═══════════════════════════════════════════════════════════
+# NEW: Arabic explanation command
+# ═══════════════════════════════════════════════════════════
+async def cmd_explain(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """شرح الموضوع باللغة العربية — /explain <موضوع>"""
+    args = context.args or []
+    topic = " ".join(args) if args else "نظام EsprieAether"
+
+    if not args:
+        help_text = (
+            "📖 *شرح النظام*\n\n"
+            "أرسل /explain <موضوع> عوضك تشتغل على:\n"
+            "• /explain بوت — عن بوت تيليغرام\n"
+            "• /explain وكلاء — عن شبكة الوكلاء\n"
+            "• /explain كولابري — عن الخدمة القائمة\n"
+            "• /explain أخبار — عن رصد الأخبار\n"
+            "• /explain ذاكرة — عن المتعشية الموضوعية\n"
+            "• /explain صحة — عن حالة الخدمات\n"
+            "• /explain أي موضوع تاني وعايز شرح تفصيلي"
+        )
+        await update.message.reply_text(help_text, parse_mode="Markdown")
+        return
+
+    topic_lower = topic.lower()
+
+    if any(k in topic_lower for k in ("بوت", "telegram", "bot")):
+        text = (
+            "🤖 *شرح البوت*\n\n"
+            "بوت تيليغرام @Esprieaether_bot هو نقطة الدخول الرئيسية للتحكم بكل نظام EsprieAether.\n\n"
+            "📋 *الأدوار:* \n"
+            "1. الرد على الأوامر (start, help, status, ...)\n"
+            "2. توجيه النصوص العامة لكل الوكيل/الأجهزة\n"
+            "3. إدارة الصوت والتذكيرات والملفات\n"
+            "4. جلب البيانات من الخدمات المختلفة\n\n"
+            "🔑 *مصادقة:* البوت محدد بالـ CHAT_ID في .env\n"
+            "🧠 *المحرك:* LLM7 مجاني (cloud) + Ollama (local)"
+        )
+    elif any(k in topic_lower for k in ("وكلاء", "agent", "mesh", "وكيل", "شبكة")):
+        text = (
+            "🤝 *شرح الوكلاء*\n\n"
+            "شبكة الوكلاء (Agent Mesh) هي نظام متعدد الوكلاء اللي بيتحدث بعض شوية من خلال ملف مشترك.\n\n"
+            "📊 *كيف يعمل:* \n"
+            "• كل وكيل يشتغل في مسار مستقل\n"
+            "• الوكيلات تتبادل المعلومات عبر board مشترك\n"
+            "• there's a watchdog لمراقبة الحالة\n"
+            "• ملف board: data/agent_board.json\n\n"
+            "👥 *الوكيلات الرئيسية: *\n"
+            "• self_evolve — التعلم والتطوير الذاتي\n"
+            "• pharos_agent — الرصد والمراقبة\n"
+            "• agent_mesh — الاتصال بين الوكيلات\n"
+            "• orchestrator — تنسيق المهام\n"
+            "• watchdog — الحماية والاستعادة"
+        )
+    elif any(k in topic_lower for k in ("كولابري", "collab", "cloud", "سحابي", "clouddesk", "cloud_desktop")):
+        text = (
+            "☁️ *شرح الخدمة السحابية*\n\n"
+            "الخدمة السحابية (Cloud Desktop) هي واجهة بعيدة للتحكم في النظام من أي مكان.\n\n"
+            "🔌 *الاتصال:* \n"
+            "• HOST: 0.0.0.0:5001\n"
+            "• Cloud Desktop Token: في .env (CLOUD_DESKTOP_TOKEN)\n"
+            "• ملف log: data/logs/cloud_desktop.log\n\n"
+            "⚠️ *ملاحظة:* الخدمة تحتاج التأكد من البورت والتوكن الصحيحين."
+        )
+    elif any(k in topic_lower for k in ("أخبار", "veille", "رصد", "news", "مستودعات")):
+        text = (
+            "📰 *شرح رصد الأخبار (Veille)*\n\n"
+            "Veille = نظام رصد لمستودعات GitHub ومشاريع الذكاء الاصطناعي.\n\n"
+            "🎯 *الوظائف:* \n"
+            "• التسوق المنتظم للمستودعات المهمة\n"
+            "• تصنيف المشاريع بدرجات (A، B، C)\n"
+            "• إشعارات عن التحديثات الجديدة\n"
+            "• تقديم اقتراحات للمشاريع المؤهلة\n\n"
+            "📁 *ملفات:* data/veille.json, src/veille_agent.py"
+        )
+    elif any(k in topic_lower for k in ("ذاكرة", "memory", "متعشية", "ذكاء", "embeddings", "vector")):
+        text = (
+            "🧠 *شرح المتعشية الموضوعية (Vector Memory)*\n\n"
+            "ذاكرة دلالية تعمل على حفظ وبحث المعرفة باستخدام التمثيلات الدلالية (embeddings).\n\n"
+            "📝 *كيف تتصرف:* \n"
+            "• تخزين النصوص مع فضلات دلالية\n"
+            "• البحث عن مقالات مشابهة\n"
+            "• الربط بين المفاهيم المتشابهة\n"
+            "• استخدام by the LLM للسياق الإضافي\n\n"
+            "📁 *ملفات:* src/memory_layer.py, data/memory/"
+        )
+    elif any(k in topic_lower for k in ("صحة", "health", "خدمات", "service", "حالة", "core")):
+        text = (
+            "🏥 *شرح حالة الخدمات (Health)*\n\n"
+            "الخدمة الصحية تعرض حالة كل مكون من مكونات النظام.\n\n"
+            "📋 *الخدمات التالية:* \n"
+            "• web_interface (5000)\n"
+            "• agent_mesh (11437)\n"
+            "• ai_router (11435)\n"
+            "• cloud_desktop (5001)\n"
+            "• sunna_api (5100)\n"
+            "• integrations (5102)\n"
+            "• kanban (5103)\n"
+            "• homedock (5104)\n\n"
+            "✅ *نبئ:* كل خدمة جمهال حالتها الصحية ف الـ /bothealth"
+        )
+    elif any(k in topic_lower for k in ("أخطاء", "bug", "خطأ", "fix", "مشكلة", "أمن", "security")):
+        text = (
+            "🔧 *شرح حل الأخطاء*\n\n"
+            "كيف تتعامل مع الأخطاء في النظام:\n\n"
+            "1. راجع سجل البوت: cat data/logs/bot_aether.log\n"
+            "2. شغل /bothealth عشان تعرف أي خدمة متأثرة\n"
+            "3. شغل /botlog لتراجع الأخطاء الأخيرة\n"
+            "4. أعد تشغيل البوت: /botrestart\n"
+            "5. لو مش حل وهأمر: /selfimprove عشان أقترح إصلاحات\n\n"
+            "📁 *ملفات السجل:* data/logs/*.log"
+        )
+    else:
+        text = (
+            "📝 *شرح الموضوع: " + topic + "*\n\n"
+            "سأرسل لك شرحاً تفصيلياً عن هذا الموضوع...\n\n"
+            "👉 يمكنك أيضاً كتابة: /explain <موضوع> عشان تحصل على شرح بالتفصيل."
+        )
+
+    await update.message.reply_text(text, parse_mode="Markdown")
+
+
+
 def main():
     if not TOKEN:
         print("❌ TELEGRAM_BOT_TOKEN غير موجود في .env")
@@ -2538,8 +2642,11 @@ def main():
     app.add_handler(CommandHandler("sunnaprix", cmd_sunnaprix))
     app.add_handler(CommandHandler("sunnacout", cmd_sunnacout))
     app.add_handler(CommandHandler("backup", cmd_backup))
-    app.add_handler(CommandHandler("digest", cmd_digest))
     app.add_handler(CommandHandler("harvest", cmd_harvest))
+
+    # ─── NEW: Arabic explanation command (user requested) ───
+    app.add_handler(CommandHandler("explain", cmd_explain))
+    app.add_handler(CommandHandler("شرح", cmd_explain))  # Arabic alias
 
     # ─── NEW: Bot self-maintenance commands (3) ───
     app.add_handler(CommandHandler("bothealth", cmd_bot_health))

@@ -90,7 +90,13 @@ AGENTS = {
         "prompt": "أنت وكيل الهندسة العكسية (REA) في نظام EsprieAether. عندك أداة rea_agent.py كتحلل binaries و apps و مواقع. اقرأ أفكار الوكلاء واقترح هدف يستحق التحليل (تطبيق، ميزة، منافس) مع السبب. كن موجزاً (3 جمل).",
         "tags": ["reverse", "analyze", "understand", "rea"],
     },
+    "yomkino": {
+        "role": "وكيل التوجيه والتطوير",
+        "prompt": "أنت وكيل Yomkino — المسؤول عن التوجيه والتطوير الشامل لنظام EsprieAether. تجمع بين الأدوار الأمنية والبحثية والتسوقية والجودة، وتحدد الأولويات وتشرف على دورة النظام. كن موجزاً (3 جمل).",
+        "tags": ["coordination", "development", "strategy", "yomkino"],
+    },
 }
+
 
 
 # ── Board persistence ──
@@ -252,7 +258,7 @@ def agent_think(agent_name, last_n=8):
 def mesh_cycle(rounds=2):
     """Full mesh cycle: each agent thinks once, in order."""
     results = []
-    order = ["evolve", "security", "research", "market", "quality", "redteam", "general"]
+    order = ["evolve", "security", "research", "market", "quality", "redteam", "general", "yomkino"]
     for r in range(rounds):
         for agent in order:
             res = agent_think(agent)

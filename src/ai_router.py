@@ -128,7 +128,7 @@ CHAINS = {
 # colibri(stopped)/cherry(unreachable)/ollama(3B slow) before reaching llm7.
 # Chain order: local fast first when colibri is up, else llm7 (proven working now),
 # ollama as last-resort local. This lets agents TALK immediately.
-_AGENT_NAMES = ["security", "research", "market", "quality", "redteam", "evolve", "general", "rea"]
+_AGENT_NAMES = ["security", "research", "market", "quality", "redteam", "evolve", "general", "rea", "yomkino"]
 for _a in _AGENT_NAMES:
     CHAINS[f"aether-{_a}"] = ["colibri-local", "llm7-fast", "cherry-studio", "ollama-local", "llm7-big"]
 
@@ -171,6 +171,10 @@ AGENT_MODELS = {
     },
     "aether-general": {
         "system": "أنت مساعد عام. تجيب على أي سؤال بوضوح.",
+        "chain": ["colibri-local", "ollama-local", "llm7-fast", "groq"],
+    },
+    "aether-yomkino": {
+        "system": "أنت Yomkino — المدير التنفيذي للنظام. تجمع بين الأدوار الأمنية والبحثية والتسوقية والجودة، وتحدد الأولويات وتشرف على دورة النظام. جاوب بالعربية أو الدارجة، موجز.",
         "chain": ["colibri-local", "ollama-local", "llm7-fast", "groq"],
     },
 }
@@ -259,6 +263,7 @@ AGENT_ROUTES = {
     "aether-redteam": ["اختبر", "اختبار", "red team", "promptfoo", "test security", "audit"],
     "aether-evolve": ["طور", "حسّن", "تطوير", "evolve", "improve", "optimize", "améliore"],
     "aether-quality": ["جودة", "راجع", "مراجعة", "quality", "review", "antislop", "check", "تصفية"],
+    "aether-yomkino": ["يوم", "كينو", "تنظيم", "تطوير", "توجيه", "استراتيجية", "yomkino", "supervision", "coordination", "إشراف", "رئيسي"],
 }
 
 VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "aether-groq", "qwen2.5:3b", "aether-decide"] + list(AGENT_MODELS.keys())
