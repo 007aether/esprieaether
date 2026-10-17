@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-10-17T01:26:27.328925+00:00",
-  "total": 276,
+  "updated_at": "2026-10-17T12:43:50.804109+00:00",
+  "total": 275,
   "by_grade": {
-    "A": 33,
-    "B": 5,
+    "A": 28,
+    "B": 10,
     "C": 0,
-    "D": 238
+    "D": 237
   },
   "scams_blocked": 0,
   "items": [
@@ -13,7 +13,7 @@
       "title": "TastyCo",
       "link": "https://airdrops.io/tastyco/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -27,13 +27,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.292194+00:00"
+      "scored_at": "2026-10-17T12:43:50.747733+00:00"
     },
     {
       "title": "Raycash",
       "link": "https://airdrops.io/raycash/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -47,13 +47,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.293348+00:00"
+      "scored_at": "2026-10-17T12:43:50.749664+00:00"
     },
     {
       "title": "RWAPerp",
       "link": "https://airdrops.io/rwaperp/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -67,13 +67,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.294554+00:00"
+      "scored_at": "2026-10-17T12:43:50.751625+00:00"
     },
     {
       "title": "Synthra",
       "link": "https://airdrops.io/synthra/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -88,13 +88,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.295966+00:00"
+      "scored_at": "2026-10-17T12:43:50.753911+00:00"
     },
     {
       "title": "MindGames",
       "link": "https://airdrops.io/mindgames/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -108,53 +108,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.297184+00:00"
-    },
-    {
-      "title": "CZR",
-      "link": "https://airdrops.io/czr/",
-      "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
-      "score": 100,
-      "grade": "A",
-      "signals": [
-        "airdrops_io_listed",
-        "claim_live",
-        "potential_airdrop",
-        "confirmed_airdrop",
-        "waitlisted",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.298631+00:00"
-    },
-    {
-      "title": "PowerX OneWallet",
-      "link": "https://airdrops.io/powerx-onewallet/",
-      "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
-      "score": 100,
-      "grade": "A",
-      "signals": [
-        "airdrops_io_listed",
-        "claim_live",
-        "potential_airdrop",
-        "confirmed_airdrop",
-        "waitlisted",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.300077+00:00"
+      "scored_at": "2026-10-17T12:43:50.755848+00:00"
     },
     {
       "title": "Arcus",
       "link": "https://airdrops.io/arcus/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -168,33 +128,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.301483+00:00"
-    },
-    {
-      "title": "Ink",
-      "link": "https://airdrops.io/ink/",
-      "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
-      "score": 100,
-      "grade": "A",
-      "signals": [
-        "airdrops_io_listed",
-        "claim_live",
-        "potential_airdrop",
-        "confirmed_airdrop",
-        "waitlisted",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.303004+00:00"
+      "scored_at": "2026-10-17T12:43:50.758131+00:00"
     },
     {
       "title": "RISEx",
       "link": "https://airdrops.io/risex/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -208,13 +148,33 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.304571+00:00"
+      "scored_at": "2026-10-17T12:43:50.760064+00:00"
+    },
+    {
+      "title": "Ink",
+      "link": "https://airdrops.io/ink/",
+      "source": "airdrops.io",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.761990+00:00"
     },
     {
       "title": "BULK",
       "link": "https://airdrops.io/bulk/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -229,13 +189,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.309419+00:00"
+      "scored_at": "2026-10-17T12:43:50.770668+00:00"
     },
     {
       "title": "Variational",
       "link": "https://airdrops.io/variational/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -249,13 +209,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.310494+00:00"
+      "scored_at": "2026-10-17T12:43:50.772497+00:00"
     },
     {
       "title": "Nado",
       "link": "https://airdrops.io/nado/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -269,13 +229,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.313201+00:00"
+      "scored_at": "2026-10-17T12:43:50.776884+00:00"
     },
     {
       "title": "Arc",
       "link": "https://airdrops.io/arc/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -291,33 +251,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.314631+00:00"
-    },
-    {
-      "title": "Jumper Exchange",
-      "link": "https://airdrops.io/jumper-exchange/",
-      "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
-      "score": 100,
-      "grade": "A",
-      "signals": [
-        "airdrops_io_listed",
-        "claim_live",
-        "potential_airdrop",
-        "confirmed_airdrop",
-        "waitlisted",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.317357+00:00"
+      "scored_at": "2026-10-17T12:43:50.779167+00:00"
     },
     {
       "title": "VOICE",
       "link": "https://airdrops.io/voice/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 100,
       "grade": "A",
       "signals": [
@@ -331,13 +271,33 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.318788+00:00"
+      "scored_at": "2026-10-17T12:43:50.781194+00:00"
+    },
+    {
+      "title": "Jumper Exchange",
+      "link": "https://airdrops.io/jumper-exchange/",
+      "source": "airdrops.io",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
+      "score": 100,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "waitlisted",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.783244+00:00"
     },
     {
       "title": "Titan Exchange",
       "link": "https://airdrops.io/titan-exchange/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 95,
       "grade": "A",
       "signals": [
@@ -351,7 +311,7 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.290610+00:00"
+      "scored_at": "2026-10-17T12:43:50.744883+00:00"
     },
     {
       "title": "Quip Network Full Guide: Node & Airdrop Points",
@@ -370,7 +330,7 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.220793+00:00"
+      "scored_at": "2026-10-17T12:43:50.609773+00:00"
     },
     {
       "title": "Best crypto airdrops to farm right now",
@@ -389,83 +349,7 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.223989+00:00"
-    },
-    {
-      "title": "Crypto airdrops explained: types, qualifying and safety",
-      "link": "https://airdrops.io/blog/crypto-airdrops-explained-types-qualifying-and-safety/",
-      "source": "https://airdrops.io/feed/",
-      "date": "Sat, 19 Sep 2026 09:04:28 +0000",
-      "score": 90,
-      "grade": "A",
-      "signals": [
-        "airdrops_io_listed",
-        "claim_live",
-        "potential_airdrop",
-        "confirmed_airdrop",
-        "waitlisted"
-      ],
-      "flags": [],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.225216+00:00"
-    },
-    {
-      "title": "xStocks Points Farming: The Pendle YT Strategy",
-      "link": "https://airdrops.io/blog/xstocks-yt-farm-strategy/",
-      "source": "https://airdrops.io/feed/",
-      "date": "Fri, 04 Sep 2026 15:30:58 +0000",
-      "score": 90,
-      "grade": "A",
-      "signals": [
-        "airdrops_io_listed",
-        "claim_live",
-        "potential_airdrop",
-        "confirmed_airdrop",
-        "waitlisted"
-      ],
-      "flags": [],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.226430+00:00"
-    },
-    {
-      "title": "Perp DEX Farming 2026: 4 Proven Strategies",
-      "link": "https://airdrops.io/blog/perp-dex-farming-strategies-2026/",
-      "source": "https://airdrops.io/feed/",
-      "date": "Thu, 06 Aug 2026 14:03:46 +0000",
-      "score": 90,
-      "grade": "A",
-      "signals": [
-        "airdrops_io_listed",
-        "claim_live",
-        "potential_airdrop",
-        "confirmed_airdrop",
-        "waitlisted"
-      ],
-      "flags": [],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.227655+00:00"
-    },
-    {
-      "title": "Ondo Points: what will one point be worth?",
-      "link": "https://airdrops.io/blog/ondo-points-value-analysis/",
-      "source": "https://airdrops.io/feed/",
-      "date": "Wed, 29 Jul 2026 11:04:03 +0000",
-      "score": 90,
-      "grade": "A",
-      "signals": [
-        "airdrops_io_listed",
-        "claim_live",
-        "potential_airdrop",
-        "confirmed_airdrop",
-        "waitlisted"
-      ],
-      "flags": [],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.229237+00:00"
+      "scored_at": "2026-10-17T12:43:50.618639+00:00"
     },
     {
       "title": "Top 5 passive airdrop farms: deposit once and let it work",
@@ -484,7 +368,7 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.231842+00:00"
+      "scored_at": "2026-10-17T12:43:50.637669+00:00"
     },
     {
       "title": "Best crypto testnets to farm right now: 6 free airdrop plays",
@@ -503,32 +387,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.233061+00:00"
-    },
-    {
-      "title": "Nado x xStocks: one deposit, two potential airdrops",
-      "link": "https://airdrops.io/blog/nado-xstocks-double-dip-airdrop/",
-      "source": "https://airdrops.io/feed/",
-      "date": "Wed, 15 Jul 2026 17:04:52 +0000",
-      "score": 90,
-      "grade": "A",
-      "signals": [
-        "airdrops_io_listed",
-        "claim_live",
-        "potential_airdrop",
-        "confirmed_airdrop",
-        "waitlisted"
-      ],
-      "flags": [],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.234191+00:00"
+      "scored_at": "2026-10-17T12:43:50.639678+00:00"
     },
     {
       "title": "Catalyst",
       "link": "https://airdrops.io/catalyst/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 90,
       "grade": "A",
       "signals": [
@@ -541,13 +406,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.286556+00:00"
+      "scored_at": "2026-10-17T12:43:50.734064+00:00"
     },
     {
       "title": "PERPTools",
       "link": "https://airdrops.io/perptools/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 90,
       "grade": "A",
       "signals": [
@@ -560,13 +425,32 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.289096+00:00"
+      "scored_at": "2026-10-17T12:43:50.739618+00:00"
+    },
+    {
+      "title": "River",
+      "link": "https://airdrops.io/river/",
+      "source": "airdrops.io",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
+      "score": 90,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.742032+00:00"
     },
     {
       "title": "Axis Robotics",
       "link": "https://airdrops.io/axis-robotics/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 90,
       "grade": "A",
       "signals": [
@@ -579,13 +463,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.307393+00:00"
+      "scored_at": "2026-10-17T12:43:50.764195+00:00"
     },
     {
       "title": "Extended",
       "link": "https://airdrops.io/extended/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 90,
       "grade": "A",
       "signals": [
@@ -598,13 +482,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.311679+00:00"
+      "scored_at": "2026-10-17T12:43:50.774469+00:00"
     },
     {
       "title": "Cambria",
       "link": "https://airdrops.io/cambria/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 90,
       "grade": "A",
       "signals": [
@@ -617,13 +501,32 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.315876+00:00"
+      "scored_at": "2026-10-17T12:43:50.786788+00:00"
+    },
+    {
+      "title": "NEAR Protocol",
+      "link": "https://airdrops.io/near-protocol/",
+      "source": "airdrops.io",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
+      "score": 90,
+      "grade": "A",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "confirmed_airdrop",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.789950+00:00"
     },
     {
       "title": "NeoSoul",
       "link": "https://airdrops.io/neosoul/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 90,
       "grade": "A",
       "signals": [
@@ -636,13 +539,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.320358+00:00"
+      "scored_at": "2026-10-17T12:43:50.793230+00:00"
     },
     {
       "title": "TxFlow",
       "link": "https://airdrops.io/txflow/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 85,
       "grade": "A",
       "signals": [
@@ -655,13 +558,31 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.283561+00:00"
+      "scored_at": "2026-10-17T12:43:50.729661+00:00"
+    },
+    {
+      "title": "Papertrade",
+      "link": "https://airdrops.io/papertrade/",
+      "source": "airdrops.io",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
+      "score": 75,
+      "grade": "B",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.726768+00:00"
     },
     {
       "title": "XStable",
       "link": "https://airdrops.io/xstable/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 75,
       "grade": "B",
       "signals": [
@@ -673,13 +594,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.284785+00:00"
+      "scored_at": "2026-10-17T12:43:50.731625+00:00"
     },
     {
       "title": "Amadeus Protocol",
       "link": "https://airdrops.io/amadeus-protocol/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 75,
       "grade": "B",
       "signals": [
@@ -691,13 +612,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.305917+00:00"
+      "scored_at": "2026-10-17T12:43:50.766551+00:00"
     },
     {
       "title": "Superposition",
       "link": "https://airdrops.io/superposition/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 75,
       "grade": "B",
       "signals": [
@@ -709,25 +630,75 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.321863+00:00"
+      "scored_at": "2026-10-17T12:43:50.795984+00:00"
     },
     {
-      "title": "Blackboard",
-      "link": "https://airdrops.io/blackboard/",
-      "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
-      "score": 75,
+      "title": "Crypto airdrops explained: types, qualifying and safety",
+      "link": "https://airdrops.io/blog/crypto-airdrops-explained-types-qualifying-and-safety/",
+      "source": "https://airdrops.io/feed/",
+      "date": "Sat, 19 Sep 2026 09:04:28 +0000",
+      "score": 65,
       "grade": "B",
       "signals": [
         "airdrops_io_listed",
         "claim_live",
-        "potential_airdrop",
-        "fresh"
+        "potential_airdrop"
       ],
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.323428+00:00"
+      "scored_at": "2026-10-17T12:43:50.624529+00:00"
+    },
+    {
+      "title": "xStocks Points Farming: The Pendle YT Strategy",
+      "link": "https://airdrops.io/blog/xstocks-yt-farm-strategy/",
+      "source": "https://airdrops.io/feed/",
+      "date": "Fri, 04 Sep 2026 15:30:58 +0000",
+      "score": 65,
+      "grade": "B",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.627366+00:00"
+    },
+    {
+      "title": "Perp DEX Farming 2026: 4 Proven Strategies",
+      "link": "https://airdrops.io/blog/perp-dex-farming-strategies-2026/",
+      "source": "https://airdrops.io/feed/",
+      "date": "Thu, 06 Aug 2026 14:03:46 +0000",
+      "score": 65,
+      "grade": "B",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.629891+00:00"
+    },
+    {
+      "title": "Ondo Points: what will one point be worth?",
+      "link": "https://airdrops.io/blog/ondo-points-value-analysis/",
+      "source": "https://airdrops.io/feed/",
+      "date": "Wed, 29 Jul 2026 11:04:03 +0000",
+      "score": 65,
+      "grade": "B",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.632720+00:00"
     },
     {
       "title": "The 15 biggest airdrops ever: HYPE eclipsed the next five combined",
@@ -744,13 +715,30 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.230431+00:00"
+      "scored_at": "2026-10-17T12:43:50.635231+00:00"
+    },
+    {
+      "title": "Nado x xStocks: one deposit, two potential airdrops",
+      "link": "https://airdrops.io/blog/nado-xstocks-double-dip-airdrop/",
+      "source": "https://airdrops.io/feed/",
+      "date": "Wed, 15 Jul 2026 17:04:52 +0000",
+      "score": 65,
+      "grade": "B",
+      "signals": [
+        "airdrops_io_listed",
+        "claim_live",
+        "potential_airdrop"
+      ],
+      "flags": [],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.641545+00:00"
     },
     {
       "title": "Nous Research",
       "link": "https://airdrops.io/nous-research/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 45,
       "grade": "D",
       "signals": [
@@ -761,13 +749,13 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.287897+00:00"
+      "scored_at": "2026-10-17T12:43:50.737004+00:00"
     },
     {
       "title": "Updated Airdrops",
       "link": "https://airdrops.io/updated-airdrops/",
       "source": "airdrops.io",
-      "date": "Sat, 17 Oct 2026 01:25:38 GMT",
+      "date": "Sat, 17 Oct 2026 12:42:59 GMT",
       "score": 40,
       "grade": "D",
       "signals": [
@@ -777,13 +765,13 @@
       "flags": [],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.320007+00:00"
+      "scored_at": "2026-10-17T12:43:50.789414+00:00"
     },
     {
       "title": "GitHub: Yarzarhyo/Blum-Airdrop-Assistant",
       "link": "https://github.com/Yarzarhyo/Blum-Airdrop-Assistant",
       "source": "github_search",
-      "date": "2026-10-17T01:02:04Z",
+      "date": "2026-10-17T11:21:10Z",
       "score": 25,
       "grade": "D",
       "signals": [
@@ -792,13 +780,13 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327785+00:00"
+      "scored_at": "2026-10-17T12:43:50.802456+00:00"
     },
     {
       "title": "GitHub: kwaikwessam-prog/crypto-ops-vault",
       "link": "https://github.com/kwaikwessam-prog/crypto-ops-vault",
       "source": "github_search",
-      "date": "2026-10-17T01:00:08Z",
+      "date": "2026-10-17T10:05:32Z",
       "score": 25,
       "grade": "D",
       "signals": [
@@ -807,7 +795,7 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327853+00:00"
+      "scored_at": "2026-10-17T12:43:50.802680+00:00"
     },
     {
       "title": "GitHub: arturnery/airdrop-tracker",
@@ -822,7 +810,7 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.328441+00:00"
+      "scored_at": "2026-10-17T12:43:50.803290+00:00"
     },
     {
       "title": "GitHub: andrewhayter/bulk-airdrop-guide",
@@ -837,7 +825,75 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.328501+00:00"
+      "scored_at": "2026-10-17T12:43:50.803475+00:00"
+    },
+    {
+      "title": "NEAR Sunrise Launch: Solana Access Sends NEAR Up 14%, and My Long Got Stopped Anyway",
+      "link": "https://airdropalert.com/blogs/near-sunrise-solana/",
+      "source": "https://airdropalert.com/feed/",
+      "date": "Sat, 17 Oct 2026 11:49:58 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.644053+00:00"
+    },
+    {
+      "title": "Meme Coin Glossary: 80+ Slang Terms Explained in Plain English",
+      "link": "https://airdropalert.com/blogs/meme-coin-glossary/",
+      "source": "https://airdropalert.com/feed/",
+      "date": "Sat, 17 Oct 2026 05:15:00 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.647363+00:00"
+    },
+    {
+      "title": "How to Revoke Token Approvals: A Step-by-Step Guide",
+      "link": "https://airdropalert.com/blogs/how-to-revoke-token-approvals/",
+      "source": "https://airdropalert.com/feed/",
+      "date": "Sat, 17 Oct 2026 02:48:00 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.649609+00:00"
+    },
+    {
+      "title": "Crypto Trading Bots: Are They Actually Profitable?",
+      "link": "https://airdropalert.com/blogs/crypto-trading-bots/",
+      "source": "https://airdropalert.com/feed/",
+      "date": "Sat, 17 Oct 2026 01:47:00 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.651778+00:00"
     },
     {
       "title": "Zcash Holds $1,000: My ZEC Long Setup After the 15% Flush",
@@ -854,7 +910,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.235464+00:00"
+      "scored_at": "2026-10-17T12:43:50.654014+00:00"
     },
     {
       "title": "Gamdom Hack: $3M Admitted, $4.2M Tracked, and the Casino Is Back Online",
@@ -871,7 +927,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.237242+00:00"
+      "scored_at": "2026-10-17T12:43:50.656170+00:00"
     },
     {
       "title": "BiggerZ Review: Crypto Casino, Sportsbook and Prediction Markets in One Wallet",
@@ -888,7 +944,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.238583+00:00"
+      "scored_at": "2026-10-17T12:43:50.658307+00:00"
     },
     {
       "title": "How to Buy Shiba Inu (SHIB) for the First Time",
@@ -905,7 +961,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.239879+00:00"
+      "scored_at": "2026-10-17T12:43:50.660451+00:00"
     },
     {
       "title": "Hyperliquid vs Variational: Order Book Giant vs RFQ Newcomer",
@@ -922,7 +978,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.241170+00:00"
+      "scored_at": "2026-10-17T12:43:50.660568+00:00"
     },
     {
       "title": "Robinhood Review: The Stock App That Became a Crypto Platform",
@@ -939,13 +995,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.242462+00:00"
+      "scored_at": "2026-10-17T12:43:50.660690+00:00"
     },
     {
-      "title": "Trezor Reseller Cuts, Airdrop Updates and This Week’s Crypto News",
-      "link": "https://airdropalert.com/blogs/trezor-reseller-crypto-airdrop-updates/",
-      "source": "https://airdropalert.com/feed/",
-      "date": "Thu, 15 Oct 2026 18:07:38 +0000",
+      "title": "NEAR Sunrise Launch: Solana Access Sends NEAR Up 14%, and My Long Got Stopped Anyway",
+      "link": "https://airdropalert.com/blogs/near-sunrise-solana/",
+      "source": "https://airdropalert.com/feed/?post_type=airdrop",
+      "date": "Sat, 17 Oct 2026 11:49:58 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -956,13 +1012,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.242540+00:00"
+      "scored_at": "2026-10-17T12:43:50.660810+00:00"
     },
     {
-      "title": "Ledger Atom: Does an $849 Android Signer Fix the Reseller Problem?",
-      "link": "https://airdropalert.com/blogs/ledger-atom/",
-      "source": "https://airdropalert.com/feed/",
-      "date": "Thu, 15 Oct 2026 16:22:53 +0000",
+      "title": "Meme Coin Glossary: 80+ Slang Terms Explained in Plain English",
+      "link": "https://airdropalert.com/blogs/meme-coin-glossary/",
+      "source": "https://airdropalert.com/feed/?post_type=airdrop",
+      "date": "Sat, 17 Oct 2026 05:15:00 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -973,13 +1029,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.242638+00:00"
+      "scored_at": "2026-10-17T12:43:50.662963+00:00"
     },
     {
-      "title": "PPI Hits 6.3%: Why Ethereum Fell and What It Means for Fed Hikes",
-      "link": "https://airdropalert.com/blogs/ppi-6-3-ethereum/",
-      "source": "https://airdropalert.com/feed/",
-      "date": "Thu, 15 Oct 2026 12:55:28 +0000",
+      "title": "How to Revoke Token Approvals: A Step-by-Step Guide",
+      "link": "https://airdropalert.com/blogs/how-to-revoke-token-approvals/",
+      "source": "https://airdropalert.com/feed/?post_type=airdrop",
+      "date": "Sat, 17 Oct 2026 02:48:00 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -990,13 +1046,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.242711+00:00"
+      "scored_at": "2026-10-17T12:43:50.665100+00:00"
     },
     {
-      "title": "Trade.xyz Review: Wall Street Perps on Hyperliquid, Around the Clock",
-      "link": "https://airdropalert.com/blogs/trade-xyz-review/",
-      "source": "https://airdropalert.com/feed/",
-      "date": "Thu, 15 Oct 2026 12:09:03 +0000",
+      "title": "Crypto Trading Bots: Are They Actually Profitable?",
+      "link": "https://airdropalert.com/blogs/crypto-trading-bots/",
+      "source": "https://airdropalert.com/feed/?post_type=airdrop",
+      "date": "Sat, 17 Oct 2026 01:47:00 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -1007,7 +1063,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.242783+00:00"
+      "scored_at": "2026-10-17T12:43:50.667231+00:00"
     },
     {
       "title": "Zcash Holds $1,000: My ZEC Long Setup After the 15% Flush",
@@ -1024,7 +1080,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.242858+00:00"
+      "scored_at": "2026-10-17T12:43:50.671317+00:00"
     },
     {
       "title": "Gamdom Hack: $3M Admitted, $4.2M Tracked, and the Casino Is Back Online",
@@ -1041,7 +1097,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.244147+00:00"
+      "scored_at": "2026-10-17T12:43:50.673523+00:00"
     },
     {
       "title": "BiggerZ Review: Crypto Casino, Sportsbook and Prediction Markets in One Wallet",
@@ -1058,7 +1114,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.245449+00:00"
+      "scored_at": "2026-10-17T12:43:50.675772+00:00"
     },
     {
       "title": "How to Buy Shiba Inu (SHIB) for the First Time",
@@ -1075,7 +1131,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.246750+00:00"
+      "scored_at": "2026-10-17T12:43:50.677919+00:00"
     },
     {
       "title": "Hyperliquid vs Variational: Order Book Giant vs RFQ Newcomer",
@@ -1092,7 +1148,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.248052+00:00"
+      "scored_at": "2026-10-17T12:43:50.678037+00:00"
     },
     {
       "title": "Robinhood Review: The Stock App That Became a Crypto Platform",
@@ -1109,75 +1165,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.249354+00:00"
-    },
-    {
-      "title": "Trezor Reseller Cuts, Airdrop Updates and This Week’s Crypto News",
-      "link": "https://airdropalert.com/blogs/trezor-reseller-crypto-airdrop-updates/",
-      "source": "https://airdropalert.com/feed/?post_type=airdrop",
-      "date": "Thu, 15 Oct 2026 18:07:38 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.249427+00:00"
-    },
-    {
-      "title": "Ledger Atom: Does an $849 Android Signer Fix the Reseller Problem?",
-      "link": "https://airdropalert.com/blogs/ledger-atom/",
-      "source": "https://airdropalert.com/feed/?post_type=airdrop",
-      "date": "Thu, 15 Oct 2026 16:22:53 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.249517+00:00"
-    },
-    {
-      "title": "PPI Hits 6.3%: Why Ethereum Fell and What It Means for Fed Hikes",
-      "link": "https://airdropalert.com/blogs/ppi-6-3-ethereum/",
-      "source": "https://airdropalert.com/feed/?post_type=airdrop",
-      "date": "Thu, 15 Oct 2026 12:55:28 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.249589+00:00"
-    },
-    {
-      "title": "Trade.xyz Review: Wall Street Perps on Hyperliquid, Around the Clock",
-      "link": "https://airdropalert.com/blogs/trade-xyz-review/",
-      "source": "https://airdropalert.com/feed/?post_type=airdrop",
-      "date": "Thu, 15 Oct 2026 12:09:03 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.249663+00:00"
+      "scored_at": "2026-10-17T12:43:50.678159+00:00"
     },
     {
       "title": "Tesla Roadster Rocket Is the Cool 'Flying' Car You Can’t Have",
@@ -1194,7 +1182,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.249738+00:00"
+      "scored_at": "2026-10-17T12:43:50.678283+00:00"
     },
     {
       "title": "Hackers Jailbreak iPhone 18 Pro on Stage, and It Survives a Reboot",
@@ -1211,7 +1199,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.251245+00:00"
+      "scored_at": "2026-10-17T12:43:50.680728+00:00"
     },
     {
       "title": "Circle Plans Push Into 40 Emerging Markets as Stablecoins Go Mainstream, CEO Says",
@@ -1228,7 +1216,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.253399+00:00"
+      "scored_at": "2026-10-17T12:43:50.683173+00:00"
     },
     {
       "title": "Bitcoin Treasury Giant Strategy Faces Index Removal Under Finalized MSCI Rules",
@@ -1245,7 +1233,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.255351+00:00"
+      "scored_at": "2026-10-17T12:43:50.686246+00:00"
     },
     {
       "title": "India's Cyber Agency Says AI Agents Read Confidential Business Records Without Authorization",
@@ -1262,7 +1250,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.256877+00:00"
+      "scored_at": "2026-10-17T12:43:50.689305+00:00"
     },
     {
       "title": "CFTC Wants to Drop Gemini’s $5M Settlement. A Judge Just Said No",
@@ -1279,7 +1267,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.259511+00:00"
+      "scored_at": "2026-10-17T12:43:50.691786+00:00"
     },
     {
       "title": "Bitcoin Bounces, But Where Does It Go Next? Here’s What the Charts Say",
@@ -1296,7 +1284,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.261034+00:00"
+      "scored_at": "2026-10-17T12:43:50.696514+00:00"
     },
     {
       "title": "Three Canadian Armed Forces Members Charged in Kidnapping of Crypto Exchange Owner",
@@ -1313,7 +1301,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.262553+00:00"
+      "scored_at": "2026-10-17T12:43:50.696743+00:00"
     },
     {
       "title": "Scammer Lost $4.8M in Bitcoin to Tampered Ledger Wallets: Chainalysis",
@@ -1330,7 +1318,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.264084+00:00"
+      "scored_at": "2026-10-17T12:43:50.696908+00:00"
     },
     {
       "title": "Morning Minute: Google Clears a Major Quantum Hurdle, Bitcoin Still Safe",
@@ -1347,7 +1335,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.265588+00:00"
+      "scored_at": "2026-10-17T12:43:50.697055+00:00"
     },
     {
       "title": "OpenAI Model Used Testnet Ethereum Wallet Without Permission to Finish Coding Task",
@@ -1365,7 +1353,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267089+00:00"
+      "scored_at": "2026-10-17T12:43:50.697201+00:00"
     },
     {
       "title": "GTA 6 Trailer Features Meme Coin—And Solana Copycat Soars 2,900%",
@@ -1382,7 +1370,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267202+00:00"
+      "scored_at": "2026-10-17T12:43:50.697348+00:00"
     },
     {
       "title": "What Is a Hardware Wallet? Crypto Cold Storage Explained",
@@ -1399,7 +1387,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267297+00:00"
+      "scored_at": "2026-10-17T12:43:50.697501+00:00"
     },
     {
       "title": "Hidden Text, a Fake Mailbox: How Researchers Got Rogue AI Agents to Talk",
@@ -1416,7 +1404,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267379+00:00"
+      "scored_at": "2026-10-17T12:43:50.697666+00:00"
     },
     {
       "title": "Google Says It Just Cracked One of Quantum Computing's Biggest Bottlenecks",
@@ -1433,7 +1421,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267461+00:00"
+      "scored_at": "2026-10-17T12:43:50.697808+00:00"
     },
     {
       "title": "Russia Will Soon Ban Peer-to-Peer Bitcoin Trading, Central Bank Confirms",
@@ -1450,7 +1438,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267545+00:00"
+      "scored_at": "2026-10-17T12:43:50.697946+00:00"
     },
     {
       "title": "Boom or Bust, Bitcoin Wins the AI Trade, Bitwise CIO Says",
@@ -1467,7 +1455,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267625+00:00"
+      "scored_at": "2026-10-17T12:43:50.698076+00:00"
     },
     {
       "title": "BlackRock’s Larry Fink Warns AI Data Center Halt Could Tip US Into Recession",
@@ -1484,7 +1472,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267704+00:00"
+      "scored_at": "2026-10-17T12:43:50.698201+00:00"
     },
     {
       "title": "Google Says AI Isn't Building Itself Yet—Even Though It Writes 75% of the Code",
@@ -1501,7 +1489,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267797+00:00"
+      "scored_at": "2026-10-17T12:43:50.698352+00:00"
     },
     {
       "title": "Mastercard and BVNK Launch 'Global Money Platform' to Merge Fiat and Stablecoins",
@@ -1518,7 +1506,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267893+00:00"
+      "scored_at": "2026-10-17T12:43:50.698506+00:00"
     },
     {
       "title": "Strive’s bitcoin buying spree earns 27% price target hike from TD Cowen",
@@ -1535,7 +1523,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.267980+00:00"
+      "scored_at": "2026-10-17T12:43:50.698649+00:00"
     },
     {
       "title": "Coinbase to power stablecoin-backed cards for Marqeta customers",
@@ -1552,7 +1540,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.268087+00:00"
+      "scored_at": "2026-10-17T12:43:50.698821+00:00"
     },
     {
       "title": "Circle details USDC revenue split, says $819 million went to partners and costs in H1 2026",
@@ -1569,7 +1557,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.268183+00:00"
+      "scored_at": "2026-10-17T12:43:50.698975+00:00"
     },
     {
       "title": "How Ethereum Works",
@@ -1586,7 +1574,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.268276+00:00"
+      "scored_at": "2026-10-17T12:43:50.699127+00:00"
     },
     {
       "title": "OpenAI says research model spent another wallet’s testnet ETH without authorization on coding task",
@@ -1604,7 +1592,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.268339+00:00"
+      "scored_at": "2026-10-17T12:43:50.699231+00:00"
     },
     {
       "title": "Visa Direct moves USDC prefunding into commercial production with Inyo Global",
@@ -1621,7 +1609,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.268676+00:00"
+      "scored_at": "2026-10-17T12:43:50.699419+00:00"
     },
     {
       "title": "Google demonstrates quantum computing breakthrough as observers weigh Q-day implications",
@@ -1638,7 +1626,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.268907+00:00"
+      "scored_at": "2026-10-17T12:43:50.699587+00:00"
     },
     {
       "title": "Capital B posts wider H1 net loss of $78 million on bitcoin impairment charge",
@@ -1655,7 +1643,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269007+00:00"
+      "scored_at": "2026-10-17T12:43:50.699762+00:00"
     },
     {
       "title": "US federal judge denies joint Gemini-CFTC bid to undo $5 million settlement",
@@ -1672,7 +1660,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269096+00:00"
+      "scored_at": "2026-10-17T12:43:50.699908+00:00"
     },
     {
       "title": "MSCI finalizes index rules that put Strategy, crypto treasury firms at risk of exclusion",
@@ -1689,7 +1677,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269200+00:00"
+      "scored_at": "2026-10-17T12:43:50.700054+00:00"
     },
     {
       "title": "Farcaster acquired by Balaji’s Network School, with new ‘social smart contract’ for users",
@@ -1706,7 +1694,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269298+00:00"
+      "scored_at": "2026-10-17T12:43:50.700215+00:00"
     },
     {
       "title": "CleanSpark and BitFuFu see bitcoin production slip in September as Canaan remains flat",
@@ -1723,7 +1711,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269407+00:00"
+      "scored_at": "2026-10-17T12:43:50.700391+00:00"
     },
     {
       "title": "Multiliquid, a settlement platform for tokenized assets, raises $8 million",
@@ -1740,7 +1728,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269511+00:00"
+      "scored_at": "2026-10-17T12:43:50.700567+00:00"
     },
     {
       "title": "DeFi Development boosts CHAD dividend to 14% amid push to grow Solana holdings",
@@ -1757,7 +1745,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269599+00:00"
+      "scored_at": "2026-10-17T12:43:50.700710+00:00"
     },
     {
       "title": "Ripple Prime adds RWA swaps referencing perpetual futures listed on Hyperliquid",
@@ -1774,7 +1762,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269688+00:00"
+      "scored_at": "2026-10-17T12:43:50.700857+00:00"
     },
     {
       "title": "Starknet opens seven-day vote on independent Layer 1 over quantum risks",
@@ -1791,7 +1779,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269784+00:00"
+      "scored_at": "2026-10-17T12:43:50.701015+00:00"
     },
     {
       "title": "Bitwise CIO argues bitcoin will benefit whether AI booms or busts",
@@ -1808,7 +1796,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269882+00:00"
+      "scored_at": "2026-10-17T12:43:50.701176+00:00"
     },
     {
       "title": "Helius CEO Mert Mumtaz joins NEAR Foundation Council",
@@ -1825,7 +1813,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.269976+00:00"
+      "scored_at": "2026-10-17T12:43:50.701331+00:00"
     },
     {
       "title": "Ledger unveils Atom Android device with Solana Mobile integration and new tamper protections amid investigation into modified wallets",
@@ -1842,7 +1830,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.270062+00:00"
+      "scored_at": "2026-10-17T12:43:50.701472+00:00"
     },
     {
       "title": "EBA designates Circle’s USDC as the EU’s first ‘significant’ e-money token",
@@ -1859,7 +1847,109 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.270165+00:00"
+      "scored_at": "2026-10-17T12:43:50.701665+00:00"
+    },
+    {
+      "title": "2 Banking Giants Make Major Crypto Moves as Schwab and Deutsche Bank Expand Into Digital Assets",
+      "link": "https://cryptopotato.com/2-banking-giants-make-major-crypto-moves-as-schwab-and-deutsche-bank-expand-into-digital-assets/",
+      "source": "https://cryptopotato.com/feed/",
+      "date": "Sat, 17 Oct 2026 11:25:46 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.701854+00:00"
+    },
+    {
+      "title": "Bitcoin’s Road to $125K Could Include a Brutal Drop to $68K: Analyst",
+      "link": "https://cryptopotato.com/bitcoins-road-to-125k-could-include-a-brutal-drop-to-68k-analyst/",
+      "source": "https://cryptopotato.com/feed/",
+      "date": "Sat, 17 Oct 2026 09:01:33 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.702030+00:00"
+    },
+    {
+      "title": "These Alts Bleed the Most as Bitcoin (BTC) Settles Below $82K: Weekend Watch",
+      "link": "https://cryptopotato.com/these-alts-bleed-the-most-as-bitcoin-btc-settles-below-82k-weekend-watch/",
+      "source": "https://cryptopotato.com/feed/",
+      "date": "Sat, 17 Oct 2026 07:30:01 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.702185+00:00"
+    },
+    {
+      "title": "Bitcoin Under Pressure as Trump Reportedly Prepares to Strike Iran Within 24 Hours",
+      "link": "https://cryptopotato.com/bitcoin-under-pressure-as-trump-reportedly-prepares-to-strike-iran-within-24-hours/",
+      "source": "https://cryptopotato.com/feed/",
+      "date": "Sat, 17 Oct 2026 06:14:59 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.702334+00:00"
+    },
+    {
+      "title": "Pi Network Announces First-Ever Ecosystem Summit: Here’s What Pioneers Need to Know",
+      "link": "https://cryptopotato.com/pi-network-announces-first-ever-ecosystem-summit-heres-what-pioneers-need-to-know/",
+      "source": "https://cryptopotato.com/feed/",
+      "date": "Sat, 17 Oct 2026 05:36:00 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.702493+00:00"
+    },
+    {
+      "title": "XRP’s Chaos Near $1.33 Could Be the Start of a Much Bigger Move",
+      "link": "https://cryptopotato.com/xrps-chaos-near-1-33-could-be-the-start-of-a-much-bigger-move/",
+      "source": "https://cryptopotato.com/feed/",
+      "date": "Sat, 17 Oct 2026 04:04:29 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.702666+00:00"
     },
     {
       "title": "Taiwan Cuts Off Coinbase and Kalshi Weeks Before Local Vote: Report",
@@ -1876,7 +1966,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.270275+00:00"
+      "scored_at": "2026-10-17T12:43:50.702814+00:00"
     },
     {
       "title": "Starknet’s STRK Climbs 210% in Four Weeks, but Can the Rally Last?",
@@ -1893,7 +1983,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.270362+00:00"
+      "scored_at": "2026-10-17T12:43:50.702959+00:00"
     },
     {
       "title": "Michael Saylor’s Strategy in Trouble? MSCI’s New Rules Put Index Status at Risk",
@@ -1910,7 +2000,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.270462+00:00"
+      "scored_at": "2026-10-17T12:43:50.703113+00:00"
     },
     {
       "title": "Dacity Coin Spikes on GTA VI Trailer, Trading Against Tokenized Take-Two Stock",
@@ -1927,7 +2017,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.270564+00:00"
+      "scored_at": "2026-10-17T12:43:50.703282+00:00"
     },
     {
       "title": "Top Bittensor Price Predictions as TAO Rises 10% Daily",
@@ -1944,7 +2034,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.270658+00:00"
+      "scored_at": "2026-10-17T12:43:50.703436+00:00"
     },
     {
       "title": "Injective (INJ) Explodes to a 1-Year High: Has Its Bull Run Begun?",
@@ -1961,7 +2051,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.270736+00:00"
+      "scored_at": "2026-10-17T12:43:50.703566+00:00"
     },
     {
       "title": "Bitcoin Dumps to Monthly Lows on Hot Inflation Data and Warsh Comments: Weekly Crypto Recap",
@@ -1978,7 +2068,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.270820+00:00"
+      "scored_at": "2026-10-17T12:43:50.703726+00:00"
     },
     {
       "title": "ETH Defends $2.4K Support Despite Weakening US Buying Pressure: Ethereum Price Analysis",
@@ -1995,7 +2085,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.270923+00:00"
+      "scored_at": "2026-10-17T12:43:50.703893+00:00"
     },
     {
       "title": "Liquid Ape NFTs Strategically Plan Their Launch to Coincide with ApeFest 2026",
@@ -2012,7 +2102,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271021+00:00"
+      "scored_at": "2026-10-17T12:43:50.704056+00:00"
     },
     {
       "title": "Crypto Price Analysis Oct-16: ETH, XRP, ADA, BNB, and HYPE",
@@ -2029,7 +2119,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271113+00:00"
+      "scored_at": "2026-10-17T12:43:50.704209+00:00"
     },
     {
       "title": "Insane Trading Wins and Losses, Major ZEC Turbulence, and More: Bits Recap October 16",
@@ -2046,7 +2136,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271204+00:00"
+      "scored_at": "2026-10-17T12:43:50.704339+00:00"
     },
     {
       "title": "Ripple Pushes RLUSD Deeper Into Banking With New Cross River Partnership",
@@ -2063,7 +2153,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271301+00:00"
+      "scored_at": "2026-10-17T12:43:50.704499+00:00"
     },
     {
       "title": "This Bitcoin Cycle Theory Puts $350K in Focus Before the Next Crash",
@@ -2080,7 +2170,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271390+00:00"
+      "scored_at": "2026-10-17T12:43:50.704646+00:00"
     },
     {
       "title": "Fed Chair Warsh’s Bangkok Speech: 4 Key Takeaways and What They Mean for Bitcoin",
@@ -2097,13 +2187,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271475+00:00"
+      "scored_at": "2026-10-17T12:43:50.704787+00:00"
     },
     {
-      "title": "Ledger Unveils $849 Android-Based Atom Signer Days After Hardware Implant Attack",
-      "link": "https://cryptopotato.com/ledger-unveils-849-android-based-atom-signer-days-after-hardware-implant-attack/",
-      "source": "https://cryptopotato.com/feed/",
-      "date": "Fri, 16 Oct 2026 07:31:35 +0000",
+      "title": "Is Cardano Complete? Hoskinson Says 'Yes' but There Is One Thing Left",
+      "link": "https://u.today/is-cardano-complete-hoskinson-says-yes-but-there-is-one-thing-left",
+      "source": "https://u.today/rss",
+      "date": "Sat, 17 Oct 2026 10:35:56 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2114,31 +2204,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271578+00:00"
+      "scored_at": "2026-10-17T12:43:50.704957+00:00"
     },
     {
-      "title": "OpenAI Says Research Model Raided Developer Wallet on Ethereum Testnet",
-      "link": "https://cryptopotato.com/openai-says-research-model-raided-developer-wallet-on-ethereum-testnet/",
-      "source": "https://cryptopotato.com/feed/",
-      "date": "Fri, 16 Oct 2026 06:16:31 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "testnet",
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271678+00:00"
-    },
-    {
-      "title": "Pixagram Announces Free Account Creation for 250 New Users Daily Through 2026",
-      "link": "https://cryptopotato.com/pixagram-announces-free-account-creation-for-250-new-users-daily-through-2026/",
-      "source": "https://cryptopotato.com/feed/",
-      "date": "Fri, 16 Oct 2026 05:33:27 +0000",
+      "title": "Ethereum's Vitalik Buterin Shares Key Difference Between Bitcoin Mining and AI",
+      "link": "https://u.today/ethereums-vitalik-buterin-shares-key-difference-between-bitcoin-mining-and-ai",
+      "source": "https://u.today/rss",
+      "date": "Sat, 17 Oct 2026 10:25:52 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2149,13 +2221,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271765+00:00"
+      "scored_at": "2026-10-17T12:43:50.705096+00:00"
     },
     {
-      "title": "ChangeNOW Announces NOW AI After Resolving Website Integration Vulnerability",
-      "link": "https://cryptopotato.com/changenow-announces-now-ai-after-resolving-website-integration-vulnerability/",
-      "source": "https://cryptopotato.com/feed/",
-      "date": "Fri, 16 Oct 2026 05:32:57 +0000",
+      "title": "XRP Searches Drop 90% on Yearly Scale in Google Trends",
+      "link": "https://u.today/xrp-searches-drop-90-on-yearly-scale-in-google-trends",
+      "source": "https://u.today/rss",
+      "date": "Sat, 17 Oct 2026 04:00:00 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2166,13 +2238,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271857+00:00"
+      "scored_at": "2026-10-17T12:43:50.705242+00:00"
     },
     {
-      "title": "XRP Flashes Multiple Buy Signals Even as Struggle Near $1.30 Continues",
-      "link": "https://cryptopotato.com/xrp-flashes-multiple-buy-signals-even-as-struggle-near-1-30-continues/",
-      "source": "https://cryptopotato.com/feed/",
-      "date": "Fri, 16 Oct 2026 04:08:06 +0000",
+      "title": "81 Billion Shiba Inu (SHIB) Traded in 24 Hours: There's Hope",
+      "link": "https://u.today/81-billion-shiba-inu-shib-traded-in-24-hours-theres-hope",
+      "source": "https://u.today/rss",
+      "date": "Sat, 17 Oct 2026 03:00:00 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2183,24 +2255,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.271949+00:00"
-    },
-    {
-      "title": "USDC Just Hit a Major EU Regulatory Milestone: Here’s What Changes in November",
-      "link": "https://cryptopotato.com/usdc-just-hit-a-major-eu-regulatory-milestone-heres-what-changes-in-november/",
-      "source": "https://cryptopotato.com/feed/",
-      "date": "Thu, 15 Oct 2026 22:20:37 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272038+00:00"
+      "scored_at": "2026-10-17T12:43:50.705367+00:00"
     },
     {
       "title": "Dogecoin (DOGE), Shiba Inu (SHIB), Uniswap (UNI) and Ethereum (ETH) Price Analysis For October 17: Unexpected Recovery Is Here",
@@ -2217,7 +2272,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272140+00:00"
+      "scored_at": "2026-10-17T12:43:50.705496+00:00"
     },
     {
       "title": "Binance Founder CZ Voices Support for XRP, ZEC and SOL Amid China Crypto Controversy",
@@ -2234,7 +2289,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272250+00:00"
+      "scored_at": "2026-10-17T12:43:50.705697+00:00"
     },
     {
       "title": "Google's Quantum Breakthrough Sparks Fresh Crypto Security Concerns",
@@ -2251,7 +2306,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272344+00:00"
+      "scored_at": "2026-10-17T12:43:50.705853+00:00"
     },
     {
       "title": "Bitcoin on Track for $10,000 if S&P 500 Drops 20%, Bloomberg Strategist Insists",
@@ -2268,7 +2323,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272428+00:00"
+      "scored_at": "2026-10-17T12:43:50.705988+00:00"
     },
     {
       "title": "XRP Trading Volume Surpasses Bitcoin and Ethereum in South Korea",
@@ -2285,7 +2340,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272517+00:00"
+      "scored_at": "2026-10-17T12:43:50.706135+00:00"
     },
     {
       "title": "Deutsche Bank to Launch Bitcoin and Ethereum Custody Within Weeks",
@@ -2302,7 +2357,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272599+00:00"
+      "scored_at": "2026-10-17T12:43:50.706269+00:00"
     },
     {
       "title": "Dogecoin Eyes First Major Daily Death Cross of 2026: Potential Trend Shift Ahead?",
@@ -2319,7 +2374,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272680+00:00"
+      "scored_at": "2026-10-17T12:43:50.706402+00:00"
     },
     {
       "title": "Japan Megabanks Test First Joint Yen Stablecoin: Where Does XRP Fit?",
@@ -2336,7 +2391,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272771+00:00"
+      "scored_at": "2026-10-17T12:43:50.706552+00:00"
     },
     {
       "title": "Major Crypto Exchange Announces October Asset Delistings, XRP Safe",
@@ -2353,7 +2408,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272854+00:00"
+      "scored_at": "2026-10-17T12:43:50.706688+00:00"
     },
     {
       "title": "78 Billion Shiba Inu Netflow Triggers Brief Price Recovery",
@@ -2370,7 +2425,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.272937+00:00"
+      "scored_at": "2026-10-17T12:43:50.706823+00:00"
     },
     {
       "title": "Vitalik Buterin Deploys 'Paranoid Mode' for AI on Ethereum",
@@ -2387,7 +2442,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273014+00:00"
+      "scored_at": "2026-10-17T12:43:50.706951+00:00"
     },
     {
       "title": "Shiba Inu (SHIB) Eyes 'Zero Deletion' Scenario as Bulls Defend Key $3 Billion Support",
@@ -2404,7 +2459,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273092+00:00"
+      "scored_at": "2026-10-17T12:43:50.707077+00:00"
     },
     {
       "title": "Not From Ryoshi? Shiba Inu Founder's Mystery Takes Turn With Fresh Detail Uncovered",
@@ -2421,7 +2476,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273204+00:00"
+      "scored_at": "2026-10-17T12:43:50.707229+00:00"
     },
     {
       "title": "Ledger, Again: Another Attack, Another Phishing Wave: How Can Users Protect Themselves?",
@@ -2438,7 +2493,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273297+00:00"
+      "scored_at": "2026-10-17T12:43:50.707380+00:00"
     },
     {
       "title": "XRP Defies Support Crash With Sudden $184 Million Binance Inflow",
@@ -2455,7 +2510,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273392+00:00"
+      "scored_at": "2026-10-17T12:43:50.707537+00:00"
     },
     {
       "title": "Will Death Cross Finalize on XRP?",
@@ -2472,13 +2527,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273474+00:00"
+      "scored_at": "2026-10-17T12:43:50.707691+00:00"
     },
     {
-      "title": "OpenAI Agent Involved in Crypto Security Incident",
-      "link": "https://u.today/openai-agent-involved-in-crypto-security-incident",
-      "source": "https://u.today/rss",
-      "date": "Fri, 16 Oct 2026 07:16:17 +0000",
+      "title": "Arthur Hayes Says OpenAI and Anthropic Are Worthless and Bitcoin Wins",
+      "link": "https://news.bitcoin.com/finance/arthur-hayes-ai-waste-of-money-bitcoin-bailout/",
+      "source": "https://news.bitcoin.com/feed/",
+      "date": "Sat, 17 Oct 2026 11:00:10 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2489,13 +2544,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273536+00:00"
+      "scored_at": "2026-10-17T12:43:50.707797+00:00"
     },
     {
-      "title": "Coinbase Warns of XRP Long Position Risks",
-      "link": "https://u.today/coinbase-warns-of-xrp-long-position-risks",
-      "source": "https://u.today/rss",
-      "date": "Fri, 16 Oct 2026 05:35:27 +0000",
+      "title": "Bloomberg Sees Bitcoin Price at $10K and Cryptoquant’s CEO Doesn’t Agree",
+      "link": "https://news.bitcoin.com/crypto-news/bloomberg-mcglone-bitcoin-10k-cryptoquant-ki-young-ju/",
+      "source": "https://news.bitcoin.com/feed/",
+      "date": "Sat, 17 Oct 2026 09:30:10 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2506,13 +2561,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273609+00:00"
+      "scored_at": "2026-10-17T12:43:50.707935+00:00"
     },
     {
-      "title": "Bitcoin (BTC), Binance Coin (BNB), Hyperliquid (HYPE) and Cardano (ADA) Price Analysis For October 16: Can Buyers Reclaim Control?",
-      "link": "https://u.today/price-analysis/bitcoin-btc-binance-coin-bnb-hyperliquid-hype-and-cardano-ada-price-analysis-for-october-16-can",
-      "source": "https://u.today/rss",
-      "date": "Fri, 16 Oct 2026 00:01:00 +0000",
+      "title": "Binance Offers Nearly 8% in XRP for RLUSD But the Base Rate Keeps Falling",
+      "link": "https://news.bitcoin.com/exchanges/binance-rlusd-xrp-rewards-7-77-apr-shrinking/",
+      "source": "https://news.bitcoin.com/feed/",
+      "date": "Sat, 17 Oct 2026 08:30:40 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2523,13 +2578,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273680+00:00"
+      "scored_at": "2026-10-17T12:43:50.708103+00:00"
     },
     {
-      "title": "Saylor Reacts to AI Money Study With Bullish Bitcoin Message",
-      "link": "https://u.today/saylor-reacts-to-ai-money-study-with-bullish-bitcoin-message",
-      "source": "https://u.today/rss",
-      "date": "Thu, 15 Oct 2026 20:34:16 +0000",
+      "title": "Strategy Sinks Nearly 10% on MSCI News But Saylor Is Still $5B Up",
+      "link": "https://news.bitcoin.com/market-updates/strategy-mstr-falls-msci-ruling-saylor-bitcoin-5b-profit/",
+      "source": "https://news.bitcoin.com/feed/",
+      "date": "Sat, 17 Oct 2026 07:30:22 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2540,7 +2595,92 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273797+00:00"
+      "scored_at": "2026-10-17T12:43:50.708242+00:00"
+    },
+    {
+      "title": "NASA Sent Thousands of Jellyfish to Space in 1991. The Babies Born Up There Couldn’t Handle Earth",
+      "link": "https://news.bitcoin.com/technology/nasa-sent-thousands-of-jellyfish-to-space-in-1991-the-babies-born-up-there-couldnt-handle-earth-49201/",
+      "source": "https://news.bitcoin.com/feed/",
+      "date": "Sat, 17 Oct 2026 06:30:00 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.708389+00:00"
+    },
+    {
+      "title": "A North Carolina Woman Won $100,000 on a Scratch-Off. Then She Won It Again on the Exact Same Game",
+      "link": "https://news.bitcoin.com/featured/a-north-carolina-woman-won-100000-on-a-scratch-off-then-she-won-it-again-on-the-exact-same-game-49201/",
+      "source": "https://news.bitcoin.com/feed/",
+      "date": "Sat, 17 Oct 2026 05:30:28 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.708594+00:00"
+    },
+    {
+      "title": "Nine Blockchain Groups Unite as Quantum Threat Hangs Over Bitcoin",
+      "link": "https://news.bitcoin.com/featured/nine-blockchain-groups-unite-as-quantum-threat-hangs-over-bitcoin/",
+      "source": "https://news.bitcoin.com/feed/",
+      "date": "Sat, 17 Oct 2026 03:50:13 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.708774+00:00"
+    },
+    {
+      "title": "Judge Refuses to Erase Gemini’s $5M Settlement Despite CFTC Reversal",
+      "link": "https://news.bitcoin.com/regulation-and-legal/judge-refuses-to-erase-geminis-5m-settlement-despite-cftc-reversal/",
+      "source": "https://news.bitcoin.com/feed/",
+      "date": "Sat, 17 Oct 2026 02:30:18 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.708919+00:00"
+    },
+    {
+      "title": "Solana Apps Generate $193M in 30 Days Amid Real-World Assets Surge",
+      "link": "https://news.bitcoin.com/altcoins/solana-apps-generate-193m-30-days-rwas-surge-600/",
+      "source": "https://news.bitcoin.com/feed/",
+      "date": "Sat, 17 Oct 2026 01:30:03 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.709090+00:00"
     },
     {
       "title": "Claude AI Cracks the NSA’s 25-Year Cryptography Seed Mystery",
@@ -2557,13 +2697,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273877+00:00"
+      "scored_at": "2026-10-17T12:43:50.709228+00:00"
     },
     {
-      "title": "Wall Street Veterans Unveil DeFi Platform for 77 TradFi Markets",
-      "link": "https://news.bitcoin.com/finance/wall-street-veterans-unveil-defi-platform-77-tradfi-markets/",
-      "source": "https://news.bitcoin.com/feed/",
-      "date": "Fri, 16 Oct 2026 23:30:29 +0000",
+      "title": "Banks could slow stablecoin growth by paying savers more, BIS paper finds",
+      "link": "https://www.coindesk.com/business/2026/10/14/banks-could-slow-stablecoin-growth-by-paying-savers-more-bis-paper-finds",
+      "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "date": "Sat, 17 Oct 2026 12:00:00 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2574,13 +2714,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.273972+00:00"
+      "scored_at": "2026-10-17T12:43:50.709384+00:00"
     },
     {
-      "title": "Solana Abruptly Postpones Shanghai Event as Registrations Quadruple",
-      "link": "https://news.bitcoin.com/altcoins/solana-abruptly-postpones-shanghai-event-registrations-quadruple/",
-      "source": "https://news.bitcoin.com/feed/",
-      "date": "Fri, 16 Oct 2026 22:30:01 +0000",
+      "title": "‘Wow, it’s a real discovery’: Claude cracks a 25-year NSA number mystery",
+      "link": "https://www.coindesk.com/tech/2026/10/17/wow-it-s-a-real-discovery-claude-cracks-a-25-year-nsa-number-mystery",
+      "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "date": "Sat, 17 Oct 2026 06:39:48 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2591,13 +2731,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.274058+00:00"
+      "scored_at": "2026-10-17T12:43:50.709544+00:00"
     },
     {
-      "title": "Visa Moves Massive Stablecoin Payments Pilot Into Production Phase",
-      "link": "https://news.bitcoin.com/stablecoins/visa-moves-massive-stablecoin-payments-pilot-production-phase/",
-      "source": "https://news.bitcoin.com/feed/",
-      "date": "Fri, 16 Oct 2026 21:30:47 +0000",
+      "title": "Satoshi-era bitcoin faces a bigger quantum threat after Google’s new Willow breakthrough",
+      "link": "https://www.coindesk.com/tech/2026/10/16/satoshi-era-bitcoin-faces-a-bigger-quantum-threat-after-google-s-new-willow-breakthrough",
+      "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "date": "Sat, 17 Oct 2026 02:30:00 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -2608,109 +2748,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.274147+00:00"
-    },
-    {
-      "title": "Bitcoin Mining Difficulty Jumps 5.92% in Third-Largest Hike of 2026",
-      "link": "https://news.bitcoin.com/mining/bitcoin-mining-difficulty-jumps-5-92-third-largest-hike-2026/",
-      "source": "https://news.bitcoin.com/feed/",
-      "date": "Fri, 16 Oct 2026 20:30:18 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.274236+00:00"
-    },
-    {
-      "title": "Ethereum Founder Vitalik Buterin Details His ‘Paranoid Mode’ AI Agent Setup",
-      "link": "https://news.bitcoin.com/technology/ethereum-founder-vitalik-buterin-paranoid-mode-ai-agent-setup/",
-      "source": "https://news.bitcoin.com/feed/",
-      "date": "Fri, 16 Oct 2026 19:25:51 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.274380+00:00"
-    },
-    {
-      "title": "Taiwan Blocks Coinbase and Kalshi Over Bets on Its November Elections",
-      "link": "https://news.bitcoin.com/igaming/taiwan-blocks-coinbase-kalshi-bets-november-elections/",
-      "source": "https://news.bitcoin.com/feed/",
-      "date": "Fri, 16 Oct 2026 18:35:58 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.274483+00:00"
-    },
-    {
-      "title": "Bitcoin Price Hovers Near $81K as Analysts See Potential Market Bottom",
-      "link": "https://news.bitcoin.com/market-updates/bitcoin-price-hovers-near-81k-analysts-see-market-bottom/",
-      "source": "https://news.bitcoin.com/feed/",
-      "date": "Fri, 16 Oct 2026 17:43:15 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.274569+00:00"
-    },
-    {
-      "title": "Bitcoin Giant Strategy Plans STRC Daily Dividends Starting in November",
-      "link": "https://news.bitcoin.com/finance/bitcoin-giant-strategy-strc-daily-dividends-starting-november/",
-      "source": "https://news.bitcoin.com/feed/",
-      "date": "Fri, 16 Oct 2026 16:56:51 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.274663+00:00"
-    },
-    {
-      "title": "Deutsche Bank Nears Launch of Institutional Bitcoin, Ether Custody",
-      "link": "https://news.bitcoin.com/finance/deutsche-bank-nears-launch-institutional-bitcoin-ether-custody/",
-      "source": "https://news.bitcoin.com/feed/",
-      "date": "Fri, 16 Oct 2026 16:25:10 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.274751+00:00"
+      "scored_at": "2026-10-17T12:43:50.709956+00:00"
     },
     {
       "title": "Big Tech's AI auditors will only see what they're shown",
@@ -2727,7 +2765,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.274839+00:00"
+      "scored_at": "2026-10-17T12:43:50.710336+00:00"
     },
     {
       "title": "Traders will soon be able to bet on whether Coinbase, Robinhood and Marathon will hit their targets",
@@ -2744,7 +2782,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.274925+00:00"
+      "scored_at": "2026-10-17T12:43:50.710590+00:00"
     },
     {
       "title": "Circle targets 40 new markets as stablecoin demand grows globally",
@@ -2761,7 +2799,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.275037+00:00"
+      "scored_at": "2026-10-17T12:43:50.710913+00:00"
     },
     {
       "title": "Quantum Alliance forms amid warnings 6.4 million bitcoin face future quantum threat",
@@ -2778,7 +2816,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.275129+00:00"
+      "scored_at": "2026-10-17T12:43:50.711174+00:00"
     },
     {
       "title": "Tokenized Tesla surges as Elon Musk unveils SpaceX-powered flying Roadster prototype",
@@ -2795,7 +2833,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.275244+00:00"
+      "scored_at": "2026-10-17T12:43:50.711509+00:00"
     },
     {
       "title": "Altcoins outpace bitcoin as celestia jumps 16%, Warsh silent on interest-rate plans",
@@ -2812,7 +2850,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.275355+00:00"
+      "scored_at": "2026-10-17T12:43:50.711828+00:00"
     },
     {
       "title": "Scammer gets scammed in Ledger spy-chip exploit, loses almost $5 million in bitcoin",
@@ -2829,7 +2867,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.275456+00:00"
+      "scored_at": "2026-10-17T12:43:50.712126+00:00"
     },
     {
       "title": "Live updates: Bitcoin dips to $81,000 as stocks slide, VIX soars ahead of Black Monday anniversary",
@@ -2846,7 +2884,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.275563+00:00"
+      "scored_at": "2026-10-17T12:43:50.712422+00:00"
     },
     {
       "title": "U.S. judge rejects Gemini’s appeal to void $5 million settlement despite CFTC backing",
@@ -2863,7 +2901,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.275669+00:00"
+      "scored_at": "2026-10-17T12:43:50.712671+00:00"
     },
     {
       "title": "MSCI approves rules that could eject Strategy, Metaplanet from equity indexes",
@@ -2880,7 +2918,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.275791+00:00"
+      "scored_at": "2026-10-17T12:43:50.712863+00:00"
     },
     {
       "title": "XRP has failed to make holders rich like bitcoin and ether. Here’s why",
@@ -2897,7 +2935,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.275890+00:00"
+      "scored_at": "2026-10-17T12:43:50.713026+00:00"
     },
     {
       "title": "An OpenAI agent ran out of Ethereum funds, and took from a wallet it did not own",
@@ -2914,7 +2952,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.275993+00:00"
+      "scored_at": "2026-10-17T12:43:50.713196+00:00"
     },
     {
       "title": "Bitcoin buyers snap up a brief drop below $80,000 as Asian stocks rebound",
@@ -2931,7 +2969,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.276091+00:00"
+      "scored_at": "2026-10-17T12:43:50.713358+00:00"
     },
     {
       "title": "At the White House, crypto policy vacancy looms large",
@@ -2948,7 +2986,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.276187+00:00"
+      "scored_at": "2026-10-17T12:43:50.713621+00:00"
     },
     {
       "title": "Crypto for Advisors: Wall Street is done waiting on Congress for crypto rules",
@@ -2965,7 +3003,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.276272+00:00"
+      "scored_at": "2026-10-17T12:43:50.713764+00:00"
     },
     {
       "title": "How Brooklyn prosecutors and the FBI took down a massive crypto fraud network targeting Russian speakers",
@@ -2982,7 +3020,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.276374+00:00"
+      "scored_at": "2026-10-17T12:43:50.713931+00:00"
     },
     {
       "title": "Under pressure, Ledger unveils plan to turn its crypto hardware wallet into a smartphone",
@@ -2999,13 +3037,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.276489+00:00"
+      "scored_at": "2026-10-17T12:43:50.714120+00:00"
     },
     {
-      "title": "Bitcoin, copper, stocks, yields all fall; gold rises",
-      "link": "https://www.coindesk.com/daybook-us/2026/10/15/bitcoin-copper-stocks-yields-all-fall-gold-rises",
-      "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
-      "date": "Thu, 15 Oct 2026 11:15:00 +0000",
+      "title": "Circle’s Allaire says stablecoin issuer looking to enter 40 developing markets: Report",
+      "link": "https://cointelegraph.com/news/circles-allaire-says-stablecoin-issuer-looking-to-enter-40-developing-markets-report?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "https://cointelegraph.com/rss",
+      "date": "Sat, 17 Oct 2026 10:00:07 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -3016,13 +3054,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.276593+00:00"
+      "scored_at": "2026-10-17T12:43:50.714299+00:00"
     },
     {
-      "title": "Altcoins lead crypto declines as Asian stocks drop; bitcoin little changed since midnight",
-      "link": "https://www.coindesk.com/markets/2026/10/15/bitcoin-holds-above-usd80-000-as-an-asian-stock-rout-drags-altcoins-lower",
-      "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
-      "date": "Thu, 15 Oct 2026 10:52:11 +0000",
+      "title": "Lagarde says euro-area economy is resilient, digital euro imminent",
+      "link": "https://cointelegraph.com/news/lagarde-says-euro-area-economy-is-resilient-digital-euro-imminent?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "https://cointelegraph.com/rss",
+      "date": "Sat, 17 Oct 2026 08:32:11 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -3033,13 +3071,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.276675+00:00"
+      "scored_at": "2026-10-17T12:43:50.714522+00:00"
     },
     {
-      "title": "Live updates: Bitcoin bounces back to $82,000 after first fall below $80,000 in one month",
-      "link": "https://www.coindesk.com/business/2026/10/15/live-updates-bitcoin-back-under-usd81-000-as-ai-selloff-worsens",
-      "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
-      "date": "Thu, 15 Oct 2026 10:16:15 +0000",
+      "title": "Bitget to discontinue services for some users in one-off exercise",
+      "link": "https://cointelegraph.com/news/bitget-to-discontinue-services-for-some-users-in-one-off-exercise?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "https://cointelegraph.com/rss",
+      "date": "Sat, 17 Oct 2026 07:26:57 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -3050,7 +3088,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.276776+00:00"
+      "scored_at": "2026-10-17T12:43:50.714704+00:00"
     },
     {
       "title": "Here’s what happened in crypto today",
@@ -3067,7 +3105,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.276873+00:00"
+      "scored_at": "2026-10-17T12:43:50.714887+00:00"
     },
     {
       "title": "Crypto PACs escalate spending against Sherrod Brown in Ohio Senate race",
@@ -3084,7 +3122,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.276974+00:00"
+      "scored_at": "2026-10-17T12:43:50.715047+00:00"
     },
     {
       "title": "Stablecoin remittances cost 84% less than traditional transfers, report finds",
@@ -3101,7 +3139,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.277082+00:00"
+      "scored_at": "2026-10-17T12:43:50.715225+00:00"
     },
     {
       "title": "Crypto Biz: Wall Street closes at 4. Tokenized stocks keep trading",
@@ -3118,7 +3156,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.277201+00:00"
+      "scored_at": "2026-10-17T12:43:50.715421+00:00"
     },
     {
       "title": "Bitcoin price steadies around $82K after Fed’s Warsh avoids rate-hike hints",
@@ -3135,7 +3173,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.277306+00:00"
+      "scored_at": "2026-10-17T12:43:50.715595+00:00"
     },
     {
       "title": "Strategy conditionally declares daily dividends as STRC hovers below $100",
@@ -3152,7 +3190,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.277435+00:00"
+      "scored_at": "2026-10-17T12:43:50.715797+00:00"
     },
     {
       "title": "Ledger’s early implant warnings deserved more action, Karpelès says",
@@ -3169,7 +3207,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.277540+00:00"
+      "scored_at": "2026-10-17T12:43:50.715976+00:00"
     },
     {
       "title": "Deutsche Bank prepares German crypto custody launch, eyes Asia: Report",
@@ -3186,7 +3224,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.277653+00:00"
+      "scored_at": "2026-10-17T12:43:50.716162+00:00"
     },
     {
       "title": "Solana’s Liu says Shanghai event postponed over registration surge",
@@ -3203,7 +3241,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.277758+00:00"
+      "scored_at": "2026-10-17T12:43:50.716339+00:00"
     },
     {
       "title": "CONNECT recap: Liquidity is tokenization’s next challenge, everyday stablecoins",
@@ -3220,7 +3258,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.277873+00:00"
+      "scored_at": "2026-10-17T12:43:50.716524+00:00"
     },
     {
       "title": "Bitcoin may seek 20-month trend line reclaim before new record highs: CryptoQuant",
@@ -3237,7 +3275,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.278003+00:00"
+      "scored_at": "2026-10-17T12:43:50.716742+00:00"
     },
     {
       "title": "Capital B reports $78M H1 loss driven by Bitcoin impairment charge",
@@ -3254,7 +3292,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.278121+00:00"
+      "scored_at": "2026-10-17T12:43:50.716934+00:00"
     },
     {
       "title": "Judge rejects CFTC, Gemini bid to undo $5M settlement",
@@ -3271,7 +3309,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.278226+00:00"
+      "scored_at": "2026-10-17T12:43:50.717100+00:00"
     },
     {
       "title": "OpenAI model helped itself to testnet crypto, then kept quiet about it",
@@ -3289,7 +3327,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.278325+00:00"
+      "scored_at": "2026-10-17T12:43:50.717262+00:00"
     },
     {
       "title": "Balaji’s ‘Singapore of social media’ begins with a wave of bans",
@@ -3306,7 +3344,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.278420+00:00"
+      "scored_at": "2026-10-17T12:43:50.717436+00:00"
     },
     {
       "title": "MSCI adopts index exclusion rules that could oust Strategy",
@@ -3323,7 +3361,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.278538+00:00"
+      "scored_at": "2026-10-17T12:43:50.717629+00:00"
     },
     {
       "title": "Australia releases draft bill to adopt OECD crypto tax reporting framework",
@@ -3340,58 +3378,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.278642+00:00"
-    },
-    {
-      "title": "Scammer loses $4.8M stored on tampered Ledgers: Asia Express",
-      "link": "https://cointelegraph.com/magazine/scammer-loses-48m-stored-on-tampered-ledgers-asia-express?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "https://cointelegraph.com/rss",
-      "date": "Thu, 15 Oct 2026 22:42:58 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.278756+00:00"
-    },
-    {
-      "title": "Binance.US seeks $1B valuation in potential $100M funding round: Report",
-      "link": "https://cointelegraph.com/news/binance-us-funding-valuation-billion?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "https://cointelegraph.com/rss",
-      "date": "Thu, 15 Oct 2026 20:21:11 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.278861+00:00"
-    },
-    {
-      "title": "Ex-Trump crypto adviser profited after helping pass stablecoin bill: WSJ",
-      "link": "https://cointelegraph.com/news/bo-hines-donald-trump-crypto-advisor-nxum-tether-conflict?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "https://cointelegraph.com/rss",
-      "date": "Thu, 15 Oct 2026 17:14:45 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.278962+00:00"
+      "scored_at": "2026-10-17T12:43:50.717806+00:00"
     },
     {
       "title": "Poetic Justice: Scammer Lost $5M in Bitcoin After Being Targeted by Ledger Thieves",
@@ -3408,7 +3395,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.279070+00:00"
+      "scored_at": "2026-10-17T12:43:50.717993+00:00"
     },
     {
       "title": "BFFS26 Denver: Joseph Kelly on Bitcoin Custody and Credit; Alan Lane on Banking Lessons",
@@ -3425,7 +3412,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.279155+00:00"
+      "scored_at": "2026-10-17T12:43:50.718221+00:00"
     },
     {
       "title": "Sazmining Now Sells Jack Dorsey’s Proto Immersion Hashboards",
@@ -3442,7 +3429,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.279272+00:00"
+      "scored_at": "2026-10-17T12:43:50.718407+00:00"
     },
     {
       "title": "Hot Inflation Data Puts Bitcoin Under Pressure, but ‘Difficult’ Isn’t ‘Bearish’: CoinShares",
@@ -3459,7 +3446,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.279368+00:00"
+      "scored_at": "2026-10-17T12:43:50.718551+00:00"
     },
     {
       "title": "Deutsche Bank To Debut Bitcoin Custody Within Weeks: Report",
@@ -3476,7 +3463,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.279465+00:00"
+      "scored_at": "2026-10-17T12:43:50.718841+00:00"
     },
     {
       "title": "MSCI To Move Forward With Proposal That Could Exclude Strategy From Index",
@@ -3493,7 +3480,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.279543+00:00"
+      "scored_at": "2026-10-17T12:43:50.719044+00:00"
     },
     {
       "title": "Crypto Analyst Lark Davis: The Bitcoin Bull Run has Begun",
@@ -3510,7 +3497,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.279624+00:00"
+      "scored_at": "2026-10-17T12:43:50.719351+00:00"
     },
     {
       "title": "Math Professor Warns of Threat to Bitcoin from AI Pivot",
@@ -3527,7 +3514,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.279708+00:00"
+      "scored_at": "2026-10-17T12:43:50.719951+00:00"
     },
     {
       "title": "Morgan Stanley’s Amy Oldenburg: The Digital Gold Investment Case for Bitcoin",
@@ -3544,7 +3531,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.279793+00:00"
+      "scored_at": "2026-10-17T12:43:50.720153+00:00"
     },
     {
       "title": "Sazmining Brings Proto’s Immersion Hashboards to Individual Owners, With 0% Financing From $1,397 Down",
@@ -3561,7 +3548,75 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.279900+00:00"
+      "scored_at": "2026-10-17T12:43:50.720425+00:00"
+    },
+    {
+      "title": "Bitcoin ETFs Lose $82 Million As BlackRock Leads Friday’s Withdrawals",
+      "link": "https://www.newsbtc.com/bitcoin-news/bitcoin-etfs-lose-82-million-as-blackrock-leads-friday-s-withdrawals/",
+      "source": "https://www.newsbtc.com/feed/",
+      "date": "Sat, 17 Oct 2026 12:13:00 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.720638+00:00"
+    },
+    {
+      "title": "Circle Targets 40 New Markets As USDC Push Moves Beyond Crypto Trading",
+      "link": "https://www.newsbtc.com/crypto-news/circle-targets-40-new-markets-as-usdc-push-moves-beyond-crypto-trading/",
+      "source": "https://www.newsbtc.com/feed/",
+      "date": "Sat, 17 Oct 2026 11:13:00 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.720868+00:00"
+    },
+    {
+      "title": "Judge Rejects Gemini And CFTC Bid To Overturn $5 Million Settlement",
+      "link": "https://www.newsbtc.com/regulation/judge-rejects-gemini-and-cftc-bid-to-overturn-5-million-settlement/",
+      "source": "https://www.newsbtc.com/feed/",
+      "date": "Sat, 17 Oct 2026 10:13:00 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.721024+00:00"
+    },
+    {
+      "title": "MSCI Tightens Index Rules As Strategy And Other Bitcoin Treasury Firms Face Fresh Scrutiny",
+      "link": "https://www.newsbtc.com/regulation/msci-tightens-index-rules-as-strategy-and-other-bitcoin-treasury-firms/",
+      "source": "https://www.newsbtc.com/feed/",
+      "date": "Sat, 17 Oct 2026 09:13:00 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.721175+00:00"
     },
     {
       "title": "MEXC Releases October 2026 Proof of Reserves, Reinforcing User Trust Through Verifiable Transparency",
@@ -3578,7 +3633,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.280025+00:00"
+      "scored_at": "2026-10-17T12:43:50.721337+00:00"
     },
     {
       "title": "MEXC AI Trading Report Reveals 85% of Crypto Traders Use AI, But Most Limit Its Control Over Funds",
@@ -3595,7 +3650,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.280133+00:00"
+      "scored_at": "2026-10-17T12:43:50.721539+00:00"
     },
     {
       "title": "BingX EU Secures MiCAR License, Advancing Regulated Crypto Services Across Europe",
@@ -3612,7 +3667,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.280239+00:00"
+      "scored_at": "2026-10-17T12:43:50.721723+00:00"
     },
     {
       "title": "HTX Publishes Its Q3 2026 Scorecard: Cumulative TradFi Trading Volume Approaches $6B Amid 13th Anniversary Celebration",
@@ -3629,7 +3684,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.280337+00:00"
+      "scored_at": "2026-10-17T12:43:50.721882+00:00"
     },
     {
       "title": "State of TRON Q3 2026 Report Highlights $2.21 Trillion in Stablecoin Settlement Amid Network Activity Growth",
@@ -3646,7 +3701,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.280456+00:00"
+      "scored_at": "2026-10-17T12:43:50.722077+00:00"
     },
     {
       "title": "MEXC Brings AI, TradFi and the Future of Trading to Life at TOKEN2049 Singapore",
@@ -3663,13 +3718,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.280569+00:00"
+      "scored_at": "2026-10-17T12:43:50.722263+00:00"
     },
     {
-      "title": "From TOKEN2049 to Ecosystem Co-Building: HTX Advances Its Multifaceted Engagement Across the Global Crypto Industry",
-      "link": "https://www.newsbtc.com/news/from-token2049-to-ecosystem-co-building-htx-advances-its-multifaceted-engagement-across-the-global-crypto-industry/",
-      "source": "https://www.newsbtc.com/feed/",
-      "date": "Mon, 12 Oct 2026 08:07:37 +0000",
+      "title": "Gold Price Slides on Hot Inflation, but Schiff Says It’s a Gift",
+      "link": "https://beincrypto.com/gold-price-hot-inflation-peter-schiff/",
+      "source": "https://beincrypto.com/feed/",
+      "date": "Sat, 17 Oct 2026 11:13:21 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -3680,13 +3735,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.280664+00:00"
+      "scored_at": "2026-10-17T12:43:50.722420+00:00"
     },
     {
-      "title": "Justin Sun Shares AI and Quantum Vision at TOKEN2049 Singapore and Blockworks DAS Asia",
-      "link": "https://www.newsbtc.com/news/justin-sun-shares-ai-and-quantum-vision-at-token2049-singapore-and-blockworks-das-asia/",
-      "source": "https://www.newsbtc.com/feed/",
-      "date": "Sat, 10 Oct 2026 18:04:27 +0000",
+      "title": "Apple’s First Foldable iPhone Sells Out in Minutes",
+      "link": "https://beincrypto.com/iphone-duo-pre-orders-sell-out-christmas/",
+      "source": "https://beincrypto.com/feed/",
+      "date": "Sat, 17 Oct 2026 10:30:00 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -3697,13 +3752,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.280787+00:00"
+      "scored_at": "2026-10-17T12:43:50.722556+00:00"
     },
     {
-      "title": "MEXC and Payward Highlight Collaboration as Crypto and TradFi Converge at TOKEN2049",
-      "link": "https://www.newsbtc.com/news/mexc-and-payward-highlight-collaboration-as-crypto-and-tradfi-converge-at-token2049/",
-      "source": "https://www.newsbtc.com/feed/",
-      "date": "Fri, 09 Oct 2026 10:34:04 +0000",
+      "title": "White House Mocks GTA 6 After Tesla Flying Car Reveal",
+      "link": "https://beincrypto.com/white-house-tesla-flying-car-gta-6/",
+      "source": "https://beincrypto.com/feed/",
+      "date": "Sat, 17 Oct 2026 09:30:00 +0000",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -3714,7 +3769,24 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.280887+00:00"
+      "scored_at": "2026-10-17T12:43:50.722686+00:00"
+    },
+    {
+      "title": "Bitcoin Bull Signals are Flashing Everywhere, Analysts Claim",
+      "link": "https://beincrypto.com/bitcoin-bull-signals-planb-momentum-cycle/",
+      "source": "https://beincrypto.com/feed/",
+      "date": "Sat, 17 Oct 2026 09:04:05 +0000",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "fresh"
+      ],
+      "flags": [
+        "no_github"
+      ],
+      "has_github": false,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.722804+00:00"
     },
     {
       "title": "Former Ripple Adviser Warns XRP’s Biggest Test Is Still Ahead",
@@ -3731,7 +3803,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281080+00:00"
+      "scored_at": "2026-10-17T12:43:50.722930+00:00"
     },
     {
       "title": "Raoul Pal Holds Bitcoin, Solana and Ethereum, but Calls One Wildly Undervalued",
@@ -3748,7 +3820,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281164+00:00"
+      "scored_at": "2026-10-17T12:43:50.723065+00:00"
     },
     {
       "title": "JPMorgan Blocks Outside AI Agents From Customer Accounts",
@@ -3765,7 +3837,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281267+00:00"
+      "scored_at": "2026-10-17T12:43:50.723198+00:00"
     },
     {
       "title": "BTCC Exchange Concludes TOKEN2049 Singapore, Taking Its Zero-Barrier Theme From Platform to Show Floor",
@@ -3782,7 +3854,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281346+00:00"
+      "scored_at": "2026-10-17T12:43:50.723326+00:00"
     },
     {
       "title": "Is the AI Bubble Cracking? Chip Stocks Fall for 8 Straight Days",
@@ -3799,7 +3871,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281436+00:00"
+      "scored_at": "2026-10-17T12:43:50.723496+00:00"
     },
     {
       "title": "Japan’s Megabanks Finish Yen Stablecoin Pilot and Eye Real Transactions",
@@ -3816,7 +3888,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281511+00:00"
+      "scored_at": "2026-10-17T12:43:50.723620+00:00"
     },
     {
       "title": "3 Altcoins That Could Reach All-Time Highs This Weekend",
@@ -3833,7 +3905,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281602+00:00"
+      "scored_at": "2026-10-17T12:43:50.723768+00:00"
     },
     {
       "title": "Elon Musk vs. Coinbase CEO: Who Really Won Tech’s Drinking Leaderboard?",
@@ -3850,75 +3922,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281677+00:00"
-    },
-    {
-      "title": "iFX EXPO Asia 2026 Wraps Up in Hong Kong After Two Days of Business and Connections",
-      "link": "https://beincrypto.com/ifx-expo-asia-2026-hong-kong-2026/",
-      "source": "https://beincrypto.com/feed/",
-      "date": "Fri, 16 Oct 2026 11:38:14 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281770+00:00"
-    },
-    {
-      "title": "Firelight Brings Onchain Protection to Kraken Protected Strategies USDC Vault",
-      "link": "https://beincrypto.com/firelight-onchain-protection-kraken-protected-strategies-usdc-vault/",
-      "source": "https://beincrypto.com/feed/",
-      "date": "Fri, 16 Oct 2026 11:33:14 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281851+00:00"
-    },
-    {
-      "title": "Bitunix Talk Show at TOKEN2049: From Education to Community, KOLs Say Trading Is No Longer Solo",
-      "link": "https://beincrypto.com/bitunix-talk-show-token2049/",
-      "source": "https://beincrypto.com/feed/",
-      "date": "Fri, 16 Oct 2026 11:24:43 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.281947+00:00"
-    },
-    {
-      "title": "Bitcoin Whale Wallets Hit a Record While Shorts Pile In. What Comes Next?",
-      "link": "https://beincrypto.com/bitcoin-whale-wallets-record-negative-funding/",
-      "source": "https://beincrypto.com/feed/",
-      "date": "Fri, 16 Oct 2026 11:07:52 +0000",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "fresh"
-      ],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282031+00:00"
+      "scored_at": "2026-10-17T12:43:50.723890+00:00"
     },
     {
       "title": "Glamsterdam Hoodi Testnet Announcement",
@@ -3936,13 +3940,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282113+00:00"
+      "scored_at": "2026-10-17T12:43:50.724033+00:00"
     },
     {
       "title": "Project",
       "link": "https://coinmarketcap.com/currencies/project/",
       "source": "coinmarketcap",
-      "date": "Sat, 17 Oct 2026 01:25:42 GMT",
+      "date": "Sat, 17 Oct 2026 12:43:03 GMT",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -3953,13 +3957,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.325493+00:00"
+      "scored_at": "2026-10-17T12:43:50.798528+00:00"
     },
     {
       "title": "Participants",
       "link": "https://coinmarketcap.com/currencies/participants/",
       "source": "coinmarketcap",
-      "date": "Sat, 17 Oct 2026 01:25:42 GMT",
+      "date": "Sat, 17 Oct 2026 12:43:03 GMT",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -3970,13 +3974,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.325646+00:00"
+      "scored_at": "2026-10-17T12:43:50.798627+00:00"
     },
     {
       "title": "Winners",
       "link": "https://coinmarketcap.com/currencies/winners/",
       "source": "coinmarketcap",
-      "date": "Sat, 17 Oct 2026 01:25:42 GMT",
+      "date": "Sat, 17 Oct 2026 12:43:03 GMT",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -3987,13 +3991,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.325766+00:00"
+      "scored_at": "2026-10-17T12:43:50.798723+00:00"
     },
     {
       "title": "Rewards pool",
       "link": "https://coinmarketcap.com/currencies/rewards-pool/",
       "source": "coinmarketcap",
-      "date": "Sat, 17 Oct 2026 01:25:42 GMT",
+      "date": "Sat, 17 Oct 2026 12:43:03 GMT",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -4004,13 +4008,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.325822+00:00"
+      "scored_at": "2026-10-17T12:43:50.798812+00:00"
     },
     {
       "title": "Started",
       "link": "https://coinmarketcap.com/currencies/started/",
       "source": "coinmarketcap",
-      "date": "Sat, 17 Oct 2026 01:25:42 GMT",
+      "date": "Sat, 17 Oct 2026 12:43:03 GMT",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -4021,13 +4025,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.325881+00:00"
+      "scored_at": "2026-10-17T12:43:50.798905+00:00"
     },
     {
       "title": "Ended",
       "link": "https://coinmarketcap.com/currencies/ended/",
       "source": "coinmarketcap",
-      "date": "Sat, 17 Oct 2026 01:25:42 GMT",
+      "date": "Sat, 17 Oct 2026 12:43:03 GMT",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -4038,13 +4042,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.325938+00:00"
+      "scored_at": "2026-10-17T12:43:50.798994+00:00"
     },
     {
       "title": "GitHub: anthropics /",
       "link": "https://github.com/anthropics/claude-plugins-official",
       "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -4054,157 +4058,13 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.325994+00:00"
-    },
-    {
-      "title": "GitHub: K-Dense-AI /",
-      "link": "https://github.com/K-Dense-AI/scientific-agent-skills",
-      "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "generic_repo",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.326302+00:00"
-    },
-    {
-      "title": "GitHub: affaan-m /",
-      "link": "https://github.com/affaan-m/ECC",
-      "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "generic_repo",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.326458+00:00"
-    },
-    {
-      "title": "GitHub: HKUDS /",
-      "link": "https://github.com/HKUDS/CLI-Anything",
-      "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "generic_repo",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.326592+00:00"
-    },
-    {
-      "title": "GitHub: mksglu /",
-      "link": "https://github.com/mksglu/context-mode",
-      "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "generic_repo",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.326693+00:00"
-    },
-    {
-      "title": "GitHub: ruvnet /",
-      "link": "https://github.com/ruvnet/ruflo",
-      "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "generic_repo",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.326832+00:00"
-    },
-    {
-      "title": "GitHub: android /",
-      "link": "https://github.com/android/skills",
-      "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "generic_repo",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327004+00:00"
-    },
-    {
-      "title": "GitHub: obra /",
-      "link": "https://github.com/obra/superpowers",
-      "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "generic_repo",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327068+00:00"
-    },
-    {
-      "title": "GitHub: cursor /",
-      "link": "https://github.com/cursor/plugins",
-      "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "generic_repo",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327131+00:00"
-    },
-    {
-      "title": "GitHub: debpalash /",
-      "link": "https://github.com/debpalash/VoiceStudio",
-      "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
-      "score": 10,
-      "grade": "D",
-      "signals": [
-        "generic_repo",
-        "fresh"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327194+00:00"
+      "scored_at": "2026-10-17T12:43:50.799550+00:00"
     },
     {
       "title": "GitHub: MadsLorentzen /",
       "link": "https://github.com/MadsLorentzen/ai-job-search",
       "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -4214,13 +4074,13 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327260+00:00"
+      "scored_at": "2026-10-17T12:43:50.800100+00:00"
     },
     {
-      "title": "GitHub: hmjz100 /",
-      "link": "https://github.com/hmjz100/LinkSwift",
+      "title": "GitHub: affaan-m /",
+      "link": "https://github.com/affaan-m/ECC",
       "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -4230,13 +4090,141 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327331+00:00"
+      "scored_at": "2026-10-17T12:43:50.800337+00:00"
+    },
+    {
+      "title": "GitHub: HKUDS /",
+      "link": "https://github.com/HKUDS/CLI-Anything",
+      "source": "github_trending",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.800546+00:00"
+    },
+    {
+      "title": "GitHub: K-Dense-AI /",
+      "link": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "source": "github_trending",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.800706+00:00"
+    },
+    {
+      "title": "GitHub: akitaonrails /",
+      "link": "https://github.com/akitaonrails/ai-memory",
+      "source": "github_trending",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.800945+00:00"
+    },
+    {
+      "title": "GitHub: android /",
+      "link": "https://github.com/android/skills",
+      "source": "github_trending",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.801124+00:00"
+    },
+    {
+      "title": "GitHub: stablyai /",
+      "link": "https://github.com/stablyai/orca",
+      "source": "github_trending",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.801224+00:00"
+    },
+    {
+      "title": "GitHub: debpalash /",
+      "link": "https://github.com/debpalash/VoiceStudio",
+      "source": "github_trending",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.801323+00:00"
+    },
+    {
+      "title": "GitHub: anomalyco /",
+      "link": "https://github.com/anomalyco/opencode",
+      "source": "github_trending",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.801450+00:00"
+    },
+    {
+      "title": "GitHub: ruvnet /",
+      "link": "https://github.com/ruvnet/ruflo",
+      "source": "github_trending",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
+      "score": 10,
+      "grade": "D",
+      "signals": [
+        "generic_repo",
+        "fresh"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.801553+00:00"
     },
     {
       "title": "GitHub: xerj-org /",
       "link": "https://github.com/xerj-org/xerj",
       "source": "github_trending",
-      "date": "Sat, 17 Oct 2026 01:25:44 GMT",
+      "date": "Sat, 17 Oct 2026 12:43:05 GMT",
       "score": 10,
       "grade": "D",
       "signals": [
@@ -4246,22 +4234,7 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327404+00:00"
-    },
-    {
-      "title": "Post-Quantum Custody Platform Strongpoint Adds Quantus As Development Partner",
-      "link": "https://www.newsbtc.com/technology/post-quantum-custody-platform-strongpoint-adds-quantus-as-development/",
-      "source": "https://www.newsbtc.com/feed/",
-      "date": "Fri, 09 Oct 2026 01:00:00 +0000",
-      "score": 0,
-      "grade": "D",
-      "signals": [],
-      "flags": [
-        "no_github"
-      ],
-      "has_github": false,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.280985+00:00"
+      "scored_at": "2026-10-17T12:43:50.801650+00:00"
     },
     {
       "title": "How native transaction assertions could enforce a transaction's final outcome",
@@ -4276,7 +4249,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282178+00:00"
+      "scored_at": "2026-10-17T12:43:50.724144+00:00"
     },
     {
       "title": "Introducing zkAPI: private usage credits for any API",
@@ -4291,7 +4264,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282260+00:00"
+      "scored_at": "2026-10-17T12:43:50.724277+00:00"
     },
     {
       "title": "Glamsterdam Testnet Announcement",
@@ -4308,7 +4281,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282331+00:00"
+      "scored_at": "2026-10-17T12:43:50.724392+00:00"
     },
     {
       "title": "Join Us: EF Protocol Reddit AMA - September 16th, 2026",
@@ -4323,7 +4296,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282394+00:00"
+      "scored_at": "2026-10-17T12:43:50.724495+00:00"
     },
     {
       "title": "EF Protocol: The Hegotá EIP Opinion Post and Tier List",
@@ -4338,7 +4311,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282463+00:00"
+      "scored_at": "2026-10-17T12:43:50.724609+00:00"
     },
     {
       "title": "EF Protocol: Current and Emerging Priorities",
@@ -4353,7 +4326,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282536+00:00"
+      "scored_at": "2026-10-17T12:43:50.724727+00:00"
     },
     {
       "title": "Glamsterdam Repricing Impact for Smart Contract Developers",
@@ -4368,7 +4341,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282605+00:00"
+      "scored_at": "2026-10-17T12:43:50.724839+00:00"
     },
     {
       "title": "Raising machine-checked security benchmarks to advance hash-based SNARKs through agentic collaboration",
@@ -4383,7 +4356,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282683+00:00"
+      "scored_at": "2026-10-17T12:43:50.724965+00:00"
     },
     {
       "title": "Allocation Update - Q2 2026",
@@ -4398,7 +4371,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282773+00:00"
+      "scored_at": "2026-10-17T12:43:50.725111+00:00"
     },
     {
       "title": "Announcing the Platåberget Testnet",
@@ -4415,7 +4388,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282836+00:00"
+      "scored_at": "2026-10-17T12:43:50.725213+00:00"
     },
     {
       "title": "Announcing a Trillion Dollar Security grant for WEBCAT",
@@ -4430,7 +4403,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282895+00:00"
+      "scored_at": "2026-10-17T12:43:50.725310+00:00"
     },
     {
       "title": "Ethereum Foundation Board Update",
@@ -4445,7 +4418,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.282969+00:00"
+      "scored_at": "2026-10-17T12:43:50.725422+00:00"
     },
     {
       "title": "Devcon 8 Tickets Are Live: Find Your Path to Mumbai",
@@ -4460,7 +4433,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.283035+00:00"
+      "scored_at": "2026-10-17T12:43:50.725562+00:00"
     },
     {
       "title": "The triage is the product: running AI agents against Ethereum's protocol code",
@@ -4475,7 +4448,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.283105+00:00"
+      "scored_at": "2026-10-17T12:43:50.725676+00:00"
     },
     {
       "title": "Ethereum for Governments and Institutions: Why neutral infrastructure matters now",
@@ -4490,7 +4463,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.283185+00:00"
+      "scored_at": "2026-10-17T12:43:50.725806+00:00"
     },
     {
       "title": "The EF’s new structure",
@@ -4505,7 +4478,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.283277+00:00"
+      "scored_at": "2026-10-17T12:43:50.725940+00:00"
     },
     {
       "title": "Clear Signing: Making Transaction Approvals Safer on Ethereum",
@@ -4520,7 +4493,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.283344+00:00"
+      "scored_at": "2026-10-17T12:43:50.726045+00:00"
     },
     {
       "title": "Protocol Cluster Updates: May 2026",
@@ -4535,7 +4508,7 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.283420+00:00"
+      "scored_at": "2026-10-17T12:43:50.726169+00:00"
     },
     {
       "title": "Soldøgn Interop Recap ☀️",
@@ -4550,148 +4523,13 @@
       ],
       "has_github": false,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.283488+00:00"
-    },
-    {
-      "title": "GitHub: AbhirajB-debug/acki-nacki-harvester",
-      "link": "https://github.com/AbhirajB-debug/acki-nacki-harvester",
-      "source": "github_search",
-      "date": "2026-10-17T01:08:22Z",
-      "score": 0,
-      "grade": "D",
-      "signals": [
-        "generic_repo"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327467+00:00"
-    },
-    {
-      "title": "GitHub: FernSalamanca/JuneAI-Farmhand",
-      "link": "https://github.com/FernSalamanca/JuneAI-Farmhand",
-      "source": "github_search",
-      "date": "2026-10-17T01:07:17Z",
-      "score": 0,
-      "grade": "D",
-      "signals": [
-        "generic_repo"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327549+00:00"
-    },
-    {
-      "title": "GitHub: jjuliantt/KiteAI-Autopilot-Suite",
-      "link": "https://github.com/jjuliantt/KiteAI-Autopilot-Suite",
-      "source": "github_search",
-      "date": "2026-10-17T01:06:42Z",
-      "score": 0,
-      "grade": "D",
-      "signals": [
-        "generic_repo"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327623+00:00"
-    },
-    {
-      "title": "GitHub: Micael20055/Growth-Accelerator",
-      "link": "https://github.com/Micael20055/Growth-Accelerator",
-      "source": "github_search",
-      "date": "2026-10-17T01:03:44Z",
-      "score": 0,
-      "grade": "D",
-      "signals": [
-        "generic_repo"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327698+00:00"
-    },
-    {
-      "title": "GitHub: ashidohonzu-bit/fintopio-automated-farmer",
-      "link": "https://github.com/ashidohonzu-bit/fintopio-automated-farmer",
-      "source": "github_search",
-      "date": "2026-10-17T00:56:34Z",
-      "score": 0,
-      "grade": "D",
-      "signals": [
-        "generic_repo"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.327920+00:00"
-    },
-    {
-      "title": "GitHub: Srujan30x/Sui-Momentum-Trading-Bot",
-      "link": "https://github.com/Srujan30x/Sui-Momentum-Trading-Bot",
-      "source": "github_search",
-      "date": "2026-10-17T00:56:20Z",
-      "score": 0,
-      "grade": "D",
-      "signals": [
-        "generic_repo"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.328002+00:00"
-    },
-    {
-      "title": "GitHub: RUDRA17117/DAWN-ORCHESTRATOR",
-      "link": "https://github.com/RUDRA17117/DAWN-ORCHESTRATOR",
-      "source": "github_search",
-      "date": "2026-10-17T00:52:44Z",
-      "score": 0,
-      "grade": "D",
-      "signals": [
-        "generic_repo"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.328080+00:00"
-    },
-    {
-      "title": "GitHub: noiramaster/noira1m",
-      "link": "https://github.com/noiramaster/noira1m",
-      "source": "github_search",
-      "date": "2026-10-16T23:48:41Z",
-      "score": 0,
-      "grade": "D",
-      "signals": [
-        "generic_repo"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.328151+00:00"
-    },
-    {
-      "title": "GitHub: zsaif516-oss/Auto-Farm-Steward",
-      "link": "https://github.com/zsaif516-oss/Auto-Farm-Steward",
-      "source": "github_search",
-      "date": "2026-10-16T23:21:33Z",
-      "score": 0,
-      "grade": "D",
-      "signals": [
-        "generic_repo"
-      ],
-      "flags": [],
-      "has_github": true,
-      "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.328216+00:00"
+      "scored_at": "2026-10-17T12:43:50.726568+00:00"
     },
     {
       "title": "GitHub: deepakkankure/Gopher-Governance-Toolkit",
       "link": "https://github.com/deepakkankure/Gopher-Governance-Toolkit",
       "source": "github_search",
-      "date": "2026-10-16T23:08:33Z",
+      "date": "2026-10-17T11:52:06Z",
       "score": 0,
       "grade": "D",
       "signals": [
@@ -4700,13 +4538,88 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.328289+00:00"
+      "scored_at": "2026-10-17T12:43:50.801748+00:00"
+    },
+    {
+      "title": "GitHub: noiramaster/noira1m",
+      "link": "https://github.com/noiramaster/noira1m",
+      "source": "github_search",
+      "date": "2026-10-17T11:31:37Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.801884+00:00"
+    },
+    {
+      "title": "GitHub: AbhirajB-debug/acki-nacki-harvester",
+      "link": "https://github.com/AbhirajB-debug/acki-nacki-harvester",
+      "source": "github_search",
+      "date": "2026-10-17T11:26:57Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.801988+00:00"
+    },
+    {
+      "title": "GitHub: FernSalamanca/JuneAI-Farmhand",
+      "link": "https://github.com/FernSalamanca/JuneAI-Farmhand",
+      "source": "github_search",
+      "date": "2026-10-17T11:26:10Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.802109+00:00"
+    },
+    {
+      "title": "GitHub: jjuliantt/KiteAI-Autopilot-Suite",
+      "link": "https://github.com/jjuliantt/KiteAI-Autopilot-Suite",
+      "source": "github_search",
+      "date": "2026-10-17T11:25:22Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.802223+00:00"
+    },
+    {
+      "title": "GitHub: Micael20055/Growth-Accelerator",
+      "link": "https://github.com/Micael20055/Growth-Accelerator",
+      "source": "github_search",
+      "date": "2026-10-17T11:22:37Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.802341+00:00"
     },
     {
       "title": "GitHub: Navaneeth-07251/Gata-Auto-Farmer",
       "link": "https://github.com/Navaneeth-07251/Gata-Auto-Farmer",
       "source": "github_search",
-      "date": "2026-10-16T23:05:24Z",
+      "date": "2026-10-17T11:14:29Z",
       "score": 0,
       "grade": "D",
       "signals": [
@@ -4715,7 +4628,67 @@
       "flags": [],
       "has_github": true,
       "pay_to_play": false,
-      "scored_at": "2026-10-17T01:26:27.328367+00:00"
+      "scored_at": "2026-10-17T12:43:50.802563+00:00"
+    },
+    {
+      "title": "GitHub: ashidohonzu-bit/fintopio-automated-farmer",
+      "link": "https://github.com/ashidohonzu-bit/fintopio-automated-farmer",
+      "source": "github_search",
+      "date": "2026-10-17T09:59:01Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.802796+00:00"
+    },
+    {
+      "title": "GitHub: Srujan30x/Sui-Momentum-Trading-Bot",
+      "link": "https://github.com/Srujan30x/Sui-Momentum-Trading-Bot",
+      "source": "github_search",
+      "date": "2026-10-17T09:58:09Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.802926+00:00"
+    },
+    {
+      "title": "GitHub: RUDRA17117/DAWN-ORCHESTRATOR",
+      "link": "https://github.com/RUDRA17117/DAWN-ORCHESTRATOR",
+      "source": "github_search",
+      "date": "2026-10-17T09:50:02Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.803045+00:00"
+    },
+    {
+      "title": "GitHub: zsaif516-oss/Auto-Farm-Steward",
+      "link": "https://github.com/zsaif516-oss/Auto-Farm-Steward",
+      "source": "github_search",
+      "date": "2026-10-17T08:24:20Z",
+      "score": 0,
+      "grade": "D",
+      "signals": [
+        "generic_repo"
+      ],
+      "flags": [],
+      "has_github": true,
+      "pay_to_play": false,
+      "scored_at": "2026-10-17T12:43:50.803175+00:00"
     }
   ]
 }
