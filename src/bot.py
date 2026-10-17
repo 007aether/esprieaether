@@ -2657,7 +2657,6 @@ def main():
 
     # ─── NEW: Arabic explanation command (user requested) ───
     app.add_handler(CommandHandler("explain", cmd_explain))
-    app.add_handler(CommandHandler("شرح", cmd_explain))  # Arabic alias
 
     # ─── NEW: Bot self-maintenance commands (3) ───
     app.add_handler(CommandHandler("bothealth", cmd_bot_health))
@@ -2733,6 +2732,9 @@ def main():
     app.post_init = set_commands
 
     logger.info("🚀 بدء تشغيل البوت...")
+
+if __name__ == "__main__":
+    main()
 
 # ═══════════════════════════════════════════════════════════
 # NEW: Bot self-maintenance commands (3)
