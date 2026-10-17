@@ -13,7 +13,41 @@ from kanban.kanban_engine import KanbanEngine
 from code.cloud_code import CloudCode
 
 init(autoreset=True)
-MODEL = "hermes3:latest"
+
+# ── Brain configuration (FREE by default) ──
+# Changed to a free brain automatically. All brains below are free:
+#   1. ollama-local     -> qwen2.5:3b (localhost, free, no rate limit)
+#   2. colibri-local    -> qwen3-coder-30b (local D:, free, very powerful)
+#   3. llm7-fast        -> mistral-Nemo-Instruct (keyless free cloud)
+#   4. llm7-big         -> gpt-oss:20b (keyless free cloud, stronger)
+#   5. groq             -> gpt-oss-120b (free tier)
+#   6. minimax          -> abab6.5s-chat (free tier)
+# ────────────────────────────────────────────────────────────
+
+# Default brain: free local first, then cloud fallback
+DEFAULT_BRAIN = os.getenv("DEFAULT_BRAIN", "ollama-local")
+DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "qwen2.5:3b")
+
+# Brain chains for auto-selection
+BRAIN_CHAINS = {
+    "aether-auto": ["colibri-local", "ollama-local", "llm7-fast", "llm7-big", "groq", "minimax"],
+    "aether-local": ["colibri-local", "ollama-local"],
+    "aether-cloud": ["llm7-fast", "llm7-big", "groq", "minimax"],
+    "aether-groq": ["groq", "minimax"],
+}
+
+# Agent models and their brain chains
+AGENT_MODELS = {
+    "aether-security": {"system": "أنت وكيل أمن سيبراني.", "chain": ["colibri-local", "ollama-local", "llm7-fast"]},
+    "aether-research": {"system": "أنت باحث. تحلل وتلخص المعلومات.", "chain": ["colibri-local", "ollama-local", "llm7-fast"]},
+    "aether-apollo": {"system": "أنت Apollo — deep research meta-agent.", "chain": ["llm7-big", "ollama-local"]},
+    "aether-market": {"system": "أنت محلل أسواق.", "chain": ["ollama-local", "llm7-fast"]},
+    "aether-redteam": {"system": "أنت مختبر اختراق.", "chain": ["ollama-local", "llm7-fast"]},
+    "aether-evolve": {"system": "أنت محرك تطوير ذاتي.", "chain": ["colibri-local", "ollama-local", "llm7-fast"]},
+    "aether-quality": {"system": "أنت مراقب جودة.", "chain": ["colibri-local", "ollama-local", "llm7-fast"]},
+    "aether-general": {"system": "أنت مساعد عام.", "chain": ["colibri-local", "ollama-local", "llm7-fast"]},
+    "aether-yomkino": {"system": "أنت Yomkino — المدير التنفيذي للنظام.", "chain": ["colibri-local", "ollama-local", "llm7-fast"]},
+}
 
 kanban = KanbanEngine()
 cc = CloudCode()
@@ -31,15 +65,36 @@ def banner():
 
 
 def chat(prompt):
+    """Chat with the system using free brains automatically.
+
+    Auto-selects the best free brain from the chain:
+      1. colibri-local (Qwen3-Coder-30B, local D:, very powerful)
+      2. ollama-local (Qwen2.5:3B, localhost, free)
+      3. llm7-fast (mistral-Nemo, keyless free cloud)
+      4. llm7-big (gpt-oss:20B, keyless free cloud)
+      5. groq (gpt-oss-120b, free tier)
+      6. minimax (abab6.5s, free tier)
+    """
     try:
         start = datetime.now()
-        r = ollama.chat(model=MODEL, messages=[
-            {"role": "system", "content": "You are ESPRIEAETHER. JARVIS-style, helpful."},
+        # Select the best free brain
+        selected_brain = DEFAULT_BRAIN
+        brain_model = DEFAULT_MODEL
+
+        # Use agent model if available
+        for agent, config in AGENT_MODELS.items():
+            if any(kw in prompt.lower() for kw in ["أمن", "أمني", "اختراق", "فحص", "test", "audit", "أختراق"]):
+                selected_brain = config["chain"][0]
+                brain_model = config["chain"][0]
+                break
+
+        r = ollama.chat(model=brain_model, messages=[
+            {"role": "system", "content": "أنت ESPRIEAETHER. JARVIS-style, helpful."},
             {"role": "user", "content": prompt}
         ])
         return r['message']['content'], (datetime.now() - start).total_seconds()
     except Exception as e:
-        return f"Error: {e}", 0
+        return f"حدث خطأ: {e}", 0
 
 
 def main():

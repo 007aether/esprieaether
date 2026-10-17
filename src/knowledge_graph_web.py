@@ -17,6 +17,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+C = None  # color helper (optional)
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 KB_DIR = BASE_DIR / "data" / "knowledge_base"
 KB_FILE = KB_DIR / "knowledge_index.json"
@@ -326,7 +328,7 @@ function buildTagsTable(tags) {{
   let html = '<tr><th>وسم</th><th>العدد</th></tr>';
   tags.forEach((t, i) => {{
     const color = ['#4ade80', '#f59e0b', '#60a5fa', '#a78bfa', '#f472b6', '#34d399', '#fbbf24', '#f87171', '#60a5fa', '#a78bfa'][i % 10];
-    html += `<tr><td style="color: ${color}">${{t[0]}}</td><td>${{t[1]}}</td></tr>`;
+    html += `<tr><td style="color: ${colorScheme[i % 10]}">${t[0]}</td><td>${t[1]}</td></tr>`;
   }});
   return html;
 }}
@@ -388,7 +390,7 @@ def generate_stats():
 
 
 def run():
-    print(f"\n📊 {C.CYAN}🔬 Knowledge Graph Visualizer{C.RESET}")
+    print(f"\n📊 Knowledge Graph Visualizer")
     print(f"   Reading: {KB_FILE}")
     print(f"   Generating: {WEB_FILE}")
 
