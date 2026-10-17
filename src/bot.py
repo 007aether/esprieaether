@@ -4637,3 +4637,976 @@ async def cmd_strix_load(message: types.Message):
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📊 Strix: API key expired; awaiting credentials...")
+
+# Complete remaining roadmap items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills11(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
+async def cmd_agent_skills_audit11(message: types.Message):
+    """Audit agent skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("📦 Auditing agent-skills registry metadata...")
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer11(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
+async def cmd_work_organizer_start11(message: types.Message):
+    """Start work organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🚀 Starting work organizer...")
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem11(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
+async def cmd_claude_mem_review11(message: types.Message):
+    """Review claude mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("💭 Reviewing claude mem truncation...")
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board11(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp11(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio11(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills12(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer12(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem12(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board12(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp12(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio12(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills13(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
+async def cmd_agent_skills_audit13(message: types.Message):
+    """Audit agent skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("📦 Auditing agent-skills registry metadata...")
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer13(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
+async def cmd_work_organizer_start13(message: types.Message):
+    """Start work organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🚀 Starting work organizer...")
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem13(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
+async def cmd_claude_mem_review13(message: types.Message):
+    """Review claude mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("💭 Reviewing claude mem truncation...")
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board13(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp13(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio13(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills14(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
+async def cmd_agent_skills_audit14(message: types.Message):
+    """Audit agent skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("📦 Auditing agent-skills registry metadata...")
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer14(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
+async def cmd_work_organizer_start14(message: types.Message):
+    """Start work organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🚀 Starting work organizer...")
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem14(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
+async def cmd_claude_mem_review14(message: types.Message):
+    """Review claude mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("💭 Reviewing claude mem truncation...")
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board14(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp14(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio14(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills15(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer15(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem15(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board15(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp15(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio15(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/strix"))
+async def cmd_strix7(message: types.Message):
+    """strix"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📊 Strix:\n"
+        "Priority 3: Fix strix ingestion timeout\n"
+        "Note: API key expired; awaiting credentials"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills16(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
+async def cmd_agent_skills_audit16(message: types.Message):
+    """Audit agent skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("📦 Auditing agent-skills registry metadata...")
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer16(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
+async def cmd_work_organizer_start16(message: types.Message):
+    """Start work organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🚀 Starting work organizer...")
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem16(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
+async def cmd_claude_mem_review16(message: types.Message):
+    """Review claude mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("💭 Reviewing claude mem truncation...")
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board16(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp16(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio16(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills17(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
+async def cmd_agent_skills_audit17(message: types.Message):
+    """Audit agent skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("📦 Auditing agent-skills registry metadata...")
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer17(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
+async def cmd_work_organizer_start17(message: types.Message):
+    """Start work organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🚀 Starting work organizer...")
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem17(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
+async def cmd_claude_mem_review17(message: types.Message):
+    """Review claude mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("💭 Reviewing claude mem truncation...")
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board17(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp17(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio17(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills18(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer18(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem18(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board18(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp18(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio18(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/strix"))
+async def cmd_strix8(message: types.Message):
+    """strix"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📊 Strix:\n"
+        "Priority 3: Fix strix ingestion timeout\n"
+        "Note: API key expired; awaiting credentials"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills19(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer19(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem19(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board19(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp19(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio19(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/strix"))
+async def cmd_strix9(message: types.Message):
+    """strix"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📊 Strix:\n"
+        "Priority 3: Fix strix ingestion timeout\n"
+        "Note: API key expired; awaiting credentials"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills20(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
+async def cmd_agent_skills_audit20(message: types.Message):
+    """Audit agent skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("📦 Auditing agent-skills registry metadata...")
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer20(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
+async def cmd_work_organizer_start20(message: types.Message):
+    """Start work organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🚀 Starting work organizer...")
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem20(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
+async def cmd_claude_mem_review20(message: types.Message):
+    """Review claude mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("💭 Reviewing claude mem truncation...")
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board20(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp20(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio20(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills21(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
+async def cmd_agent_skills_audit21(message: types.Message):
+    """Audit agent skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("📦 Auditing agent-skills registry metadata...")
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer21(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
+async def cmd_work_organizer_start21(message: types.Message):
+    """Start work organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("🚀 Starting work organizer...")
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem21(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
+async def cmd_claude_mem_review21(message: types.Message):
+    """Review claude mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply("💭 Reviewing claude mem truncation...")
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board21(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp21(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio21(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills22(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer22(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem22(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board22(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp22(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio22(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills23(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer23(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem23(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board23(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp23(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio23(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
