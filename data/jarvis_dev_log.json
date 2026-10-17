@@ -75,5 +75,11 @@
   "errors": [
    "missing module docstring"
   ]
+ },
+ {
+  "ts": "2026-10-17T04:44:48.655965+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
  }
 ]
