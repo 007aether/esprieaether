@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-10-17T02:29:21.712444",
+  "checked_at": "2026-10-17T02:37:28.965112",
   "services": {
     "router": "up",
     "mesh": "up",
-    "web": "up",
+    "web": "down",
     "cloud": "up",
     "sunna": "up",
     "integrations": "up",
@@ -12,6 +12,8 @@
     "jarvis": "up",
     "ollama": "up"
   },
-  "restarts": [],
+  "restarts": [
+    "web:down -> down"
+  ],
   "changed": false
 }
