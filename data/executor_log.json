@@ -619,5 +619,14 @@
   "kind": "info",
   "ok": true,
   "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T20:29:27.034951+00:00",
+  "task_id": "task-1792268685407",
+  "agent": "evolve",
+  "title": "أولويتي حاليا تصحيح النظام وإصلاح محاولات التكرار.还需加快处理并减少安全操作的重复执行。也要扩大对安全模式的监控。",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
  }
 ]
