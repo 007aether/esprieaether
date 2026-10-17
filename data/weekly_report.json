@@ -25,19 +25,19 @@
     <body>
     <div class="container">
         <h1>📊 تقرير الأسبوع - EsprieAether</h1>
-        <p class="subtitle">تاريخ التقرير: 2026-10-17 10:51 UTC</p>
+        <p class="subtitle">تاريخ التقرير: 2026-10-17 10:53 UTC</p>
 
         <div class="stats">
             <div class="stat">
-                <div class="number">188</div>
+                <div class="number">191</div>
                 <div class="label">رسائل المedian</div>
             </div>
             <div class="stat">
-                <div class="number">47</div>
+                <div class="number">49</div>
                 <div class="label">المهام الإجمالية</div>
             </div>
             <div class="stat">
-                <div class="number">11</div>
+                <div class="number">13</div>
                 <div class="label">المهام المقترحة</div>
             </div>
             <div class="stat">
@@ -58,7 +58,7 @@
             <h2>🧠 الدروس المست-conjugate الأسبوعية</h2>
             <p class="subtitle">أحدث 10 كلمة رائجة لدى النظام</p>
             <div id="lessons">
-                <div class="lesson">📌 [weekly_report] report generated: 177 messages, 40 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 182 messages, 43 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 185 messages, 45 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
+                <div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 182 messages, 43 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 185 messages, 45 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 188 messages, 47 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
             </div>
         </div>
 
@@ -72,7 +72,7 @@
 
         <div class="card">
             <h2>📋 أنشطة الأسبوع</h2>
-            <p class="subtitle">رسائل المedian (188)</p>
+            <p class="subtitle">رسائل المedian (191)</p>
             <div id="activities">
                 <span class="tag">general: test message</span><span class="tag">general: الكلام الأخير كان يحمل نصاً &quot;test message&quot;. يجب على أحد الوكلاء ارسال محتوى محدد</span><span class="tag">evolve: للرد على الإعلان الأخير، قمنا بتحديث الرسالة الأولى إلى آخر محتوى تم تقييمه.</span><span class="tag">security: أخبرهم عن أحدث التحديثات الأمنية. كنحذرنهم من المحادثات غير المرغوب فيها. ضع خطو</span><span class="tag">research: let's discus upgrade protocol и security updates. رد على التهديدات غير المرغوب ف</span><span class="tag">market: سأalyze الرسائل وسأذكِر الفرص القادمة:
 

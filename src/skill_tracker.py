@@ -74,8 +74,8 @@ def load_veille():
 def detect_skill_usage(skill_names):
     """يجد مرات استخدام مهارة في وثائق النظام (مثلاً أوراق الـ bot والأوامر)."""
     usage = {}
-    for skill in skill_names:
-        name = skill.get("name", "")
+    for name in skill_names:
+        # name هنا هو اسم المهارة (string) - لست كائن
         # نبحث في المتغيرات الرئيسية
         count = 0
         files = []
