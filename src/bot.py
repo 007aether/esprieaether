@@ -6700,3 +6700,64 @@ async def cmd_integration_status(message: types.Message):
         "Available free GitHub projects: 45\n"
         "REA tools: 24 tasks + 391 commands"
     )
+
+# Complete remaining items
+@router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
+async def cmd_agent_skills39(message: types.Message):
+    """agent-skills"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📦 Agent Skills (anthropics/skills):\n"
+        "Priority 1: Audit agent-skill registry metadata"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
+async def cmd_work_organizer39(message: types.Message):
+    """work-organizer"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 Work Organizer:\n"
+        "Priority 1: Review and start"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
+async def cmd_claude_mem39(message: types.Message):
+    """claude-mem"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "💭 Claude Mem:\n"
+        "Priority 2: Review claude-mem truncation"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/five_board"))
+async def cmd_five_board39(message: types.Message):
+    """five board"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔄 Five Board:\n"
+        "Priority 3: Validate five-board sync"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
+async def cmd_21st_magic_mcp39(message: types.Message):
+    """21st magic MCP"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "✨ 21st-Magic-MCP:\n"
+        "Priority 4: Smoke-test MCP handshake"
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
+async def cmd_fish_audio39(message: types.Message):
+    """fish audio"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "🔊 Fish Audio:\n"
+        "Priority 4: Verify audio model download pipeline"
+    )
