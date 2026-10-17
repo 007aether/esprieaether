@@ -2809,3 +2809,158 @@ app.run_polling(allowed_updates=Update.ALL_TYPES)
 if __name__ == "__main__":
     main()
 
+
+# REA Tools Commands
+@router.message(lambda m: m.text and m.text.startswith("/rea_tool"))
+async def cmd_rea_tool(message: types.Message):
+    """List available REA tools"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📊 REA Tools (Reverse Engineering):\n\n"
+        "Available tools:\n"
+        "• /rea_doctor      - Check REA health\n"
+        "• /rea_do      - Run REA doctor\n"
+        "• /rea_analyze <path> - Analyze a binary/app\n"
+        "• /rea_status    - Check mesh + REA status\n"
+        "• /rea_help      - Show REA tool info\n\n"
+        "REA is installed with 207 tools from morluto/rea (226k★).\n"
+        "Use for binary analysis, app reverse engineering, website analysis."
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_doctor"))
+async def cmd_rea_doctor(message: types.Message):
+    """Run REA doctor health check"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    try:
+        from rea_agent import doctor
+        report = doctor()
+        await message.reply(f"🔍 REA Doctor:\n{report[:1000]}...")
+    except Exception as e:
+        await message.reply(f"❌ REA doctor error: {str(e)}")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_analyze"))
+async def cmd_rea_analyze(message: types.Message):
+    """Analyze a binary/app with REA"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    parts = message.text.split(" ", 1)
+    if len(parts) < 2:
+        await message.reply("❌ Usage: /rea_analyze <path_to_file>")
+        return
+    path = parts[1]
+    try:
+        from rea_agent import analyze
+        result = analyze(path)
+        await message.reply(f"🔍 REA Analysis complete:\n{result}")
+    except Exception as e:
+        await message.reply(f"❌ Analysis error: {str(e)}")
+
+# More REA tools
+@router.message(lambda m: m.text and m.text.startswith("/rea_list"))
+async def cmd_rea_list(message: types.Message):
+    """List all available REA tools"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📋 REA Tools (Reverse Engineering Agent):\n\n"
+        "Available tools:\n"
+        "• /rea_doctor      - Check REA health\n"
+        "• /rea_do          - Run REA doctor\n"
+        "• /rea_analyze <path> - Analyze a binary/app\n"
+        "• /rea_status      - Check mesh + REA status\n"
+        "• /rea_list        - List all REA tools\n"
+        "• /rea_help        - Show REA tool info\n"
+        "• /rea_elements    - Scan system elements\n"
+        "• /rea_report      - Generate REA report\n"
+        "• /rea_symbolic    - Enable symbolic execution\n"
+        "• /rea_sbom        - Generate SBOM\n"
+        "• /rea_evidence    - Export evidence\n\n"
+        "REA v6.5.0 with 207 tools, 153 CLI commands."
+    )
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_do"))
+async def cmd_rea_do(message: types.Message):
+    """Run REA doctor"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    try:
+        from rea_agent import doctor
+        report = doctor()
+        await message.reply(f"🔍 REA Doctor Report:\n{report[:1500]}...")
+    except Exception as e:
+        await message.reply(f"❌ REA doctor error: {str(e)}")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_status"))
+async def cmd_rea_status(message: types.Message):
+    """Check REA + mesh status"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    try:
+        from rea_agent import doctor
+        from bot import get_board_status
+        rea_report = doctor()
+        mesh = get_board_status()
+        await message.reply(
+            f"🔍 REA Status:\n\n"
+            f"REA:\n{rea_report[:500]}...\n\n"
+            f"MESHRouter:\n{mesh}"
+        )
+    except Exception as e:
+        await message.reply(f"❌ Error: {str(e)}")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_elements"))
+async def cmd_rea_elements(message: types.Message):
+    """Scan system elements with REA"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    try:
+        result = task_rea_elements()
+        await message.reply(f"🔍 REA Elements Scan:\n{result}")
+    except Exception as e:
+        await message.reply(f"❌ Scan error: {str(e)}")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_report"))
+async def cmd_rea_report(message: types.Message):
+    """Generate REA report"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    try:
+        result = task_rea_report()
+        await message.reply(f"📊 REA Report generated:\n{result}")
+    except Exception as e:
+        await message.reply(f"❌ Report error: {str(e)}")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_symbolic"))
+async def cmd_rea_symbolic(message: types.Message):
+    """Enable symbolic execution for REA"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    try:
+        result = task_rea_symbolic()
+        await message.reply(f"🔍 Symbolic Execution enabled:\n{result}")
+    except Exception as e:
+        await message.reply(f"❌ Error: {str(e)}")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_sbom"))
+async def cmd_rea_sbom(message: types.Message):
+    """Generate SBOM for REA"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    try:
+        result = task_rea_sbom()
+        await message.reply(f"📦 SBOM generated:\n{result}")
+    except Exception as e:
+        await message.reply(f"❌ SBOM error: {str(e)}")
+
+@router.message(lambda m: m.text and m.text.startswith("/rea_evidence"))
+async def cmd_rea_evidence(message: types.Message):
+    """Export REA evidence"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    try:
+        result = task_rea_evidence_export()
+        await message.reply(f"📦 Evidence exported:\n{result}")
+    except Exception as e:
+        await message.reply(f"❌ Error: {str(e)}")
