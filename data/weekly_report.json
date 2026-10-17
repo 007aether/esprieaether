@@ -25,7 +25,7 @@
     <body>
     <div class="container">
         <h1>📊 تقرير الأسبوع - EsprieAether</h1>
-        <p class="subtitle">تاريخ التقرير: 2026-10-17 11:18 UTC</p>
+        <p class="subtitle">تاريخ التقرير: 2026-10-17 11:19 UTC</p>
 
         <div class="stats">
             <div class="stat">
@@ -33,15 +33,15 @@
                 <div class="label">رسائل المedian</div>
             </div>
             <div class="stat">
-                <div class="number">56</div>
+                <div class="number">50</div>
                 <div class="label">المهام الإجمالية</div>
             </div>
             <div class="stat">
-                <div class="number">25</div>
+                <div class="number">27</div>
                 <div class="label">المهام المقترحة</div>
             </div>
             <div class="stat">
-                <div class="number">31</div>
+                <div class="number">23</div>
                 <div class="label">المهام المكتملة</div>
             </div>
             <div class="stat">
@@ -58,7 +58,7 @@
             <h2>🧠 الدروس المست-conjugate الأسبوعية</h2>
             <p class="subtitle">أحدث 10 كلمة رائجة لدى النظام</p>
             <div id="lessons">
-                <div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 52 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 54 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
+                <div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 52 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 54 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 56 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
             </div>
         </div>
 
@@ -74,7 +74,7 @@
             <h2>📋 أنشطة الأسبوع</h2>
             <p class="subtitle">رسائل المedian (200)</p>
             <div id="activities">
-                <span class="tag">quality: مراجعة وتحديث البروتوكولات والتعاون بين الوكلاء حاسم لإنهاء الثغرات الهجومية. تط</span><span class="tag">redteam: 1. الاعتماد المتقطع على “معاينة البريد الإلكتروني” يخلق فجوة إذا خذلت الماسحات أ</span><span class="tag">evolve: يجب تحديث وتحديث البروتوكولات للحد من الثغرات الهجومية، وإجراء تقييم وتحديث بين </span><span class="tag">quality: updater و protocols البروتوكولات لإصلاح الثغرات وتجنب الهجمات. تحديث آلية المراج</span><span class="tag">redteam: 1. الاعتماد على “معاينة البريد الإلكتروني” كطبقة وحيدة للدفاع يتيح هجوم injectio</span><span class="tag">general: الكلاء تعاونوا في تحديث بروتوكولات التحقق وإدارة التعارضات. الخطوة القادمة الأهم</span><span class="tag">research: نظام EsprieAether يحتاج إلى تحديد نقاط ضعف فنية وسلوكية للرد على الهجمات المتعدد</span><span class="tag">general: الوكلاء واقعوا على أهمية تحديث البروتوكولات وتعزيز التعاون بين الوكلاء. اعتماد ا</span><span class="tag">market: الأنظمة المتعددة الوكلاء في نظام EsprieAether توفر فرصًا مالية واسعة، خاصة مع تط</span><span class="tag">quality: تحسين آلية معاينة البريد الإلكتروني وتوحيد بروتوكولات التحقق بين الوكلاء. توسيع </span>
+                <span class="tag">quality: updater و protocols البروتوكولات لإصلاح الثغرات وتجنب الهجمات. تحديث آلية المراج</span><span class="tag">redteam: 1. الاعتماد على “معاينة البريد الإلكتروني” كطبقة وحيدة للدفاع يتيح هجوم injectio</span><span class="tag">general: الكلاء تعاونوا في تحديث بروتوكولات التحقق وإدارة التعارضات. الخطوة القادمة الأهم</span><span class="tag">research: نظام EsprieAether يحتاج إلى تحديد نقاط ضعف فنية وسلوكية للرد على الهجمات المتعدد</span><span class="tag">general: الوكلاء واقعوا على أهمية تحديث البروتوكولات وتعزيز التعاون بين الوكلاء. اعتماد ا</span><span class="tag">market: الأنظمة المتعددة الوكلاء في نظام EsprieAether توفر فرصًا مالية واسعة، خاصة مع تط</span><span class="tag">quality: تحسين آلية معاينة البريد الإلكتروني وتوحيد بروتوكولات التحقق بين الوكلاء. توسيع </span><span class="tag">redteam: 1. الاعتماد على “معاينة البريد الإلكتروني” كطبقة وحيدة يعرض النظام لهجمات inject</span><span class="tag">general: الكلاء تعاونوا لتحسين البروتوكولات وكشف نقاط ضعف. الاعتماد على البرامج المعاينة </span><span class="tag">evolve: tighten email authentication protocols, unify security protocols, enhance collab</span>
             </div>
         </div>
 
