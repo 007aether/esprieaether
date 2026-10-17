@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-17T07:42:19.174292+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-17T01:42:59.098550+00:00",
+  "cloud_last_run": "2026-10-17T09:46:15.686917+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Meme Coin Glossary: 80+ Slang Terms Explained in Plain English",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Revoke Token Approvals: A Step-by-Step Guide",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Crypto Trading Bots: Are They Actually Profitable?",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "Trezor Reseller Cuts, Airdrop Updates and This Week’s Crypto News",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Ledger Atom: Does an $849 Android Signer Fix the Reseller Problem?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "PPI Hits 6.3%: Why Ethereum Fell and What It Means for Fed Hikes",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Trade.xyz Review: Wall Street Perps on Hyperliquid, Around the Clock",
       "source": "https://airdropalert.com/feed"
     },
     {
