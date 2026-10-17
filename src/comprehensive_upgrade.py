@@ -155,9 +155,11 @@ def create_summary_doc():
     print_step("📝 Creating upgrade summary")
     try:
         import json
-        data_dir = os.path.join(os.path.dirname(__file__), "data")
-        skill_tracker_path = os.path.join(data_dir, "skill_tracker.json")
-        knowledge_index_path = os.path.join(data_dir, "knowledge_base", "knowledge_index.json")
+        import os
+        # BASE_DIR is src/, so repo root is parent
+        repo_root = BASE_DIR.parent
+        skill_tracker_path = os.path.join(repo_root, "data", "skill_tracker.json")
+        knowledge_index_path = os.path.join(repo_root, "data", "knowledge_base", "knowledge_index.json")
         
         impact_path = BASE_DIR / "data" / "upgrade_impact.md"
         content = f"""# 📊 EsprieAether Comprehensive Upgrade Report
