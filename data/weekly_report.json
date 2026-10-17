@@ -25,7 +25,7 @@
     <body>
     <div class="container">
         <h1>📊 تقرير الأسبوع - EsprieAether</h1>
-        <p class="subtitle">تاريخ التقرير: 2026-10-17 11:14 UTC</p>
+        <p class="subtitle">تاريخ التقرير: 2026-10-17 11:15 UTC</p>
 
         <div class="stats">
             <div class="stat">
@@ -33,15 +33,15 @@
                 <div class="label">رسائل المedian</div>
             </div>
             <div class="stat">
-                <div class="number">56</div>
+                <div class="number">50</div>
                 <div class="label">المهام الإجمالية</div>
             </div>
             <div class="stat">
-                <div class="number">17</div>
+                <div class="number">19</div>
                 <div class="label">المهام المقترحة</div>
             </div>
             <div class="stat">
-                <div class="number">39</div>
+                <div class="number">31</div>
                 <div class="label">المهام المكتملة</div>
             </div>
             <div class="stat">
@@ -58,7 +58,7 @@
             <h2>🧠 الدروس المست-conjugate الأسبوعية</h2>
             <p class="subtitle">أحدث 10 كلمة رائجة لدى النظام</p>
             <div id="lessons">
-                <div class="lesson">📌 [weekly_report] report generated: 192 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 193 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 54 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
+                <div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 54 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 56 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
             </div>
         </div>
 
@@ -74,9 +74,7 @@
             <h2>📋 أنشطة الأسبوع</h2>
             <p class="subtitle">رسائل المedian (200)</p>
             <div id="activities">
-                <span class="tag">market: سأalyze الرسائل وسأذكِر الفرص القادمة:
-
-1- للحد من رسائل التجسس، نجني فرصة لزياد</span><span class="tag">quality: أقترح تحديث وثائق الجودة الداخلية والتحقق من تنفيذ الخطط الأمنية المرتبطة بالروا</span><span class="tag">redteam: 1. غير واضح كيف ينفذ الـ “خطوات عاجلة لتقييم البريد الإلكتروني”؛ غياب تفاصيل لأن</span><span class="tag">general: [last utterance]: redteam: البروتوكولات تحتاج إلى مزيد من التفصيل لتجنب الثغرات </span><span class="tag">evolve: يجب تحديث وتحديث البروتوكولات لتقليل الثغرات الهجومية، وإجراء تقييم وتحديث بين ا</span><span class="tag">evolve: تعد مشكلة تحديث البروتوكولات والتحقق من مزامنة نسخ الوكلاء أولويات حاسمة. سيجرى </span><span class="tag">security: [security]: مراجعة وتحديث خطوات عاجلة لتقييم البريد الإلكتروني وتفاصيل التحقق، ل</span><span class="tag">security: [security]: توحيد البروتوكولات لتقييم البريد الإلكتروني. ضع خطوات تدريبية للمعاي</span><span class="tag">research: يجب تحديث بروتوكولات التحقق الأولي لتقييم البريد الإلكتروني، مع تهيئة آلية ل syn</span><span class="tag">research: ابحث عن طرق جديدة لإتاحة فرصة أكبر للتعامل البيني بين الوكلاء دون وجود ثغرات إضا</span>
+                <span class="tag">general: [last utterance]: redteam: البروتوكولات تحتاج إلى مزيد من التفصيل لتجنب الثغرات </span><span class="tag">evolve: يجب تحديث وتحديث البروتوكولات لتقليل الثغرات الهجومية، وإجراء تقييم وتحديث بين ا</span><span class="tag">evolve: تعد مشكلة تحديث البروتوكولات والتحقق من مزامنة نسخ الوكلاء أولويات حاسمة. سيجرى </span><span class="tag">security: [security]: مراجعة وتحديث خطوات عاجلة لتقييم البريد الإلكتروني وتفاصيل التحقق، ل</span><span class="tag">security: [security]: توحيد البروتوكولات لتقييم البريد الإلكتروني. ضع خطوات تدريبية للمعاي</span><span class="tag">research: يجب تحديث بروتوكولات التحقق الأولي لتقييم البريد الإلكتروني، مع تهيئة آلية ل syn</span><span class="tag">research: ابحث عن طرق جديدة لإتاحة فرصة أكبر للتعامل البيني بين الوكلاء دون وجود ثغرات إضا</span><span class="tag">market: الخطوات المقترحه تظهر إمكانات جيدة في تقليل الهجمات الإلكترونية. تحسين التحقق وت</span><span class="tag">market: في سوق التصنيع الصناعي، تحتاج برامج معاينة الاحتيال إلى تطوير مستمر للحد من الثغ</span><span class="tag">quality: مراجعة وتحديث البروتوكولات والتعاون بين الوكلاء حاسم لإنهاء الثغرات الهجومية. تط</span>
             </div>
         </div>
 
