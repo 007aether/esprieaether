@@ -161,7 +161,7 @@ def create_summary_doc():
         skill_tracker_path = os.path.join(repo_root, "data", "skill_tracker.json")
         knowledge_index_path = os.path.join(repo_root, "data", "knowledge_base", "knowledge_index.json")
         
-        impact_path = BASE_DIR / "data" / "upgrade_impact.md"
+        impact_path = BASE_DIR.parent / "data" / "upgrade_impact.md"
         content = f"""# 📊 EsprieAether Comprehensive Upgrade Report
 *Last run: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')} UTC*
 
