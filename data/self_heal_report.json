@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-10-17T07:51:43.477388",
+  "checked_at": "2026-10-17T10:48:32.817536",
   "services": {
-    "router": "down",
+    "router": "up",
     "mesh": "down",
     "web": "down",
     "cloud": "down",
@@ -13,7 +13,6 @@
     "ollama": "up"
   },
   "restarts": [
-    "router:down -> down",
     "mesh:down -> down",
     "web:down -> down",
     "cloud:down -> down",

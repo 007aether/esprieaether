@@ -238,6 +238,17 @@ def h_noop(robot_id: str) -> dict:
     return {"ok": True, "summary": "idle (no handler)"}
 
 
+def h_knowledge(robot_id: str) -> dict:
+    """روبوت المعرفة — يربط ذاكرة الش안건 بالنظام (mesh + tasks)."""
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import knowledge_router as kr
+        result = kr.run()
+        return {"ok": True, "summary": f"knowledge_router done={result}"}
+    except Exception as e:
+        return {"ok": False, "summary": f"knowledge_router error: {str(e)[:120]}"}
+
+
 def h_hexstrike(robot_id: str) -> dict:
     """IMM robots — فحص أمني عبر HexStrike AI (port 8888)"""
     try:
@@ -266,6 +277,8 @@ ROLE_HANDLERS: dict = {
     "logs": h_log_scan,
     "analysis": h_log_scan,
     "reports": h_stats,
+    # Knowledge
+    "knowledge": h_knowledge,
     # AI
     "hermes_bridge": h_ai_think,
     "prompt_craft": h_ai_think,

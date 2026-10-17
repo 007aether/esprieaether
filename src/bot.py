@@ -1947,6 +1947,30 @@ async def cmd_digest(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @authorized_only
+async def cmd_knowledge(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """🤖 /knowledge — يربط ذاكرة الش안건 بالوكلاء (mesh + tasks + lessons)"""
+    from pathlib import Path
+    BASE = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(BASE / "src"))
+    try:
+        import knowledge_router as kr
+        result = kr.run()
+        from datetime import datetime, timezone
+        ts = datetime.now(timezone.utc).isoformat()
+        msg = await update.message.reply_text(
+            f"🔗 *مهمة المعرفة*\n"
+            f"📡 داد تايم: `{len(kr.parse_veille_digest(kr.VEILLE_FILE))} أقسام`\n"
+            f"📚 مرشح مهارة: `{kr.parse_skill_candidates(kr.SKILLS_FILE)['total']}`\n"
+            f"📝 المedian + مهمة للـ evolve\n\n"
+            f"✅ *تم التشغيل* `@{ts.split('T')[0]}`",
+            parse_mode="Markdown"
+        )
+        return msg
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ في المعرفة: {e}")
+
+
+@authorized_only
 async def cmd_harvest(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """🎯 /harvest — skill candidates from the veille index"""
     from pathlib import Path
@@ -2613,6 +2637,7 @@ def main():
     app.add_handler(CommandHandler("auto_apply", cmd_auto_apply))
     app.add_handler(CommandHandler("market", cmd_market))
     app.add_handler(CommandHandler("digest", cmd_digest))
+    app.add_handler(CommandHandler("knowledge", cmd_knowledge))
     app.add_handler(CommandHandler("bandwidth", cmd_bandwidth))
     app.add_handler(CommandHandler("approve", cmd_approve))
     app.add_handler(CommandHandler("reject", cmd_reject))
@@ -3062,6 +3087,39 @@ async def cmd_rea_config(message: types.Message):
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_help"))
 async def cmd_rea_help(message: types.Message):
+    """21st_magic_mcp_smoke - command placeholder"""
+    await message.reply("⚠️ /rea_help - أمر قيد التنفيذ")
+
+@router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp_smoke"))
+async def cmd_21st_magic_mcp_smoke(message: types.Message):
+    """21st_magic_mcp_smoke - command placeholder"""
+    await message.reply(f"⚠️ /21st_magic_mcp_smoke - command in progress")
+
+
+@router.message(lambda m: m.text and m.text.startswith("/5th_magic_mcp"))
+async def cmd_5th_magic_mcp(message: types.Message):
+    """5th_magic_mcp - command placeholder"""
+    await message.reply(f"⚠️ /5th_magic_mcp - command in progress")
+
+
+@router.message(lambda m: m.text and m.text.startswith("/fish_audio_download"))
+async def cmd_fish_audio_download(message: types.Message):
+    """fish_audio_download - command placeholder"""
+    await message.reply(f"⚠️ /fish_audio_download - command in progress")
+
+
+@router.message(lambda m: m.text and m.text.startswith("/five"))
+async def cmd_five(message: types.Message):
+    """five - command placeholder"""
+    await message.reply(f"⚠️ /five - command in progress")
+
+
+@router.message(lambda m: m.text and m.text.startswith("/obsidian_vault_rebuild"))
+async def cmd_obsidian_vault_rebuild(message: types.Message):
+    """obsidian_vault_rebuild - command placeholder"""
+    await message.reply(f"⚠️ /obsidian_vault_rebuild - command in progress")
+
+
     """Show REA help"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
