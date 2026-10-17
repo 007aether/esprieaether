@@ -1,26 +1,17 @@
 {
-  "checked_at": "2026-10-16T17:05:09.348867",
+  "checked_at": "2026-10-17T01:42:21.722198",
   "services": {
-    "router": "down",
-    "mesh": "down",
-    "web": "down",
-    "cloud": "down",
-    "sunna": "down",
-    "integrations": "down",
-    "kanban": "down",
-    "homedock": "down",
+    "router": "up",
+    "mesh": "up",
+    "web": "up",
+    "cloud": "up",
+    "sunna": "up",
+    "integrations": "up",
+    "kanban": "up",
+    "homedock": "up",
     "jarvis": "up",
     "ollama": "up"
   },
-  "restarts": [
-    "router:down -> down",
-    "mesh:down -> down",
-    "web:down -> down",
-    "cloud:down -> down",
-    "sunna:down -> down",
-    "integrations:down -> down",
-    "kanban:down -> down",
-    "homedock:down -> down"
-  ],
+  "restarts": [],
   "changed": false
 }
