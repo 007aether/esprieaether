@@ -487,3 +487,22 @@ if __name__ == "__main__":
         else:
             print(f"   model: {m} → (direct brain)")
     app.run(host="0.0.0.0", port=port, threaded=True)
+
+    # ── agenticSeek brain ──
+    if "aether-agenticSeek" not in AGENT_MODELS:
+        AGENT_MODELS["aether-agenticSeek"] = {
+            "name": "agenticSeek",
+            "provider": "ollama",
+            "model": "qwen2.5:3b",
+            "description": "AgenticSeek local agent (27K★) - local AI alternative",
+            "chain": ["ollama", "colibri"],
+        }
+    
+    # AGENT_ROUTES - add agenticSeek keywords
+    if "agenticSeek" not in AGENT_ROUTES:
+        AGENT_ROUTES["agenticSeek"] = {
+            "keywords": ["agenticSeek", "agentSeek", "manus", "local agent", "lagent", "seeker"],
+            "brain": "aether-agenticSeek",
+            "priority": 7,
+        }
+    print("agenticSeek registered in AI router")

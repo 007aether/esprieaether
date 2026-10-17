@@ -1,0 +1,258 @@
+import unittest
+from unittest.mock import patch, MagicMock
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from sources.llm_provider import Provider
+from sources.errors import ProviderError
+
+
+class TestMiniMaxProvider(unittest.TestCase):
+    """Test cases for MiniMax provider integration."""
+
+    def test_minimax_provider_registered(self):
+        """Test that minimax provider is registered in available_providers."""
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M3", is_local=False)
+            self.assertIn("minimax", provider.available_providers)
+
+    def test_minimax_in_unsafe_providers(self):
+        """Test that minimax is in unsafe_providers list."""
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M3", is_local=False)
+            self.assertIn("minimax", provider.unsafe_providers)
+
+    def test_minimax_api_key_required(self):
+        """Test that API key is fetched for minimax provider."""
+        with patch.object(Provider, 'get_api_key', return_value='test-minimax-key') as mock_get_key:
+            provider = Provider("minimax", "MiniMax-M3", is_local=False)
+            mock_get_key.assert_called_with("minimax")
+            self.assertEqual(provider.api_key, 'test-minimax-key')
+
+    @patch('sources.llm_provider.OpenAI')
+    @patch.dict(os.environ, {'MINIMAX_API_KEY': 'test-key'})
+    def test_minimax_local_not_supported(self, mock_openai_class):
+        """Test that minimax provider raises error when is_local=True."""
+        provider = Provider("minimax", "MiniMax-M3", is_local=True)
+        provider.api_key = 'test-key'
+        history = [{"role": "user", "content": "Hello"}]
+        with self.assertRaises(ProviderError) as context:
+            provider.minimax_fn(history)
+        self.assertEqual(context.exception.kind, "local_unsupported")
+
+    @patch('sources.llm_provider.OpenAI')
+    @patch.dict(os.environ, {'MINIMAX_API_KEY': 'test-key'})
+    def test_minimax_uses_correct_base_url(self, mock_openai_class):
+        """Test that minimax provider uses correct base URL."""
+        mock_client = MagicMock()
+        mock_openai_class.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock(message=MagicMock(content="Hello!"))]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M3", is_local=False)
+            history = [{"role": "user", "content": "Hello"}]
+            provider.minimax_fn(history)
+
+            mock_openai_class.assert_called_with(
+                api_key='test-key',
+                base_url='https://api.minimax.io/v1'
+            )
+
+    @patch('sources.llm_provider.OpenAI')
+    @patch.dict(os.environ, {
+        'MINIMAX_API_KEY': 'test-key',
+        'MINIMAX_BASE_URL': 'https://api.minimaxi.com/v1'
+    })
+    def test_minimax_custom_base_url(self, mock_openai_class):
+        """Test that minimax provider uses custom base URL from env."""
+        mock_client = MagicMock()
+        mock_openai_class.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock(message=MagicMock(content="Hello!"))]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M3", is_local=False)
+            history = [{"role": "user", "content": "Hello"}]
+            provider.minimax_fn(history)
+
+            mock_openai_class.assert_called_with(
+                api_key='test-key',
+                base_url='https://api.minimaxi.com/v1'
+            )
+
+    @patch('sources.llm_provider.requests.post')
+    def test_minimax_anthropic_compatible_base_urls(self, mock_post):
+        """Test the MiniMax Anthropic-compatible endpoints in both regions."""
+        mock_post.return_value.json.return_value = {
+            "content": [
+                {"type": "thinking", "thinking": "Reasoning"},
+                {"type": "text", "text": "Hello!"},
+            ]
+        }
+        history = [
+            {"role": "system", "content": "Be helpful."},
+            {"role": "user", "content": "Hello"},
+        ]
+
+        for base_url in (
+            'https://api.minimax.io/anthropic',
+            'https://api.minimaxi.com/anthropic',
+        ):
+            with self.subTest(base_url=base_url), patch.dict(
+                os.environ, {'MINIMAX_BASE_URL': base_url}
+            ):
+                mock_post.reset_mock()
+                with patch.object(Provider, 'get_api_key', return_value='test-key'):
+                    provider = Provider("minimax", "MiniMax-M3", is_local=False)
+                    result = provider.minimax_fn(history)
+
+                self.assertEqual(result, "Hello!")
+                mock_post.assert_called_once_with(
+                    f'{base_url}/v1/messages',
+                    headers={
+                        'Content-Type': 'application/json',
+                        'X-Api-Key': 'test-key',
+                    },
+                    json={
+                        'model': 'MiniMax-M3',
+                        'max_tokens': 1024,
+                        'messages': [{"role": "user", "content": "Hello"}],
+                        'temperature': 1.0,
+                        'system': 'Be helpful.',
+                    },
+                    timeout=30,
+                )
+
+    @patch('sources.llm_provider.OpenAI')
+    @patch.dict(os.environ, {'MINIMAX_API_KEY': 'test-key'})
+    def test_minimax_uses_temperature_one(self, mock_openai_class):
+        """Test that minimax provider uses temperature=1.0."""
+        mock_client = MagicMock()
+        mock_openai_class.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock(message=MagicMock(content="Hello!"))]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M3", is_local=False)
+            history = [{"role": "user", "content": "Hello"}]
+            provider.minimax_fn(history)
+
+            call_kwargs = mock_client.chat.completions.create.call_args[1]
+            self.assertEqual(call_kwargs['temperature'], 1.0)
+
+    @patch('sources.llm_provider.OpenAI')
+    @patch.dict(os.environ, {'MINIMAX_API_KEY': 'test-key'})
+    def test_minimax_returns_response_content(self, mock_openai_class):
+        """Test that minimax provider returns response content."""
+        mock_client = MagicMock()
+        mock_openai_class.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock(message=MagicMock(content="Test response"))]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M3", is_local=False)
+            history = [{"role": "user", "content": "Hello"}]
+            result = provider.minimax_fn(history)
+
+            self.assertEqual(result, "Test response")
+
+    @patch('sources.llm_provider.OpenAI')
+    @patch.dict(os.environ, {'MINIMAX_API_KEY': 'test-key'})
+    def test_minimax_handles_empty_response(self, mock_openai_class):
+        """Test that minimax provider handles empty response."""
+        mock_client = MagicMock()
+        mock_openai_class.return_value = mock_client
+        mock_client.chat.completions.create.return_value = None
+
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M3", is_local=False)
+            history = [{"role": "user", "content": "Hello"}]
+
+            with self.assertRaises(ProviderError) as context:
+                provider.minimax_fn(history)
+            self.assertEqual(context.exception.kind, "empty_response")
+
+    @patch('sources.llm_provider.OpenAI')
+    @patch.dict(os.environ, {'MINIMAX_API_KEY': 'test-key'})
+    def test_minimax_respond_explains_api_error(self, mock_openai_class):
+        """respond() turns a raw MiniMax failure into a diagnosed ProviderError."""
+        mock_client = MagicMock()
+        mock_openai_class.return_value = mock_client
+        mock_client.chat.completions.create.side_effect = Exception("API rate limit exceeded")
+
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M3", is_local=False)
+            history = [{"role": "user", "content": "Hello"}]
+
+            with self.assertRaises(ProviderError) as context:
+                provider.respond(history)
+            self.assertEqual(context.exception.kind, "rate_limit")
+
+
+class TestMiniMaxProviderModels(unittest.TestCase):
+    """Test cases for MiniMax provider model configurations."""
+
+    @patch('sources.llm_provider.OpenAI')
+    @patch.dict(os.environ, {'MINIMAX_API_KEY': 'test-key'})
+    def test_minimax_m3_model(self, mock_openai_class):
+        """Test MiniMax-M3 model."""
+        mock_client = MagicMock()
+        mock_openai_class.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock(message=MagicMock(content="Response"))]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M3", is_local=False)
+            history = [{"role": "user", "content": "Hello"}]
+            provider.minimax_fn(history)
+
+            call_kwargs = mock_client.chat.completions.create.call_args[1]
+            self.assertEqual(call_kwargs['model'], "MiniMax-M3")
+
+    @patch('sources.llm_provider.OpenAI')
+    @patch.dict(os.environ, {'MINIMAX_API_KEY': 'test-key'})
+    def test_minimax_m27_model(self, mock_openai_class):
+        """Test MiniMax-M2.7 model."""
+        mock_client = MagicMock()
+        mock_openai_class.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock(message=MagicMock(content="Response"))]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M2.7", is_local=False)
+            history = [{"role": "user", "content": "Hello"}]
+            provider.minimax_fn(history)
+
+            call_kwargs = mock_client.chat.completions.create.call_args[1]
+            self.assertEqual(call_kwargs['model'], "MiniMax-M2.7")
+
+    @patch('sources.llm_provider.OpenAI')
+    @patch.dict(os.environ, {'MINIMAX_API_KEY': 'test-key'})
+    def test_minimax_m27_highspeed_model(self, mock_openai_class):
+        """Test MiniMax-M2.7-highspeed model."""
+        mock_client = MagicMock()
+        mock_openai_class.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock(message=MagicMock(content="Response"))]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        with patch.object(Provider, 'get_api_key', return_value='test-key'):
+            provider = Provider("minimax", "MiniMax-M2.7-highspeed", is_local=False)
+            history = [{"role": "user", "content": "Hello"}]
+            provider.minimax_fn(history)
+
+            call_kwargs = mock_client.chat.completions.create.call_args[1]
+            self.assertEqual(call_kwargs['model'], "MiniMax-M2.7-highspeed")
+
+
+if __name__ == '__main__':
+    unittest.main()

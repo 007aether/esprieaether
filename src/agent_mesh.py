@@ -368,3 +368,21 @@ if __name__ == "__main__":
     for name, a in AGENTS.items():
         print(f"   {name}: {a['role']}")
     app.run(host="0.0.0.0", port=port, threaded=True)
+
+    # ── agenticSeek agent ──
+    if "agenticSeek" not in AGENTS:
+        AGENTS["agenticSeek"] = {
+            "role": "local agent alternative",
+            "description": "AgenticSeek (27K★) - 100% local AI agent alternative",
+            "model": "qwen2.5:3b",
+            "provider": "ollama",
+            "tags": ["local", "agent", "ai", "agenticSeek"],
+            "prompt": "AgenticSeek - voice-enabled AI assistant, autonomous web browsing, code generation, task planning",
+        }
+    
+    # ── agenticSeek in mesh cycle after agenticSeek agent ──
+    if "agenticSeek" in mesh_cycle:
+        pass  # already there
+    else:
+        mesh_cycle.insert(-1, "agenticSeek")
+        print("✅ agenticSeek added to mesh_cycle")
