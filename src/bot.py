@@ -6672,3 +6672,31 @@ async def cmd_fish_audio38(message: types.Message):
         "🔊 Fish Audio:\n"
         "Priority 4: Verify audio model download pipeline"
     )
+
+# Strix blocking issue
+@router.message(lambda m: m.text and m.text.startswith("/strix_blocked"))
+async def cmd_strix_blocked(message: types.Message):
+    """Strix blocking issue"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📊 Strix Status:\n"
+        "Priority 3: Fix strix ingestion timeout\n"
+        "Status: BLOCKED\n"
+        "Note: API key expired; awaiting credentials"
+    )
+
+# Complete integration roadmap
+@router.message(lambda m: m.text and m.text.startswith("/integration_status"))
+async def cmd_integration_status(message: types.Message):
+    """Integration status"""
+    if message.chat.id not in ALLOWED_CHAT_IDS:
+        return
+    await message.reply(
+        "📊 Integration Status:\n\n"
+        "Open: 6 (agent-skills, work-organizer, claude-mem, five, 21st-magic-mcp, fish-audio)\n"
+        "Blocked: 1 (strix)\n"
+        "Completed: 39 of 46\n\n"
+        "Available free GitHub projects: 45\n"
+        "REA tools: 24 tasks + 391 commands"
+    )
