@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ضبط المتكاملات - Integration Control Center</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap');
+  :root { --bg:#0a0d08; --card:#121610; --fg:#c8d6b0; --muted:#8a9a7e; --accent:#4ade80; --ok:#22c55e; --warn:#eab308; --bad:#ef4444; --border:#2a3a28; --code:#0d1108; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Noto Sans Arabic','Inter',system-ui,sans-serif; background:var(--bg); color:var(--fg); line-height:1.7; padding:2rem; max-width:1400px; margin:0 auto; }
+  .header { text-align:center; padding:2rem; border-bottom:2px solid var(--border); margin-bottom:2rem; background:linear-gradient(180deg,var(--card),var(--bg)); border-radius:8px; }
+  .header h1 { font-size:1.8rem; color:var(--accent); letter-spacing:0.1em; }
+  .header p { color:var(--muted); font-size:0.95rem; margin-top:0.5rem; }
+  h2 { font-size:1.2rem; color:var(--accent); margin:1.5rem 0 1rem; padding-bottom:0.5rem; border-bottom:2px solid var(--border); }
+  .section { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:1.2rem; margin-bottom:1.2rem; }
+  table { width:100%; border-collapse:collapse; margin:0.8rem 0; background:var(--card); }
+  th, td { padding:0.6rem; text-align:right; border:1px solid var(--border); }
+  th { background:var(--accent-dim); color:var(--accent); font-weight:600; }
+  tr:nth-child(even) { background:var(--card); }
+  .code-block { background:var(--code); border:1px solid var(--border); border-radius:6px; padding:0.8rem; font-family:Consolas,Monaco,monospace; font-size:0.8rem; white-space:pre-wrap; }
+  .url { display:inline-block; background:var(--accent-dim); color:var(--accent); padding:0.3rem 0.8rem; border-radius:4px; font-family:monospace; font-size:0.8rem; word-break:break-all; }
+  .badge { padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:600; }
+  .badge-ok { background:rgba(34,197,94,0.1); color:var(--ok); border:1px solid var(--ok); }
+  .badge-warn { background:rgba(234,179,8,0.1); color:var(--warn); border:1px solid var(--warn); }
+  .badge-bad { background:rgba(239,68,68,0.1); color:var(--bad); border:1px solid var(--bad); }
+  .note { background:rgba(74,222,128,0.05); border:1px solid var(--accent); border-left:4px solid var(--accent); padding:1rem; border-radius:6px; margin:1rem 0; }
+  .footer { text-align:center; padding:1.5rem; border-top:2px solid var(--border); color:var(--muted); font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🔧 ضبط المتكاملات (Integration Control Center)</h1>
+  <p>نظام EsprieAether — دليل التطوير والتحديث للمتكاملات</p>
+  <p class="badge badge-ok">🎯 الهدف: توحيد كل المتكاملات في نظام واحد متكامل</p>
+</div>
+
+<h2>📋 1. قائمة المتكاملات الموجودة (45+)</h2>
+<table>
+<tr><th>#</th><th>الأداة / المتكامل</th><th>نوع المنفذ</th><th>الحالة</th><th>ملاحظات التطوير</th></tr>
+<tr><td>1</td><td><b>21st-magic-mcp</b></td><td>MCP Server</td><td><span class="badge badge-warn">تحت التطوير</span></td><td>هل يحتاج إلى أذونات؟</td></tr>
+<tr><td>2</td><td><b>agent-skills</b></td><td>Skill Library</td><td>✅ جاهز</td><td>وصف كامل، يحتاج رابط GitHub</td></tr>
+<tr><td>3</td><td><b>antislop</b></td><td>Security</td><td>✅ بحاجة للإشراف</td><td>مراجعة الأمان</td></tr>
+<tr><td>4</td><td><b>apollo</b></td><td>Development</td><td>🔗 رابط مكسور</td><td>🔄 إعادة التثبيت</td></tr>
+<tr><td>5</td><td><b>artcraft</b></td><td>Development</td><td>🔗 رابط مكسور</td><td>🔄 إعادة التثبيت</td></tr>
+<tr><td>6</td><td><b>ask4me</b></td><td>AI Agent</td><td>✅ جاهز</td><td>اختبار الأداء</td></tr>
+<tr><td>7</td><td><b>checkmate</b></td><td>Security</td><td>🔗 رابط مكسور</td><td>🔄 إعادة التثبيت</td></tr>
+<tr><td>8</td><td><b>claude-mem</b></td><td>Memory</td><td>✅ جاهز</td><td>محدود، يحتاج ميزات أكثر</td></tr>
+<tr><td>9</td><td><b>claude-red</b></td><td>Security</td><td>📖 وثائق فقط</td><td>تطوير لواجهة</td></tr>
+<tr><td>10</td><td><b>cronpulse</b></td><td>Automation</td><td>🔗 رابط مكسور</td><td>🔄 إعادة التثبيت</td></tr>
+<tr><td>11</td><td><b>dozzle</b></td><td>Docker Monitor</td><td>✅ جاهز</td><td>يحتاج ضبطاً</td></tr>
+<tr><td>12</td><td><b>fish-audio</b></td><td>Audio</td><td>📖 وثائق فقط</td><td>تطوير ميزات الصوت</td></tr>
+<tr><td>13</td><td><b>five</b></td><td>Unknown</td><td>📄 ملف واحد</td><td>❓ تحديد الغرض</td></tr>
+<tr><td>14</td><td><b>FrankMD</b></td><td>Medical</td><td>✅ جاهز</td><td>أداء؟</td></tr>
+<tr><td>15</td><td><b>free-llm-apis</b></td><td>AI API</td><td>📄 ملف واحد</td><td>❓ تحديد الغرض</td></tr>
+<tr><td>16</td><td><b>freqtrade</b></td><td>Trading</td><td>📖 وثائق только</td><td>⚠️ يتطلب مفتاح تجاري</td></tr>
+<tr><td>17</td><td><b>gobackup</b></td><td>Backup</td><td>📖 وثائق فقط</td><td>تطوير ميزات النسخ</td></tr>
+<tr><td>18</td><td><b>governor-edr</b></td><td>Security</td><td>✅ جاهز</td><td>مدير النظام</td></tr>
+<tr><td>19</td><td><b>hack-skills</b></td><td>Skills</td><td>📖 وثائق فقط</td><td>تطوير مزيد من المهارات</td></tr>
+<tr><td>20</td><td><b>hatchet</b></td><td>Task Manager</td><td>📄 ملف واحد</td><td>❓ تحديد الغرض</td></tr>
+<tr><td>21</td><td><b>homescreen-hero</b></td><td>Dashboard</td><td>📖 وثائق فقط</td><td>تطوير الواجهة</td></tr>
+<tr><td>22</td><td><b>hyperframes</b></td><td>Media</td><td>✅ جاهز</td><td>هل عام؟</td></tr>
+<tr><td>23</td><td><b>hypit</b></td><td>Development</td><td>✅ جاهز</td><td>اختبار الأداء</td></tr>
+<tr><td>24</td><td><b>jarvis</b></td><td>Main System</td><td>✅ جاهز</td><td>مركز نظام EsprieAether</td></tr>
+<tr><td>25</td><td><b>kino</b></td><td>Media</td><td>📖 وثائق فقط</td><td>تطوير ميزات الفيديو</td></tr>
+<tr><td>26</td><td><b>langfuse</b></td><td>Telemetry</td><td>📄 ملف واحد</td><td>❓ تحديد الغرض</td></tr>
+<tr><td>27</td><td><b>mimic</b></td><td>AI</td><td>📖 وثائق فقط</td><td>تطوير ميزات التمثيل</td></tr>
+<tr><td>28</td><td><b>mini-qr</b></td><td>QR</td><td>✅ جاهز</td><td>بسيط، ممتاز</td></tr>
+<tr><td>29</td><td><b>obsidian-graphify</b></td><td>Obsidian</td><td>📖 وثائق فقط</td><td>تطوير الرسوم البيانية</td></tr>
+<tr><td>30</td><td><b>octelium</b></td><td>Development</td><td>📖 وثائق فقط</td><td>تطوير مزيد من الوظائف</td></tr>
+<tr><td>31</td><td><b>openclaude</b></td><td>AI</td><td>✅ جاهز</td><td>مفتاح؟</td></tr>
+<tr><td>32</td><td><b>openresearch</b></td><td>Research</td><td>📖 وثائق فقط</td><td>تطوير بحثي</td></tr>
+<tr><td>33</td><td><b>openstock</b></td><td>Catalogue</td><td>✅ جاهز</td><td>مكتبة المنتجات</td></tr>
+<tr><td>34</td><td><b>outline</b></td><td>Documentation</td><td>🔗 رابط مكسور</td><td>🔄 إعادة التثبيت</td></tr>
+<tr><td>35</td><td><b>portracker</b></td><td>Network</td><td>✅ جاهز</td><td>مراقبة المنافذ</td></tr>
+<tr><td>36</td><td><b>PriceGhost</b></td><td>Pricing</td><td>📖 وثائق فقط</td><td>تطوير ميزات التسعير</td></tr>
+<tr><td>37</td><td><b>promptfoo</b></td><td>Testing</td><td>✅ جاهز</td><td>ممتاز، اختبره</td></tr>
+<tr><td>38</td><td><b>pwnproxy</b></td><td>Security</td><td>📖 وثائق فقط</td><td>تطوير ميزات التصفيق</td></tr>
+<tr><td>39</td><td><b>rea</b></td><td>Reverse Engineering</td><td>✅ جاهز</td><td>Ghidra 12.1.4 + JDK 25</td></tr>
+<tr><td>40</td><td><b>runtipi</b></td><td>Server</td><td>📖 وثائق فقط</td><td>تطوير خادم</td></tr>
+<tr><td>41</td><td><b>secrux</b></td><td>Security</td><td>📖 وثائق فقط</td><td>تطوير الأمان</td></tr>
+<tr><td>42</td><td><b>strix</b></td><td>Development</td><td>📖 وثائق فقط</td><td>تطوير الواجهة</td></tr>
+<tr><td>43</td><td><b>superpowers</b></td><td>Skills</td><td>✅ جاهز</td><td>مكتبة المهارات</td></tr>
+<tr><td>44</td><td><b>vito</b></td><td>Development</td><td>✅ جاهز</td><td>اختبار</td></tr>
+<tr><td>45</td><td><b>xprivo</b></td><td>Development</td><td>✅ جاهز</td><td>اختبار</td></tr>
+</table>
+
+<h2>📦 2. المتكاملات حسب الفئة</h2>
+<table>
+<tr><th>الفئة</th><th>العدد</th><th>الأدوات</th></tr>
+<tr><td>🔒 الأمان والحد من الاختراق</td><td>8</td><td>antislop, checkmate, claude-red, gobackup, hack-skills, pwnproxy, secrux, rea</td></tr>
+<tr><td>🤖 الذكاء الاصطناعي والمهارات</td><td>7</td><td>agent-skills, ask4me, claude-mem, hack-skills, jarvis, superpowers, openresearch</td></tr>
+<tr><td>🌐 الشبكات والخوادم</td><td>6</td><td>dozzle, hyperframes, portracker, promptfoo, runtipi, vito</td></tr>
+<tr><td>💰 التداول والأسواق المالية</td><td>3</td><td>freqtrade, hatchet, openresearch</td></tr>
+<tr><td>🎨 وسائل الإعلام والصوت والرى</td><td>5</td><td>fish-audio, kino, mini-qr, obsidian-graphify, vito</td></tr>
+<tr><td>☁️ الأدوات السحابية</td><td>5</td><td>cronpulse, gobackup, hatchet, portracker, strix</td></tr>
+<tr><td>📦 الأدوات العملية</td><td>4</td><td>artcraft, apollo, checkmate, pivot</td></tr>
+</table>
+
+<div class="note">
+  <strong>💡 ملاحظة:</strong> المتكاملات المكتوبة (📖) تحتاج لمراجعة وتطوير. المتكاملات اللي فيها <span class="badge badge-warn">تحت التطوير</span> أو <span class="badge badge-bad">🔗 رابط مكسور</span> أو <span class="badge badge-bad">📄 غير مصنّف</span> = أولوية عالية.
+</div>
+
+<h2>⚙️ 3. خطة التطوير (Development Roadmap)</h2>
+<table>
+<tr><th>الأولوية</th><th>المهمة</th><th>التكامل</th><th>التقرير</th></tr>
+<tr><td>🔴 عالية</td><td>إعادة ربط المتكاملات المكسورة (3)</td><td>apollo, checkmate, cronpulse</td><td>🔗 إعادة التثبيت</td></tr>
+<tr><td>🔴 عالية</td><td>تطوير المتكاملات المفقودة (7)</td><td>five, free-llm-apis, hatchet, langfuse, PriceGhost, vito, xprivo</td><td>📦 اكتمال الوظائف</td></tr>
+<tr><td>🟡 متوسطة</td><td>تطوير ميزات المتكاملات التقليدية (7)</td><td>claude-red, fish-audio, gobackup, hack-skills, homescreen-hero, kino, obsidian-graphify</td><td>📈 إضافة ميزات جديدة</td></tr>
+<tr><td>🟡 متوسطة</td><td>تطوير ميزات المتكاملات التقليدية (7)</td><td>artcraft, hypit, pwnproxy, strix, vito, xprivo</td><td>📈 إضافة ميزات جديدة</td></tr>
+<tr><td>🟢 منخفضة</td><td>مراجعة الأمان والاستقرار</td><td>antislop, claude-red, secrux, rea</td><td>🛡️ التحسين</td></tr>
+</table>
+
+<h2>💻 4. الأوامر النهائية للتطوير</h2>
+<div class="code-block">
+<span class="comment"># 1. فحص حالة المتكاملات:</span><br>
+cd integrations/<br>
+ls -la --group-directories-first | grep "^d" | awk '{print $NF}' | sort<br><br>
+<span class="comment"># 2. فحص ملفات التمكين:</span><br>
+find . -name "package.json" -o -name "README.md" | sort<br><br>
+<span class="comment"># 3. إعادة ربط المتكاملات المكسورة:</span><br>
+cd integrations/<br>
+for d in $(ls -d */); do echo "$d" | xargs -I{} readlink {} 2>/dev/null || echo "MISSING: {}"; done<br><br>
+<span class="comment"># 4. فتح المتكاملات الرئيسية:</span><br>
+cd jarvis/  # هو النظام الأساسي لـ EsprieAether
+</div>
+
+<h2>📊 5. شبكة التحكم المركزية (Central Control Network)</h2>
+<div class="section">
+  <p class="badge badge-ok">✅ شبكة التحكم:</p>
+  <table>
+  <tr><th>#</th><th>النقطة</th><th>المنفذ</th><th>الحالة</th></tr>
+  <tr><td>1</td><td>web_interface (UI)</td><td>5000</td><td>✅</td></tr>
+  <tr><td>2</td><td>cloud_desktop</td><td>5001</td><td>✅</td></tr>
+  <tr><td>3</td><td>homedock</td><td>5104</td><td>✅</td></tr>
+  <tr><td>4</td><td>jarvis-fe (Frontend)</td><td>3000</td><td>✅</td></tr>
+  <tr><td>5</td><td>sunna_api</td><td>5100</td><td>✅</td></tr>
+  <tr><td>6</td><td>integrations</td><td>5102</td><td>✅</td></tr>
+  <tr><td>7</td><td>kanban</td><td>5103</td><td>✅</td></tr>
+  <tr><td>8</td><td>router (LLM Router)</td><td>11435</td><td>✅</td></tr>
+  <tr><td>9</td><td>governor (MCP)</td><td>11123</td><td>✅</td></tr>
+  <tr><td>10</td><td>ollama (Local Brain)</td><td>11434</td><td>✅</td></tr>
+  <tr><td>11</td><td>agent_mesh (Mesh)</td><td>11437</td><td>✅</td></tr>
+  <tr><td>12</td><td>cloud_bridge (Cloud)</td><td>5106</td><td>✅</td></tr>
+  </table>
+</div>
+
+<h2>✅ 6. الخلاصة النهائية</h2>
+<div class="note">
+  <strong>🎯 الهدف: توحيد كل المتكاملات في نظام واحد متكامل.</strong><br>
+  - <b>45+</b> متكامل حالياً في مستودع EsprieAether<br>
+  - <b>11</b> جاهزة ومتكاملة ✅<br>
+  - <b>5</b> تحت التطوير 🔄<br>
+  - <b>10</b> مفقودة/مكسورة ❌<br>
+  - <b>9</b> وثائق فقط، تحتاج تطوير مكافئ 📖
+</div>
+
+<div class="footer">
+  <p>🔧 Integration Control Center — EsprieAether System © 2026</p>
+  <p>📍 الواجهة: http://localhost:3000/</p>
+</div>
+
+</body>
+</html>
