@@ -160,4 +160,4 @@ h1{{font-size:18px;margin:0}}h1 span{{color:#58a6ff}}
 
 if __name__ == "__main__":
     print(f"🏠 HomeDock dashboard — port {PORT}")
-    app.run(host="127.0.0.1", port=PORT, threaded=True)
+    app.run(host="0.0.0.0", port=PORT, threaded=True)

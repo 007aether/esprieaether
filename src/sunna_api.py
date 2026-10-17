@@ -223,4 +223,4 @@ def prices():
 if __name__ == "__main__":
     print(f"📋 Sunna API bridge — {SUNNA} — port {PORT}")
     print(f"   sunna dir exists: {SUNNA.exists()}")
-    app.run(host="127.0.0.1", port=PORT, threaded=True)
+    app.run(host="0.0.0.0", port=PORT, threaded=True)

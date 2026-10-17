@@ -361,4 +361,4 @@ if __name__ == "__main__":
     print(f"🕸️  Aether Agent Mesh — {len(AGENTS)} agents — port {port}")
     for name, a in AGENTS.items():
         print(f"   {name}: {a['role']}")
-    app.run(host="127.0.0.1", port=port, threaded=True)
+    app.run(host="0.0.0.0", port=port, threaded=True)

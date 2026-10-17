@@ -179,4 +179,4 @@ if __name__ == "__main__":
     print(f"🧩 Integrations adapter — {len(CATALOG)} catalog — port {PORT}")
     linked = sum(1 for n in CATALOG if (INT_DIR / n).exists() and list((INT_DIR / n).iterdir()))
     print(f"   linked: {linked}/{len(CATALOG)}")
-    app.run(host="127.0.0.1", port=PORT, threaded=True)
+    app.run(host="0.0.0.0", port=PORT, threaded=True)

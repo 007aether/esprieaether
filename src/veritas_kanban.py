@@ -151,4 +151,4 @@ if __name__ == "__main__":
         print(f"seeded: {KANBAN}")
     else:
         print(f"📋 Veritas-style kanban — {KANBAN} — port {PORT}")
-        app.run(host="127.0.0.1", port=PORT, threaded=True)
+        app.run(host="0.0.0.0", port=PORT, threaded=True)
