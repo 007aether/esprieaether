@@ -805,6 +805,23 @@
       ],
       "source": "veille",
       "stored_at": "2026-10-17T11:19:25.760264+00:00"
+    },
+    {
+      "text": "EsprieAether ↔ Hermes Desktop integration active",
+      "tags": [
+        "integration",
+        "bridge"
+      ],
+      "source": "bridge_sync",
+      "stored_at": "2026-10-18T12:34:46.757655+00:00"
+    },
+    {
+      "text": "Dual-agent architecture: EsprieAether + Hermes",
+      "tags": [
+        "architecture"
+      ],
+      "source": "bridge_sync",
+      "stored_at": "2026-10-18T12:34:49.985135+00:00"
     }
   ],
   "searched_at": null

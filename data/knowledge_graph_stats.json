@@ -1,0 +1,51 @@
+{
+  "generated": "2026-10-18T08:00:26.574852+00:00",
+  "total_items": 86,
+  "total_nodes": 86,
+  "total_edges": 1531,
+  "total_tags": 8,
+  "top_tags": [
+    [
+      "knowledge",
+      50
+    ],
+    [
+      "route",
+      32
+    ],
+    [
+      "verdict",
+      32
+    ],
+    [
+      "ai",
+      18
+    ],
+    [
+      "local",
+      18
+    ],
+    [
+      "school",
+      18
+    ],
+    [
+      "exam",
+      18
+    ],
+    [
+      "test",
+      18
+    ]
+  ],
+  "top_sources": [
+    [
+      "veille",
+      86
+    ]
+  ],
+  "output_files": [
+    "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\knowledge_graph_web.py",
+    "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\data\\knowledge_graph.json"
+  ]
+}
