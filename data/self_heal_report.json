@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-18T06:25:29.880585",
+  "checked_at": "2026-10-18T06:33:16.446370",
   "services": {
     "router": "up",
     "mesh": "up",
@@ -15,8 +15,7 @@
   "restarts": [
     "web:down -> down",
     "cloud:down -> down",
-    "integrations:down -> down",
-    "ollama:down -> up"
+    "integrations:down -> down"
   ],
-  "changed": true
+  "changed": false
 }
