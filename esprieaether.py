@@ -25,8 +25,8 @@ init(autoreset=True)
 # ────────────────────────────────────────────────────────────
 
 # Default brain: free local first, then cloud fallback
-DEFAULT_BRAIN = os.getenv("DEFAULT_BRAIN", "ollama-local")
-DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "qwen2.5:3b")
+DEFAULT_BRAIN = os.getenv("DEFAULT_BRAIN", "colibri-local")
+DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "qwen3-coder:30b")
 
 # Brain chains for auto-selection
 BRAIN_CHAINS = {

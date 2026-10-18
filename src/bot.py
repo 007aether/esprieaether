@@ -35,7 +35,7 @@ from jarvis_bridge import JarvisBridge
 
 # محرك Hermes (اختياري — يُحمّل عند الطلب)
 try:
-    from src.hermes_bridge import HermesBridge
+    from src.hermes_bridge_new import HermesBridge
 except ImportError:
     HermesBridge = None
 
@@ -88,7 +88,7 @@ def md_safe(text: str, parse_mode: str = "Markdown") -> tuple:
 # HermesBridge = fallback chain (LLM7 free cloud → Ollama local)
 # JarvisBridge = Ollama فقط (fallback)
 try:
-    from src.hermes_bridge import HermesBridge
+    from src.hermes_bridge_new import HermesBridge
     jarvis = HermesBridge()
 except Exception:
     from jarvis_bridge import JarvisBridge
@@ -493,7 +493,7 @@ async def cmd_hermes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = await update.message.reply_text("⚡ Hermes يفكر...")
 
     try:
-        from src.hermes_bridge import HermesBridge
+        from src.hermes_bridge_new import HermesBridge
         bridge = HermesBridge()
         answer = bridge.ask(prompt)
         engine = bridge.status().get("active_engine", "?")
@@ -2740,7 +2740,7 @@ def main():
             return
 
         # ── anything else → LLM brain (Hermes free cloud, fallback Ollama) ──
-        from src.hermes_bridge import HermesBridge
+        from src.hermes_bridge_new import HermesBridge
         try:
             brain = HermesBridge()
             reply = await brain.ask(text, system="أنت EsprieAether — ذكاء النظام الموحّد. خذ من المخزون (π، مذكرات، أهداف، مشاكل، أدوات قيد التشغيل) وأجب باداء المهمة المطلوبة في أقصر وقت. إذا طُلب تشغيل أمر، نفذه وrclّر. اجب بعمليات عن ذكر تقصد.")
