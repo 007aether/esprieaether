@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-17T04:25:50.785654+00:00",
+ "updated": "2026-10-18T04:46:08.717661+00:00",
  "total": 47,
  "adopt": 10,
  "reference": 5,
@@ -7,7 +7,7 @@
   {
    "name": "CherryHQ/cherry-studio",
    "url": "https://github.com/CherryHQ/cherry-studio",
-   "stars": 52693,
+   "stars": 52722,
    "category": "ai_agent_framework",
    "lang": "TypeScript",
    "desc": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
@@ -20,7 +20,7 @@
   {
    "name": "HKUDS/nanobot",
    "url": "https://github.com/HKUDS/nanobot",
-   "stars": 49100,
+   "stars": 49137,
    "category": "ai_agent_framework",
    "lang": "Python",
    "desc": "Ultra-lightweight, open-source, self-hosted personal AI agent framework in Python with WebUI, tools, memory, MCP, multi-agent workflows, automation, a",
@@ -33,7 +33,7 @@
   {
    "name": "khoj-ai/khoj",
    "url": "https://github.com/khoj-ai/khoj",
-   "stars": 37713,
+   "stars": 37725,
    "category": "ai_agent_framework",
    "lang": "Python",
    "desc": "Your AI second brain. Self-hostable. Get answers from the web or your docs. Build custom agents, schedule automations, do deep research. Turn any onli",
@@ -46,7 +46,7 @@
   {
    "name": "thedotmack/claude-mem",
    "url": "https://github.com/thedotmack/claude-mem",
-   "stars": 101253,
+   "stars": 101446,
    "category": "rag_memory",
    "lang": "TypeScript",
    "desc": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant",
@@ -59,7 +59,7 @@
   {
    "name": "PrimeIntellect-ai/prime-agent",
    "url": "https://github.com/PrimeIntellect-ai/prime-agent",
-   "stars": 22067,
+   "stars": 22099,
    "category": "self_evolving",
    "lang": "Rust",
    "desc": "A self-improving RLM agent for coding workflows and long-running autonomous tasks.",
@@ -72,7 +72,7 @@
   {
    "name": "alibaba/zvec",
    "url": "https://github.com/alibaba/zvec",
-   "stars": 16116,
+   "stars": 16121,
    "category": "rag_memory",
    "lang": "C++",
    "desc": "A lightweight, lightning-fast, in-process vector database",
@@ -85,7 +85,7 @@
   {
    "name": "browseros-ai/BrowserOS",
    "url": "https://github.com/browseros-ai/BrowserOS",
-   "stars": 13945,
+   "stars": 13974,
    "category": "local_llm",
    "lang": "TypeScript",
    "desc": "🌐 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.",
@@ -98,7 +98,7 @@
   {
    "name": "aden-hive/hive",
    "url": "https://github.com/aden-hive/hive",
-   "stars": 11107,
+   "stars": 11109,
    "category": "self_evolving",
    "lang": "Python",
    "desc": "Multi-Agent Harness for Production AI",
@@ -111,7 +111,7 @@
   {
    "name": "Human-Agent-Society/reef",
    "url": "https://github.com/Human-Agent-Society/reef",
-   "stars": 7614,
+   "stars": 7621,
    "category": "self_evolving",
    "lang": "Python",
    "desc": "Infrastructure for continually self‑improving agents",
@@ -137,7 +137,7 @@
   {
    "name": "langfuse/langfuse",
    "url": "https://github.com/langfuse/langfuse",
-   "stars": 35938,
+   "stars": 35980,
    "category": "observability",
    "lang": "TypeScript",
    "desc": "🪢 Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform.",
@@ -150,7 +150,7 @@
   {
    "name": "swarmclawai/swarmclaw",
    "url": "https://github.com/swarmclawai/swarmclaw",
-   "stars": 689,
+   "stars": 692,
    "category": "local_llm",
    "lang": "TypeScript",
    "desc": "Open-source self-hosted AI agent runtime and multi-agent framework for autonomous agent swarms. Agent memory, MCP tools, schedules, delegation, and 23",
@@ -163,7 +163,7 @@
   {
    "name": "conductor-oss/conductor",
    "url": "https://github.com/conductor-oss/conductor",
-   "stars": 32317,
+   "stars": 32327,
    "category": "orchestration",
    "lang": "Java",
    "desc": "Conductor is an event driven agentic workflow engine providing durable and highly resilient execution engine for applications and AI Agents",
@@ -176,7 +176,7 @@
   {
    "name": "ccfos/nightingale",
    "url": "https://github.com/ccfos/nightingale",
-   "stars": 13366,
+   "stars": 13365,
    "category": "observability",
    "lang": "Go",
    "desc": "Open-source, self-hosted alerting for metrics, logs, and databases. Includes a built-in AI agent and MCP server.",
@@ -202,7 +202,7 @@
   {
    "name": "hatchet-dev/hatchet",
    "url": "https://github.com/hatchet-dev/hatchet",
-   "stars": 8132,
+   "stars": 8133,
    "category": "orchestration",
    "lang": "Go",
    "desc": "🪓 An orchestration engine for background tasks, AI agents, and durable workflows",
@@ -241,7 +241,7 @@
   {
    "name": "toby-bridges/api-relay-audit",
    "url": "https://github.com/toby-bridges/api-relay-audit",
-   "stars": 884,
+   "stars": 885,
    "category": "crypto_airdrop",
    "lang": "Python",
    "desc": "Local security audit for AI API relays and LLM proxies: detects prompt injection, model substitution, tool-call rewriting, SSE anomalies, error leakag",
@@ -254,7 +254,7 @@
   {
    "name": "aeonfun/aeon",
    "url": "https://github.com/aeonfun/aeon",
-   "stars": 776,
+   "stars": 777,
    "category": "cloud_free",
    "lang": "JavaScript",
    "desc": "The most autonomous AI agent framework: runs unattended on GitHub Actions, self-healing skills, drives Claude Code, Grok, Codex & more. No approval lo",
@@ -280,7 +280,7 @@
   {
    "name": "existence-master/Sentient",
    "url": "https://github.com/existence-master/Sentient",
-   "stars": 704,
+   "stars": 706,
    "category": "voice_interface",
    "lang": "Python",
    "desc": "Your personal AI assistant, running on your own computer. Long-running tasks, real memory, proactive help, voice, phones and smart glasses. Any model,",
@@ -371,7 +371,7 @@
   {
    "name": "42wim/matterbridge",
    "url": "https://github.com/42wim/matterbridge",
-   "stars": 7587,
+   "stars": 7588,
    "category": "messaging_bridge",
    "lang": "Go",
    "desc": "bridge between mattermost, IRC, gitter, xmpp, slack, discord, telegram, rocketchat, twitch, ssh-chat, zulip, whatsapp, keybase, matrix, microsoft team",
