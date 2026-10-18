@@ -26,7 +26,7 @@ init(autoreset=True)
 
 # Default brain: free local first, then cloud fallback
 DEFAULT_BRAIN = os.getenv("DEFAULT_BRAIN", "colibri-local")
-DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "qwen3-coder:30b")
+DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "qwen3-coder-30b")
 
 # Brain chains for auto-selection
 BRAIN_CHAINS = {
@@ -65,36 +65,18 @@ def banner():
 
 
 def chat(prompt):
-    """Chat with the system using free brains automatically.
-
-    Auto-selects the best free brain from the chain:
+    """Chat with the system using ONLY colibri (Qwen3-Coder-30B).
+    
+    Setup:
       1. colibri-local (Qwen3-Coder-30B, local D:, very powerful)
-      2. ollama-local (Qwen2.5:3B, localhost, free)
-      3. llm7-fast (mistral-Nemo, keyless free cloud)
-      4. llm7-big (gpt-oss:20B, keyless free cloud)
-      5. groq (gpt-oss-120b, free tier)
-      6. minimax (abab6.5s, free tier)
     """
     try:
-        start = datetime.now()
-        # Select the best free brain
-        selected_brain = DEFAULT_BRAIN
-        brain_model = DEFAULT_MODEL
-
-        # Use agent model if available
-        for agent, config in AGENT_MODELS.items():
-            if any(kw in prompt.lower() for kw in ["أمن", "أمني", "اختراق", "فحص", "test", "audit", "أختراق"]):
-                selected_brain = config["chain"][0]
-                brain_model = config["chain"][0]
-                break
-
-        r = ollama.chat(model=brain_model, messages=[
-            {"role": "system", "content": "أنت ESPRIEAETHER. JARVIS-style, helpful."},
-            {"role": "user", "content": prompt}
-        ])
-        return r['message']['content'], (datetime.now() - start).total_seconds()
+        from src.ai_router import AI_Router
+        router = AI_Router()
+        response = router.chat(prompt, model="colibri-local")
+        return response, 0
     except Exception as e:
-        return f"حدث خطأ: {e}", 0
+        return f"حدث خطأ في كوليبري: {e}", 0
 
 
 def main():

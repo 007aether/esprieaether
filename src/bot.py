@@ -22,7 +22,10 @@ from pathlib import Path
 
 # مسار المشروع
 BASE_DIR = Path(__file__).parent.parent
-sys.path.insert(0, str(BASE_DIR / "src"))
+# Don't add src to path - use proper relative imports
+# Ensure src is on path for imports
+if str(BASE_DIR / "src") not in sys.path:
+    sys.path.insert(0, str(BASE_DIR / "src"))
 
 from telegram import Update, BotCommand
 from telegram.ext import (
@@ -35,7 +38,7 @@ from jarvis_bridge import JarvisBridge
 
 # محرك Hermes (اختياري — يُحمّل عند الطلب)
 try:
-    from src.hermes_bridge_new import HermesBridge
+    from hermes_bridge_new import HermesBridge
 except ImportError:
     HermesBridge = None
 
@@ -88,7 +91,7 @@ def md_safe(text: str, parse_mode: str = "Markdown") -> tuple:
 # HermesBridge = fallback chain (LLM7 free cloud → Ollama local)
 # JarvisBridge = Ollama فقط (fallback)
 try:
-    from src.hermes_bridge_new import HermesBridge
+    from hermes_bridge_new import HermesBridge
     jarvis = HermesBridge()
 except Exception:
     from jarvis_bridge import JarvisBridge
@@ -493,7 +496,7 @@ async def cmd_hermes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = await update.message.reply_text("⚡ Hermes يفكر...")
 
     try:
-        from src.hermes_bridge_new import HermesBridge
+        from hermes_bridge_new import HermesBridge
         bridge = HermesBridge()
         answer = bridge.ask(prompt)
         engine = bridge.status().get("active_engine", "?")
@@ -1403,7 +1406,7 @@ async def handle_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def cmd_files(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """📁 file manager — /files [path]"""
     try:
-        from src.file_manager import list_dir, read_file, delete_file, write_file
+        from file_manager import list_dir, read_file, delete_file, write_file
         if not context.args:
             r = list_dir(".")
             items = r.get("items", [])[:20]
@@ -1436,7 +1439,7 @@ async def cmd_files(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def cmd_tasks(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """📅 calendar/tasks — /task [add|list|done]"""
     try:
-        from src.calendar_agent import add_task, list_tasks, complete_task
+        from calendar_agent import add_task, list_tasks, complete_task
         if not context.args:
             r = list_tasks()
             tasks = r.get("tasks", [])
@@ -1467,7 +1470,7 @@ async def cmd_tasks(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def cmd_vault(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """🔐 password vault — /vault [get|store|list]"""
     try:
-        from src.vault_agent import store, retrieve, list_secrets, delete_secret
+        from vault_agent import store, retrieve, list_secrets, delete_secret
         if not context.args:
             r = list_secrets()
             names = r.get("names", [])
@@ -1502,7 +1505,7 @@ async def cmd_browse(update: Update, context: ContextTypes.DEFAULT_TYPE):
     url = context.args[0]
     msg = await update.message.reply_text(f"🌐 جارٍ فتح {url}...")
     try:
-        from src.browser_agent import extract, screenshot
+        from browser_agent import extract, screenshot
         r = extract(url)
         if r.get("ok"):
             text = f"🌐 *{r.get('title', url)}*\n\n{r.get('text', '')[:2500]}"
@@ -2570,6 +2573,85 @@ async def cmd_explain(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 
+async def cmd_bot_health(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Bot health — shows system status & service endpoints (0.0.0.0)."""
+    lines = []
+    lines.append("┌" + "─" * 46 + "┬" + "─" * 30 + "┬" + "─" * 10 + "┬" * 10)
+    lines.append("│ *Service*".ljust(46) + "│ *Port*".rjust(30) + "│ *State*".rjust(10) + "│ *URL*".rjust(10) + "│")
+    lines.append("├" + "─" * 46 + "┼" + "─" * 30 + "┼" + "─" * 10 + "┼" * 10 + "┤")
+    services = [
+        ("web_interface", "5000", "http://127.0.0.1:5000/"),
+        ("jarvis-api", "8000", "http://127.0.0.1:8000/api/health"),
+        ("agent_mesh", "11437", "http://127.0.0.1:11437/"),
+        ("ai_router", "11435", "http://127.0.0.1:11435/"),
+        ("cloud_desktop", "5001", "http://127.0.0.1:5001/"),
+        ("sunna_api", "5100", "http://127.0.0.1:5100/"),
+        ("integrations", "5102", "http://127.0.0.1:5102/"),
+        ("kanban", "5103", "http://127.0.0.1:5103/"),
+        ("homedock", "5104", "http://127.0.0.1:5104/"),
+    ]
+    ok = 0
+    for name, port, url in services:
+        import urllib.request
+        try:
+            urllib.request.urlopen(url, timeout=4)
+            st = "✅"
+            ok += 1
+        except Exception:
+            st = "❌"
+        lines.append(f"│ {name}".ljust(46) + f"│ {port}".rjust(30) + f"│ {st}".rjust(10) + f"│ {url}".rjust(10) + "│")
+    lines.append("├" + "─" * 46 + "┴" + "─" * 30 + "┴" + "─" * 10 + "┴" * 10 + "┤")
+    lines.append(f"│ *Total*: {ok}/9 ✅".ljust(46) + "│".rjust(30) + "│".rjust(10) + "│".rjust(10) + "│")
+    lines.append("└" + "─" * 46 + "┴" + "─" * 30 + "┴" + "─" * 10 + "┴" * 10 + "┘")
+    await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
+
+
+
+async def cmd_bot_log(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Bot log — shows last N lines of bot logs."""
+    n = 20
+    if context.args and context.args[0].isdigit():
+        n = min(int(context.args[0]), 200)
+    log_file = Path(__file__).parent.parent / "data" / "logs" / "bot.log"
+    try:
+        if not log_file.exists():
+            raise FileNotFoundError
+        text = log_file.read_text(encoding="utf-8", errors="replace").splitlines()
+        last = text[-n:]
+        if not last:
+            await update.message.reply_text("📭 لا توجد سجلات (log empty).")
+            return
+        out = "\n".join(f"{i+1:>4} | {l}" for i, l in enumerate(reversed(last)))
+        await update.message.reply_text(f"📋 *Last {n} lines of bot.log*\n" + out, parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"❌ لا يمكن قراءة السجل: {e}")
+
+
+
+async def cmd_bot_restart(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Bot restart — restarts the bot daemon (supervisor keeps it alive)."""
+    user = update.effective_user.username or "user"
+    await update.message.reply_text(f"🔄 *Bot restart* — إعادة تشغيل البوت (يتم من قبل supervisor)...\n", parse_mode="Markdown")
+    from pathlib import Path
+    log = Path(__file__).parent.parent / "data" / "logs" / "bot-restart.log"
+    log.parent.mkdir(parents=True, exist_ok=True)
+    log.write_text(f"[{datetime.now().isoformat()}] restart requested by @{user}\n", encoding="utf-8")
+    await update.message.reply_text("✅ *Bot restart requested* — البوت سيعود تلقائياً مع supervisor.")
+
+
+
+app.run_polling(allowed_updates=Update.ALL_TYPES)
+
+
+if __name__ == "__main__":
+    main()
+
+
+# REA Tools Commands
+@router.message(lambda m: m.text and m.text.startswith("/rea_tool"))
+
+
+
 def main():
     if not TOKEN:
         print("❌ TELEGRAM_BOT_TOKEN غير موجود في .env")
@@ -2721,7 +2803,7 @@ def main():
             await update.message.reply_text(md_escape(str(out))[:4000] or "✅ تم التنفيذ بنجاح.", parse_mode="Markdown")
             return
         if any(k in low for k in ("mesh", "agent", "agent_mesh", "عام", "شبكة الوكيل")):
-            from src.ask_agent import AskAgent
+            from ask_agent import AskAgent
             a = AskAgent()
             resp = await a.ask(text, system="أجب كل ما أسألك كومة وكيل. اعرض اسم الخدمة أو النتيجة فقط.")
             await update.message.reply_text(md_escape(resp)[:4000] or "✅ تم الاستماع.", parse_mode="Markdown")
@@ -2740,7 +2822,7 @@ def main():
             return
 
         # ── anything else → LLM brain (Hermes free cloud, fallback Ollama) ──
-        from src.hermes_bridge_new import HermesBridge
+        from hermes_bridge_new import HermesBridge
         try:
             brain = HermesBridge()
             reply = await brain.ask(text, system="أنت EsprieAether — ذكاء النظام الموحّد. خذ من المخزون (π، مذكرات، أهداف، مشاكل، أدوات قيد التشغيل) وأجب باداء المهمة المطلوبة في أقصر وقت. إذا طُلب تشغيل أمر، نفذه وrclّر. اجب بعمليات عن ذكر تقصد.")
@@ -2765,78 +2847,6 @@ if __name__ == "__main__":
 # NEW: Bot self-maintenance commands (3)
 # ═══════════════════════════════════════════════════════════
 
-async def cmd_bot_health(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Bot health — shows system status & service endpoints (0.0.0.0)."""
-    lines = []
-    lines.append("┌" + "─" * 46 + "┬" + "─" * 30 + "┬" + "─" * 10 + "┬" * 10)
-    lines.append("│ *Service*".ljust(46) + "│ *Port*".rjust(30) + "│ *State*".rjust(10) + "│ *URL*".rjust(10) + "│")
-    lines.append("├" + "─" * 46 + "┼" + "─" * 30 + "┼" + "─" * 10 + "┼" * 10 + "┤")
-    services = [
-        ("web_interface", "5000", "http://127.0.0.1:5000/"),
-        ("jarvis-api", "8000", "http://127.0.0.1:8000/api/health"),
-        ("agent_mesh", "11437", "http://127.0.0.1:11437/"),
-        ("ai_router", "11435", "http://127.0.0.1:11435/"),
-        ("cloud_desktop", "5001", "http://127.0.0.1:5001/"),
-        ("sunna_api", "5100", "http://127.0.0.1:5100/"),
-        ("integrations", "5102", "http://127.0.0.1:5102/"),
-        ("kanban", "5103", "http://127.0.0.1:5103/"),
-        ("homedock", "5104", "http://127.0.0.1:5104/"),
-    ]
-    ok = 0
-    for name, port, url in services:
-        import urllib.request
-        try:
-            urllib.request.urlopen(url, timeout=4)
-            st = "✅"
-            ok += 1
-        except Exception:
-            st = "❌"
-        lines.append(f"│ {name}".ljust(46) + f"│ {port}".rjust(30) + f"│ {st}".rjust(10) + f"│ {url}".rjust(10) + "│")
-    lines.append("├" + "─" * 46 + "┴" + "─" * 30 + "┴" + "─" * 10 + "┴" * 10 + "┤")
-    lines.append(f"│ *Total*: {ok}/9 ✅".ljust(46) + "│".rjust(30) + "│".rjust(10) + "│".rjust(10) + "│")
-    lines.append("└" + "─" * 46 + "┴" + "─" * 30 + "┴" + "─" * 10 + "┴" * 10 + "┘")
-    await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
-
-async def cmd_bot_log(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Bot log — shows last N lines of bot logs."""
-    n = 20
-    if context.args and context.args[0].isdigit():
-        n = min(int(context.args[0]), 200)
-    log_file = Path(__file__).parent.parent / "data" / "logs" / "bot.log"
-    try:
-        if not log_file.exists():
-            raise FileNotFoundError
-        text = log_file.read_text(encoding="utf-8", errors="replace").splitlines()
-        last = text[-n:]
-        if not last:
-            await update.message.reply_text("📭 لا توجد سجلات (log empty).")
-            return
-        out = "\n".join(f"{i+1:>4} | {l}" for i, l in enumerate(reversed(last)))
-        await update.message.reply_text(f"📋 *Last {n} lines of bot.log*\n" + out, parse_mode="Markdown")
-    except Exception as e:
-        await update.message.reply_text(f"❌ لا يمكن قراءة السجل: {e}")
-
-async def cmd_bot_restart(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Bot restart — restarts the bot daemon (supervisor keeps it alive)."""
-    user = update.effective_user.username or "user"
-    await update.message.reply_text(f"🔄 *Bot restart* — إعادة تشغيل البوت (يتم من قبل supervisor)...\n", parse_mode="Markdown")
-    from pathlib import Path
-    log = Path(__file__).parent.parent / "data" / "logs" / "bot-restart.log"
-    log.parent.mkdir(parents=True, exist_ok=True)
-    log.write_text(f"[{datetime.now().isoformat()}] restart requested by @{user}\n", encoding="utf-8")
-    await update.message.reply_text("✅ *Bot restart requested* — البوت سيعود تلقائياً مع supervisor.")
-
-
-
-app.run_polling(allowed_updates=Update.ALL_TYPES)
-
-
-if __name__ == "__main__":
-    main()
-
-
-# REA Tools Commands
-@router.message(lambda m: m.text and m.text.startswith("/rea_tool"))
 async def cmd_rea_tool(message: types.Message):
     """List available REA tools"""
     if message.chat.id not in ALLOWED_CHAT_IDS:

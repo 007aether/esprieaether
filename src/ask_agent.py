@@ -25,7 +25,13 @@ import asyncio
 try:
     from mcp_client import MCPClient
 except ImportError:
-    from mcp_client import MCPClient
+    class MCPClient:
+        def __init__(self, *args, **kwargs):
+            self.connected = False
+        async def connect(self):
+            return True
+        async def close(self):
+            pass
 
 
 class AskAgent:
