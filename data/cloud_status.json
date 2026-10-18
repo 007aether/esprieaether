@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-18T07:03:23.192566+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-18T01:39:44.697792+00:00",
+  "cloud_last_run": "2026-10-18T09:58:49.235835+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Jared Tendler: The $300-an-Hour Mental Coach Who Multiplied My Poker Income",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy Lighter (LIT) for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Gamdom Hack: $3M Admitted, $4.2M Tracked, and the Casino Is Back Online",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "BiggerZ Review: Crypto Casino, Sportsbook and Prediction Markets in One Wallet",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy Shiba Inu (SHIB) for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
