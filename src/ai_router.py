@@ -59,6 +59,14 @@ BRAINS = {
         "min_interval": 0.0,
         "label": "Ollama qwen2.5:3b (local)",
     },
+    "service-62243": {
+        "url": "http://127.0.0.1:62243/v1/chat/completions",
+        "key": None,
+        "model": "custom-service",
+        "min_interval": 0.0,
+        "label": "Custom Service 62243",
+        "optional": True,
+    },
     "colibri-local": {
         "url": "http://127.0.0.1:8000/v1/chat/completions",
         "key": None,
