@@ -59,14 +59,12 @@ BRAINS = {
         "min_interval": 0.0,
         "label": "Ollama qwen2.5:3b (local)",
     },
-    "service-62243": {
-        "url": "http://127.0.0.1:62243/v1/chat/completions",
-        "key": None,
-        "model": "custom-service",
+        "url": "https://freellmapi.com/v1/chat/completions",
+        "key": os.getenv("FREELLMAPI_KEY", ""),
+        "model": "free-auto",
         "min_interval": 0.0,
-        "label": "Custom Service 62243",
+        "label": "FreeLLMAPI (34 free providers, 7.4B tokens/month)",
         "optional": True,
-    },
     "colibri-local": {
         "url": "http://127.0.0.1:8000/v1/chat/completions",
         "key": None,
