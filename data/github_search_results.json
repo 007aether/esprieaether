@@ -1,0 +1,54 @@
+{
+  "search_date": "2026-10-18",
+  "results": [
+    {
+      "project": "letta-ai/letta",
+      "stars": 25183,
+      "description": "Platform for stateful agents: AI with advanced memory that can learn and self-improve over time.",
+      "language": "Python",
+      "key_features": ["stateful_agents", "memory", "self_improvement", "context_management"]
+    },
+    {
+      "project": "mindsdb/anton",
+      "stars": 757,
+      "description": "self-improving agent",
+      "language": "Python",
+      "key_features": ["self_improvement", "agent", "learning"]
+    },
+    {
+      "project": "volcengine/OpenViking",
+      "stars": 40249,
+      "description": "Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
+      "language": "Python",
+      "key_features": ["self_evolving", "context_database", "memory", "rag", "skills"]
+    },
+    {
+      "project": "EvoScientist/EvoScientist",
+      "stars": 4988,
+      "description": "🔬 Harness Vibe Research with Self-evolving AI Scientists",
+      "language": "Python",
+      "key_features": ["self_evolution", "scientific", "research", "ai_scientist"]
+    },
+    {
+      "project": "hoihm/levy",
+      "stars": 4768,
+      "description": "The open-source AI agent with multi-agent learning, self-planning, memory, tool-calling and LLM model support.",
+      "language": "TypeScript",
+      "key_features": ["multi_agent", "self_planning", "memory", "tool_calling", "llm"]
+    },
+    {
+      "project": "keskival/recursive-self-improvement-suite",
+      "stars": 55,
+      "description": "A suite of open-ended, non-imitative tasks involving generalizable skills for large language model chatbots and agents to enable bootstrapped recursive self-improvement and an unambiguous AGI.",
+      "language": "Python",
+      "key_features": ["recursive_self_improvement", "agi", "self_improvement", "bootstrapped"]
+    },
+    {
+      "project": "lobehub/awesome-rsi",
+      "stars": 798,
+      "description": "A curated research map of Recursive Self-Improvement (RSI): models, agents, harnesses, embodied systems, automated AI R&D, benchmarks, and safety.",
+      "language": "null",
+      "key_features": ["research", "self_improvement", "agi", "safety", "benchmarks"]
+    }
+  ]
+}
