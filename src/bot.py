@@ -32,6 +32,21 @@ from telegram.ext import (
     Application, CommandHandler, MessageHandler,
     ContextTypes, filters
 )
+
+class _NullBotRouter:
+    """Stub router that neutralises legacy @router.message decorators left in
+    the module (they reference a name that no longer exists). The decorators
+    become no-ops so the functions remain defined but are never registered as
+    handlers -- they are all registered via main() instead."""
+    def message(self, *args, **kwargs):
+        def deco(func):
+            return func
+        return deco
+    def __getattr__(self, name):
+        return lambda *args, **kwargs: None
+
+router = _NullBotRouter()
+
 from dotenv import load_dotenv
 
 from jarvis_bridge import JarvisBridge
@@ -2639,9 +2654,6 @@ async def cmd_bot_restart(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("✅ *Bot restart requested* — البوت سيعود تلقائياً مع supervisor.")
 
 
-
-
-    main()
 
 
 # REA Tools Commands
