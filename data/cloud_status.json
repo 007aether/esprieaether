@@ -2,7 +2,7 @@
   "pc_last_seen": "2026-10-18T20:19:21.393728+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-18T19:44:34.456725+00:00",
+  "cloud_last_run": "2026-10-19T01:57:36.292178+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
