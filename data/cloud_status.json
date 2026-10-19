@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-19T17:44:12.765337+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-19T11:21:15.271217+00:00",
+  "cloud_last_run": "2026-10-19T17:49:11.251236+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "PAPER Is Live on Hyperliquid: The Farmers Who Lost on Purpose Are Up Millions",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Is Erik Voorhees? Bitcoin&#8217;s Original Libertarian Still Fighting",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Pump.fun Launches Perps on Hyperliquid, and It Is Not Just Memecoins Anymore",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "NEAR Sunrise Launch: Solana Access Sends NEAR Up 14%, and My Long Got Stopped Anyway",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Meme Coin Glossary: 80+ Slang Terms Explained in Plain English",
       "source": "https://airdropalert.com/feed"
     },
     {
