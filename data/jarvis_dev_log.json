@@ -208,5 +208,11 @@
   "errors": [
    "missing module docstring"
   ]
+ },
+ {
+  "ts": "2026-10-19T15:15:12.161298+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "khoj-ai/khoj"
  }
 ]
