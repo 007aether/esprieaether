@@ -191,5 +191,22 @@
   "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\nanobot_agent.py",
   "valid": true,
   "errors": []
+ },
+ {
+  "ts": "2026-10-19T09:07:14.725778+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "khoj-ai/khoj"
+ },
+ {
+  "ts": "2026-10-19T12:11:20.719720+00:00",
+  "written": 0,
+  "idea": "khoj-ai/khoj",
+  "module": "khoj_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\khoj_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
  }
 ]
