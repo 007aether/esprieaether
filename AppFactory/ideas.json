@@ -1,82 +1,242 @@
 [
   {
+    "name": "TimeMaster",
+    "slug": "timemaster",
+    "category": "productivity",
+    "pitch": "Time tracking for remote teams to improve productivity",
+    "monetization": "advanced time slice analysis",
+    "audience": "remote teams, managers",
+    "id": 1,
+    "score": 80
+  },
+  {
+    "name": "FitSage",
+    "slug": "fitsage",
+    "category": "health",
+    "pitch": "Personalized diet and exercise planner",
+    "monetization": "AI-curated meal plans",
+    "audience": "foodies, health enthusiasts",
+    "id": 2,
+    "score": 57
+  },
+  {
+    "name": "CalmQuest",
+    "slug": "calmquest",
+    "category": "wellness",
+    "pitch": "Guided meditations for mental focus and wellness",
+    "monetization": "Adaptive practice difficulty",
+    "audience": "students, busy professionals",
+    "id": 3,
+    "score": 70
+  },
+  {
+    "name": "NewsNest",
+    "slug": "newsnest",
+    "category": "information",
+    "pitch": "Personalized newsreader for career advancements",
+    "monetization": "Influencer collaboration",
+    "audience": "career seekers, students",
+    "id": 4,
+    "score": 45
+  },
+  {
+    "name": "BreadChat",
+    "slug": "breadchat",
+    "category": "social",
+    "pitch": "Virtual bread baking club for new bakers",
+    "monetization": "Access to exclusive recipes",
+    "audience": "Beginner bakers, food lovers",
+    "id": 5,
+    "score": 42
+  },
+  {
+    "name": "GuruGuide",
+    "slug": "guruguide",
+    "category": "career",
+    "pitch": "Personalized career advice for recent graduates",
+    "monetization": "Career path analytics",
+    "audience": "Graduates, job seekers",
+    "id": 6,
+    "score": 45
+  },
+  {
+    "name": "DreamDesk",
+    "slug": "dreamdesk",
+    "category": "travel",
+    "pitch": "Virtual travel planning assistant for budget travelers",
+    "monetization": "Exclusive hotel deals",
+    "audience": "Budget travelers, frequent flyers",
+    "id": 7,
+    "score": 56
+  },
+  {
+    "name": "GreenGrow",
+    "slug": "greengrow",
+    "category": "environment",
+    "pitch": "Gardening tips for urban gardeners",
+    "monetization": "Curated seed and plant packages",
+    "audience": "Urban gardeners, city dwellers",
+    "id": 8,
+    "score": 52
+  },
+  {
+    "name": "FocusFlow",
+    "slug": "focusflow",
+    "category": "productivity",
+    "pitch": "Pomodoro timer with personalized breaks & streaks for coders",
+    "monetization": "Ad-free, customizable break types, detailed stats",
+    "audience": "Professional developers",
+    "id": 9,
+    "score": 80
+  },
+  {
+    "name": "SoundScape",
+    "slug": "soundscape",
+    "category": "relaxation",
+    "pitch": "Immersive 3D ambient soundscapes for sleep or work",
+    "monetization": "Unlimited tracks, high-quality audio, customizable loops",
+    "audience": "Working professionals & insomniacs",
+    "id": 10,
+    "score": 70
+  },
+  {
+    "name": "MealMaster",
+    "slug": "mealmaster",
+    "category": "cooking",
+    "pitch": "Step-by-step recipe videos for one-pan, easy-to-clean meals",
+    "monetization": "Unlimited recipes, no ads, offline access",
+    "audience": "Busy professionals who love cooking",
+    "id": 11,
+    "score": 70
+  },
+  {
+    "name": "LangLearn",
+    "slug": "langlearn",
+    "category": "education",
+    "pitch": "Gamified language learning for 10+ languages",
+    "monetization": "Unlimited lessons, offline mode, custom learning plans",
+    "audience": "Language enthusiasts & professionals",
+    "id": 12,
+    "score": 85
+  },
+  {
+    "name": "FitFlow",
+    "slug": "fitflow",
+    "category": "fitness",
+    "pitch": "Adaptive home workouts with AI-based progress tracking",
+    "monetization": "Unlimited workouts, custom AI model, detailed analytics",
+    "audience": "Home fitness enthusiasts",
+    "id": 13,
+    "score": 70
+  },
+  {
+    "name": "PlantPal",
+    "slug": "plantpal",
+    "category": "lifestyle",
+    "pitch": "Plant care assistant with watering, sunlight & growth monitoring",
+    "monetization": "Unlimited plants, push notifications, customizable care tips",
+    "audience": "Plant parents & hobbyists",
+    "id": 14,
+    "score": 53
+  },
+  {
+    "name": "MintMoments",
+    "slug": "mintmoments",
+    "category": "mindfulness",
+    "pitch": "Bite-sized guided meditations for instant stress relief",
+    "monetization": "Unlimited meditations, customizable sessions, offline access",
+    "audience": "Busy professionals & mindfulness beginners",
+    "id": 15,
+    "score": 70
+  },
+  {
+    "name": "CryptoCompanion",
+    "slug": "cryptocompanion",
+    "category": "finance",
+    "pitch": "All-in-one crypto portfolio tracker with real-time news & alerts",
+    "monetization": "Unlimited watchlists, advanced analytics, priority customer support",
+    "audience": "Cryptocurrency investors",
+    "id": 16,
+    "score": 58
+  },
+  {
     "name": "FocusFlow",
     "slug": "focus-flow",
     "category": "productivity",
-    "pitch": "Pomodoro timer with adaptive breaks for coders",
-    "monetization": "Premium themes & sounds library",
-    "audience": "Developers",
-    "id": 1,
-    "score": 75
+    "pitch": "Time-blocked pomodoro app for students & freelancers.",
+    "monetization": "Unlimited tasks, customizable timers, statistics.",
+    "audience": "Students, freelancers, professionals.",
+    "id": 17,
+    "score": 80
   },
   {
-    "name": "MealPrepPal",
-    "slug": "meal-prep-pal",
-    "category": "health",
-    "pitch": "Meal planning for paleo, keto & gluten-free diets",
-    "monetization": "Exclusive recipe collections",
-    "audience": "Diet-conscious individuals",
-    "id": 2,
-    "score": 62
-  },
-  {
-    "name": "PetConnect",
-    "slug": "pet-connect",
-    "category": "pets",
-    "pitch": "Pet sitting & dog walking marketplace for busy pet owners",
-    "monetization": "Featured listings & priority booking",
-    "audience": "Working pet owners",
-    "id": 3,
-    "score": 42
+    "name": "MealMaster",
+    "slug": "meal-master",
+    "category": "food",
+    "pitch": "Meal planning for families to save time & reduce food waste.",
+    "monetization": "Unlimited meals, customizable recipes, grocery list.",
+    "audience": "Busy families, health-conscious individuals.",
+    "id": 18,
+    "score": 61
   },
   {
     "name": "LearnLingo",
     "slug": "learn-lingo",
     "category": "education",
-    "pitch": "Gamified language learning with daily challenges",
-    "monetization": "Premium language courses",
-    "audience": "Language learners",
-    "id": 4,
-    "score": 68
+    "pitch": "Spaced repetition flashcards app for language learners.",
+    "monetization": "Unlimited languages, offline mode, custom decks.",
+    "audience": "Language learners, students.",
+    "id": 19,
+    "score": 50
   },
   {
-    "name": "BudgetBuddy",
-    "slug": "budget-buddy",
-    "category": "finance",
-    "pitch": "Smarter budgeting with AI-driven spending insights",
-    "monetization": "Custom budgeting categories & unlimited tracked accounts",
-    "audience": "Financially conscious individuals",
-    "id": 5,
-    "score": 53
-  },
-  {
-    "name": "SleepSense",
-    "slug": "sleep-sense",
+    "name": "SleepSentry",
+    "slug": "sleep-sentry",
     "category": "health",
-    "pitch": "Sleep tracker with personalized sleep improvement plans",
-    "monetization": "Expert sleep consultations",
-    "audience": "Sleep-deprived individuals",
-    "id": 6,
-    "score": 85
+    "pitch": "Sleep tracking and smart wake-up app for better rest.",
+    "monetization": "Sleep debt tracking, customized sleep reports.",
+    "audience": "Health-conscious individuals, shift workers.",
+    "id": 20,
+    "score": 52
   },
   {
-    "name": "TaskTrackr",
-    "slug": "task-trackr",
-    "category": "productivity",
-    "pitch": "Task management with team time tracking & accountability",
-    "monetization": "Private team boards & advanced analytics",
-    "audience": "Remote teams & freelancers",
-    "id": 7,
-    "score": 58
+    "name": "PetPal",
+    "slug": "pet-pal",
+    "category": "pets",
+    "pitch": "Pet healthcare & medication tracker for responsible pet owners.",
+    "monetization": "Unlimited pets, customizable alerts, vet records backup.",
+    "audience": "Pet owners, animal lovers.",
+    "id": 21,
+    "score": 50
   },
   {
-    "name": "GreenGrow",
-    "slug": "green-grow",
-    "category": "lifestyle",
-    "pitch": "Indoor plant care with personalized watering & sunlight alerts",
-    "monetization": "Exclusive plant care guides & workshops",
-    "audience": "Indoor plant enthusiasts",
-    "id": 8,
+    "name": "BudgetBulwark",
+    "slug": "budget-bulwark",
+    "category": "finance",
+    "pitch": "Secure, open-source budgeting app with detailed insights.",
+    "monetization": "Unlimited accounts, investment tracking, export tools.",
+    "audience": "Budget-conscious individuals, finance enthusiasts.",
+    "id": 22,
     "score": 53
+  },
+  {
+    "name": "GardenGuru",
+    "slug": "garden-guru",
+    "category": "lifestyle",
+    "pitch": "Plant care app with personalized alerts for green thumbs.",
+    "monetization": "Unlimited plants, customizable care reminders, plant ID.",
+    "audience": "Gardeners, plant lovers.",
+    "id": 23,
+    "score": 60
+  },
+  {
+    "name": "MoodLogger",
+    "slug": "mood-logger",
+    "category": "health",
+    "pitch": "Mood tracking app with trends and personalized insights.",
+    "monetization": "Unlimited entries, customizable moods, journal export.",
+    "audience": "Mental health advocates, self-care enthusiasts.",
+    "id": 24,
+    "score": 55
   }
 ]
