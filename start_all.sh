@@ -24,10 +24,9 @@ declare -A SVC=(
 
 for name in "${!SVC[@]}"; do
   log="$LOGDIR/$name.log"
-  # kill any existing instance
-  pkill -f "python.*src/${SVC[$name]}" 2>/dev/null
+  pkill -f "python.*src/${SVC[$name]%% *}" 2>/dev/null
   sleep 1
-  nohup $PY "${SVC[$name]}" > "$log" 2>&1 &
+  nohup $PY ${SVC[$name]} > "$log" 2>&1 &
   echo "[$name] started pid=$! log=$log"
   sleep 2
 done

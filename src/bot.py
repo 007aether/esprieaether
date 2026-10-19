@@ -2640,10 +2640,7 @@ async def cmd_bot_restart(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 
-app.run_polling(allowed_updates=Update.ALL_TYPES)
 
-
-if __name__ == "__main__":
     main()
 
 
@@ -2839,6 +2836,7 @@ def main():
     app.post_init = set_commands
 
     logger.info("🚀 بدء تشغيل البوت...")
+    app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == "__main__":
     main()
