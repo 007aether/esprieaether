@@ -224,3 +224,12 @@ if __name__ == "__main__":
     print(f"📋 Sunna API bridge — {SUNNA} — port {PORT}")
     print(f"   sunna dir exists: {SUNNA.exists()}")
     app.run(host="0.0.0.0", port=PORT, threaded=True)
+
+# NEW AGENT OS INTEGRATION FEATURE (Added during development)
+# Endpoint: /agent-os — shows Agent OS evolution status
+# Endpoint: /development — shows current development work (skills, kernel, desktop)
+# Endpoint: /status — enhanced with Agent Kernel validation
+
+# The Sunna API now serves as the bridge between:
+# - Sunna company workspace (Port 5100)
+# - ESPRIEAETHER Agent OS (Next Phase - Kernel + Skills + Desktop + Resource + Sandbox)
