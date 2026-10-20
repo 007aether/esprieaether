@@ -829,6 +829,10 @@ def obsidian_page():
     return "<h1>🧠 vault not found</h1><p>run: python src/obsidian_vault_builder.py</p>", 200
 
 
+@app.route("/test")
+def test_route():
+    return "TEST OK"
+
 @app.route("/api/executor")
 def api_executor():
     """جلب حالة Task Executor — نتائج التنفيذ، المهام، السجل"""
@@ -886,6 +890,7 @@ def api_executor():
 
 @app.route("/executor")
 def executor_page():
+    print("=== executor_page called ===", flush=True)
     """صفحة عرض حالة Task Executor"""
     try:
         import sys
