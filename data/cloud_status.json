@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-20T20:55:45.685070+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-20T10:29:09.357610+00:00",
+  "cloud_last_run": "2026-10-20T20:56:35.126646+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Sophon Shutdown: Withdraw Your Funds Before November 25",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Bitcoin 83K: The Black Monday That Never Came",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "What Is a CTO in Crypto? Community Takeovers Explained",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Gate.com Review: 3,600 Coins, Low Fees, and a Few Scars",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Dogecoin 0.08 Long: Why I Took the Trade at the Range Low",
       "source": "https://airdropalert.com/feed"
     },
     {
