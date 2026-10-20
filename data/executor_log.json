@@ -727,5 +727,14 @@
   "kind": "info",
   "ok": true,
   "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-20T15:50:55.271797+00:00",
+  "task_id": "task-1792511438729",
+  "agent": "evolve",
+  "title": "مهمة تجريبية - اختبار Task Executor",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
  }
 ]
