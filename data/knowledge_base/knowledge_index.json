@@ -842,6 +842,37 @@
       ],
       "source": "veille",
       "stored_at": "2026-10-19T05:11:11.198411+00:00"
+    },
+    {
+      "text": "- [esprieaether_architecture]: full system architecture with 14 brains, 11 agents, 49 tasks\n- [agent_kernel]: policy validation (monitor/repair/develop/execute/manage)\n- [ask_agent]: cognitive layer (plan + memory + execute)\n- [vector_memory]: SQLite + semantic search (1475 entries)\n- [autonomous_loop]: 49 scheduled tasks (24/7)\n- [sandbox_executor]: safety sandbox for agents\n- [skills]: 10 skills written (agent-os-kernel, auto-healing, deepseek-harness, memory-manager, resource-allocator, sandbox-executor, security-agent, security-monitor, system-developer-agent, universal-brain)\n- [knowledge_router]: knowledge linking robot (veille + mesh)\n- [obsidian_vault]: 164 notes, 9 categories\n- [colibri]: Qwen3-Coder-30B local model (8 brains)\n- [jarvis_api]: OSINT + integrations (FastAPI)\n- [sunna_api]: Steel/galvanized/zinc price tracker\n- [veritas_kanban]: project management (5103)\n- [cloud_bridge]: GitHub cloud synchronization\n- [dsh_bridge]: JARVIS⇄DSH relay (web automation)\n- [task_executor]: mesh→executor loop close\n- [self_heal]: auto-healing system\n- [guardian]: security guardian (30 min)\n- [pharos]: testnet monitoring\n- [daily_digest]: daily report generation",
+      "tags": [
+        "architecture",
+        "skills",
+        "knowledge_base"
+      ],
+      "source": "veille",
+      "stored_at": "2026-10-20T14:00:00+00:00"
+    },
+    {
+      "text": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [telegram_bots]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [self_evolving]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [orchestration]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [observability]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [cloud_free]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [crypto_airdrop]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [security_edr]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [rag_memory]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [voice_interface]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [messaging_bridge]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [workshop_tools]: 0 اقتراح متوحّد، 1 لم يحدد القرار بعد\n- [estimating_costing]: 0 اقتراح متوحّد، 3 لم يحدد القرار بعد\n- [pipe_tube_work]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [brouettes]: 0 اقتراح متوحّد، 2 لم يحدد القرار بعد\n- [productivity]: 0 اقتراح متوحّد، 2 لم يحدد القرار بعد\n- [🏆 Global Top 10]: 0 اقتراح متوحّد، 10 لم يحدد القرار بعد",
+      "tags": [
+        "knowledge",
+        "route",
+        "verdict",
+        "esprieaether"
+      ],
+      "source": "veille",
+      "stored_at": "2026-10-20T14:05:00+00:00"
+    },
+    {
+      "text": "نظام EsprieAether — أنظمة الذكاء الاصطناعي المحلية\n\n1. 🏗️ البنية التحتية (Infrastructure)\n   - Router: 11435 (14 موديل)\n   - Agent Mesh: 11437 (10 وكيل)\n   - Web Interface: 5000\n   - Jarvis API: 8000\n   - Sunna API: 5100\n   - Kanban: 5103\n   - Jarvis FE: 3000\n\n2. 🧠 الوكيل الذكي (AI Agent)\n   - Ask Agent: ذاكرة + تنفيذ + تخطيط\n   - Agent Kernel: سياسة التنفيذ + audit logging\n   - Vector Memory: ذاكرة متجهة (435 رد)\n\n3. ⚡ التلقائي (Autonomous)\n   - Autonomous Loop: 49 task (24/7)\n   - Skills: 10 skills مكتوبة\n   - Skills: 10 skills مكتوبة\n\n4. 📊 البيانات\n   - Knowledge Base: 164+ notes\n   - Agent Board: 200 msg\n   - Vector Memory: 435 records\n   - Skills: 10 (مكتوبة)\n\n5. 🔄 البروتوكول\n   - Boot → Mesh → Loop → Kernel → Memory → Report\n\n6. 🌟 النتيجة المحصلة\n   - جميع الخدمات متصلة\n   - 100% الجاهزية\n   - النظام شغال تماماً",
+      "tags": [
+        "architecture",
+        "esprieaether",
+        "summary"
+      ],
+      "source": "veille",
+      "stored_at": "2026-10-20T14:10:00+00:00"
     }
   ],
   "searched_at": null
