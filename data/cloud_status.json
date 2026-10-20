@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-19T21:23:56.749826+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-19T21:46:05.522798+00:00",
+  "cloud_last_run": "2026-10-20T02:14:54.490805+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Prop Firm Breakout Review: Kraken&#8217;s Crypto Prop Firm Explained",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "How to Buy Lighter (LIT) for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Lighter vs Variational: Battle of the Zero-Fee Perp DEXs",
       "source": "https://airdropalert.com/feed"
     },
     {
