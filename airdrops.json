@@ -1,5 +1,516 @@
 [
   {
+    "title": "French Lawmakers Back Stablecoin Swap Tax by Just One Vote",
+    "link": "https://decrypt.co/381413/french-lawmakers-back-stablecoin-swap-tax-by-just-one-vote",
+    "date": "Tue, 20 Oct 2026 14:04:10 +0000",
+    "source": "https://decrypt.co/feed",
+    "fetched_at": "2026-10-20T15:03:07.668348"
+  },
+  {
+    "title": "Morning Minute: Nine Blue Chip Companies Say No to Tokenized Stocks",
+    "link": "https://decrypt.co/381399/morning-minute-nine-blue-chip-companies-say-no-to-tokenized-stocks",
+    "date": "Tue, 20 Oct 2026 12:06:44 +0000",
+    "source": "https://decrypt.co/feed",
+    "fetched_at": "2026-10-20T15:03:07.668361"
+  },
+  {
+    "title": "Mt. Gox Pushes Repayment Deadline to 2027 With $2.8B in Bitcoin Still to Distribute",
+    "link": "https://decrypt.co/381392/mt-gox-pushes-repayment-deadline-to-2027-with-2-8b-in-bitcoin-still-to-distribute",
+    "date": "Tue, 20 Oct 2026 10:55:48 +0000",
+    "source": "https://decrypt.co/feed",
+    "fetched_at": "2026-10-20T15:03:07.668364"
+  },
+  {
+    "title": "BlackRock Files for 'Buffer' Bitcoin ETF as IBIT Draws $665M in a Day",
+    "link": "https://decrypt.co/381385/blackrock-files-for-buffer-bitcoin-etf-as-ibit-draws-665m-in-a-day",
+    "date": "Tue, 20 Oct 2026 09:13:30 +0000",
+    "source": "https://decrypt.co/feed",
+    "fetched_at": "2026-10-20T15:03:07.668367"
+  },
+  {
+    "title": "Blockchain.com rolls out crypto options as it pursues US derivatives licenses",
+    "link": "https://www.theblock.co/news/markets/2026-10-20-blockchain-com-launches-options-trading-bitcoin-ether-sol-421326",
+    "date": "Tue, 20 Oct 2026 14:31:29 +0000",
+    "source": "https://www.theblock.co/rss.xml",
+    "fetched_at": "2026-10-20T15:03:07.883294"
+  },
+  {
+    "title": "Injective partners with BDACS to bring Korean won stablecoin to RWA ecosystem",
+    "link": "https://www.theblock.co/news/markets/2026-10-20-injective-partners-bdacs-418883",
+    "date": "Tue, 20 Oct 2026 14:00:00 +0000",
+    "source": "https://www.theblock.co/rss.xml",
+    "fetched_at": "2026-10-20T15:03:07.883305"
+  },
+  {
+    "title": "Stablecoins move over $400 million per hour on average as off-hours transfers dominate, Coinbase and The Block study finds",
+    "link": "https://www.theblock.co/news/web3/2026-10-20-stablecoins-move-400-million-per-hour-421111",
+    "date": "Tue, 20 Oct 2026 13:00:00 +0000",
+    "source": "https://www.theblock.co/rss.xml",
+    "fetched_at": "2026-10-20T15:03:07.883307"
+  },
+  {
+    "title": "Swiss regulator FINMA approves country’s first spot bitcoin ETF for retail investors",
+    "link": "https://www.theblock.co/news/regulation/2026-10-20-swiss-regulator-finma-approves-countrys-first-spot-bitcoin-etf-for-retail-investors-421127",
+    "date": "Tue, 20 Oct 2026 12:15:05 +0000",
+    "source": "https://www.theblock.co/rss.xml",
+    "fetched_at": "2026-10-20T15:03:07.883309"
+  },
+  {
+    "title": "Important Pi Network News and PI Price Update: October 20",
+    "link": "https://cryptopotato.com/important-pi-network-news-and-pi-price-update-october-20/",
+    "date": "Tue, 20 Oct 2026 14:58:09 +0000",
+    "source": "https://cryptopotato.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.287810"
+  },
+  {
+    "title": "Ethereum Price Analysis: ETH Jumps 3% in an Hour – What Comes Next?",
+    "link": "https://cryptopotato.com/ethereum-price-analysis-eth-jumps-3-in-an-hour-what-comes-next/",
+    "date": "Tue, 20 Oct 2026 14:35:50 +0000",
+    "source": "https://cryptopotato.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.287825"
+  },
+  {
+    "title": "GRVT Burns 1.1 Million Tokens as Countdown to Grvt 2.0 Begins",
+    "link": "https://cryptopotato.com/grvt-burns-1-1-million-tokens-as-countdown-to-grvt-2-0-begins/",
+    "date": "Tue, 20 Oct 2026 13:09:33 +0000",
+    "source": "https://cryptopotato.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.287828"
+  },
+  {
+    "title": "JPMorgan Expects Bitcoin to Beat Stocks and Gold: But There’s a Catch",
+    "link": "https://cryptopotato.com/jpmorgan-expects-bitcoin-to-beat-stocks-and-gold-but-theres-a-catch/",
+    "date": "Tue, 20 Oct 2026 13:08:58 +0000",
+    "source": "https://cryptopotato.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.287830"
+  },
+  {
+    "title": "Switzerland Approves Its First Bitcoin ETF in Major Retail Crypto Milestone",
+    "link": "https://cryptopotato.com/switzerland-approves-its-first-bitcoin-etf-in-major-retail-crypto-milestone/",
+    "date": "Tue, 20 Oct 2026 12:31:56 +0000",
+    "source": "https://cryptopotato.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.287833"
+  },
+  {
+    "title": "Worldcoin (WLD) Jumps 9% Daily: What Happened and What’s Next?",
+    "link": "https://cryptopotato.com/worldcoin-wld-jumps-9-daily-what-happened-and-whats-next/",
+    "date": "Tue, 20 Oct 2026 12:06:55 +0000",
+    "source": "https://cryptopotato.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.287837"
+  },
+  {
+    "title": "XRP Whales Pull Back? Small Binance Transfers Hit Highest Share Since October 2024",
+    "link": "https://cryptopotato.com/xrp-whales-pull-back-small-binance-transfers-hit-highest-share-since-october-2024/",
+    "date": "Tue, 20 Oct 2026 10:31:12 +0000",
+    "source": "https://cryptopotato.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.287840"
+  },
+  {
+    "title": "Major Bitcoin ETF Inflows Fail to Stop BTC From Sliding Further: Market Watch",
+    "link": "https://cryptopotato.com/major-bitcoin-etf-inflows-fail-to-stop-btc-from-sliding-further-market-watch/",
+    "date": "Tue, 20 Oct 2026 09:11:16 +0000",
+    "source": "https://cryptopotato.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.287842"
+  },
+  {
+    "title": "XRP Millionaires Make Bold 5-Year-Low Move Amid Market Drop",
+    "link": "https://u.today/xrp-millionaires-make-bold-5-year-low-move-amid-market-drop",
+    "date": "Tue, 20 Oct 2026 14:48:05 +0000",
+    "source": "https://u.today/rss",
+    "fetched_at": "2026-10-20T15:03:08.591594"
+  },
+  {
+    "title": "Stellar (XLM) Alert Issued by Japanese Crypto Exchange: Here's the Reason",
+    "link": "https://u.today/stellar-xlm-alert-issued-by-japanese-crypto-exchange-heres-the-reason",
+    "date": "Tue, 20 Oct 2026 13:15:57 +0000",
+    "source": "https://u.today/rss",
+    "fetched_at": "2026-10-20T15:03:08.591605"
+  },
+  {
+    "title": "Largest Banking Network in Europe Adds Support for XRP and Other Major Cryptos",
+    "link": "https://u.today/largest-banking-network-in-europe-adds-support-for-xrp-and-other-major-cryptos",
+    "date": "Tue, 20 Oct 2026 12:57:19 +0000",
+    "source": "https://u.today/rss",
+    "fetched_at": "2026-10-20T15:03:08.591607"
+  },
+  {
+    "title": "Stolen Ethereum (ETH) Appears on Market: $32 Million Moved",
+    "link": "https://u.today/stolen-ethereum-eth-appears-on-market-32-million-moved",
+    "date": "Tue, 20 Oct 2026 12:37:45 +0000",
+    "source": "https://u.today/rss",
+    "fetched_at": "2026-10-20T15:03:08.591609"
+  },
+  {
+    "title": "Zcash (ZEC) vs Hyperliquid (HYPE): Battle for Crypto Market's Top 10",
+    "link": "https://u.today/zcash-zec-vs-hyperliquid-hype-battle-for-crypto-markets-top-10",
+    "date": "Tue, 20 Oct 2026 12:05:00 +0000",
+    "source": "https://u.today/rss",
+    "fetched_at": "2026-10-20T15:03:08.591611"
+  },
+  {
+    "title": "Ripple President Breaks Silence as XRP Gains Fresh Social Media Attention",
+    "link": "https://u.today/ripple-president-breaks-silence-as-xrp-gains-fresh-social-media-attention",
+    "date": "Tue, 20 Oct 2026 10:30:12 +0000",
+    "source": "https://u.today/rss",
+    "fetched_at": "2026-10-20T15:03:08.591613"
+  },
+  {
+    "title": "Shiba Inu (SHIB) Loses Most Importnat Support For Now",
+    "link": "https://u.today/shiba-inu-shib-loses-0000005",
+    "date": "Tue, 20 Oct 2026 10:00:00 +0000",
+    "source": "https://u.today/rss",
+    "fetched_at": "2026-10-20T15:03:08.591615"
+  },
+  {
+    "title": "Ripple CLO Ends Speculation over What's Next for Stablecoin Regulation",
+    "link": "https://u.today/ripple-clo-ends-speculation-over-whats-next-for-stablecoin-regulation",
+    "date": "Tue, 20 Oct 2026 09:18:15 +0000",
+    "source": "https://u.today/rss",
+    "fetched_at": "2026-10-20T15:03:08.591617"
+  },
+  {
+    "title": "Bitcoin Firm Strive Launches SATS Stock With 15% Dividend After Raising $630M",
+    "link": "https://news.bitcoin.com/finance/bitcoin-firm-strive-launches-stats-stock-15-dividend-raising-630m/",
+    "date": "Tue, 20 Oct 2026 14:48:57 +0000",
+    "source": "https://news.bitcoin.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.966285"
+  },
+  {
+    "title": "Circle Makes $1.4B in Revenue but Keeps Just 7% as Profit",
+    "link": "https://news.bitcoin.com/stablecoins/circle-makes-1-4b-in-revenue-but-keeps-just-7-as-profit/",
+    "date": "Tue, 20 Oct 2026 13:55:49 +0000",
+    "source": "https://news.bitcoin.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.966295"
+  },
+  {
+    "title": "Switzerland’s First Retail Bitcoin ETF Gets Regulatory Green Light",
+    "link": "https://news.bitcoin.com/regulation-and-legal/switzerlands-first-retail-bitcoin-etf-gets-regulatory-green-light/",
+    "date": "Tue, 20 Oct 2026 13:15:56 +0000",
+    "source": "https://news.bitcoin.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.966299"
+  },
+  {
+    "title": "Bitcoin Price Clings to $81K as Sellers Circle Critical Support",
+    "link": "https://news.bitcoin.com/market-updates/bitcoin-price-clings-to-81k-as-sellers-circle-critical-support/",
+    "date": "Tue, 20 Oct 2026 12:30:39 +0000",
+    "source": "https://news.bitcoin.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.966301"
+  },
+  {
+    "title": "Tom Lee Says VCs Regret Missing Bitcoin’s 80x Rise Over 10 Years",
+    "link": "https://news.bitcoin.com/finance/tom-lee-says-vcs-regret-missing-bitcoins-80x-rise-over-10-years/",
+    "date": "Tue, 20 Oct 2026 11:30:43 +0000",
+    "source": "https://news.bitcoin.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.966304"
+  },
+  {
+    "title": "Arrington’s XRP Fund Holds a $514M Evernorth Stake Ripple Can Steer",
+    "link": "https://news.bitcoin.com/finance/arrington-xrp-capital-evernorth-stake-rippleworks/",
+    "date": "Tue, 20 Oct 2026 10:59:11 +0000",
+    "source": "https://news.bitcoin.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.966306"
+  },
+  {
+    "title": "Blackrock Posts Biggest 2026 Inflow as Bitcoin ETFs Add $527M",
+    "link": "https://news.bitcoin.com/bitcoin-etf/blackrock-posts-biggest-2026-inflow-as-bitcoin-etfs-add-527m/",
+    "date": "Tue, 20 Oct 2026 10:30:24 +0000",
+    "source": "https://news.bitcoin.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.966308"
+  },
+  {
+    "title": "XRP Whale That Stacked Above $2 Just Moved 82 Million Tokens",
+    "link": "https://news.bitcoin.com/crypto-news/xrp-whale-moves-82-million-xrp-new-wallet/",
+    "date": "Tue, 20 Oct 2026 09:59:28 +0000",
+    "source": "https://news.bitcoin.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.966310"
+  },
+  {
+    "title": "Justin Sun Sours on Bitcoin and Arthur Hayes Isn’t Buying His Argument",
+    "link": "https://news.bitcoin.com/featured/justin-sun-bearish-bitcoin-quantum-arthur-hayes-dont-sell/",
+    "date": "Tue, 20 Oct 2026 09:30:00 +0000",
+    "source": "https://news.bitcoin.com/feed/",
+    "fetched_at": "2026-10-20T15:03:08.966313"
+  },
+  {
+    "title": "BlackRock seeks to shield bitcoin investors from losses after rival fund weathers 50% crash",
+    "link": "https://www.coindesk.com/markets/2026/10/20/blackrock-seeks-to-shield-bitcoin-investors-from-losses-after-rival-fund-weathers-50-crash",
+    "date": "Tue, 20 Oct 2026 14:28:39 +0000",
+    "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "fetched_at": "2026-10-20T15:03:09.303243"
+  },
+  {
+    "title": "Kazakhstan court bars Coinbase, five others from unlicensed crypto services in Astana International Financial Centre",
+    "link": "https://www.coindesk.com/business/2026/10/20/kazakhstan-court-bars-coinbase-five-others-from-unlicensed-crypto-services-in-astana-international-financial-centre",
+    "date": "Tue, 20 Oct 2026 13:35:08 +0000",
+    "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "fetched_at": "2026-10-20T15:03:09.303304"
+  },
+  {
+    "title": "Microsoft, Alphabet and Goldman Sachs join objections to OKX-ICE tokenized stock trading",
+    "link": "https://www.coindesk.com/business/2026/10/19/microsoft-alphabet-and-goldman-sachs-join-objections-to-okx-ice-tokenized-stock-trading",
+    "date": "Tue, 20 Oct 2026 12:40:17 +0000",
+    "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "fetched_at": "2026-10-20T15:03:09.303306"
+  },
+  {
+    "title": "France's parliament approves vote to hit stablecoin trades with 31% capital gains tax",
+    "link": "https://www.coindesk.com/policy/2026/10/20/france-s-parliament-approves-vote-to-hit-crypto-to-stablecoin-trades-with-31-levy",
+    "date": "Tue, 20 Oct 2026 11:25:00 +0000",
+    "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "fetched_at": "2026-10-20T15:03:09.303309"
+  },
+  {
+    "title": "Equity weakness could damp demand for bitcoin after biggest ETF inflows in a month",
+    "link": "https://www.coindesk.com/daybook-us/2026/10/20/equity-weakness-could-damp-demand-for-bitcoin-after-biggest-etf-inflows-in-a-month",
+    "date": "Tue, 20 Oct 2026 11:14:21 +0000",
+    "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "fetched_at": "2026-10-20T15:03:09.303311"
+  },
+  {
+    "title": "JPMorgan sees 10% annual bitcoin returns, topping stocks, bonds and gold over next decade",
+    "link": "https://www.coindesk.com/markets/2026/10/20/jpmorgan-sees-10-annual-bitcoin-returns-topping-stocks-bonds-and-gold-over-next-decade",
+    "date": "Tue, 20 Oct 2026 11:10:40 +0000",
+    "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "fetched_at": "2026-10-20T15:03:09.303313"
+  },
+  {
+    "title": "Bitcoin drops to $81,400 as Asian chip stocks tumble, options traders seek downside protection",
+    "link": "https://www.coindesk.com/markets/2026/10/20/bitcoin-drops-to-usd81-400-as-asian-chip-stocks-tumble-options-traders-seek-downside-protection",
+    "date": "Tue, 20 Oct 2026 10:22:55 +0000",
+    "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "fetched_at": "2026-10-20T15:03:09.303315"
+  },
+  {
+    "title": "Live updates: Bitcoin reclaims $83,000 as stocks turn higher",
+    "link": "https://www.coindesk.com/markets/2026/10/20/live-updates-market-jitters-persist-as-the-ai-selloff-deepens",
+    "date": "Tue, 20 Oct 2026 10:14:19 +0000",
+    "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "fetched_at": "2026-10-20T15:03:09.303317"
+  },
+  {
+    "title": "South Korean IPO slump adds to AI market jitters as Brent crude tops $111",
+    "link": "https://www.coindesk.com/markets/2026/10/20/south-korean-ipo-plunge-deepens-ai-market-jitters-as-brent-tops-usd111",
+    "date": "Tue, 20 Oct 2026 09:32:24 +0000",
+    "source": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "fetched_at": "2026-10-20T15:03:09.303320"
+  },
+  {
+    "title": "Agents can trade 24/7 — but Yat Siu warns you could lose access at any time",
+    "link": "https://cointelegraph.com/magazine/ai-trade-sleep-yat-siu-warns-losing-agent?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "date": "Tue, 20 Oct 2026 13:30:00 +0000",
+    "source": "https://cointelegraph.com/rss",
+    "fetched_at": "2026-10-20T15:03:09.585768"
+  },
+  {
+    "title": "FINMA approves Switzerland’s first Bitcoin ETF for retail investors",
+    "link": "https://cointelegraph.com/news/finma-approves-switzerlands-first-bitcoin-etf-retail?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "date": "Tue, 20 Oct 2026 13:04:28 +0000",
+    "source": "https://cointelegraph.com/rss",
+    "fetched_at": "2026-10-20T15:03:09.585782"
+  },
+  {
+    "title": "Drift exploiter sends $61M ETH to Tornado Cash, holds $194M",
+    "link": "https://cointelegraph.com/news/drift-exploiter-eth-tornado-cash?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "date": "Tue, 20 Oct 2026 12:38:28 +0000",
+    "source": "https://cointelegraph.com/rss",
+    "fetched_at": "2026-10-20T15:03:09.585787"
+  },
+  {
+    "title": "Tx launches USTX stablecoin to pull RWA liquidity onto its chain",
+    "link": "https://cointelegraph.com/news/tx-ustx-stablecoin-rwa-liquidity-chain?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "date": "Tue, 20 Oct 2026 12:30:00 +0000",
+    "source": "https://cointelegraph.com/rss",
+    "fetched_at": "2026-10-20T15:03:09.585789"
+  },
+  {
+    "title": "Lloyds and Barclays among UK banks named in crypto transfer complaints, advocacy group says",
+    "link": "https://cointelegraph.com/news/uk-banks-crypto-transfer-complaints-stand-with-crypto?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "date": "Tue, 20 Oct 2026 12:13:44 +0000",
+    "source": "https://cointelegraph.com/rss",
+    "fetched_at": "2026-10-20T15:03:09.585791"
+  },
+  {
+    "title": "Netflix FTX trailer was ‘enough to upset me’ in first 30 seconds: former FTX COO",
+    "link": "https://cointelegraph.com/news/netflix-ftx-trailer-upset-first-30-seconds-ftx-coo?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "date": "Tue, 20 Oct 2026 11:23:00 +0000",
+    "source": "https://cointelegraph.com/rss",
+    "fetched_at": "2026-10-20T15:03:09.585795"
+  },
+  {
+    "title": "Kazakhstan court orders curbs on Coinbase, BingX and four others",
+    "link": "https://cointelegraph.com/news/kazakhstan-court-limits-coinbase-bingx-four?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "date": "Tue, 20 Oct 2026 11:12:21 +0000",
+    "source": "https://cointelegraph.com/rss",
+    "fetched_at": "2026-10-20T15:03:09.585797"
+  },
+  {
+    "title": "XRP 30-day exchange inflows pass 6B tokens as whales move to the sidelines",
+    "link": "https://cointelegraph.com/markets/xrp-30-day-exchange-inflows-pass-6b-tokens-as-whales-move-to-the-sidelines?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "date": "Tue, 20 Oct 2026 10:20:58 +0000",
+    "source": "https://cointelegraph.com/rss",
+    "fetched_at": "2026-10-20T15:03:09.585799"
+  },
+  {
+    "title": "Mt. Gox pushes creditor repayment deadline to 2027 in sixth extension",
+    "link": "https://cointelegraph.com/news/mt-gox-creditor-repayment-deadline-extended-2027?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "date": "Tue, 20 Oct 2026 10:20:13 +0000",
+    "source": "https://cointelegraph.com/rss",
+    "fetched_at": "2026-10-20T15:03:09.585802"
+  },
+  {
+    "title": "Bitget plans Thai crypto exchange acquisition weeks after $388M hack",
+    "link": "https://cointelegraph.com/news/bitget-plans-thai-crypto-exchange-acquisition-weeks-after-388m-hack?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "date": "Tue, 20 Oct 2026 10:00:00 +0000",
+    "source": "https://cointelegraph.com/rss",
+    "fetched_at": "2026-10-20T15:03:09.585804"
+  },
+  {
+    "title": "Sam Callahan: Bitcoin Doesn’t Need Rate Cuts to Succeed",
+    "link": "https://bitcoinmagazine.com/videos/sam-callahan-bitcoin-doesnt-need-rate-cuts-to-succeed",
+    "date": "Tue, 20 Oct 2026 12:40:11 +0000",
+    "source": "https://bitcoinmagazine.com/.rss/full/",
+    "fetched_at": "2026-10-20T15:03:10.229187"
+  },
+  {
+    "title": "Michael Howell: Bitcoin as the Apex Liquidity Asset",
+    "link": "https://bitcoinmagazine.com/videos/michael-howell-bitcoin-as-the-apex-liquidity-asset",
+    "date": "Tue, 20 Oct 2026 12:33:35 +0000",
+    "source": "https://bitcoinmagazine.com/.rss/full/",
+    "fetched_at": "2026-10-20T15:03:10.229202"
+  },
+  {
+    "title": "Strive Adds 1,223 Bitcoin As Corporate Treasury Reaches 36,818 BTC",
+    "link": "https://www.newsbtc.com/bitcoin-news/strive-adds-1-223-bitcoin-as-corporate-treasury-reaches-36-818-btc/",
+    "date": "Tue, 20 Oct 2026 14:30:00 +0000",
+    "source": "https://www.newsbtc.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.445999"
+  },
+  {
+    "title": "AnchorWatch Opens Bitcoin Custody Service With Lloyd’s-Backed Insurance Option",
+    "link": "https://www.newsbtc.com/bitcoin-news/anchorwatch-opens-bitcoin-custody-service-with-lloyd-s-backed-insurance-option/",
+    "date": "Tue, 20 Oct 2026 13:40:00 +0000",
+    "source": "https://www.newsbtc.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.446012"
+  },
+  {
+    "title": "Crypto Industry Group Asks Treasury To Clarify GENIUS Act Rules For DeFi",
+    "link": "https://www.newsbtc.com/crypto-regulation/crypto-industry-group-asks-treasury-to-clarify-genius-act-rules-for-defi/",
+    "date": "Tue, 20 Oct 2026 12:50:00 +0000",
+    "source": "https://www.newsbtc.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.446015"
+  },
+  {
+    "title": "Visa And Mesh Want Crypto Wallet Balances To Work At 175 Million Merchants",
+    "link": "https://www.newsbtc.com/crypto-news/visa-and-mesh-want-crypto-wallet-balances-to-work-at-175-million-merchants/",
+    "date": "Tue, 20 Oct 2026 12:00:00 +0000",
+    "source": "https://www.newsbtc.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.446017"
+  },
+  {
+    "title": "Mastercard Introduces Fraud Screening Before Stablecoin Payments Go On-Chain",
+    "link": "https://www.newsbtc.com/crypto-news/mastercard-introduces-fraud-screening-before-stablecoin-payments-go-on-chain/",
+    "date": "Tue, 20 Oct 2026 11:10:00 +0000",
+    "source": "https://www.newsbtc.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.446019"
+  },
+  {
+    "title": "BlackRock Bitcoin ETF Pulls In $665 Million While Rivals Lose Money",
+    "link": "https://www.newsbtc.com/bitcoin-news/blackrock-bitcoin-etf-pulls-in-665-million-while-rivals-lose-money/",
+    "date": "Tue, 20 Oct 2026 10:20:00 +0000",
+    "source": "https://www.newsbtc.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.446021"
+  },
+  {
+    "title": "BlackRock Files For Bitcoin ETF With Managed Downside Protection",
+    "link": "https://www.newsbtc.com/bitcoin-news/blackrock-files-for-bitcoin-etf-with-managed-downside-protection/",
+    "date": "Tue, 20 Oct 2026 09:35:45 +0000",
+    "source": "https://www.newsbtc.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.446023"
+  },
+  {
+    "title": "TRON’s Justin Sun Turns Bearish on Bitcoin Over AI and Quantum Risks",
+    "link": "https://beincrypto.com/justin-sun-bitcoin-quantum-ai-risks/",
+    "date": "Tue, 20 Oct 2026 14:48:59 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912847"
+  },
+  {
+    "title": "France Moves to Tax Crypto as Cost-of-Living Protests Erupt",
+    "link": "https://beincrypto.com/france-crypto-tax-violent-protests-riots/",
+    "date": "Tue, 20 Oct 2026 14:16:43 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912859"
+  },
+  {
+    "title": "Oil's 5-Month High Is a Tax on Households, Unless You Own Energy Stocks",
+    "link": "https://beincrypto.com/oil-price-5-month-high-households/",
+    "date": "Tue, 20 Oct 2026 14:00:00 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912863"
+  },
+  {
+    "title": "Copper Tests Make-or-Break Support as Mine Supply Shrinks for the First Time Since 2017",
+    "link": "https://beincrypto.com/copper-support-mine-supply-decline/",
+    "date": "Tue, 20 Oct 2026 13:00:00 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912866"
+  },
+  {
+    "title": "Grvt Completes First GRVT Token Burn, Unveils Roadmap to Yield and Zero-Fee RWA Trading",
+    "link": "https://beincrypto.com/grvt-completes-token-burn-unveils-roadmap/",
+    "date": "Tue, 20 Oct 2026 13:00:00 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912868"
+  },
+  {
+    "title": "Why Crypto Exchanges are Paying to Keep You Trading",
+    "link": "https://beincrypto.com/why-crypto-exchanges-pay-to-keep-users-trading/",
+    "date": "Tue, 20 Oct 2026 12:26:58 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912871"
+  },
+  {
+    "title": "Germany and NVIDIA Expand AI Partnership With a $10 Billion Commitment",
+    "link": "https://beincrypto.com/germany-nvidia-industrial-ai-declaration/",
+    "date": "Tue, 20 Oct 2026 12:24:52 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912873"
+  },
+  {
+    "title": "Korean AI Cloud Firm Elice Sinks 30%+ in KOSDAQ’s Biggest IPO of 2026",
+    "link": "https://beincrypto.com/elice-kosdaq-ipo-drop-anthropic/",
+    "date": "Tue, 20 Oct 2026 12:00:00 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912876"
+  },
+  {
+    "title": "XT Exchange: A Gateway to a Wider Financial World",
+    "link": "https://beincrypto.com/xt-exchange-gateway-wider-financial-world/",
+    "date": "Tue, 20 Oct 2026 11:55:10 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912878"
+  },
+  {
+    "title": "Chinese Stocks Post Record 10-Week Losing Streak Despite 4.5% GDP Growth",
+    "link": "https://beincrypto.com/chinese-stocks-record-10-week-losing-streak/",
+    "date": "Tue, 20 Oct 2026 11:05:40 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912880"
+  },
+  {
+    "title": "Goldman Names 23 Defensive Stocks for Investors Worried About the AI Trade",
+    "link": "https://beincrypto.com/goldman-and-rbc-spot-the-tech-stocks-defense/",
+    "date": "Tue, 20 Oct 2026 11:00:00 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912882"
+  },
+  {
+    "title": "MoneyGram Makes Another Big Blockchain Move With XDC Network",
+    "link": "https://beincrypto.com/moneygram-xdc-network-blockchain-validator/",
+    "date": "Tue, 20 Oct 2026 10:53:23 +0000",
+    "source": "https://beincrypto.com/feed/",
+    "fetched_at": "2026-10-20T15:03:10.912885"
+  },
+  {
     "title": "Quip Network Full Guide: Node & Airdrop Points",
     "link": "https://airdrops.io/blog/quip-network-node/",
     "date": "Fri, 02 Oct 2026 16:59:32 +0000",
