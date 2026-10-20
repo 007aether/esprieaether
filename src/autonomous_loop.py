@@ -13,6 +13,7 @@ import time
 import subprocess
 import logging
 from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 # إعداد المسار
@@ -207,6 +208,7 @@ def task_weekly_email() -> dict:
 
     # تحقق من اليوم والساعة
     import datetime
+    from datetime import datetime, timezone
     now = datetime.datetime.now()
     target_day = os.getenv("WEEKLY_REPORT_DAY", "monday").lower()
     target_hour = int(os.getenv("WEEKLY_REPORT_HOUR", "9"))
@@ -577,7 +579,7 @@ def task_research_monitor() -> dict:
 def task_semantic_memory() -> dict:
     try:
         from semantic_memory_v2 import SemanticMemory
-        from datetime import datetime
+        from datetime import datetime, timezone
         sm = SemanticMemory()
         sm.remember(f"دورة {datetime.now().isoformat()}", category="conversation", tags=["auto"], importance=0.3)
         return {"status": "ok", "total": sm.stats()["total"]}
@@ -949,25 +951,42 @@ def task_jarvis_dev() -> dict:
 
 
 def task_self_improve() -> dict:
-    """Learn from errors: scan logs → diagnose → remember → propose fixes (every 30min)."""
-    result = {"name": "self_improve", "status": "ok"}
+    """SELF-HEAL: scan logs, diagnose, learn, propose fixes (every 5 min)"""
+    result = {"name": "self_improve", "status": "ok", "errors_found": 0, "patterns_learned": 0, "fixes_proposed": 0}
+
     try:
-        import subprocess
-        r = subprocess.run(
-            [sys.executable, str(BASE_DIR / "bots" / "self_improve.py"), "--once"],
-            capture_output=True, text=True, timeout=180,
-        )
-        if r.returncode == 0 and r.stdout.strip():
-            import json as _json
-            try:
-                data = _json.loads(r.stdout.strip().splitlines()[-1])
-                result["diagnosed"] = data.get("diagnosed", 0)
-                result["scanned"] = data.get("scanned", 0)
-            except Exception:
-                pass
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import self_improve as si
+
+        # Scan logs
+        errors = si.scan_logs()
+        result["errors_found"] = len(errors)
+
+        if errors:
+            # Learn from errors
+            learned, unknown = si.learn_from_errors(errors)
+            result["patterns_learned"] = len(learned)
+            result["unknown"] = len(unknown)
+
+            # Propose fixes
+            fixes = si.propose_fixes(learned)
+            result["fixes_proposed"] = len(fixes)
+
+            # Apply fixes (force mode for critical/high)
+            for fix in fixes:
+                if fix["severity"] in ("critical", "high"):
+                    si.apply_fix(fix)
+                    state["applied_fixes"].append({
+                        "pattern": fix["pattern"],
+                        "fix": fix["fix"],
+                        "result": "applied",
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                    })
     except Exception as e:
         result["status"] = "error"
-        result["error"] = str(e)[:150]
+        result["error"] = str(e)[:200]
+
+    return result
     return result
 
 

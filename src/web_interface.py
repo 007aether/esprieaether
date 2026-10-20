@@ -829,6 +829,111 @@ def obsidian_page():
     return "<h1>🧠 vault not found</h1><p>run: python src/obsidian_vault_builder.py</p>", 200
 
 
+@app.route("/api/executor")
+def api_executor():
+    """جلب حالة Task Executor — نتائج التنفيذ، المهام، السجل"""
+    try:
+        import sys
+        sys.path.insert(0, str(BASE_DIR))
+        sys.path.insert(0, str(BASE_DIR / "bots"))
+        from task_executor import load_tasks, LOG_FILE_DATA, classify
+        tasks = load_tasks()
+        pending = [t for t in tasks if t.get("status") in ("pending", "proposed")]
+        done = sum(1 for t in tasks if t.get("status") == "done")
+        failed = sum(1 for t in tasks if t.get("status") == "failed")
+
+        import os
+        log_entries = []
+        if LOG_FILE_DATA.exists():
+            log_entries = json.loads(LOG_FILE_DATA.read_text(encoding="utf-8"))
+        log_entries = log_entries[-50:]  # أخر 50
+
+        # summary by kind
+        from collections import Counter
+        kind_counts = Counter(e.get("kind") for e in log_entries)
+
+        return jsonify({
+            "status": "ok",
+            "executed": len(log_entries),
+            "pending": len(pending),
+            "done": done,
+            "failed": failed,
+            "last_executions": [
+                {
+                    "id": e.get("task_id", "?"),
+                    "title": e.get("title", "")[:60],
+                    "kind": e.get("kind"),
+                    "ok": e.get("ok", False),
+                    "action": e.get("action", "")[:60],
+                    "ts": e.get("ts", "")[:19],
+                }
+                for e in log_entries
+            ],
+            "pending_tasks": [
+                {
+                    "id": t.get("id"),
+                    "title": t.get("title", "")[:60],
+                    "agent": t.get("agent", "?"),
+                    "kind": classify(t)[0],
+                    "ts": t.get("ts", "")[:19],
+                }
+                for t in pending
+            ],
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)[:200]})
+
+
+@app.route("/executor")
+def executor_page():
+    """صفحة عرض حالة Task Executor"""
+    try:
+        import sys
+        sys.path.insert(0, str(BASE_DIR))
+        sys.path.insert(0, str(BASE_DIR / "bots"))
+        from task_executor import load_tasks, LOG_FILE_DATA, classify
+        tasks = load_tasks()
+        pending = [t for t in tasks if t.get("status") in ("pending", "proposed")]
+        done = sum(1 for t in tasks if t.get("status") == "done")
+        failed = sum(1 for t in tasks if t.get("status") == "failed")
+
+        import os
+        log_entries = []
+        if LOG_FILE_DATA.exists():
+            log_entries = json.loads(LOG_FILE_DATA.read_text(encoding="utf-8"))
+        log_entries = log_entries[-50:]
+
+        # summary by kind
+        from collections import Counter
+        kind_counts = Counter(e.get("kind") for e in log_entries)
+
+        # summary
+        kind_counts = Counter(e.get("kind") for e in log_entries)
+
+        return render_template(
+            "executor.html",
+            pending=len(pending),
+            done=done,
+            failed=failed,
+            total=len(tasks),
+            executed=len(log_entries),
+            kind_counts=dict(kind_counts),
+            recent_executions=sorted(log_entries, key=lambda e: e.get("ts", ""), reverse=True)[:20],
+            pending_tasks=[
+                {
+                    "id": t.get("id"),
+                    "title": t.get("title", "")[:50],
+                    "kind": classify(t)[0],
+                    "agent": t.get("agent", "?"),
+                    "ts": t.get("ts", "")[:19],
+                }
+                for t in pending
+            ],
+        )
+    except Exception as e:
+        return render_template("executor.html", error=str(e)[:200], executed=0, kind_counts={}, recent_executions=[], pending_tasks=[])
+
+
 if __name__ == "__main__":
     print(f"🚀 Server running on http://{WEB_HOST}:{WEB_PORT}")
     print(f"📊 Total routes: {len(list(app.url_map.iter_rules()))}")

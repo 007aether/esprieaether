@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Executor — EsprieAether</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: #0f0f1a;
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+header {
+  background: #1a1a2e;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #2a2a4a;
+}
+header .logo { font-size: 22px; font-weight: 700; color: #4fc3f7; }
+header .title { font-size: 18px; color: #fff; }
+main { padding: 24px; max-width: 1200px; margin: 0 auto; }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.stat-card .value { font-size: 32px; font-weight: 700; }
+.stat-card .label { font-size: 14px; color: #888; margin-top: 4px; }
+.stat-card.ok .value { color: #4caf50; }
+.stat-card.warn .value { color: #ff9800; }
+.stat-card.err .value { color: #f44336; }
+h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+.section {
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4fc3f7;
+  margin-bottom: 16px;
+}
+.grid-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.grid-table th {
+  background: #2a2a4a;
+  color: #888;
+  padding: 10px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.grid-table td {
+  padding: 10px;
+  border-bottom: 1px solid #2a2a4a;
+  font-size: 14px;
+}
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.status-badge.ok { background: #1a3a1a; color: #4caf50; }
+.status-badge.fail { background: #3a1a1a; color: #f44336; }
+.status-badge.pending { background: #3a2a1a; color: #ff9800; }
+.activity-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.activity-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid #2a2a4a;
+  align-items: center;
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-item .time { color: #888; font-size: 12px; min-width: 80px; }
+.activity-item .kind {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.kind.code { background: #1a1a3a; color: #4fc3f7; }
+.kind.info { background: #1a2a1a; color: #4caf50; }
+.activity-item .action { font-size: 14px; color: #ccc; text-align: right; flex: 1; }
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+.loading { text-align: center; padding: 40px; color: #888; }
+.error { color: #f44336; text-align: center; padding: 20px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">⚙️</div>
+  <div class="title">Task Executor — نظام التنفيذ التلقائي</div>
+</header>
+<main>
+  <div class="stats-grid">
+    <div class="stat-card ok">
+      <div class="value">{{ done }}</div>
+      <div class="label">مكتمل</div>
+    </div>
+    <div class="stat-card pending">
+      <div class="value">{{ pending }}</div>
+      <div class="label">قيد الانتظار</div>
+    </div>
+    <div class="stat-card err">
+      <div class="value">{{ failed }}</div>
+      <div class="label">فشل</div>
+    </div>
+    <div class="stat-card">
+      <div class="value">{{ executed }}</div>
+      <div class="label">تم التنفيذ</div>
+    </div>
+  </div>
+
+  {% if error %}
+    <div class="error">❌ {{ error }}</div>
+  {% else %}
+    <div class="section">
+    <div class="section-title">📊 آخر عمليات التنفيذ</div>
+    {% if recent_executions %}
+    <div class="activity-list">
+      {% for e in recent_executions %}
+      <div class="activity-item">
+        <span class="time">{{ e.ts }}</span>
+        <span class="kind {{ e.kind }}">{{ e.kind }}</span>
+        <span class="action">{{ e.title }} → {{ e.action }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty">لا توجد عمليات تنفيذ مسجلة بعد</div>
+    {% endif %}
+  </div>
+
+  {% endif %}
+
+  <div class="section">
+    <div class="section-title">⏳ المهام المقترحة (معلقة)</div>
+    {% if pending_tasks %}
+    <div class="activity-list">
+      {% for t in pending_tasks %}
+      <div class="activity-item">
+        <span class="time">{{ t.ts }}</span>
+        <span class="kind {{ t.kind }}">{{ t.kind }}</span>
+        <span class="action">{{ t.title }} (من {{ t.agent }})</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty" style="color:#4caf50;">✅ لا توجد مهام معلقة — كل شيء تم</div>
+    {% endif %}
+  </div>
+
+  <div class="section">
+    <div class="section-title">📈 توزيع أنواع المهام</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+      {% for kind, count in kind_counts.items() %}
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="status-badge {{ kind }}">{{ kind }}</span>
+        <span style="font-size:14px; color:#888;">{{ count }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔄 إجراءات سريعة</div>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <a href="/" style="padding: 10px 20px; background: #1a1a2e; color: #fff; border: 1px solid #2a2a4a; border-radius: 8px; text-decoration: none; font-size: 14px; display: inline-block;">
+        📊 الرئيسية
+      </a>
+      <a href="/control" style="padding: 10px 20px; background: #1a1a2e; color: #fff; border: 1px solid #2a2a4a; border-radius: 8px; text-decoration: none; font-size: 14px; display: inline-block;">
+        🎛️ التحكم بالكامل
+      </a>
+      <button onclick="refresh()" style="padding: 10px 20px; background: #4fc3f7; color: #000; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">
+        🔄 تحديث
+      </button>
+    </div>
+  </div>
+
+  <script>
+  function refresh() {
+    fetch('/api/executor')
+      .then(r => r.json())
+      .then(data => {
+        document.querySelectorAll('.stat-card .value').forEach(el => el.textContent = '0');
+        document.querySelectorAll('.stat-card .label').forEach(el => el.textContent = '—');
+        if (data.status === 'ok') {
+          document.querySelector('.stat-card.ok .value').textContent = data.done;
+          document.querySelector('.stat-card.ok .label').textContent = 'مكتمل';
+          document.querySelector('.stat-card.pending .value').textContent = data.pending;
+          document.querySelector('.stat-card.pending .label').textContent = 'قيد الانتظار';
+          document.querySelector('.stat-card.err .value').textContent = data.failed;
+          document.querySelector('.stat-card.err .label').textContent = 'فشل';
+          document.querySelector('.stat-card:nth-child(4) .value').textContent = data.executed;
+          document.querySelector('.stat-card:nth-child(4) .label').textContent = 'تم التنفيذ';
+
+          // update recent executions
+          const container = document.querySelector('.activity-list');
+          container.innerHTML = '';
+          data.last_executions.forEach(e => {
+            const div = document.createElement('div');
+            div.className = 'activity-item';
+            const time = document.createElement('span');
+            time.className = 'time';
+            time.textContent = e.ts;
+            const kind = document.createElement('span');
+            kind.className = 'kind ' + e.kind;
+            kind.textContent = e.kind;
+            const action = document.createElement('span');
+            action.className = 'action';
+            action.textContent = e.title + ' → ' + e.action;
+            div.appendChild(time);
+            div.appendChild(kind);
+            div.appendChild(action);
+            container.appendChild(div);
+          });
+
+          // update pending tasks
+          const pendingContainer = document.querySelectorAll('.activity-list')[1];
+          if (pendingContainer) {
+            pendingContainer.innerHTML = data.pending_tasks.length
+              ? data.pending_tasks.map(t => `
+                  <div class="activity-item">
+                    <span class="time">${t.ts}</span>
+                    <span class="kind ${t.kind}">${t.kind}</span>
+                    <span class="action">${t.title} (من ${t.agent})</span>
+                  </div>
+                `).join('')
+              : '<div class="empty" style="color:#4caf50;">✅ لا توجد مهام معلقة</div>';
+          }
+        }
+      });
+  }
+  setInterval(refresh, 5000);
+  refresh();
+  </script>
+</main>
+</body>
+</html>
