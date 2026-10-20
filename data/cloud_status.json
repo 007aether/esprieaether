@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-19T21:23:56.749826+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-20T02:14:54.490805+00:00",
+  "cloud_last_run": "2026-10-20T10:29:09.357610+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Hyperliquid SEC Letter: HYPE’s Policy Arm Just Asked for Airdrop Clarity",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy Aster (ASTER) for the First Time",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "PaperTrade Review: I Deposited, Got Stuck in the Queue, and Watched Losers Get Rich",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "Dogecoin 0.08 Long: Why I Took the Trade at the Range Low",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Mudwater Airdrop: BAYC Just Dropped Free Trading Cards on Solana",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Jared Tendler: The $300-an-Hour Mental Coach Who Multiplied My Poker Income",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy Lighter (LIT) for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
