@@ -59,62 +59,6 @@ h2 {
   color: #4fc3f7;
   margin-bottom: 16px;
 }
-.grid-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.grid-table th {
-  background: #2a2a4a;
-  color: #888;
-  padding: 10px;
-  text-align: left;
-  font-size: 12px;
-  text-transform: uppercase;
-}
-.grid-table td {
-  padding: 10px;
-  border-bottom: 1px solid #2a2a4a;
-  font-size: 14px;
-}
-.status-badge {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-}
-.status-badge.ok { background: #1a3a1a; color: #4caf50; }
-.status-badge.fail { background: #3a1a1a; color: #f44336; }
-.status-badge.pending { background: #3a2a1a; color: #ff9800; }
-.activity-list {
-  max-height: 400px;
-  overflow-y: auto;
-}
-.activity-item {
-  display: flex;
-  gap: 12px;
-  padding: 12px;
-  border-bottom: 1px solid #2a2a4a;
-  align-items: center;
-}
-.activity-item:last-child { border-bottom: none; }
-.activity-item .time { color: #888; font-size: 12px; min-width: 80px; }
-.activity-item .kind {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-.kind.code { background: #1a1a3a; color: #4fc3f7; }
-.kind.info { background: #1a2a1a; color: #4caf50; }
-.activity-item .action { font-size: 14px; color: #ccc; text-align: right; flex: 1; }
-.empty {
-  text-align: center;
-  padding: 40px;
-  color: #666;
-}
-.loading { text-align: center; padding: 40px; color: #888; }
-.error { color: #f44336; text-align: center; padding: 20px; }
 </style>
 </head>
 <body>
@@ -124,95 +68,45 @@ h2 {
 </header>
 <main>
   <div class="stats-grid">
-    <div class="stat-card ok">
-      <div class="value">{{ done }}</div>
-      <div class="label">مكتمل</div>
-    </div>
-    <div class="stat-card pending">
-      <div class="value">{{ pending }}</div>
-      <div class="label">قيد الانتظار</div>
-    </div>
-    <div class="stat-card err">
-      <div class="value">{{ failed }}</div>
-      <div class="label">فشل</div>
-    </div>
-    <div class="stat-card">
-      <div class="value">{{ executed }}</div>
-      <div class="label">تم التنفيذ</div>
-    </div>
+    <div class="stat-card ok"><div class="value">{{ done }}</div><div class="label">مكتمل</div></div>
+    <div class="stat-card pending"><div class="value">{{ pending }}</div><div class="label">قيد الانتظار</div></div>
+    <div class="stat-card err"><div class="value">{{ failed }}</div><div class="label">فشل</div></div>
+    <div class="stat-card"><div class="value">{{ executed }}</div><div class="label">تم التنفيذ</div></div>
   </div>
 
-  {% if error %}
-    <div class="error">❌ {{ error }}</div>
-  {% else %}
-    <div class="section">
-    <div class="section-title">📊 آخر عمليات التنفيذ</div>
+  {% if error %}<div class="error">❌ {{ error }}</div>{% else %}
+  <div class="section"><div class="section-title">📊 آخر عمليات التنفيذ</div>
     {% if recent_executions %}
-    <div class="activity-list">
-      {% for e in recent_executions %}
-      <div class="activity-item">
-        <span class="time">{{ e.ts }}</span>
-        <span class="kind {{ e.kind }}">{{ e.kind }}</span>
-        <span class="action">{{ e.title }} → {{ e.action }}</span>
-      </div>
-      {% endfor %}
-    </div>
-    {% else %}
-    <div class="empty">لا توجد عمليات تنفيذ مسجلة بعد</div>
-    {% endif %}
-  </div>
+    <div class="activity-list">{% for e in recent_executions %}
+      <div class="activity-item"><span class="time">{{ e.ts }}</span><span class="kind {{ e.kind }}">{{ e.kind }}</span><span class="action">{{ e.title }} → {{ e.action }}</span></div>
+      {% endfor %}</div>{% else %}<div class="empty">لا توجد عمليات تنفيذ مسجلة بعد</div>{% endif %}
+  </div>{% endif %}
 
-  {% endif %}
-
-  <div class="section">
-    <div class="section-title">⏳ المهام المقترحة (معلقة)</div>
+  <div class="section"><div class="section-title">⏳ المهام المقترحة (معلقة)</div>
     {% if pending_tasks %}
-    <div class="activity-list">
-      {% for t in pending_tasks %}
-      <div class="activity-item">
-        <span class="time">{{ t.ts }}</span>
-        <span class="kind {{ t.kind }}">{{ t.kind }}</span>
-        <span class="action">{{ t.title }} (من {{ t.agent }})</span>
-      </div>
-      {% endfor %}
-    </div>
-    {% else %}
-    <div class="empty" style="color:#4caf50;">✅ لا توجد مهام معلقة — كل شيء تم</div>
-    {% endif %}
+    <div class="activity-list">{% for t in pending_tasks %}
+      <div class="activity-item"><span class="time">{{ t.ts }}</span><span class="kind {{ t.kind }}">{{ t.kind }}</span><span class="action">{{ t.title }} (من {{ t.agent }})</span></div>
+      {% endfor %}</div>{% else %}<div class="empty" style="color:#4caf50;">✅ لا توجد مهام معلقة — كل شيء تم</div>{% endif %}
   </div>
 
-  <div class="section">
-    <div class="section-title">📈 توزيع أنواع المهام</div>
+  <div class="section"><div class="section-title">📈 توزيع أنواع المهام</div>
     <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
       {% for kind, count in kind_counts.items() %}
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <span class="status-badge {{ kind }}">{{ kind }}</span>
-        <span style="font-size:14px; color:#888;">{{ count }}</span>
-      </div>
+      <div style="display: flex; align-items: center; gap: 8px;"><span class="status-badge {{ kind }}">{{ kind }}</span><span style="font-size:14px; color:#888;">{{ count }}</span></div>
       {% endfor %}
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-title">🔄 إجراءات سريعة</div>
+  <div class="section"><div class="section-title">🔄 إجراءات سريعة</div>
     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-      <a href="/" style="padding: 10px 20px; background: #1a1a2e; color: #fff; border: 1px solid #2a2a4a; border-radius: 8px; text-decoration: none; font-size: 14px; display: inline-block;">
-        📊 الرئيسية
-      </a>
-      <a href="/control" style="padding: 10px 20px; background: #1a1a2e; color: #fff; border: 1px solid #2a2a4a; border-radius: 8px; text-decoration: none; font-size: 14px; display: inline-block;">
-        🎛️ التحكم بالكامل
-      </a>
-      <a href="/github" style="padding: 10px 20px; background: #24292f; color: #fff; border: 1px solid #3b4252; border-radius: 8px; text-decoration: none; font-size: 14px; display: inline-block;">
-        🔗 GitHub
-      </a>
-      <button onclick="refresh()" style="padding: 10px 20px; background: #4fc3f7; color: #000; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">
-        🔄 تحديث
-      </button>
+      <a href="/" style="padding: 10px 20px; background: #1a1a2e; color: #fff; border: 1px solid #2a2a4a; border-radius: 8px; text-decoration: none; font-size: 14px; display: inline-block;">📊 الرئيسية</a>
+      <a href="/control" style="padding: 10px 20px; background: #1a1a2e; color: #fff; border: 1px solid #2a2a4a; border-radius: 8px; text-decoration: none; font-size: 14px; display: inline-block;">🎛️ التحكم بالكامل</a>
+      <a href="/github" style="padding: 10px 20px; background: #24292f; color: #fff; border: 1px solid #3b4252; border-radius: 8px; text-decoration: none; font-size: 14px; display: inline-block;">🔗 GitHub</a>
+      <button onclick="refresh()" style="padding: 10px 20px; background: #4fc3f7; color: #000; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">🔄 تحديث</button>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-title">🏗️ بناء نظامنا (بروتوكول العمل)</div>
+  <div class="section"><div class="section-title">🏗️ بناء نظامنا (بروتوكول العمل)</div>
     <div style="background: #0f3d2e; border: 1px solid #1a5a3a; border-radius: 12px; padding: 20px;">
       <p style="color: #a8e6cf; font-size: 16px;">🔗 <a href="https://github.com/007aether/esprieaether" target="_blank" style="color: #a8e6cf; text-decoration: underline;">007aether/esprieaether</a> — <strong>مؤسسة النظام الذاتي</strong></p>
       <p style="color: #a8e6cf; font-size: 14px;">2026 — بروتوكول العمل: 🖥️ PC sync → 🌐 Web Interface → 🤖 Agent Mesh → 📡 Telegram Bot</p>
@@ -220,33 +114,17 @@ h2 {
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-title">❤️ الإعجابات والاستخدام (إحصائيات النضام)</div>
+  <div class="section"><div class="section-title">❤️ الإعجابات والاستخدام (إحصائيات النضام)</div>
     <div style="background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 12px; padding: 20px;">
       <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
-        <div style="text-align: center;">
-          <div style="font-size: 36px; font-weight: 700; color: #4fc3f7;" id="like-count">0</div>
-          <div style="font-size: 14px; color: #888;">إجمالي الإعجابات</div>
-        </div>
-        <div style="text-align: center;">
-          <div style="font-size: 36px; font-weight: 700; color: #4fc3f7;" id="like-repos">0</div>
-          <div style="font-size: 14px; color: #888;">مستودعات محببة</div>
-        </div>
-        <div style="text-align: center;">
-          <div style="font-size: 36px; font-weight: 700; color: #4fc3f7;" id="like-users">0</div>
-          <div style="font-size: 14px; color: #888;">مستخدمي الإعجاب</div>
-        </div>
+        <div style="text-align: center;"><div style="font-size: 36px; font-weight: 700; color: #4fc3f7;" id="like-count">{{ like_count }}</div><div style="font-size: 14px; color: #888;">إجمالي الإعجابات</div></div>
+        <div style="text-align: center;"><div style="font-size: 36px; font-weight: 700; color: #4fc3f7;" id="like-repos">{{ like_repos }}</div><div style="font-size: 14px; color: #888;">مستودعات محببة</div></div>
+        <div style="text-align: center;"><div style="font-size: 36px; font-weight: 700; color: #4fc3f7;" id="like-users">{{ like_users }}</div><div style="font-size: 14px; color: #888;">مستخدمي الإعجاب</div></div>
       </div>
       <div style="margin-top: 16px;">
-        <button onclick="likeRepo()" style="padding: 8px 16px; background: #e53935; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">
-          ⭐ أعجبني بـ 007aether/esprieaether
-        </button>
-        <button onclick="dislikeRepo()" style="padding: 8px 16px; background: #616161; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; margin-left: 8px;">
-          🙈 لم أعجب
-        </button>
-        <a href="https://github.com/007aether/esprieaether" target="_blank" style="padding: 8px 16px; background: #24292f; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; margin-left: 8px;">
-          ⭐ اضغط هنا لـ Star على GitHub
-        </a>
+        <button onclick="likeRepo()" style="padding: 8px 16px; background: #e53935; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">⭐ أعجبني بـ 007aether/esprieaether</button>
+        <button onclick="dislikeRepo()" style="padding: 8px 16px; background: #616161; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; margin-left: 8px;">🙈 لم أعجب</button>
+        <a href="https://github.com/007aether/esprieaether" target="_blank" style="padding: 8px 16px; background: #24292f; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; margin-left: 8px;">⭐ اضغط هنا لـ Star على GitHub</a>
       </div>
     </div>
   </div>
@@ -268,7 +146,6 @@ h2 {
           document.querySelector('.stat-card:nth-child(4) .value').textContent = data.executed;
           document.querySelector('.stat-card:nth-child(4) .label').textContent = 'تم التنفيذ';
 
-          // update recent executions
           const container = document.querySelector('.activity-list');
           container.innerHTML = '';
           data.last_executions.forEach(e => {
@@ -283,27 +160,17 @@ h2 {
             const action = document.createElement('span');
             action.className = 'action';
             action.textContent = e.title + ' → ' + e.action;
-            div.appendChild(time);
-            div.appendChild(kind);
-            div.appendChild(action);
+            div.appendChild(time); div.appendChild(kind); div.appendChild(action);
             container.appendChild(div);
           });
 
-          // update pending tasks
           const pendingContainer = document.querySelectorAll('.activity-list')[1];
           if (pendingContainer) {
             pendingContainer.innerHTML = data.pending_tasks.length
-              ? data.pending_tasks.map(t => `
-                  <div class="activity-item">
-                    <span class="time">${t.ts}</span>
-                    <span class="kind ${t.kind}">${t.kind}</span>
-                    <span class="action">${t.title} (من ${t.agent})</span>
-                  </div>
-                `).join('')
+              ? data.pending_tasks.map(t => `<div class="activity-item"><span class="time">${t.ts}</span><span class="kind ${t.kind}">${t.kind}</span><span class="action">${t.title} (من ${t.agent})</span></div>`).join('')
               : '<div class="empty" style="color:#4caf50;">✅ لا توجد مهام معلقة</div>';
           }
 
-          // update github stats
           fetch('/github/stats')
             .then(r => r.json())
             .then(stats => {
@@ -320,99 +187,25 @@ h2 {
 
   async function likeRepo() {
     try {
-      const res = await fetch('/github/like', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({repo_url: 'https://github.com/007aether/esprieaether', actor: 'web_dashboard'})
-      });
+      const res = await fetch('/github/like', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({repo_url: 'https://github.com/007aether/esprieaether', actor: 'web_dashboard'}) });
       const data = await res.json();
       if (data.status === 'ok') {
-        fetch('/github/stats')
-          .then(r => r.json())
-          .then(stats => {
-            document.getElementById('like-count').textContent = stats.total_likes || 0;
-          })
-          .catch(() => {});
+        fetch('/github/stats').then(r => r.json()).then(stats => { document.getElementById('like-count').textContent = stats.total_likes || 0; }).catch(() => {});
       }
-    } catch (e) {
-      console.error(e);
-    }
+    } catch (e) { console.error(e); }
   }
 
   async function dislikeRepo() {
     try {
-      const res = await fetch('/github/like', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({repo_url: 'https://github.com/007aether/esprieaether', actor: 'web_dashboard', action: 'dislike'})
-      });
+      const res = await fetch('/github/like', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({repo_url: 'https://github.com/007aether/esprieaether', actor: 'web_dashboard', action: 'dislike'}) });
       const data = await res.json();
-      if (data.status === 'ok') {
-        refresh();
-      }
-    } catch (e) {
-      console.error(e);
-    }
+      if (data.status === 'ok') { refresh(); }
+    } catch (e) { console.error(e); }
   }
-  </script>
-
-  <script>
-  function refresh() {
-    fetch('/api/executor')
-      .then(r => r.json())
-      .then(data => {
-        document.querySelectorAll('.stat-card .value').forEach(el => el.textContent = '0');
-        document.querySelectorAll('.stat-card .label').forEach(el => el.textContent = '—');
-        if (data.status === 'ok') {
-          document.querySelector('.stat-card.ok .value').textContent = data.done;
-          document.querySelector('.stat-card.ok .label').textContent = 'مكتمل';
-          document.querySelector('.stat-card.pending .value').textContent = data.pending;
-          document.querySelector('.stat-card.pending .label').textContent = 'قيد الانتظار';
-          document.querySelector('.stat-card.err .value').textContent = data.failed;
-          document.querySelector('.stat-card.err .label').textContent = 'فشل';
-          document.querySelector('.stat-card:nth-child(4) .value').textContent = data.executed;
-          document.querySelector('.stat-card:nth-child(4) .label').textContent = 'تم التنفيذ';
-
-          // update recent executions
-          const container = document.querySelector('.activity-list');
-          container.innerHTML = '';
-          data.last_executions.forEach(e => {
-            const div = document.createElement('div');
-            div.className = 'activity-item';
-            const time = document.createElement('span');
-            time.className = 'time';
-            time.textContent = e.ts;
-            const kind = document.createElement('span');
-            kind.className = 'kind ' + e.kind;
-            kind.textContent = e.kind;
-            const action = document.createElement('span');
-            action.className = 'action';
-            action.textContent = e.title + ' → ' + e.action;
-            div.appendChild(time);
-            div.appendChild(kind);
-            div.appendChild(action);
-            container.appendChild(div);
-          });
-
-          // update pending tasks
-          const pendingContainer = document.querySelectorAll('.activity-list')[1];
-          if (pendingContainer) {
-            pendingContainer.innerHTML = data.pending_tasks.length
-              ? data.pending_tasks.map(t => `
-                  <div class="activity-item">
-                    <span class="time">${t.ts}</span>
-                    <span class="kind ${t.kind}">${t.kind}</span>
-                    <span class="action">${t.title} (من ${t.agent})</span>
-                  </div>
-                `).join('')
-              : '<div class="empty" style="color:#4caf50;">✅ لا توجد مهام معلقة</div>';
-          }
-        }
-      });
-  }
-  setInterval(refresh, 5000);
-  refresh();
   </script>
 </main>
 </body>
-</html>
+</html>"""
+with open('src/templates/executor.html', 'w') as f:
+    f.write(content)
+print('Template written:', len(content), 'chars')
