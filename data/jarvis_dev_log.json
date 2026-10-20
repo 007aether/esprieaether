@@ -220,5 +220,11 @@
   "written": 0,
   "error": "router failed",
   "idea": "khoj-ai/khoj"
+ },
+ {
+  "ts": "2026-10-20T06:36:52.292231+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
  }
 ]

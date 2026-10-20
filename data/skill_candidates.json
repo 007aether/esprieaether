@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19T04:54:22.697573+00:00",
+ "updated": "2026-10-20T06:36:28.782149+00:00",
  "total": 47,
  "adopt": 10,
  "reference": 5,
@@ -7,7 +7,7 @@
   {
    "name": "CherryHQ/cherry-studio",
    "url": "https://github.com/CherryHQ/cherry-studio",
-   "stars": 52735,
+   "stars": 52775,
    "category": "ai_agent_framework",
    "lang": "TypeScript",
    "desc": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
@@ -20,7 +20,7 @@
   {
    "name": "HKUDS/nanobot",
    "url": "https://github.com/HKUDS/nanobot",
-   "stars": 49158,
+   "stars": 49200,
    "category": "ai_agent_framework",
    "lang": "Python",
    "desc": "Ultra-lightweight, open-source, self-hosted personal AI agent framework in Python with WebUI, tools, memory, MCP, multi-agent workflows, automation, a",
@@ -33,7 +33,7 @@
   {
    "name": "khoj-ai/khoj",
    "url": "https://github.com/khoj-ai/khoj",
-   "stars": 37741,
+   "stars": 37753,
    "category": "ai_agent_framework",
    "lang": "Python",
    "desc": "Your AI second brain. Self-hostable. Get answers from the web or your docs. Build custom agents, schedule automations, do deep research. Turn any onli",
@@ -46,7 +46,7 @@
   {
    "name": "thedotmack/claude-mem",
    "url": "https://github.com/thedotmack/claude-mem",
-   "stars": 101657,
+   "stars": 101849,
    "category": "rag_memory",
    "lang": "TypeScript",
    "desc": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant",
@@ -59,7 +59,7 @@
   {
    "name": "PrimeIntellect-ai/prime-agent",
    "url": "https://github.com/PrimeIntellect-ai/prime-agent",
-   "stars": 22139,
+   "stars": 22190,
    "category": "self_evolving",
    "lang": "Rust",
    "desc": "A self-improving RLM agent for coding workflows and long-running autonomous tasks.",
@@ -72,7 +72,7 @@
   {
    "name": "alibaba/zvec",
    "url": "https://github.com/alibaba/zvec",
-   "stars": 16124,
+   "stars": 16126,
    "category": "rag_memory",
    "lang": "C++",
    "desc": "A lightweight, lightning-fast, in-process vector database",
@@ -85,7 +85,7 @@
   {
    "name": "browseros-ai/BrowserOS",
    "url": "https://github.com/browseros-ai/BrowserOS",
-   "stars": 13979,
+   "stars": 14003,
    "category": "local_llm",
    "lang": "TypeScript",
    "desc": "🌐 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.",
@@ -98,7 +98,7 @@
   {
    "name": "aden-hive/hive",
    "url": "https://github.com/aden-hive/hive",
-   "stars": 11108,
+   "stars": 11112,
    "category": "self_evolving",
    "lang": "Python",
    "desc": "Multi-Agent Harness for Production AI",
@@ -111,7 +111,7 @@
   {
    "name": "Human-Agent-Society/reef",
    "url": "https://github.com/Human-Agent-Society/reef",
-   "stars": 7646,
+   "stars": 7680,
    "category": "self_evolving",
    "lang": "Python",
    "desc": "Infrastructure for continually self‑improving agents",
@@ -124,7 +124,7 @@
   {
    "name": "siddsachar/row-bot",
    "url": "https://github.com/siddsachar/row-bot",
-   "stars": 1629,
+   "stars": 1630,
    "category": "rag_memory",
    "lang": "Python",
    "desc": "Row-Bot - Personal AI Sovereignty. A local-first AI assistant with integrated tools, a personal knowledge graph, voice, vision, shell, browser automat",
@@ -137,7 +137,7 @@
   {
    "name": "langfuse/langfuse",
    "url": "https://github.com/langfuse/langfuse",
-   "stars": 36010,
+   "stars": 36056,
    "category": "observability",
    "lang": "TypeScript",
    "desc": "🪢 Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform.",
@@ -150,7 +150,7 @@
   {
    "name": "swarmclawai/swarmclaw",
    "url": "https://github.com/swarmclawai/swarmclaw",
-   "stars": 692,
+   "stars": 695,
    "category": "local_llm",
    "lang": "TypeScript",
    "desc": "Open-source self-hosted AI agent runtime and multi-agent framework for autonomous agent swarms. Agent memory, MCP tools, schedules, delegation, and 23",
@@ -163,7 +163,7 @@
   {
    "name": "conductor-oss/conductor",
    "url": "https://github.com/conductor-oss/conductor",
-   "stars": 32334,
+   "stars": 32340,
    "category": "orchestration",
    "lang": "Java",
    "desc": "Conductor is an event driven agentic workflow engine providing durable and highly resilient execution engine for applications and AI Agents",
@@ -176,7 +176,7 @@
   {
    "name": "ccfos/nightingale",
    "url": "https://github.com/ccfos/nightingale",
-   "stars": 13366,
+   "stars": 13370,
    "category": "observability",
    "lang": "Go",
    "desc": "Open-source, self-hosted alerting for metrics, logs, and databases. Includes a built-in AI agent and MCP server.",
@@ -202,7 +202,7 @@
   {
    "name": "hatchet-dev/hatchet",
    "url": "https://github.com/hatchet-dev/hatchet",
-   "stars": 8139,
+   "stars": 8148,
    "category": "orchestration",
    "lang": "Go",
    "desc": "🪓 An orchestration engine for background tasks, AI agents, and durable workflows",
@@ -241,7 +241,7 @@
   {
    "name": "toby-bridges/api-relay-audit",
    "url": "https://github.com/toby-bridges/api-relay-audit",
-   "stars": 885,
+   "stars": 887,
    "category": "crypto_airdrop",
    "lang": "Python",
    "desc": "Local security audit for AI API relays and LLM proxies: detects prompt injection, model substitution, tool-call rewriting, SSE anomalies, error leakag",
@@ -280,7 +280,7 @@
   {
    "name": "existence-master/Sentient",
    "url": "https://github.com/existence-master/Sentient",
-   "stars": 706,
+   "stars": 709,
    "category": "voice_interface",
    "lang": "Python",
    "desc": "Your personal AI assistant, running on your own computer. Long-running tasks, real memory, proactive help, voice, phones and smart glasses. Any model,",
@@ -288,7 +288,7 @@
    "reason": "low signal",
    "target": "esprieaether",
    "value": 15,
-   "score": 23.5
+   "score": 23.6
   },
   {
    "name": "devshazam/TelegramBot-Invoice-Generator_Django_v4.2024",
@@ -410,7 +410,7 @@
   {
    "name": "RajwanYair/WoodworkingShop",
    "url": "https://github.com/RajwanYair/WoodworkingShop",
-   "stars": 25,
+   "stars": 26,
    "category": "workshop_tools",
    "lang": "TypeScript",
    "desc": "Free online cabinet planner and woodworking cut-list optimizer with CNC exports and offline support",
@@ -449,7 +449,7 @@
   {
    "name": "MolecularAI/REINVENT4",
    "url": "https://github.com/MolecularAI/REINVENT4",
-   "stars": 878,
+   "stars": 879,
    "category": "pipe_tube_work",
    "lang": "Python",
    "desc": "AI molecular design tool for de novo design, scaffold hopping, R-group replacement, linker design and molecule optimization.",
@@ -501,7 +501,7 @@
   {
    "name": "AgriciDaniel/skill-forge",
    "url": "https://github.com/AgriciDaniel/skill-forge",
-   "stars": 182,
+   "stars": 183,
    "category": "pipe_tube_work",
    "lang": "Python",
    "desc": "Ultimate Claude Code skill creator — design, scaffold, build, review, evolve, and publish production-grade AI agent skills",
