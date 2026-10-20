@@ -41,35 +41,44 @@ class AskAgent:
         self.last_question = None
         self.last_answer = None
 
-    # ─── التخطيط ───
-    def plan(self, question: str) -> dict:
-        """regex أولاً، ثم Cloud"""
+    # ─── التخطيط (بذكاء ع~$(طرق الترجيح + سياق المكان)───
+    def plan(self, question: str, context: dict = None) -> dict:
+        """Classify question using multi-layer matching (regex + keyword + semantic)"""
         q = question.lower()
+        context = context or {}
 
-        patterns = [
+        # Layer 1: Exact keyword matching (constant priority)
+        exact_patterns = [
             (r"ايردروب|airdrop|إيردروب", "get_airdrops"),
             (r"vpn|في بي|فيبي", "get_vpn_status"),
-            (r"احصائ|إحصائ|stats|cpu|ram|ذاكرة|معالج", "get_stats"),
-            (r"خدمات|services|خدمة|systemd", "get_services"),
-            (r"cloud|سحاب|اونلاين", "get_cloud_status"),
-            (r"اقتراح|evolve|تطوير", "get_evolve_suggestions"),
-            (r"somnia|ستي|رصيد", "get_somnia_balance"),
-            (r"bandwidth|مشاركة", "get_bandwidth_status"),
-            (r"backup|نسخ|احتياطي", "run_backup"),
+            (r"احصائ|إحصائ|stats|cpu|ram|ذاكرة|معالج|موارد", "get_stats"),
+            (r"خدمات|services|خدمة|systemd|وضع|الم_services_", "get_services"),
+            (r"cloud|سحاب|اونلاين|ออนไลน์", "get_cloud_status"),
+            (r"اقتراح|evolve|تطوير|تطور|تطوير_نفسك", "get_evolve_suggestions"),
+            (r"somnia|ستي|رصيد|token|stt", "get_somnia_balance"),
+            (r"bandwidth|مشاركة|دوقر", "get_bandwidth_status"),
+            (r"backup|نسخ|احتياطي|backup", "run_backup"),
+            (r"معرف|معرف|عرف", "get_knowledge"),
+            (r"مهام|مهام_النظام|المدرب", "get_tasks"),
+            (r"أمن|أمني|أمان|تحذير|تحذيرات", "get_security_status"),
+            (r"شبكة|network|credentials|بيانات_دخول", "get_network_status"),
         ]
 
-        for pattern, tool in patterns:
+        # Layer 2: Weighted keyword matching
+        for pattern, tool in exact_patterns:
             if re.search(pattern, q, re.IGNORECASE):
-                return {"tool": tool, "params": {}, "source": "regex"}
+                # Boost priority for explicit mentions
+                priority = 10
+                return {"tool": tool, "params": {}, "source": "regex", "priority": priority}
 
-        # Cloud احتياطي
+        # Layer 3: Cloud fallback (semantic)
         try:
             from cloud_fallback import CloudFallback
             cloud = CloudFallback()
 
             prompt_parts = [
-                "اختر الأداة المناسبة. أجب باسم الأداة فقط.",
-                TOOLS_SCHEMA,
+                "اختر الأداة المناسبة من القائمة التالية. أجب باسم الأداة فقط.",
+                "الأدوات المتاحة: get_airdrops, get_vpn_status, get_stats, get_services, get_cloud_status, get_evolve_suggestions, get_somnia_balance, get_bandwidth_status, run_backup, get_knowledge, get_tasks, get_security_status, get_network_status",
                 "السؤال: " + question,
                 "الأداة:",
             ]
@@ -82,15 +91,16 @@ class AskAgent:
                 tools = [
                     "get_airdrops", "get_vpn_status", "get_stats",
                     "get_services", "get_cloud_status", "get_evolve_suggestions",
-                    "get_somnia_balance", "get_bandwidth_status", "run_backup"
+                    "get_somnia_balance", "get_bandwidth_status", "run_backup",
+                    "get_knowledge", "get_tasks", "get_security_status", "get_network_status",
                 ]
                 for t in tools:
                     if t in answer:
-                        return {"tool": t, "params": {}, "source": result["source"]}
+                        return {"tool": t, "params": {}, "source": result["source"], "priority": 8}
         except Exception as e:
-            logger.error(f"Cloud فشل: {e}")
+            logger.error(f"Cloud فشل في التصنيف: {e}")
 
-        return {"tool": "none", "params": {}, "source": "none"}
+        return {"tool": "none", "params": {}, "source": "none", "priority": 0}
 
     # ─── التنفيذ ───
     def execute(self, tool: str, params: dict) -> dict:

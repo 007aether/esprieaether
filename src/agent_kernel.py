@@ -10,17 +10,32 @@ BASE_DIR = "C:/Users/ESPRIEAETHER/Desktop/esprieaether"
 def validate_action(action_type, action_data):
     """Policy-based validation of agent actions (Agent OS kernel feature)"""
     allowed_actions = {
-        "monitor": ["agent_mesh", "router", "services"],
-        "repair": ["service_restart", "router_reset", "mesh_sync"],
-        "develop": ["skills_add", "vault_rebuild", "report_generate"],
-        "execute": ["brain_query", "memory_write", "skill_read"],
+        "monitor": ["agent_mesh", "router", "services", "network", "memory"],
+        "repair": ["service_restart", "router_reset", "mesh_sync", "skill_reload", "memory_clean"],
+        "develop": ["skills_add", "vault_rebuild", "report_generate", "knowledge_link", "code_patch"],
+        "execute": ["brain_query", "memory_write", "skill_read", "shell_exec", "network_call"],
+        "manage": ["user_management", "backup_create", "config_change"],
     }
+    # ✅ 1. Action type validation
     if action_type not in allowed_actions:
-        return False, f"Action '{action_type}' not permitted by Agent Kernel policy"
-    for target in action_data.get("targets", []):
-        if target not in allowed_actions[action_type]:
+        return False, f"Action '{action_type}' not permitted by Agent Kernel"
+
+    # ✅ 2. Target validation (with wildcard support)
+    targets = action_data.get("targets", [])
+    if not isinstance(targets, list):
+        targets = [targets]
+    for target in targets:
+        allowed = False
+        for pattern in allowed_actions[action_type]:
+            if target == pattern or target.startswith(pattern + "."):
+                allowed = True
+                break
+        if not allowed:
             return False, f"Target '{target}' not permitted for '{action_type}'"
-    return True, "Action validated by Agent Kernel"
+
+    # ✅ 3. Audit logging
+    log_action(action_type, "ALLOWED", f"targets={targets} context={action_data.get('context','')}")
+    return True, f"Action validated: {action_type} -> {targets}"
 
 def log_action(action_type, result, message=""):
     log_path = os.path.join(BASE_DIR, "data", "agent_kernel.log")
