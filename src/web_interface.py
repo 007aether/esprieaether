@@ -888,6 +888,72 @@ def api_executor():
         return jsonify({"status": "error", "error": str(e)[:200]})
 
 
+@app.route("/github/like", methods=["POST"])
+def github_like():
+    """إعجاب بمستودع GitHub"""
+    try:
+        import sys
+        sys.path.insert(0, str(BASE_DIR))
+        from github_like import GitHubLike
+        gl = GitHubLike()
+        data = request.get_json()
+        repo_url = data.get("repo_url", "")
+        actor = data.get("actor", "unknown")
+        action = data.get("action", "like")
+        if action == "like":
+            return jsonify(gl.like_repo(repo_url, actor))
+        elif action == "dislike":
+            return jsonify(gl.dislike_repo(repo_url, actor))
+        else:
+            return jsonify({"status": "error", "message": "unknown action"})
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)[:200]})
+
+
+@app.route("/github/likes")
+def github_likes():
+    """عرض قائمة الإعجابات"""
+    try:
+        import sys
+        sys.path.insert(0, str(BASE_DIR))
+        from github_like import GitHubLike
+        gl = GitHubLike()
+        limit = request.args.get("limit", 50, type=int)
+        repo_url = request.args.get("repo", None)
+        if repo_url:
+            result = gl.get_likes(repo_url)
+        else:
+            result = gl.get_likes(limit=limit)
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)[:200]})
+
+
+@app.route("/github/stats")
+def github_stats():
+    """إحصائيات الإعجابات"""
+    try:
+        import sys
+        sys.path.insert(0, str(BASE_DIR))
+        from github_like import GitHubLike
+        gl = GitHubLike()
+        return jsonify(gl.get_stats())
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)[:200]})
+
+
+@app.route("/github")
+def github_link():
+    """رابط GitHub للنظام"""
+    github_repo = os.getenv("GITHUB_REPO", "007aether/esprieaether")
+    return jsonify({
+        "status": "ok",
+        "url": f"https://github.com/{github_repo}",
+        "repo": github_repo,
+        "description": "Sovereign Local AI - 50 Robots + Kanban + Cloud Code"
+    })
+
+
 @app.route("/executor")
 def executor_page():
     print("=== executor_page called ===", flush=True)

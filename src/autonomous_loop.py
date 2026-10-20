@@ -554,7 +554,8 @@ SCHEDULE = {
     "obsidian_refresh": 24 * 60 * 60,      # يومياً — knowledge graph rebuild
     "task_executor": 15 * 60,              # كل 15 دقيقة — execute mesh-proposed tasks
     "self_improve": 30 * 60,               # كل 30 دقيقة — learn from errors
-    "cherry_bridge": 15 * 60,              # كل 15 دقيقة — cherry gateway + board mirror
+    "github_like": 5 * 60,                 # كل 5 دقائق — track GitHub likes
+    "cherry_bridge": 15 * 60,              # كل 15 دقائق — cherry gateway + board mirror
     "jarvis_dev": 3 * 60 * 60,             # كل 3 ساعات — JARVIS writes a new agent
     "graph_fixer": 24 * 60 * 60,           # يومياً — repair orphan notes + rebuild graph
     "app_factory": 24 * 60 * 60,           # يومياً — generate 60 app ideas → top 20
@@ -1498,3 +1499,42 @@ def task_rea_symbolic() -> dict:
     """Symbolic execution for binaries"""
     result = {"task": "rea_symbolic", "status": "ready", "note": "Enable symbolic execution for PE/ELF binaries"}
     return result
+
+
+# ═══════════════════════════════════════
+#  GitHub Like Agent
+# ═══════════════════════════════════════
+try:
+    from github_like import GitHubLike
+    github_like = GitHubLike()
+    logger.info("✅ GitHubLike agent loaded")
+except ImportError as e:
+    github_like = None
+    logger.warning(f"⚠️ GitHubLike not loaded: {e}")
+
+
+# ═══════════════════════════════════════
+#  Task: github_like (track likes)
+# ═══════════════════════════════════════
+def task_github_like(state: dict) -> dict:
+    """Track likes on GitHub repos"""
+    if github_like is None:
+        return {"name": "github_like", "status": "skipped", "message": "GitHubLike not loaded"}
+
+    try:
+        result = github_like.get_stats()
+        logger.info(f"❤️ GitHub Likes: {result['total_likes']} total")
+        return {
+            "name": "github_like",
+            "status": "ok",
+            "stats": result,
+            "count": result["total_likes"]
+        }
+    except Exception as e:
+        logger.error(f"❌ GitHubLike error: {e}")
+        return {"name": "github_like", "status": "error", "message": str(e)}
+
+
+# ═══════════════════════════════════════
+#  Wire into run_cycle
+# ═══════════════════════════════════════
