@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-20T06:36:28.782149+00:00",
+ "updated": "2026-10-20T13:10:39.214647+00:00",
  "total": 47,
  "adopt": 10,
  "reference": 5,
@@ -7,7 +7,7 @@
   {
    "name": "CherryHQ/cherry-studio",
    "url": "https://github.com/CherryHQ/cherry-studio",
-   "stars": 52775,
+   "stars": 52787,
    "category": "ai_agent_framework",
    "lang": "TypeScript",
    "desc": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
@@ -20,7 +20,7 @@
   {
    "name": "HKUDS/nanobot",
    "url": "https://github.com/HKUDS/nanobot",
-   "stars": 49200,
+   "stars": 49209,
    "category": "ai_agent_framework",
    "lang": "Python",
    "desc": "Ultra-lightweight, open-source, self-hosted personal AI agent framework in Python with WebUI, tools, memory, MCP, multi-agent workflows, automation, a",
@@ -33,7 +33,7 @@
   {
    "name": "khoj-ai/khoj",
    "url": "https://github.com/khoj-ai/khoj",
-   "stars": 37753,
+   "stars": 37755,
    "category": "ai_agent_framework",
    "lang": "Python",
    "desc": "Your AI second brain. Self-hostable. Get answers from the web or your docs. Build custom agents, schedule automations, do deep research. Turn any onli",
@@ -46,7 +46,7 @@
   {
    "name": "thedotmack/claude-mem",
    "url": "https://github.com/thedotmack/claude-mem",
-   "stars": 101849,
+   "stars": 101893,
    "category": "rag_memory",
    "lang": "TypeScript",
    "desc": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant",
@@ -59,7 +59,7 @@
   {
    "name": "PrimeIntellect-ai/prime-agent",
    "url": "https://github.com/PrimeIntellect-ai/prime-agent",
-   "stars": 22190,
+   "stars": 22196,
    "category": "self_evolving",
    "lang": "Rust",
    "desc": "A self-improving RLM agent for coding workflows and long-running autonomous tasks.",
@@ -72,7 +72,7 @@
   {
    "name": "alibaba/zvec",
    "url": "https://github.com/alibaba/zvec",
-   "stars": 16126,
+   "stars": 16125,
    "category": "rag_memory",
    "lang": "C++",
    "desc": "A lightweight, lightning-fast, in-process vector database",
@@ -85,7 +85,7 @@
   {
    "name": "browseros-ai/BrowserOS",
    "url": "https://github.com/browseros-ai/BrowserOS",
-   "stars": 14003,
+   "stars": 14011,
    "category": "local_llm",
    "lang": "TypeScript",
    "desc": "🌐 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.",
@@ -98,7 +98,7 @@
   {
    "name": "aden-hive/hive",
    "url": "https://github.com/aden-hive/hive",
-   "stars": 11112,
+   "stars": 11114,
    "category": "self_evolving",
    "lang": "Python",
    "desc": "Multi-Agent Harness for Production AI",
@@ -111,7 +111,7 @@
   {
    "name": "Human-Agent-Society/reef",
    "url": "https://github.com/Human-Agent-Society/reef",
-   "stars": 7680,
+   "stars": 7693,
    "category": "self_evolving",
    "lang": "Python",
    "desc": "Infrastructure for continually self‑improving agents",
@@ -137,7 +137,7 @@
   {
    "name": "langfuse/langfuse",
    "url": "https://github.com/langfuse/langfuse",
-   "stars": 36056,
+   "stars": 36082,
    "category": "observability",
    "lang": "TypeScript",
    "desc": "🪢 Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform.",
@@ -163,7 +163,7 @@
   {
    "name": "conductor-oss/conductor",
    "url": "https://github.com/conductor-oss/conductor",
-   "stars": 32340,
+   "stars": 32343,
    "category": "orchestration",
    "lang": "Java",
    "desc": "Conductor is an event driven agentic workflow engine providing durable and highly resilient execution engine for applications and AI Agents",
@@ -176,7 +176,7 @@
   {
    "name": "ccfos/nightingale",
    "url": "https://github.com/ccfos/nightingale",
-   "stars": 13370,
+   "stars": 13372,
    "category": "observability",
    "lang": "Go",
    "desc": "Open-source, self-hosted alerting for metrics, logs, and databases. Includes a built-in AI agent and MCP server.",
@@ -202,7 +202,7 @@
   {
    "name": "hatchet-dev/hatchet",
    "url": "https://github.com/hatchet-dev/hatchet",
-   "stars": 8148,
+   "stars": 8152,
    "category": "orchestration",
    "lang": "Go",
    "desc": "🪓 An orchestration engine for background tasks, AI agents, and durable workflows",
@@ -371,7 +371,7 @@
   {
    "name": "42wim/matterbridge",
    "url": "https://github.com/42wim/matterbridge",
-   "stars": 7589,
+   "stars": 7590,
    "category": "messaging_bridge",
    "lang": "Go",
    "desc": "bridge between mattermost, IRC, gitter, xmpp, slack, discord, telegram, rocketchat, twitch, ssh-chat, zulip, whatsapp, keybase, matrix, microsoft team",
@@ -501,7 +501,7 @@
   {
    "name": "AgriciDaniel/skill-forge",
    "url": "https://github.com/AgriciDaniel/skill-forge",
-   "stars": 183,
+   "stars": 184,
    "category": "pipe_tube_work",
    "lang": "Python",
    "desc": "Ultimate Claude Code skill creator — design, scaffold, build, review, evolve, and publish production-grade AI agent skills",
