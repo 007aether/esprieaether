@@ -1,10 +1,16 @@
 {
-  "current_cycle": 11,
-  "total_cycles": 11,
+  "current_cycle": 12,
+  "total_cycles": 12,
   "diagnoses": [
     {
       "type": "service_down",
       "services": {
+        "ollama": {
+          "port": 11434,
+          "path": "/api/tags",
+          "status": false,
+          "local": true
+        },
         "dsh_relay": {
           "port": 5105,
           "path": "/health",
@@ -13,7 +19,7 @@
         }
       },
       "severity": "medium",
-      "message": "1/12 services are down"
+      "message": "2/12 services are down"
     }
   ],
   "fixes_applied": [],
@@ -83,6 +89,12 @@
       "action": "Applied self-improvement",
       "status": "applied",
       "timestamp": "2026-10-21T17:15:56.539905"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-21T18:00:10.600318"
     }
   ],
   "decisions": [
@@ -162,9 +174,16 @@
       "confidence": 0.85,
       "timestamp": "2026-10-21T17:15:56.539176",
       "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-21T18:00:10.599710",
+      "reason": "System healthy, no urgent action needed"
     }
   ],
-  "last_run": "2026-10-21T17:15:56.538143",
+  "last_run": "2026-10-21T18:00:10.598802",
   "status": "diagnosed",
   "local_pct": 100.0,
   "error_count": 0,
