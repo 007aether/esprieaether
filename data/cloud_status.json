@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-21T16:09:44.266843+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-21T10:40:40.769961+00:00",
+  "cloud_last_run": "2026-10-21T16:10:16.897602+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Is Kimchi? The $40M TRUMP Legend Pump.fun Just Signed",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "PaperTrade Review: I Deposited, Got Stuck in the Queue, and Watched Losers Get Rich",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Prop Firm Breakout Review: Kraken&#8217;s Crypto Prop Firm Explained",
       "source": "https://airdropalert.com/feed"
     },
     {
