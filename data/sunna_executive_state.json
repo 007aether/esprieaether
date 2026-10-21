@@ -23,12 +23,17 @@
   },
   "production": {
     "status": "completed",
-    "last_audit": "2026-10-21T19:26:51.060858+00:00",
+    "last_audit": "2026-10-21T19:35:48.096914+00:00",
     "tasks_queued": [
       {
         "action": "audit",
         "details": "Starting production audit",
         "timestamp": "2026-10-21T19:26:51.060797+00:00"
+      },
+      {
+        "action": "audit",
+        "details": "Starting production audit",
+        "timestamp": "2026-10-21T19:35:48.096827+00:00"
       }
     ],
     "inventory_status": "unknown",
@@ -67,7 +72,7 @@
   },
   "marketing": {
     "status": "completed",
-    "last_campaign": "2026-10-21T19:26:51.064054+00:00",
+    "last_campaign": "2026-10-21T19:35:48.099631+00:00",
     "leads_generated": 0,
     "recommendations": [
       "Post on LinkedIn: daily market updates (steel prices, projects)",
@@ -80,7 +85,7 @@
   },
   "operations": {
     "status": "completed",
-    "last_audit": "2026-10-21T19:26:51.064923+00:00",
+    "last_audit": "2026-10-21T19:35:48.100399+00:00",
     "task_queue": [],
     "recommendations": [
       "Optimize production schedule: 08:00-16:00 (5 days/week)",
@@ -106,7 +111,7 @@
   },
   "quality": {
     "status": "completed",
-    "last_audit": "2026-10-21T19:26:51.069392+00:00",
+    "last_audit": "2026-10-21T19:35:48.104366+00:00",
     "defects_found": 0,
     "recommendations": [
       "Inspect galvanized surfaces: uniform coating, no streaks",
@@ -140,7 +145,24 @@
     "[2026-10-21 19:26:51] Financial management started",
     "[2026-10-21 19:26:51] Financial management completed",
     "[2026-10-21 19:26:51] Quality management started",
-    "[2026-10-21 19:26:51] Quality management completed"
+    "[2026-10-21 19:26:51] Quality management completed",
+    "[2026-10-21 19:35:48] Sunna Executive Manager initialized",
+    "[2026-10-21 19:35:48] Production management started",
+    "[2026-10-21 19:35:48] [production] Queued: audit - Starting production audit",
+    "[2026-10-21 19:35:48] Production recommendations: 4",
+    "[2026-10-21 19:35:48] Production management completed",
+    "[2026-10-21 19:35:48] Pricing management started",
+    "[2026-10-21 19:35:48] Pricing management completed",
+    "[2026-10-21 19:35:48] Supplier management started",
+    "[2026-10-21 19:35:48] Supplier management completed",
+    "[2026-10-21 19:35:48] Marketing management started",
+    "[2026-10-21 19:35:48] Marketing management completed",
+    "[2026-10-21 19:35:48] Operations management started",
+    "[2026-10-21 19:35:48] Operations management completed",
+    "[2026-10-21 19:35:48] Financial management started",
+    "[2026-10-21 19:35:48] Financial management completed",
+    "[2026-10-21 19:35:48] Quality management started",
+    "[2026-10-21 19:35:48] Quality management completed"
   ],
   "running": false
 }

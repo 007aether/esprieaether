@@ -25,7 +25,7 @@
     <body>
     <div class="container">
         <h1>📊 تقرير الأسبوع - EsprieAether</h1>
-        <p class="subtitle">تاريخ التقرير: 2026-10-21 19:27 UTC</p>
+        <p class="subtitle">تاريخ التقرير: 2026-10-21 19:36 UTC</p>
 
         <div class="stats">
             <div class="stat">
@@ -37,11 +37,11 @@
                 <div class="label">المهام الإجمالية</div>
             </div>
             <div class="stat">
-                <div class="number">4</div>
+                <div class="number">6</div>
                 <div class="label">المهام المقترحة</div>
             </div>
             <div class="stat">
-                <div class="number">46</div>
+                <div class="number">44</div>
                 <div class="label">المهام المكتملة</div>
             </div>
             <div class="stat">
