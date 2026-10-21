@@ -25,7 +25,7 @@
     <body>
     <div class="container">
         <h1>📊 تقرير الأسبوع - EsprieAether</h1>
-        <p class="subtitle">تاريخ التقرير: 2026-10-21 18:49 UTC</p>
+        <p class="subtitle">تاريخ التقرير: 2026-10-21 19:20 UTC</p>
 
         <div class="stats">
             <div class="stat">
@@ -58,7 +58,7 @@
             <h2>🧠 الدروس المست-conjugate الأسبوعية</h2>
             <p class="subtitle">أحدث 10 كلمة رائجة لدى النظام</p>
             <div id="lessons">
-                <div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
+                <div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
             </div>
         </div>
 
@@ -74,11 +74,12 @@
             <h2>📋 أنشطة الأسبوع</h2>
             <p class="subtitle">رسائل المedian (200)</p>
             <div id="activities">
-                <span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
-- [local_llm]: 0 ا</span><span class="tag">knowledge: رسالة اختبار للمعرفة</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
-- [local_llm]: 0 ا</span><span class="tag">knowledge: رسالة اختبار للمعرفة</span><span class="tag">executor: ✅ نفّذت المهمة: معالجة معرفة جديدة من الش안건 (18 أقسام) → acknowledged</span><span class="tag">executor: ✅ نفّذت المهمة: معالجة معرفة جديدة من الش안건 (18 أقسام) → acknowledged</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+                <span class="tag">executor: ✅ نفّذت المهمة: معالجة معرفة جديدة من الش안건 (18 أقسام) → acknowledged</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
 - [local_llm]: 0 ا</span><span class="tag">knowledge: رسالة اختبار للمعرفة</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
 - [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: رسالة اختبار للمعرفة</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: رسالة اختبار للمعرفة</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
 - [local_llm]: 0 ا</span>
             </div>
         </div>
