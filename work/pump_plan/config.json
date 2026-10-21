@@ -1,0 +1,50 @@
+{
+  "name": "AETHER",
+  "symbol": "ATH",
+  "description": "الذكاء الاصطناعي المحلي والذاتي",
+  "vision": "رابط البشر بالذكاء الاصطناعي التقني",
+  "tagline": "فيتقن الذكاء الاصطناعي. نبني المستقبل.",
+  "channels": [
+    "X/Twitter",
+    "Telegram",
+    "Discord",
+    "GitHub",
+    "TikTok"
+  ],
+  "budget": {
+    "minimum": 10.0,
+    "target": 500.0
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "إعداد GitHub",
+      "status": "completed"
+    },
+    {
+      "step": 2,
+      "action": "كتابة المحتوى التسويقي",
+      "status": "completed"
+    },
+    {
+      "step": 3,
+      "action": "إعداد المجتمع",
+      "status": "pending"
+    },
+    {
+      "step": 4,
+      "action": "تجميع التمويل",
+      "status": "pending"
+    },
+    {
+      "step": 5,
+      "action": "إطلاق العملة على pump.fun",
+      "status": "pending"
+    },
+    {
+      "step": 6,
+      "action": "التسويق والتوزيع",
+      "status": "pending"
+    }
+  ]
+}
