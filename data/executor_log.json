@@ -889,5 +889,14 @@
   "kind": "info",
   "ok": true,
   "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T21:26:22.679215+00:00",
+  "task_id": "task-1792617578956",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
  }
 ]
