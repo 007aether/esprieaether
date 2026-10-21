@@ -94,7 +94,8 @@ class PromptEngine:
         
         prompt = template['prompt'].replace('{{task}}', task)
         
-        return f"تلميح: {prompt}\n\nالإعدادات المستخدمة:\n${'temperature':.2f}, ${'max_tokens':.0f}"
+        settings = f"الإعدادات المستخدمة:\n  - Temperature: {template.get('temperature', 'N/A')}\n  - Max Tokens: {template.get('max_tokens', 'N/A')}"
+        return f"تلميح: {prompt}\n\n{settings}"
     
     def suggest_template(self, task_type: str) -> str:
         """اقتراح توجيه مناسب للمهمة"""
