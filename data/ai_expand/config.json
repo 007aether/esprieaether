@@ -1,0 +1,79 @@
+{
+  "providers": {},
+  "agents": {
+    "analyzer": {
+      "name": "analyzer",
+      "role": "Analysis Agent",
+      "capabilities": [
+        "text_analysis",
+        "sentiment",
+        "keyword_extraction"
+      ],
+      "prompt": "أنت وكيل التحليل في نظام EsprieAether. Analyze text for sentiment, keywords, and themes.",
+      "tags": [
+        "analysis",
+        "nlp",
+        "text"
+      ],
+      "added_at": "2026-10-21T20:45:22.364251+00:00"
+    },
+    "translator": {
+      "name": "translator",
+      "role": "Translator Agent",
+      "capabilities": [
+        "language_translation",
+        "multilingual"
+      ],
+      "prompt": "أنت وكيل الترجمة. ترجم النص بين العربية والأنجليزية والدارجة المغربية بدقة.",
+      "tags": [
+        "translation",
+        "language",
+        "multilingual"
+      ],
+      "added_at": "2026-10-21T20:45:22.365572+00:00"
+    },
+    "summarizer": {
+      "name": "summarizer",
+      "role": "Summarizer Agent",
+      "capabilities": [
+        "text_summarization",
+        "compression"
+      ],
+      "prompt": "أنت وكيل التلخيص. قم بتلخيص النص المحدد في 3 جمل فقط مع الحفاظ على النقاط الأساسية.",
+      "tags": [
+        "summarization",
+        "compression",
+        "text"
+      ],
+      "added_at": "2026-10-21T20:45:22.366594+00:00"
+    }
+  },
+  "skills": {
+    "ai-expansion": {
+      "name": "ai-expansion",
+      "description": "AI Toolset Expansion",
+      "category": "ai-expansion",
+      "author": "EsprieAether",
+      "content": "\n# AI Toolset Expansion Skill\n\n## Purpose\nExpand AI capabilities beyond the base models (Ollama, LLM7, Colibri, Groq).\n\n## Features\n- Multi-provider support (Groq, Together, HF, Replicate, Anthropic)\n- Model management\n- Auto-benchmarking\n- Performance tracking\n\n## Usage\nfrom src.ai_expand import AIToolsetManager\nmanager = AIToolsetManager()\nmanager.add_provider(\"together-ai\")\nmanager.generate(model=\"together-ai\", prompt=\"Hello, world!\")\n",
+      "added_at": "2026-10-21T20:45:22.367416+00:00"
+    },
+    "multi-language": {
+      "name": "multi-language",
+      "description": "Multilingual Support",
+      "category": "language",
+      "author": "EsprieAether",
+      "content": "\n# Multilingual Skill\n\n## Purpose\nSupport Arabic (Darija), English, and French for EsprieAether.\n\n## Features\n- Language detection\n- Translation\n- Multilingual QA\n- Localized responses\n",
+      "added_at": "2026-10-21T20:45:22.368429+00:00"
+    },
+    "autonomous-execution": {
+      "name": "autonomous-execution",
+      "description": "Autonomous Execution",
+      "category": "automation",
+      "author": "EsprieAether",
+      "content": "\n# Autonomous Execution Skill\n\n## Purpose\nEnable autonomous execution of tasks without user intervention.\n\n## Features\n- Task planning\n- Execution monitoring\n- Error recovery\n- Self-healing\n",
+      "added_at": "2026-10-21T20:45:22.369395+00:00"
+    }
+  },
+  "benchmarks": [],
+  "reports": []
+}
