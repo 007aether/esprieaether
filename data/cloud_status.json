@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-21T10:39:50.870862+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-21T02:08:22.330791+00:00",
+  "cloud_last_run": "2026-10-21T10:40:40.769961+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is a Honeypot in Crypto? The Token You Can Buy but Never Sell",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is a Crypto Bridge and How Does It Work?",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Prop Firm Breakout Review: Kraken&#8217;s Crypto Prop Firm Explained",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "PEPE Triangle Long: My Limit Order Below the Market Before Big Tech Earnings",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "PAPER Is Live on Hyperliquid: The Farmers Who Lost on Purpose Are Up Millions",
       "source": "https://airdropalert.com/feed"
     },
     {
