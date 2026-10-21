@@ -1,0 +1,53 @@
+{
+  "quality_assurance": {
+    "version": "2.0.0",
+    "checklist": [
+      "system_health_check",
+      "service_availability",
+      "data_integrity",
+      "performance_benchmark",
+      "security_audit",
+      "knowledge_consistency",
+      "memory_optimization"
+    ],
+    "thresholds": {
+      "success_rate": 95,
+      "response_time_ms": 200,
+      "error_rate": 5,
+      "memory_usage_mb": 500,
+      "local_ratio_pct": 90
+    }
+  },
+  "test_suites": {
+    "unit_tests": {
+      "paths": [
+        "tests/unit/test_agent_kernel.py",
+        "tests/unit/test_agent_mesh.py",
+        "tests/unit/test_ai_router.py",
+        "tests/unit/test_orchestrator.py",
+        "tests/unit/test_autonome_evolve.py",
+        "tests/unit/test_web_interface.py"
+      ]
+    },
+    "stress_tests": {
+      "paths": [
+        "tests/stress/test_service_load.py",
+        "tests/stress/test_memory_load.py",
+        "tests/stress/test_network_latency.py"
+      ]
+    }
+  },
+  "benchmarks": {
+    "memory": {
+      "target_mb": 500,
+      "warn_mb": 800
+    },
+    "response_time": {
+      "target_ms": 200,
+      "warn_ms": 500
+    },
+    "service_uptime": {
+      "target_pct": 98
+    }
+  }
+}
