@@ -8,6 +8,7 @@ Unit tests for social networking integration.
 import sys
 import os
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -28,9 +29,16 @@ class TestSocialLinkerConfig(unittest.TestCase):
     def setUp(self):
         if not SOCIAL_LINKER_AVAILABLE:
             self.skipTest("SocialLinker not available")
-        self.linker = SocialLinker()
+        # Use a temporary config file for isolation
+        self.temp_config = os.path.join(tempfile.gettempdir(), f"social_links_test_{os.getpid()}.json")
+        self.linker = SocialLinker(config_file=self.temp_config)
         # Clear cache
         self.linker._cache = {}
+
+    def tearDown(self):
+        # Clean up temp config file
+        if os.path.exists(self.temp_config):
+            os.remove(self.temp_config)
 
     def test_initial_config(self):
         """Test initial social links configuration."""
@@ -44,10 +52,11 @@ class TestSocialLinkerConfig(unittest.TestCase):
     def test_add_social_link(self):
         """Test adding a new social link."""
         original_count = len(self.linker.links["social_links"])
-        self.linker.add_social_link("telegram", "https://t.me/esprieaether")
+        new_link = self.linker.add_social_link("instagram", "https://instagram.com/esprieaether")
         new_count = len(self.linker.links["social_links"])
         self.assertEqual(new_count, original_count + 1)
-        self.assertIn("telegram", self.linker.links["social_links"])
+        self.assertIn("instagram", self.linker.links["social_links"])
+        self.assertEqual(new_link, "https://instagram.com/esprieaether")
 
     def test_remove_social_link(self):
         """Test removing a social link."""

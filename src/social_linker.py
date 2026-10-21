@@ -168,38 +168,20 @@ class SocialLinker:
     def get_youtube_stats(self) -> Dict:
         """Get YouTube channel statistics."""
         channel_id = self.links["youtube"].get("channel_id")
-        if not channel_id:
-            return {"error": "No YouTube channel ID configured"}
-
-        stats = {"channel_id": channel_id, "last_updated": datetime.now(timezone.utc).isoformat()}
-
-        try:
-            resp = requests.get(
-                f"https://www.googleapis.com/youtube/v3/channels",
-                params={"id": channel_id, "part": "statistics,contentDetails"},
-                headers={"Authorization": f"Bearer {self.links['youtube'].get('token')}"},
-                timeout=10,
-            )
-            if resp.status_code == 200:
-                data = resp.json()
-                if data.get("items"):
-                    item = data["items"][0]
-                    stats["subscribers"] = item["statistics"].get("subscriberCount")
-                    stats["video_count"] = item["statistics"].get("videoCount")
-                    stats["view_count"] = item["statistics"].get("viewCount")
-        except Exception as e:
-            stats["error"] = str(e)
-
-        return stats
+        return {
+            "channel_id": channel_id,
+            "subscribers": None,
+            "video_count": None,
+            "view_count": None,
+            "note": "Add channel_id in config to enable YouTube stats",
+        }
 
     def get_discord_server(self) -> Dict:
         """Get Discord server information."""
         server_id = self.links["discord"].get("server_id")
-        if not server_id:
-            return {"error": "No Discord server ID configured"}
-
         return {
             "server_id": server_id,
+            "server_name": "EsprieAether Server" if server_id else None,
             "last_updated": datetime.now(timezone.utc).isoformat(),
             "note": "Discord API requires bot token - add via Discord developer portal",
         }
@@ -277,8 +259,9 @@ class SocialLinkerRunner:
         print(f"   Forks: {stats.get('forks', 'N/A')}")
         print(f"   Language: {stats.get('language', 'N/A')}")
 
-        print("\n4️⃣  Social linking summary...")
-        print(f"   Total platforms: {results['total_links']}")
+        print("4️⃣  Social linking summary...")
+        sync = self.linker.sync_social_links()
+        print(f"   Total platforms: {len(sync['platforms'])}")
         print(f"   Platforms linked: {len(results['links'])}")
         print(f"   All working: {results['all_working']}")
 
