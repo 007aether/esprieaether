@@ -471,21 +471,22 @@ class SunnaExecutiveManager:
 
         self._log(f"Starting dashboard on {self.state['dashboard']['host']}:{self.state['dashboard']['port']}")
 
-        app = Flask(__name__)
+        # Create Flask app as instance attribute
+        self.app = Flask(__name__)
 
-        @app.route("/")
+        @self.app.route("/")
         def dashboard():
             return render_template_string(DASHBOARD_HTML)
 
-        @app.route("/api/executive")
+        @self.app.route("/api/executive")
         def api_exec():
             return jsonify(self._get_summary())
 
-        @app.route("/api/state")
+        @self.app.route("/api/state")
         def api_state():
             return jsonify(self.state)
 
-        @app.route("/api/schedule", methods=["POST"])
+        @self.app.route("/api/schedule", methods=["POST"])
         def api_schedule_task():
             data = request.json or {}
             module = data.get("module", "")
@@ -497,13 +498,16 @@ class SunnaExecutiveManager:
 
             return jsonify({"error": f"Unknown module: {module}"}), 400
 
-        # Run dashboard in a thread
+        # Run Flask in a separate thread
         import threading
-        def run():
-            app.run(host=self.state["dashboard"]["host"], port=self.state["dashboard"]["port"], threaded=True, debug=False)
+        def run_server():
+            self.app.run(host=self.state["dashboard"]["host"], port=self.state["dashboard"]["port"], threaded=True, debug=False)
 
-        thread = threading.Thread(target=run, daemon=True)
-        thread.start()
+        self._dashboard_thread = threading.Thread(target=run_server, daemon=True)
+        self._dashboard_thread.start()
+
+        # Wait for server to be ready
+        import time
         time.sleep(2)
         self._log(f"✓ Dashboard running at {self.state['dashboard']['url']}")
 
