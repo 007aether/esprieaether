@@ -1,37 +1,5 @@
 [
   {
-    "id": "route-1792233261706-knowledge",
-    "agent": "knowledge",
-    "text": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [telegram_bots]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [self_evolving]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [orchestration]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [observability]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [cloud_free]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [crypto_airdrop]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [security_edr]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [rag_memory]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [voice_interface]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [messaging_bridge]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [workshop_tools]: 0 اقتراح متوحّد، 1 لم يحدد القرار بعد\n- [estimating_costing]: 0 اقتراح متوحّد، 3 لم يحدد القرار بعد\n- [pipe_tube_work]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [brouettes]: 0 اقتراح متوحّد، 2 لم يحدد القرار بعد\n- [productivity]: 0 اقتراح متوحّد، 2 لم يحدد القرار بعد\n- [🏆 Global Top 10]: 0 اقتراح متوحّد، 10 لم يحدد القرار بعد",
-    "tags": [
-      "knowledge",
-      "route",
-      "verdict"
-    ],
-    "ts": "2026-10-17T10:34:21.706544+00:00"
-  },
-  {
-    "id": "route-1792233261724-knowledge",
-    "agent": "knowledge",
-    "text": "رسالة اختبار للمعرفة",
-    "tags": [
-      "test",
-      "knowledge"
-    ],
-    "ts": "2026-10-17T10:34:21.724249+00:00"
-  },
-  {
-    "id": "route-1792233294712-knowledge",
-    "agent": "knowledge",
-    "text": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [telegram_bots]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [self_evolving]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [orchestration]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [observability]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [cloud_free]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [crypto_airdrop]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [security_edr]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [rag_memory]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [voice_interface]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [messaging_bridge]: 0 اقتراح متوحّد، 5 لم يحدد القرار بعد\n- [workshop_tools]: 0 اقتراح متوحّد، 1 لم يحدد القرار بعد\n- [estimating_costing]: 0 اقتراح متوحّد، 3 لم يحدد القرار بعد\n- [pipe_tube_work]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [brouettes]: 0 اقتراح متوحّد، 2 لم يحدد القرار بعد\n- [productivity]: 0 اقتراح متوحّد، 2 لم يحدد القرار بعد\n- [🏆 Global Top 10]: 0 اقتراح متوحّد، 10 لم يحدد القرار بعد",
-    "tags": [
-      "knowledge",
-      "route",
-      "verdict"
-    ],
-    "ts": "2026-10-17T10:34:54.712439+00:00"
-  },
-  {
     "id": "route-1792233294744-knowledge",
     "agent": "knowledge",
     "text": "رسالة اختبار للمعرفة",
@@ -2003,5 +1971,38 @@
       "coordination"
     ],
     "ts": "2026-10-21T14:47:56.648651+00:00"
+  },
+  {
+    "id": "1792604992233-security",
+    "agent": "security",
+    "text": "1) **معايير الهوية والامتياز**: اعتمد نظام IAM مركزي يضع معايير صارمة للـ SSO و MFA عند توسيع شراكات البرمجيات، لتقليل نقاط الاختراق المحتملة.  \n2) **تشفير وتدقيق**: طبق TLS 1.3 مع تشفير تقارب AES‑256 على جميع قنوات التواصل بين الوكلاء، مع سجلات تدقيق (audit trail) فورية للـ RAT (Breach‑Detection) لتوقيت الاستجابة.  \n3) **أتمتة التحديثات**: استخدم منصة إدارة تحديثات موحدة (Endpoint Management) التي تدعم تحسين الحزم عبر تصنيف التعليمات البرمجية وإعادة بناء الإصلاحات في بيئات التجربة (sandbox) قبل إطلاقها.",
+    "tags": [
+      "security",
+      "audit",
+      "vuln"
+    ],
+    "ts": "2026-10-21T17:49:52.233339+00:00"
+  },
+  {
+    "id": "1792605022152-research",
+    "agent": "research",
+    "text": "révèle la nécessité d'un générateur de mots de passe sécurisés intégré aux services. cela permettrait de renforcer la sécurité des utilisateurs et de couvrir toutes les exigences de sécurité conformément à la norme recommandée et aux directives de la GDPR et HIPAA.",
+    "tags": [
+      "research",
+      "knowledge",
+      "idea"
+    ],
+    "ts": "2026-10-21T17:50:22.152227+00:00"
+  },
+  {
+    "id": "1792605022173-security",
+    "agent": "security",
+    "text": "قال [general] إن تعزيز البرمجيات الاجنبية وتحديث البرمجيات هو خطوة رئيسية. يجب تذكير أن سياسات الشراكة أساسية لتعزيز الأمان. التواصل بين الوكلاء ضروري لتحسين الأمان الشامل. أهديت للتركيز على تحديث سياسات الشراكة وتعميمها.",
+    "tags": [
+      "security",
+      "audit",
+      "vuln"
+    ],
+    "ts": "2026-10-21T17:50:22.173199+00:00"
   }
 ]
