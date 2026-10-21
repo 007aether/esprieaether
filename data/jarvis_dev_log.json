@@ -352,5 +352,11 @@
   "written": 0,
   "error": "router failed",
   "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T23:04:25.517522+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
  }
 ]
