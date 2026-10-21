@@ -1,0 +1,53 @@
+{
+  "current_cycle": 1,
+  "total_cycles": 1,
+  "diagnoses": [
+    {
+      "type": "service_down",
+      "services": {
+        "ollama": {
+          "port": 11434,
+          "path": "/api/tags",
+          "status": false,
+          "local": true
+        },
+        "dsh_relay": {
+          "port": 5105,
+          "path": "/health",
+          "status": false,
+          "local": true
+        }
+      },
+      "severity": "medium",
+      "message": "2/12 services are down"
+    }
+  ],
+  "fixes_applied": [],
+  "learning": [
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-21T13:08:10.583423"
+    }
+  ],
+  "decisions": [
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-21T13:08:10.582618",
+      "reason": "System healthy, no urgent action needed"
+    }
+  ],
+  "last_run": "2026-10-21T13:08:10.581657",
+  "status": "diagnosed",
+  "local_pct": 100.0,
+  "error_count": 0,
+  "auto_fixes": [],
+  "architecture": {
+    "baseline": {},
+    "current": {},
+    "evolved": {}
+  }
+}
