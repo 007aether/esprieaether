@@ -1,10 +1,16 @@
 {
-  "current_cycle": 15,
-  "total_cycles": 15,
+  "current_cycle": 21,
+  "total_cycles": 21,
   "diagnoses": [
     {
       "type": "service_down",
       "services": {
+        "ollama": {
+          "port": 11434,
+          "path": "/api/tags",
+          "status": false,
+          "local": true
+        },
         "dsh_relay": {
           "port": 5105,
           "path": "/health",
@@ -13,7 +19,7 @@
         }
       },
       "severity": "medium",
-      "message": "1/12 services are down"
+      "message": "2/12 services are down"
     }
   ],
   "fixes_applied": [],
@@ -107,6 +113,42 @@
       "action": "Applied self-improvement",
       "status": "applied",
       "timestamp": "2026-10-21T22:53:41.383119"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-21T22:54:36.026905"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-21T22:54:50.915694"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-21T22:55:07.584658"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-21T22:56:16.920873"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-21T22:56:32.401497"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-21T22:56:47.315286"
     }
   ],
   "decisions": [
@@ -214,9 +256,51 @@
       "confidence": 0.85,
       "timestamp": "2026-10-21T22:53:41.382480",
       "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-21T22:54:36.026231",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-21T22:54:50.913482",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-21T22:55:07.584005",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-21T22:56:16.920211",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-21T22:56:32.400796",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-21T22:56:47.314534",
+      "reason": "System healthy, no urgent action needed"
     }
   ],
-  "last_run": "2026-10-21T22:53:41.381494",
+  "last_run": "2026-10-21T22:56:47.313157",
   "status": "diagnosed",
   "local_pct": 100.0,
   "error_count": 0,
