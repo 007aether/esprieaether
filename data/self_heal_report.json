@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-21T00:48:47.071099",
+  "checked_at": "2026-10-21T00:55:16.368191",
   "services": {
     "router": "up",
     "mesh": "up",
@@ -10,10 +10,10 @@
     "kanban": "up",
     "homedock": "up",
     "jarvis": "up",
-    "ollama": "up"
+    "ollama": "down"
   },
   "restarts": [
-    "ollama:down -> up"
+    "ollama:down -> down"
   ],
-  "changed": true
+  "changed": false
 }
