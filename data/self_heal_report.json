@@ -1,19 +1,19 @@
 {
-  "checked_at": "2026-10-21T04:56:25.431040",
+  "checked_at": "2026-10-21T05:08:41.979774",
   "services": {
     "router": "up",
     "mesh": "up",
     "web": "up",
-    "cloud": "up",
+    "cloud": "down",
     "sunna": "up",
     "integrations": "up",
     "kanban": "up",
     "homedock": "up",
     "jarvis": "up",
-    "ollama": "down"
+    "ollama": "up"
   },
   "restarts": [
-    "ollama:down -> down"
+    "cloud:down -> down"
   ],
   "changed": false
 }
