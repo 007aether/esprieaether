@@ -1,13 +1,13 @@
 {
-  "current_cycle": 12,
-  "total_cycles": 12,
+  "current_cycle": 13,
+  "total_cycles": 13,
   "diagnoses": [
     {
       "type": "service_down",
       "services": {
-        "ollama": {
-          "port": 11434,
-          "path": "/api/tags",
+        "orchestrator": {
+          "port": 11436,
+          "path": "/health",
           "status": false,
           "local": true
         },
@@ -95,6 +95,12 @@
       "action": "Applied self-improvement",
       "status": "applied",
       "timestamp": "2026-10-21T18:00:10.600318"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-21T18:27:39.330684"
     }
   ],
   "decisions": [
@@ -181,9 +187,16 @@
       "confidence": 0.85,
       "timestamp": "2026-10-21T18:00:10.599710",
       "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-21T18:27:39.329979",
+      "reason": "System healthy, no urgent action needed"
     }
   ],
-  "last_run": "2026-10-21T18:00:10.598802",
+  "last_run": "2026-10-21T18:27:39.328989",
   "status": "diagnosed",
   "local_pct": 100.0,
   "error_count": 0,
