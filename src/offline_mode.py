@@ -235,7 +235,7 @@ class OfflineModeManager:
     def get_dashboard_html(self) -> str:
         """Generate HTML dashboard for offline status."""
         if not FLASK_AVAILABLE:
-            return 
+            return ""
 
         status = self.get_local_status()
         offline = self.offline_mode
@@ -300,15 +300,15 @@ class OfflineModeManager:
     <div class="status-box">
         <h2>🔒 الوضع المحلي - Anti-Offline</h2>
         <p style="font-size: 14px;">
-            {online_text}
+            __ONLINE_TEXT__
         </p>
     </div>
 
     <div class="stats">
         <div class="card">
-            <div class="stat"><div class="value">{providers}</div><div class="label">AI Providers</div></div>
-            <div class="stat"><div class="value">{agents}</div><div class="label">Agents</div></div>
-            <div class="stat"><div class="value">{skills}</div><div class="label">Skills</div></div>
+            <div class="stat"><div class="value">__PROVIDERS__</div><div class="label">AI Providers</div></div>
+            <div class="stat"><div class="value">__AGENTS__</div><div class="label">Agents</div></div>
+            <div class="stat"><div class="value">__SKILLS__</div><div class="label">Skills</div></div>
         </div>
     </div>
 
@@ -316,33 +316,33 @@ class OfflineModeManager:
         <h2>🧠 الخدمات المحلية</h2>
         <div class="provider">
             <h4>🌐 Ollama (qwen2.5:3b)</h4>
-            <p class="state" style="color: {ollama_color};">{ollama_state}</p>
+            <p class="state" style="color: __OLLAMA_COLOR__;">__OLLAMA_STATE__</p>
         </div>
         <div class="provider">
             <h4>🧠 Colibri (qwen3-coder-30b)</h4>
-            <p class="state" style="color: {colibri_color};">{colibri_state}</p>
+            <p class="state" style="color: __COLIBRI_COLOR__;">__COLIBRI_STATE__</p>
         </div>
     </div>
 
     <div class="footer">
         <p>✅ نظام العمل بلا انقطاق - Always Works Offline</p>
-        <p>📅 التاريخ: {date}</p>
+        <p>📅 التاريخ: __DATE__</p>
     </div>
 </body>
 </html>"""
 
-        html = html.format(
-            online_text=online_text,
-            providers=provider_count,
-            agents=agent_count,
-            skills=skill_count,
-            ollama_color="#48c774",
-            ollama_state=ollama_state,
-            colibri_color="#48c774",
-            colibri_state=colibri_state,
-            date=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        )
+        # Replace placeholders using simple .replace() (no .format() to avoid CSS brace conflicts)
+        html = html.replace("__ONLINE_TEXT__", online_text)
+        html = html.replace("__PROVIDERS__", str(provider_count))
+        html = html.replace("__AGENTS__", str(agent_count))
+        html = html.replace("__SKILLS__", str(skill_count))
+        html = html.replace("__OLLAMA_COLOR__", "#48c774")
+        html = html.replace("__OLLAMA_STATE__", ollama_state)
+        html = html.replace("__COLIBRI_COLOR__", "#48c774")
+        html = html.replace("__COLIBRI_STATE__", colibri_state)
+        html = html.replace("__DATE__", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         return html
+
 class OfflineModeRunner:
     """
     Runner for offline mode scenario.
