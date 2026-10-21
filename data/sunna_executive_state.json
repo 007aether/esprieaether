@@ -1,0 +1,146 @@
+{
+  "company": {
+    "name": "SUNNA ÉQUIPE INDUSTRIAL",
+    "type": "SARL AU",
+    "ice": "004054044000074",
+    "activity": "تصنيع منتجات معدنية · حدادة · غلفنة · هياكل",
+    "workshop": "72م² — الدار البيضاء",
+    "phone": "0770720602"
+  },
+  "director": {
+    "name": "EsprieAether",
+    "role": "Executive Director (AI Agent OS)",
+    "status": "online",
+    "capabilities": [
+      "production",
+      "pricing",
+      "suppliers",
+      "marketing",
+      "operations",
+      "finance",
+      "quality"
+    ]
+  },
+  "production": {
+    "status": "completed",
+    "last_audit": "2026-10-21T19:26:51.060858+00:00",
+    "tasks_queued": [
+      {
+        "action": "audit",
+        "details": "Starting production audit",
+        "timestamp": "2026-10-21T19:26:51.060797+00:00"
+      }
+    ],
+    "inventory_status": "unknown",
+    "recommendations": [
+      "Prioritize high-demand products (steel structures, galvanized panels)",
+      "Review inventory of galvanization materials (last 6h checked)",
+      "Schedule production runs for best-selling items",
+      "Implement kanban system for material tracking"
+    ]
+  },
+  "pricing": {
+    "status": "completed",
+    "last_analysis": null,
+    "markup_strategy": "auto",
+    "recommendations": [
+      "Apply 15-20% markup on steel products for profit margin",
+      "Check competitor prices daily (M1_Marche_Metallerie agent)",
+      "Price galvanization services: 30% above material cost",
+      "Increase prices on slow-moving products by 10%",
+      "Maintain lead times: 2-3 weeks for standard structures",
+      "Track net profit per product (not just unit price)"
+    ]
+  },
+  "suppliers": {
+    "status": "completed",
+    "last_review": null,
+    "vendors_evaluated": [],
+    "recommendations": [
+      "Prioritize local suppliers (reduce shipping time and cost)",
+      "Negotiate bulk pricing for steel (minimum 500kg orders)",
+      "Evaluate Galvanization specialists: A1-G agent covers 9 companies",
+      "Add backup suppliers for critical materials (steel, zinc)",
+      "Track delivery times and quality per supplier",
+      "Quarterly review for all vendors with scorecard system"
+    ]
+  },
+  "marketing": {
+    "status": "completed",
+    "last_campaign": "2026-10-21T19:26:51.064054+00:00",
+    "leads_generated": 0,
+    "recommendations": [
+      "Post on LinkedIn: daily market updates (steel prices, projects)",
+      "Update Instagram: photos of completed projects",
+      "Send weekly newsletter (offer + market insights)",
+      "Track competitor posts and react quickly",
+      "Target: E-commerce for B2B products",
+      "Generate 5 leads per day minimum"
+    ]
+  },
+  "operations": {
+    "status": "completed",
+    "last_audit": "2026-10-21T19:26:51.064923+00:00",
+    "task_queue": [],
+    "recommendations": [
+      "Optimize production schedule: 08:00-16:00 (5 days/week)",
+      "Assign A1-A4 agents: galvanization, pricing, plans, legal",
+      "M1-M2 agents: market and pricing monitoring",
+      "L1-L2 agents: tax and labor compliance",
+      "Implement daily standup (15 min) with team",
+      "Track cycle time per project"
+    ]
+  },
+  "finance": {
+    "status": "completed",
+    "last_analysis": null,
+    "cash_position": "unknown",
+    "recommendations": [
+      "Track daily expenses: materials, labor, tools, transport",
+      "Set 3-month cash reserve target (50,000 MAD)",
+      "Allocate 20% profit to new equipment",
+      "Avoid debt for daily operations",
+      "Review weekly: revenue vs costs",
+      "Quarterly: tax estimates (L1 agent)"
+    ]
+  },
+  "quality": {
+    "status": "completed",
+    "last_audit": "2026-10-21T19:26:51.069392+00:00",
+    "defects_found": 0,
+    "recommendations": [
+      "Inspect galvanized surfaces: uniform coating, no streaks",
+      "Test structural integrity: load test for critical frames",
+      "Check dimensions: every 5th product",
+      "Document defects: photo + description + severity",
+      "Implement 5S system: Sort, Set, Shine, Standardize, Sustain",
+      "Monthly quality review with team",
+      "Track defect rate: target < 2%"
+    ]
+  },
+  "dashboard": {
+    "host": "0.0.0.0",
+    "port": 5105,
+    "url": "http://localhost:5105"
+  },
+  "logs": [
+    "[2026-10-21 19:26:51] Sunna Executive Manager initialized",
+    "[2026-10-21 19:26:51] Production management started",
+    "[2026-10-21 19:26:51] [production] Queued: audit - Starting production audit",
+    "[2026-10-21 19:26:51] Production recommendations: 4",
+    "[2026-10-21 19:26:51] Production management completed",
+    "[2026-10-21 19:26:51] Pricing management started",
+    "[2026-10-21 19:26:51] Pricing management completed",
+    "[2026-10-21 19:26:51] Supplier management started",
+    "[2026-10-21 19:26:51] Supplier management completed",
+    "[2026-10-21 19:26:51] Marketing management started",
+    "[2026-10-21 19:26:51] Marketing management completed",
+    "[2026-10-21 19:26:51] Operations management started",
+    "[2026-10-21 19:26:51] Operations management completed",
+    "[2026-10-21 19:26:51] Financial management started",
+    "[2026-10-21 19:26:51] Financial management completed",
+    "[2026-10-21 19:26:51] Quality management started",
+    "[2026-10-21 19:26:51] Quality management completed"
+  ],
+  "running": false
+}
