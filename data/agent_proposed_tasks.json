@@ -476,15 +476,19 @@
   "agent": "test_agent",
   "title": "Test task",
   "description": "Test description",
-  "status": "proposed",
-  "ts": "2026-10-21T22:35:02.849468+00:00"
+  "status": "done",
+  "ts": "2026-10-21T22:35:02.849468+00:00",
+  "executed_ts": "2026-10-21T22:50:29.406485+00:00",
+  "result": "acknowledged"
  },
  {
   "id": "task-1792622134962",
   "agent": "test_agent",
   "title": "Test task",
   "description": "Test description",
-  "status": "proposed",
-  "ts": "2026-10-21T22:35:34.962906+00:00"
+  "status": "done",
+  "ts": "2026-10-21T22:35:34.962906+00:00",
+  "executed_ts": "2026-10-21T22:50:29.822055+00:00",
+  "result": "acknowledged"
  }
 ]
