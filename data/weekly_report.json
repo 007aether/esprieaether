@@ -25,7 +25,7 @@
     <body>
     <div class="container">
         <h1>📊 تقرير الأسبوع - EsprieAether</h1>
-        <p class="subtitle">تاريخ التقرير: 2026-10-21 18:14 UTC</p>
+        <p class="subtitle">تاريخ التقرير: 2026-10-21 18:15 UTC</p>
 
         <div class="stats">
             <div class="stat">
@@ -37,11 +37,11 @@
                 <div class="label">المهام الإجمالية</div>
             </div>
             <div class="stat">
-                <div class="number">2</div>
+                <div class="number">4</div>
                 <div class="label">المهام المقترحة</div>
             </div>
             <div class="stat">
-                <div class="number">48</div>
+                <div class="number">46</div>
                 <div class="label">المهام المكتملة</div>
             </div>
             <div class="stat">
@@ -58,7 +58,7 @@
             <h2>🧠 الدروس المست-conjugate الأسبوعية</h2>
             <p class="subtitle">أحدث 10 كلمة رائجة لدى النظام</p>
             <div id="lessons">
-                <div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 56 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
+                <div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
             </div>
         </div>
 
@@ -78,9 +78,9 @@
 - [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
 - [local_llm]: 0 ا</span><span class="tag">knowledge: رسالة اختبار للمعرفة</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
 - [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
 - [local_llm]: 0 ا</span><span class="tag">knowledge: رسالة اختبار للمعرفة</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
-- [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
-- [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
 - [local_llm]: 0 ا</span>
             </div>
         </div>
