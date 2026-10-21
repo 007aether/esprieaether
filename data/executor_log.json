@@ -925,5 +925,23 @@
   "kind": "info",
   "ok": true,
   "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T22:33:51.554167+00:00",
+  "task_id": "task-1792621467252",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T22:33:51.696339+00:00",
+  "task_id": "task-1792621887740",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
  }
 ]
