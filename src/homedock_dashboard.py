@@ -92,22 +92,21 @@ def widgets():
 
 @app.route("/")
 def index():
-    w = get_json("http://127.0.0.1:5104/api/widgets") or {}
-    svcs = w.get("services", {})
-    prices = w.get("prices", {})
-    kanban = w.get("kanban", {})
-    site = w.get("site", {})
-    integ = w.get("integrations", {})
+    # Serve dashboard directly - no recursive call to /api/widgets
+    w = {"services": SERVICES, "products": [], "prices": {}, "kanban": {}, "site": {}, "integrations": {"linked": 0, "total": 0}}
+    integ = w["integrations"]
+    kanban = w["kanban"]
+    site = w["site"]
 
     svc_cards = "".join(
         f'<div class="w {"up" if ok else "down"}"><b>{n}</b><span>{"●" if ok else "○"}</span></div>'
-        for n, ok in svcs.items()
+        for n, ok in w["services"].items()
     )
     price_rows = "".join(
         f'<div class="row"><span>{k}</span><b>{v["price"]} {v.get("unit","")}</b></div>'
-        for k, v in prices.items() if v.get("price") is not None
+        for k, v in w["prices"].items() if v.get("price") is not None
     )
-    up_count = sum(1 for v in svcs.values() if v)
+    up_count = sum(1 for v in w["services"].values() if v)
 
     html = f"""<!doctype html><html><head><meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -126,7 +125,7 @@ h1{{font-size:18px;margin:0}}h1 span{{color:#58a6ff}}
 .stat{{display:flex;gap:16px}}.stat>div{{text-align:center}}
 </style></head><body>
 <header><h1>🏠 HomeDock — <span>EsprieAether × Sunna</span></h1>
-<div>{up_count}/{len(svcs)} up</div></header>
+<div>{up_count}/{len(w["services"])} up</div></header>
 <div class="grid">
   <div class="card"><h3>Services</h3>{svc_cards}</div>
   <div class="card"><h3>Stack</h3>
