@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-21T01:57:59.482398+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-20T20:56:35.126646+00:00",
+  "cloud_last_run": "2026-10-21T02:08:22.330791+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is TradFi? Traditional Finance in Crypto Explained",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Hyperliquid vs edgeX: Deepest Order Book vs Full Fee Refunds",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "PAPER Is Live on Hyperliquid: The Farmers Who Lost on Purpose Are Up Millions",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is Erik Voorhees? Bitcoin&#8217;s Original Libertarian Still Fighting",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is a CTO in Crypto? Community Takeovers Explained",
       "source": "https://airdropalert.com/feed"
     },
     {
