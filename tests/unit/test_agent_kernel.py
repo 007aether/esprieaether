@@ -9,20 +9,13 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 class TestAgentKernel(unittest.TestCase):
-    """Test cases for agent kernel"""
+    """Test cases for Agent Kernel"""
     
-    def test_kernel_response(self):
-        """Test kernel gives proper responses"""
-        from src.agent_kernel import AgentKernel
-        kernel = AgentKernel()
-        response = kernel.process("test")
-        self.assertIsNotNone(response)
-    
-    def test_kernel_init(self):
-        """Test kernel initialization"""
-        from src.agent_kernel import AgentKernel
-        kernel = AgentKernel()
-        self.assertIsNotNone(kernel)
-    
+    def test_validate_action(self):
+        """Test action validation"""
+        from src.agent_kernel import validate_action
+        allowed, msg = validate_action("monitor", {"targets": ["agent_mesh"]})
+        self.assertTrue(allowed)
+
 if __name__ == "__main__":
     unittest.main()
