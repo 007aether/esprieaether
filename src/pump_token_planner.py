@@ -146,11 +146,11 @@ class PumpTokenPlanner:
         print(f"  📄 المحتوى: {content['name']} ({content['symbol']})")
         print("  📁 إنشاء ملفات المشروع...")
         self.create_project_files()
-        print("✅ الخطة جاهزة للتطبيق!")
+        print("✅ الخطة جاهرة للتطبيق!")
         return {
             "status": "completed",
             "content": content,
-            "files": list(files.keys())
+            "files": ["README.md", "config.json", "plan.md"]
         }
 
 if __name__ == "__main__":
