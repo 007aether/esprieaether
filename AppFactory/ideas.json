@@ -1,82 +1,82 @@
 [
   {
-    "name": "FitnessFlow",
-    "slug": "fitness-flow",
-    "category": "health",
-    "pitch": "Personalized workout plans, track progress, no gym needed",
-    "monetization": "Advanced workout plans, custom nutrition guides",
-    "audience": "Busy professionals wanting home workout solutions",
+    "name": "FocusFlow",
+    "slug": "focusflow",
+    "category": "productivity",
+    "pitch": "Pomodoro timer with smart breaks and streaks",
+    "monetization": "Customizable break activities and themes",
+    "audience": "Students, freelancers, remote workers",
     "id": 1,
-    "score": 85
-  },
-  {
-    "name": "StudyBuddy",
-    "slug": "study-buddy",
-    "category": "education",
-    "pitch": "Personalized study plans, flashcards, quizzes for exams",
-    "monetization": "Unlimited study plans, offline access, advanced analytics",
-    "audience": "Students preparing for exams, standardized tests",
-    "id": 2,
-    "score": 60
-  },
-  {
-    "name": "SleepSense",
-    "slug": "sleep-sense",
-    "category": "lifestyle",
-    "pitch": "Sleep tracking, personalized sleep schedules, mindfulness",
-    "monetization": "Advanced sleep analysis, customizable sleep sounds, unlimited tracks",
-    "audience": "Professionals prioritizing sleep and stress management",
-    "id": 3,
-    "score": 68
-  },
-  {
-    "name": "PlantPal",
-    "slug": "plant-pal",
-    "category": "lifestyle",
-    "pitch": "Plant care reminders, diagnoses, shop plant essentials",
-    "monetization": "Unlimited plants, custom care plans, exclusive plant shop access",
-    "audience": "Plant lovers struggling to keep their plants alive",
-    "id": 4,
     "score": 58
   },
   {
-    "name": "PetConnect",
-    "slug": "pet-connect",
+    "name": "PlantPal",
+    "slug": "plantpal",
     "category": "lifestyle",
-    "pitch": "Pet sitters, dog walkers, pet-friendly places nearby",
-    "monetization": "Unlimited bookings, priority access to sitters, exclusive pet perks",
-    "audience": "Pet owners juggling multiple responsibilities",
+    "pitch": "Indoor plant care assistant with water reminders",
+    "monetization": "Plant identification, care tips, and exclusive deals",
+    "audience": "Plant enthusiasts, urban gardeners",
+    "id": 2,
+    "score": 58
+  },
+  {
+    "name": "MealMaster",
+    "slug": "mealmaster",
+    "category": "food & drink",
+    "pitch": "Meal planning with grocery list generator",
+    "monetization": "Recipe recommendations based on dietary restrictions",
+    "audience": "Busy professionals, health-conscious individuals",
+    "id": 3,
+    "score": 83
+  },
+  {
+    "name": "SleepSync",
+    "slug": "sleepsync",
+    "category": "health & fitness",
+    "pitch": "Sleep tracker with personalized insights and routines",
+    "monetization": "Sleep sounds library and relaxation exercises",
+    "audience": "Sleep-deprived professionals, young parents",
+    "id": 4,
+    "score": 73
+  },
+  {
+    "name": "LearnLingo",
+    "slug": "learnlingo",
+    "category": "education",
+    "pitch": "Language learning app with spaced repetition flashcards",
+    "monetization": "Offline mode and custom flashcard creation",
+    "audience": "Language learners, travelers",
     "id": 5,
-    "score": 43
-  },
-  {
-    "name": "FoodieFinder",
-    "slug": "foodie-finder",
-    "category": "food",
-    "pitch": "Local food inspiration, dietary filters, book tables",
-    "monetization": "Unlimited reservations, exclusive deals, customizable meal plans",
-    "audience": "Food enthusiasts seeking new dining experiences",
-    "id": 6,
-    "score": 54
-  },
-  {
-    "name": "MoodTrack",
-    "slug": "mood-track",
-    "category": "mental health",
-    "pitch": "Track mood, journal, get insights and coping tips",
-    "monetization": "Unlimited journal entries, advanced mood analysis, coping toolkits",
-    "audience": "Individuals managing mental health, seeking self-care tools",
-    "id": 7,
     "score": 48
   },
   {
-    "name": "NoCodeBuilder",
-    "slug": "no-code-builder",
-    "category": "productivity",
-    "pitch": "Build apps, automate tasks, no coding required",
-    "monetization": "Unlimited app builds, advanced components, priority support",
-    "audience": "Non-technical professionals needing custom solutions",
+    "name": "FinanceFlow",
+    "slug": "financeflow",
+    "category": "finance",
+    "pitch": "Budgeting app with recurrent transaction forecasting",
+    "monetization": "Investment tracking and passive income calculator",
+    "audience": "Financial independence seekers, budget-conscious individuals",
+    "id": 6,
+    "score": 55
+  },
+  {
+    "name": "ArtBook",
+    "slug": "artbook",
+    "category": "entertainment",
+    "pitch": "Art collection organizer with artwork valuation",
+    "monetization": "Art market news and exclusive art offers",
+    "audience": "Art collectors, art enthusiasts",
+    "id": 7,
+    "score": 43
+  },
+  {
+    "name": "GreenGuru",
+    "slug": "greenguru",
+    "category": "sustainability",
+    "pitch": "Eco-friendly product recommendations and reviews",
+    "monetization": "Zero-waste challenge tracker and exclusive discounts",
+    "audience": "Eco-conscious consumers, environmental advocates",
     "id": 8,
-    "score": 78
+    "score": 68
   }
 ]
