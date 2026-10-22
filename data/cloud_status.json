@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-22T10:42:00.477293+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-22T02:02:17.263786+00:00",
+  "cloud_last_run": "2026-10-22T10:43:16.624654+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "PAPER Staking Explained: Where the USDC Comes From and How Long It Lasts",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Bitstamp Review: The Longest-Running Exchange in Crypto",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "PHP2Shell: Why Websites Went Offline and What Crypto Users Must Do Now",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "Sophon Shutdown: Withdraw Your Funds Before November 25",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Bitcoin 83K: The Black Monday That Never Came",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Hyperliquid SEC Letter: HYPE’s Policy Arm Just Asked for Airdrop Clarity",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy Aster (ASTER) for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
