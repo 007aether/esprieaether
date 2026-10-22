@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-22T13:36:22.326524+00:00",
+ "updated": "2026-10-22T13:43:05.902938+00:00",
  "total": 47,
  "adopt": 10,
  "reference": 5,
@@ -7,7 +7,7 @@
   {
    "name": "CherryHQ/cherry-studio",
    "url": "https://github.com/CherryHQ/cherry-studio",
-   "stars": 52874,
+   "stars": 52875,
    "category": "ai_agent_framework",
    "lang": "TypeScript",
    "desc": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
@@ -20,7 +20,7 @@
   {
    "name": "HKUDS/nanobot",
    "url": "https://github.com/HKUDS/nanobot",
-   "stars": 49262,
+   "stars": 49264,
    "category": "ai_agent_framework",
    "lang": "Python",
    "desc": "Ultra-lightweight, open-source, self-hosted personal AI agent framework in Python with WebUI, tools, memory, MCP, multi-agent workflows, automation, a",
@@ -59,7 +59,7 @@
   {
    "name": "PrimeIntellect-ai/prime-agent",
    "url": "https://github.com/PrimeIntellect-ai/prime-agent",
-   "stars": 22262,
+   "stars": 22264,
    "category": "self_evolving",
    "lang": "Rust",
    "desc": "A self-improving RLM agent for coding workflows and long-running autonomous tasks.",
