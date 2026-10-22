@@ -1,18 +1,18 @@
 {
- "updated": "2026-10-21T13:19:18.426151+00:00",
+ "updated": "2026-10-22T13:33:02.031972+00:00",
  "total": 500,
  "categories": {
   "ai_agent_framework": 56,
-  "local_llm": 67,
+  "local_llm": 69,
   "telegram_bots": 34,
   "self_evolving": 48,
   "orchestration": 37,
-  "observability": 48,
-  "cloud_free": 27,
-  "crypto_airdrop": 34,
-  "security_edr": 18,
+  "observability": 49,
+  "cloud_free": 25,
+  "crypto_airdrop": 33,
+  "security_edr": 19,
   "rag_memory": 46,
-  "voice_interface": 45,
+  "voice_interface": 44,
   "messaging_bridge": 26,
   "metal_fabrication": 0,
   "cnc_laser_dxf": 0,
@@ -32,7 +32,7 @@
   {
    "name": "HKUDS/nanobot",
    "url": "https://github.com/HKUDS/nanobot",
-   "stars": 49242,
+   "stars": 49262,
    "lang": "Python",
    "desc": "Ultra-lightweight, open-source, self-hosted personal AI agent framework in Python with WebUI, tools, memory, MCP, multi-agent workflows, automation, and chat apps",
    "topics": [
@@ -45,8 +45,8 @@
     "llm-agents",
     "llms"
    ],
-   "updated": "2026-10-21",
-   "forks": 8660,
+   "updated": "2026-10-22",
+   "forks": 8665,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 98
@@ -54,7 +54,7 @@
   {
    "name": "CherryHQ/cherry-studio",
    "url": "https://github.com/CherryHQ/cherry-studio",
-   "stars": 52824,
+   "stars": 52874,
    "lang": "TypeScript",
    "desc": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
    "topics": [
@@ -67,8 +67,8 @@
     "open-code-review",
     "skills"
    ],
-   "updated": "2026-10-21",
-   "forks": 5103,
+   "updated": "2026-10-22",
+   "forks": 5109,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 98
@@ -76,7 +76,7 @@
   {
    "name": "khoj-ai/khoj",
    "url": "https://github.com/khoj-ai/khoj",
-   "stars": 37777,
+   "stars": 37785,
    "lang": "Python",
    "desc": "Your AI second brain. Self-hostable. Get answers from the web or your docs. Build custom agents, schedule automations, do deep research. Turn any online or local LLM into your personal, autonomous AI ",
    "topics": [
@@ -89,8 +89,8 @@
     "image-generation",
     "llama3"
    ],
-   "updated": "2026-10-21",
-   "forks": 2526,
+   "updated": "2026-10-22",
+   "forks": 2524,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 97
@@ -98,7 +98,7 @@
   {
    "name": "Tencent/WeKnora",
    "url": "https://github.com/Tencent/WeKnora",
-   "stars": 34963,
+   "stars": 35060,
    "lang": "Go",
    "desc": "Open-source LLM knowledge platform: turn raw documents into a queryable RAG, an autonomous reasoning agent, and a self-maintaining Wiki.",
    "topics": [
@@ -111,8 +111,8 @@
     "evaluation",
     "generative-ai"
    ],
-   "updated": "2026-10-21",
-   "forks": 4677,
+   "updated": "2026-10-22",
+   "forks": 4698,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 97
@@ -120,7 +120,7 @@
   {
    "name": "assafelovic/gpt-researcher",
    "url": "https://github.com/assafelovic/gpt-researcher",
-   "stars": 30214,
+   "stars": 30242,
    "lang": "Python",
    "desc": "An autonomous agent that conducts deep research on any data using any LLM providers",
    "topics": [
@@ -133,8 +133,8 @@
     "mcp-server",
     "python"
    ],
-   "updated": "2026-10-21",
-   "forks": 4128,
+   "updated": "2026-10-22",
+   "forks": 4132,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 97
@@ -142,7 +142,7 @@
   {
    "name": "Fosowl/agenticSeek",
    "url": "https://github.com/Fosowl/agenticSeek",
-   "stars": 27519,
+   "stars": 27526,
    "lang": "Python",
    "desc": "Fully Local Manus AI. No APIs, No $200 monthly bills. Enjoy an autonomous agent that thinks, browses the web, and code for the sole cost of electricity.",
    "topics": [
@@ -155,7 +155,7 @@
     "llm-agents",
     "voice-assistant"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 3085,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
@@ -164,7 +164,7 @@
   {
    "name": "wanshuiyin/Auto-claude-code-research-in-sleep",
    "url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
-   "stars": 17836,
+   "stars": 17899,
    "lang": "Python",
    "desc": "ARIS ⚔️ (Auto-Research-In-Sleep) — Lightweight Markdown-only skills for autonomous ML research: cross-model review loops, idea discovery, and experiment automation. No framework, no lock-in — works wi",
    "topics": [
@@ -177,8 +177,8 @@
     "claude-code-skills",
     "codex"
    ],
-   "updated": "2026-10-21",
-   "forks": 1472,
+   "updated": "2026-10-22",
+   "forks": 1477,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 96
@@ -186,7 +186,7 @@
   {
    "name": "raga-ai-hub/RagaAI-Catalyst",
    "url": "https://github.com/raga-ai-hub/RagaAI-Catalyst",
-   "stars": 16175,
+   "stars": 16179,
    "lang": "Python",
    "desc": "Python SDK for Agent AI Observability, Monitoring and Evaluation Framework. Includes features like agent, llm and tools tracing, debugging multi-agentic system, self-hosted dashboard and advanced anal",
    "topics": [
@@ -199,7 +199,7 @@
     "ai-evaluation-tools",
     "ai-performance-optimization"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-21",
    "forks": 3574,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
@@ -208,7 +208,7 @@
   {
    "name": "cft0808/edict",
    "url": "https://github.com/cft0808/edict",
-   "stars": 17006,
+   "stars": 17010,
    "lang": "Python",
    "desc": "🏛️ 三省六部制 · OpenClaw Multi-Agent Orchestration System — 9 specialized AI agents with real-time dashboard, model config, and full audit trails",
    "topics": [
@@ -221,8 +221,8 @@
     "llm",
     "multi-agent"
    ],
-   "updated": "2026-10-21",
-   "forks": 1766,
+   "updated": "2026-10-22",
+   "forks": 1765,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 95
@@ -230,7 +230,7 @@
   {
    "name": "aden-hive/hive",
    "url": "https://github.com/aden-hive/hive",
-   "stars": 11112,
+   "stars": 11115,
    "lang": "Python",
    "desc": "Multi-Agent Harness for Production AI",
    "topics": [
@@ -243,7 +243,7 @@
     "claude",
     "harness"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 5645,
    "category": "self_evolving",
    "query": "self-improving agent",
@@ -265,7 +265,7 @@
     "llm",
     "llm-router"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 650,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
@@ -291,7 +291,7 @@
   {
    "name": "kodu-ai/claude-coder",
    "url": "https://github.com/kodu-ai/claude-coder",
-   "stars": 5205,
+   "stars": 5204,
    "lang": "TypeScript",
    "desc": "Kodu is an autonomous coding agent that lives in your IDE. It is a VSCode extension that can help you build your dream project step by step by leveraging the latest technologies in automated coding ag",
    "topics": [
@@ -303,7 +303,7 @@
     "vscode",
     "vscode-extension"
    ],
-   "updated": "2026-10-17",
+   "updated": "2026-10-21",
    "forks": 198,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
@@ -312,7 +312,7 @@
   {
    "name": "ruc-datalab/DeepAnalyze",
    "url": "https://github.com/ruc-datalab/DeepAnalyze",
-   "stars": 4738,
+   "stars": 4740,
    "lang": "Python",
    "desc": "DeepAnalyze is the first agentic LLM for autonomous data science. 🎈你的AI数据分析师，自动分析大量数据，一键生成专业分析报告！",
    "topics": [
@@ -325,7 +325,7 @@
     "data",
     "data-analysis"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 745,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
@@ -334,7 +334,7 @@
   {
    "name": "siddsachar/row-bot",
    "url": "https://github.com/siddsachar/row-bot",
-   "stars": 1634,
+   "stars": 1637,
    "lang": "Python",
    "desc": "Row-Bot - Personal AI Sovereignty. A local-first AI assistant with integrated tools, a personal knowledge graph, voice, vision, shell, browser automation, scheduled tasks, health tracking, and messagi",
    "topics": [
@@ -347,7 +347,7 @@
     "react-agent",
     "sovereign-ai"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 193,
    "category": "rag_memory",
    "query": "knowledge graph tool",
@@ -356,7 +356,7 @@
   {
    "name": "AstrBotDevs/AstrBot",
    "url": "https://github.com/AstrBotDevs/AstrBot",
-   "stars": 42568,
+   "stars": 42758,
    "lang": "Python",
    "desc": "AI Agent Assistant & development framework that integrates lots of IM platforms, LLMs, plugins and AI feature, and can be your openclaw alternative. ✨",
    "topics": [
@@ -369,8 +369,8 @@
     "docker",
     "gemini"
    ],
-   "updated": "2026-10-21",
-   "forks": 3111,
+   "updated": "2026-10-22",
+   "forks": 3128,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 88
@@ -378,7 +378,7 @@
   {
    "name": "Yeachan-Heo/oh-my-claudecode",
    "url": "https://github.com/Yeachan-Heo/oh-my-claudecode",
-   "stars": 40145,
+   "stars": 40173,
    "lang": "TypeScript",
    "desc": "Teams-first Multi-agent orchestration for Claude Code",
    "topics": [
@@ -391,7 +391,7 @@
     "oh-my-opencode",
     "opencode"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 3594,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
@@ -400,7 +400,7 @@
   {
    "name": "openai/openai-agents-python",
    "url": "https://github.com/openai/openai-agents-python",
-   "stars": 30199,
+   "stars": 30223,
    "lang": "Python",
    "desc": "A lightweight, powerful framework for multi-agent workflows",
    "topics": [
@@ -412,8 +412,8 @@
     "openai",
     "python"
    ],
-   "updated": "2026-10-21",
-   "forks": 4913,
+   "updated": "2026-10-22",
+   "forks": 4924,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 87
@@ -421,7 +421,7 @@
   {
    "name": "deepset-ai/haystack",
    "url": "https://github.com/deepset-ai/haystack",
-   "stars": 26801,
+   "stars": 26809,
    "lang": "Python",
    "desc": "Open-source AI orchestration framework for building context-engineered, production-ready LLM applications. Design modular pipelines and agent workflows with explicit control over retrieval, routing, m",
    "topics": [
@@ -434,8 +434,8 @@
     "context-engineering",
     "framework"
    ],
-   "updated": "2026-10-21",
-   "forks": 3317,
+   "updated": "2026-10-22",
+   "forks": 3319,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 87
@@ -443,7 +443,7 @@
   {
    "name": "reworkd/AgentGPT",
    "url": "https://github.com/reworkd/AgentGPT",
-   "stars": 36278,
+   "stars": 36280,
    "lang": "TypeScript",
    "desc": "🤖 Assemble, configure, and deploy autonomous AI Agents in your browser.",
    "topics": [
@@ -456,8 +456,8 @@
     "autogpt",
     "baby-agi"
    ],
-   "updated": "2026-10-21",
-   "forks": 9205,
+   "updated": "2026-10-22",
+   "forks": 9201,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 87
@@ -478,7 +478,7 @@
     "ai-agent-framework",
     "ai-agents"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 142,
    "category": "local_llm",
    "query": "ollama alternative",
@@ -487,7 +487,7 @@
   {
    "name": "langfuse/langfuse",
    "url": "https://github.com/langfuse/langfuse",
-   "stars": 36132,
+   "stars": 36182,
    "lang": "TypeScript",
    "desc": "🪢 Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform.",
    "topics": [
@@ -500,8 +500,8 @@
     "llm",
     "llm-evaluation"
    ],
-   "updated": "2026-10-21",
-   "forks": 4034,
+   "updated": "2026-10-22",
+   "forks": 4043,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 87
@@ -509,7 +509,7 @@
   {
    "name": "existence-master/Sentient",
    "url": "https://github.com/existence-master/Sentient",
-   "stars": 710,
+   "stars": 711,
    "lang": "Python",
    "desc": "Your personal AI assistant, running on your own computer. Long-running tasks, real memory, proactive help, voice, phones and smart glasses. Any model, local or cloud. No account.",
    "topics": [
@@ -522,8 +522,8 @@
     "desktop-app",
     "llm"
    ],
-   "updated": "2026-10-21",
-   "forks": 126,
+   "updated": "2026-10-22",
+   "forks": 130,
    "category": "voice_interface",
    "query": "voice assistant local",
    "score": 87
@@ -531,12 +531,12 @@
   {
    "name": "PrimeIntellect-ai/prime-agent",
    "url": "https://github.com/PrimeIntellect-ai/prime-agent",
-   "stars": 22227,
+   "stars": 22262,
    "lang": "Rust",
    "desc": "A self-improving RLM agent for coding workflows and long-running autonomous tasks.",
    "topics": [],
-   "updated": "2026-10-21",
-   "forks": 2457,
+   "updated": "2026-10-22",
+   "forks": 2463,
    "category": "self_evolving",
    "query": "self-improving agent",
    "score": 86
@@ -544,7 +544,7 @@
   {
    "name": "TransformerOptimus/SuperAGI",
    "url": "https://github.com/TransformerOptimus/SuperAGI",
-   "stars": 17710,
+   "stars": 17713,
    "lang": "Python",
    "desc": "<⚡️> SuperAGI - A dev-first open source autonomous AI agent framework. Enabling developers to build, manage & run useful autonomous agents quickly and reliably.",
    "topics": [
@@ -557,8 +557,8 @@
     "gpt-4",
     "hacktoberfest"
    ],
-   "updated": "2026-10-21",
-   "forks": 2224,
+   "updated": "2026-10-22",
+   "forks": 2223,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 85
@@ -566,7 +566,7 @@
   {
    "name": "0x4m4/hexstrike-ai",
    "url": "https://github.com/0x4m4/hexstrike-ai",
-   "stars": 12989,
+   "stars": 13015,
    "lang": "Python",
    "desc": "HexStrike AI MCP Agents is an advanced MCP server that lets AI agents (Claude, GPT, Copilot, etc.) autonomously run 150+ cybersecurity tools for automated pentesting, vulnerability discovery, bug boun",
    "topics": [
@@ -579,8 +579,8 @@
     "ai-security-tool",
     "artificial-intelligence"
    ],
-   "updated": "2026-10-21",
-   "forks": 2638,
+   "updated": "2026-10-22",
+   "forks": 2643,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 85
@@ -588,7 +588,7 @@
   {
    "name": "browseros-ai/BrowserOS",
    "url": "https://github.com/browseros-ai/BrowserOS",
-   "stars": 14027,
+   "stars": 14049,
    "lang": "TypeScript",
    "desc": "🌐 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.",
    "topics": [
@@ -601,8 +601,8 @@
     "chromium",
     "claude"
    ],
-   "updated": "2026-10-21",
-   "forks": 1505,
+   "updated": "2026-10-22",
+   "forks": 1507,
    "category": "local_llm",
    "query": "ollama alternative",
    "score": 85
@@ -610,7 +610,7 @@
   {
    "name": "ccfos/nightingale",
    "url": "https://github.com/ccfos/nightingale",
-   "stars": 13375,
+   "stars": 13377,
    "lang": "Go",
    "desc": "Open-source, self-hosted alerting for metrics, logs, and databases. Includes a built-in AI agent and MCP server.",
    "topics": [
@@ -623,8 +623,8 @@
     "mcp-server",
     "metrics"
    ],
-   "updated": "2026-10-21",
-   "forks": 1792,
+   "updated": "2026-10-22",
+   "forks": 1793,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 85
@@ -632,7 +632,7 @@
   {
    "name": "alibaba/zvec",
    "url": "https://github.com/alibaba/zvec",
-   "stars": 16130,
+   "stars": 16133,
    "lang": "C++",
    "desc": "A lightweight, lightning-fast, in-process vector database",
    "topics": [
@@ -645,8 +645,8 @@
     "hnsw",
     "llm-memory"
    ],
-   "updated": "2026-10-21",
-   "forks": 1014,
+   "updated": "2026-10-22",
+   "forks": 1015,
    "category": "rag_memory",
    "query": "local rag vector database",
    "score": 85
@@ -654,7 +654,7 @@
   {
    "name": "MervinPraison/PraisonAI",
    "url": "https://github.com/MervinPraison/PraisonAI",
-   "stars": 9281,
+   "stars": 9282,
    "lang": "Python",
    "desc": "PraisonAI 🦞 — Hire a 24/7 AI Workforce. Stop writing boilerplate and start shipping autonomous self-improving agents that research, plan, code, and execute tasks. Deployed in 5 lines of code with buil",
    "topics": [
@@ -667,7 +667,7 @@
     "ai-agents-sdk",
     "ai-framwork"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 1483,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
@@ -689,7 +689,7 @@
   {
    "name": "HarnessMD/munder-difflin",
    "url": "https://github.com/HarnessMD/munder-difflin",
-   "stars": 8950,
+   "stars": 8973,
    "lang": "TypeScript",
    "desc": "an open-source alternative to the dots, bots and muses of the world, run an office of claude code/codex like agents on your laptop, sandboxes or anywhere, uses your existing subscriptions",
    "topics": [
@@ -702,8 +702,8 @@
     "codex",
     "coding-agents"
    ],
-   "updated": "2026-10-21",
-   "forks": 1238,
+   "updated": "2026-10-22",
+   "forks": 1244,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 84
@@ -711,7 +711,7 @@
   {
    "name": "iflytek/astron-agent",
    "url": "https://github.com/iflytek/astron-agent",
-   "stars": 8921,
+   "stars": 8913,
    "lang": "Java",
    "desc": "Enterprise-grade, commercial-friendly agentic workflow platform for building next-generation SuperAgents.",
    "topics": [
@@ -724,8 +724,8 @@
     "iflytek-astron",
     "llm"
    ],
-   "updated": "2026-10-21",
-   "forks": 903,
+   "updated": "2026-10-22",
+   "forks": 904,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 84
@@ -777,7 +777,7 @@
   {
    "name": "tlgrcli/tlgr",
    "url": "https://github.com/tlgrcli/tlgr",
-   "stars": 193,
+   "stars": 196,
    "lang": "Python",
    "desc": "CLI for Telegram — agent-friendly, daemon-based, with webhook event push.",
    "topics": [
@@ -790,7 +790,7 @@
     "osint",
     "python"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 3,
    "category": "telegram_bots",
    "query": "telegram automation python",
@@ -799,7 +799,7 @@
   {
    "name": "genkit-ai/genkit",
    "url": "https://github.com/genkit-ai/genkit",
-   "stars": 6537,
+   "stars": 6542,
    "lang": "TypeScript",
    "desc": "Open-source framework for building agentic apps in JavaScript, Go, Dart, and Python, built and used in production by Google",
    "topics": [
@@ -812,7 +812,7 @@
     "rag",
     "vector-database"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 863,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
@@ -821,7 +821,7 @@
   {
    "name": "AgentOps-AI/agentops",
    "url": "https://github.com/AgentOps-AI/agentops",
-   "stars": 5901,
+   "stars": 5907,
    "lang": "Python",
    "desc": "Python SDK for AI agent monitoring, LLM cost tracking, benchmarking, and more. Integrates with most LLMs and agent frameworks including CrewAI, Agno, OpenAI Agents SDK, Langchain, Autogen, AG2, and Ca",
    "topics": [
@@ -834,7 +834,7 @@
     "cost-estimation",
     "crewai"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 646,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
@@ -843,7 +843,7 @@
   {
    "name": "osaurus-ai/osaurus",
    "url": "https://github.com/osaurus-ai/osaurus",
-   "stars": 8063,
+   "stars": 8067,
    "lang": "Swift",
    "desc": "Own your AI. The native macOS harness for AI agents -- any model, persistent memory, autonomous execution, cryptographic identity. Built in Swift. Fully offline. Open source.",
    "topics": [
@@ -856,8 +856,8 @@
     "mcp-server",
     "mlx"
    ],
-   "updated": "2026-10-21",
-   "forks": 484,
+   "updated": "2026-10-22",
+   "forks": 483,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 83
@@ -865,7 +865,7 @@
   {
    "name": "BitterSecurity/Decepticon",
    "url": "https://github.com/BitterSecurity/Decepticon",
-   "stars": 6378,
+   "stars": 6397,
    "lang": "Python",
    "desc": "Autonomous Hacking Agent for Red Team",
    "topics": [
@@ -878,8 +878,8 @@
     "hacking",
     "langchain"
    ],
-   "updated": "2026-10-21",
-   "forks": 1229,
+   "updated": "2026-10-22",
+   "forks": 1232,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 83
@@ -887,7 +887,7 @@
   {
    "name": "beatwad/LinkedIn-AI-Job-Applier-Ultimate",
    "url": "https://github.com/beatwad/LinkedIn-AI-Job-Applier-Ultimate",
-   "stars": 177,
+   "stars": 176,
    "lang": "Python",
    "desc": "AI-powered LinkedIn and Indeed job application bot with Playwright automation, LLM integration, data anonymization, and Telegram reporting. Applies to ALL job types (not just Easy Apply), generates cu",
    "topics": [
@@ -900,7 +900,7 @@
     "easy-apply",
     "gemini"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 46,
    "category": "telegram_bots",
    "query": "telegram automation python",
@@ -909,7 +909,7 @@
   {
    "name": "Human-Agent-Society/reef",
    "url": "https://github.com/Human-Agent-Society/reef",
-   "stars": 7717,
+   "stars": 7733,
    "lang": "Python",
    "desc": "Infrastructure for continually self‑improving agents",
    "topics": [
@@ -922,8 +922,8 @@
     "reinforcement-learning",
     "self-improving-agents"
    ],
-   "updated": "2026-10-21",
-   "forks": 724,
+   "updated": "2026-10-22",
+   "forks": 726,
    "category": "self_evolving",
    "query": "self-improving agent",
    "score": 83
@@ -931,7 +931,7 @@
   {
    "name": "superduper-io/superduper",
    "url": "https://github.com/superduper-io/superduper",
-   "stars": 5326,
+   "stars": 5325,
    "lang": "Python",
    "desc": "Superduper: End-to-end framework for building custom AI applications and agents.",
    "topics": [
@@ -944,7 +944,7 @@
     "llm-inference",
     "llm-serving"
    ],
-   "updated": "2026-10-19",
+   "updated": "2026-10-22",
    "forks": 546,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
@@ -953,7 +953,7 @@
   {
    "name": "darrenhinde/OpenAgentsControl",
    "url": "https://github.com/darrenhinde/OpenAgentsControl",
-   "stars": 4924,
+   "stars": 4930,
    "lang": "TypeScript",
    "desc": "AI agent framework for plan-first development workflows with approval-based execution. Multi-language support (TypeScript, Python, Go, Rust) with automatic testing, code review, and validation built f",
    "topics": [
@@ -966,7 +966,7 @@
     "developer-tools",
     "opencode"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 401,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
@@ -997,7 +997,7 @@
   {
    "name": "campfirein/byterover-cli",
    "url": "https://github.com/campfirein/byterover-cli",
-   "stars": 4948,
+   "stars": 4950,
    "lang": "TypeScript",
    "desc": "ByteRover CLI (brv) - The portable memory layer for  autonomous coding agents (formerly Cipher)",
    "topics": [
@@ -1010,7 +1010,7 @@
     "developer-tools",
     "knowledge-management"
    ],
-   "updated": "2026-10-19",
+   "updated": "2026-10-22",
    "forks": 455,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
@@ -1019,7 +1019,7 @@
   {
    "name": "gptme/gptme",
    "url": "https://github.com/gptme/gptme",
-   "stars": 4457,
+   "stars": 4459,
    "lang": "Python",
    "desc": "Your agent in your terminal, equipped with local tools: writes code, uses the terminal, browses the web. Make your own persistent autonomous agent on top!",
    "topics": [
@@ -1032,8 +1032,8 @@
     "chatbot",
     "chatgpt"
    ],
-   "updated": "2026-10-20",
-   "forks": 454,
+   "updated": "2026-10-22",
+   "forks": 456,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 82
@@ -1059,7 +1059,7 @@
   {
    "name": "golutra/golutra",
    "url": "https://github.com/golutra/golutra",
-   "stars": 3861,
+   "stars": 3859,
    "lang": "Rust",
    "desc": "Multi-agent AI orchestration platform for automation, workflows, and developer tools. Golutra transforms Codex, Claude Code, and OpenClaw into a unified agent system with parallel execution, task orch",
    "topics": [
@@ -1072,7 +1072,7 @@
     "codex",
     "codex-cli"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 443,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
@@ -1081,7 +1081,7 @@
   {
    "name": "kirodotdev/KiroCrew",
    "url": "https://github.com/kirodotdev/KiroCrew",
-   "stars": 4527,
+   "stars": 4541,
    "lang": "Python",
    "desc": "A persistent workspace for development work that self-improves and continues beyond one session.",
    "topics": [
@@ -1094,8 +1094,8 @@
     "devtools",
     "kiro"
    ],
-   "updated": "2026-10-21",
-   "forks": 857,
+   "updated": "2026-10-22",
+   "forks": 858,
    "category": "self_evolving",
    "query": "self-improving agent",
    "score": 82
@@ -1103,7 +1103,7 @@
   {
    "name": "simonlin1212/TradingAgents-astock",
    "url": "https://github.com/simonlin1212/TradingAgents-astock",
-   "stars": 3749,
+   "stars": 3758,
    "lang": "Python",
    "desc": "A股多Agent投研框架 — 适配A股数据源(龙虎榜/游资/解禁等)，7位分析师基于A股规则的辩论决策，基于TradingAgents深度改造，适配大A。A-share multi-agent investment research framework — 7 AI analysts, bull/bear debate, risk assessment。",
    "topics": [
@@ -1116,8 +1116,8 @@
     "langgraph",
     "llm"
    ],
-   "updated": "2026-10-21",
-   "forks": 942,
+   "updated": "2026-10-22",
+   "forks": 944,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 81
@@ -1125,7 +1125,7 @@
   {
    "name": "MemMachine/MemMachine",
    "url": "https://github.com/MemMachine/MemMachine",
-   "stars": 3075,
+   "stars": 3076,
    "lang": "Python",
    "desc": "Universal memory layer for AI Agents. It provides scalable, extensible, and interoperable memory storage and retrieval to streamline AI agent state management for next-generation autonomous systems.",
    "topics": [
@@ -1138,8 +1138,8 @@
     "chatbots",
     "conversational-agents"
    ],
-   "updated": "2026-10-20",
-   "forks": 222,
+   "updated": "2026-10-21",
+   "forks": 223,
    "category": "ai_agent_framework",
    "query": "autonomous agent llm",
    "score": 81
@@ -1147,7 +1147,7 @@
   {
    "name": "foryourhealth111-pixel/Vibe-Skills",
    "url": "https://github.com/foryourhealth111-pixel/Vibe-Skills",
-   "stars": 3748,
+   "stars": 3758,
    "lang": "Python",
    "desc": "Intelligent Skill routing and workflow orchestration for AI agents — +21.12 pp reward, −29.6% tokens on SkillsBench with DeepSeekV4Flash-VE.",
    "topics": [
@@ -1160,7 +1160,7 @@
     "ai-workflow",
     "automation"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 341,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
@@ -1213,7 +1213,7 @@
   {
    "name": "langchain-ai/langchain",
    "url": "https://github.com/langchain-ai/langchain",
-   "stars": 148192,
+   "stars": 148269,
    "lang": "Python",
    "desc": "The agent engineering platform.",
    "topics": [
@@ -1226,8 +1226,8 @@
     "enterprise",
     "framework"
    ],
-   "updated": "2026-10-21",
-   "forks": 24869,
+   "updated": "2026-10-22",
+   "forks": 24883,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 80
@@ -1235,7 +1235,7 @@
   {
    "name": "AtomicBot-ai/Atomic-Chat",
    "url": "https://github.com/AtomicBot-ai/Atomic-Chat",
-   "stars": 1824,
+   "stars": 1828,
    "lang": "TypeScript",
    "desc": "Local AI app and inference engine for agents. Run open-weight LLMs locally — private, 100% offline on your computer. Join our Discord: https://discord.com/invite/8wGSsvmg4V",
    "topics": [
@@ -1248,8 +1248,8 @@
     "gemma",
     "gguf"
    ],
-   "updated": "2026-10-21",
-   "forks": 208,
+   "updated": "2026-10-22",
+   "forks": 209,
    "category": "local_llm",
    "query": "local llm inference engine",
    "score": 80
@@ -1277,6 +1277,19 @@
    "score": 80
   },
   {
+   "name": "hexo-ai/sia",
+   "url": "https://github.com/hexo-ai/sia",
+   "stars": 2161,
+   "lang": "Python",
+   "desc": "SIA is a Self Improving AI framework to autonomously improve the performance of any AI system (Model / Agent) on a benchmark task.",
+   "topics": [],
+   "updated": "2026-10-21",
+   "forks": 256,
+   "category": "self_evolving",
+   "query": "self-improving agent",
+   "score": 80
+  },
+  {
    "name": "avivl/cloud-sre-agent",
    "url": "https://github.com/avivl/cloud-sre-agent",
    "stars": 53,
@@ -1301,7 +1314,7 @@
   {
    "name": "thedotmack/claude-mem",
    "url": "https://github.com/thedotmack/claude-mem",
-   "stars": 102065,
+   "stars": 102254,
    "lang": "TypeScript",
    "desc": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Cla",
    "topics": [
@@ -1314,29 +1327,16 @@
     "claude",
     "claude-agent-sdk"
    ],
-   "updated": "2026-10-21",
-   "forks": 8988,
+   "updated": "2026-10-22",
+   "forks": 9007,
    "category": "rag_memory",
    "query": "embeddings sqlite",
    "score": 80
   },
   {
-   "name": "hexo-ai/sia",
-   "url": "https://github.com/hexo-ai/sia",
-   "stars": 2162,
-   "lang": "Python",
-   "desc": "SIA is a Self Improving AI framework to autonomously improve the performance of any AI system (Model / Agent) on a benchmark task.",
-   "topics": [],
-   "updated": "2026-10-18",
-   "forks": 256,
-   "category": "self_evolving",
-   "query": "self-improving agent",
-   "score": 80
-  },
-  {
    "name": "ENTERPILOT/GoModel",
    "url": "https://github.com/ENTERPILOT/GoModel",
-   "stars": 1262,
+   "stars": 1266,
    "lang": "Go",
    "desc": "AI gateway / AI control plane / AI proxy written in Go. Unified OpenAI-compatible and Anthropic-compatible API for OpenAI, Anthropic, Gemini, Groq, xAI, Ollama, vLLM and more. A LiteLLM alternative wi",
    "topics": [
@@ -1349,8 +1349,8 @@
     "groq",
     "litellm-alternative"
    ],
-   "updated": "2026-10-21",
-   "forks": 116,
+   "updated": "2026-10-22",
+   "forks": 117,
    "category": "local_llm",
    "query": "ollama alternative",
    "score": 79
@@ -1358,7 +1358,7 @@
   {
    "name": "langchain-ai/langgraph",
    "url": "https://github.com/langchain-ai/langgraph",
-   "stars": 43641,
+   "stars": 43715,
    "lang": "Python",
    "desc": "Build resilient agents.",
    "topics": [
@@ -1371,8 +1371,8 @@
     "framework",
     "gemini"
    ],
-   "updated": "2026-10-21",
-   "forks": 7470,
+   "updated": "2026-10-22",
+   "forks": 7494,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 78
@@ -1400,53 +1400,9 @@
    "score": 78
   },
   {
-   "name": "frankbria/codeframe",
-   "url": "https://github.com/frankbria/codeframe",
-   "stars": 24,
-   "lang": "Python",
-   "desc": "Your coding agent writes the code — CodeFRAME proves it works, and keeps proving it. Every bug you capture becomes a permanent, scoped obligation that blocks the merge until real evidence satisfies it",
-   "topics": [
-    "agent-orchestration",
-    "ai-agent",
-    "ai-agent-framework",
-    "ai-agents",
-    "ai-coding-assistant",
-    "auto-code-review",
-    "automation",
-    "autonomous-agents"
-   ],
-   "updated": "2026-10-16",
-   "forks": 8,
-   "category": "self_evolving",
-   "query": "auto-code-review agent",
-   "score": 78
-  },
-  {
-   "name": "toby-bridges/api-relay-audit",
-   "url": "https://github.com/toby-bridges/api-relay-audit",
-   "stars": 887,
-   "lang": "Python",
-   "desc": "Local security audit for AI API relays and LLM proxies: detects prompt injection, model substitution, tool-call rewriting, SSE anomalies, error leakage, and Web3 wallet risks.",
-   "topics": [
-    "ai-agents",
-    "ai-audit",
-    "ai-security",
-    "anthropic",
-    "api-gateway",
-    "claude",
-    "dsh-plugin",
-    "llm-audit"
-   ],
-   "updated": "2026-10-20",
-   "forks": 84,
-   "category": "crypto_airdrop",
-   "query": "web3 python tools",
-   "score": 78
-  },
-  {
    "name": "opencrabs/opencrabs",
    "url": "https://github.com/opencrabs/opencrabs",
-   "stars": 1004,
+   "stars": 1005,
    "lang": "Rust",
    "desc": "The all-in-one AI agent. Build mobile apps, frontend, backend, manages files, deep research, schedule tasks and events. Self-improving, self-healing, fully autonomous. TUI, CLI and Daemon. Connect to ",
    "topics": [
@@ -1459,8 +1415,8 @@
     "open-source",
     "opencrabs"
    ],
-   "updated": "2026-10-21",
-   "forks": 103,
+   "updated": "2026-10-22",
+   "forks": 104,
    "category": "self_evolving",
    "query": "self-improving agent",
    "score": 78
@@ -1488,6 +1444,28 @@
    "score": 78
   },
   {
+   "name": "toby-bridges/api-relay-audit",
+   "url": "https://github.com/toby-bridges/api-relay-audit",
+   "stars": 887,
+   "lang": "Python",
+   "desc": "Local security audit for AI API relays and LLM proxies: detects prompt injection, model substitution, tool-call rewriting, SSE anomalies, error leakage, and Web3 wallet risks.",
+   "topics": [
+    "ai-agents",
+    "ai-audit",
+    "ai-security",
+    "anthropic",
+    "api-gateway",
+    "claude",
+    "dsh-plugin",
+    "llm-audit"
+   ],
+   "updated": "2026-10-22",
+   "forks": 84,
+   "category": "crypto_airdrop",
+   "query": "web3 python tools",
+   "score": 78
+  },
+  {
    "name": "metiutek/Vortelio",
    "url": "https://github.com/metiutek/Vortelio",
    "stars": 19,
@@ -1503,10 +1481,32 @@
     "llamacpp",
     "llm"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 1,
    "category": "voice_interface",
    "query": "whisper alternative python",
+   "score": 78
+  },
+  {
+   "name": "frankbria/codeframe",
+   "url": "https://github.com/frankbria/codeframe",
+   "stars": 24,
+   "lang": "Python",
+   "desc": "Your coding agent writes the code — CodeFRAME proves it works, and keeps proving it. Every bug you capture becomes a permanent, scoped obligation that blocks the merge until real evidence satisfies it",
+   "topics": [
+    "agent-orchestration",
+    "ai-agent",
+    "ai-agent-framework",
+    "ai-agents",
+    "ai-coding-assistant",
+    "auto-code-review",
+    "automation",
+    "autonomous-agents"
+   ],
+   "updated": "2026-10-16",
+   "forks": 8,
+   "category": "self_evolving",
+   "query": "auto-code-review agent",
    "score": 78
   },
   {
@@ -1534,7 +1534,7 @@
   {
    "name": "SigNoz/signoz",
    "url": "https://github.com/SigNoz/signoz",
-   "stars": 32420,
+   "stars": 32425,
    "lang": "TypeScript",
    "desc": "SigNoz is an open-source, OpenTelemetry-native observability platform for your team and their AI agents. Get logs, metrics, and traces in one tool with features like APM, distributed tracing, log mana",
    "topics": [
@@ -1547,7 +1547,7 @@
     "log",
     "logs"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 2549,
    "category": "observability",
    "query": "self-hosted monitoring",
@@ -1556,7 +1556,7 @@
   {
    "name": "aeonfun/aeon",
    "url": "https://github.com/aeonfun/aeon",
-   "stars": 780,
+   "stars": 782,
    "lang": "JavaScript",
    "desc": "The most autonomous AI agent framework: runs unattended on GitHub Actions, self-healing skills, drives Claude Code, Grok, Codex & more. No approval loops. Configure once, forget forever.",
    "topics": [
@@ -1570,7 +1570,7 @@
     "claude"
    ],
    "updated": "2026-10-21",
-   "forks": 292,
+   "forks": 293,
    "category": "cloud_free",
    "query": "github actions automation",
    "score": 77
@@ -1600,12 +1600,12 @@
   {
    "name": "openai/swarm",
    "url": "https://github.com/openai/swarm",
-   "stars": 22065,
+   "stars": 22068,
    "lang": "Python",
    "desc": "Educational framework exploring ergonomic, lightweight multi-agent orchestration. Managed by OpenAI Solution team.",
    "topics": [],
-   "updated": "2026-10-21",
-   "forks": 2345,
+   "updated": "2026-10-22",
+   "forks": 2346,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 76
@@ -1677,9 +1677,27 @@
    "score": 76
   },
   {
+   "name": "letta-ai/letta",
+   "url": "https://github.com/letta-ai/letta",
+   "stars": 25229,
+   "lang": "",
+   "desc": "Platform for stateful agents: AI with advanced memory that can learn and self-improve over time.",
+   "topics": [
+    "ai",
+    "ai-agents",
+    "llm",
+    "llm-agent"
+   ],
+   "updated": "2026-10-22",
+   "forks": 2651,
+   "category": "self_evolving",
+   "query": "self-improving agent",
+   "score": 76
+  },
+  {
    "name": "getmaxun/maxun",
    "url": "https://github.com/getmaxun/maxun",
-   "stars": 17973,
+   "stars": 17994,
    "lang": "TypeScript",
    "desc": "Turn any website into a structured API. Extract, automate, search and monitor the web.",
    "topics": [
@@ -1692,8 +1710,8 @@
     "data-extraction",
     "no-code"
    ],
-   "updated": "2026-10-21",
-   "forks": 1556,
+   "updated": "2026-10-22",
+   "forks": 1562,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 76
@@ -1714,7 +1732,7 @@
     "grafana-alternative",
     "heartbeat"
    ],
-   "updated": "2026-10-17",
+   "updated": "2026-10-22",
    "forks": 24,
    "category": "observability",
    "query": "uptime monitoring self-hosted",
@@ -1743,27 +1761,9 @@
    "score": 76
   },
   {
-   "name": "letta-ai/letta",
-   "url": "https://github.com/letta-ai/letta",
-   "stars": 25214,
-   "lang": "",
-   "desc": "Platform for stateful agents: AI with advanced memory that can learn and self-improve over time.",
-   "topics": [
-    "ai",
-    "ai-agents",
-    "llm",
-    "llm-agent"
-   ],
-   "updated": "2026-10-21",
-   "forks": 2651,
-   "category": "self_evolving",
-   "query": "self-improving agent",
-   "score": 76
-  },
-  {
    "name": "microsoft/agent-framework",
    "url": "https://github.com/microsoft/agent-framework",
-   "stars": 14247,
+   "stars": 14271,
    "lang": "Python",
    "desc": "A framework for building, orchestrating and deploying AI agents and multi-agent workflows with support for Python and .NET.",
    "topics": [
@@ -1776,8 +1776,8 @@
     "orchestration",
     "python"
    ],
-   "updated": "2026-10-21",
-   "forks": 2494,
+   "updated": "2026-10-22",
+   "forks": 2496,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 75
@@ -1785,7 +1785,7 @@
   {
    "name": "HKUDS/DeepCode",
    "url": "https://github.com/HKUDS/DeepCode",
-   "stars": 16739,
+   "stars": 16742,
    "lang": "Python",
    "desc": "\"DeepCode: Open Agentic Coding (Agent Harness & Loop Engineering & Multi-Agent Orchestration)\"",
    "topics": [
@@ -1793,8 +1793,8 @@
     "harness-engineering",
     "llm-agent"
    ],
-   "updated": "2026-10-21",
-   "forks": 2174,
+   "updated": "2026-10-22",
+   "forks": 2176,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 75
@@ -1802,7 +1802,7 @@
   {
    "name": "OrchestratorInc/agent-orchestrator",
    "url": "https://github.com/OrchestratorInc/agent-orchestrator",
-   "stars": 13445,
+   "stars": 13482,
    "lang": "Go",
    "desc": "Open-source (Apache-2.0) orchestrator for Claude Code, Codex & 30+ coding agents. Plan, run and supervise agent teams from task to merged PR. Desktop (macOS, Windows, Linux) + iPhone & Android apps.",
    "topics": [
@@ -1815,8 +1815,8 @@
     "ai-coding",
     "claude-code"
    ],
-   "updated": "2026-10-21",
-   "forks": 1848,
+   "updated": "2026-10-22",
+   "forks": 1854,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 75
@@ -1846,7 +1846,7 @@
   {
    "name": "rishabhops/CipherElite",
    "url": "https://github.com/rishabhops/CipherElite",
-   "stars": 285,
+   "stars": 287,
    "lang": "Python",
    "desc": "CipherElite: A new era Telegram Userbot featuring advanced AI plugins. Built with Python & Telethon to automate tasks, manage groups, and generate AI responses. Supports Heroku, VPS, & Termux.",
    "topics": [
@@ -1859,8 +1859,8 @@
     "new-era",
     "python"
    ],
-   "updated": "2026-10-16",
-   "forks": 557,
+   "updated": "2026-10-22",
+   "forks": 559,
    "category": "telegram_bots",
    "query": "telegram automation python",
    "score": 75
@@ -1881,7 +1881,7 @@
   {
    "name": "omnigent-ai/omnigent",
    "url": "https://github.com/omnigent-ai/omnigent",
-   "stars": 10950,
+   "stars": 10984,
    "lang": "Python",
    "desc": "Omnigent is an open-source AI agent framework and meta-harness: orchestrate Claude Code, Codex, Cursor, Pi, and custom agents — swap harnesses without rewriting, enforce policies and sandboxing, and c",
    "topics": [
@@ -1894,8 +1894,8 @@
     "ai-agents",
     "claude-code"
    ],
-   "updated": "2026-10-21",
-   "forks": 1776,
+   "updated": "2026-10-22",
+   "forks": 1789,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 74
@@ -1903,7 +1903,7 @@
   {
    "name": "alvinunreal/oh-my-opencode-slim",
    "url": "https://github.com/alvinunreal/oh-my-opencode-slim",
-   "stars": 9707,
+   "stars": 9738,
    "lang": "TypeScript",
    "desc": "Lean, fine tuned Opencode multi agent suite · Mix any models · Auto delegate tasks",
    "topics": [
@@ -1913,8 +1913,8 @@
     "opencode",
     "orchestration"
    ],
-   "updated": "2026-10-21",
-   "forks": 589,
+   "updated": "2026-10-22",
+   "forks": 591,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 74
@@ -1963,7 +1963,7 @@
   {
    "name": "eadmin2/jarvis_ai",
    "url": "https://github.com/eadmin2/jarvis_ai",
-   "stars": 194,
+   "stars": 195,
    "lang": "Python",
    "desc": "Iron-Man-style voice assistant + holographic HUD for Hermes Agent. Local Whisper STT, ElevenLabs voice, agent-summoned media panels, runs on your own hardware.",
    "topics": [
@@ -1976,7 +1976,7 @@
     "voice-assistant",
     "whisper"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 69,
    "category": "voice_interface",
    "query": "voice assistant local",
@@ -1999,7 +1999,7 @@
     "aws-bedrock"
    ],
    "updated": "2026-10-21",
-   "forks": 743,
+   "forks": 744,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 73
@@ -2041,8 +2041,8 @@
     "gemini",
     "graph"
    ],
-   "updated": "2026-10-21",
-   "forks": 429,
+   "updated": "2026-10-22",
+   "forks": 428,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 73
@@ -2050,7 +2050,7 @@
   {
    "name": "kyegomez/swarms",
    "url": "https://github.com/kyegomez/swarms",
-   "stars": 7285,
+   "stars": 7287,
    "lang": "Python",
    "desc": "The Enterprise-Grade Multi-Agent Orchestration Framework. Website: https://swarms.ai",
    "topics": [
@@ -2063,7 +2063,7 @@
     "claude-code",
     "gpt4all"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 1047,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
@@ -2072,7 +2072,7 @@
   {
    "name": "ModelEngine-Group/nexent",
    "url": "https://github.com/ModelEngine-Group/nexent",
-   "stars": 6005,
+   "stars": 6010,
    "lang": "Python",
    "desc": "Nexent is a zero-code platform for auto-generating production-grade AI agents using Harness Engineering principles — unified tools, skills, memory, and orchestration with built-in constraints, feedbac",
    "topics": [
@@ -2085,8 +2085,8 @@
     "harness",
     "harness-engineering"
    ],
-   "updated": "2026-10-21",
-   "forks": 748,
+   "updated": "2026-10-22",
+   "forks": 749,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 73
@@ -2094,7 +2094,7 @@
   {
    "name": "ageerle/ruoyi-ai",
    "url": "https://github.com/ageerle/ruoyi-ai",
-   "stars": 5767,
+   "stars": 5771,
    "lang": "Java",
    "desc": "Enterprise-grade AI agent framework with multi-provider LLM management, secure knowledge bases and high-precision RAG, visual workflow orchestration, and multi-agent coordination.",
    "topics": [
@@ -2104,8 +2104,8 @@
     "mcp",
     "rag"
    ],
-   "updated": "2026-10-21",
-   "forks": 1418,
+   "updated": "2026-10-22",
+   "forks": 1423,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 73
@@ -2126,16 +2126,38 @@
     "claude-design-alternative",
     "deepseek"
    ],
-   "updated": "2026-10-21",
-   "forks": 852,
+   "updated": "2026-10-22",
+   "forks": 853,
    "category": "local_llm",
    "query": "ollama alternative",
    "score": 73
   },
   {
+   "name": "rongxinzy/RongxinAI",
+   "url": "https://github.com/rongxinzy/RongxinAI",
+   "stars": 161,
+   "lang": "TypeScript",
+   "desc": "Open-source desktop AI agent: built-in free model, local GGUF models via llama.cpp, dispatch tasks from WeChat/Feishu/DingTalk. Files, browser & MCP tools. | 开源桌面 AI 智能体：内置免费模型，llama.cpp 本地 GGUF 模型，微信",
+   "topics": [
+    "agentic-ai",
+    "ai",
+    "ai-agent",
+    "ai-agents",
+    "ai-assistant",
+    "browser-automation",
+    "computer-use",
+    "context-engineering"
+   ],
+   "updated": "2026-10-22",
+   "forks": 7,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 73
+  },
+  {
    "name": "aiogram/aiogram",
    "url": "https://github.com/aiogram/aiogram",
-   "stars": 5900,
+   "stars": 5904,
    "lang": "Python",
    "desc": "aiogram is a modern and fully asynchronous framework for Telegram Bot API written in Python using asyncio",
    "topics": [
@@ -2147,8 +2169,8 @@
     "telegram-bot",
     "telegram-bot-api"
    ],
-   "updated": "2026-10-20",
-   "forks": 976,
+   "updated": "2026-10-22",
+   "forks": 978,
    "category": "telegram_bots",
    "query": "telegram bot python framework",
    "score": 73
@@ -2156,7 +2178,7 @@
   {
    "name": "hatchet-dev/hatchet",
    "url": "https://github.com/hatchet-dev/hatchet",
-   "stars": 8161,
+   "stars": 8164,
    "lang": "Go",
    "desc": "🪓 An orchestration engine for background tasks, AI agents, and durable workflows",
    "topics": [
@@ -2169,7 +2191,7 @@
     "fastapi",
     "golang"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 523,
    "category": "orchestration",
    "query": "task queue python",
@@ -2178,7 +2200,7 @@
   {
    "name": "apache/hertzbeat",
    "url": "https://github.com/apache/hertzbeat",
-   "stars": 7432,
+   "stars": 7436,
    "lang": "Java",
    "desc": "An AI-powered next-generation open source real-time observability system.",
    "topics": [
@@ -2191,8 +2213,8 @@
     "llm",
     "logs"
    ],
-   "updated": "2026-10-21",
-   "forks": 1362,
+   "updated": "2026-10-22",
+   "forks": 1364,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 73
@@ -2200,9 +2222,9 @@
   {
    "name": "rcourtman/Pulse",
    "url": "https://github.com/rcourtman/Pulse",
-   "stars": 6905,
+   "stars": 6914,
    "lang": "Go",
-   "desc": "Real-time monitoring dashboard for Proxmox VE, PBS, Docker, Kubernetes, TrueNAS and vSphere. Self-hosted, with smart alerts and AI patrols that catch silent failures.",
+   "desc": "Real-time monitoring dashboard for Proxmox VE, PBS, Docker, Kubernetes, TrueNAS and vSphere. Self-hosted, with alerts for failed backups, full disks, unhealthy containers and offline nodes.",
    "topics": [
     "ai",
     "alerts",
@@ -2213,8 +2235,8 @@
     "homelab",
     "infrastructure-monitoring"
    ],
-   "updated": "2026-10-21",
-   "forks": 276,
+   "updated": "2026-10-22",
+   "forks": 279,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 73
@@ -2222,7 +2244,7 @@
   {
    "name": "buxuku/SmartSub",
    "url": "https://github.com/buxuku/SmartSub",
-   "stars": 5788,
+   "stars": 5797,
    "lang": "TypeScript",
    "desc": "视频转字幕、字幕翻译、AI 配音与声音克隆、字幕烧录——免费开源的一站式桌面工具。基于 Whisper / FunASR 等本地模型离线语音转文字，批量处理 + 全平台 GPU 加速，跨 Windows / macOS / Linux。Free, open-source desktop app to generate, translate, dub & burn video subtitles —",
    "topics": [
@@ -2235,8 +2257,8 @@
     "qwen3-asr",
     "sherpa-onnx"
    ],
-   "updated": "2026-10-21",
-   "forks": 465,
+   "updated": "2026-10-22",
+   "forks": 467,
    "category": "voice_interface",
    "query": "speech to text local",
    "score": 73
@@ -2264,28 +2286,6 @@
    "score": 73
   },
   {
-   "name": "rongxinzy/RongxinAI",
-   "url": "https://github.com/rongxinzy/RongxinAI",
-   "stars": 161,
-   "lang": "TypeScript",
-   "desc": "Open-source desktop AI agent: built-in free model, local GGUF models via llama.cpp, dispatch tasks from WeChat/Feishu/DingTalk. Files, browser & MCP tools. | 开源桌面 AI 智能体：内置免费模型，llama.cpp 本地 GGUF 模型，微信",
-   "topics": [
-    "agentic-ai",
-    "ai",
-    "ai-agent",
-    "ai-agents",
-    "ai-assistant",
-    "browser-automation",
-    "computer-use",
-    "context-engineering"
-   ],
-   "updated": "2026-10-21",
-   "forks": 7,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 73
-  },
-  {
    "name": "truefoundry/cognita",
    "url": "https://github.com/truefoundry/cognita",
    "stars": 4411,
@@ -2305,28 +2305,6 @@
    "forks": 394,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
-   "score": 72
-  },
-  {
-   "name": "SolaceLabs/solace-agent-mesh",
-   "url": "https://github.com/SolaceLabs/solace-agent-mesh",
-   "stars": 4914,
-   "lang": "Python",
-   "desc": "An event-driven framework designed to build and orchestrate multi-agent AI systems. It enables seamless integration of AI agents with real-world data sources and systems, facilitating complex, multi-s",
-   "topics": [
-    "a2a",
-    "agentframework",
-    "agentic",
-    "agentic-ai",
-    "agentic-framework",
-    "agentic-workflow",
-    "agenticai",
-    "agents"
-   ],
-   "updated": "2026-10-21",
-   "forks": 274,
-   "category": "ai_agent_framework",
-   "query": "multi-agent orchestration",
    "score": 72
   },
   {
@@ -2365,6 +2343,50 @@
    "score": 72
   },
   {
+   "name": "AarambhDevHub/aarambh-studio",
+   "url": "https://github.com/AarambhDevHub/aarambh-studio",
+   "stars": 110,
+   "lang": "Rust",
+   "desc": "🦀 Decoder-only LLM built from scratch in pure Rust using Candle — no Python, no PyTorch. Gated DeltaNet + sparse attention, fine-grained MoE, native video/document understanding, long-horizon tool age",
+   "topics": [
+    "ai-agents",
+    "candle",
+    "decoder-only",
+    "deep-learning",
+    "dora",
+    "from-scratch",
+    "gguf",
+    "grpo"
+   ],
+   "updated": "2026-09-27",
+   "forks": 36,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 72
+  },
+  {
+   "name": "EverMind-AI/Raven",
+   "url": "https://github.com/EverMind-AI/Raven",
+   "stars": 5551,
+   "lang": "Python",
+   "desc": "The Harness of Harnesses • built for RSI: a trusted, persistent, self-evolving multi-agent ecosystem for all-domain collaboration.",
+   "topics": [
+    "ai",
+    "ai-agents",
+    "anthropic",
+    "chatgpt",
+    "claude",
+    "codex",
+    "evermind",
+    "hermes"
+   ],
+   "updated": "2026-10-22",
+   "forks": 183,
+   "category": "self_evolving",
+   "query": "self-improving agent",
+   "score": 72
+  },
+  {
    "name": "libenxier-beep/codex-memories",
    "url": "https://github.com/libenxier-beep/codex-memories",
    "stars": 103,
@@ -2400,48 +2422,26 @@
    "score": 72
   },
   {
-   "name": "AarambhDevHub/aarambh-studio",
-   "url": "https://github.com/AarambhDevHub/aarambh-studio",
-   "stars": 110,
-   "lang": "Rust",
-   "desc": "🦀 Decoder-only LLM built from scratch in pure Rust using Candle — no Python, no PyTorch. Gated DeltaNet + sparse attention, fine-grained MoE, native video/document understanding, long-horizon tool age",
+   "name": "off-grid-ai/OGAM",
+   "url": "https://github.com/off-grid-ai/OGAM",
+   "stars": 3263,
+   "lang": "TypeScript",
+   "desc": "The Swiss Army Knife of Offline AI. Chat, see, speak, and generate images on your phone or Mac — GGUF LLMs, vision, Whisper speech-to-text, Stable Diffusion, tool calling, and local-network servers. R",
    "topics": [
-    "ai-agents",
-    "candle",
-    "decoder-only",
-    "deep-learning",
-    "dora",
-    "from-scratch",
+    "android",
+    "edge-ai",
     "gguf",
-    "grpo"
+    "ios",
+    "llama-cpp",
+    "local-ai",
+    "macos",
+    "mcp"
    ],
-   "updated": "2026-09-27",
-   "forks": 36,
+   "updated": "2026-10-22",
+   "forks": 320,
    "category": "local_llm",
    "query": "gguf tools",
-   "score": 72
-  },
-  {
-   "name": "EverMind-AI/Raven",
-   "url": "https://github.com/EverMind-AI/Raven",
-   "stars": 5538,
-   "lang": "Python",
-   "desc": "The Harness of Harnesses • built for RSI: a trusted, persistent, self-evolving multi-agent ecosystem for all-domain collaboration.",
-   "topics": [
-    "ai",
-    "ai-agents",
-    "anthropic",
-    "chatgpt",
-    "claude",
-    "codex",
-    "evermind",
-    "hermes"
-   ],
-   "updated": "2026-10-21",
-   "forks": 180,
-   "category": "self_evolving",
-   "query": "self-improving agent",
-   "score": 72
+   "score": 71
   },
   {
    "name": "YarmolenkoD/boinkers",
@@ -2466,9 +2466,30 @@
    "score": 71
   },
   {
+   "name": "PhyAgentOS/PhyAgentOS-core",
+   "url": "https://github.com/PhyAgentOS/PhyAgentOS-core",
+   "stars": 2973,
+   "lang": "Python",
+   "desc": "PhyAgentOS is a Recursive Self-Improving (RSI)  physical agent operating system that enables agents to recursively self-improve through agentic workflows.",
+   "topics": [
+    "agent",
+    "claw",
+    "embodied-agent",
+    "embodied-ai",
+    "harness",
+    "rsi",
+    "self-evolution"
+   ],
+   "updated": "2026-10-22",
+   "forks": 128,
+   "category": "self_evolving",
+   "query": "self-improving agent",
+   "score": 71
+  },
+  {
    "name": "operacle/checkcle",
    "url": "https://github.com/operacle/checkcle",
-   "stars": 3308,
+   "stars": 3309,
    "lang": "Go",
    "desc": "CheckCle is a self-hosted, open-source monitoring platform for seamless, real-time full-stack systems, applications, and infrastructure. It provides real-time uptime monitoring, distributed checks, in",
    "topics": [
@@ -2481,7 +2502,7 @@
     "go",
     "infrastructure"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 293,
    "category": "observability",
    "query": "uptime monitoring self-hosted",
@@ -2490,7 +2511,7 @@
   {
    "name": "shanananana/deepticket",
    "url": "https://github.com/shanananana/deepticket",
-   "stars": 70,
+   "stars": 71,
    "lang": "Python",
    "desc": "An AI troubleshooting workbench for internal systems: it integrates ticketing and alerting systems via HTTP APIs and webhooks, connects code, logs, configurations, and agents, and provides a web-based",
    "topics": [
@@ -2512,7 +2533,7 @@
   {
    "name": "codedogQBY/ReadAny",
    "url": "https://github.com/codedogQBY/ReadAny",
-   "stars": 2847,
+   "stars": 2855,
    "lang": "TypeScript",
    "desc": "AI-powered cross-platform e-book reader with semantic search, RAG chat, local vector store, notes, TTS, and WebDAV sync.",
    "topics": [
@@ -2525,53 +2546,10 @@
     "knowledge-management",
     "llm"
    ],
-   "updated": "2026-10-21",
-   "forks": 228,
+   "updated": "2026-10-22",
+   "forks": 233,
    "category": "rag_memory",
    "query": "embeddings sqlite",
-   "score": 71
-  },
-  {
-   "name": "off-grid-ai/OGAM",
-   "url": "https://github.com/off-grid-ai/OGAM",
-   "stars": 3256,
-   "lang": "TypeScript",
-   "desc": "The Swiss Army Knife of Offline AI. Chat, see, speak, and generate images on your phone or Mac — GGUF LLMs, vision, Whisper speech-to-text, Stable Diffusion, tool calling, and local-network servers. R",
-   "topics": [
-    "android",
-    "edge-ai",
-    "gguf",
-    "ios",
-    "llama-cpp",
-    "local-ai",
-    "macos",
-    "mcp"
-   ],
-   "updated": "2026-10-21",
-   "forks": 317,
-   "category": "voice_interface",
-   "query": "speech to text local",
-   "score": 71
-  },
-  {
-   "name": "PhyAgentOS/PhyAgentOS-core",
-   "url": "https://github.com/PhyAgentOS/PhyAgentOS-core",
-   "stars": 2991,
-   "lang": "Python",
-   "desc": "PhyAgentOS is a Recursive Self-Improving (RSI)  physical agent operating system that enables agents to recursively self-improve through agentic workflows.",
-   "topics": [
-    "agent",
-    "claw",
-    "embodied-agent",
-    "embodied-ai",
-    "harness",
-    "rsi",
-    "self-evolution"
-   ],
-   "updated": "2026-10-21",
-   "forks": 127,
-   "category": "self_evolving",
-   "query": "self-improving agent",
    "score": 71
   },
   {
@@ -2612,7 +2590,7 @@
     "mcp",
     "react-native"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 0,
    "category": "local_llm",
    "query": "llama.cpp alternative",
@@ -2638,6 +2616,76 @@
    "forks": 0,
    "category": "local_llm",
    "query": "llama.cpp alternative",
+   "score": 70
+  },
+  {
+   "name": "kekzl/imp",
+   "url": "https://github.com/kekzl/imp",
+   "stars": 47,
+   "lang": "C++",
+   "desc": "Fast LLM server for NVIDIA Blackwell: GeForce RTX 50 and RTX PRO. Qwen3.8-27B on one RTX 5090: 91-94 tok/s, 1.3x vLLM and 1.4x llama.cpp. Runs the 123.6 GiB Qwen3.8-Flash-Next on a 32 GB card. OpenAI ",
+   "topics": [
+    "ai-agents",
+    "blackwell",
+    "cuda",
+    "gguf",
+    "inference-engine",
+    "llama-cpp",
+    "llm-inference",
+    "local-llm"
+   ],
+   "updated": "2026-10-22",
+   "forks": 4,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 70
+  },
+  {
+   "name": "Asymptote-Labs/agent-beacon",
+   "url": "https://github.com/Asymptote-Labs/agent-beacon",
+   "stars": 2555,
+   "lang": "Go",
+   "desc": "The cross-harness, self-improving memory layer for AI agents. Join our community: https://discord.com/invite/zdNChS2fBu",
+   "topics": [
+    "agent-ai-cli",
+    "agent-harnesses",
+    "agent-security",
+    "browser-extension",
+    "ci",
+    "claude-code",
+    "cloud",
+    "codex"
+   ],
+   "updated": "2026-10-22",
+   "forks": 233,
+   "category": "self_evolving",
+   "query": "self-improving agent",
+   "score": 70
+  },
+  {
+   "name": "chrisworsey55/atlas-gic",
+   "url": "https://github.com/chrisworsey55/atlas-gic",
+   "stars": 2328,
+   "lang": "Python",
+   "desc": "ATLAS by General Intelligence Capital — Self-improving AI trading agents using Karpathy-style autoresearch",
+   "topics": [],
+   "updated": "2026-10-22",
+   "forks": 418,
+   "category": "self_evolving",
+   "query": "self-improving agent",
+   "score": 70
+  },
+  {
+   "name": "OS-Copilot/OS-Copilot",
+   "url": "https://github.com/OS-Copilot/OS-Copilot",
+   "stars": 1794,
+   "lang": "Python",
+   "desc": "An self-improving embodied conversational agent seamlessly integrated into the operating system to automate our daily tasks. ",
+   "topics": [],
+   "updated": "2026-10-21",
+   "forks": 203,
+   "category": "self_evolving",
+   "query": "self-improving agent",
    "score": 70
   },
   {
@@ -2669,7 +2717,7 @@
   {
    "name": "isair/jarvis",
    "url": "https://github.com/isair/jarvis",
-   "stars": 2117,
+   "stars": 2126,
    "lang": "Python",
    "desc": "Private local AI assistant for your desktop. Voice and text chat, personal memory, dictation and MCP tools. Runs offline with Ollama or OpenAI-compatible servers on macOS, Windows and Linux.",
    "topics": [
@@ -2682,80 +2730,10 @@
     "mcp",
     "nutrition"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 415,
    "category": "voice_interface",
    "query": "voice assistant local",
-   "score": 70
-  },
-  {
-   "name": "kekzl/imp",
-   "url": "https://github.com/kekzl/imp",
-   "stars": 47,
-   "lang": "C++",
-   "desc": "Fast LLM server for NVIDIA Blackwell: GeForce RTX 50 and RTX PRO. Qwen3.8-27B on one RTX 5090: 91-94 tok/s, 1.3x vLLM and 1.4x llama.cpp. Runs the 123.6 GiB Qwen3.8-Flash-Next on a 32 GB card. OpenAI ",
-   "topics": [
-    "ai-agents",
-    "blackwell",
-    "cuda",
-    "gguf",
-    "inference-engine",
-    "llama-cpp",
-    "llm-inference",
-    "local-llm"
-   ],
-   "updated": "2026-10-21",
-   "forks": 4,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 70
-  },
-  {
-   "name": "chrisworsey55/atlas-gic",
-   "url": "https://github.com/chrisworsey55/atlas-gic",
-   "stars": 2325,
-   "lang": "Python",
-   "desc": "ATLAS by General Intelligence Capital — Self-improving AI trading agents using Karpathy-style autoresearch",
-   "topics": [],
-   "updated": "2026-10-20",
-   "forks": 418,
-   "category": "self_evolving",
-   "query": "self-improving agent",
-   "score": 70
-  },
-  {
-   "name": "Asymptote-Labs/agent-beacon",
-   "url": "https://github.com/Asymptote-Labs/agent-beacon",
-   "stars": 2306,
-   "lang": "Go",
-   "desc": "The cross-harness, self-improving memory layer for AI agents. Join our community: https://discord.com/invite/zdNChS2fBu",
-   "topics": [
-    "agent-ai-cli",
-    "agent-harnesses",
-    "agent-security",
-    "browser-extension",
-    "ci",
-    "claude-code",
-    "cloud",
-    "codex"
-   ],
-   "updated": "2026-10-21",
-   "forks": 207,
-   "category": "self_evolving",
-   "query": "self-improving agent",
-   "score": 70
-  },
-  {
-   "name": "OS-Copilot/OS-Copilot",
-   "url": "https://github.com/OS-Copilot/OS-Copilot",
-   "stars": 1794,
-   "lang": "Python",
-   "desc": "An self-improving embodied conversational agent seamlessly integrated into the operating system to automate our daily tasks. ",
-   "topics": [],
-   "updated": "2026-10-21",
-   "forks": 203,
-   "category": "self_evolving",
-   "query": "self-improving agent",
    "score": 70
   },
   {
@@ -2794,19 +2772,6 @@
    "score": 70
   },
   {
-   "name": "colbymchenry/codegraph",
-   "url": "https://github.com/colbymchenry/codegraph",
-   "stars": 74586,
-   "lang": "C",
-   "desc": "Pre-indexed code knowledge graph, auto syncs on code changes, for Claude Code, Codex, Gemini, Cursor, OpenCode, AntiGravity, Kiro, CoPilot, and Hermes Agent — fewer tokens, fewer tool calls, 100% loca",
-   "topics": [],
-   "updated": "2026-10-21",
-   "forks": 4828,
-   "category": "rag_memory",
-   "query": "knowledge graph tool",
-   "score": 69
-  },
-  {
    "name": "greyhaven-ai/autocontext",
    "url": "https://github.com/greyhaven-ai/autocontext",
    "stars": 1310,
@@ -2826,6 +2791,19 @@
    "forks": 114,
    "category": "self_evolving",
    "query": "self-improving agent",
+   "score": 69
+  },
+  {
+   "name": "colbymchenry/codegraph",
+   "url": "https://github.com/colbymchenry/codegraph",
+   "stars": 74674,
+   "lang": "C",
+   "desc": "Pre-indexed code knowledge graph, auto syncs on code changes, for Claude Code, Codex, Gemini, Cursor, OpenCode, AntiGravity, Kiro, CoPilot, and Hermes Agent — fewer tokens, fewer tool calls, 100% loca",
+   "topics": [],
+   "updated": "2026-10-22",
+   "forks": 4834,
+   "category": "rag_memory",
+   "query": "knowledge graph tool",
    "score": 69
   },
   {
@@ -2872,6 +2850,28 @@
    "score": 68
   },
   {
+   "name": "metauto-ai/GPTSwarm",
+   "url": "https://github.com/metauto-ai/GPTSwarm",
+   "stars": 1055,
+   "lang": "Python",
+   "desc": "🐝  The First Self-Improving agents with RL / Prompting Optimization",
+   "topics": [
+    "agent",
+    "ai",
+    "gpt",
+    "multi-agent",
+    "python",
+    "reinforcement-learning",
+    "self-improvement",
+    "society-of-mind"
+   ],
+   "updated": "2026-10-21",
+   "forks": 109,
+   "category": "self_evolving",
+   "query": "self-improving agent",
+   "score": 68
+  },
+  {
    "name": "0xfurai/peekaping",
    "url": "https://github.com/0xfurai/peekaping",
    "stars": 1202,
@@ -2886,8 +2886,8 @@
     "uptime",
     "uptime-monitoring"
    ],
-   "updated": "2026-10-21",
-   "forks": 82,
+   "updated": "2026-10-22",
+   "forks": 84,
    "category": "observability",
    "query": "uptime monitoring self-hosted",
    "score": 68
@@ -2913,28 +2913,6 @@
    "score": 68
   },
   {
-   "name": "metauto-ai/GPTSwarm",
-   "url": "https://github.com/metauto-ai/GPTSwarm",
-   "stars": 1055,
-   "lang": "Python",
-   "desc": "🐝  The First Self-Improving agents with RL / Prompting Optimization",
-   "topics": [
-    "agent",
-    "ai",
-    "gpt",
-    "multi-agent",
-    "python",
-    "reinforcement-learning",
-    "self-improvement",
-    "society-of-mind"
-   ],
-   "updated": "2026-10-21",
-   "forks": 109,
-   "category": "self_evolving",
-   "query": "self-improving agent",
-   "score": 68
-  },
-  {
    "name": "FareedKhan-dev/agentic-quantum-computing",
    "url": "https://github.com/FareedKhan-dev/agentic-quantum-computing",
    "stars": 24,
@@ -2957,13 +2935,35 @@
    "score": 68
   },
   {
+   "name": "wmentor/go-magnetar",
+   "url": "https://github.com/wmentor/go-magnetar",
+   "stars": 19,
+   "lang": "Go",
+   "desc": "An AI chat agent (harness) with integrated tools, skills and an optional knowledge base. Chat with any OpenAI-compatible LLM, use built-in integrations (web search, Confluence, JIRA, GitHub, GitLab an",
+   "topics": [
+    "ai-agent",
+    "ai-assistant",
+    "ai-harness",
+    "ai-tools",
+    "chatbot",
+    "cli",
+    "confluence",
+    "cve"
+   ],
+   "updated": "2026-10-22",
+   "forks": 12,
+   "category": "rag_memory",
+   "query": "local rag vector database",
+   "score": 68
+  },
+  {
    "name": "howdeploy/LocalForgeLLM",
    "url": "https://github.com/howdeploy/LocalForgeLLM",
-   "stars": 14,
+   "stars": 15,
    "lang": "Python",
    "desc": "A framework that lets AI agents build and optimize your local AI stack, choosing MoE models, inference engines, quantization, and runtime settings to get the most from your hardware for your tasks.",
    "topics": [],
-   "updated": "2026-10-04",
+   "updated": "2026-10-21",
    "forks": 3,
    "category": "local_llm",
    "query": "local llm inference engine",
@@ -2972,7 +2972,7 @@
   {
    "name": "python-telegram-bot/python-telegram-bot",
    "url": "https://github.com/python-telegram-bot/python-telegram-bot",
-   "stars": 29526,
+   "stars": 29527,
    "lang": "Python",
    "desc": "We have made you a wrapper you can't refuse",
    "topics": [
@@ -2982,16 +2982,38 @@
     "python",
     "telegram"
    ],
-   "updated": "2026-10-21",
-   "forks": 6170,
+   "updated": "2026-10-22",
+   "forks": 6168,
    "category": "telegram_bots",
    "query": "telegram bot python framework",
    "score": 67
   },
   {
+   "name": "conductor-oss/conductor",
+   "url": "https://github.com/conductor-oss/conductor",
+   "stars": 32363,
+   "lang": "Java",
+   "desc": "Conductor is an event driven agentic workflow engine providing durable and highly resilient execution engine for applications and AI Agents",
+   "topics": [
+    "distributed-systems",
+    "durable-execution",
+    "grpc",
+    "java",
+    "javascript",
+    "microservice-orchestration",
+    "orchestration-engine",
+    "orchestrator"
+   ],
+   "updated": "2026-10-22",
+   "forks": 1037,
+   "category": "orchestration",
+   "query": "durable workflow engine",
+   "score": 67
+  },
+  {
    "name": "glanceapp/glance",
    "url": "https://github.com/glanceapp/glance",
-   "stars": 37598,
+   "stars": 37610,
    "lang": "Go",
    "desc": "A self-hosted dashboard that puts all your feeds in one place",
    "topics": [
@@ -3004,8 +3026,8 @@
     "homepage",
     "monitoring"
    ],
-   "updated": "2026-10-21",
-   "forks": 1496,
+   "updated": "2026-10-22",
+   "forks": 1497,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 67
@@ -3013,7 +3035,7 @@
   {
    "name": "henrygd/beszel",
    "url": "https://github.com/henrygd/beszel",
-   "stars": 26392,
+   "stars": 26429,
    "lang": "Go",
    "desc": "Lightweight server monitoring with historical data, docker stats, and alerts.",
    "topics": [
@@ -3021,8 +3043,8 @@
     "monitoring",
     "self-hosted"
    ],
-   "updated": "2026-10-21",
-   "forks": 1104,
+   "updated": "2026-10-22",
+   "forks": 1107,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 67
@@ -3047,28 +3069,6 @@
    "forks": 3935,
    "category": "cloud_free",
    "query": "github actions automation",
-   "score": 67
-  },
-  {
-   "name": "wmentor/go-magnetar",
-   "url": "https://github.com/wmentor/go-magnetar",
-   "stars": 17,
-   "lang": "Go",
-   "desc": "An AI chat agent (harness) with integrated tools, skills and an optional knowledge base. Chat with any OpenAI-compatible LLM, use built-in integrations (web search, Confluence, JIRA, GitHub, GitLab an",
-   "topics": [
-    "ai-agent",
-    "ai-assistant",
-    "ai-harness",
-    "ai-tools",
-    "chatbot",
-    "cli",
-    "confluence",
-    "cve"
-   ],
-   "updated": "2026-10-21",
-   "forks": 13,
-   "category": "rag_memory",
-   "query": "local rag vector database",
    "score": 67
   },
   {
@@ -3118,7 +3118,7 @@
   {
    "name": "HelpCode-ai/anythingmcp",
    "url": "https://github.com/HelpCode-ai/anythingmcp",
-   "stars": 773,
+   "stars": 775,
    "lang": "TypeScript",
    "desc": "MCP gateway for AI agents: turn any REST/OpenAPI, GraphQL, SOAP or SQL API into MCP tools. 517 ready-made connectors (SAP, ERP, e-commerce) with RBAC, SSO, audit logs and a knowledge graph.",
    "topics": [
@@ -3131,8 +3131,8 @@
     "ecommerce",
     "erp"
    ],
-   "updated": "2026-10-21",
-   "forks": 96,
+   "updated": "2026-10-22",
+   "forks": 97,
    "category": "rag_memory",
    "query": "knowledge graph tool",
    "score": 67
@@ -3140,11 +3140,11 @@
   {
    "name": "aovestdipaperino/tokensave",
    "url": "https://github.com/aovestdipaperino/tokensave",
-   "stars": 673,
+   "stars": 675,
    "lang": "Rust",
    "desc": "The most comprehensive code intelligence MCP server for AI coding agents. 40+ tools, 30+ languages, 9 agent integrations. Pre-indexed semantic knowledge graphs for instant code understanding — fewer t",
    "topics": [],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 69,
    "category": "rag_memory",
    "query": "knowledge graph tool",
@@ -3153,7 +3153,7 @@
   {
    "name": "tetherto/qvac",
    "url": "https://github.com/tetherto/qvac",
-   "stars": 703,
+   "stars": 704,
    "lang": "TypeScript",
    "desc": "Open-source local AI SDK - run AI on-device with no cloud, no API keys. Supports GGUF, RAG, image, music, and video generation, speech-to-text, P2P inference, and more. Cross-platform: Linux, macOS, W",
    "topics": [
@@ -3166,7 +3166,7 @@
     "local-llm",
     "nodejs"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 140,
    "category": "voice_interface",
    "query": "speech to text local",
@@ -3195,31 +3195,9 @@
    "score": 67
   },
   {
-   "name": "conductor-oss/conductor",
-   "url": "https://github.com/conductor-oss/conductor",
-   "stars": 32361,
-   "lang": "Java",
-   "desc": "Conductor is an event driven agentic workflow engine providing durable and highly resilient execution engine for applications and AI Agents",
-   "topics": [
-    "distributed-systems",
-    "durable-execution",
-    "grpc",
-    "java",
-    "javascript",
-    "microservice-orchestration",
-    "orchestration-engine",
-    "orchestrator"
-   ],
-   "updated": "2026-10-21",
-   "forks": 1035,
-   "category": "orchestration",
-   "query": "durable workflow engine",
-   "score": 67
-  },
-  {
    "name": "jnMetaCode/agency-agents-zh",
    "url": "https://github.com/jnMetaCode/agency-agents-zh",
-   "stars": 21466,
+   "stars": 21499,
    "lang": "Shell",
    "desc": "🎭 277 个即插即用的 AI 专家角色 — 支持 Claude Code/Cursor/Copilot 等 20 种工具，覆盖工程/设计/营销/金融等 20 个部门。含 64 个中国市场原创智能体（小红书/抖音/微信/飞书/钉钉/Qt 上位机/机械设计）。搭配编排器 agency-orchestrator，一句话即可让多位专家按 DAG 自动协作。",
    "topics": [
@@ -3232,8 +3210,8 @@
     "claude-code",
     "copilot-agent"
    ],
-   "updated": "2026-10-21",
-   "forks": 3456,
+   "updated": "2026-10-22",
+   "forks": 3461,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 66
@@ -3241,7 +3219,7 @@
   {
    "name": "dyad-sh/dyad",
    "url": "https://github.com/dyad-sh/dyad",
-   "stars": 22021,
+   "stars": 22031,
    "lang": "TypeScript",
    "desc": "Local, open-source AI app builder for power users ✨ v0 / Lovable / Replit / Bolt alternative 🌟 Star if you like it!",
    "topics": [
@@ -3254,8 +3232,8 @@
     "generative-ai",
     "github"
    ],
-   "updated": "2026-10-21",
-   "forks": 2767,
+   "updated": "2026-10-22",
+   "forks": 2769,
    "category": "local_llm",
    "query": "ollama alternative",
    "score": 66
@@ -3334,6 +3312,22 @@
     "llm"
    ],
    "updated": "2026-09-25",
+   "forks": 1,
+   "category": "security_edr",
+   "query": "open source edr",
+   "score": 66
+  },
+  {
+   "name": "RawTrail/RawTrail",
+   "url": "https://github.com/RawTrail/RawTrail",
+   "stars": 10,
+   "lang": "Go",
+   "desc": "Open-source macOS Endpoint Detection and Response (EDR): real-time process + network telemetry, behavioral detection rules, and host response actions, all in a single self-hosted server + agent.",
+   "topics": [
+    "macos",
+    "security-tools"
+   ],
+   "updated": "2026-10-22",
    "forks": 0,
    "category": "security_edr",
    "query": "open source edr",
@@ -3342,7 +3336,7 @@
   {
    "name": "liliang-cn/cortexdb",
    "url": "https://github.com/liliang-cn/cortexdb",
-   "stars": 467,
+   "stars": 468,
    "lang": "Go",
    "desc": "AI memory and a knowledge graph in one SQLite file. Pure Go: vectors, RAG, agent memory, RDF/SPARQL, Cypher, 80+ MCP tools. Works without an embedding model.",
    "topics": [
@@ -3355,8 +3349,8 @@
     "go",
     "golang"
    ],
-   "updated": "2026-10-21",
-   "forks": 25,
+   "updated": "2026-10-22",
+   "forks": 26,
    "category": "rag_memory",
    "query": "embeddings sqlite",
    "score": 66
@@ -3378,7 +3372,7 @@
     "indexing-engine"
    ],
    "updated": "2026-10-21",
-   "forks": 94,
+   "forks": 95,
    "category": "rag_memory",
    "query": "embeddings sqlite",
    "score": 66
@@ -3386,12 +3380,12 @@
   {
    "name": "HICAI-ZJU/SciToolAgent",
    "url": "https://github.com/HICAI-ZJU/SciToolAgent",
-   "stars": 429,
+   "stars": 430,
    "lang": "Python",
    "desc": "SciToolAgent: A Knowledge Graph-Driven Scientific Agent for Multi-Tool Integration",
    "topics": [],
-   "updated": "2026-10-21",
-   "forks": 62,
+   "updated": "2026-10-22",
+   "forks": 63,
    "category": "rag_memory",
    "query": "knowledge graph tool",
    "score": 66
@@ -3399,7 +3393,7 @@
   {
    "name": "databrickslabs/ontobricks",
    "url": "https://github.com/databrickslabs/ontobricks",
-   "stars": 420,
+   "stars": 427,
    "lang": "Python",
    "desc": "Transforms Databricks Unity Catalog tables into a knowledge graph, with ontology design and reasoning exposed as tools via MCP.",
    "topics": [
@@ -3412,7 +3406,7 @@
     "graph-rag",
     "knowledge-graph"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 84,
    "category": "rag_memory",
    "query": "knowledge graph tool",
@@ -3421,7 +3415,7 @@
   {
    "name": "CatCatUncle/openworkbuddy",
    "url": "https://github.com/CatCatUncle/openworkbuddy",
-   "stars": 338,
+   "stars": 339,
    "lang": "JavaScript",
    "desc": "Open-source Claude Cowork / Codex alternative — a local-first AI office agent that turns one request into real PPTX, DOCX, XLSX and HTML files. Runs DeepSeek, Qwen, Doubao, Claude or Ollama (BYOK), MC",
    "topics": [
@@ -3434,8 +3428,8 @@
     "codex-alternative",
     "deepseek"
    ],
-   "updated": "2026-10-21",
-   "forks": 73,
+   "updated": "2026-10-22",
+   "forks": 72,
    "category": "local_llm",
    "query": "ollama alternative",
    "score": 65
@@ -3443,7 +3437,7 @@
   {
    "name": "Aseiel/VideoHighlighter",
    "url": "https://github.com/Aseiel/VideoHighlighter",
-   "stars": 267,
+   "stars": 271,
    "lang": "Python",
    "desc": "Open-source local AI video analyzer powered by Ollama. Visual search, automatic highlights, scene/action/object detection, audio analysis, and subtitle generation. Free, offline alternative to Twelve ",
    "topics": [
@@ -3456,8 +3450,8 @@
     "object-detection-pipelines",
     "offline-ai"
    ],
-   "updated": "2026-10-21",
-   "forks": 36,
+   "updated": "2026-10-22",
+   "forks": 38,
    "category": "local_llm",
    "query": "ollama alternative",
    "score": 65
@@ -3507,6 +3501,24 @@
    "score": 65
   },
   {
+   "name": "antirez/gguf-tools",
+   "url": "https://github.com/antirez/gguf-tools",
+   "stars": 371,
+   "lang": "C",
+   "desc": "GGUF implementation in C as a library and a tools CLI program",
+   "topics": [
+    "ai",
+    "gguf",
+    "llm",
+    "ml"
+   ],
+   "updated": "2026-10-21",
+   "forks": 40,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 65
+  },
+  {
    "name": "haziq-exe/TikTokAutoUploader",
    "url": "https://github.com/haziq-exe/TikTokAutoUploader",
    "stars": 307,
@@ -3540,7 +3552,7 @@
     "scaleable"
    ],
    "updated": "2026-10-10",
-   "forks": 69,
+   "forks": 70,
    "category": "orchestration",
    "query": "task queue python",
    "score": 65
@@ -3548,7 +3560,7 @@
   {
    "name": "TwiN/gatus",
    "url": "https://github.com/TwiN/gatus",
-   "stars": 12369,
+   "stars": 12374,
    "lang": "Go",
    "desc": "Automated developer-oriented status page with alerting and incident support",
    "topics": [
@@ -3561,50 +3573,10 @@
     "golang",
     "health"
    ],
-   "updated": "2026-10-21",
-   "forks": 870,
+   "updated": "2026-10-22",
+   "forks": 871,
    "category": "observability",
    "query": "self-hosted monitoring",
-   "score": 65
-  },
-  {
-   "name": "buildingjoshbetter/TrueMemory",
-   "url": "https://github.com/buildingjoshbetter/TrueMemory",
-   "stars": 381,
-   "lang": "Python",
-   "desc": "The memory your AI should have had from the start. Automatic capture, automatic recall, 100% local. One SQLite file, zero cloud. Works with Claude Code, Claude CLI, Cursor, Codex CLI, Gemini CLI.",
-   "topics": [
-    "agent-memory",
-    "ai",
-    "ai-agent",
-    "ai-agents",
-    "ai-memory",
-    "anthropic",
-    "claude",
-    "claude-code"
-   ],
-   "updated": "2026-10-10",
-   "forks": 51,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
-   "score": 65
-  },
-  {
-   "name": "antirez/gguf-tools",
-   "url": "https://github.com/antirez/gguf-tools",
-   "stars": 371,
-   "lang": "C",
-   "desc": "GGUF implementation in C as a library and a tools CLI program",
-   "topics": [
-    "ai",
-    "gguf",
-    "llm",
-    "ml"
-   ],
-   "updated": "2026-10-21",
-   "forks": 40,
-   "category": "local_llm",
-   "query": "gguf tools",
    "score": 65
   },
   {
@@ -3627,6 +3599,28 @@
    "forks": 55,
    "category": "security_edr",
    "query": "host intrusion detection",
+   "score": 65
+  },
+  {
+   "name": "buildingjoshbetter/TrueMemory",
+   "url": "https://github.com/buildingjoshbetter/TrueMemory",
+   "stars": 381,
+   "lang": "Python",
+   "desc": "The memory your AI should have had from the start. Automatic capture, automatic recall, 100% local. One SQLite file, zero cloud. Works with Claude Code, Claude CLI, Cursor, Codex CLI, Gemini CLI.",
+   "topics": [
+    "agent-memory",
+    "ai",
+    "ai-agent",
+    "ai-agents",
+    "ai-memory",
+    "anthropic",
+    "claude",
+    "claude-code"
+   ],
+   "updated": "2026-10-10",
+   "forks": 51,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
    "score": 65
   },
   {
@@ -3672,7 +3666,7 @@
   {
    "name": "bluewave-labs/Checkmate",
    "url": "https://github.com/bluewave-labs/Checkmate",
-   "stars": 10970,
+   "stars": 10972,
    "lang": "TypeScript",
    "desc": "Checkmate is an open-source, self-hosted tool designed to track and monitor server hardware, uptime, response times, and incidents in real-time with beautiful visualizations. Don't be shy, join here: ",
    "topics": [
@@ -3685,7 +3679,7 @@
     "infrastructure",
     "infrastructure-monitoring"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 1231,
    "category": "observability",
    "query": "self-hosted monitoring",
@@ -3694,7 +3688,7 @@
   {
    "name": "nezhahq/nezha",
    "url": "https://github.com/nezhahq/nezha",
-   "stars": 10366,
+   "stars": 10363,
    "lang": "Go",
    "desc": ":trollface: Self-hosted, lightweight server and website monitoring and O&M tool",
    "topics": [
@@ -3702,8 +3696,8 @@
     "monitoring-tool",
     "system"
    ],
-   "updated": "2026-10-21",
-   "forks": 1619,
+   "updated": "2026-10-22",
+   "forks": 1618,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 64
@@ -3742,8 +3736,8 @@
     "github-actions",
     "savelife"
    ],
-   "updated": "2026-10-21",
-   "forks": 220,
+   "updated": "2026-10-22",
+   "forks": 222,
    "category": "cloud_free",
    "query": "github actions automation",
    "score": 64
@@ -3795,7 +3789,7 @@
   {
    "name": "QuentinFuxa/WhisperLiveKit",
    "url": "https://github.com/QuentinFuxa/WhisperLiveKit",
-   "stars": 11160,
+   "stars": 11163,
    "lang": "Python",
    "desc": "Real-time, local speech-to-text with streaming ASR, speaker diarization, translation, and OpenAI/Deepgram-compatible APIs.",
    "topics": [
@@ -3808,8 +3802,8 @@
     "speech-recognition",
     "speech-to-text"
    ],
-   "updated": "2026-10-21",
-   "forks": 1151,
+   "updated": "2026-10-22",
+   "forks": 1152,
    "category": "voice_interface",
    "query": "speech to text local",
    "score": 64
@@ -3873,27 +3867,49 @@
    "url": "https://github.com/dynalm-project/dynalm",
    "stars": 3,
    "lang": "C++",
-   "desc": "Run LLMs locally on your CPU: an open-source Ollama and llama.cpp alternative with no GPU needed. Llama, Qwen, Gemma, Phi, Mistral (GGUF, SafeTensors, GPTQ/AWQ), OpenAI-compatible API server. Linux, m",
+   "desc": "Run LLMs locally on Mac, Linux and Windows: an open-source llama.cpp and Ollama alternative with Metal GPU support, an OpenAI-compatible API server and continuous batching. Llama, Qwen, Gemma, Phi, Mi",
    "topics": [
     "apple-silicon",
-    "avx2",
     "continuous-batching",
-    "cpp",
     "cpu-inference",
     "gemma",
     "gguf",
-    "inference-engine"
+    "inference-engine",
+    "llama",
+    "llama-cpp"
    ],
-   "updated": "2026-10-19",
+   "updated": "2026-10-22",
    "forks": 2,
    "category": "local_llm",
    "query": "llama.cpp alternative",
    "score": 63
   },
   {
+   "name": "AbuZar-Ansarii/PocketStrike",
+   "url": "https://github.com/AbuZar-Ansarii/PocketStrike",
+   "stars": 129,
+   "lang": "Dart",
+   "desc": " PocketStrike is a privacy-first mobile AI workstation. It combines zero-cloud native on-device GGUF inference (ARM NEON accelerated)   │ with frontier cloud LLMs, multi-step ReAct agent tools, Model ",
+   "topics": [
+    "agentic-ai",
+    "agents",
+    "ai",
+    "ai-agents",
+    "ai-tools",
+    "android",
+    "android-app",
+    "artificial-intelligence"
+   ],
+   "updated": "2026-10-22",
+   "forks": 38,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 63
+  },
+  {
    "name": "aceberg/WatchYourLAN",
    "url": "https://github.com/aceberg/WatchYourLAN",
-   "stars": 7640,
+   "stars": 7639,
    "lang": "Go",
    "desc": "Lightweight network IP scanner written in Go. With notifications, history, export to Grafana",
    "topics": [
@@ -3905,7 +3921,7 @@
     "self-hosted",
     "selfhosted"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 284,
    "category": "observability",
    "query": "self-hosted monitoring",
@@ -3978,50 +3994,6 @@
    "score": 63
   },
   {
-   "name": "42wim/matterbridge",
-   "url": "https://github.com/42wim/matterbridge",
-   "stars": 7591,
-   "lang": "Go",
-   "desc": "bridge between mattermost, IRC, gitter, xmpp, slack, discord, telegram, rocketchat, twitch, ssh-chat, zulip, whatsapp, keybase, matrix, microsoft teams, nextcloud, mumble, vk and more with REST API (m",
-   "topics": [
-    "bridge",
-    "counter-strike",
-    "discord",
-    "facebook-messenger",
-    "gitter",
-    "irc",
-    "matrix",
-    "mattermost"
-   ],
-   "updated": "2026-10-20",
-   "forks": 740,
-   "category": "messaging_bridge",
-   "query": "whatsapp bridge api",
-   "score": 63
-  },
-  {
-   "name": "AbuZar-Ansarii/PocketStrike",
-   "url": "https://github.com/AbuZar-Ansarii/PocketStrike",
-   "stars": 123,
-   "lang": "Dart",
-   "desc": " PocketStrike is a privacy-first mobile AI workstation. It combines zero-cloud native on-device GGUF inference (ARM NEON accelerated)   │ with frontier cloud LLMs, multi-step ReAct agent tools, Model ",
-   "topics": [
-    "agentic-ai",
-    "agents",
-    "ai",
-    "ai-agents",
-    "ai-tools",
-    "android",
-    "android-app",
-    "artificial-intelligence"
-   ],
-   "updated": "2026-10-21",
-   "forks": 38,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 63
-  },
-  {
    "name": "drajb/whisper-local",
    "url": "https://github.com/drajb/whisper-local",
    "stars": 123,
@@ -4044,22 +4016,110 @@
    "score": 63
   },
   {
+   "name": "42wim/matterbridge",
+   "url": "https://github.com/42wim/matterbridge",
+   "stars": 7591,
+   "lang": "Go",
+   "desc": "bridge between mattermost, IRC, gitter, xmpp, slack, discord, telegram, rocketchat, twitch, ssh-chat, zulip, whatsapp, keybase, matrix, microsoft teams, nextcloud, mumble, vk and more with REST API (m",
+   "topics": [
+    "bridge",
+    "counter-strike",
+    "discord",
+    "facebook-messenger",
+    "gitter",
+    "irc",
+    "matrix",
+    "mattermost"
+   ],
+   "updated": "2026-10-20",
+   "forks": 739,
+   "category": "messaging_bridge",
+   "query": "whatsapp bridge api",
+   "score": 63
+  },
+  {
+   "name": "SolaceLabs/solace-agent-mesh",
+   "url": "https://github.com/SolaceLabs/solace-agent-mesh",
+   "stars": 4914,
+   "lang": "Shell",
+   "desc": "An event-driven framework designed to build and orchestrate multi-agent AI systems. It enables seamless integration of AI agents with real-world data sources and systems, facilitating complex, multi-s",
+   "topics": [
+    "a2a",
+    "agentframework",
+    "agentic",
+    "agentic-ai",
+    "agentic-framework",
+    "agentic-workflow",
+    "agenticai",
+    "agents"
+   ],
+   "updated": "2026-10-22",
+   "forks": 274,
+   "category": "ai_agent_framework",
+   "query": "multi-agent orchestration",
+   "score": 62
+  },
+  {
    "name": "VRSEN/agency-swarm",
    "url": "https://github.com/VRSEN/agency-swarm",
-   "stars": 4605,
+   "stars": 4610,
    "lang": "Python",
    "desc": "Reliable Multi-Agent Orchestration Framework",
    "topics": [],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 1058,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
    "score": 62
   },
   {
+   "name": "nathaninline/ajean",
+   "url": "https://github.com/nathaninline/ajean",
+   "stars": 99,
+   "lang": "Go",
+   "desc": "Run your AI models at home in one binary: chat, persistent memory, web access, browser control, MCP tools, encryption at rest and end-to-end encrypted remote access. Linux, macOS, Windows. FR/EN docs.",
+   "topics": [
+    "ai-assistant",
+    "chatbot",
+    "cuda",
+    "gguf",
+    "golang",
+    "inference",
+    "llama-cpp",
+    "llm"
+   ],
+   "updated": "2026-10-21",
+   "forks": 11,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 62
+  },
+  {
+   "name": "Aesthisia/LLMinator",
+   "url": "https://github.com/Aesthisia/LLMinator",
+   "stars": 99,
+   "lang": "Python",
+   "desc": "Gradio based tool to run opensource LLM models directly from Huggingface",
+   "topics": [
+    "chatbot",
+    "cpu",
+    "cuda",
+    "gguf",
+    "gradio",
+    "huggingface",
+    "langchain",
+    "llama-cpp-python"
+   ],
+   "updated": "2026-10-11",
+   "forks": 20,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 62
+  },
+  {
    "name": "pyrogram/pyrogram",
    "url": "https://github.com/pyrogram/pyrogram",
-   "stars": 4620,
+   "stars": 4618,
    "lang": "Python",
    "desc": "Elegant, modern and asynchronous Telegram MTProto API framework in Python for users and bots",
    "topics": [
@@ -4072,7 +4132,7 @@
     "python",
     "telegram"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 1376,
    "category": "telegram_bots",
    "query": "telegram bot python framework",
@@ -4103,7 +4163,7 @@
   {
    "name": "PokemonGoF/PokemonGo-Bot",
    "url": "https://github.com/PokemonGoF/PokemonGo-Bot",
-   "stars": 3924,
+   "stars": 3925,
    "lang": "Python",
    "desc": "The Pokemon Go Bot, baking with community.",
    "topics": [
@@ -4116,8 +4176,8 @@
     "pokemongo-bot",
     "pokemongof"
    ],
-   "updated": "2026-10-19",
-   "forks": 1492,
+   "updated": "2026-10-22",
+   "forks": 1493,
    "category": "telegram_bots",
    "query": "telegram automation python",
    "score": 62
@@ -4227,7 +4287,7 @@
     "sdk-python"
    ],
    "updated": "2026-10-16",
-   "forks": 20,
+   "forks": 21,
    "category": "orchestration",
    "query": "job scheduler python",
    "score": 62
@@ -4243,50 +4303,6 @@
    "forks": 0,
    "category": "observability",
    "query": "log analysis agent",
-   "score": 62
-  },
-  {
-   "name": "nathaninline/ajean",
-   "url": "https://github.com/nathaninline/ajean",
-   "stars": 99,
-   "lang": "Go",
-   "desc": "Run your AI models at home in one binary: chat, persistent memory, web access, browser control, MCP tools, encryption at rest and end-to-end encrypted remote access. Linux, macOS, Windows. FR/EN docs.",
-   "topics": [
-    "ai-assistant",
-    "chatbot",
-    "cuda",
-    "gguf",
-    "golang",
-    "inference",
-    "llama-cpp",
-    "llm"
-   ],
-   "updated": "2026-10-21",
-   "forks": 11,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 62
-  },
-  {
-   "name": "Aesthisia/LLMinator",
-   "url": "https://github.com/Aesthisia/LLMinator",
-   "stars": 99,
-   "lang": "Python",
-   "desc": "Gradio based tool to run opensource LLM models directly from Huggingface",
-   "topics": [
-    "chatbot",
-    "cpu",
-    "cuda",
-    "gguf",
-    "gradio",
-    "huggingface",
-    "langchain",
-    "llama-cpp-python"
-   ],
-   "updated": "2026-10-11",
-   "forks": 20,
-   "category": "local_llm",
-   "query": "gguf tools",
    "score": 62
   },
   {
@@ -4398,6 +4414,41 @@
    "score": 61
   },
   {
+   "name": "facebookresearch/HyperAgents",
+   "url": "https://github.com/facebookresearch/HyperAgents",
+   "stars": 2828,
+   "lang": "Python",
+   "desc": "Self-referential self-improving agents that can optimize for any computable task",
+   "topics": [],
+   "updated": "2026-10-22",
+   "forks": 367,
+   "category": "self_evolving",
+   "query": "self-improving agent",
+   "score": 61
+  },
+  {
+   "name": "sayiir/sayiir",
+   "url": "https://github.com/sayiir/sayiir",
+   "stars": 78,
+   "lang": "Rust",
+   "desc": "Sayiir: simple, embeddable durable workflow engine in Rust with Node.js & Python bindings. Checkpoint-based recovery, no deterministic replay. A simplified alternative to Temporal, Restate, and Airflo",
+   "topics": [
+    "agent-orchestration",
+    "agentic-workflow",
+    "checkpointing",
+    "delayed-jobs",
+    "distributed",
+    "distributed-systems",
+    "durable-execution",
+    "durable-workflows"
+   ],
+   "updated": "2026-10-15",
+   "forks": 10,
+   "category": "orchestration",
+   "query": "durable workflow engine",
+   "score": 61
+  },
+  {
    "name": "msgbyte/tianji",
    "url": "https://github.com/msgbyte/tianji",
    "stars": 3116,
@@ -4413,30 +4464,27 @@
     "server-status",
     "statistics"
    ],
-   "updated": "2026-10-21",
-   "forks": 195,
+   "updated": "2026-10-22",
+   "forks": 196,
    "category": "observability",
    "query": "uptime monitoring self-hosted",
    "score": 61
   },
   {
-   "name": "fajita-io/fajita",
-   "url": "https://github.com/fajita-io/fajita",
-   "stars": 81,
-   "lang": "TypeScript",
-   "desc": "Open-source uptime monitoring for websites, APIs, SSL, and cron jobs with failure verification before alerts.",
+   "name": "airlabspl/uptimemonitor",
+   "url": "https://github.com/airlabspl/uptimemonitor",
+   "stars": 80,
+   "lang": "Go",
+   "desc": "Self-hosted uptime monitor for your websites",
    "topics": [
-    "api-monitoring",
-    "cron-monitoring",
-    "devops",
+    "go",
+    "golang",
+    "htmx",
     "monitoring",
-    "observability",
-    "open-source",
-    "self-hosted",
-    "ssl-monitoring"
+    "self-hosted"
    ],
-   "updated": "2026-10-13",
-   "forks": 17,
+   "updated": "2026-07-02",
+   "forks": 1,
    "category": "observability",
    "query": "uptime monitoring self-hosted",
    "score": 61
@@ -4507,7 +4555,7 @@
   {
    "name": "HeyWillow/willow",
    "url": "https://github.com/HeyWillow/willow",
-   "stars": 3127,
+   "stars": 3128,
    "lang": "C",
    "desc": "Open source, local, and self-hosted Amazon Echo/Google Home competitive Voice Assistant alternative",
    "topics": [
@@ -4520,45 +4568,32 @@
     "google-home",
     "home-assistant"
    ],
-   "updated": "2026-10-17",
+   "updated": "2026-10-22",
    "forks": 130,
    "category": "voice_interface",
    "query": "voice assistant local",
    "score": 61
   },
   {
-   "name": "facebookresearch/HyperAgents",
-   "url": "https://github.com/facebookresearch/HyperAgents",
-   "stars": 2826,
-   "lang": "Python",
-   "desc": "Self-referential self-improving agents that can optimize for any computable task",
-   "topics": [],
-   "updated": "2026-10-21",
-   "forks": 367,
-   "category": "self_evolving",
-   "query": "self-improving agent",
-   "score": 61
-  },
-  {
-   "name": "sayiir/sayiir",
-   "url": "https://github.com/sayiir/sayiir",
-   "stars": 78,
-   "lang": "Rust",
-   "desc": "Sayiir: simple, embeddable durable workflow engine in Rust with Node.js & Python bindings. Checkpoint-based recovery, no deterministic replay. A simplified alternative to Temporal, Restate, and Airflo",
+   "name": "fajita-io/fajita",
+   "url": "https://github.com/fajita-io/fajita",
+   "stars": 81,
+   "lang": "TypeScript",
+   "desc": "Open-source uptime monitoring for websites, APIs, SSL, and cron jobs with failure verification before alerts.",
    "topics": [
-    "agent-orchestration",
-    "agentic-workflow",
-    "checkpointing",
-    "delayed-jobs",
-    "distributed",
-    "distributed-systems",
-    "durable-execution",
-    "durable-workflows"
+    "api-monitoring",
+    "cron-monitoring",
+    "devops",
+    "monitoring",
+    "observability",
+    "open-source",
+    "self-hosted",
+    "ssl-monitoring"
    ],
-   "updated": "2026-10-15",
-   "forks": 10,
-   "category": "orchestration",
-   "query": "durable workflow engine",
+   "updated": "2026-10-13",
+   "forks": 17,
+   "category": "observability",
+   "query": "uptime monitoring self-hosted",
    "score": 61
   },
   {
@@ -4595,6 +4630,28 @@
    "score": 60
   },
   {
+   "name": "ghostapp-ai/ghost",
+   "url": "https://github.com/ghostapp-ai/ghost",
+   "stars": 46,
+   "lang": "Rust",
+   "desc": "The Private Agent OS — search files, run AI agents, connect to 10,000+ tools via the complete protocol stack (MCP, AG-UI, A2UI, A2A). Zero cloud. Zero telemetry. On-device inference.",
+   "topics": [
+    "a2a",
+    "a2ui",
+    "ag-ui",
+    "agent-orchestration",
+    "agent-os",
+    "cross-platform",
+    "desktop-app",
+    "generative-ui"
+   ],
+   "updated": "2026-10-19",
+   "forks": 9,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 60
+  },
+  {
    "name": "nickoala/telepot",
    "url": "https://github.com/nickoala/telepot",
    "stars": 2410,
@@ -4609,6 +4666,19 @@
    "forks": 456,
    "category": "telegram_bots",
    "query": "telegram bot python framework",
+   "score": 60
+  },
+  {
+   "name": "jennyzzt/dgm",
+   "url": "https://github.com/jennyzzt/dgm",
+   "stars": 2445,
+   "lang": "Python",
+   "desc": "Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents",
+   "topics": [],
+   "updated": "2026-10-22",
+   "forks": 455,
+   "category": "self_evolving",
+   "query": "self-improving agent",
    "score": 60
   },
   {
@@ -4651,22 +4721,9 @@
    "score": 60
   },
   {
-   "name": "Lathajaichandu/Autonomous-code-review-agent",
-   "url": "https://github.com/Lathajaichandu/Autonomous-code-review-agent",
-   "stars": 0,
-   "lang": "Python",
-   "desc": "",
-   "topics": [],
-   "updated": "2026-07-07",
-   "forks": 0,
-   "category": "self_evolving",
-   "query": "auto-code-review agent",
-   "score": 60
-  },
-  {
    "name": "louislam/uptime-kuma",
    "url": "https://github.com/louislam/uptime-kuma",
-   "stars": 92709,
+   "stars": 92745,
    "lang": "JavaScript",
    "desc": "A fancy self-hosted monitoring tool",
    "topics": [
@@ -4679,8 +4736,8 @@
     "single-page-app",
     "socket-io"
    ],
-   "updated": "2026-10-21",
-   "forks": 8580,
+   "updated": "2026-10-22",
+   "forks": 8585,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 60
@@ -4701,7 +4758,7 @@
     "cplusplus",
     "crash"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 5,
    "category": "observability",
    "query": "log analysis agent",
@@ -4750,7 +4807,7 @@
   {
    "name": "alexpinel/Dot",
    "url": "https://github.com/alexpinel/Dot",
-   "stars": 1916,
+   "stars": 1917,
    "lang": "JavaScript",
    "desc": "Text-To-Speech, RAG, and LLMs. All local!",
    "topics": [
@@ -4763,45 +4820,23 @@
     "local",
     "phi-3"
    ],
-   "updated": "2026-10-17",
+   "updated": "2026-10-22",
    "forks": 110,
    "category": "voice_interface",
    "query": "speech to text local",
    "score": 60
   },
   {
-   "name": "ghostapp-ai/ghost",
-   "url": "https://github.com/ghostapp-ai/ghost",
-   "stars": 46,
-   "lang": "Rust",
-   "desc": "The Private Agent OS — search files, run AI agents, connect to 10,000+ tools via the complete protocol stack (MCP, AG-UI, A2UI, A2A). Zero cloud. Zero telemetry. On-device inference.",
-   "topics": [
-    "a2a",
-    "a2ui",
-    "ag-ui",
-    "agent-orchestration",
-    "agent-os",
-    "cross-platform",
-    "desktop-app",
-    "generative-ui"
-   ],
-   "updated": "2026-10-19",
-   "forks": 9,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 60
-  },
-  {
-   "name": "jennyzzt/dgm",
-   "url": "https://github.com/jennyzzt/dgm",
-   "stars": 2440,
+   "name": "Lathajaichandu/Autonomous-code-review-agent",
+   "url": "https://github.com/Lathajaichandu/Autonomous-code-review-agent",
+   "stars": 0,
    "lang": "Python",
-   "desc": "Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents",
+   "desc": "",
    "topics": [],
-   "updated": "2026-10-21",
-   "forks": 454,
+   "updated": "2026-07-07",
+   "forks": 0,
    "category": "self_evolving",
-   "query": "self-improving agent",
+   "query": "auto-code-review agent",
    "score": 60
   },
   {
@@ -4833,10 +4868,76 @@
     "gguf",
     "inference"
    ],
-   "updated": "2026-10-17",
+   "updated": "2026-10-22",
    "forks": 2,
    "category": "local_llm",
    "query": "local llm inference engine",
+   "score": 59
+  },
+  {
+   "name": "kitops-ml/kitops",
+   "url": "https://github.com/kitops-ml/kitops",
+   "stars": 1433,
+   "lang": "Go",
+   "desc": "An open source DevOps tool from the CNCF for packaging and versioning AI/ML models, datasets, code, and configuration into an OCI Artifact.",
+   "topics": [
+    "ai",
+    "code",
+    "datasets",
+    "devops",
+    "devops-tools",
+    "gguf",
+    "hacktoberfest",
+    "kubernetes"
+   ],
+   "updated": "2026-10-21",
+   "forks": 187,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 59
+  },
+  {
+   "name": "nibor1896/Crow",
+   "url": "https://github.com/nibor1896/Crow",
+   "stars": 37,
+   "lang": "Python",
+   "desc": "Crow — a local AI agent, not a chat box: 30 tools, MCP, memory, skills, goals, subagents, vision, and image generation and editing with Qwen-Image. Runs on crow-nest or llama.cpp on one GPU, or any mo",
+   "topics": [
+    "agentic-ai",
+    "ai-agent",
+    "anthropic",
+    "coding-agent",
+    "cuda",
+    "gguf",
+    "image-generation",
+    "linux"
+   ],
+   "updated": "2026-10-22",
+   "forks": 2,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 59
+  },
+  {
+   "name": "Veloresearch/velocity-local-services",
+   "url": "https://github.com/Veloresearch/velocity-local-services",
+   "stars": 34,
+   "lang": "",
+   "desc": "Velocity Local Services: an app for running LLMs locally on Windows and Linux. Load any GGUF model and chat with web search, tools and schematics, let it use your computer by voice, and serve it to op",
+   "topics": [
+    "ai",
+    "ai-agents",
+    "ai-assistant",
+    "computer-use",
+    "desktop-app",
+    "gguf",
+    "linux",
+    "llama-cpp"
+   ],
+   "updated": "2026-10-22",
+   "forks": 4,
+   "category": "local_llm",
+   "query": "gguf tools",
    "score": 59
   },
   {
@@ -4855,7 +4956,7 @@
     "embeddings",
     "knowledge-base"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 0,
    "category": "self_evolving",
    "query": "self-evolving codebase",
@@ -4956,7 +5057,7 @@
   {
    "name": "techjarves/Portable-Local-Studio",
    "url": "https://github.com/techjarves/Portable-Local-Studio",
-   "stars": 1548,
+   "stars": 1550,
    "lang": "JavaScript",
    "desc": "Portable local AI studio for Windows, Linux, and macOS. Zero-setup GUI for Image Generation, GGUF LLMs, Text to Speech & Speech to Text",
    "topics": [
@@ -4965,8 +5066,8 @@
     "text-generation",
     "text-to-speech"
    ],
-   "updated": "2026-10-21",
-   "forks": 381,
+   "updated": "2026-10-22",
+   "forks": 382,
    "category": "voice_interface",
    "query": "speech to text local",
    "score": 59
@@ -5001,7 +5102,7 @@
     "cozy-voice-3"
    ],
    "updated": "2026-10-21",
-   "forks": 149,
+   "forks": 151,
    "category": "voice_interface",
    "query": "speech to text local",
    "score": 59
@@ -5042,72 +5143,6 @@
    "score": 59
   },
   {
-   "name": "kitops-ml/kitops",
-   "url": "https://github.com/kitops-ml/kitops",
-   "stars": 1433,
-   "lang": "Go",
-   "desc": "An open source DevOps tool from the CNCF for packaging and versioning AI/ML models, datasets, code, and configuration into an OCI Artifact.",
-   "topics": [
-    "ai",
-    "code",
-    "datasets",
-    "devops",
-    "devops-tools",
-    "gguf",
-    "hacktoberfest",
-    "kubernetes"
-   ],
-   "updated": "2026-10-21",
-   "forks": 187,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 59
-  },
-  {
-   "name": "nibor1896/Crow",
-   "url": "https://github.com/nibor1896/Crow",
-   "stars": 37,
-   "lang": "Python",
-   "desc": "Crow — a local AI agent, not a chat box: 30 tools, MCP, memory, skills, goals, subagents, vision, and image generation and editing with Qwen-Image. Runs on crow-nest or llama.cpp on one GPU, or any mo",
-   "topics": [
-    "agentic-ai",
-    "ai-agent",
-    "anthropic",
-    "coding-agent",
-    "cuda",
-    "gguf",
-    "image-generation",
-    "linux"
-   ],
-   "updated": "2026-10-18",
-   "forks": 2,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 59
-  },
-  {
-   "name": "Veloresearch/velocity-local-services",
-   "url": "https://github.com/Veloresearch/velocity-local-services",
-   "stars": 34,
-   "lang": "",
-   "desc": "Velocity Local Services: an app for running LLMs locally on Windows and Linux. Load any GGUF model and chat with web search, tools and schematics, let it use your computer by voice, and serve it to op",
-   "topics": [
-    "ai",
-    "ai-agents",
-    "ai-assistant",
-    "computer-use",
-    "desktop-app",
-    "gguf",
-    "linux",
-    "llama-cpp"
-   ],
-   "updated": "2026-10-21",
-   "forks": 4,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 59
-  },
-  {
    "name": "Siddhesh2377/Ai-Systems-New",
    "url": "https://github.com/Siddhesh2377/Ai-Systems-New",
    "stars": 33,
@@ -5145,115 +5180,23 @@
   {
    "name": "IncarnaMind/IncarnaMind",
    "url": "https://github.com/IncarnaMind/IncarnaMind",
-   "stars": 841,
+   "stars": 843,
    "lang": "TypeScript",
-   "desc": "Open-source AI desktop app: chat with your PDFs, Word, Excel and PowerPoint files, write with AI, and fact-check every sentence against your documents. Answers cite the exact page. Meeting transcripti",
+   "desc": "Open-source, Notion-like AI editor for your local documents and meetings: chat with PDFs, Word, Excel and PowerPoint, write and fact-check with page citations, and take AI meeting notes transcribed on",
    "topics": [
     "ai-assistant",
     "chat-with-pdf",
     "citations",
-    "deepseek",
     "desktop-app",
     "document-qa",
     "fact-checking",
+    "granola-alternative",
     "knowledge-management"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 59,
    "category": "local_llm",
    "query": "ollama alternative",
-   "score": 58
-  },
-  {
-   "name": "mikepenz/release-changelog-builder-action",
-   "url": "https://github.com/mikepenz/release-changelog-builder-action",
-   "stars": 868,
-   "lang": "TypeScript",
-   "desc": "A GitHub action that builds your release notes / changelog fast, easy and exactly the way you want.",
-   "topics": [
-    "action",
-    "actions",
-    "automation",
-    "cd",
-    "changelog",
-    "ci",
-    "github-actions",
-    "hacktoberfest"
-   ],
-   "updated": "2026-10-21",
-   "forks": 112,
-   "category": "cloud_free",
-   "query": "github actions automation",
-   "score": 58
-  },
-  {
-   "name": "sqliteai/sqlite-vector",
-   "url": "https://github.com/sqliteai/sqlite-vector",
-   "stars": 1192,
-   "lang": "C",
-   "desc": "SQLite-Vector is a cross-platform, ultra-efficient SQLite extension that brings vector search capabilities to your embedded database.",
-   "topics": [],
-   "updated": "2026-10-20",
-   "forks": 53,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
-   "score": 58
-  },
-  {
-   "name": "Kieirra/murmure",
-   "url": "https://github.com/Kieirra/murmure",
-   "stars": 1128,
-   "lang": "TypeScript",
-   "desc": "Fully local, private and cross platform Speech-to-Text with LLM Post-processing",
-   "topics": [
-    "asr",
-    "asr-model",
-    "debian-packages",
-    "linux",
-    "macos",
-    "privacy",
-    "speech-to-text",
-    "windows"
-   ],
-   "updated": "2026-10-21",
-   "forks": 103,
-   "category": "voice_interface",
-   "query": "speech to text local",
-   "score": 58
-  },
-  {
-   "name": "PromtEngineer/Verbi",
-   "url": "https://github.com/PromtEngineer/Verbi",
-   "stars": 1124,
-   "lang": "Python",
-   "desc": "A modular voice assistant application for experimenting with state-of-the-art transcription, response generation, and text-to-speech models. Supports OpenAI, Groq, Elevanlabs, CartesiaAI, and Deepgram",
-   "topics": [],
-   "updated": "2026-10-18",
-   "forks": 212,
-   "category": "voice_interface",
-   "query": "speech to text local",
-   "score": 58
-  },
-  {
-   "name": "Razzleberryss/AstroTick",
-   "url": "https://github.com/Razzleberryss/AstroTick",
-   "stars": 23,
-   "lang": "Python",
-   "desc": "🚀 Trade Bitcoin prediction markets on autopilot with this automated Kalshi trading bot in Python — targets BTC Up/Down 15-minute contracts using momentum signals, orderbook skew, stop-loss/take-profit",
-   "topics": [
-    "agent",
-    "btc-market",
-    "built-with-python",
-    "clawdbot",
-    "cursor",
-    "cursor-ai",
-    "hands-free",
-    "kalshi"
-   ],
-   "updated": "2026-10-20",
-   "forks": 7,
-   "category": "messaging_bridge",
-   "query": "signal bot python",
    "score": 58
   },
   {
@@ -5281,14 +5224,106 @@
   {
    "name": "Kulaxyz/self-learning-skills",
    "url": "https://github.com/Kulaxyz/self-learning-skills",
-   "stars": 968,
+   "stars": 970,
    "lang": "",
    "desc": "A self-improving skill for AI coding agents (Claude Code, Cursor, AGENTS.md): recognize a hard-won golden path in a session and harvest it into a reusable skill/rule for next time.",
    "topics": [],
-   "updated": "2026-10-18",
+   "updated": "2026-10-21",
    "forks": 45,
    "category": "self_evolving",
    "query": "self-improving agent",
+   "score": 58
+  },
+  {
+   "name": "mikepenz/release-changelog-builder-action",
+   "url": "https://github.com/mikepenz/release-changelog-builder-action",
+   "stars": 868,
+   "lang": "TypeScript",
+   "desc": "A GitHub action that builds your release notes / changelog fast, easy and exactly the way you want.",
+   "topics": [
+    "action",
+    "actions",
+    "automation",
+    "cd",
+    "changelog",
+    "ci",
+    "github-actions",
+    "hacktoberfest"
+   ],
+   "updated": "2026-10-21",
+   "forks": 112,
+   "category": "cloud_free",
+   "query": "github actions automation",
+   "score": 58
+  },
+  {
+   "name": "sqliteai/sqlite-vector",
+   "url": "https://github.com/sqliteai/sqlite-vector",
+   "stars": 1194,
+   "lang": "C",
+   "desc": "SQLite-Vector is a cross-platform, ultra-efficient SQLite extension that brings vector search capabilities to your embedded database.",
+   "topics": [],
+   "updated": "2026-10-22",
+   "forks": 53,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 58
+  },
+  {
+   "name": "Kieirra/murmure",
+   "url": "https://github.com/Kieirra/murmure",
+   "stars": 1129,
+   "lang": "TypeScript",
+   "desc": "Fully local, private and cross platform Speech-to-Text with LLM Post-processing",
+   "topics": [
+    "asr",
+    "asr-model",
+    "debian-packages",
+    "linux",
+    "macos",
+    "privacy",
+    "speech-to-text",
+    "windows"
+   ],
+   "updated": "2026-10-22",
+   "forks": 104,
+   "category": "voice_interface",
+   "query": "speech to text local",
+   "score": 58
+  },
+  {
+   "name": "PromtEngineer/Verbi",
+   "url": "https://github.com/PromtEngineer/Verbi",
+   "stars": 1124,
+   "lang": "Python",
+   "desc": "A modular voice assistant application for experimenting with state-of-the-art transcription, response generation, and text-to-speech models. Supports OpenAI, Groq, Elevanlabs, CartesiaAI, and Deepgram",
+   "topics": [],
+   "updated": "2026-10-18",
+   "forks": 210,
+   "category": "voice_interface",
+   "query": "speech to text local",
+   "score": 58
+  },
+  {
+   "name": "Razzleberryss/AstroTick",
+   "url": "https://github.com/Razzleberryss/AstroTick",
+   "stars": 23,
+   "lang": "Python",
+   "desc": "🚀 Trade Bitcoin prediction markets on autopilot with this automated Kalshi trading bot in Python — targets BTC Up/Down 15-minute contracts using momentum signals, orderbook skew, stop-loss/take-profit",
+   "topics": [
+    "agent",
+    "btc-market",
+    "built-with-python",
+    "clawdbot",
+    "cursor",
+    "cursor-ai",
+    "hands-free",
+    "kalshi"
+   ],
+   "updated": "2026-10-20",
+   "forks": 7,
+   "category": "messaging_bridge",
+   "query": "signal bot python",
    "score": 58
   },
   {
@@ -5380,7 +5415,7 @@
   {
    "name": "celery/celery",
    "url": "https://github.com/celery/celery",
-   "stars": 29029,
+   "stars": 29032,
    "lang": "Python",
    "desc": "Distributed Task Queue (development branch)",
    "topics": [
@@ -5393,16 +5428,38 @@
     "queued-jobs",
     "redis"
    ],
-   "updated": "2026-10-21",
-   "forks": 5231,
+   "updated": "2026-10-22",
+   "forks": 5235,
    "category": "orchestration",
    "query": "task queue python",
    "score": 57
   },
   {
+   "name": "b-erdem/belay",
+   "url": "https://github.com/b-erdem/belay",
+   "stars": 17,
+   "lang": "Elixir",
+   "desc": "A durable job engine for Elixir, on Postgres. Jobs are built from memoized steps — retries resume work instead of redoing it. Budgets, workflows, human-in-the-loop, embedded dashboard.",
+   "topics": [
+    "ai-agents",
+    "background-jobs",
+    "belay",
+    "durable-execution",
+    "elixir",
+    "job-queue",
+    "llm",
+    "oban"
+   ],
+   "updated": "2026-09-16",
+   "forks": 2,
+   "category": "orchestration",
+   "query": "durable workflow engine",
+   "score": 57
+  },
+  {
    "name": "dgtlmoon/changedetection.io",
    "url": "https://github.com/dgtlmoon/changedetection.io",
-   "stars": 35174,
+   "stars": 35204,
    "lang": "Python",
    "desc": "Best and simplest tool for website change detection, web page monitoring, and website change alerts. Perfect for tracking content changes, price drops, restock alerts, and website defacement monitorin",
    "topics": [
@@ -5415,8 +5472,8 @@
     "restock-monitor",
     "rss"
    ],
-   "updated": "2026-10-21",
-   "forks": 2169,
+   "updated": "2026-10-22",
+   "forks": 2174,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 57
@@ -5444,7 +5501,7 @@
   {
    "name": "github/branch-deploy",
    "url": "https://github.com/github/branch-deploy",
-   "stars": 580,
+   "stars": 582,
    "lang": "TypeScript",
    "desc": "Enabling Branch Deployments through IssueOps with GitHub Actions - If you find this project useful, give it a star! ⭐️ ",
    "topics": [
@@ -5457,7 +5514,7 @@
     "continuous-deployment",
     "deploy"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 75,
    "category": "cloud_free",
    "query": "github actions automation",
@@ -5492,8 +5549,8 @@
     "flask",
     "good-first-issue"
    ],
-   "updated": "2026-10-21",
-   "forks": 77,
+   "updated": "2026-10-22",
+   "forks": 79,
    "category": "crypto_airdrop",
    "query": "web3 python tools",
    "score": 57
@@ -5575,50 +5632,6 @@
    "score": 57
   },
   {
-   "name": "NadirAliOfficial/ibkr-ai-trading-bot",
-   "url": "https://github.com/NadirAliOfficial/ibkr-ai-trading-bot",
-   "stars": 17,
-   "lang": "Python",
-   "desc": "A Python trading bot connecting directly to Interactive Brokers (IBKR) via ib_insync for live market data and automated order execution, with optional OpenAI integration for advanced signals.",
-   "topics": [
-    "ai-trading",
-    "algorithmic-trading",
-    "automation",
-    "ib-insync",
-    "ibkr",
-    "interactive-brokers",
-    "openai",
-    "python"
-   ],
-   "updated": "2026-10-15",
-   "forks": 4,
-   "category": "messaging_bridge",
-   "query": "signal bot python",
-   "score": 57
-  },
-  {
-   "name": "b-erdem/belay",
-   "url": "https://github.com/b-erdem/belay",
-   "stars": 17,
-   "lang": "Elixir",
-   "desc": "A durable job engine for Elixir, on Postgres. Jobs are built from memoized steps — retries resume work instead of redoing it. Budgets, workflows, human-in-the-loop, embedded dashboard.",
-   "topics": [
-    "ai-agents",
-    "background-jobs",
-    "belay",
-    "durable-execution",
-    "elixir",
-    "job-queue",
-    "llm",
-    "oban"
-   ],
-   "updated": "2026-09-16",
-   "forks": 2,
-   "category": "orchestration",
-   "query": "durable workflow engine",
-   "score": 57
-  },
-  {
    "name": "kleZ799/clipmint",
    "url": "https://github.com/kleZ799/clipmint",
    "stars": 17,
@@ -5638,6 +5651,28 @@
    "forks": 2,
    "category": "voice_interface",
    "query": "whisper alternative python",
+   "score": 57
+  },
+  {
+   "name": "NadirAliOfficial/ibkr-ai-trading-bot",
+   "url": "https://github.com/NadirAliOfficial/ibkr-ai-trading-bot",
+   "stars": 17,
+   "lang": "Python",
+   "desc": "A Python trading bot connecting directly to Interactive Brokers (IBKR) via ib_insync for live market data and automated order execution, with optional OpenAI integration for advanced signals.",
+   "topics": [
+    "ai-trading",
+    "algorithmic-trading",
+    "automation",
+    "ib-insync",
+    "ibkr",
+    "interactive-brokers",
+    "openai",
+    "python"
+   ],
+   "updated": "2026-10-15",
+   "forks": 4,
+   "category": "messaging_bridge",
+   "query": "signal bot python",
    "score": 57
   },
   {
@@ -5679,9 +5714,27 @@
     "funpaycardinal"
    ],
    "updated": "2026-10-19",
-   "forks": 112,
+   "forks": 113,
    "category": "telegram_bots",
    "query": "telegram automation python",
+   "score": 56
+  },
+  {
+   "name": "henomis/packtrail",
+   "url": "https://github.com/henomis/packtrail",
+   "stars": 12,
+   "lang": "Go",
+   "desc": "Durable, NATS-only workflow engine for Go",
+   "topics": [
+    "agents",
+    "ai",
+    "go",
+    "nats"
+   ],
+   "updated": "2026-10-22",
+   "forks": 1,
+   "category": "orchestration",
+   "query": "durable workflow engine",
    "score": 56
   },
   {
@@ -5713,7 +5766,7 @@
     "prompt-tuning",
     "rails"
    ],
-   "updated": "2026-10-18",
+   "updated": "2026-10-21",
    "forks": 2,
    "category": "observability",
    "query": "log analysis agent",
@@ -5744,7 +5797,7 @@
   {
    "name": "tgymnich/fork-sync",
    "url": "https://github.com/tgymnich/fork-sync",
-   "stars": 472,
+   "stars": 471,
    "lang": "TypeScript",
    "desc": "🔄 Github action to sync your forks",
    "topics": [
@@ -5755,7 +5808,7 @@
     "octokit",
     "sync"
    ],
-   "updated": "2026-10-19",
+   "updated": "2026-10-22",
    "forks": 95,
    "category": "cloud_free",
    "query": "github actions automation",
@@ -5828,6 +5881,25 @@
    "score": 56
   },
   {
+   "name": "gojue/ehids-agent",
+   "url": "https://github.com/gojue/ehids-agent",
+   "stars": 458,
+   "lang": "C",
+   "desc": "A Linux Host-based Intrusion Detection System based on eBPF.",
+   "topics": [
+    "ebpf",
+    "ebpf-sec",
+    "golang",
+    "hids",
+    "security-audit"
+   ],
+   "updated": "2026-09-23",
+   "forks": 86,
+   "category": "security_edr",
+   "query": "host intrusion detection",
+   "score": 56
+  },
+  {
    "name": "kyrillosishak/Domicile",
    "url": "https://github.com/kyrillosishak/Domicile",
    "stars": 9,
@@ -5871,28 +5943,9 @@
    "score": 56
   },
   {
-   "name": "gojue/ehids-agent",
-   "url": "https://github.com/gojue/ehids-agent",
-   "stars": 458,
-   "lang": "C",
-   "desc": "A Linux Host-based Intrusion Detection System based on eBPF.",
-   "topics": [
-    "ebpf",
-    "ebpf-sec",
-    "golang",
-    "hids",
-    "security-audit"
-   ],
-   "updated": "2026-09-23",
-   "forks": 86,
-   "category": "security_edr",
-   "query": "host intrusion detection",
-   "score": 56
-  },
-  {
    "name": "kstonekuan/tambourine-voice",
    "url": "https://github.com/kstonekuan/tambourine-voice",
-   "stars": 389,
+   "stars": 390,
    "lang": "Rust",
    "desc": "Your personal voice interface for any app. Speak naturally and your words appear wherever your cursor is, with fully customizable AI voice dictation.  Open source alternative to Wispr Flow.",
    "topics": [
@@ -5905,7 +5958,7 @@
     "speech-to-text",
     "tauri"
    ],
-   "updated": "2026-10-15",
+   "updated": "2026-10-22",
    "forks": 72,
    "category": "voice_interface",
    "query": "whisper alternative python",
@@ -5930,7 +5983,7 @@
   {
    "name": "iskandaryv/meetingly-ai",
    "url": "https://github.com/iskandaryv/meetingly-ai",
-   "stars": 317,
+   "stars": 309,
    "lang": "TypeScript",
    "desc": "Open-source AI interview assistant and meeting copilot: live answers during Zoom, Google Meet and Teams calls, on-device transcription, hidden from screen sharing. Free Cluely, Interview Coder and Fin",
    "topics": [
@@ -5943,8 +5996,8 @@
     "electron",
     "final-round-ai"
    ],
-   "updated": "2026-10-21",
-   "forks": 20,
+   "updated": "2026-10-22",
+   "forks": 21,
    "category": "local_llm",
    "query": "ollama alternative",
    "score": 55
@@ -5972,13 +6025,26 @@
    "score": 55
   },
   {
+   "name": "sudoingX/qwen38-mtp",
+   "url": "https://github.com/sudoingX/qwen38-mtp",
+   "stars": 363,
+   "lang": "Python",
+   "desc": "One llama.cpp flag unlocks +33-39% decode speed for Qwen3.8-27B on consumer GPUs. The MTP head already ships inside your GGUF. Recipe, paired benchmarks, probe tool.",
+   "topics": [],
+   "updated": "2026-10-21",
+   "forks": 100,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 55
+  },
+  {
    "name": "dbader/schedule",
    "url": "https://github.com/dbader/schedule",
-   "stars": 12267,
+   "stars": 12269,
    "lang": "Python",
    "desc": "Python job scheduling for humans.",
    "topics": [],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 1014,
    "category": "orchestration",
    "query": "job scheduler python",
@@ -5987,7 +6053,7 @@
   {
    "name": "OpsiMate/OpsiMate",
    "url": "https://github.com/OpsiMate/OpsiMate",
-   "stars": 263,
+   "stars": 264,
    "lang": "TypeScript",
    "desc": "Open-source alert management for NOC/DevOps teams: one queue for Grafana, Datadog, Zabbix, Uptime Kuma and GCP alerts — with ownership, mute policies, root-cause analysis and insights. Self-hosted, on",
    "topics": [
@@ -6000,7 +6066,7 @@
     "incident-management",
     "monitoring"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 167,
    "category": "observability",
    "query": "uptime monitoring self-hosted",
@@ -6033,7 +6099,7 @@
    "lang": "Python",
    "desc": "TestTriage is a RAG agent that analyzes nightly Playwright e2e and CI test failures from OpenShift CI pipelines in GCS. It uses AI vision on screenshots, parses logs, and generates root cause analysis",
    "topics": [],
-   "updated": "2026-01-08",
+   "updated": "2026-10-21",
    "forks": 1,
    "category": "observability",
    "query": "log analysis agent",
@@ -6108,7 +6174,7 @@
   {
    "name": "ymmmmmmmm/BeraChainTools",
    "url": "https://github.com/ymmmmmmmm/BeraChainTools",
-   "stars": 365,
+   "stars": 364,
    "lang": "Python",
    "desc": "berachain领水，合约交互。berachain claim test tokens,contract interactions.",
    "topics": [
@@ -6119,7 +6185,7 @@
     "web3",
     "web3py"
    ],
-   "updated": "2026-10-18",
+   "updated": "2026-10-22",
    "forks": 249,
    "category": "crypto_airdrop",
    "query": "web3 python tools",
@@ -6161,7 +6227,7 @@
   {
    "name": "pmbstyle/Alice",
    "url": "https://github.com/pmbstyle/Alice",
-   "stars": 323,
+   "stars": 324,
    "lang": "TypeScript",
    "desc": "Alice is a voice-first desktop AI assistant application built with Vue.js, Vite, and Electron. Advanced memory system, function calling, MCP support, optional fully local use, and more.",
    "topics": [
@@ -6174,42 +6240,33 @@
     "javascript",
     "mcp-client"
    ],
-   "updated": "2026-10-12",
+   "updated": "2026-10-21",
    "forks": 58,
    "category": "voice_interface",
    "query": "voice assistant local",
    "score": 55
   },
   {
-   "name": "sudoingX/qwen38-mtp",
-   "url": "https://github.com/sudoingX/qwen38-mtp",
-   "stars": 363,
-   "lang": "Python",
-   "desc": "One llama.cpp flag unlocks +33-39% decode speed for Qwen3.8-27B on consumer GPUs. The MTP head already ships inside your GGUF. Recipe, paired benchmarks, probe tool.",
-   "topics": [],
-   "updated": "2026-10-21",
-   "forks": 100,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 55
-  },
-  {
-   "name": "henomis/packtrail",
-   "url": "https://github.com/henomis/packtrail",
-   "stars": 8,
-   "lang": "Go",
-   "desc": "Durable, NATS-only workflow engine for Go",
+   "name": "Eric-Terminal/ETOS-LLM-Studio",
+   "url": "https://github.com/Eric-Terminal/ETOS-LLM-Studio",
+   "stars": 209,
+   "lang": "Swift",
+   "desc": "A native LLM client for iOS & Apple Watch. Run local GGUF models offline via llama.cpp, or connect to OpenAI/Claude/Gemini. Features local RAG, Model Context Protocol (MCP) tools, Siri Shortcuts, and ",
    "topics": [
-    "agents",
-    "ai",
-    "go",
-    "nats"
+    "ai-assistant",
+    "apple-watch",
+    "daily-pulse",
+    "gguf",
+    "ios",
+    "llama-cpp",
+    "llm-client",
+    "mcp"
    ],
    "updated": "2026-10-19",
-   "forks": 1,
-   "category": "orchestration",
-   "query": "durable workflow engine",
-   "score": 55
+   "forks": 25,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 54
   },
   {
    "name": "hydrogram/hydrogram",
@@ -6280,7 +6337,7 @@
   {
    "name": "rq/rq",
    "url": "https://github.com/rq/rq",
-   "stars": 10693,
+   "stars": 10695,
    "lang": "Python",
    "desc": "Simple job queues for Python",
    "topics": [
@@ -6293,10 +6350,32 @@
     "redis",
     "rq"
    ],
-   "updated": "2026-10-21",
-   "forks": 1511,
+   "updated": "2026-10-22",
+   "forks": 1515,
    "category": "orchestration",
    "query": "task queue python",
+   "score": 54
+  },
+  {
+   "name": "wavezync/durable",
+   "url": "https://github.com/wavezync/durable",
+   "stars": 208,
+   "lang": "Elixir",
+   "desc": "A durable workflow execution engine for Elixir ",
+   "topics": [
+    "ai-workflow",
+    "automation",
+    "durable-execution",
+    "durable-objects",
+    "elixir",
+    "postgresql",
+    "queue",
+    "workflow"
+   ],
+   "updated": "2026-10-22",
+   "forks": 11,
+   "category": "orchestration",
+   "query": "durable workflow engine",
    "score": 54
   },
   {
@@ -6324,7 +6403,7 @@
   {
    "name": "hyperdxio/hyperdx",
    "url": "https://github.com/hyperdxio/hyperdx",
-   "stars": 9962,
+   "stars": 9961,
    "lang": "TypeScript",
    "desc": "Resolve production issues, fast. An open source observability platform unifying session replays, logs, metrics, traces and errors powered by ClickHouse and OpenTelemetry.",
    "topics": [
@@ -6337,8 +6416,8 @@
     "frontend-monitoring",
     "kubernetes"
    ],
-   "updated": "2026-10-21",
-   "forks": 499,
+   "updated": "2026-10-22",
+   "forks": 500,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 54
@@ -6389,7 +6468,7 @@
   {
    "name": "betterlytics/betterlytics",
    "url": "https://github.com/betterlytics/betterlytics",
-   "stars": 179,
+   "stars": 180,
    "lang": "TypeScript",
    "desc": "Open-source web analytics with session replay, error tracking, Core Web Vitals and uptime monitoring in one tool. Cookieless, EU-hosted cloud or self-hosted.",
    "topics": [
@@ -6402,7 +6481,7 @@
     "mcp-server",
     "nextjs"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 22,
    "category": "observability",
    "query": "uptime monitoring self-hosted",
@@ -6519,7 +6598,7 @@
   {
    "name": "ThHanke/ontosphere",
    "url": "https://github.com/ThHanke/ontosphere",
-   "stars": 252,
+   "stars": 253,
    "lang": "TypeScript",
    "desc": "Browser-based RDF/ontology knowledge graph editor — load RDF from files, URLs or SPARQL endpoints; author nodes and edges on the canvas; run OWL-RL reasoning; apply multi-algorithm layout and clusteri",
    "topics": [
@@ -6532,7 +6611,7 @@
     "model-context-protocol",
     "ontology"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 32,
    "category": "rag_memory",
    "query": "knowledge graph tool",
@@ -6576,7 +6655,7 @@
   {
    "name": "rhasspy/piper",
    "url": "https://github.com/rhasspy/piper",
-   "stars": 11302,
+   "stars": 11303,
    "lang": "C++",
    "desc": "A fast, local neural text to speech system",
    "topics": [
@@ -6584,20 +6663,42 @@
     "text-to-speech",
     "tts"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 1098,
    "category": "voice_interface",
    "query": "speech to text local",
    "score": 54
   },
   {
+   "name": "TypischSinan/generate-clips-for-tiktok-and-instagram",
+   "url": "https://github.com/TypischSinan/generate-clips-for-tiktok-and-instagram",
+   "stars": 5,
+   "lang": "Python",
+   "desc": "Local, self-hosted alternative to OpusClip: turns long-form YouTube videos into vertical short-form clips with AI moment selection, subject tracking and burned-in captions",
+   "topics": [
+    "claude",
+    "content-creation",
+    "ffmpeg",
+    "opusclip-alternative",
+    "python",
+    "short-form-video",
+    "tiktok",
+    "video-editing"
+   ],
+   "updated": "2026-10-17",
+   "forks": 1,
+   "category": "voice_interface",
+   "query": "whisper alternative python",
+   "score": 54
+  },
+  {
    "name": "RoyalCities/RC-Home-Assistant-Low-VRAM",
    "url": "https://github.com/RoyalCities/RC-Home-Assistant-Low-VRAM",
-   "stars": 252,
+   "stars": 253,
    "lang": "",
    "desc": "Local AI voice assistant stack for Home Assistant (GPU-accelerated) with persistent memory, follow-up conversation, and Ollama model recommendations - settings designed for low VRAM systems.",
    "topics": [],
-   "updated": "2026-10-18",
+   "updated": "2026-10-21",
    "forks": 25,
    "category": "voice_interface",
    "query": "voice assistant local",
@@ -6606,11 +6707,11 @@
   {
    "name": "speakrail/speakrail",
    "url": "https://github.com/speakrail/speakrail",
-   "stars": 190,
+   "stars": 192,
    "lang": "Python",
    "desc": "Speakrail - a low-latency fully-local voice assistant that runs on a single RTX 4090",
    "topics": [],
-   "updated": "2026-10-19",
+   "updated": "2026-10-22",
    "forks": 22,
    "category": "voice_interface",
    "query": "voice assistant local",
@@ -6641,7 +6742,7 @@
   {
    "name": "ogunjobiFX/MT4-MT5-Forex-Signal-Copier-Telegram-Bot",
    "url": "https://github.com/ogunjobiFX/MT4-MT5-Forex-Signal-Copier-Telegram-Bot",
-   "stars": 257,
+   "stars": 258,
    "lang": "Python",
    "desc": "Telegram bot used for copying and entering signals from signal provider directly to MT4 and MT5 trading accounts with calculated lot sizes and profit/loss display",
    "topics": [
@@ -6654,76 +6755,10 @@
     "metaapi-cloud",
     "metatrader-4"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 131,
    "category": "messaging_bridge",
    "query": "signal bot python",
-   "score": 54
-  },
-  {
-   "name": "Eric-Terminal/ETOS-LLM-Studio",
-   "url": "https://github.com/Eric-Terminal/ETOS-LLM-Studio",
-   "stars": 209,
-   "lang": "Swift",
-   "desc": "A native LLM client for iOS & Apple Watch. Run local GGUF models offline via llama.cpp, or connect to OpenAI/Claude/Gemini. Features local RAG, Model Context Protocol (MCP) tools, Siri Shortcuts, and ",
-   "topics": [
-    "ai-assistant",
-    "apple-watch",
-    "daily-pulse",
-    "gguf",
-    "ios",
-    "llama-cpp",
-    "llm-client",
-    "mcp"
-   ],
-   "updated": "2026-10-19",
-   "forks": 25,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 54
-  },
-  {
-   "name": "wavezync/durable",
-   "url": "https://github.com/wavezync/durable",
-   "stars": 208,
-   "lang": "Elixir",
-   "desc": "A durable workflow execution engine for Elixir ",
-   "topics": [
-    "ai-workflow",
-    "automation",
-    "durable-execution",
-    "durable-objects",
-    "elixir",
-    "postgresql",
-    "queue",
-    "workflow"
-   ],
-   "updated": "2026-10-18",
-   "forks": 11,
-   "category": "orchestration",
-   "query": "durable workflow engine",
-   "score": 54
-  },
-  {
-   "name": "TypischSinan/generate-clips-for-tiktok-and-instagram",
-   "url": "https://github.com/TypischSinan/generate-clips-for-tiktok-and-instagram",
-   "stars": 5,
-   "lang": "Python",
-   "desc": "Local, self-hosted alternative to OpusClip: turns long-form YouTube videos into vertical short-form clips with AI moment selection, subject tracking and burned-in captions",
-   "topics": [
-    "claude",
-    "content-creation",
-    "ffmpeg",
-    "opusclip-alternative",
-    "python",
-    "short-form-video",
-    "tiktok",
-    "video-editing"
-   ],
-   "updated": "2026-10-17",
-   "forks": 1,
-   "category": "voice_interface",
-   "query": "whisper alternative python",
    "score": 54
   },
   {
@@ -6798,7 +6833,7 @@
     "task-queue"
    ],
    "updated": "2026-10-21",
-   "forks": 1151,
+   "forks": 1152,
    "category": "orchestration",
    "query": "task queue python",
    "score": 53
@@ -6806,7 +6841,7 @@
   {
    "name": "coleifer/huey",
    "url": "https://github.com/coleifer/huey",
-   "stars": 6054,
+   "stars": 6055,
    "lang": "Python",
    "desc": "a little task queue for python",
    "topics": [
@@ -6817,8 +6852,8 @@
     "redis",
     "task-queue"
    ],
-   "updated": "2026-10-19",
-   "forks": 404,
+   "updated": "2026-10-22",
+   "forks": 405,
    "category": "orchestration",
    "query": "task queue python",
    "score": 53
@@ -6848,7 +6883,7 @@
   {
    "name": "ptweezy/cronstable",
    "url": "https://github.com/ptweezy/cronstable",
-   "stars": 137,
+   "stars": 136,
    "lang": "Python",
    "desc": "A job scheduler with retries, alerts, saved run history, workflows, and dashboards for single machines and clusters.",
    "topics": [
@@ -6861,7 +6896,7 @@
     "homelab",
     "ios"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 2,
    "category": "orchestration",
    "query": "job scheduler python",
@@ -6883,8 +6918,8 @@
     "tracker",
     "tracking"
    ],
-   "updated": "2026-10-21",
-   "forks": 245,
+   "updated": "2026-10-22",
+   "forks": 247,
    "category": "observability",
    "query": "self-hosted monitoring",
    "score": 53
@@ -6892,7 +6927,7 @@
   {
    "name": "pgsty/pigsty",
    "url": "https://github.com/pgsty/pigsty",
-   "stars": 5839,
+   "stars": 5842,
    "lang": "Shell",
    "desc": "Enterprise-Grade OSS PostgreSQL Distribution with HA, PITR, IaC, Monitor, 12 kernel forks and 575 PG extensions. Best-of-breed products integrated as a platform. Self-host Postgres like a Pro!",
    "topics": [
@@ -6903,7 +6938,7 @@
     "toolbox",
     "yours"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 392,
    "category": "observability",
    "query": "self-hosted monitoring",
@@ -6928,12 +6963,12 @@
   {
    "name": "OHF-Voice/piper1-gpl",
    "url": "https://github.com/OHF-Voice/piper1-gpl",
-   "stars": 5941,
+   "stars": 5952,
    "lang": "C++",
    "desc": "Fast and local neural text-to-speech engine",
    "topics": [],
-   "updated": "2026-10-21",
-   "forks": 578,
+   "updated": "2026-10-22",
+   "forks": 577,
    "category": "voice_interface",
    "query": "speech to text local",
    "score": 53
@@ -7049,8 +7084,8 @@
     "juicity",
     "proxy"
    ],
-   "updated": "2026-10-21",
-   "forks": 77,
+   "updated": "2026-10-22",
+   "forks": 78,
    "category": "telegram_bots",
    "query": "telegram automation python",
    "score": 52
@@ -7091,6 +7126,28 @@
    "score": 52
   },
   {
+   "name": "ossec/ossec-hids",
+   "url": "https://github.com/ossec/ossec-hids",
+   "stars": 5068,
+   "lang": "C",
+   "desc": "OSSEC is an Open Source Host-based Intrusion Detection System that performs log analysis, file integrity checking, policy monitoring, rootkit detection, real-time alerting and active response.",
+   "topics": [
+    "compliance",
+    "file-integrity-management",
+    "fim",
+    "hids",
+    "intrusion-detection",
+    "loganalyzer",
+    "nist800-53",
+    "ossec"
+   ],
+   "updated": "2026-10-22",
+   "forks": 1076,
+   "category": "security_edr",
+   "query": "host intrusion detection",
+   "score": 52
+  },
+  {
    "name": "canonical/dqlite",
    "url": "https://github.com/canonical/dqlite",
    "stars": 4407,
@@ -7105,28 +7162,6 @@
    "forks": 254,
    "category": "rag_memory",
    "query": "embeddings sqlite",
-   "score": 52
-  },
-  {
-   "name": "ossec/ossec-hids",
-   "url": "https://github.com/ossec/ossec-hids",
-   "stars": 5067,
-   "lang": "C",
-   "desc": "OSSEC is an Open Source Host-based Intrusion Detection System that performs log analysis, file integrity checking, policy monitoring, rootkit detection, real-time alerting and active response.",
-   "topics": [
-    "compliance",
-    "file-integrity-management",
-    "fim",
-    "hids",
-    "intrusion-detection",
-    "loganalyzer",
-    "nist800-53",
-    "ossec"
-   ],
-   "updated": "2026-10-20",
-   "forks": 1076,
-   "category": "security_edr",
-   "query": "host intrusion detection",
    "score": 52
   },
   {
@@ -7154,7 +7189,7 @@
   {
    "name": "VoltAgent/awesome-claude-design",
    "url": "https://github.com/VoltAgent/awesome-claude-design",
-   "stars": 4157,
+   "stars": 4168,
    "lang": "",
    "desc": "Awesome Claude Design: 68 ready-to-use design system inspirations in DESIGN.md format. Drop one in, scaffold a full UI in one shot.",
    "topics": [
@@ -7164,8 +7199,8 @@
     "design-system",
     "figma"
    ],
-   "updated": "2026-10-21",
-   "forks": 458,
+   "updated": "2026-10-22",
+   "forks": 461,
    "category": "pipe_tube_work",
    "query": "scaffold design",
    "score": 52
@@ -7351,9 +7386,29 @@
    "score": 50
   },
   {
+   "name": "ShelbyJenkins/llm_utils",
+   "url": "https://github.com/ShelbyJenkins/llm_utils",
+   "stars": 47,
+   "lang": "Rust",
+   "desc": "llm_utils: Basic LLM tools, best practices, and minimal abstraction.",
+   "topics": [
+    "gguf",
+    "llm",
+    "nlp",
+    "rust",
+    "segmentation",
+    "tokenizer"
+   ],
+   "updated": "2026-05-03",
+   "forks": 3,
+   "category": "local_llm",
+   "query": "gguf tools",
+   "score": 50
+  },
+  {
    "name": "gege-circle/.github",
    "url": "https://github.com/gege-circle/.github",
-   "stars": 2055,
+   "stars": 2060,
    "lang": "",
    "desc": "这里是GitHub的草场，也是戈戈圈爱好者的交流地，主要讨论动漫、游戏、科技、人文、生活等所有话题，欢迎各位小伙伴们在此讨论趣事。This is GitHub grassland, and the community place for Gege circle lovers, mainly discusses anime, games, technology, lifing and other t",
    "topics": [
@@ -7366,7 +7421,7 @@
     "vtuber",
     "vup"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 153,
    "category": "telegram_bots",
    "query": "telegram bot python framework",
@@ -7463,26 +7518,13 @@
    "score": 50
   },
   {
-   "name": "ColepJod/Autonomous-Code-Review-Agent",
-   "url": "https://github.com/ColepJod/Autonomous-Code-Review-Agent",
+   "name": "ainapurekrishna2-hub/-Autonomous-Code-Review-Agent",
+   "url": "https://github.com/ainapurekrishna2-hub/-Autonomous-Code-Review-Agent",
    "stars": 0,
-   "lang": "Python",
-   "desc": "this agent helps in optimization and security of code ",
+   "lang": "",
+   "desc": "https://github.com/Aurite-ai/agent-verifier.git",
    "topics": [],
-   "updated": "2026-10-18",
-   "forks": 0,
-   "category": "self_evolving",
-   "query": "auto-code-review agent",
-   "score": 50
-  },
-  {
-   "name": "B0nitoFlakes/autonomous-code-review-agent",
-   "url": "https://github.com/B0nitoFlakes/autonomous-code-review-agent",
-   "stars": 0,
-   "lang": "Python",
-   "desc": "",
-   "topics": [],
-   "updated": "2026-06-11",
+   "updated": "2026-09-22",
    "forks": 0,
    "category": "self_evolving",
    "query": "auto-code-review agent",
@@ -7503,7 +7545,7 @@
     "task-executor",
     "task-manager"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 156,
    "category": "orchestration",
    "query": "task queue python",
@@ -7520,6 +7562,28 @@
    "forks": 6,
    "category": "observability",
    "query": "log analysis agent",
+   "score": 50
+  },
+  {
+   "name": "googlecodelabs/cloud-nebulous-serverless",
+   "url": "https://github.com/googlecodelabs/cloud-nebulous-serverless",
+   "stars": 40,
+   "lang": "Python",
+   "desc": "This repo is for the codelabs (free, online, self-paced tutorials) showing developers how they can deploy the same app locally *and* to all three fully-managed serverless compute platforms from Google",
+   "topics": [
+    "application",
+    "cloud-computing",
+    "cloudcomputing",
+    "containers",
+    "docker",
+    "expressjs",
+    "google-app-engine",
+    "google-appengine"
+   ],
+   "updated": "2026-06-28",
+   "forks": 91,
+   "category": "cloud_free",
+   "query": "free serverless compute",
    "score": 50
   },
   {
@@ -7643,7 +7707,7 @@
   {
    "name": "Neo23x0/yarGen",
    "url": "https://github.com/Neo23x0/yarGen",
-   "stars": 1819,
+   "stars": 1821,
    "lang": "Python",
    "desc": "yarGen is a generator for YARA rules",
    "topics": [
@@ -7654,7 +7718,7 @@
     "python",
     "yara"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 302,
    "category": "security_edr",
    "query": "yara rules",
@@ -7663,7 +7727,7 @@
   {
    "name": "TypeWhisper/typewhisper-mac",
    "url": "https://github.com/TypeWhisper/typewhisper-mac",
-   "stars": 1868,
+   "stars": 1870,
    "lang": "Swift",
    "desc": "Local speech-to-text for macOS  on-device AI, fully private, optional cloud",
    "topics": [
@@ -7676,10 +7740,73 @@
     "swiftui",
     "transcription"
    ],
-   "updated": "2026-10-21",
-   "forks": 147,
+   "updated": "2026-10-22",
+   "forks": 148,
    "category": "voice_interface",
    "query": "speech to text local",
+   "score": 50
+  },
+  {
+   "name": "mehbul/chopify",
+   "url": "https://github.com/mehbul/chopify",
+   "stars": 41,
+   "lang": "Python",
+   "desc": "Free, open-source, local alternative to Opus Clip, Vizard & Klap. Turns long videos into AI-scored viral short clips (16:9/9:16/1:1) with complete-thought detection, keyword search, a pick-the-best re",
+   "topics": [
+    "ai-video",
+    "captions",
+    "content-creation",
+    "faster-whisper",
+    "ffmpeg",
+    "free-opus-clip-alternative",
+    "opencv",
+    "opus-clip-alternative"
+   ],
+   "updated": "2026-10-18",
+   "forks": 11,
+   "category": "voice_interface",
+   "query": "whisper alternative python",
+   "score": 50
+  },
+  {
+   "name": "perrypixel/VoiceTyper-Pro",
+   "url": "https://github.com/perrypixel/VoiceTyper-Pro",
+   "stars": 40,
+   "lang": "Python",
+   "desc": "VoiceTyper-Pro is an advanced speech-to-text dictation tool built with Python and powered by the Deepgram API. Alternative to Mac Whisper, Voice Access, and other voice typing tools.",
+   "topics": [
+    "deepgram",
+    "mac",
+    "voice-recognition",
+    "whisper",
+    "whisper-ai"
+   ],
+   "updated": "2026-09-12",
+   "forks": 11,
+   "category": "voice_interface",
+   "query": "whisper alternative python",
+   "score": 50
+  },
+  {
+   "name": "viettran1502/video-transcript-tool",
+   "url": "https://github.com/viettran1502/video-transcript-tool",
+   "stars": 1,
+   "lang": "Python",
+   "desc": "🎬 Extract transcripts from YouTube, TikTok, Facebook videos using Whisper AI - Free alternative to paid services",
+   "topics": [
+    "automation",
+    "free-tool",
+    "open-source",
+    "python",
+    "speech-to-text",
+    "tiktok",
+    "transcript",
+    "video-processing"
+   ],
+   "updated": "2026-07-23",
+   "forks": 0,
+   "category": "voice_interface",
+   "query": "whisper alternative python",
    "score": 50
   },
   {
@@ -7729,7 +7856,7 @@
   {
    "name": "mautrix/whatsapp",
    "url": "https://github.com/mautrix/whatsapp",
-   "stars": 1909,
+   "stars": 1910,
    "lang": "Go",
    "desc": "A Matrix-WhatsApp puppeting bridge",
    "topics": [
@@ -7742,7 +7869,7 @@
     "whatsapp",
     "whatsapp-web"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 289,
    "category": "messaging_bridge",
    "query": "matrix bridge",
@@ -7781,86 +7908,29 @@
    "score": 50
   },
   {
-   "name": "ShelbyJenkins/llm_utils",
-   "url": "https://github.com/ShelbyJenkins/llm_utils",
-   "stars": 47,
-   "lang": "Rust",
-   "desc": "llm_utils: Basic LLM tools, best practices, and minimal abstraction.",
-   "topics": [
-    "gguf",
-    "llm",
-    "nlp",
-    "rust",
-    "segmentation",
-    "tokenizer"
-   ],
-   "updated": "2026-05-03",
-   "forks": 3,
-   "category": "local_llm",
-   "query": "gguf tools",
-   "score": 50
-  },
-  {
-   "name": "mehbul/chopify",
-   "url": "https://github.com/mehbul/chopify",
-   "stars": 41,
+   "name": "ColepJod/Autonomous-Code-Review-Agent",
+   "url": "https://github.com/ColepJod/Autonomous-Code-Review-Agent",
+   "stars": 0,
    "lang": "Python",
-   "desc": "Free, open-source, local alternative to Opus Clip, Vizard & Klap. Turns long videos into AI-scored viral short clips (16:9/9:16/1:1) with complete-thought detection, keyword search, a pick-the-best re",
-   "topics": [
-    "ai-video",
-    "captions",
-    "content-creation",
-    "faster-whisper",
-    "ffmpeg",
-    "free-opus-clip-alternative",
-    "opencv",
-    "opus-clip-alternative"
-   ],
+   "desc": "this agent helps in optimization and security of code ",
+   "topics": [],
    "updated": "2026-10-18",
-   "forks": 10,
-   "category": "voice_interface",
-   "query": "whisper alternative python",
-   "score": 50
-  },
-  {
-   "name": "perrypixel/VoiceTyper-Pro",
-   "url": "https://github.com/perrypixel/VoiceTyper-Pro",
-   "stars": 40,
-   "lang": "Python",
-   "desc": "VoiceTyper-Pro is an advanced speech-to-text dictation tool built with Python and powered by the Deepgram API. Alternative to Mac Whisper, Voice Access, and other voice typing tools.",
-   "topics": [
-    "deepgram",
-    "mac",
-    "voice-recognition",
-    "whisper",
-    "whisper-ai"
-   ],
-   "updated": "2026-09-12",
-   "forks": 11,
-   "category": "voice_interface",
-   "query": "whisper alternative python",
-   "score": 50
-  },
-  {
-   "name": "viettran1502/video-transcript-tool",
-   "url": "https://github.com/viettran1502/video-transcript-tool",
-   "stars": 1,
-   "lang": "Python",
-   "desc": "🎬 Extract transcripts from YouTube, TikTok, Facebook videos using Whisper AI - Free alternative to paid services",
-   "topics": [
-    "automation",
-    "free-tool",
-    "open-source",
-    "python",
-    "speech-to-text",
-    "tiktok",
-    "transcript",
-    "video-processing"
-   ],
-   "updated": "2026-07-23",
    "forks": 0,
-   "category": "voice_interface",
-   "query": "whisper alternative python",
+   "category": "self_evolving",
+   "query": "auto-code-review agent",
+   "score": 50
+  },
+  {
+   "name": "B0nitoFlakes/autonomous-code-review-agent",
+   "url": "https://github.com/B0nitoFlakes/autonomous-code-review-agent",
+   "stars": 0,
+   "lang": "Python",
+   "desc": "",
+   "topics": [],
+   "updated": "2026-06-11",
+   "forks": 0,
+   "category": "self_evolving",
+   "query": "auto-code-review agent",
    "score": 50
   },
   {
@@ -7874,28 +7944,6 @@
    "forks": 0,
    "category": "self_evolving",
    "query": "auto-code-review agent",
-   "score": 50
-  },
-  {
-   "name": "googlecodelabs/cloud-nebulous-serverless",
-   "url": "https://github.com/googlecodelabs/cloud-nebulous-serverless",
-   "stars": 40,
-   "lang": "Python",
-   "desc": "This repo is for the codelabs (free, online, self-paced tutorials) showing developers how they can deploy the same app locally *and* to all three fully-managed serverless compute platforms from Google",
-   "topics": [
-    "application",
-    "cloud-computing",
-    "cloudcomputing",
-    "containers",
-    "docker",
-    "expressjs",
-    "google-app-engine",
-    "google-appengine"
-   ],
-   "updated": "2026-06-28",
-   "forks": 91,
-   "category": "cloud_free",
-   "query": "free serverless compute",
    "score": 50
   },
   {
@@ -7919,19 +7967,6 @@
    "desc": "",
    "topics": [],
    "updated": "2026-06-05",
-   "forks": 0,
-   "category": "self_evolving",
-   "query": "auto-code-review agent",
-   "score": 50
-  },
-  {
-   "name": "ainapurekrishna2-hub/-Autonomous-Code-Review-Agent",
-   "url": "https://github.com/ainapurekrishna2-hub/-Autonomous-Code-Review-Agent",
-   "stars": 0,
-   "lang": "",
-   "desc": "https://github.com/Aurite-ai/agent-verifier.git",
-   "topics": [],
-   "updated": "2026-09-22",
    "forks": 0,
    "category": "self_evolving",
    "query": "auto-code-review agent",
@@ -7990,10 +8025,32 @@
     "qwen3-8-flash-next",
     "strata"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 2,
    "category": "local_llm",
    "query": "local llm inference engine",
+   "score": 49
+  },
+  {
+   "name": "hardenedlinux/SonicBoom",
+   "url": "https://github.com/hardenedlinux/SonicBoom",
+   "stars": 28,
+   "lang": "C++",
+   "desc": "A compiler-first PyTorch alternative. MLIR-based Boom IR, Guile scripting, CUDA and CPU. On consumer GPUs it already beats llama.cpp’s LLM decode with the same kernels; the compiler makes the differen",
+   "topics": [
+    "deep-learning-compiler",
+    "deepseek",
+    "gemma",
+    "gguf",
+    "guile",
+    "inference-engine",
+    "lisp",
+    "llama-cpp"
+   ],
+   "updated": "2026-10-21",
+   "forks": 2,
+   "category": "local_llm",
+   "query": "llama.cpp alternative",
    "score": 49
   },
   {
@@ -8031,8 +8088,8 @@
     "queue",
     "task-queue"
    ],
-   "updated": "2026-10-20",
-   "forks": 40,
+   "updated": "2026-10-22",
+   "forks": 41,
    "category": "orchestration",
    "query": "task queue python",
    "score": 49
@@ -8056,7 +8113,7 @@
   {
    "name": "procrastinate-org/procrastinate",
    "url": "https://github.com/procrastinate-org/procrastinate",
-   "stars": 1428,
+   "stars": 1430,
    "lang": "Python",
    "desc": "PostgreSQL-based Task Queue for Python",
    "topics": [
@@ -8066,7 +8123,7 @@
     "sync",
     "task-queue"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 114,
    "category": "orchestration",
    "query": "task queue python",
@@ -8075,7 +8132,7 @@
   {
    "name": "rq/rq-scheduler",
    "url": "https://github.com/rq/rq-scheduler",
-   "stars": 1517,
+   "stars": 1516,
    "lang": "Python",
    "desc": "A lightweight library that adds job scheduling capabilities to RQ (Redis Queue)",
    "topics": [
@@ -8086,16 +8143,38 @@
     "scheduler",
     "task-scheduler"
    ],
-   "updated": "2026-10-01",
+   "updated": "2026-10-22",
    "forks": 235,
    "category": "orchestration",
    "query": "job scheduler python",
    "score": 49
   },
   {
+   "name": "jiangsi/edgecd-blog",
+   "url": "https://github.com/jiangsi/edgecd-blog",
+   "stars": 29,
+   "lang": "TypeScript",
+   "desc": "EdgeCD AI Blog is an open-source blog system built with Remix.run on Cloudflare Workers. Features: - Powered by Remix.run framework - Fully edge-based computing - Leverages Cloudflare ecosystem (D1, R",
+   "topics": [
+    "ai",
+    "blog",
+    "cloudflare-workers",
+    "d1",
+    "free",
+    "kv",
+    "open-source",
+    "r2"
+   ],
+   "updated": "2026-08-17",
+   "forks": 6,
+   "category": "cloud_free",
+   "query": "free serverless compute",
+   "score": 49
+  },
+  {
    "name": "0xrawsec/whids",
    "url": "https://github.com/0xrawsec/whids",
-   "stars": 1321,
+   "stars": 1320,
    "lang": "Go",
    "desc": "Open Source EDR for Windows",
    "topics": [
@@ -8106,7 +8185,7 @@
     "threat-hunting",
     "windows"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 152,
    "category": "security_edr",
    "query": "open source edr",
@@ -8183,7 +8262,7 @@
   {
    "name": "redheadesign/music-island",
    "url": "https://github.com/redheadesign/music-island",
-   "stars": 1243,
+   "stars": 1244,
    "lang": "Rust",
    "desc": "Music controls, local dictation, voice processing and assistant limits at the top edge of your Windows desktop.",
    "topics": [
@@ -8194,32 +8273,10 @@
     "tauri",
     "windows"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 46,
    "category": "voice_interface",
    "query": "voice assistant local",
-   "score": 49
-  },
-  {
-   "name": "jiangsi/edgecd-blog",
-   "url": "https://github.com/jiangsi/edgecd-blog",
-   "stars": 29,
-   "lang": "TypeScript",
-   "desc": "EdgeCD AI Blog is an open-source blog system built with Remix.run on Cloudflare Workers. Features: - Powered by Remix.run framework - Fully edge-based computing - Leverages Cloudflare ecosystem (D1, R",
-   "topics": [
-    "ai",
-    "blog",
-    "cloudflare-workers",
-    "d1",
-    "free",
-    "kv",
-    "open-source",
-    "r2"
-   ],
-   "updated": "2026-08-17",
-   "forks": 6,
-   "category": "cloud_free",
-   "query": "free serverless compute",
    "score": 49
   },
   {
@@ -8255,8 +8312,8 @@
     "mmap",
     "model-container"
    ],
-   "updated": "2026-10-20",
-   "forks": 2,
+   "updated": "2026-10-22",
+   "forks": 3,
    "category": "local_llm",
    "query": "local llm inference engine",
    "score": 48
@@ -8301,9 +8358,31 @@
    "score": 48
   },
   {
+   "name": "YakirOren/turbine",
+   "url": "https://github.com/YakirOren/turbine",
+   "stars": 18,
+   "lang": "TypeScript",
+   "desc": "SQLite-based durable workflow engine for Go",
+   "topics": [
+    "automation",
+    "background-jobs",
+    "cron",
+    "durable-execution",
+    "go",
+    "golang",
+    "job-queue",
+    "orchestration"
+   ],
+   "updated": "2026-10-19",
+   "forks": 2,
+   "category": "orchestration",
+   "query": "durable workflow engine",
+   "score": 48
+  },
+  {
    "name": "actions/create-github-app-token",
    "url": "https://github.com/actions/create-github-app-token",
-   "stars": 903,
+   "stars": 904,
    "lang": "JavaScript",
    "desc": "GitHub Action for creating a GitHub App Installation Access Token",
    "topics": [
@@ -8312,8 +8391,8 @@
     "hacktoberfest",
     "tokens"
    ],
-   "updated": "2026-10-21",
-   "forks": 180,
+   "updated": "2026-10-22",
+   "forks": 179,
    "category": "cloud_free",
    "query": "github actions automation",
    "score": 48
@@ -8518,7 +8597,7 @@
     "rust-lang",
     "sqlite-architecture"
    ],
-   "updated": "2026-10-12",
+   "updated": "2026-10-22",
    "forks": 55,
    "category": "rag_memory",
    "query": "embeddings sqlite",
@@ -8655,28 +8734,6 @@
    "score": 48
   },
   {
-   "name": "YakirOren/turbine",
-   "url": "https://github.com/YakirOren/turbine",
-   "stars": 18,
-   "lang": "TypeScript",
-   "desc": "SQLite-based durable workflow engine for Go",
-   "topics": [
-    "automation",
-    "background-jobs",
-    "cron",
-    "durable-execution",
-    "go",
-    "golang",
-    "job-queue",
-    "orchestration"
-   ],
-   "updated": "2026-10-19",
-   "forks": 2,
-   "category": "orchestration",
-   "query": "durable workflow engine",
-   "score": 48
-  },
-  {
    "name": "kadevin/ilab-conjure",
    "url": "https://github.com/kadevin/ilab-conjure",
    "stars": 719,
@@ -8742,9 +8799,75 @@
    "score": 47
   },
   {
+   "name": "obeli-sk/obelisk",
+   "url": "https://github.com/obeli-sk/obelisk",
+   "stars": 763,
+   "lang": "Rust",
+   "desc": "Durable & Deterministic Workflow Engine",
+   "topics": [
+    "deterministic",
+    "durable-functions",
+    "obelisk",
+    "runtime",
+    "rust",
+    "sqlite3",
+    "wasi",
+    "wasm"
+   ],
+   "updated": "2026-10-22",
+   "forks": 19,
+   "category": "orchestration",
+   "query": "durable workflow engine",
+   "score": 47
+  },
+  {
+   "name": "ahmedrowaihi/iterativeflow",
+   "url": "https://github.com/ahmedrowaihi/iterativeflow",
+   "stars": 15,
+   "lang": "TypeScript",
+   "desc": "Durable, backend-agnostic workflows for TypeScript — one engine over Postgres, SQLite, MySQL, MongoDB, Redis, DynamoDB, or Cloudflare Durable Objects.",
+   "topics": [
+    "durable-execution",
+    "durable-workflows",
+    "job-queue",
+    "postgres",
+    "saga",
+    "serverless",
+    "typescript",
+    "workflow-engine"
+   ],
+   "updated": "2026-10-21",
+   "forks": 1,
+   "category": "orchestration",
+   "query": "durable workflow engine",
+   "score": 47
+  },
+  {
+   "name": "RealZimboGuy/gopherflow",
+   "url": "https://github.com/RealZimboGuy/gopherflow",
+   "stars": 14,
+   "lang": "Go",
+   "desc": "Temporal-style durable workflows without running Temporal. Define workflows as plain Go structs; every state transition persists to Postgres, MySQL or SQLite. Engine, REST API and web console are a li",
+   "topics": [
+    "background-jobs",
+    "durable-execution",
+    "go",
+    "golang",
+    "mysql",
+    "orchestration",
+    "postgres",
+    "saga"
+   ],
+   "updated": "2026-10-13",
+   "forks": 1,
+   "category": "orchestration",
+   "query": "durable workflow engine",
+   "score": 47
+  },
+  {
    "name": "KSJaay/Lunalytics",
    "url": "https://github.com/KSJaay/Lunalytics",
-   "stars": 738,
+   "stars": 737,
    "lang": "JavaScript",
    "desc": "🚀 Open source monitoring tool built with Node.js",
    "topics": [
@@ -8757,7 +8880,7 @@
     "responsive",
     "self-hosted"
    ],
-   "updated": "2026-10-17",
+   "updated": "2026-10-22",
    "forks": 42,
    "category": "observability",
    "query": "uptime monitoring self-hosted",
@@ -8766,7 +8889,7 @@
   {
    "name": "kuvasz-uptime/kuvasz",
    "url": "https://github.com/kuvasz-uptime/kuvasz",
-   "stars": 663,
+   "stars": 664,
    "lang": "Kotlin",
    "desc": "Kuvasz (pronounce as [ˈkuvɒs]) is an open-source uptime and SSL monitoring service, with multiple notification channels, status pages, IAC support via YAML, Prometheus integration, a complete REST API",
    "topics": [
@@ -8779,7 +8902,7 @@
     "metrics-exporter",
     "micronaut"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 40,
    "category": "observability",
    "query": "uptime monitoring self-hosted",
@@ -8858,7 +8981,7 @@
     "githug-profile",
     "learning"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 2,
    "category": "crypto_airdrop",
    "query": "web3 python tools",
@@ -8883,6 +9006,47 @@
    "forks": 0,
    "category": "crypto_airdrop",
    "query": "web3 python tools",
+   "score": 47
+  },
+  {
+   "name": "cyberblu3s/CyberBlue",
+   "url": "https://github.com/cyberblu3s/CyberBlue",
+   "stars": 565,
+   "lang": "Shell",
+   "desc": "CyberSecurity BLUE TEAM containerized platform that brings together open-source tools for SIEM, DFIR, CTI, SOAR, and Network Analysis",
+   "topics": [
+    "cti",
+    "dfir",
+    "edr",
+    "siem",
+    "soar"
+   ],
+   "updated": "2026-10-22",
+   "forks": 109,
+   "category": "security_edr",
+   "query": "open source edr",
+   "score": 47
+  },
+  {
+   "name": "EBWi11/AgentSmith-HIDS",
+   "url": "https://github.com/EBWi11/AgentSmith-HIDS",
+   "stars": 601,
+   "lang": "",
+   "desc": "By Kprobe technology Open Source Host-based Intrusion Detection System(HIDS), from E_Bwill.",
+   "topics": [
+    "anti-rootkit",
+    "connect-hook",
+    "create-file-hook",
+    "detect-porcess-injection",
+    "dns-query-hook",
+    "execve-hook",
+    "hids",
+    "intrusion-detection"
+   ],
+   "updated": "2026-10-20",
+   "forks": 161,
+   "category": "security_edr",
+   "query": "host intrusion detection",
    "score": 47
   },
   {
@@ -8962,7 +9126,7 @@
   {
    "name": "suislanchez/polymarket-kalshi-weather-bot",
    "url": "https://github.com/suislanchez/polymarket-kalshi-weather-bot",
-   "stars": 790,
+   "stars": 791,
    "lang": "Python",
    "desc": "Multi-platform prediction market trading bot: trades weather temperature markets on Kalshi (KXHIGH series) and Polymarket using 31-member GFS ensemble forecasts + BTC 5-min microstructure signals. Kel",
    "topics": [
@@ -8975,8 +9139,8 @@
     "python",
     "react"
    ],
-   "updated": "2026-10-20",
-   "forks": 192,
+   "updated": "2026-10-21",
+   "forks": 194,
    "category": "messaging_bridge",
    "query": "signal bot python",
    "score": 47
@@ -8995,7 +9159,7 @@
     "trading"
    ],
    "updated": "2026-10-21",
-   "forks": 181,
+   "forks": 182,
    "category": "messaging_bridge",
    "query": "signal bot python",
    "score": 47
@@ -9003,7 +9167,7 @@
   {
    "name": "mautrix/signal",
    "url": "https://github.com/mautrix/signal",
-   "stars": 676,
+   "stars": 675,
    "lang": "Go",
    "desc": "A Matrix-Signal puppeting bridge",
    "topics": [
@@ -9015,7 +9179,7 @@
     "matrix-org",
     "signal"
    ],
-   "updated": "2026-10-19",
+   "updated": "2026-10-22",
    "forks": 94,
    "category": "messaging_bridge",
    "query": "matrix bridge",
@@ -9049,94 +9213,6 @@
    "forks": 4,
    "category": "productivity",
    "query": "shop management software",
-   "score": 47
-  },
-  {
-   "name": "obeli-sk/obelisk",
-   "url": "https://github.com/obeli-sk/obelisk",
-   "stars": 762,
-   "lang": "Rust",
-   "desc": "Durable & Deterministic Workflow Engine",
-   "topics": [
-    "deterministic",
-    "durable-functions",
-    "obelisk",
-    "runtime",
-    "rust",
-    "sqlite3",
-    "wasi",
-    "wasm"
-   ],
-   "updated": "2026-10-21",
-   "forks": 19,
-   "category": "orchestration",
-   "query": "durable workflow engine",
-   "score": 47
-  },
-  {
-   "name": "RealZimboGuy/gopherflow",
-   "url": "https://github.com/RealZimboGuy/gopherflow",
-   "stars": 14,
-   "lang": "Go",
-   "desc": "Temporal-style durable workflows without running Temporal. Define workflows as plain Go structs; every state transition persists to Postgres, MySQL or SQLite. Engine, REST API and web console are a li",
-   "topics": [
-    "background-jobs",
-    "durable-execution",
-    "go",
-    "golang",
-    "mysql",
-    "orchestration",
-    "postgres",
-    "saga"
-   ],
-   "updated": "2026-10-13",
-   "forks": 1,
-   "category": "orchestration",
-   "query": "durable workflow engine",
-   "score": 47
-  },
-  {
-   "name": "ahmedrowaihi/iterativeflow",
-   "url": "https://github.com/ahmedrowaihi/iterativeflow",
-   "stars": 13,
-   "lang": "TypeScript",
-   "desc": "Durable, backend-agnostic workflows for TypeScript — one engine over Postgres, SQLite, MySQL, MongoDB, Redis, DynamoDB, or Cloudflare Durable Objects.",
-   "topics": [
-    "durable-execution",
-    "durable-workflows",
-    "job-queue",
-    "postgres",
-    "saga",
-    "serverless",
-    "typescript",
-    "workflow-engine"
-   ],
-   "updated": "2026-10-21",
-   "forks": 1,
-   "category": "orchestration",
-   "query": "durable workflow engine",
-   "score": 47
-  },
-  {
-   "name": "EBWi11/AgentSmith-HIDS",
-   "url": "https://github.com/EBWi11/AgentSmith-HIDS",
-   "stars": 601,
-   "lang": "",
-   "desc": "By Kprobe technology Open Source Host-based Intrusion Detection System(HIDS), from E_Bwill.",
-   "topics": [
-    "anti-rootkit",
-    "connect-hook",
-    "create-file-hook",
-    "detect-porcess-injection",
-    "dns-query-hook",
-    "execve-hook",
-    "hids",
-    "intrusion-detection"
-   ],
-   "updated": "2026-10-20",
-   "forks": 161,
-   "category": "security_edr",
-   "query": "host intrusion detection",
    "score": 47
   },
   {
@@ -9176,6 +9252,50 @@
    "forks": 20,
    "category": "orchestration",
    "query": "task queue python",
+   "score": 46
+  },
+  {
+   "name": "lucheeseng827/dagron",
+   "url": "https://github.com/lucheeseng827/dagron",
+   "stars": 11,
+   "lang": "Rust",
+   "desc": "Durable DAG workflow engine in one Rust binary — an open-source, lightweight Airflow alternative.",
+   "topics": [
+    "airflow-alternative",
+    "dag",
+    "data-pipeline",
+    "kubernetes",
+    "rust",
+    "scheduler",
+    "workflow-engine",
+    "workflow-orchestration"
+   ],
+   "updated": "2026-10-03",
+   "forks": 1,
+   "category": "orchestration",
+   "query": "durable workflow engine",
+   "score": 46
+  },
+  {
+   "name": "D0NMEGA/donnyclaude",
+   "url": "https://github.com/D0NMEGA/donnyclaude",
+   "stars": 9,
+   "lang": "JavaScript",
+   "desc": "Verified workflow engine for Claude Code: durable project memory, phase planning, subagents, and deterministic completion gates.",
+   "topics": [
+    "agent-workflows",
+    "ai-agents",
+    "ai-coding",
+    "anthropic",
+    "claude",
+    "claude-code",
+    "claude-code-plugins",
+    "cli"
+   ],
+   "updated": "2026-10-08",
+   "forks": 0,
+   "category": "orchestration",
+   "query": "durable workflow engine",
    "score": 46
   },
   {
@@ -9301,25 +9421,6 @@
    "score": 46
   },
   {
-   "name": "cyberblu3s/CyberBlue",
-   "url": "https://github.com/cyberblu3s/CyberBlue",
-   "stars": 556,
-   "lang": "Shell",
-   "desc": "CyberSecurity BLUE TEAM containerized platform that brings together open-source tools for SIEM, DFIR, CTI, SOAR, and Network Analysis",
-   "topics": [
-    "cti",
-    "dfir",
-    "edr",
-    "siem",
-    "soar"
-   ],
-   "updated": "2026-10-21",
-   "forks": 108,
-   "category": "security_edr",
-   "query": "open source edr",
-   "score": 46
-  },
-  {
    "name": "chronicle/detection-rules",
    "url": "https://github.com/chronicle/detection-rules",
    "stars": 522,
@@ -9335,7 +9436,7 @@
   {
    "name": "Karib0u/rustinel",
    "url": "https://github.com/Karib0u/rustinel",
-   "stars": 512,
+   "stars": 513,
    "lang": "Rust",
    "desc": "Endpoint detection for Windows, Linux, and macOS. Sigma, YARA, and IOC rules on native telemetry. Written in Rust. No cloud account required.",
    "topics": [
@@ -9348,7 +9449,7 @@
     "etw",
     "incident-response"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 66,
    "category": "security_edr",
    "query": "yara rules",
@@ -9410,7 +9511,7 @@
   {
    "name": "Shoshuo/Prismarr",
    "url": "https://github.com/Shoshuo/Prismarr",
-   "stars": 467,
+   "stars": 468,
    "lang": "Twig",
    "desc": "A self-hosted media dashboard unifying Radarr, Sonarr, Prowlarr, Jellyseerr, qBittorrent and TMDb in a single Symfony 8 interface. One search bar across the local library and TMDb, one calendar mergin",
    "topics": [
@@ -9423,7 +9524,7 @@
     "php",
     "prowlarr"
    ],
-   "updated": "2026-10-19",
+   "updated": "2026-10-21",
    "forks": 19,
    "category": "rag_memory",
    "query": "embeddings sqlite",
@@ -9489,7 +9590,7 @@
   {
    "name": "ygelfand/echolocal",
    "url": "https://github.com/ygelfand/echolocal",
-   "stars": 473,
+   "stars": 477,
    "lang": "Go",
    "desc": "Turn an Amazon Echo Dot or Echo Show into a fully local Home Assistant voice satellite, media player, display and Bluetooth proxy. No Amazon, no cloud.",
    "topics": [
@@ -9502,7 +9603,7 @@
     "esphome",
     "golang"
    ],
-   "updated": "2026-10-21",
+   "updated": "2026-10-22",
    "forks": 26,
    "category": "voice_interface",
    "query": "voice assistant local",
@@ -9524,7 +9625,7 @@
   {
    "name": "AlexxIT/StreamAssist",
    "url": "https://github.com/AlexxIT/StreamAssist",
-   "stars": 389,
+   "stars": 390,
    "lang": "Python",
    "desc": "Home Assistant custom component that allows you to turn almost any camera and almost any speaker into a local voice assistant",
    "topics": [
@@ -9534,7 +9635,7 @@
     "voice-control",
     "voice-recognition"
    ],
-   "updated": "2026-10-18",
+   "updated": "2026-10-22",
    "forks": 39,
    "category": "voice_interface",
    "query": "voice assistant local",
@@ -9625,7 +9726,7 @@
     "matrix-appservice",
     "matrix-org"
    ],
-   "updated": "2026-10-20",
+   "updated": "2026-10-22",
    "forks": 86,
    "category": "messaging_bridge",
    "query": "matrix bridge",
@@ -9671,50 +9772,6 @@
    "forks": 3,
    "category": "estimating_costing",
    "query": "invoice generator python",
-   "score": 46
-  },
-  {
-   "name": "lucheeseng827/dagron",
-   "url": "https://github.com/lucheeseng827/dagron",
-   "stars": 11,
-   "lang": "Rust",
-   "desc": "Durable DAG workflow engine in one Rust binary — an open-source, lightweight Airflow alternative.",
-   "topics": [
-    "airflow-alternative",
-    "dag",
-    "data-pipeline",
-    "kubernetes",
-    "rust",
-    "scheduler",
-    "workflow-engine",
-    "workflow-orchestration"
-   ],
-   "updated": "2026-10-03",
-   "forks": 1,
-   "category": "orchestration",
-   "query": "durable workflow engine",
-   "score": 46
-  },
-  {
-   "name": "D0NMEGA/donnyclaude",
-   "url": "https://github.com/D0NMEGA/donnyclaude",
-   "stars": 9,
-   "lang": "JavaScript",
-   "desc": "Verified workflow engine for Claude Code: durable project memory, phase planning, subagents, and deterministic completion gates.",
-   "topics": [
-    "agent-workflows",
-    "ai-agents",
-    "ai-coding",
-    "anthropic",
-    "claude",
-    "claude-code",
-    "claude-code-plugins",
-    "cli"
-   ],
-   "updated": "2026-10-08",
-   "forks": 0,
-   "category": "orchestration",
-   "query": "durable workflow engine",
    "score": 46
   },
   {
@@ -9879,53 +9936,9 @@
     "workflow"
    ],
    "updated": "2026-08-23",
-   "forks": 3480,
+   "forks": 3479,
    "category": "cloud_free",
    "query": "github actions automation",
-   "score": 45
-  },
-  {
-   "name": "Sfedfcv/redesigned-pancake",
-   "url": "https://github.com/Sfedfcv/redesigned-pancake",
-   "stars": 268,
-   "lang": "",
-   "desc": "Skip to content github / docs Code Issues 80 Pull requests 35 Discussions Actions Projects 2 Security Insights Merge branch 'main' into 1862-Add-Travis-CI-migration-table  1862-Add-Travis-CI-migration",
-   "topics": [],
-   "updated": "2026-10-19",
-   "forks": 0,
-   "category": "cloud_free",
-   "query": "github actions automation",
-   "score": 45
-  },
-  {
-   "name": "infocrud/gobase",
-   "url": "https://github.com/infocrud/gobase",
-   "stars": 6,
-   "lang": "Go",
-   "desc": "Open-source Backend-as-a-Service built with Go + PostgreSQL. Auth, auto-generated REST APIs, realtime subscriptions, file storage, and edge functions — self-host on any VPS in under 60 second",
-   "topics": [],
-   "updated": "2026-06-25",
-   "forks": 0,
-   "category": "cloud_free",
-   "query": "edge functions self-hosted",
-   "score": 45
-  },
-  {
-   "name": "ApeWorX/evm-trace",
-   "url": "https://github.com/ApeWorX/evm-trace",
-   "stars": 316,
-   "lang": "Python",
-   "desc": "Ethereum Virtual Machine transaction tracing tool",
-   "topics": [
-    "ethereum",
-    "python",
-    "smart-contracts",
-    "web3"
-   ],
-   "updated": "2026-10-12",
-   "forks": 34,
-   "category": "crypto_airdrop",
-   "query": "web3 python tools",
    "score": 45
   }
  ]
