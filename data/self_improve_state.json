@@ -4,14 +4,14 @@
       "cause": "Operation exceeded time limit",
       "fix": "Increase timeout or optimize the operation",
       "severity": "medium",
-      "count": 2514,
+      "count": 2561,
       "first_seen": "2026-10-20T16:31:20.356518+00:00"
     },
     "Traceback": {
       "cause": "Python exception in script",
       "fix": "Check traceback and fix the error",
       "severity": "high",
-      "count": 1147,
+      "count": 1178,
       "first_seen": "2026-10-21T11:51:42.523627+00:00"
     }
   },
@@ -217996,7 +217996,4297 @@
       "line": 319,
       "text": "2026-10-22 06:20:23 | ❌ jarvis-frontend: restart failed: [WinError 1455] Le fichier de pagination est insuffisant pour terminer cette opération",
       "timestamp": "2026-10-22T07:54:49.874009+00:00"
+    },
+    {
+      "file": "agent-mesh.log",
+      "line": 263,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.169191+00:00"
+    },
+    {
+      "file": "agent-mesh.log",
+      "line": 270,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.169218+00:00"
+    },
+    {
+      "file": "agent-mesh.log",
+      "line": 271,
+      "text": "2026-10-22 06:20:20,945 | ERROR | werkzeug | Error on request:",
+      "timestamp": "2026-10-22T08:25:43.169221+00:00"
+    },
+    {
+      "file": "agent-mesh.log",
+      "line": 278,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.169235+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 1,
+      "text": "2026-10-15 13:25:30,054 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170514+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 3,
+      "text": "2026-10-15 13:26:05,540 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170537+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 5,
+      "text": "2026-10-15 13:29:18,337 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170543+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 7,
+      "text": "2026-10-15 13:30:12,333 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170549+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 9,
+      "text": "2026-10-15 13:32:33,451 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170555+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 12,
+      "text": "2026-10-15 13:35:54,306 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170562+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 13,
+      "text": "2026-10-15 13:36:18,801 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170566+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 15,
+      "text": "2026-10-15 13:37:03,649 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170572+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 17,
+      "text": "2026-10-15 13:40:14,583 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170577+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 19,
+      "text": "2026-10-15 13:41:06,564 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170583+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 20,
+      "text": "2026-10-15 13:41:06,565 | WARNING | app_factory | batch 1 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170590+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 22,
+      "text": "2026-10-15 13:41:06,586 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170596+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 23,
+      "text": "2026-10-15 13:41:06,586 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170600+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 25,
+      "text": "2026-10-15 13:41:06,600 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170606+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 26,
+      "text": "2026-10-15 13:41:06,600 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170611+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 28,
+      "text": "2026-10-15 13:41:06,615 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170622+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 29,
+      "text": "2026-10-15 13:41:06,615 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170627+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 32,
+      "text": "2026-10-15 13:42:23,581 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170635+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 33,
+      "text": "2026-10-15 13:42:23,581 | WARNING | app_factory | batch 1 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170639+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 35,
+      "text": "2026-10-15 13:42:23,585 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170645+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 36,
+      "text": "2026-10-15 13:42:23,585 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170649+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 38,
+      "text": "2026-10-15 13:42:23,604 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170654+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 39,
+      "text": "2026-10-15 13:42:23,607 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170658+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 41,
+      "text": "2026-10-15 13:42:23,637 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170664+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 42,
+      "text": "2026-10-15 13:42:23,641 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170668+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 45,
+      "text": "2026-10-15 13:44:52,732 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170675+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 46,
+      "text": "2026-10-15 13:44:52,732 | WARNING | app_factory | batch 1 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170679+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 48,
+      "text": "2026-10-15 13:44:52,736 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170685+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 49,
+      "text": "2026-10-15 13:44:52,737 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170689+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 51,
+      "text": "2026-10-15 13:44:52,764 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170694+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 52,
+      "text": "2026-10-15 13:44:52,764 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170698+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 54,
+      "text": "2026-10-15 13:44:52,780 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170703+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 55,
+      "text": "2026-10-15 13:44:52,781 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170707+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 58,
+      "text": "2026-10-15 13:50:16,140 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170715+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 59,
+      "text": "2026-10-15 13:50:16,141 | WARNING | app_factory | batch 1 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170719+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 61,
+      "text": "2026-10-15 13:50:16,160 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170724+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 62,
+      "text": "2026-10-15 13:50:16,160 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170728+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 64,
+      "text": "2026-10-15 13:50:16,176 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170734+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 65,
+      "text": "2026-10-15 13:50:16,176 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170738+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 67,
+      "text": "2026-10-15 13:50:16,194 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170743+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 68,
+      "text": "2026-10-15 13:50:16,196 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170747+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 72,
+      "text": "2026-10-15 13:54:48,022 | WARNING | app_factory | batch 1 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170758+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 75,
+      "text": "2026-10-15 13:56:48,039 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170767+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 77,
+      "text": "2026-10-15 13:56:50,109 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170772+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 78,
+      "text": "2026-10-15 13:56:50,109 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170776+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 80,
+      "text": "2026-10-15 13:56:50,124 | ERROR | app_factory | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.170781+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 81,
+      "text": "2026-10-15 13:56:50,125 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170785+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 86,
+      "text": "2026-10-15 14:03:03,164 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170797+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 87,
+      "text": "2026-10-15 14:03:07,745 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170802+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 88,
+      "text": "2026-10-15 14:03:07,745 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170805+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 89,
+      "text": "2026-10-15 14:03:07,745 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170809+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 91,
+      "text": "2026-10-15 14:03:07,771 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170815+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 92,
+      "text": "2026-10-15 14:03:07,981 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170819+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 93,
+      "text": "2026-10-15 14:03:07,987 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170822+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 94,
+      "text": "2026-10-15 14:03:07,989 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170826+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 96,
+      "text": "2026-10-15 14:03:08,009 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170832+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 97,
+      "text": "2026-10-15 14:03:08,024 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170836+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 98,
+      "text": "2026-10-15 14:03:08,024 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170841+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 99,
+      "text": "2026-10-15 14:03:08,024 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170845+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 101,
+      "text": "2026-10-15 14:03:08,045 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170851+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 102,
+      "text": "2026-10-15 14:03:08,063 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170856+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 103,
+      "text": "2026-10-15 14:03:08,063 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170859+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 104,
+      "text": "2026-10-15 14:03:08,064 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170863+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 106,
+      "text": "2026-10-15 14:03:08,078 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170868+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 107,
+      "text": "2026-10-15 14:03:08,098 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170873+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 108,
+      "text": "2026-10-15 14:03:08,099 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170875+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 109,
+      "text": "2026-10-15 14:03:08,099 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170879+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 111,
+      "text": "2026-10-15 14:03:08,130 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170885+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 112,
+      "text": "2026-10-15 14:03:08,160 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170889+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 113,
+      "text": "2026-10-15 14:03:08,160 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170893+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 114,
+      "text": "2026-10-15 14:03:08,160 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170897+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 116,
+      "text": "2026-10-15 14:03:08,203 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170903+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 117,
+      "text": "2026-10-15 14:03:08,222 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170907+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 118,
+      "text": "2026-10-15 14:03:08,222 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170910+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 119,
+      "text": "2026-10-15 14:03:08,222 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170914+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 124,
+      "text": "2026-10-15 14:15:09,432 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170926+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 125,
+      "text": "2026-10-15 14:15:11,801 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170930+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 126,
+      "text": "2026-10-15 14:15:11,802 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170933+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 127,
+      "text": "2026-10-15 14:15:11,802 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170937+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 129,
+      "text": "2026-10-15 14:15:14,092 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170944+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 130,
+      "text": "2026-10-15 14:15:14,213 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170948+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 131,
+      "text": "2026-10-15 14:15:14,213 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170952+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 132,
+      "text": "2026-10-15 14:15:14,213 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170956+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 134,
+      "text": "2026-10-15 14:15:14,359 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170962+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 135,
+      "text": "2026-10-15 14:15:14,533 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170967+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 136,
+      "text": "2026-10-15 14:15:14,533 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170970+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 137,
+      "text": "2026-10-15 14:15:14,533 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170975+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 139,
+      "text": "2026-10-15 14:15:14,682 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170981+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 140,
+      "text": "2026-10-15 14:15:14,785 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170985+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 141,
+      "text": "2026-10-15 14:15:14,785 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.170989+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 142,
+      "text": "2026-10-15 14:15:14,785 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.170993+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 144,
+      "text": "2026-10-15 14:15:14,879 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.170999+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 145,
+      "text": "2026-10-15 14:15:14,994 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171004+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 146,
+      "text": "2026-10-15 14:15:14,994 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171006+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 147,
+      "text": "2026-10-15 14:15:14,994 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171011+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 149,
+      "text": "2026-10-15 14:15:15,170 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171017+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 150,
+      "text": "2026-10-15 14:15:15,278 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171021+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 151,
+      "text": "2026-10-15 14:15:15,278 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171024+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 152,
+      "text": "2026-10-15 14:15:15,278 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171028+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 154,
+      "text": "2026-10-15 14:15:15,564 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171034+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 155,
+      "text": "2026-10-15 14:15:15,900 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171039+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 156,
+      "text": "2026-10-15 14:15:15,900 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171042+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 157,
+      "text": "2026-10-15 14:15:15,900 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171047+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 162,
+      "text": "2026-10-15 14:20:36,374 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171058+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 163,
+      "text": "2026-10-15 14:20:39,263 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171062+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 164,
+      "text": "2026-10-15 14:20:39,264 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171065+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 165,
+      "text": "2026-10-15 14:20:39,264 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171069+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 167,
+      "text": "2026-10-15 14:20:41,361 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171075+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 168,
+      "text": "2026-10-15 14:20:41,421 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171079+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 169,
+      "text": "2026-10-15 14:20:41,422 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171082+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 170,
+      "text": "2026-10-15 14:20:41,422 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171086+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 172,
+      "text": "2026-10-15 14:20:41,454 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171092+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 173,
+      "text": "2026-10-15 14:20:41,999 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171097+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 174,
+      "text": "2026-10-15 14:20:42,000 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171100+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 175,
+      "text": "2026-10-15 14:20:42,000 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171104+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 177,
+      "text": "2026-10-15 14:20:42,227 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171110+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 178,
+      "text": "2026-10-15 14:20:42,309 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171114+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 179,
+      "text": "2026-10-15 14:20:42,310 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171117+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 180,
+      "text": "2026-10-15 14:20:42,310 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171122+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 182,
+      "text": "2026-10-15 14:20:42,339 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171127+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 183,
+      "text": "2026-10-15 14:20:42,391 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171131+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 184,
+      "text": "2026-10-15 14:20:42,391 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171135+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 185,
+      "text": "2026-10-15 14:20:42,392 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171139+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 187,
+      "text": "2026-10-15 14:20:42,671 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171145+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 188,
+      "text": "2026-10-15 14:20:43,180 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171149+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 189,
+      "text": "2026-10-15 14:20:43,183 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171156+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 190,
+      "text": "2026-10-15 14:20:43,183 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171160+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 192,
+      "text": "2026-10-15 14:20:43,954 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171166+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 193,
+      "text": "2026-10-15 14:20:43,987 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171170+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 194,
+      "text": "2026-10-15 14:20:43,988 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171173+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 195,
+      "text": "2026-10-15 14:20:43,988 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171178+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 198,
+      "text": "2026-10-16 14:00:28,660 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171187+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 199,
+      "text": "2026-10-16 14:00:30,692 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171193+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 200,
+      "text": "2026-10-16 14:00:30,692 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171197+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 201,
+      "text": "2026-10-16 14:00:30,692 | WARNING | app_factory | batch 1 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171202+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 203,
+      "text": "2026-10-16 14:00:32,721 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171209+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 204,
+      "text": "2026-10-16 14:00:34,754 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171214+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 205,
+      "text": "2026-10-16 14:00:34,755 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171218+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 206,
+      "text": "2026-10-16 14:00:34,755 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171222+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 208,
+      "text": "2026-10-16 14:00:36,791 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171230+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 209,
+      "text": "2026-10-16 14:00:38,828 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171235+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 210,
+      "text": "2026-10-16 14:00:38,828 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171239+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 211,
+      "text": "2026-10-16 14:00:38,829 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171243+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 213,
+      "text": "2026-10-16 14:00:40,859 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171249+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 214,
+      "text": "2026-10-16 14:00:42,895 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171254+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 215,
+      "text": "2026-10-16 14:00:42,895 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171257+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 216,
+      "text": "2026-10-16 14:00:42,897 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171261+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 218,
+      "text": "2026-10-16 14:00:44,945 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171267+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 219,
+      "text": "2026-10-16 14:00:46,994 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171272+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 220,
+      "text": "2026-10-16 14:00:47,012 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171275+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 221,
+      "text": "2026-10-16 14:00:47,013 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171278+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 223,
+      "text": "2026-10-16 14:00:49,048 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171285+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 224,
+      "text": "2026-10-16 14:00:51,127 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171290+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 225,
+      "text": "2026-10-16 14:00:51,136 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171292+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 226,
+      "text": "2026-10-16 14:00:51,142 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171296+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 228,
+      "text": "2026-10-16 14:00:53,516 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171303+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 229,
+      "text": "2026-10-16 14:00:55,555 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171307+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 230,
+      "text": "2026-10-16 14:00:55,555 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171310+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 231,
+      "text": "2026-10-16 14:00:55,556 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171314+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 233,
+      "text": "2026-10-16 14:00:57,562 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171321+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 234,
+      "text": "2026-10-16 14:00:59,587 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171325+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 235,
+      "text": "2026-10-16 14:00:59,587 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171328+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 236,
+      "text": "2026-10-16 14:00:59,587 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171332+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 239,
+      "text": "2026-10-16 14:01:07,339 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171341+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 240,
+      "text": "2026-10-16 14:01:09,362 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171345+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 241,
+      "text": "2026-10-16 14:01:09,362 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171349+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 242,
+      "text": "2026-10-16 14:01:09,362 | WARNING | app_factory | batch 1 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171353+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 244,
+      "text": "2026-10-16 14:01:11,384 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171360+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 245,
+      "text": "2026-10-16 14:01:13,407 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171364+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 246,
+      "text": "2026-10-16 14:01:13,407 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171368+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 247,
+      "text": "2026-10-16 14:01:13,407 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171372+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 249,
+      "text": "2026-10-16 14:01:15,432 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171378+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 250,
+      "text": "2026-10-16 14:01:17,469 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171383+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 251,
+      "text": "2026-10-16 14:01:17,469 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171386+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 252,
+      "text": "2026-10-16 14:01:17,469 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171390+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 254,
+      "text": "2026-10-16 14:01:19,495 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171397+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 255,
+      "text": "2026-10-16 14:01:21,549 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171402+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 256,
+      "text": "2026-10-16 14:01:21,549 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171405+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 257,
+      "text": "2026-10-16 14:01:21,549 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171409+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 259,
+      "text": "2026-10-16 14:01:23,585 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171416+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 260,
+      "text": "2026-10-16 14:01:25,626 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171420+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 261,
+      "text": "2026-10-16 14:01:25,626 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171424+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 262,
+      "text": "2026-10-16 14:01:25,626 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171428+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 264,
+      "text": "2026-10-16 14:01:27,645 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171435+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 265,
+      "text": "2026-10-16 14:01:29,667 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171439+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 266,
+      "text": "2026-10-16 14:01:29,667 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171443+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 267,
+      "text": "2026-10-16 14:01:29,667 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171447+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 269,
+      "text": "2026-10-16 14:01:31,699 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171453+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 270,
+      "text": "2026-10-16 14:01:33,732 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171458+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 271,
+      "text": "2026-10-16 14:01:33,733 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171462+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 272,
+      "text": "2026-10-16 14:01:33,733 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171466+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 274,
+      "text": "2026-10-16 14:01:35,771 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171473+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 275,
+      "text": "2026-10-16 14:01:37,820 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
+      "timestamp": "2026-10-22T08:25:43.171477+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 276,
+      "text": "2026-10-16 14:01:37,820 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171481+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 277,
+      "text": "2026-10-16 14:01:37,820 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171486+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 280,
+      "text": "2026-10-17 14:09:25,992 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171494+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 283,
+      "text": "2026-10-17 14:10:05,281 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171502+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 288,
+      "text": "2026-10-17 14:14:42,649 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171512+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 291,
+      "text": "2026-10-17 14:15:22,476 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171520+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 292,
+      "text": "2026-10-17 14:15:26,048 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171524+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 293,
+      "text": "2026-10-17 14:15:26,048 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171527+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 294,
+      "text": "2026-10-17 14:15:26,049 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171531+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 296,
+      "text": "2026-10-17 14:15:26,055 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171537+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 297,
+      "text": "2026-10-17 14:15:26,071 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171541+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 298,
+      "text": "2026-10-17 14:15:26,072 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171545+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 299,
+      "text": "2026-10-17 14:15:26,072 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171549+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 301,
+      "text": "2026-10-17 14:15:26,412 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171555+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 302,
+      "text": "2026-10-17 14:15:26,612 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171559+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 303,
+      "text": "2026-10-17 14:15:26,613 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171562+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 304,
+      "text": "2026-10-17 14:15:26,613 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171567+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 306,
+      "text": "2026-10-17 14:15:26,712 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171573+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 307,
+      "text": "2026-10-17 14:15:26,764 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171578+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 308,
+      "text": "2026-10-17 14:15:26,765 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171581+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 309,
+      "text": "2026-10-17 14:15:26,765 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171585+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 312,
+      "text": "2026-10-18 14:24:22,840 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171594+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 315,
+      "text": "2026-10-18 14:25:01,017 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171601+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 316,
+      "text": "2026-10-18 14:25:10,913 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171606+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 317,
+      "text": "2026-10-18 14:25:10,913 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171609+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 318,
+      "text": "2026-10-18 14:25:10,913 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171613+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 320,
+      "text": "2026-10-18 14:25:10,934 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171619+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 321,
+      "text": "2026-10-18 14:25:10,953 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171623+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 322,
+      "text": "2026-10-18 14:25:10,953 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171626+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 323,
+      "text": "2026-10-18 14:25:10,953 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171630+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 325,
+      "text": "2026-10-18 14:25:10,999 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171654+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 326,
+      "text": "2026-10-18 14:25:11,020 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171659+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 327,
+      "text": "2026-10-18 14:25:11,020 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171663+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 328,
+      "text": "2026-10-18 14:25:11,021 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171667+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 330,
+      "text": "2026-10-18 14:25:11,056 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171673+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 331,
+      "text": "2026-10-18 14:25:11,076 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171677+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 332,
+      "text": "2026-10-18 14:25:11,076 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171681+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 333,
+      "text": "2026-10-18 14:25:11,076 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171685+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 335,
+      "text": "2026-10-18 14:25:11,101 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171691+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 336,
+      "text": "2026-10-18 14:25:11,120 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171695+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 337,
+      "text": "2026-10-18 14:25:11,120 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171698+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 338,
+      "text": "2026-10-18 14:25:11,120 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171702+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 340,
+      "text": "2026-10-18 14:25:11,157 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171708+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 341,
+      "text": "2026-10-18 14:25:11,197 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171712+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 342,
+      "text": "2026-10-18 14:25:11,197 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171714+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 343,
+      "text": "2026-10-18 14:25:11,197 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171719+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 345,
+      "text": "2026-10-18 14:25:11,237 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171725+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 346,
+      "text": "2026-10-18 14:25:11,254 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171729+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 347,
+      "text": "2026-10-18 14:25:11,254 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171732+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 348,
+      "text": "2026-10-18 14:25:11,254 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171736+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 353,
+      "text": "2026-10-19 14:32:37,147 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171747+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 356,
+      "text": "2026-10-19 14:33:18,180 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171754+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 359,
+      "text": "2026-10-19 14:33:53,428 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171762+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 360,
+      "text": "2026-10-19 14:34:07,393 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171766+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 362,
+      "text": "2026-10-19 14:34:07,414 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171773+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 363,
+      "text": "2026-10-19 14:34:08,644 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171777+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 364,
+      "text": "2026-10-19 14:34:08,645 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171780+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 365,
+      "text": "2026-10-19 14:34:08,645 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171784+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 367,
+      "text": "2026-10-19 14:34:08,684 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171790+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 368,
+      "text": "2026-10-19 14:34:08,712 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171794+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 369,
+      "text": "2026-10-19 14:34:08,713 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171797+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 370,
+      "text": "2026-10-19 14:34:08,713 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171801+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 372,
+      "text": "2026-10-19 14:34:08,734 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171807+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 373,
+      "text": "2026-10-19 14:34:08,761 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171811+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 374,
+      "text": "2026-10-19 14:34:08,761 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171814+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 375,
+      "text": "2026-10-19 14:34:08,761 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171818+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 377,
+      "text": "2026-10-19 14:34:08,793 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171824+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 378,
+      "text": "2026-10-19 14:34:08,822 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171828+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 379,
+      "text": "2026-10-19 14:34:08,822 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171832+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 380,
+      "text": "2026-10-19 14:34:08,823 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171836+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 383,
+      "text": "2026-10-20 14:40:58,436 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171844+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 386,
+      "text": "2026-10-20 14:41:35,563 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171851+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 387,
+      "text": "2026-10-20 14:41:37,648 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171855+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 388,
+      "text": "2026-10-20 14:41:37,648 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171858+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 389,
+      "text": "2026-10-20 14:41:37,648 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171862+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 391,
+      "text": "2026-10-20 14:41:37,667 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171868+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 392,
+      "text": "2026-10-20 14:41:37,683 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171872+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 393,
+      "text": "2026-10-20 14:41:37,684 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171875+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 394,
+      "text": "2026-10-20 14:41:37,684 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171879+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 396,
+      "text": "2026-10-20 14:41:37,699 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171885+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 397,
+      "text": "2026-10-20 14:41:37,714 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171889+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 398,
+      "text": "2026-10-20 14:41:37,714 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171893+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 399,
+      "text": "2026-10-20 14:41:37,714 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171897+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 401,
+      "text": "2026-10-20 14:41:37,727 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171903+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 402,
+      "text": "2026-10-20 14:41:37,735 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171907+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 403,
+      "text": "2026-10-20 14:41:37,736 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171910+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 404,
+      "text": "2026-10-20 14:41:37,736 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171914+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 406,
+      "text": "2026-10-20 14:41:37,760 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171920+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 407,
+      "text": "2026-10-20 14:41:37,769 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171924+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 408,
+      "text": "2026-10-20 14:41:37,770 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171927+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 409,
+      "text": "2026-10-20 14:41:37,770 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171931+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 411,
+      "text": "2026-10-20 14:41:37,792 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171937+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 412,
+      "text": "2026-10-20 14:41:37,802 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171942+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 413,
+      "text": "2026-10-20 14:41:37,803 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171945+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 414,
+      "text": "2026-10-20 14:41:37,803 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171949+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 416,
+      "text": "2026-10-20 14:41:37,815 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171955+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 417,
+      "text": "2026-10-20 14:41:37,822 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171959+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 418,
+      "text": "2026-10-20 14:41:37,823 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171963+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 419,
+      "text": "2026-10-20 14:41:37,823 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171967+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 422,
+      "text": "2026-10-21 14:45:14,525 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171975+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 423,
+      "text": "2026-10-21 14:45:20,428 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171978+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 424,
+      "text": "2026-10-21 14:45:20,428 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171982+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 425,
+      "text": "2026-10-21 14:45:20,428 | WARNING | app_factory | batch 1 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.171986+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 427,
+      "text": "2026-10-21 14:45:22,544 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171991+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 428,
+      "text": "2026-10-21 14:45:22,672 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.171996+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 429,
+      "text": "2026-10-21 14:45:22,672 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.171999+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 430,
+      "text": "2026-10-21 14:45:22,672 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172003+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 432,
+      "text": "2026-10-21 14:45:22,723 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172008+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 433,
+      "text": "2026-10-21 14:45:22,831 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172013+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 434,
+      "text": "2026-10-21 14:45:22,831 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172017+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 435,
+      "text": "2026-10-21 14:45:22,831 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172021+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 437,
+      "text": "2026-10-21 14:45:22,911 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172026+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 438,
+      "text": "2026-10-21 14:45:23,016 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172030+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 439,
+      "text": "2026-10-21 14:45:23,016 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172033+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 440,
+      "text": "2026-10-21 14:45:23,016 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172037+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 442,
+      "text": "2026-10-21 14:45:23,108 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172043+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 443,
+      "text": "2026-10-21 14:45:23,221 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172047+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 444,
+      "text": "2026-10-21 14:45:23,221 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172050+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 445,
+      "text": "2026-10-21 14:45:23,221 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172055+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 447,
+      "text": "2026-10-21 14:45:23,300 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172060+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 448,
+      "text": "2026-10-21 14:45:23,398 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172065+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 449,
+      "text": "2026-10-21 14:45:23,398 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172068+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 450,
+      "text": "2026-10-21 14:45:23,398 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172071+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 452,
+      "text": "2026-10-21 14:45:23,505 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172077+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 453,
+      "text": "2026-10-21 14:45:23,584 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172081+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 454,
+      "text": "2026-10-21 14:45:23,585 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172084+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 455,
+      "text": "2026-10-21 14:45:23,585 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172088+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 457,
+      "text": "2026-10-21 14:45:23,685 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172094+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 458,
+      "text": "2026-10-21 14:45:23,741 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172098+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 459,
+      "text": "2026-10-21 14:45:23,742 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172101+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 460,
+      "text": "2026-10-21 14:45:23,742 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172105+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 463,
+      "text": "2026-10-21 14:47:14,650 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172113+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 466,
+      "text": "2026-10-21 14:48:01,304 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172120+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 467,
+      "text": "2026-10-21 14:48:09,049 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172124+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 468,
+      "text": "2026-10-21 14:48:09,049 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172127+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 469,
+      "text": "2026-10-21 14:48:09,049 | WARNING | app_factory | batch 2 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172131+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 471,
+      "text": "2026-10-21 14:48:09,129 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172137+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 472,
+      "text": "2026-10-21 14:48:09,201 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172141+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 473,
+      "text": "2026-10-21 14:48:09,201 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172144+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 474,
+      "text": "2026-10-21 14:48:09,201 | WARNING | app_factory | batch 3 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172148+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 476,
+      "text": "2026-10-21 14:48:09,257 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172154+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 477,
+      "text": "2026-10-21 14:48:09,274 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172158+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 478,
+      "text": "2026-10-21 14:48:09,274 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172162+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 479,
+      "text": "2026-10-21 14:48:09,274 | WARNING | app_factory | batch 4 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172166+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 481,
+      "text": "2026-10-21 14:48:09,316 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172172+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 482,
+      "text": "2026-10-21 14:48:09,363 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172176+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 483,
+      "text": "2026-10-21 14:48:09,364 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172179+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 484,
+      "text": "2026-10-21 14:48:09,364 | WARNING | app_factory | batch 5 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172184+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 486,
+      "text": "2026-10-21 14:48:09,469 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172190+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 487,
+      "text": "2026-10-21 14:48:09,548 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172194+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 488,
+      "text": "2026-10-21 14:48:09,548 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172197+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 489,
+      "text": "2026-10-21 14:48:09,548 | WARNING | app_factory | batch 6 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172201+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 491,
+      "text": "2026-10-21 14:48:09,677 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172208+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 492,
+      "text": "2026-10-21 14:48:09,723 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172212+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 493,
+      "text": "2026-10-21 14:48:09,723 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172216+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 494,
+      "text": "2026-10-21 14:48:09,723 | WARNING | app_factory | batch 7 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172220+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 496,
+      "text": "2026-10-21 14:48:09,745 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172226+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 497,
+      "text": "2026-10-21 14:48:09,774 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
+      "timestamp": "2026-10-22T08:25:43.172230+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 498,
+      "text": "2026-10-21 14:48:09,775 | ERROR | app_factory | all router chains failed",
+      "timestamp": "2026-10-22T08:25:43.172233+00:00"
+    },
+    {
+      "file": "app_factory.log",
+      "line": 499,
+      "text": "2026-10-21 14:48:09,775 | WARNING | app_factory | batch 8 failed — skipping",
+      "timestamp": "2026-10-22T08:25:43.172237+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 22,
+      "text": "2026-10-22 06:10:41,282 | INFO | autonomous | ✅ security_scan: error",
+      "timestamp": "2026-10-22T08:25:43.184928+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 24,
+      "text": "2026-10-22 06:10:41,635 | INFO | autonomous | ✅ semantic_memory: error",
+      "timestamp": "2026-10-22T08:25:43.184948+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 26,
+      "text": "2026-10-22 06:10:41,903 | INFO | autonomous | ✅ guardian_check: error",
+      "timestamp": "2026-10-22T08:25:43.184954+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 49,
+      "text": "2026-10-22 06:18:27,125 | INFO | autonomous | ✅ self_improve: error",
+      "timestamp": "2026-10-22T08:25:43.185007+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 163,
+      "text": "2026-10-22 06:50:09,516 | INFO | autonomous | ✅ self_improve: error",
+      "timestamp": "2026-10-22T08:25:43.185209+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 239,
+      "text": "2026-10-22 07:11:19,538 | INFO | autonomous | ✅ security_scan: error",
+      "timestamp": "2026-10-22T08:25:43.185342+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 241,
+      "text": "2026-10-22 07:11:19,624 | INFO | autonomous | ✅ semantic_memory: error",
+      "timestamp": "2026-10-22T08:25:43.185348+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 243,
+      "text": "2026-10-22 07:11:19,682 | INFO | autonomous | ✅ guardian_check: error",
+      "timestamp": "2026-10-22T08:25:43.185354+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 286,
+      "text": "2026-10-22 07:22:36,042 | INFO | autonomous | ✅ self_improve: error",
+      "timestamp": "2026-10-22T08:25:43.185431+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 306,
+      "text": "2026-10-22 07:28:13,875 | INFO | autonomous | ✅ research_monitor: error",
+      "timestamp": "2026-10-22T08:25:43.185483+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 348,
+      "text": "2026-10-22 07:42:41,759 | INFO | autonomous | ✅ sunna_veille: error",
+      "timestamp": "2026-10-22T08:25:43.185558+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 392,
+      "text": "2026-10-22 07:54:32,378 | INFO | autonomous | ✅ self_improve: error",
+      "timestamp": "2026-10-22T08:25:43.185636+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 428,
+      "text": "2026-10-22 08:05:49,850 | INFO | autonomous | ✅ inference_test: error",
+      "timestamp": "2026-10-22T08:25:43.185700+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 452,
+      "text": "2026-10-22 08:11:54,143 | INFO | autonomous | ✅ security_scan: error",
+      "timestamp": "2026-10-22T08:25:43.185744+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 454,
+      "text": "2026-10-22 08:11:54,448 | INFO | autonomous | ✅ semantic_memory: error",
+      "timestamp": "2026-10-22T08:25:43.185750+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 456,
+      "text": "2026-10-22 08:11:54,681 | INFO | autonomous | ✅ guardian_check: error",
+      "timestamp": "2026-10-22T08:25:43.185756+00:00"
+    },
+    {
+      "file": "autonomous.log",
+      "line": 499,
+      "text": "2026-10-22 08:25:37,110 | INFO | autonomous | ✅ self_improve: error",
+      "timestamp": "2026-10-22T08:25:43.185833+00:00"
+    },
+    {
+      "file": "cloud_desktop.log",
+      "line": 165,
+      "text": "Exception in thread Thread-28900 (_readerthread):",
+      "timestamp": "2026-10-22T08:25:43.221372+00:00"
+    },
+    {
+      "file": "cloud_desktop.log",
+      "line": 177,
+      "text": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x82 in position 15: invalid start byte",
+      "timestamp": "2026-10-22T08:25:43.221423+00:00"
+    },
+    {
+      "file": "guardian.log",
+      "line": 6,
+      "text": "🔴 aether-web: error: [WinError 2] Le fichier spécifié est introuvable",
+      "timestamp": "2026-10-22T08:25:43.236277+00:00"
+    },
+    {
+      "file": "guardian.log",
+      "line": 7,
+      "text": "🔴 aether-bot: error: [WinError 2] Le fichier spécifié est introuvable",
+      "timestamp": "2026-10-22T08:25:43.236293+00:00"
+    },
+    {
+      "file": "guardian.log",
+      "line": 8,
+      "text": "🔴 aether-core: error: [WinError 2] Le fichier spécifié est introuvable",
+      "timestamp": "2026-10-22T08:25:43.236299+00:00"
+    },
+    {
+      "file": "guardian.log",
+      "line": 9,
+      "text": "🔴 ollama: error: [WinError 2] Le fichier spécifié est introuvable",
+      "timestamp": "2026-10-22T08:25:43.236304+00:00"
+    },
+    {
+      "file": "integrations.log",
+      "line": 44,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.237574+00:00"
+    },
+    {
+      "file": "integrations.log",
+      "line": 51,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.237605+00:00"
+    },
+    {
+      "file": "integrations.log",
+      "line": 134,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.237691+00:00"
+    },
+    {
+      "file": "integrations.log",
+      "line": 141,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.237703+00:00"
+    },
+    {
+      "file": "integrations.log",
+      "line": 149,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.237713+00:00"
+    },
+    {
+      "file": "integrations.log",
+      "line": 156,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.237726+00:00"
+    },
+    {
+      "file": "integrations.log",
+      "line": 161,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.237733+00:00"
+    },
+    {
+      "file": "integrations.log",
+      "line": 168,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.237745+00:00"
+    },
+    {
+      "file": "integrations.log",
+      "line": 384,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.237959+00:00"
+    },
+    {
+      "file": "integrations.log",
+      "line": 391,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.237972+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 8,
+      "text": "2026-10-15 18:35:56,646 | ERROR | jarvis_dev | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.238687+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 18,
+      "text": "2026-10-16 14:00:23,971 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
+      "timestamp": "2026-10-22T08:25:43.238717+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 20,
+      "text": "2026-10-16 14:01:04,276 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
+      "timestamp": "2026-10-22T08:25:43.238725+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 22,
+      "text": "2026-10-16 17:05:04,858 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
+      "timestamp": "2026-10-22T08:25:43.238732+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 28,
+      "text": "2026-10-17 07:45:22,365 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
+      "timestamp": "2026-10-22T08:25:43.238751+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 43,
+      "text": "2026-10-18 08:19:35,890 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
+      "timestamp": "2026-10-22T08:25:43.238792+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 45,
+      "text": "2026-10-18 11:20:16,466 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
+      "timestamp": "2026-10-22T08:25:43.238798+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 49,
+      "text": "2026-10-18 17:43:50,924 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
+      "timestamp": "2026-10-22T08:25:43.238811+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 51,
+      "text": "2026-10-18 17:45:56,368 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
+      "timestamp": "2026-10-22T08:25:43.238817+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 64,
+      "text": "2026-10-19 09:07:14,725 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
+      "timestamp": "2026-10-22T08:25:43.238855+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 68,
+      "text": "2026-10-19 15:15:12,160 | ERROR | jarvis_dev | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.238866+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 73,
+      "text": "2026-10-20 06:36:52,292 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
+      "timestamp": "2026-10-22T08:25:43.238881+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 107,
+      "text": "2026-10-21 13:52:37,824 | ERROR | jarvis_dev | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.238968+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 123,
+      "text": "2026-10-22 02:09:11,094 | ERROR | jarvis_dev | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.239010+00:00"
+    },
+    {
+      "file": "jarvis_dev.log",
+      "line": 127,
+      "text": "2026-10-22 05:12:02,717 | ERROR | jarvis_dev | router error: HTTP Error 502: BAD GATEWAY",
+      "timestamp": "2026-10-22T08:25:43.239022+00:00"
+    },
+    {
+      "file": "kanban.log",
+      "line": 61,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.240380+00:00"
+    },
+    {
+      "file": "kanban.log",
+      "line": 68,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.240402+00:00"
+    },
+    {
+      "file": "kanban.log",
+      "line": 223,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.240564+00:00"
+    },
+    {
+      "file": "kanban.log",
+      "line": 230,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.240576+00:00"
+    },
+    {
+      "file": "kanban.log",
+      "line": 384,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.240726+00:00"
+    },
+    {
+      "file": "kanban.log",
+      "line": 391,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.240737+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 3,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347376+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 6,
+      "text": "[2026-10-22 03:09:13,860] ERROR in app: Exception on /stats [GET]",
+      "timestamp": "2026-10-22T08:25:43.347395+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 11,
+      "text": "rv = self.handle_user_exception(e)",
+      "timestamp": "2026-10-22T08:25:43.347406+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 20,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347420+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 23,
+      "text": "[2026-10-22 03:09:34,025] ERROR in app: Exception on /stats [GET]",
+      "timestamp": "2026-10-22T08:25:43.347426+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 28,
+      "text": "rv = self.handle_user_exception(e)",
+      "timestamp": "2026-10-22T08:25:43.347435+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 37,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347447+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 41,
+      "text": "[2026-10-22 03:09:56,806] ERROR in app: Exception on /stats [GET]",
+      "timestamp": "2026-10-22T08:25:43.347453+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 46,
+      "text": "rv = self.handle_user_exception(e)",
+      "timestamp": "2026-10-22T08:25:43.347463+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 55,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347474+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 59,
+      "text": "[2026-10-22 03:10:14,275] ERROR in app: Exception on /stats [GET]",
+      "timestamp": "2026-10-22T08:25:43.347480+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 64,
+      "text": "rv = self.handle_user_exception(e)",
+      "timestamp": "2026-10-22T08:25:43.347490+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 73,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347503+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 76,
+      "text": "[2026-10-22 03:10:35,116] ERROR in app: Exception on /stats [GET]",
+      "timestamp": "2026-10-22T08:25:43.347508+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 81,
+      "text": "rv = self.handle_user_exception(e)",
+      "timestamp": "2026-10-22T08:25:43.347517+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 90,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347529+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 94,
+      "text": "[2026-10-22 03:10:48,554] ERROR in app: Exception on /stats [GET]",
+      "timestamp": "2026-10-22T08:25:43.347538+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 99,
+      "text": "rv = self.handle_user_exception(e)",
+      "timestamp": "2026-10-22T08:25:43.347547+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 108,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347559+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 113,
+      "text": "[2026-10-22 03:11:12,261] ERROR in app: Exception on /stats [GET]",
+      "timestamp": "2026-10-22T08:25:43.347566+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 118,
+      "text": "rv = self.handle_user_exception(e)",
+      "timestamp": "2026-10-22T08:25:43.347575+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 127,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347586+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 131,
+      "text": "[2026-10-22 03:11:33,997] ERROR in app: Exception on /stats [GET]",
+      "timestamp": "2026-10-22T08:25:43.347592+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 136,
+      "text": "rv = self.handle_user_exception(e)",
+      "timestamp": "2026-10-22T08:25:43.347602+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 145,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347613+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 148,
+      "text": "[2026-10-22 03:11:51,061] ERROR in app: Exception on /stats [GET]",
+      "timestamp": "2026-10-22T08:25:43.347618+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 153,
+      "text": "rv = self.handle_user_exception(e)",
+      "timestamp": "2026-10-22T08:25:43.347627+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 162,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347638+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 165,
+      "text": "[2026-10-22 03:12:12,869] ERROR in app: Exception on /stats [GET]",
+      "timestamp": "2026-10-22T08:25:43.347643+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 170,
+      "text": "rv = self.handle_user_exception(e)",
+      "timestamp": "2026-10-22T08:25:43.347653+00:00"
+    },
+    {
+      "file": "router.log",
+      "line": 179,
+      "text": "TypeError: string indices must be integers, not 'str'",
+      "timestamp": "2026-10-22T08:25:43.347664+00:00"
+    },
+    {
+      "file": "sunna.log",
+      "line": 37,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.598340+00:00"
+    },
+    {
+      "file": "sunna.log",
+      "line": 44,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.598368+00:00"
+    },
+    {
+      "file": "sunna.log",
+      "line": 48,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.598374+00:00"
+    },
+    {
+      "file": "sunna.log",
+      "line": 55,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.598386+00:00"
+    },
+    {
+      "file": "sunna.log",
+      "line": 223,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.598556+00:00"
+    },
+    {
+      "file": "sunna.log",
+      "line": 230,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.598567+00:00"
+    },
+    {
+      "file": "sunna.log",
+      "line": 235,
+      "text": "Error on request:",
+      "timestamp": "2026-10-22T08:25:43.598574+00:00"
+    },
+    {
+      "file": "sunna.log",
+      "line": 242,
+      "text": "MemoryError",
+      "timestamp": "2026-10-22T08:25:43.598589+00:00"
+    },
+    {
+      "file": "supervisor.log",
+      "line": 72,
+      "text": "[2026-10-19 13:48:33] network: TIMEOUT â€” continuing anyway",
+      "timestamp": "2026-10-22T08:25:43.599634+00:00"
+    },
+    {
+      "file": "supervisor.log",
+      "line": 74,
+      "text": "[2026-10-19 13:48:54] network: TIMEOUT â€” continuing anyway",
+      "timestamp": "2026-10-22T08:25:43.599651+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 2,
+      "text": "2026-10-22 06:20:27,117 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831582+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 4,
+      "text": "2026-10-22 06:20:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831600+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 6,
+      "text": "2026-10-22 06:21:27,144 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831608+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 8,
+      "text": "2026-10-22 06:21:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831613+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 10,
+      "text": "2026-10-22 06:22:27,166 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831620+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 12,
+      "text": "2026-10-22 06:22:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831624+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 14,
+      "text": "2026-10-22 06:23:27,188 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831631+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 16,
+      "text": "2026-10-22 06:23:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831636+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 18,
+      "text": "2026-10-22 06:24:27,210 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831643+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 20,
+      "text": "2026-10-22 06:24:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831647+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 22,
+      "text": "2026-10-22 06:25:27,236 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831654+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 24,
+      "text": "2026-10-22 06:25:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831658+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 26,
+      "text": "2026-10-22 06:26:27,259 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831665+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 28,
+      "text": "2026-10-22 06:26:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831669+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 30,
+      "text": "2026-10-22 06:27:27,284 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831676+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 32,
+      "text": "2026-10-22 06:27:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831681+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 34,
+      "text": "2026-10-22 06:28:27,306 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831688+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 36,
+      "text": "2026-10-22 06:28:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831692+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 38,
+      "text": "2026-10-22 06:29:27,328 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831699+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 40,
+      "text": "2026-10-22 06:29:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831703+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 42,
+      "text": "2026-10-22 06:30:27,353 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831709+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 44,
+      "text": "2026-10-22 06:30:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831713+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 46,
+      "text": "2026-10-22 06:31:27,375 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831719+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 48,
+      "text": "2026-10-22 06:31:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831724+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 50,
+      "text": "2026-10-22 06:32:27,398 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831730+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 52,
+      "text": "2026-10-22 06:32:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831734+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 54,
+      "text": "2026-10-22 06:33:27,421 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831740+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 56,
+      "text": "2026-10-22 06:33:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831744+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 58,
+      "text": "2026-10-22 06:34:27,620 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831751+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 60,
+      "text": "2026-10-22 06:34:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831755+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 62,
+      "text": "2026-10-22 06:35:27,849 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831762+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 64,
+      "text": "2026-10-22 06:35:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831766+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 66,
+      "text": "2026-10-22 06:36:27,994 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831772+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 68,
+      "text": "2026-10-22 06:36:27 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831776+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 70,
+      "text": "2026-10-22 06:37:28,418 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831783+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 72,
+      "text": "2026-10-22 06:37:28 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831787+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 74,
+      "text": "2026-10-22 06:38:28,687 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831794+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 76,
+      "text": "2026-10-22 06:38:28 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831798+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 78,
+      "text": "2026-10-22 06:39:29,032 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831805+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 80,
+      "text": "2026-10-22 06:39:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831809+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 82,
+      "text": "2026-10-22 06:40:29,157 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831815+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 84,
+      "text": "2026-10-22 06:40:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831819+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 86,
+      "text": "2026-10-22 06:41:29,212 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831826+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 88,
+      "text": "2026-10-22 06:41:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831831+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 90,
+      "text": "2026-10-22 06:42:29,380 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831837+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 92,
+      "text": "2026-10-22 06:42:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831841+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 94,
+      "text": "2026-10-22 06:43:29,430 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831848+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 96,
+      "text": "2026-10-22 06:43:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831852+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 98,
+      "text": "2026-10-22 06:44:29,483 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831858+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 100,
+      "text": "2026-10-22 06:44:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831862+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 102,
+      "text": "2026-10-22 06:45:29,571 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831868+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 104,
+      "text": "2026-10-22 06:45:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831872+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 106,
+      "text": "2026-10-22 06:46:29,620 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831879+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 108,
+      "text": "2026-10-22 06:46:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831883+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 110,
+      "text": "2026-10-22 06:47:29,718 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831889+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 112,
+      "text": "2026-10-22 06:47:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831893+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 114,
+      "text": "2026-10-22 06:48:29,777 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831900+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 116,
+      "text": "2026-10-22 06:48:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831904+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 118,
+      "text": "2026-10-22 06:49:29,848 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831910+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 120,
+      "text": "2026-10-22 06:49:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831914+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 122,
+      "text": "2026-10-22 06:50:29,901 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831921+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 124,
+      "text": "2026-10-22 06:50:29 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831925+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 126,
+      "text": "2026-10-22 06:51:30,071 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831931+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 128,
+      "text": "2026-10-22 06:51:30 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831935+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 130,
+      "text": "2026-10-22 06:52:30,163 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831942+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 132,
+      "text": "2026-10-22 06:52:30 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831946+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 134,
+      "text": "2026-10-22 06:53:30,307 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831952+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 136,
+      "text": "2026-10-22 06:53:30 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831956+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 138,
+      "text": "2026-10-22 06:54:30,492 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831962+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 140,
+      "text": "2026-10-22 06:54:30 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831968+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 142,
+      "text": "2026-10-22 06:55:30,685 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831974+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 144,
+      "text": "2026-10-22 06:55:30 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831978+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 146,
+      "text": "2026-10-22 06:56:30,802 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831984+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 148,
+      "text": "2026-10-22 06:56:30 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831988+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 150,
+      "text": "2026-10-22 06:57:31,044 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.831995+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 152,
+      "text": "2026-10-22 06:57:31 |    → error",
+      "timestamp": "2026-10-22T08:25:43.831999+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 154,
+      "text": "2026-10-22 06:58:31,178 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832005+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 156,
+      "text": "2026-10-22 06:58:31 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832009+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 158,
+      "text": "2026-10-22 06:59:31,392 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832016+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 160,
+      "text": "2026-10-22 06:59:31 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832019+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 162,
+      "text": "2026-10-22 07:00:31,619 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832026+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 164,
+      "text": "2026-10-22 07:00:31 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832030+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 166,
+      "text": "2026-10-22 07:01:31,827 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832037+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 168,
+      "text": "2026-10-22 07:01:31 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832041+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 170,
+      "text": "2026-10-22 07:02:32,054 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832047+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 172,
+      "text": "2026-10-22 07:02:32 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832051+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 174,
+      "text": "2026-10-22 07:03:32,273 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832058+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 176,
+      "text": "2026-10-22 07:03:32 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832062+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 178,
+      "text": "2026-10-22 07:04:32,515 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832068+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 180,
+      "text": "2026-10-22 07:04:32 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832072+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 182,
+      "text": "2026-10-22 07:05:32,748 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832079+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 184,
+      "text": "2026-10-22 07:05:32 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832083+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 186,
+      "text": "2026-10-22 07:06:33,089 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832089+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 188,
+      "text": "2026-10-22 07:06:33 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832093+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 190,
+      "text": "2026-10-22 07:07:33,484 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832099+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 192,
+      "text": "2026-10-22 07:07:33 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832103+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 194,
+      "text": "2026-10-22 07:08:33,887 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832109+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 196,
+      "text": "2026-10-22 07:08:33 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832113+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 198,
+      "text": "2026-10-22 07:09:34,172 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832120+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 200,
+      "text": "2026-10-22 07:09:34 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832123+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 202,
+      "text": "2026-10-22 07:10:34,539 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832130+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 204,
+      "text": "2026-10-22 07:10:34 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832134+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 206,
+      "text": "2026-10-22 07:11:34,948 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832140+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 208,
+      "text": "2026-10-22 07:11:34 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832144+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 210,
+      "text": "2026-10-22 07:12:35,446 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832150+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 212,
+      "text": "2026-10-22 07:12:35 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832154+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 214,
+      "text": "2026-10-22 07:13:35,847 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832160+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 216,
+      "text": "2026-10-22 07:13:35 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832165+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 218,
+      "text": "2026-10-22 07:14:36,219 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832171+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 220,
+      "text": "2026-10-22 07:14:36 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832175+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 222,
+      "text": "2026-10-22 07:15:36,589 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832181+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 224,
+      "text": "2026-10-22 07:15:36 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832185+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 226,
+      "text": "2026-10-22 07:16:36,925 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832191+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 228,
+      "text": "2026-10-22 07:16:36 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832195+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 230,
+      "text": "2026-10-22 07:17:37,281 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832202+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 232,
+      "text": "2026-10-22 07:17:37 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832205+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 234,
+      "text": "2026-10-22 07:18:37,751 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832212+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 236,
+      "text": "2026-10-22 07:18:37 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832216+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 238,
+      "text": "2026-10-22 07:19:38,184 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832222+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 240,
+      "text": "2026-10-22 07:19:38 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832226+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 242,
+      "text": "2026-10-22 07:20:38,457 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832233+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 244,
+      "text": "2026-10-22 07:20:38 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832237+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 246,
+      "text": "2026-10-22 07:21:39,458 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832243+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 248,
+      "text": "2026-10-22 07:21:39 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832247+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 250,
+      "text": "2026-10-22 07:22:40,340 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832253+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 252,
+      "text": "2026-10-22 07:22:40 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832258+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 254,
+      "text": "2026-10-22 07:23:40,821 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832264+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 256,
+      "text": "2026-10-22 07:23:40 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832268+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 258,
+      "text": "2026-10-22 07:24:42,051 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832275+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 260,
+      "text": "2026-10-22 07:24:42 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832279+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 262,
+      "text": "2026-10-22 07:25:42,959 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832285+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 264,
+      "text": "2026-10-22 07:25:42 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832289+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 266,
+      "text": "2026-10-22 07:26:43,975 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832296+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 268,
+      "text": "2026-10-22 07:26:43 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832300+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 270,
+      "text": "2026-10-22 07:27:44,968 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832307+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 272,
+      "text": "2026-10-22 07:27:44 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832319+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 274,
+      "text": "2026-10-22 07:28:45,664 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832326+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 276,
+      "text": "2026-10-22 07:28:45 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832330+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 278,
+      "text": "2026-10-22 07:29:46,155 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832337+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 280,
+      "text": "2026-10-22 07:29:46 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832341+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 282,
+      "text": "2026-10-22 07:30:46,731 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832347+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 284,
+      "text": "2026-10-22 07:30:46 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832351+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 286,
+      "text": "2026-10-22 07:31:47,283 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832358+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 288,
+      "text": "2026-10-22 07:31:47 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832361+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 290,
+      "text": "2026-10-22 07:32:47,782 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832368+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 292,
+      "text": "2026-10-22 07:32:47 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832372+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 294,
+      "text": "2026-10-22 07:33:48,194 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832378+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 296,
+      "text": "2026-10-22 07:33:48 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832383+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 298,
+      "text": "2026-10-22 07:34:48,948 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832389+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 300,
+      "text": "2026-10-22 07:34:48 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832395+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 302,
+      "text": "2026-10-22 07:35:49,467 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832401+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 304,
+      "text": "2026-10-22 07:35:49 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832405+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 306,
+      "text": "2026-10-22 07:36:49,911 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832412+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 308,
+      "text": "2026-10-22 07:36:49 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832416+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 310,
+      "text": "2026-10-22 07:37:50,588 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832422+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 312,
+      "text": "2026-10-22 07:37:50 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832426+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 314,
+      "text": "2026-10-22 07:38:51,134 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832432+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 316,
+      "text": "2026-10-22 07:38:51 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832436+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 318,
+      "text": "2026-10-22 07:39:51,844 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832443+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 320,
+      "text": "2026-10-22 07:39:51 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832447+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 322,
+      "text": "2026-10-22 07:40:52,388 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832453+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 324,
+      "text": "2026-10-22 07:40:52 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832457+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 326,
+      "text": "2026-10-22 07:41:52,882 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832463+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 328,
+      "text": "2026-10-22 07:41:52 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832468+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 330,
+      "text": "2026-10-22 07:42:54,013 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832474+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 332,
+      "text": "2026-10-22 07:42:54 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832478+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 334,
+      "text": "2026-10-22 07:43:54,798 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832485+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 336,
+      "text": "2026-10-22 07:43:54 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832489+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 338,
+      "text": "2026-10-22 07:44:55,729 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832495+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 340,
+      "text": "2026-10-22 07:44:55 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832499+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 342,
+      "text": "2026-10-22 07:45:57,020 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832506+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 344,
+      "text": "2026-10-22 07:45:57 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832510+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 346,
+      "text": "2026-10-22 07:46:57,996 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832516+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 348,
+      "text": "2026-10-22 07:46:57 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832520+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 350,
+      "text": "2026-10-22 07:47:59,503 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832526+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 352,
+      "text": "2026-10-22 07:47:59 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832530+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 354,
+      "text": "2026-10-22 07:49:00,995 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832537+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 356,
+      "text": "2026-10-22 07:49:00 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832541+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 358,
+      "text": "2026-10-22 07:50:01,647 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832547+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 360,
+      "text": "2026-10-22 07:50:01 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832551+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 362,
+      "text": "2026-10-22 07:51:02,422 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832557+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 364,
+      "text": "2026-10-22 07:51:02 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832561+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 366,
+      "text": "2026-10-22 07:52:03,646 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832568+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 368,
+      "text": "2026-10-22 07:52:03 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832572+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 370,
+      "text": "2026-10-22 07:53:04,783 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832579+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 372,
+      "text": "2026-10-22 07:53:04 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832583+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 374,
+      "text": "2026-10-22 07:54:06,391 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832589+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 376,
+      "text": "2026-10-22 07:54:06 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832593+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 378,
+      "text": "2026-10-22 07:55:07,116 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832599+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 380,
+      "text": "2026-10-22 07:55:07 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832603+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 382,
+      "text": "2026-10-22 07:56:08,151 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832610+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 384,
+      "text": "2026-10-22 07:56:08 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832614+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 386,
+      "text": "2026-10-22 07:57:09,107 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832620+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 388,
+      "text": "2026-10-22 07:57:09 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832625+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 390,
+      "text": "2026-10-22 07:58:10,786 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832631+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 392,
+      "text": "2026-10-22 07:58:10 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832635+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 394,
+      "text": "2026-10-22 07:59:11,761 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832641+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 396,
+      "text": "2026-10-22 07:59:11 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832645+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 398,
+      "text": "2026-10-22 08:00:12,673 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832652+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 400,
+      "text": "2026-10-22 08:00:12 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832656+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 402,
+      "text": "2026-10-22 08:01:13,565 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832662+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 404,
+      "text": "2026-10-22 08:01:13 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832666+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 406,
+      "text": "2026-10-22 08:02:14,467 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832673+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 408,
+      "text": "2026-10-22 08:02:14 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832677+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 410,
+      "text": "2026-10-22 08:03:15,557 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832683+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 412,
+      "text": "2026-10-22 08:03:15 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832688+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 414,
+      "text": "2026-10-22 08:04:16,529 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832694+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 416,
+      "text": "2026-10-22 08:04:16 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832698+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 418,
+      "text": "2026-10-22 08:05:17,460 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832705+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 420,
+      "text": "2026-10-22 08:05:17 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832709+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 422,
+      "text": "2026-10-22 08:06:18,696 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832715+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 424,
+      "text": "2026-10-22 08:06:18 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832719+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 426,
+      "text": "2026-10-22 08:07:19,611 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832730+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 428,
+      "text": "2026-10-22 08:07:19 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832734+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 430,
+      "text": "2026-10-22 08:08:20,427 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832740+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 432,
+      "text": "2026-10-22 08:08:20 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832744+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 434,
+      "text": "2026-10-22 08:09:21,360 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832751+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 436,
+      "text": "2026-10-22 08:09:21 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832755+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 438,
+      "text": "2026-10-22 08:10:23,402 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832761+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 440,
+      "text": "2026-10-22 08:10:23 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832765+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 442,
+      "text": "2026-10-22 08:11:24,737 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832772+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 444,
+      "text": "2026-10-22 08:11:24 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832776+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 446,
+      "text": "2026-10-22 08:12:26,432 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832782+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 448,
+      "text": "2026-10-22 08:12:26 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832786+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 450,
+      "text": "2026-10-22 08:13:28,097 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832793+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 452,
+      "text": "2026-10-22 08:13:28 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832797+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 454,
+      "text": "2026-10-22 08:14:28,895 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832803+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 456,
+      "text": "2026-10-22 08:14:28 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832807+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 458,
+      "text": "2026-10-22 08:15:30,041 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832816+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 460,
+      "text": "2026-10-22 08:15:30 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832820+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 462,
+      "text": "2026-10-22 08:16:30,912 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832826+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 464,
+      "text": "2026-10-22 08:16:30 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832830+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 466,
+      "text": "2026-10-22 08:17:32,610 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832836+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 468,
+      "text": "2026-10-22 08:17:32 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832840+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 470,
+      "text": "2026-10-22 08:18:33,608 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832847+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 472,
+      "text": "2026-10-22 08:18:33 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832851+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 474,
+      "text": "2026-10-22 08:19:34,989 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832857+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 476,
+      "text": "2026-10-22 08:19:34 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832863+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 478,
+      "text": "2026-10-22 08:20:35,805 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832869+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 480,
+      "text": "2026-10-22 08:20:35 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832873+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 482,
+      "text": "2026-10-22 08:21:36,953 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832879+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 484,
+      "text": "2026-10-22 08:21:36 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832883+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 486,
+      "text": "2026-10-22 08:22:37,988 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832900+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 488,
+      "text": "2026-10-22 08:22:37 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832905+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 490,
+      "text": "2026-10-22 08:23:39,295 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832911+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 492,
+      "text": "2026-10-22 08:23:39 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832915+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 494,
+      "text": "2026-10-22 08:24:40,348 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832922+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 496,
+      "text": "2026-10-22 08:24:40 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832926+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 498,
+      "text": "2026-10-22 08:25:40,971 | ERROR | vpn_agent | ❌ فشل الاتصال: Sudo est désactivé sur cet ordinateur. Pour l’activer, accédez à \u001b]8;;ms-settings:developers\u001b\\Developer Settings page\u001b]8;;\u001b\\ dans l’application Paramètres",
+      "timestamp": "2026-10-22T08:25:43.832932+00:00"
+    },
+    {
+      "file": "vpn-daemon.log",
+      "line": 500,
+      "text": "2026-10-22 08:25:40 |    → error",
+      "timestamp": "2026-10-22T08:25:43.832936+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 144,
+      "text": "Exception in thread Thread-5634 (_readerthread):",
+      "timestamp": "2026-10-22T08:25:43.958102+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 156,
+      "text": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x82 in position 22: invalid start byte",
+      "timestamp": "2026-10-22T08:25:43.958137+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 159,
+      "text": "Exception in thread Thread-5636 (_readerthread):",
+      "timestamp": "2026-10-22T08:25:43.958147+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 171,
+      "text": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x82 in position 22: invalid start byte",
+      "timestamp": "2026-10-22T08:25:43.958165+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 173,
+      "text": "Exception in thread Thread-5638 (_readerthread):",
+      "timestamp": "2026-10-22T08:25:43.958170+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 185,
+      "text": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x82 in position 15: invalid start byte",
+      "timestamp": "2026-10-22T08:25:43.958188+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 242,
+      "text": "Exception in thread Thread-5760 (_readerthread):",
+      "timestamp": "2026-10-22T08:25:43.958294+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 254,
+      "text": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x82 in position 15: invalid start byte",
+      "timestamp": "2026-10-22T08:25:43.958312+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 257,
+      "text": "Exception in thread Thread-5762 (_readerthread):",
+      "timestamp": "2026-10-22T08:25:43.958320+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 269,
+      "text": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 152: invalid continuation byte",
+      "timestamp": "2026-10-22T08:25:43.958338+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 271,
+      "text": "Exception in thread Thread-5764 (_readerthread):",
+      "timestamp": "2026-10-22T08:25:43.958343+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 283,
+      "text": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 152: invalid continuation byte",
+      "timestamp": "2026-10-22T08:25:43.958360+00:00"
+    },
+    {
+      "file": "watchdog.log",
+      "line": 285,
+      "text": "2026-10-22 06:20:23 | ❌ jarvis-frontend: restart failed: [WinError 1455] Le fichier de pagination est insuffisant pour terminer cette opération",
+      "timestamp": "2026-10-22T08:25:43.958368+00:00"
     }
   ],
-  "last_scan": "2026-10-22T07:54:50.256425+00:00"
+  "last_scan": "2026-10-22T08:25:44.337672+00:00"
 }
