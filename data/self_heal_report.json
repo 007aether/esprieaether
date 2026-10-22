@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-22T09:01:06.376011",
+  "checked_at": "2026-10-22T09:07:27.088196",
   "services": {
     "router": "up",
     "mesh": "up",
@@ -10,10 +10,8 @@
     "kanban": "up",
     "homedock": "up",
     "jarvis": "up",
-    "ollama": "down"
+    "ollama": "up"
   },
-  "restarts": [
-    "ollama:down FAIL: failed: Command '['powershell', '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', \"Start-Process -FilePath 'C:/Users/ESPRIEAETHER/AppData/Local/hermes/installs/18613b2b4f703f95/environments/6fb53118af6642d1a10883a5b810cc66/venv/Scripts/python.exe' -ArgumentList 'ollama' -WorkingDirectory 'C:\\\\Users\\\\ESPRIEAETHER\\\\Desktop\\\\esprieaether' -WindowStyle Hidden -RedirectStandardOutput 'C:\\\\Users\\\\ESPRIEAETHER\\\\Desktop\\\\esprieaether\\\\data\\\\logs\\\\self_heal_ollama.log' -RedirectStandardError 'C:\\\\Users\\\\ESPRIEAETHER\\\\Desktop\\\\esprieaether\\\\data\\\\logs\\\\self_heal_ollama.log'\"]' timed out after 60 seconds"
-  ],
-  "changed": true
+  "restarts": [],
+  "changed": false
 }
