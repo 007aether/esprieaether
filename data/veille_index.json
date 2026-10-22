@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-22T13:33:02.031972+00:00",
+ "updated": "2026-10-22T13:39:19.088585+00:00",
  "total": 500,
  "categories": {
   "ai_agent_framework": 56,
   "local_llm": 69,
   "telegram_bots": 34,
   "self_evolving": 48,
-  "orchestration": 37,
+  "orchestration": 35,
   "observability": 49,
-  "cloud_free": 25,
+  "cloud_free": 23,
   "crypto_airdrop": 33,
   "security_edr": 19,
-  "rag_memory": 46,
-  "voice_interface": 44,
-  "messaging_bridge": 26,
+  "rag_memory": 47,
+  "voice_interface": 46,
+  "messaging_bridge": 27,
   "metal_fabrication": 0,
   "cnc_laser_dxf": 0,
   "gates_ironwork": 0,
@@ -32,7 +32,7 @@
   {
    "name": "HKUDS/nanobot",
    "url": "https://github.com/HKUDS/nanobot",
-   "stars": 49262,
+   "stars": 49264,
    "lang": "Python",
    "desc": "Ultra-lightweight, open-source, self-hosted personal AI agent framework in Python with WebUI, tools, memory, MCP, multi-agent workflows, automation, and chat apps",
    "topics": [
@@ -46,7 +46,7 @@
     "llms"
    ],
    "updated": "2026-10-22",
-   "forks": 8665,
+   "forks": 8667,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
    "score": 98
@@ -54,7 +54,7 @@
   {
    "name": "CherryHQ/cherry-studio",
    "url": "https://github.com/CherryHQ/cherry-studio",
-   "stars": 52874,
+   "stars": 52875,
    "lang": "TypeScript",
    "desc": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
    "topics": [
@@ -463,28 +463,6 @@
    "score": 87
   },
   {
-   "name": "swarmclawai/swarmclaw",
-   "url": "https://github.com/swarmclawai/swarmclaw",
-   "stars": 697,
-   "lang": "TypeScript",
-   "desc": "Open-source self-hosted AI agent runtime and multi-agent framework for autonomous agent swarms. Agent memory, MCP tools, schedules, delegation, and 23+ LLM providers (Claude, GPT, Gemini, OpenRouter, ",
-   "topics": [
-    "agent-framework",
-    "agent-memory",
-    "agent-runtime",
-    "agent-swarm",
-    "agents",
-    "ai",
-    "ai-agent-framework",
-    "ai-agents"
-   ],
-   "updated": "2026-10-22",
-   "forks": 142,
-   "category": "local_llm",
-   "query": "ollama alternative",
-   "score": 87
-  },
-  {
    "name": "langfuse/langfuse",
    "url": "https://github.com/langfuse/langfuse",
    "stars": 36182,
@@ -529,9 +507,31 @@
    "score": 87
   },
   {
+   "name": "swarmclawai/swarmclaw",
+   "url": "https://github.com/swarmclawai/swarmclaw",
+   "stars": 697,
+   "lang": "TypeScript",
+   "desc": "Open-source self-hosted AI agent runtime and multi-agent framework for autonomous agent swarms. Agent memory, MCP tools, schedules, delegation, and 23+ LLM providers (Claude, GPT, Gemini, OpenRouter, ",
+   "topics": [
+    "agent-framework",
+    "agent-memory",
+    "agent-runtime",
+    "agent-swarm",
+    "agents",
+    "ai",
+    "ai-agent-framework",
+    "ai-agents"
+   ],
+   "updated": "2026-10-22",
+   "forks": 142,
+   "category": "local_llm",
+   "query": "ollama alternative",
+   "score": 87
+  },
+  {
    "name": "PrimeIntellect-ai/prime-agent",
    "url": "https://github.com/PrimeIntellect-ai/prime-agent",
-   "stars": 22262,
+   "stars": 22264,
    "lang": "Rust",
    "desc": "A self-improving RLM agent for coding workflows and long-running autonomous tasks.",
    "topics": [],
@@ -586,28 +586,6 @@
    "score": 85
   },
   {
-   "name": "browseros-ai/BrowserOS",
-   "url": "https://github.com/browseros-ai/BrowserOS",
-   "stars": 14049,
-   "lang": "TypeScript",
-   "desc": "🌐 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.",
-   "topics": [
-    "agent",
-    "ai-agents",
-    "automation",
-    "browser",
-    "browser-automation",
-    "browseros",
-    "chromium",
-    "claude"
-   ],
-   "updated": "2026-10-22",
-   "forks": 1507,
-   "category": "local_llm",
-   "query": "ollama alternative",
-   "score": 85
-  },
-  {
    "name": "ccfos/nightingale",
    "url": "https://github.com/ccfos/nightingale",
    "stars": 13377,
@@ -649,6 +627,28 @@
    "forks": 1015,
    "category": "rag_memory",
    "query": "local rag vector database",
+   "score": 85
+  },
+  {
+   "name": "browseros-ai/BrowserOS",
+   "url": "https://github.com/browseros-ai/BrowserOS",
+   "stars": 14049,
+   "lang": "TypeScript",
+   "desc": "🌐 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.",
+   "topics": [
+    "agent",
+    "ai-agents",
+    "automation",
+    "browser",
+    "browser-automation",
+    "browseros",
+    "chromium",
+    "claude"
+   ],
+   "updated": "2026-10-22",
+   "forks": 1507,
+   "category": "local_llm",
+   "query": "ollama alternative",
    "score": 85
   },
   {
@@ -885,28 +885,6 @@
    "score": 83
   },
   {
-   "name": "beatwad/LinkedIn-AI-Job-Applier-Ultimate",
-   "url": "https://github.com/beatwad/LinkedIn-AI-Job-Applier-Ultimate",
-   "stars": 176,
-   "lang": "Python",
-   "desc": "AI-powered LinkedIn and Indeed job application bot with Playwright automation, LLM integration, data anonymization, and Telegram reporting. Applies to ALL job types (not just Easy Apply), generates cu",
-   "topics": [
-    "ai",
-    "ai-job-matching",
-    "ai-job-search",
-    "application-resume",
-    "automation",
-    "automation-playwright",
-    "easy-apply",
-    "gemini"
-   ],
-   "updated": "2026-10-22",
-   "forks": 46,
-   "category": "telegram_bots",
-   "query": "telegram automation python",
-   "score": 83
-  },
-  {
    "name": "Human-Agent-Society/reef",
    "url": "https://github.com/Human-Agent-Society/reef",
    "stars": 7733,
@@ -926,6 +904,28 @@
    "forks": 726,
    "category": "self_evolving",
    "query": "self-improving agent",
+   "score": 83
+  },
+  {
+   "name": "beatwad/LinkedIn-AI-Job-Applier-Ultimate",
+   "url": "https://github.com/beatwad/LinkedIn-AI-Job-Applier-Ultimate",
+   "stars": 176,
+   "lang": "Python",
+   "desc": "AI-powered LinkedIn and Indeed job application bot with Playwright automation, LLM integration, data anonymization, and Telegram reporting. Applies to ALL job types (not just Easy Apply), generates cu",
+   "topics": [
+    "ai",
+    "ai-job-matching",
+    "ai-job-search",
+    "application-resume",
+    "automation",
+    "automation-playwright",
+    "easy-apply",
+    "gemini"
+   ],
+   "updated": "2026-10-22",
+   "forks": 46,
+   "category": "telegram_bots",
+   "query": "telegram automation python",
    "score": 83
   },
   {
@@ -1358,7 +1358,7 @@
   {
    "name": "langchain-ai/langgraph",
    "url": "https://github.com/langchain-ai/langgraph",
-   "stars": 43715,
+   "stars": 43716,
    "lang": "Python",
    "desc": "Build resilient agents.",
    "topics": [
@@ -1375,28 +1375,6 @@
    "forks": 7494,
    "category": "ai_agent_framework",
    "query": "ai agent framework python",
-   "score": 78
-  },
-  {
-   "name": "kossakovsky/selfhost-ai",
-   "url": "https://github.com/kossakovsky/selfhost-ai",
-   "stars": 951,
-   "lang": "Shell",
-   "desc": "One-command installer for a self-hosted AI stack on your own server: n8n, Ollama, Open WebUI, OpenClaw, Dify, Flowise, Supabase, ComfyUI, Qdrant & 30+ tools. Docker Compose, automatic HTTPS via Caddy,",
-   "topics": [
-    "ai-agents",
-    "ai-automation",
-    "comfyui",
-    "dify",
-    "docker-compose",
-    "flowise",
-    "homelab",
-    "llm"
-   ],
-   "updated": "2026-10-19",
-   "forks": 237,
-   "category": "local_llm",
-   "query": "ollama alternative",
    "score": 78
   },
   {
@@ -1444,28 +1422,6 @@
    "score": 78
   },
   {
-   "name": "toby-bridges/api-relay-audit",
-   "url": "https://github.com/toby-bridges/api-relay-audit",
-   "stars": 887,
-   "lang": "Python",
-   "desc": "Local security audit for AI API relays and LLM proxies: detects prompt injection, model substitution, tool-call rewriting, SSE anomalies, error leakage, and Web3 wallet risks.",
-   "topics": [
-    "ai-agents",
-    "ai-audit",
-    "ai-security",
-    "anthropic",
-    "api-gateway",
-    "claude",
-    "dsh-plugin",
-    "llm-audit"
-   ],
-   "updated": "2026-10-22",
-   "forks": 84,
-   "category": "crypto_airdrop",
-   "query": "web3 python tools",
-   "score": 78
-  },
-  {
    "name": "metiutek/Vortelio",
    "url": "https://github.com/metiutek/Vortelio",
    "stars": 19,
@@ -1485,6 +1441,50 @@
    "forks": 1,
    "category": "voice_interface",
    "query": "whisper alternative python",
+   "score": 78
+  },
+  {
+   "name": "kossakovsky/selfhost-ai",
+   "url": "https://github.com/kossakovsky/selfhost-ai",
+   "stars": 951,
+   "lang": "Shell",
+   "desc": "One-command installer for a self-hosted AI stack on your own server: n8n, Ollama, Open WebUI, OpenClaw, Dify, Flowise, Supabase, ComfyUI, Qdrant & 30+ tools. Docker Compose, automatic HTTPS via Caddy,",
+   "topics": [
+    "ai-agents",
+    "ai-automation",
+    "comfyui",
+    "dify",
+    "docker-compose",
+    "flowise",
+    "homelab",
+    "llm"
+   ],
+   "updated": "2026-10-19",
+   "forks": 237,
+   "category": "local_llm",
+   "query": "ollama alternative",
+   "score": 78
+  },
+  {
+   "name": "toby-bridges/api-relay-audit",
+   "url": "https://github.com/toby-bridges/api-relay-audit",
+   "stars": 887,
+   "lang": "Python",
+   "desc": "Local security audit for AI API relays and LLM proxies: detects prompt injection, model substitution, tool-call rewriting, SSE anomalies, error leakage, and Web3 wallet risks.",
+   "topics": [
+    "ai-agents",
+    "ai-audit",
+    "ai-security",
+    "anthropic",
+    "api-gateway",
+    "claude",
+    "dsh-plugin",
+    "llm-audit"
+   ],
+   "updated": "2026-10-22",
+   "forks": 84,
+   "category": "crypto_airdrop",
+   "query": "web3 python tools",
    "score": 78
   },
   {
@@ -1510,28 +1510,6 @@
    "score": 78
   },
   {
-   "name": "NotPunchnox/rkllama",
-   "url": "https://github.com/NotPunchnox/rkllama",
-   "stars": 617,
-   "lang": "Python",
-   "desc": "Ollama alternative for Rockchip NPU: An efficient solution for running AI and Deep learning models on Rockchip devices with optimized NPU support ( rkllm )",
-   "topics": [
-    "ai",
-    "client",
-    "client-server",
-    "ia",
-    "llm",
-    "llm-apps",
-    "llm-inference",
-    "npu"
-   ],
-   "updated": "2026-10-21",
-   "forks": 103,
-   "category": "local_llm",
-   "query": "ollama alternative",
-   "score": 77
-  },
-  {
    "name": "SigNoz/signoz",
    "url": "https://github.com/SigNoz/signoz",
    "stars": 32425,
@@ -1551,6 +1529,28 @@
    "forks": 2549,
    "category": "observability",
    "query": "self-hosted monitoring",
+   "score": 77
+  },
+  {
+   "name": "NotPunchnox/rkllama",
+   "url": "https://github.com/NotPunchnox/rkllama",
+   "stars": 617,
+   "lang": "Python",
+   "desc": "Ollama alternative for Rockchip NPU: An efficient solution for running AI and Deep learning models on Rockchip devices with optimized NPU support ( rkllm )",
+   "topics": [
+    "ai",
+    "client",
+    "client-server",
+    "ia",
+    "llm",
+    "llm-apps",
+    "llm-inference",
+    "npu"
+   ],
+   "updated": "2026-10-21",
+   "forks": 103,
+   "category": "local_llm",
+   "query": "ollama alternative",
    "score": 77
   },
   {
@@ -1611,28 +1611,6 @@
    "score": 76
   },
   {
-   "name": "KolosalAI/kolosal-cli",
-   "url": "https://github.com/KolosalAI/kolosal-cli",
-   "stars": 466,
-   "lang": "TypeScript",
-   "desc": "Super lightweight Ollama + Qwen Code alternative to run Llama 3.3, DeepSeek-R1, Phi-4, Gemma 3, Mistral Small 3.1 and other large language models.",
-   "topics": [
-    "agent",
-    "agents",
-    "cli",
-    "coding",
-    "deepseek",
-    "gemma",
-    "gemma3",
-    "gemma3n"
-   ],
-   "updated": "2026-10-07",
-   "forks": 15,
-   "category": "local_llm",
-   "query": "ollama alternative",
-   "score": 76
-  },
-  {
    "name": "GiacomoSaccaggi/Mithril",
    "url": "https://github.com/GiacomoSaccaggi/Mithril",
    "stars": 11,
@@ -1652,28 +1630,6 @@
    "forks": 1,
    "category": "local_llm",
    "query": "local llm inference engine",
-   "score": 76
-  },
-  {
-   "name": "PleasePrompto/ductor",
-   "url": "https://github.com/PleasePrompto/ductor",
-   "stars": 463,
-   "lang": "Python",
-   "desc": "Control Claude Code, Codex CLI and Gemini CLI from Telegram. Live streaming, persistent memory, cron jobs, webhooks, Docker sandboxing.",
-   "topics": [
-    "ai-assistant",
-    "automation",
-    "claude-code",
-    "cli",
-    "codex",
-    "docker",
-    "gemini",
-    "gemini-cli"
-   ],
-   "updated": "2026-10-20",
-   "forks": 92,
-   "category": "telegram_bots",
-   "query": "telegram automation python",
    "score": 76
   },
   {
@@ -1761,6 +1717,50 @@
    "score": 76
   },
   {
+   "name": "KolosalAI/kolosal-cli",
+   "url": "https://github.com/KolosalAI/kolosal-cli",
+   "stars": 466,
+   "lang": "TypeScript",
+   "desc": "Super lightweight Ollama + Qwen Code alternative to run Llama 3.3, DeepSeek-R1, Phi-4, Gemma 3, Mistral Small 3.1 and other large language models.",
+   "topics": [
+    "agent",
+    "agents",
+    "cli",
+    "coding",
+    "deepseek",
+    "gemma",
+    "gemma3",
+    "gemma3n"
+   ],
+   "updated": "2026-10-07",
+   "forks": 15,
+   "category": "local_llm",
+   "query": "ollama alternative",
+   "score": 76
+  },
+  {
+   "name": "PleasePrompto/ductor",
+   "url": "https://github.com/PleasePrompto/ductor",
+   "stars": 463,
+   "lang": "Python",
+   "desc": "Control Claude Code, Codex CLI and Gemini CLI from Telegram. Live streaming, persistent memory, cron jobs, webhooks, Docker sandboxing.",
+   "topics": [
+    "ai-assistant",
+    "automation",
+    "claude-code",
+    "cli",
+    "codex",
+    "docker",
+    "gemini",
+    "gemini-cli"
+   ],
+   "updated": "2026-10-20",
+   "forks": 92,
+   "category": "telegram_bots",
+   "query": "telegram automation python",
+   "score": 76
+  },
+  {
    "name": "microsoft/agent-framework",
    "url": "https://github.com/microsoft/agent-framework",
    "stars": 14271,
@@ -1822,6 +1822,19 @@
    "score": 75
   },
   {
+   "name": "llm-guy/jarvis",
+   "url": "https://github.com/llm-guy/jarvis",
+   "stars": 337,
+   "lang": "Python",
+   "desc": "Jarvis is a voice-activated, conversational AI assistant powered by a local LLM (Qwen via Ollama). It listens for a wake word, processes spoken commands using a local language model with LangChain, an",
+   "topics": [],
+   "updated": "2026-10-15",
+   "forks": 107,
+   "category": "voice_interface",
+   "query": "voice assistant local",
+   "score": 75
+  },
+  {
    "name": "Natfii/ZeroClaw-Android",
    "url": "https://github.com/Natfii/ZeroClaw-Android",
    "stars": 308,
@@ -1866,19 +1879,6 @@
    "score": 75
   },
   {
-   "name": "llm-guy/jarvis",
-   "url": "https://github.com/llm-guy/jarvis",
-   "stars": 337,
-   "lang": "Python",
-   "desc": "Jarvis is a voice-activated, conversational AI assistant powered by a local LLM (Qwen via Ollama). It listens for a wake word, processes spoken commands using a local language model with LangChain, an",
-   "topics": [],
-   "updated": "2026-10-15",
-   "forks": 107,
-   "category": "voice_interface",
-   "query": "voice assistant local",
-   "score": 75
-  },
-  {
    "name": "omnigent-ai/omnigent",
    "url": "https://github.com/omnigent-ai/omnigent",
    "stars": 10984,
@@ -1917,25 +1917,6 @@
    "forks": 591,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
-   "score": 74
-  },
-  {
-   "name": "shadowfax92/Fyin",
-   "url": "https://github.com/shadowfax92/Fyin",
-   "stars": 235,
-   "lang": "Rust",
-   "desc": "Open source alternative to Perplexity AI with ability to run locally",
-   "topics": [
-    "llm",
-    "ollama",
-    "openai",
-    "rag",
-    "rust"
-   ],
-   "updated": "2026-09-30",
-   "forks": 24,
-   "category": "local_llm",
-   "query": "ollama alternative",
    "score": 74
   },
   {
@@ -1980,6 +1961,25 @@
    "forks": 69,
    "category": "voice_interface",
    "query": "voice assistant local",
+   "score": 74
+  },
+  {
+   "name": "shadowfax92/Fyin",
+   "url": "https://github.com/shadowfax92/Fyin",
+   "stars": 235,
+   "lang": "Rust",
+   "desc": "Open source alternative to Perplexity AI with ability to run locally",
+   "topics": [
+    "llm",
+    "ollama",
+    "openai",
+    "rag",
+    "rust"
+   ],
+   "updated": "2026-09-30",
+   "forks": 24,
+   "category": "local_llm",
+   "query": "ollama alternative",
    "score": 74
   },
   {
@@ -2072,7 +2072,7 @@
   {
    "name": "ModelEngine-Group/nexent",
    "url": "https://github.com/ModelEngine-Group/nexent",
-   "stars": 6010,
+   "stars": 6011,
    "lang": "Python",
    "desc": "Nexent is a zero-code platform for auto-generating production-grade AI agents using Harness Engineering principles — unified tools, skills, memory, and orchestration with built-in constraints, feedbac",
    "topics": [
@@ -2108,28 +2108,6 @@
    "forks": 1423,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
-   "score": 73
-  },
-  {
-   "name": "OpenCoworkAI/open-codesign",
-   "url": "https://github.com/OpenCoworkAI/open-codesign",
-   "stars": 8090,
-   "lang": "TypeScript",
-   "desc": "Open-source Claude Design alternative. One-click import your Claude Code / Codex API key. Prompt → prototype / slides / PDF. Multi-model (Claude, GPT, Gemini, Kimi, GLM, Ollama). BYOK, local-first, MI",
-   "topics": [
-    "ai-design",
-    "anthropic",
-    "byok",
-    "claude",
-    "claude-code",
-    "claude-design",
-    "claude-design-alternative",
-    "deepseek"
-   ],
-   "updated": "2026-10-22",
-   "forks": 853,
-   "category": "local_llm",
-   "query": "ollama alternative",
    "score": 73
   },
   {
@@ -2194,7 +2172,7 @@
    "updated": "2026-10-22",
    "forks": 523,
    "category": "orchestration",
-   "query": "task queue python",
+   "query": "durable workflow engine",
    "score": 73
   },
   {
@@ -2283,6 +2261,28 @@
    "forks": 0,
    "category": "messaging_bridge",
    "query": "whatsapp bridge api",
+   "score": 73
+  },
+  {
+   "name": "OpenCoworkAI/open-codesign",
+   "url": "https://github.com/OpenCoworkAI/open-codesign",
+   "stars": 8090,
+   "lang": "TypeScript",
+   "desc": "Open-source Claude Design alternative. One-click import your Claude Code / Codex API key. Prompt → prototype / slides / PDF. Multi-model (Claude, GPT, Gemini, Kimi, GLM, Ollama). BYOK, local-first, MI",
+   "topics": [
+    "ai-design",
+    "anthropic",
+    "byok",
+    "claude",
+    "claude-code",
+    "claude-design",
+    "claude-design-alternative",
+    "deepseek"
+   ],
+   "updated": "2026-10-22",
+   "forks": 853,
+   "category": "local_llm",
+   "query": "ollama alternative",
    "score": 73
   },
   {
@@ -2444,28 +2444,6 @@
    "score": 71
   },
   {
-   "name": "YarmolenkoD/boinkers",
-   "url": "https://github.com/YarmolenkoD/boinkers",
-   "stars": 72,
-   "lang": "Python",
-   "desc": "[NO SUPPROTED] Boinkers is a Telegram automation tool designed to help you manage and interact with boinker_bot. This bot can create sessions, gather statistics, and automate tasks for your accounts.",
-   "topics": [
-    "airdrop",
-    "auto",
-    "autoclaim",
-    "boink",
-    "boinkerbot",
-    "boinkers",
-    "boinkersbot",
-    "bot"
-   ],
-   "updated": "2026-06-20",
-   "forks": 12,
-   "category": "telegram_bots",
-   "query": "telegram automation python",
-   "score": 71
-  },
-  {
    "name": "PhyAgentOS/PhyAgentOS-core",
    "url": "https://github.com/PhyAgentOS/PhyAgentOS-core",
    "stars": 2973,
@@ -2528,6 +2506,28 @@
    "forks": 3,
    "category": "observability",
    "query": "log analysis agent",
+   "score": 71
+  },
+  {
+   "name": "YarmolenkoD/boinkers",
+   "url": "https://github.com/YarmolenkoD/boinkers",
+   "stars": 72,
+   "lang": "Python",
+   "desc": "[NO SUPPROTED] Boinkers is a Telegram automation tool designed to help you manage and interact with boinker_bot. This bot can create sessions, gather statistics, and automate tasks for your accounts.",
+   "topics": [
+    "airdrop",
+    "auto",
+    "autoclaim",
+    "boink",
+    "boinkerbot",
+    "boinkers",
+    "boinkersbot",
+    "bot"
+   ],
+   "updated": "2026-06-20",
+   "forks": 12,
+   "category": "telegram_bots",
+   "query": "telegram automation python",
    "score": 71
   },
   {
@@ -2796,7 +2796,7 @@
   {
    "name": "colbymchenry/codegraph",
    "url": "https://github.com/colbymchenry/codegraph",
-   "stars": 74674,
+   "stars": 74677,
    "lang": "C",
    "desc": "Pre-indexed code knowledge graph, auto syncs on code changes, for Claude Code, Codex, Gemini, Cursor, OpenCode, AntiGravity, Kiro, CoPilot, and Hermes Agent — fewer tokens, fewer tool calls, 100% loca",
    "topics": [],
@@ -2826,28 +2826,6 @@
    "category": "pipe_tube_work",
    "query": "scaffold design",
    "score": 69
-  },
-  {
-   "name": "srikanth235/privy",
-   "url": "https://github.com/srikanth235/privy",
-   "stars": 993,
-   "lang": "TypeScript",
-   "desc": "An open-source alternative to GitHub copilot that runs locally.",
-   "topics": [
-    "ai",
-    "code-completion",
-    "codellama",
-    "copilot",
-    "developer-tools",
-    "gen-ai",
-    "ide",
-    "ollama"
-   ],
-   "updated": "2026-10-13",
-   "forks": 51,
-   "category": "local_llm",
-   "query": "ollama alternative",
-   "score": 68
   },
   {
    "name": "metauto-ai/GPTSwarm",
@@ -2957,6 +2935,28 @@
    "score": 68
   },
   {
+   "name": "srikanth235/privy",
+   "url": "https://github.com/srikanth235/privy",
+   "stars": 993,
+   "lang": "TypeScript",
+   "desc": "An open-source alternative to GitHub copilot that runs locally.",
+   "topics": [
+    "ai",
+    "code-completion",
+    "codellama",
+    "copilot",
+    "developer-tools",
+    "gen-ai",
+    "ide",
+    "ollama"
+   ],
+   "updated": "2026-10-13",
+   "forks": 51,
+   "category": "local_llm",
+   "query": "ollama alternative",
+   "score": 68
+  },
+  {
    "name": "howdeploy/LocalForgeLLM",
    "url": "https://github.com/howdeploy/LocalForgeLLM",
    "stars": 15,
@@ -3035,7 +3035,7 @@
   {
    "name": "henrygd/beszel",
    "url": "https://github.com/henrygd/beszel",
-   "stars": 26429,
+   "stars": 26430,
    "lang": "Go",
    "desc": "Lightweight server monitoring with historical data, docker stats, and alerts.",
    "topics": [
@@ -3047,50 +3047,6 @@
    "forks": 1107,
    "category": "observability",
    "query": "self-hosted monitoring",
-   "score": 67
-  },
-  {
-   "name": "Azure-Samples/contoso-chat",
-   "url": "https://github.com/Azure-Samples/contoso-chat",
-   "stars": 766,
-   "lang": "Bicep",
-   "desc": "This sample has the full End2End process of creating RAG application with Prompty and Azure AI Foundry. It includes GPT-4 LLM application code, evaluations, deployment automation with AZD CLI, GitHub ",
-   "topics": [
-    "ai-azd-templates",
-    "azd-templates",
-    "azure-ai-foundry",
-    "azure-ai-samples",
-    "azure-ai-search",
-    "azure-ai-services",
-    "azure-cosmosdb",
-    "azure-openai-service"
-   ],
-   "updated": "2026-09-17",
-   "forks": 3935,
-   "category": "cloud_free",
-   "query": "github actions automation",
-   "score": 67
-  },
-  {
-   "name": "0xK3vin/MegaMemory",
-   "url": "https://github.com/0xK3vin/MegaMemory",
-   "stars": 725,
-   "lang": "TypeScript",
-   "desc": "Persistent project knowledge graph for coding agents. MCP server with semantic search, in-process embeddings, and web explorer.",
-   "topics": [
-    "agentic-coding",
-    "ai",
-    "ai-agents",
-    "claude-code",
-    "code-context",
-    "coding-agent",
-    "embeddings",
-    "knowledge-graph"
-   ],
-   "updated": "2026-10-21",
-   "forks": 74,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
    "score": 67
   },
   {
@@ -3195,6 +3151,50 @@
    "score": 67
   },
   {
+   "name": "Azure-Samples/contoso-chat",
+   "url": "https://github.com/Azure-Samples/contoso-chat",
+   "stars": 766,
+   "lang": "Bicep",
+   "desc": "This sample has the full End2End process of creating RAG application with Prompty and Azure AI Foundry. It includes GPT-4 LLM application code, evaluations, deployment automation with AZD CLI, GitHub ",
+   "topics": [
+    "ai-azd-templates",
+    "azd-templates",
+    "azure-ai-foundry",
+    "azure-ai-samples",
+    "azure-ai-search",
+    "azure-ai-services",
+    "azure-cosmosdb",
+    "azure-openai-service"
+   ],
+   "updated": "2026-09-17",
+   "forks": 3935,
+   "category": "cloud_free",
+   "query": "github actions automation",
+   "score": 67
+  },
+  {
+   "name": "0xK3vin/MegaMemory",
+   "url": "https://github.com/0xK3vin/MegaMemory",
+   "stars": 725,
+   "lang": "TypeScript",
+   "desc": "Persistent project knowledge graph for coding agents. MCP server with semantic search, in-process embeddings, and web explorer.",
+   "topics": [
+    "agentic-coding",
+    "ai",
+    "ai-agents",
+    "claude-code",
+    "code-context",
+    "coding-agent",
+    "embeddings",
+    "knowledge-graph"
+   ],
+   "updated": "2026-10-21",
+   "forks": 74,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 67
+  },
+  {
    "name": "jnMetaCode/agency-agents-zh",
    "url": "https://github.com/jnMetaCode/agency-agents-zh",
    "stars": 21499,
@@ -3214,72 +3214,6 @@
    "forks": 3461,
    "category": "ai_agent_framework",
    "query": "multi-agent orchestration",
-   "score": 66
-  },
-  {
-   "name": "dyad-sh/dyad",
-   "url": "https://github.com/dyad-sh/dyad",
-   "stars": 22031,
-   "lang": "TypeScript",
-   "desc": "Local, open-source AI app builder for power users ✨ v0 / Lovable / Replit / Bolt alternative 🌟 Star if you like it!",
-   "topics": [
-    "ai-app-builder",
-    "anthropic",
-    "artificial-intelligence",
-    "bolt",
-    "deepseek",
-    "gemini",
-    "generative-ai",
-    "github"
-   ],
-   "updated": "2026-10-22",
-   "forks": 2769,
-   "category": "local_llm",
-   "query": "ollama alternative",
-   "score": 66
-  },
-  {
-   "name": "BrowserOperator/browser-operator-core",
-   "url": "https://github.com/BrowserOperator/browser-operator-core",
-   "stars": 516,
-   "lang": "TypeScript",
-   "desc": "Browser Operator - The AI browser with built in Multi-Agent platform! Open source alternative to ChatGPT Atlas, Perplexity Comet, Dia and Microsoft CoPilot Edge Browser",
-   "topics": [
-    "agent-browser",
-    "agent-workflow",
-    "agentic-ai",
-    "agentic-browser",
-    "agentic-framework",
-    "agentic-workflow",
-    "agents",
-    "ai-browser"
-   ],
-   "updated": "2026-10-20",
-   "forks": 84,
-   "category": "local_llm",
-   "query": "ollama alternative",
-   "score": 66
-  },
-  {
-   "name": "vorojar/Folio-OCR",
-   "url": "https://github.com/vorojar/Folio-OCR",
-   "stars": 471,
-   "lang": "Python",
-   "desc": "Open-source batch OCR workbench — a free, local alternative to ABBYY FineReader. Powered by Ollama + GLM-OCR + PP-DocLayoutV3, ~0.5s/page on RTX 4090. Three-panel editor, layout-aware, PDF/image batch",
-   "topics": [
-    "abbyy-alternative",
-    "batch-ocr",
-    "book-digitization",
-    "document-ocr",
-    "document-processing",
-    "glm-ocr",
-    "layout-detection",
-    "local-ai"
-   ],
-   "updated": "2026-10-16",
-   "forks": 62,
-   "category": "local_llm",
-   "query": "ollama alternative",
    "score": 66
   },
   {
@@ -3352,29 +3286,7 @@
    "updated": "2026-10-22",
    "forks": 26,
    "category": "rag_memory",
-   "query": "embeddings sqlite",
-   "score": 66
-  },
-  {
-   "name": "Lyellr88/marm-memory",
-   "url": "https://github.com/Lyellr88/marm-memory",
-   "stars": 422,
-   "lang": "Python",
-   "desc": "Local-first 3-in-1 AI memory layer & MCP server for Claude Code, Codex, Grok, Gemini, VS Code and Cursor. Fuses session history, codebase indexing & concept graphs in SQLite. Enables zero-cloud, priva",
-   "topics": [
-    "agent-memory",
-    "ai-agents",
-    "ai-memory",
-    "claude-code",
-    "codex-cli",
-    "developer-tools",
-    "embeddings",
-    "indexing-engine"
-   ],
-   "updated": "2026-10-21",
-   "forks": 95,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
+   "query": "knowledge graph tool",
    "score": 66
   },
   {
@@ -3413,48 +3325,92 @@
    "score": 66
   },
   {
-   "name": "CatCatUncle/openworkbuddy",
-   "url": "https://github.com/CatCatUncle/openworkbuddy",
-   "stars": 339,
-   "lang": "JavaScript",
-   "desc": "Open-source Claude Cowork / Codex alternative — a local-first AI office agent that turns one request into real PPTX, DOCX, XLSX and HTML files. Runs DeepSeek, Qwen, Doubao, Claude or Ollama (BYOK), MC",
+   "name": "dyad-sh/dyad",
+   "url": "https://github.com/dyad-sh/dyad",
+   "stars": 22031,
+   "lang": "TypeScript",
+   "desc": "Local, open-source AI app builder for power users ✨ v0 / Lovable / Replit / Bolt alternative 🌟 Star if you like it!",
    "topics": [
-    "agent-harness",
-    "ai-agent",
-    "ai-office-agent",
-    "byok",
-    "claude-code",
-    "claude-cowork-alternative",
-    "codex-alternative",
-    "deepseek"
+    "ai-app-builder",
+    "anthropic",
+    "artificial-intelligence",
+    "bolt",
+    "deepseek",
+    "gemini",
+    "generative-ai",
+    "github"
    ],
    "updated": "2026-10-22",
-   "forks": 72,
+   "forks": 2769,
    "category": "local_llm",
    "query": "ollama alternative",
-   "score": 65
+   "score": 66
   },
   {
-   "name": "Aseiel/VideoHighlighter",
-   "url": "https://github.com/Aseiel/VideoHighlighter",
-   "stars": 271,
-   "lang": "Python",
-   "desc": "Open-source local AI video analyzer powered by Ollama. Visual search, automatic highlights, scene/action/object detection, audio analysis, and subtitle generation. Free, offline alternative to Twelve ",
+   "name": "BrowserOperator/browser-operator-core",
+   "url": "https://github.com/BrowserOperator/browser-operator-core",
+   "stars": 516,
+   "lang": "TypeScript",
+   "desc": "Browser Operator - The AI browser with built in Multi-Agent platform! Open source alternative to ChatGPT Atlas, Perplexity Comet, Dia and Microsoft CoPilot Edge Browser",
    "topics": [
-    "action-recognition-dataset",
-    "cuda",
-    "highlight-generation",
-    "llava",
-    "local-ai",
-    "mac",
-    "object-detection-pipelines",
-    "offline-ai"
+    "agent-browser",
+    "agent-workflow",
+    "agentic-ai",
+    "agentic-browser",
+    "agentic-framework",
+    "agentic-workflow",
+    "agents",
+    "ai-browser"
    ],
-   "updated": "2026-10-22",
-   "forks": 38,
+   "updated": "2026-10-20",
+   "forks": 84,
    "category": "local_llm",
    "query": "ollama alternative",
-   "score": 65
+   "score": 66
+  },
+  {
+   "name": "vorojar/Folio-OCR",
+   "url": "https://github.com/vorojar/Folio-OCR",
+   "stars": 471,
+   "lang": "Python",
+   "desc": "Open-source batch OCR workbench — a free, local alternative to ABBYY FineReader. Powered by Ollama + GLM-OCR + PP-DocLayoutV3, ~0.5s/page on RTX 4090. Three-panel editor, layout-aware, PDF/image batch",
+   "topics": [
+    "abbyy-alternative",
+    "batch-ocr",
+    "book-digitization",
+    "document-ocr",
+    "document-processing",
+    "glm-ocr",
+    "layout-detection",
+    "local-ai"
+   ],
+   "updated": "2026-10-16",
+   "forks": 62,
+   "category": "local_llm",
+   "query": "ollama alternative",
+   "score": 66
+  },
+  {
+   "name": "Lyellr88/marm-memory",
+   "url": "https://github.com/Lyellr88/marm-memory",
+   "stars": 422,
+   "lang": "Python",
+   "desc": "Local-first 3-in-1 AI memory layer & MCP server for Claude Code, Codex, Grok, Gemini, VS Code and Cursor. Fuses session history, codebase indexing & concept graphs in SQLite. Enables zero-cloud, priva",
+   "topics": [
+    "agent-memory",
+    "ai-agents",
+    "ai-memory",
+    "claude-code",
+    "codex-cli",
+    "developer-tools",
+    "embeddings",
+    "indexing-engine"
+   ],
+   "updated": "2026-10-21",
+   "forks": 95,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 66
   },
   {
    "name": "mohitsoni48/TurboLLM",
@@ -3519,45 +3475,6 @@
    "score": 65
   },
   {
-   "name": "haziq-exe/TikTokAutoUploader",
-   "url": "https://github.com/haziq-exe/TikTokAutoUploader",
-   "stars": 307,
-   "lang": "Python",
-   "desc": "Python tiktok uploader that lets you upload and schedule tiktoks using favorited/searched sounds, hashtags, VPN, Telegram and more",
-   "topics": [
-    "api",
-    "automation",
-    "python",
-    "telegram-bot",
-    "tiktok",
-    "tiktok-api",
-    "tiktok-automation",
-    "tiktok-upload"
-   ],
-   "updated": "2026-10-20",
-   "forks": 32,
-   "category": "telegram_bots",
-   "query": "telegram automation python",
-   "score": 65
-  },
-  {
-   "name": "AgnetLabs/Laddr",
-   "url": "https://github.com/AgnetLabs/Laddr",
-   "stars": 340,
-   "lang": "Python",
-   "desc": "Laddr is a python framework for building multi-agent systems where agents communicate, delegate tasks, and execute work in parallel. Think of it as a microservices architecture for AI agents — with bu",
-   "topics": [
-    "agentic-ai",
-    "modular",
-    "scaleable"
-   ],
-   "updated": "2026-10-10",
-   "forks": 70,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 65
-  },
-  {
    "name": "TwiN/gatus",
    "url": "https://github.com/TwiN/gatus",
    "stars": 12374,
@@ -3602,6 +3519,89 @@
    "score": 65
   },
   {
+   "name": "CatCatUncle/openworkbuddy",
+   "url": "https://github.com/CatCatUncle/openworkbuddy",
+   "stars": 339,
+   "lang": "JavaScript",
+   "desc": "Open-source Claude Cowork / Codex alternative — a local-first AI office agent that turns one request into real PPTX, DOCX, XLSX and HTML files. Runs DeepSeek, Qwen, Doubao, Claude or Ollama (BYOK), MC",
+   "topics": [
+    "agent-harness",
+    "ai-agent",
+    "ai-office-agent",
+    "byok",
+    "claude-code",
+    "claude-cowork-alternative",
+    "codex-alternative",
+    "deepseek"
+   ],
+   "updated": "2026-10-22",
+   "forks": 72,
+   "category": "local_llm",
+   "query": "ollama alternative",
+   "score": 65
+  },
+  {
+   "name": "Aseiel/VideoHighlighter",
+   "url": "https://github.com/Aseiel/VideoHighlighter",
+   "stars": 271,
+   "lang": "Python",
+   "desc": "Open-source local AI video analyzer powered by Ollama. Visual search, automatic highlights, scene/action/object detection, audio analysis, and subtitle generation. Free, offline alternative to Twelve ",
+   "topics": [
+    "action-recognition-dataset",
+    "cuda",
+    "highlight-generation",
+    "llava",
+    "local-ai",
+    "mac",
+    "object-detection-pipelines",
+    "offline-ai"
+   ],
+   "updated": "2026-10-22",
+   "forks": 38,
+   "category": "local_llm",
+   "query": "ollama alternative",
+   "score": 65
+  },
+  {
+   "name": "haziq-exe/TikTokAutoUploader",
+   "url": "https://github.com/haziq-exe/TikTokAutoUploader",
+   "stars": 307,
+   "lang": "Python",
+   "desc": "Python tiktok uploader that lets you upload and schedule tiktoks using favorited/searched sounds, hashtags, VPN, Telegram and more",
+   "topics": [
+    "api",
+    "automation",
+    "python",
+    "telegram-bot",
+    "tiktok",
+    "tiktok-api",
+    "tiktok-automation",
+    "tiktok-upload"
+   ],
+   "updated": "2026-10-20",
+   "forks": 32,
+   "category": "telegram_bots",
+   "query": "telegram automation python",
+   "score": 65
+  },
+  {
+   "name": "AgnetLabs/Laddr",
+   "url": "https://github.com/AgnetLabs/Laddr",
+   "stars": 340,
+   "lang": "Python",
+   "desc": "Laddr is a python framework for building multi-agent systems where agents communicate, delegate tasks, and execute work in parallel. Think of it as a microservices architecture for AI agents — with bu",
+   "topics": [
+    "agentic-ai",
+    "modular",
+    "scaleable"
+   ],
+   "updated": "2026-10-10",
+   "forks": 70,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 65
+  },
+  {
    "name": "buildingjoshbetter/TrueMemory",
    "url": "https://github.com/buildingjoshbetter/TrueMemory",
    "stars": 381,
@@ -3622,46 +3622,6 @@
    "category": "rag_memory",
    "query": "embeddings sqlite",
    "score": 65
-  },
-  {
-   "name": "quack-ai/companion-vscode",
-   "url": "https://github.com/quack-ai/companion-vscode",
-   "stars": 234,
-   "lang": "TypeScript",
-   "desc": "VSCode extension of Quack Companion 💻 Turn your team insights into a portable plug-and-play context for code generation. Alternative to GitHub Copilot powered by OSS LLMs (Mistral, Gemma, etc.), serve",
-   "topics": [
-    "ai",
-    "api",
-    "code-assistant",
-    "code-quality",
-    "code-review",
-    "deep-learning",
-    "developer-tools",
-    "electron"
-   ],
-   "updated": "2026-09-03",
-   "forks": 11,
-   "category": "local_llm",
-   "query": "ollama alternative",
-   "score": 64
-  },
-  {
-   "name": "thebrumby/HotWalletClaimer",
-   "url": "https://github.com/thebrumby/HotWalletClaimer",
-   "stars": 202,
-   "lang": "Python",
-   "desc": "Automate HOT (Near protocol) claims and build your virtual node in xNode’s mini-game, plus other Telegram crypto titles. This Python script simulates real user actions in a browser—no API hacks, just ",
-   "topics": [
-    "cryptocurrency",
-    "hot-claimer",
-    "near-protocol",
-    "play2earn"
-   ],
-   "updated": "2026-10-13",
-   "forks": 49,
-   "category": "telegram_bots",
-   "query": "telegram automation python",
-   "score": 64
   },
   {
    "name": "bluewave-labs/Checkmate",
@@ -3722,24 +3682,6 @@
    "forks": 690,
    "category": "observability",
    "query": "self-hosted monitoring",
-   "score": 64
-  },
-  {
-   "name": "Ronchy2000/epic-freebies-helper",
-   "url": "https://github.com/Ronchy2000/epic-freebies-helper",
-   "stars": 260,
-   "lang": "Python",
-   "desc": "Automatically claim Epic Games weekly free titles with GitHub Actions and GLM-powered captcha solving.",
-   "topics": [
-    "automation",
-    "epic-games",
-    "github-actions",
-    "savelife"
-   ],
-   "updated": "2026-10-22",
-   "forks": 222,
-   "category": "cloud_free",
-   "query": "github actions automation",
    "score": 64
   },
   {
@@ -3838,6 +3780,64 @@
    "forks": 44,
    "category": "pipe_tube_work",
    "query": "scaffold design",
+   "score": 64
+  },
+  {
+   "name": "quack-ai/companion-vscode",
+   "url": "https://github.com/quack-ai/companion-vscode",
+   "stars": 234,
+   "lang": "TypeScript",
+   "desc": "VSCode extension of Quack Companion 💻 Turn your team insights into a portable plug-and-play context for code generation. Alternative to GitHub Copilot powered by OSS LLMs (Mistral, Gemma, etc.), serve",
+   "topics": [
+    "ai",
+    "api",
+    "code-assistant",
+    "code-quality",
+    "code-review",
+    "deep-learning",
+    "developer-tools",
+    "electron"
+   ],
+   "updated": "2026-09-03",
+   "forks": 11,
+   "category": "local_llm",
+   "query": "ollama alternative",
+   "score": 64
+  },
+  {
+   "name": "thebrumby/HotWalletClaimer",
+   "url": "https://github.com/thebrumby/HotWalletClaimer",
+   "stars": 202,
+   "lang": "Python",
+   "desc": "Automate HOT (Near protocol) claims and build your virtual node in xNode’s mini-game, plus other Telegram crypto titles. This Python script simulates real user actions in a browser—no API hacks, just ",
+   "topics": [
+    "cryptocurrency",
+    "hot-claimer",
+    "near-protocol",
+    "play2earn"
+   ],
+   "updated": "2026-10-13",
+   "forks": 49,
+   "category": "telegram_bots",
+   "query": "telegram automation python",
+   "score": 64
+  },
+  {
+   "name": "Ronchy2000/epic-freebies-helper",
+   "url": "https://github.com/Ronchy2000/epic-freebies-helper",
+   "stars": 260,
+   "lang": "Python",
+   "desc": "Automatically claim Epic Games weekly free titles with GitHub Actions and GLM-powered captcha solving.",
+   "topics": [
+    "automation",
+    "epic-games",
+    "github-actions",
+    "savelife"
+   ],
+   "updated": "2026-10-22",
+   "forks": 222,
+   "category": "cloud_free",
+   "query": "github actions automation",
    "score": 64
   },
   {
@@ -4161,6 +4161,63 @@
    "score": 62
   },
   {
+   "name": "ScrapeGraphAI/scrapegraph-py",
+   "url": "https://github.com/ScrapeGraphAI/scrapegraph-py",
+   "stars": 90,
+   "lang": "Jupyter Notebook",
+   "desc": "Official Python SDK for the ScrapeGraph AI   API. Smart scraping, search, crawling,   markdownify, agentic browser automation,   scheduled jobs, and structured data   extraction ",
+   "topics": [
+    "api",
+    "json-schema",
+    "python",
+    "scrapegraph",
+    "scraping",
+    "sdk-js",
+    "sdk-nodejs",
+    "sdk-python"
+   ],
+   "updated": "2026-10-16",
+   "forks": 21,
+   "category": "orchestration",
+   "query": "job scheduler python",
+   "score": 62
+  },
+  {
+   "name": "pro-deploy/aegil",
+   "url": "https://github.com/pro-deploy/aegil",
+   "stars": 104,
+   "lang": "Python",
+   "desc": "An autonomous Site Reliability Engineering (SRE) and DevOps agent for Kubernetes with deterministic log analysis.",
+   "topics": [],
+   "updated": "2026-09-01",
+   "forks": 0,
+   "category": "observability",
+   "query": "log analysis agent",
+   "score": 62
+  },
+  {
+   "name": "benmaster82/writher",
+   "url": "https://github.com/benmaster82/writher",
+   "stars": 88,
+   "lang": "Python",
+   "desc": "🎙️ Offline voice productivity for Windows - dictate text into any app and control a local AI assistant by voice. Manages notes, to-do lists, appointments & reminders. 100% local: faster-whisper + Olla",
+   "topics": [
+    "ai-assistent",
+    "dictation",
+    "dictation-apps",
+    "dictations",
+    "good-first-issue",
+    "hacktoberfest",
+    "help-wanted",
+    "local-llm"
+   ],
+   "updated": "2026-10-14",
+   "forks": 24,
+   "category": "voice_interface",
+   "query": "whisper alternative python",
+   "score": 62
+  },
+  {
    "name": "PokemonGoF/PokemonGo-Bot",
    "url": "https://github.com/PokemonGoF/PokemonGo-Bot",
    "stars": 3925,
@@ -4271,63 +4328,6 @@
    "score": 62
   },
   {
-   "name": "ScrapeGraphAI/scrapegraph-py",
-   "url": "https://github.com/ScrapeGraphAI/scrapegraph-py",
-   "stars": 90,
-   "lang": "Jupyter Notebook",
-   "desc": "Official Python SDK for the ScrapeGraph AI   API. Smart scraping, search, crawling,   markdownify, agentic browser automation,   scheduled jobs, and structured data   extraction ",
-   "topics": [
-    "api",
-    "json-schema",
-    "python",
-    "scrapegraph",
-    "scraping",
-    "sdk-js",
-    "sdk-nodejs",
-    "sdk-python"
-   ],
-   "updated": "2026-10-16",
-   "forks": 21,
-   "category": "orchestration",
-   "query": "job scheduler python",
-   "score": 62
-  },
-  {
-   "name": "pro-deploy/aegil",
-   "url": "https://github.com/pro-deploy/aegil",
-   "stars": 104,
-   "lang": "Python",
-   "desc": "An autonomous Site Reliability Engineering (SRE) and DevOps agent for Kubernetes with deterministic log analysis.",
-   "topics": [],
-   "updated": "2026-09-01",
-   "forks": 0,
-   "category": "observability",
-   "query": "log analysis agent",
-   "score": 62
-  },
-  {
-   "name": "benmaster82/writher",
-   "url": "https://github.com/benmaster82/writher",
-   "stars": 88,
-   "lang": "Python",
-   "desc": "🎙️ Offline voice productivity for Windows - dictate text into any app and control a local AI assistant by voice. Manages notes, to-do lists, appointments & reminders. 100% local: faster-whisper + Olla",
-   "topics": [
-    "ai-assistent",
-    "dictation",
-    "dictation-apps",
-    "dictations",
-    "good-first-issue",
-    "hacktoberfest",
-    "help-wanted",
-    "local-llm"
-   ],
-   "updated": "2026-10-14",
-   "forks": 24,
-   "category": "voice_interface",
-   "query": "whisper alternative python",
-   "score": 62
-  },
-  {
    "name": "Ritiksuman07/quant-whisper",
    "url": "https://github.com/Ritiksuman07/quant-whisper",
    "stars": 71,
@@ -4367,50 +4367,6 @@
    "forks": 12,
    "category": "telegram_bots",
    "query": "telegram bot python framework",
-   "score": 61
-  },
-  {
-   "name": "inforkgodara/telegram-automated-bulk-messages",
-   "url": "https://github.com/inforkgodara/telegram-automated-bulk-messages",
-   "stars": 78,
-   "lang": "Python",
-   "desc": "It is a python script that sends the Telegram messages automatically from the Telegram desktop application.",
-   "topics": [
-    "automation",
-    "bulk-message",
-    "bulk-messages",
-    "digital-marketing",
-    "inforkgodara",
-    "pandas",
-    "python",
-    "python-automation"
-   ],
-   "updated": "2026-10-18",
-   "forks": 31,
-   "category": "telegram_bots",
-   "query": "telegram automation python",
-   "score": 61
-  },
-  {
-   "name": "erfnzdeh/EduSync",
-   "url": "https://github.com/erfnzdeh/EduSync",
-   "stars": 77,
-   "lang": "Python",
-   "desc": "EduSync is a Telegram bot that automatically syncs your Quera/CW assignments with Google Calendar, helping you stay organized and never miss a deadline. It provides an easy setup process, automatic sy",
-   "topics": [
-    "automation",
-    "calendar-sync",
-    "google-calendar",
-    "python",
-    "quera",
-    "students",
-    "telegram",
-    "telegram-bot"
-   ],
-   "updated": "2026-10-08",
-   "forks": 0,
-   "category": "telegram_bots",
-   "query": "telegram automation python",
    "score": 61
   },
   {
@@ -4490,27 +4446,6 @@
    "score": 61
   },
   {
-   "name": "peter-evans/create-pull-request",
-   "url": "https://github.com/peter-evans/create-pull-request",
-   "stars": 2868,
-   "lang": "TypeScript",
-   "desc": "A GitHub action to create a pull request for changes to your repository in the actions workspace",
-   "topics": [
-    "actions-workspace",
-    "automation",
-    "ci-cd",
-    "create-pull-request",
-    "github-action",
-    "pull-request",
-    "workflow"
-   ],
-   "updated": "2026-10-21",
-   "forks": 550,
-   "category": "cloud_free",
-   "query": "github actions automation",
-   "score": 61
-  },
-  {
    "name": "bytedance/Elkeid",
    "url": "https://github.com/bytedance/Elkeid",
    "stars": 2689,
@@ -4572,6 +4507,71 @@
    "forks": 130,
    "category": "voice_interface",
    "query": "voice assistant local",
+   "score": 61
+  },
+  {
+   "name": "inforkgodara/telegram-automated-bulk-messages",
+   "url": "https://github.com/inforkgodara/telegram-automated-bulk-messages",
+   "stars": 78,
+   "lang": "Python",
+   "desc": "It is a python script that sends the Telegram messages automatically from the Telegram desktop application.",
+   "topics": [
+    "automation",
+    "bulk-message",
+    "bulk-messages",
+    "digital-marketing",
+    "inforkgodara",
+    "pandas",
+    "python",
+    "python-automation"
+   ],
+   "updated": "2026-10-18",
+   "forks": 31,
+   "category": "telegram_bots",
+   "query": "telegram automation python",
+   "score": 61
+  },
+  {
+   "name": "erfnzdeh/EduSync",
+   "url": "https://github.com/erfnzdeh/EduSync",
+   "stars": 77,
+   "lang": "Python",
+   "desc": "EduSync is a Telegram bot that automatically syncs your Quera/CW assignments with Google Calendar, helping you stay organized and never miss a deadline. It provides an easy setup process, automatic sy",
+   "topics": [
+    "automation",
+    "calendar-sync",
+    "google-calendar",
+    "python",
+    "quera",
+    "students",
+    "telegram",
+    "telegram-bot"
+   ],
+   "updated": "2026-10-08",
+   "forks": 0,
+   "category": "telegram_bots",
+   "query": "telegram automation python",
+   "score": 61
+  },
+  {
+   "name": "peter-evans/create-pull-request",
+   "url": "https://github.com/peter-evans/create-pull-request",
+   "stars": 2868,
+   "lang": "TypeScript",
+   "desc": "A GitHub action to create a pull request for changes to your repository in the actions workspace",
+   "topics": [
+    "actions-workspace",
+    "automation",
+    "ci-cd",
+    "create-pull-request",
+    "github-action",
+    "pull-request",
+    "workflow"
+   ],
+   "updated": "2026-10-21",
+   "forks": 550,
+   "category": "cloud_free",
+   "query": "github actions automation",
    "score": 61
   },
   {
@@ -4989,50 +4989,6 @@
    "score": 59
   },
   {
-   "name": "EndBug/add-and-commit",
-   "url": "https://github.com/EndBug/add-and-commit",
-   "stars": 1293,
-   "lang": "TypeScript",
-   "desc": ":octocat: Automatically commit changes made in your workflow run directly to your repo",
-   "topics": [
-    "actions",
-    "automation",
-    "ci",
-    "collaborate",
-    "commit",
-    "git",
-    "git-add",
-    "git-commit"
-   ],
-   "updated": "2026-10-12",
-   "forks": 124,
-   "category": "cloud_free",
-   "query": "github actions automation",
-   "score": 59
-  },
-  {
-   "name": "nirholas/UCAI",
-   "url": "https://github.com/nirholas/UCAI",
-   "stars": 38,
-   "lang": "Python",
-   "desc": "Universal Contract AI Interface (UCAI) 🔗 ABI to MCP | The open standard for connecting AI agents to blockchain. MCP server generator for smart contracts. Claude + Uniswap, Aave, ERC20, NFTs, DeFi. Pyt",
-   "topics": [
-    "abi",
-    "ai-agents",
-    "arbitrum",
-    "blockchain",
-    "claude",
-    "defi",
-    "erc20",
-    "ethereum"
-   ],
-   "updated": "2026-10-21",
-   "forks": 12,
-   "category": "crypto_airdrop",
-   "query": "web3 python tools",
-   "score": 59
-  },
-  {
    "name": "NTU-Siqiang-Group/AsterVec",
    "url": "https://github.com/NTU-Siqiang-Group/AsterVec",
    "stars": 38,
@@ -5143,6 +5099,50 @@
    "score": 59
   },
   {
+   "name": "EndBug/add-and-commit",
+   "url": "https://github.com/EndBug/add-and-commit",
+   "stars": 1293,
+   "lang": "TypeScript",
+   "desc": ":octocat: Automatically commit changes made in your workflow run directly to your repo",
+   "topics": [
+    "actions",
+    "automation",
+    "ci",
+    "collaborate",
+    "commit",
+    "git",
+    "git-add",
+    "git-commit"
+   ],
+   "updated": "2026-10-12",
+   "forks": 124,
+   "category": "cloud_free",
+   "query": "github actions automation",
+   "score": 59
+  },
+  {
+   "name": "nirholas/UCAI",
+   "url": "https://github.com/nirholas/UCAI",
+   "stars": 38,
+   "lang": "Python",
+   "desc": "Universal Contract AI Interface (UCAI) 🔗 ABI to MCP | The open standard for connecting AI agents to blockchain. MCP server generator for smart contracts. Claude + Uniswap, Aave, ERC20, NFTs, DeFi. Pyt",
+   "topics": [
+    "abi",
+    "ai-agents",
+    "arbitrum",
+    "blockchain",
+    "claude",
+    "defi",
+    "erc20",
+    "ethereum"
+   ],
+   "updated": "2026-10-21",
+   "forks": 12,
+   "category": "crypto_airdrop",
+   "query": "web3 python tools",
+   "score": 59
+  },
+  {
    "name": "Siddhesh2377/Ai-Systems-New",
    "url": "https://github.com/Siddhesh2377/Ai-Systems-New",
    "stars": 33,
@@ -5178,28 +5178,6 @@
    "score": 59
   },
   {
-   "name": "IncarnaMind/IncarnaMind",
-   "url": "https://github.com/IncarnaMind/IncarnaMind",
-   "stars": 843,
-   "lang": "TypeScript",
-   "desc": "Open-source, Notion-like AI editor for your local documents and meetings: chat with PDFs, Word, Excel and PowerPoint, write and fact-check with page citations, and take AI meeting notes transcribed on",
-   "topics": [
-    "ai-assistant",
-    "chat-with-pdf",
-    "citations",
-    "desktop-app",
-    "document-qa",
-    "fact-checking",
-    "granola-alternative",
-    "knowledge-management"
-   ],
-   "updated": "2026-10-22",
-   "forks": 59,
-   "category": "local_llm",
-   "query": "ollama alternative",
-   "score": 58
-  },
-  {
    "name": "withkynam/vibecode-pro-max-kit",
    "url": "https://github.com/withkynam/vibecode-pro-max-kit",
    "stars": 1155,
@@ -5232,41 +5210,6 @@
    "forks": 45,
    "category": "self_evolving",
    "query": "self-improving agent",
-   "score": 58
-  },
-  {
-   "name": "mikepenz/release-changelog-builder-action",
-   "url": "https://github.com/mikepenz/release-changelog-builder-action",
-   "stars": 868,
-   "lang": "TypeScript",
-   "desc": "A GitHub action that builds your release notes / changelog fast, easy and exactly the way you want.",
-   "topics": [
-    "action",
-    "actions",
-    "automation",
-    "cd",
-    "changelog",
-    "ci",
-    "github-actions",
-    "hacktoberfest"
-   ],
-   "updated": "2026-10-21",
-   "forks": 112,
-   "category": "cloud_free",
-   "query": "github actions automation",
-   "score": 58
-  },
-  {
-   "name": "sqliteai/sqlite-vector",
-   "url": "https://github.com/sqliteai/sqlite-vector",
-   "stars": 1194,
-   "lang": "C",
-   "desc": "SQLite-Vector is a cross-platform, ultra-efficient SQLite extension that brings vector search capabilities to your embedded database.",
-   "topics": [],
-   "updated": "2026-10-22",
-   "forks": 53,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
    "score": 58
   },
   {
@@ -5369,26 +5312,61 @@
    "score": 58
   },
   {
-   "name": "xNul/code-llama-for-vscode",
-   "url": "https://github.com/xNul/code-llama-for-vscode",
-   "stars": 568,
-   "lang": "Python",
-   "desc": "Use Code Llama with Visual Studio Code and the Continue extension. A local LLM alternative to GitHub Copilot.",
+   "name": "IncarnaMind/IncarnaMind",
+   "url": "https://github.com/IncarnaMind/IncarnaMind",
+   "stars": 843,
+   "lang": "TypeScript",
+   "desc": "Open-source, Notion-like AI editor for your local documents and meetings: chat with PDFs, Word, Excel and PowerPoint, write and fact-check with page citations, and take AI meeting notes transcribed on",
    "topics": [
-    "assistant",
-    "code",
-    "code-llama",
-    "codellama",
-    "continue",
-    "continuedev",
-    "copilot",
-    "llama"
+    "ai-assistant",
+    "chat-with-pdf",
+    "citations",
+    "desktop-app",
+    "document-qa",
+    "fact-checking",
+    "granola-alternative",
+    "knowledge-management"
    ],
-   "updated": "2026-10-05",
-   "forks": 34,
+   "updated": "2026-10-22",
+   "forks": 59,
    "category": "local_llm",
    "query": "ollama alternative",
-   "score": 57
+   "score": 58
+  },
+  {
+   "name": "mikepenz/release-changelog-builder-action",
+   "url": "https://github.com/mikepenz/release-changelog-builder-action",
+   "stars": 868,
+   "lang": "TypeScript",
+   "desc": "A GitHub action that builds your release notes / changelog fast, easy and exactly the way you want.",
+   "topics": [
+    "action",
+    "actions",
+    "automation",
+    "cd",
+    "changelog",
+    "ci",
+    "github-actions",
+    "hacktoberfest"
+   ],
+   "updated": "2026-10-21",
+   "forks": 112,
+   "category": "cloud_free",
+   "query": "github actions automation",
+   "score": 58
+  },
+  {
+   "name": "sqliteai/sqlite-vector",
+   "url": "https://github.com/sqliteai/sqlite-vector",
+   "stars": 1194,
+   "lang": "C",
+   "desc": "SQLite-Vector is a cross-platform, ultra-efficient SQLite extension that brings vector search capabilities to your embedded database.",
+   "topics": [],
+   "updated": "2026-10-22",
+   "forks": 53,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 58
   },
   {
    "name": "Classevelabs/rai",
@@ -5410,28 +5388,6 @@
    "forks": 0,
    "category": "local_llm",
    "query": "local llm inference engine",
-   "score": 57
-  },
-  {
-   "name": "celery/celery",
-   "url": "https://github.com/celery/celery",
-   "stars": 29032,
-   "lang": "Python",
-   "desc": "Distributed Task Queue (development branch)",
-   "topics": [
-    "amqp",
-    "python",
-    "python-library",
-    "python3",
-    "queue-tasks",
-    "queue-workers",
-    "queued-jobs",
-    "redis"
-   ],
-   "updated": "2026-10-22",
-   "forks": 5235,
-   "category": "orchestration",
-   "query": "task queue python",
    "score": 57
   },
   {
@@ -5479,48 +5435,6 @@
    "score": 57
   },
   {
-   "name": "peter-evans/slash-command-dispatch",
-   "url": "https://github.com/peter-evans/slash-command-dispatch",
-   "stars": 710,
-   "lang": "TypeScript",
-   "desc": "A GitHub action that facilitates \"ChatOps\" by creating repository dispatch events for slash commands",
-   "topics": [
-    "automation",
-    "chatops",
-    "github-action",
-    "repository-dispatch",
-    "slash-commands",
-    "workflow-queue"
-   ],
-   "updated": "2026-10-21",
-   "forks": 62,
-   "category": "cloud_free",
-   "query": "github actions automation",
-   "score": 57
-  },
-  {
-   "name": "github/branch-deploy",
-   "url": "https://github.com/github/branch-deploy",
-   "stars": 582,
-   "lang": "TypeScript",
-   "desc": "Enabling Branch Deployments through IssueOps with GitHub Actions - If you find this project useful, give it a star! ⭐️ ",
-   "topics": [
-    "action",
-    "actions",
-    "automation",
-    "branch-deployment",
-    "chatops",
-    "cicd",
-    "continuous-deployment",
-    "deploy"
-   ],
-   "updated": "2026-10-22",
-   "forks": 75,
-   "category": "cloud_free",
-   "query": "github actions automation",
-   "score": 57
-  },
-  {
    "name": "Dcurig/Somnia-Auto",
    "url": "https://github.com/Dcurig/Somnia-Auto",
    "stars": 14,
@@ -5531,28 +5445,6 @@
    "forks": 9,
    "category": "crypto_airdrop",
    "query": "airdrop farming automation",
-   "score": 57
-  },
-  {
-   "name": "AyinkxLab/ai-code-assistant",
-   "url": "https://github.com/AyinkxLab/ai-code-assistant",
-   "stars": 16,
-   "lang": "Python",
-   "desc": "Open-source AI coding assistant with read-only Stellar/Soroban developer tooling: Soroban XDR & transaction decoding, RPC/Horizon inspection, an offline mock network, contract scaffolds, project detec",
-   "topics": [
-    "ai",
-    "ai-agents",
-    "ai-assistant",
-    "blockchain",
-    "coding-assistant",
-    "developer-tools",
-    "flask",
-    "good-first-issue"
-   ],
-   "updated": "2026-10-22",
-   "forks": 79,
-   "category": "crypto_airdrop",
-   "query": "web3 python tools",
    "score": 57
   },
   {
@@ -5676,6 +5568,114 @@
    "score": 57
   },
   {
+   "name": "xNul/code-llama-for-vscode",
+   "url": "https://github.com/xNul/code-llama-for-vscode",
+   "stars": 568,
+   "lang": "Python",
+   "desc": "Use Code Llama with Visual Studio Code and the Continue extension. A local LLM alternative to GitHub Copilot.",
+   "topics": [
+    "assistant",
+    "code",
+    "code-llama",
+    "codellama",
+    "continue",
+    "continuedev",
+    "copilot",
+    "llama"
+   ],
+   "updated": "2026-10-05",
+   "forks": 34,
+   "category": "local_llm",
+   "query": "ollama alternative",
+   "score": 57
+  },
+  {
+   "name": "celery/celery",
+   "url": "https://github.com/celery/celery",
+   "stars": 29032,
+   "lang": "Python",
+   "desc": "Distributed Task Queue (development branch)",
+   "topics": [
+    "amqp",
+    "python",
+    "python-library",
+    "python3",
+    "queue-tasks",
+    "queue-workers",
+    "queued-jobs",
+    "redis"
+   ],
+   "updated": "2026-10-22",
+   "forks": 5235,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 57
+  },
+  {
+   "name": "peter-evans/slash-command-dispatch",
+   "url": "https://github.com/peter-evans/slash-command-dispatch",
+   "stars": 710,
+   "lang": "TypeScript",
+   "desc": "A GitHub action that facilitates \"ChatOps\" by creating repository dispatch events for slash commands",
+   "topics": [
+    "automation",
+    "chatops",
+    "github-action",
+    "repository-dispatch",
+    "slash-commands",
+    "workflow-queue"
+   ],
+   "updated": "2026-10-21",
+   "forks": 62,
+   "category": "cloud_free",
+   "query": "github actions automation",
+   "score": 57
+  },
+  {
+   "name": "github/branch-deploy",
+   "url": "https://github.com/github/branch-deploy",
+   "stars": 582,
+   "lang": "TypeScript",
+   "desc": "Enabling Branch Deployments through IssueOps with GitHub Actions - If you find this project useful, give it a star! ⭐️ ",
+   "topics": [
+    "action",
+    "actions",
+    "automation",
+    "branch-deployment",
+    "chatops",
+    "cicd",
+    "continuous-deployment",
+    "deploy"
+   ],
+   "updated": "2026-10-22",
+   "forks": 75,
+   "category": "cloud_free",
+   "query": "github actions automation",
+   "score": 57
+  },
+  {
+   "name": "AyinkxLab/ai-code-assistant",
+   "url": "https://github.com/AyinkxLab/ai-code-assistant",
+   "stars": 16,
+   "lang": "Python",
+   "desc": "Open-source AI coding assistant with read-only Stellar/Soroban developer tooling: Soroban XDR & transaction decoding, RPC/Horizon inspection, an offline mock network, contract scaffolds, project detec",
+   "topics": [
+    "ai",
+    "ai-agents",
+    "ai-assistant",
+    "blockchain",
+    "coding-assistant",
+    "developer-tools",
+    "flask",
+    "good-first-issue"
+   ],
+   "updated": "2026-10-22",
+   "forks": 79,
+   "category": "crypto_airdrop",
+   "query": "web3 python tools",
+   "score": 57
+  },
+  {
    "name": "zolotukhin/zinc",
    "url": "https://github.com/zolotukhin/zinc",
    "stars": 523,
@@ -5695,28 +5695,6 @@
    "forks": 22,
    "category": "local_llm",
    "query": "local llm inference engine",
-   "score": 56
-  },
-  {
-   "name": "sidor0912/FunPayCardinal",
-   "url": "https://github.com/sidor0912/FunPayCardinal",
-   "stars": 502,
-   "lang": "Python",
-   "desc": "🐦 Бот для упрощения взаимодействия продавцов с биржей FunPay",
-   "topics": [
-    "automation",
-    "bot",
-    "cardinal",
-    "fpc",
-    "funpay",
-    "funpayapi",
-    "funpaybot",
-    "funpaycardinal"
-   ],
-   "updated": "2026-10-19",
-   "forks": 113,
-   "category": "telegram_bots",
-   "query": "telegram automation python",
    "score": 56
   },
   {
@@ -5770,6 +5748,113 @@
    "forks": 2,
    "category": "observability",
    "query": "log analysis agent",
+   "score": 56
+  },
+  {
+   "name": "NadirAliOfficial/x-sniper-bot",
+   "url": "https://github.com/NadirAliOfficial/x-sniper-bot",
+   "stars": 9,
+   "lang": "Python",
+   "desc": "A Telegram-based crypto sniper bot that monitors X (Twitter) posts, extracts contract or wallet addresses, and automatically executes buy or send transactions on supported chains using configurable am",
+   "topics": [
+    "blockchain",
+    "crypto",
+    "cryptocurrency",
+    "python",
+    "sniper-bot",
+    "telegram",
+    "trading-bot",
+    "web3"
+   ],
+   "updated": "2026-10-02",
+   "forks": 0,
+   "category": "crypto_airdrop",
+   "query": "crypto wallet monitor",
+   "score": 56
+  },
+  {
+   "name": "gojue/ehids-agent",
+   "url": "https://github.com/gojue/ehids-agent",
+   "stars": 458,
+   "lang": "C",
+   "desc": "A Linux Host-based Intrusion Detection System based on eBPF.",
+   "topics": [
+    "ebpf",
+    "ebpf-sec",
+    "golang",
+    "hids",
+    "security-audit"
+   ],
+   "updated": "2026-09-23",
+   "forks": 86,
+   "category": "security_edr",
+   "query": "host intrusion detection",
+   "score": 56
+  },
+  {
+   "name": "kyrillosishak/Domicile",
+   "url": "https://github.com/kyrillosishak/Domicile",
+   "stars": 9,
+   "lang": "TypeScript",
+   "desc": "Your data, domiciled on your device. A private AI stack — vector database, RAG, and local LLM — that runs entirely in the browser. Zero egress, zero third-party processors.",
+   "topics": [
+    "browser",
+    "desktop",
+    "embeddings",
+    "llamacpp",
+    "llm",
+    "local-ai",
+    "mcp",
+    "offline"
+   ],
+   "updated": "2026-09-09",
+   "forks": 2,
+   "category": "rag_memory",
+   "query": "local rag vector database",
+   "score": 56
+  },
+  {
+   "name": "kstonekuan/tambourine-voice",
+   "url": "https://github.com/kstonekuan/tambourine-voice",
+   "stars": 390,
+   "lang": "Rust",
+   "desc": "Your personal voice interface for any app. Speak naturally and your words appear wherever your cursor is, with fully customizable AI voice dictation.  Open source alternative to Wispr Flow.",
+   "topics": [
+    "accessibility",
+    "cross-platform",
+    "macos",
+    "pipecat",
+    "python",
+    "rust",
+    "speech-to-text",
+    "tauri"
+   ],
+   "updated": "2026-10-22",
+   "forks": 72,
+   "category": "voice_interface",
+   "query": "whisper alternative python",
+   "score": 56
+  },
+  {
+   "name": "sidor0912/FunPayCardinal",
+   "url": "https://github.com/sidor0912/FunPayCardinal",
+   "stars": 502,
+   "lang": "Python",
+   "desc": "🐦 Бот для упрощения взаимодействия продавцов с биржей FunPay",
+   "topics": [
+    "automation",
+    "bot",
+    "cardinal",
+    "fpc",
+    "funpay",
+    "funpayapi",
+    "funpaybot",
+    "funpaycardinal"
+   ],
+   "updated": "2026-10-19",
+   "forks": 113,
+   "category": "telegram_bots",
+   "query": "telegram automation python",
    "score": 56
   },
   {
@@ -5859,69 +5944,6 @@
    "score": 56
   },
   {
-   "name": "NadirAliOfficial/x-sniper-bot",
-   "url": "https://github.com/NadirAliOfficial/x-sniper-bot",
-   "stars": 9,
-   "lang": "Python",
-   "desc": "A Telegram-based crypto sniper bot that monitors X (Twitter) posts, extracts contract or wallet addresses, and automatically executes buy or send transactions on supported chains using configurable am",
-   "topics": [
-    "blockchain",
-    "crypto",
-    "cryptocurrency",
-    "python",
-    "sniper-bot",
-    "telegram",
-    "trading-bot",
-    "web3"
-   ],
-   "updated": "2026-10-02",
-   "forks": 0,
-   "category": "crypto_airdrop",
-   "query": "crypto wallet monitor",
-   "score": 56
-  },
-  {
-   "name": "gojue/ehids-agent",
-   "url": "https://github.com/gojue/ehids-agent",
-   "stars": 458,
-   "lang": "C",
-   "desc": "A Linux Host-based Intrusion Detection System based on eBPF.",
-   "topics": [
-    "ebpf",
-    "ebpf-sec",
-    "golang",
-    "hids",
-    "security-audit"
-   ],
-   "updated": "2026-09-23",
-   "forks": 86,
-   "category": "security_edr",
-   "query": "host intrusion detection",
-   "score": 56
-  },
-  {
-   "name": "kyrillosishak/Domicile",
-   "url": "https://github.com/kyrillosishak/Domicile",
-   "stars": 9,
-   "lang": "TypeScript",
-   "desc": "Your data, domiciled on your device. A private AI stack — vector database, RAG, and local LLM — that runs entirely in the browser. Zero egress, zero third-party processors.",
-   "topics": [
-    "browser",
-    "desktop",
-    "embeddings",
-    "llamacpp",
-    "llm",
-    "local-ai",
-    "mcp",
-    "offline"
-   ],
-   "updated": "2026-09-09",
-   "forks": 2,
-   "category": "rag_memory",
-   "query": "local rag vector database",
-   "score": 56
-  },
-  {
    "name": "sebadob/hiqlite",
    "url": "https://github.com/sebadob/hiqlite",
    "stars": 515,
@@ -5943,28 +5965,6 @@
    "score": 56
   },
   {
-   "name": "kstonekuan/tambourine-voice",
-   "url": "https://github.com/kstonekuan/tambourine-voice",
-   "stars": 390,
-   "lang": "Rust",
-   "desc": "Your personal voice interface for any app. Speak naturally and your words appear wherever your cursor is, with fully customizable AI voice dictation.  Open source alternative to Wispr Flow.",
-   "topics": [
-    "accessibility",
-    "cross-platform",
-    "macos",
-    "pipecat",
-    "python",
-    "rust",
-    "speech-to-text",
-    "tauri"
-   ],
-   "updated": "2026-10-22",
-   "forks": 72,
-   "category": "voice_interface",
-   "query": "whisper alternative python",
-   "score": 56
-  },
-  {
    "name": "getvictor/fleet-edr",
    "url": "https://github.com/getvictor/fleet-edr",
    "stars": 10,
@@ -5979,28 +5979,6 @@
    "category": "security_edr",
    "query": "open source edr",
    "score": 56
-  },
-  {
-   "name": "iskandaryv/meetingly-ai",
-   "url": "https://github.com/iskandaryv/meetingly-ai",
-   "stars": 309,
-   "lang": "TypeScript",
-   "desc": "Open-source AI interview assistant and meeting copilot: live answers during Zoom, Google Meet and Teams calls, on-device transcription, hidden from screen sharing. Free Cluely, Interview Coder and Fin",
-   "topics": [
-    "ai-interview-assistant",
-    "ai-meeting-assistant",
-    "cluely",
-    "cluely-alternative",
-    "cluely-clone",
-    "coding-interview",
-    "electron",
-    "final-round-ai"
-   ],
-   "updated": "2026-10-22",
-   "forks": 21,
-   "category": "local_llm",
-   "query": "ollama alternative",
-   "score": 55
   },
   {
    "name": "lufermalgo/voxa",
@@ -6106,28 +6084,6 @@
    "score": 55
   },
   {
-   "name": "sorenlouv/backport",
-   "url": "https://github.com/sorenlouv/backport",
-   "stars": 286,
-   "lang": "TypeScript",
-   "desc": "A simple CLI tool that automates the process of backporting commits on a GitHub repo",
-   "topics": [
-    "actions",
-    "automation",
-    "backport",
-    "backport-github-action",
-    "backporting-commits",
-    "branches",
-    "branching",
-    "cherry-pick"
-   ],
-   "updated": "2026-10-07",
-   "forks": 74,
-   "category": "cloud_free",
-   "query": "github actions automation",
-   "score": 55
-  },
-  {
    "name": "diorwave/Solana-Trading-Bot",
    "url": "https://github.com/diorwave/Solana-Trading-Bot",
    "stars": 8,
@@ -6172,6 +6128,85 @@
    "score": 55
   },
   {
+   "name": "nickbild/local_llm_assistant",
+   "url": "https://github.com/nickbild/local_llm_assistant",
+   "stars": 344,
+   "lang": "Python",
+   "desc": "World's Easiest GPT-like Voice Assistant",
+   "topics": [],
+   "updated": "2026-10-19",
+   "forks": 32,
+   "category": "voice_interface",
+   "query": "voice assistant local",
+   "score": 55
+  },
+  {
+   "name": "pmbstyle/Alice",
+   "url": "https://github.com/pmbstyle/Alice",
+   "stars": 324,
+   "lang": "TypeScript",
+   "desc": "Alice is a voice-first desktop AI assistant application built with Vue.js, Vite, and Electron. Advanced memory system, function calling, MCP support, optional fully local use, and more.",
+   "topics": [
+    "ai",
+    "ai-assistant",
+    "chatgpt",
+    "electron",
+    "groq-api",
+    "hnswlib",
+    "javascript",
+    "mcp-client"
+   ],
+   "updated": "2026-10-21",
+   "forks": 58,
+   "category": "voice_interface",
+   "query": "voice assistant local",
+   "score": 55
+  },
+  {
+   "name": "iskandaryv/meetingly-ai",
+   "url": "https://github.com/iskandaryv/meetingly-ai",
+   "stars": 309,
+   "lang": "TypeScript",
+   "desc": "Open-source AI interview assistant and meeting copilot: live answers during Zoom, Google Meet and Teams calls, on-device transcription, hidden from screen sharing. Free Cluely, Interview Coder and Fin",
+   "topics": [
+    "ai-interview-assistant",
+    "ai-meeting-assistant",
+    "cluely",
+    "cluely-alternative",
+    "cluely-clone",
+    "coding-interview",
+    "electron",
+    "final-round-ai"
+   ],
+   "updated": "2026-10-22",
+   "forks": 21,
+   "category": "local_llm",
+   "query": "ollama alternative",
+   "score": 55
+  },
+  {
+   "name": "sorenlouv/backport",
+   "url": "https://github.com/sorenlouv/backport",
+   "stars": 286,
+   "lang": "TypeScript",
+   "desc": "A simple CLI tool that automates the process of backporting commits on a GitHub repo",
+   "topics": [
+    "actions",
+    "automation",
+    "backport",
+    "backport-github-action",
+    "backporting-commits",
+    "branches",
+    "branching",
+    "cherry-pick"
+   ],
+   "updated": "2026-10-07",
+   "forks": 74,
+   "category": "cloud_free",
+   "query": "github actions automation",
+   "score": 55
+  },
+  {
    "name": "ymmmmmmmm/BeraChainTools",
    "url": "https://github.com/ymmmmmmmm/BeraChainTools",
    "stars": 364,
@@ -6209,41 +6244,6 @@
    "forks": 6,
    "category": "rag_memory",
    "query": "embeddings sqlite",
-   "score": 55
-  },
-  {
-   "name": "nickbild/local_llm_assistant",
-   "url": "https://github.com/nickbild/local_llm_assistant",
-   "stars": 344,
-   "lang": "Python",
-   "desc": "World's Easiest GPT-like Voice Assistant",
-   "topics": [],
-   "updated": "2026-10-19",
-   "forks": 32,
-   "category": "voice_interface",
-   "query": "voice assistant local",
-   "score": 55
-  },
-  {
-   "name": "pmbstyle/Alice",
-   "url": "https://github.com/pmbstyle/Alice",
-   "stars": 324,
-   "lang": "TypeScript",
-   "desc": "Alice is a voice-first desktop AI assistant application built with Vue.js, Vite, and Electron. Advanced memory system, function calling, MCP support, optional fully local use, and more.",
-   "topics": [
-    "ai",
-    "ai-assistant",
-    "chatgpt",
-    "electron",
-    "groq-api",
-    "hnswlib",
-    "javascript",
-    "mcp-client"
-   ],
-   "updated": "2026-10-21",
-   "forks": 58,
-   "category": "voice_interface",
-   "query": "voice assistant local",
    "score": 55
   },
   {
@@ -6332,28 +6332,6 @@
    "forks": 28,
    "category": "telegram_bots",
    "query": "telegram bot python framework",
-   "score": 54
-  },
-  {
-   "name": "rq/rq",
-   "url": "https://github.com/rq/rq",
-   "stars": 10695,
-   "lang": "Python",
-   "desc": "Simple job queues for Python",
-   "topics": [
-    "async",
-    "background-jobs",
-    "delayed-jobs",
-    "delayed-tasks",
-    "job-queue",
-    "python",
-    "redis",
-    "rq"
-   ],
-   "updated": "2026-10-22",
-   "forks": 1515,
-   "category": "orchestration",
-   "query": "task queue python",
    "score": 54
   },
   {
@@ -6485,27 +6463,6 @@
    "forks": 22,
    "category": "observability",
    "query": "uptime monitoring self-hosted",
-   "score": 54
-  },
-  {
-   "name": "micnncim/action-label-syncer",
-   "url": "https://github.com/micnncim/action-label-syncer",
-   "stars": 220,
-   "lang": "Go",
-   "desc": "GitHub Action to sync GitHub labels in the declarative way",
-   "topics": [
-    "actions",
-    "automation",
-    "github",
-    "github-actions",
-    "labels",
-    "manifest",
-    "sync-github-labels"
-   ],
-   "updated": "2026-10-02",
-   "forks": 34,
-   "category": "cloud_free",
-   "query": "github actions automation",
    "score": 54
   },
   {
@@ -6762,6 +6719,49 @@
    "score": 54
   },
   {
+   "name": "rq/rq",
+   "url": "https://github.com/rq/rq",
+   "stars": 10695,
+   "lang": "Python",
+   "desc": "Simple job queues for Python",
+   "topics": [
+    "async",
+    "background-jobs",
+    "delayed-jobs",
+    "delayed-tasks",
+    "job-queue",
+    "python",
+    "redis",
+    "rq"
+   ],
+   "updated": "2026-10-22",
+   "forks": 1515,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 54
+  },
+  {
+   "name": "micnncim/action-label-syncer",
+   "url": "https://github.com/micnncim/action-label-syncer",
+   "stars": 220,
+   "lang": "Go",
+   "desc": "GitHub Action to sync GitHub labels in the declarative way",
+   "topics": [
+    "actions",
+    "automation",
+    "github",
+    "github-actions",
+    "labels",
+    "manifest",
+    "sync-github-labels"
+   ],
+   "updated": "2026-10-02",
+   "forks": 34,
+   "category": "cloud_free",
+   "query": "github actions automation",
+   "score": 54
+  },
+  {
    "name": "mechramc/Orion",
    "url": "https://github.com/mechramc/Orion",
    "stars": 130,
@@ -6814,48 +6814,6 @@
    "forks": 0,
    "category": "self_evolving",
    "query": "self-evolving codebase",
-   "score": 53
-  },
-  {
-   "name": "mher/flower",
-   "url": "https://github.com/mher/flower",
-   "stars": 7238,
-   "lang": "Python",
-   "desc": "Real-time monitor and web admin for Celery distributed task queue",
-   "topics": [
-    "administration",
-    "asynchronous",
-    "celery",
-    "monitoring",
-    "python",
-    "rabbitmq",
-    "redis",
-    "task-queue"
-   ],
-   "updated": "2026-10-21",
-   "forks": 1152,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 53
-  },
-  {
-   "name": "coleifer/huey",
-   "url": "https://github.com/coleifer/huey",
-   "stars": 6055,
-   "lang": "Python",
-   "desc": "a little task queue for python",
-   "topics": [
-    "dank",
-    "django",
-    "python",
-    "queue",
-    "redis",
-    "task-queue"
-   ],
-   "updated": "2026-10-22",
-   "forks": 405,
-   "category": "orchestration",
-   "query": "task queue python",
    "score": 53
   },
   {
@@ -7009,6 +6967,48 @@
    "score": 53
   },
   {
+   "name": "mher/flower",
+   "url": "https://github.com/mher/flower",
+   "stars": 7238,
+   "lang": "Python",
+   "desc": "Real-time monitor and web admin for Celery distributed task queue",
+   "topics": [
+    "administration",
+    "asynchronous",
+    "celery",
+    "monitoring",
+    "python",
+    "rabbitmq",
+    "redis",
+    "task-queue"
+   ],
+   "updated": "2026-10-21",
+   "forks": 1152,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 53
+  },
+  {
+   "name": "coleifer/huey",
+   "url": "https://github.com/coleifer/huey",
+   "stars": 6055,
+   "lang": "Python",
+   "desc": "a little task queue for python",
+   "topics": [
+    "dank",
+    "django",
+    "python",
+    "queue",
+    "redis",
+    "task-queue"
+   ],
+   "updated": "2026-10-22",
+   "forks": 405,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 53
+  },
+  {
    "name": "python-telegram-bot/ptbcontrib",
    "url": "https://github.com/python-telegram-bot/ptbcontrib",
    "stars": 119,
@@ -7044,50 +7044,6 @@
    "forks": 8,
    "category": "telegram_bots",
    "query": "telegram bot python framework",
-   "score": 52
-  },
-  {
-   "name": "lorcalhost/ChristmasSpiritBreaker-andNewYearsToo",
-   "url": "https://github.com/lorcalhost/ChristmasSpiritBreaker-andNewYearsToo",
-   "stars": 105,
-   "lang": "Python",
-   "desc": "Python script which automatically sends Christmas/New Year's messages from a custom messages list on Whatsapp, Facebook Messenger or via SMS in a given time range, to a custom contacts list. Time to w",
-   "topics": [
-    "android",
-    "automation",
-    "bot",
-    "christmas",
-    "christmas-spirit-breaker",
-    "facebook-messenger",
-    "friends",
-    "messages"
-   ],
-   "updated": "2026-09-19",
-   "forks": 5,
-   "category": "telegram_bots",
-   "query": "telegram automation python",
-   "score": 52
-  },
-  {
-   "name": "MohammadBahemmat/V2ray-Collector",
-   "url": "https://github.com/MohammadBahemmat/V2ray-Collector",
-   "stars": 86,
-   "lang": "Python",
-   "desc": "💠جمع‌آوری خودکار و رایگان کانفیگ‌های V2Ray از گیتهاب و تلگرام (بدون API). آپدیت هر ۱۵ دقیقه با GitHub Actions. خروجی تفکیک‌شده بر اساس پروتکل. 💠Automated & free collector for V2Ray configs from GitHub",
-   "topics": [
-    "automation",
-    "config-collector",
-    "free-internet",
-    "github-actions",
-    "hysteria2",
-    "iran",
-    "juicity",
-    "proxy"
-   ],
-   "updated": "2026-10-22",
-   "forks": 78,
-   "category": "telegram_bots",
-   "query": "telegram automation python",
    "score": 52
   },
   {
@@ -7148,23 +7104,6 @@
    "score": 52
   },
   {
-   "name": "canonical/dqlite",
-   "url": "https://github.com/canonical/dqlite",
-   "stars": 4407,
-   "lang": "C",
-   "desc": "Embeddable, replicated and fault-tolerant SQL engine.",
-   "topics": [
-    "database",
-    "raft",
-    "sqlite"
-   ],
-   "updated": "2026-10-21",
-   "forks": 254,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
-   "score": 52
-  },
-  {
    "name": "kristerus/dictateme",
    "url": "https://github.com/kristerus/dictateme",
    "stars": 2,
@@ -7203,6 +7142,67 @@
    "forks": 461,
    "category": "pipe_tube_work",
    "query": "scaffold design",
+   "score": 52
+  },
+  {
+   "name": "lorcalhost/ChristmasSpiritBreaker-andNewYearsToo",
+   "url": "https://github.com/lorcalhost/ChristmasSpiritBreaker-andNewYearsToo",
+   "stars": 105,
+   "lang": "Python",
+   "desc": "Python script which automatically sends Christmas/New Year's messages from a custom messages list on Whatsapp, Facebook Messenger or via SMS in a given time range, to a custom contacts list. Time to w",
+   "topics": [
+    "android",
+    "automation",
+    "bot",
+    "christmas",
+    "christmas-spirit-breaker",
+    "facebook-messenger",
+    "friends",
+    "messages"
+   ],
+   "updated": "2026-09-19",
+   "forks": 5,
+   "category": "telegram_bots",
+   "query": "telegram automation python",
+   "score": 52
+  },
+  {
+   "name": "MohammadBahemmat/V2ray-Collector",
+   "url": "https://github.com/MohammadBahemmat/V2ray-Collector",
+   "stars": 86,
+   "lang": "Python",
+   "desc": "💠جمع‌آوری خودکار و رایگان کانفیگ‌های V2Ray از گیتهاب و تلگرام (بدون API). آپدیت هر ۱۵ دقیقه با GitHub Actions. خروجی تفکیک‌شده بر اساس پروتکل. 💠Automated & free collector for V2Ray configs from GitHub",
+   "topics": [
+    "automation",
+    "config-collector",
+    "free-internet",
+    "github-actions",
+    "hysteria2",
+    "iran",
+    "juicity",
+    "proxy"
+   ],
+   "updated": "2026-10-22",
+   "forks": 78,
+   "category": "telegram_bots",
+   "query": "telegram automation python",
+   "score": 52
+  },
+  {
+   "name": "canonical/dqlite",
+   "url": "https://github.com/canonical/dqlite",
+   "stars": 4407,
+   "lang": "C",
+   "desc": "Embeddable, replicated and fault-tolerant SQL engine.",
+   "topics": [
+    "database",
+    "raft",
+    "sqlite"
+   ],
+   "updated": "2026-10-21",
+   "forks": 254,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
    "score": 52
   },
   {
@@ -7307,28 +7307,6 @@
    "score": 51
   },
   {
-   "name": "0xTaoDev/Wallet-Trades-Tracker",
-   "url": "https://github.com/0xTaoDev/Wallet-Trades-Tracker",
-   "stars": 62,
-   "lang": "Python",
-   "desc": "This tool allows for near-instant notifications whenever a wallet executes a swap on an EVM-compatible blockchain",
-   "topics": [
-    "avax",
-    "blockchain",
-    "bsc",
-    "crypto",
-    "defi",
-    "dex",
-    "ethereum",
-    "evm"
-   ],
-   "updated": "2026-09-01",
-   "forks": 8,
-   "category": "crypto_airdrop",
-   "query": "web3 python tools",
-   "score": 51
-  },
-  {
    "name": "ObscureAintSecure/TalkTrack",
    "url": "https://github.com/ObscureAintSecure/TalkTrack",
    "stars": 63,
@@ -7361,6 +7339,28 @@
    "forks": 11,
    "category": "pipe_tube_work",
    "query": "scaffold design",
+   "score": 51
+  },
+  {
+   "name": "0xTaoDev/Wallet-Trades-Tracker",
+   "url": "https://github.com/0xTaoDev/Wallet-Trades-Tracker",
+   "stars": 62,
+   "lang": "Python",
+   "desc": "This tool allows for near-instant notifications whenever a wallet executes a swap on an EVM-compatible blockchain",
+   "topics": [
+    "avax",
+    "blockchain",
+    "bsc",
+    "crypto",
+    "defi",
+    "dex",
+    "ethereum",
+    "evm"
+   ],
+   "updated": "2026-09-01",
+   "forks": 8,
+   "category": "crypto_airdrop",
+   "query": "web3 python tools",
    "score": 51
   },
   {
@@ -7531,27 +7531,6 @@
    "score": 50
   },
   {
-   "name": "taskiq-python/taskiq",
-   "url": "https://github.com/taskiq-python/taskiq",
-   "stars": 2361,
-   "lang": "Python",
-   "desc": "Distributed task queue with full async support",
-   "topics": [
-    "asyncio",
-    "celery-like",
-    "hacktoberfest",
-    "python",
-    "python3",
-    "task-executor",
-    "task-manager"
-   ],
-   "updated": "2026-10-22",
-   "forks": 156,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 50
-  },
-  {
    "name": "LuoxuanLove/godot-dotnet-mcp",
    "url": "https://github.com/LuoxuanLove/godot-dotnet-mcp",
    "stars": 39,
@@ -7705,26 +7684,6 @@
    "score": 50
   },
   {
-   "name": "Neo23x0/yarGen",
-   "url": "https://github.com/Neo23x0/yarGen",
-   "stars": 1821,
-   "lang": "Python",
-   "desc": "yarGen is a generator for YARA rules",
-   "topics": [
-    "malware",
-    "malware-analysis",
-    "malware-research",
-    "malwareanalysis",
-    "python",
-    "yara"
-   ],
-   "updated": "2026-10-22",
-   "forks": 302,
-   "category": "security_edr",
-   "query": "yara rules",
-   "score": 50
-  },
-  {
    "name": "TypeWhisper/typewhisper-mac",
    "url": "https://github.com/TypeWhisper/typewhisper-mac",
    "stars": 1870,
@@ -7873,6 +7832,47 @@
    "forks": 289,
    "category": "messaging_bridge",
    "query": "matrix bridge",
+   "score": 50
+  },
+  {
+   "name": "taskiq-python/taskiq",
+   "url": "https://github.com/taskiq-python/taskiq",
+   "stars": 2361,
+   "lang": "Python",
+   "desc": "Distributed task queue with full async support",
+   "topics": [
+    "asyncio",
+    "celery-like",
+    "hacktoberfest",
+    "python",
+    "python3",
+    "task-executor",
+    "task-manager"
+   ],
+   "updated": "2026-10-22",
+   "forks": 156,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 50
+  },
+  {
+   "name": "Neo23x0/yarGen",
+   "url": "https://github.com/Neo23x0/yarGen",
+   "stars": 1821,
+   "lang": "Python",
+   "desc": "yarGen is a generator for YARA rules",
+   "topics": [
+    "malware",
+    "malware-analysis",
+    "malware-research",
+    "malwareanalysis",
+    "python",
+    "yara"
+   ],
+   "updated": "2026-10-22",
+   "forks": 302,
+   "category": "security_edr",
+   "query": "yara rules",
    "score": 50
   },
   {
@@ -8073,63 +8073,6 @@
    "score": 49
   },
   {
-   "name": "janbjorge/pgqueuer",
-   "url": "https://github.com/janbjorge/pgqueuer",
-   "stars": 1544,
-   "lang": "Python",
-   "desc": "PostgreSQL-backed background job and task queue for Python.",
-   "topics": [
-    "asyncio",
-    "background-jobs",
-    "job-queue",
-    "postgres",
-    "postgresql",
-    "python",
-    "queue",
-    "task-queue"
-   ],
-   "updated": "2026-10-22",
-   "forks": 41,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 49
-  },
-  {
-   "name": "closeio/tasktiger",
-   "url": "https://github.com/closeio/tasktiger",
-   "stars": 1469,
-   "lang": "Python",
-   "desc": "Python task queue using Redis",
-   "topics": [
-    "queue",
-    "worker"
-   ],
-   "updated": "2026-10-20",
-   "forks": 94,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 49
-  },
-  {
-   "name": "procrastinate-org/procrastinate",
-   "url": "https://github.com/procrastinate-org/procrastinate",
-   "stars": 1430,
-   "lang": "Python",
-   "desc": "PostgreSQL-based Task Queue for Python",
-   "topics": [
-    "async",
-    "postgresql",
-    "python",
-    "sync",
-    "task-queue"
-   ],
-   "updated": "2026-10-22",
-   "forks": 114,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 49
-  },
-  {
    "name": "rq/rq-scheduler",
    "url": "https://github.com/rq/rq-scheduler",
    "stars": 1516,
@@ -8225,28 +8168,6 @@
    "score": 49
   },
   {
-   "name": "objectbox/objectbox-go",
-   "url": "https://github.com/objectbox/objectbox-go",
-   "stars": 1275,
-   "lang": "Go",
-   "desc": "Embedded Go Database, the fast alternative to SQLite, gorm, etc.",
-   "topics": [
-    "database",
-    "edge",
-    "embedded",
-    "go",
-    "golang",
-    "iot",
-    "nosql",
-    "offline-first"
-   ],
-   "updated": "2026-10-14",
-   "forks": 51,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
-   "score": 49
-  },
-  {
    "name": "linyiLYi/voice-assistant",
    "url": "https://github.com/linyiLYi/voice-assistant",
    "stars": 1323,
@@ -8277,6 +8198,85 @@
    "forks": 46,
    "category": "voice_interface",
    "query": "voice assistant local",
+   "score": 49
+  },
+  {
+   "name": "janbjorge/pgqueuer",
+   "url": "https://github.com/janbjorge/pgqueuer",
+   "stars": 1544,
+   "lang": "Python",
+   "desc": "PostgreSQL-backed background job and task queue for Python.",
+   "topics": [
+    "asyncio",
+    "background-jobs",
+    "job-queue",
+    "postgres",
+    "postgresql",
+    "python",
+    "queue",
+    "task-queue"
+   ],
+   "updated": "2026-10-22",
+   "forks": 41,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 49
+  },
+  {
+   "name": "closeio/tasktiger",
+   "url": "https://github.com/closeio/tasktiger",
+   "stars": 1469,
+   "lang": "Python",
+   "desc": "Python task queue using Redis",
+   "topics": [
+    "queue",
+    "worker"
+   ],
+   "updated": "2026-10-20",
+   "forks": 94,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 49
+  },
+  {
+   "name": "procrastinate-org/procrastinate",
+   "url": "https://github.com/procrastinate-org/procrastinate",
+   "stars": 1430,
+   "lang": "Python",
+   "desc": "PostgreSQL-based Task Queue for Python",
+   "topics": [
+    "async",
+    "postgresql",
+    "python",
+    "sync",
+    "task-queue"
+   ],
+   "updated": "2026-10-22",
+   "forks": 114,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 49
+  },
+  {
+   "name": "objectbox/objectbox-go",
+   "url": "https://github.com/objectbox/objectbox-go",
+   "stars": 1275,
+   "lang": "Go",
+   "desc": "Embedded Go Database, the fast alternative to SQLite, gorm, etc.",
+   "topics": [
+    "database",
+    "edge",
+    "embedded",
+    "go",
+    "golang",
+    "iot",
+    "nosql",
+    "offline-first"
+   ],
+   "updated": "2026-10-14",
+   "forks": 51,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
    "score": 49
   },
   {
@@ -8345,19 +8345,6 @@
    "score": 48
   },
   {
-   "name": "pricingassistant/mrq",
-   "url": "https://github.com/pricingassistant/mrq",
-   "stars": 892,
-   "lang": "Python",
-   "desc": "Mr. Queue - A distributed worker task queue in Python using Redis & gevent",
-   "topics": [],
-   "updated": "2026-07-31",
-   "forks": 115,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 48
-  },
-  {
    "name": "YakirOren/turbine",
    "url": "https://github.com/YakirOren/turbine",
    "stars": 18,
@@ -8377,24 +8364,6 @@
    "forks": 2,
    "category": "orchestration",
    "query": "durable workflow engine",
-   "score": 48
-  },
-  {
-   "name": "actions/create-github-app-token",
-   "url": "https://github.com/actions/create-github-app-token",
-   "stars": 904,
-   "lang": "JavaScript",
-   "desc": "GitHub Action for creating a GitHub App Installation Access Token",
-   "topics": [
-    "automation",
-    "github-actions",
-    "hacktoberfest",
-    "tokens"
-   ],
-   "updated": "2026-10-22",
-   "forks": 179,
-   "category": "cloud_free",
-   "query": "github actions automation",
    "score": 48
   },
   {
@@ -8530,26 +8499,6 @@
    "score": 48
   },
   {
-   "name": "oaiwen/BeraChainTools",
-   "url": "https://github.com/oaiwen/BeraChainTools",
-   "stars": 19,
-   "lang": "Python",
-   "desc": "berachain领水，合约交互。berachain claim test tokens,contract interactions.",
-   "topics": [
-    "berachain",
-    "blockchain",
-    "python",
-    "recaptcha-solver",
-    "web3",
-    "web3py"
-   ],
-   "updated": "2026-04-09",
-   "forks": 4359,
-   "category": "crypto_airdrop",
-   "query": "web3 python tools",
-   "score": 48
-  },
-  {
    "name": "The-Abhishek1/XCLOAK-SECURITY-SUITE",
    "url": "https://github.com/The-Abhishek1/XCLOAK-SECURITY-SUITE",
    "stars": 18,
@@ -8569,80 +8518,6 @@
    "forks": 4,
    "category": "security_edr",
    "query": "open source edr",
-   "score": 48
-  },
-  {
-   "name": "kevthehermit/PasteHunter",
-   "url": "https://github.com/kevthehermit/PasteHunter",
-   "stars": 1143,
-   "lang": "Python",
-   "desc": "Scanning pastebin with yara rules",
-   "topics": [],
-   "updated": "2026-10-11",
-   "forks": 220,
-   "category": "security_edr",
-   "query": "yara rules",
-   "score": 48
-  },
-  {
-   "name": "joaoh82/rust_sqlite",
-   "url": "https://github.com/joaoh82/rust_sqlite",
-   "stars": 1089,
-   "lang": "Rust",
-   "desc": "SQLRite - Simple embedded database modeled off SQLite in Rust",
-   "topics": [
-    "computer-science",
-    "database-design",
-    "databases",
-    "rust-lang",
-    "sqlite-architecture"
-   ],
-   "updated": "2026-10-22",
-   "forks": 55,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
-   "score": 48
-  },
-  {
-   "name": "optimajet/WorkflowEngine.NET",
-   "url": "https://github.com/optimajet/WorkflowEngine.NET",
-   "stars": 994,
-   "lang": "C#",
-   "desc": "Workflow Engine by Optimajet, the embeddable workflow engine for .NET and C#. Approvals, state machines and long-running processes with a visual Workflow Designer, BPMN import and six databases.",
-   "topics": [
-    "approval-workflow",
-    "aspnet-core",
-    "bpmn",
-    "business-process-automation",
-    "csharp",
-    "dotnet",
-    "durable-execution",
-    "mongodb"
-   ],
-   "updated": "2026-10-16",
-   "forks": 264,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
-   "score": 48
-  },
-  {
-   "name": "glebarez/go-sqlite",
-   "url": "https://github.com/glebarez/go-sqlite",
-   "stars": 885,
-   "lang": "Go",
-   "desc": "pure-Go SQLite driver for Go (SQLite embedded)",
-   "topics": [
-    "database",
-    "driver",
-    "go",
-    "golang",
-    "sqlite",
-    "sqlite3"
-   ],
-   "updated": "2026-10-17",
-   "forks": 44,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
    "score": 48
   },
   {
@@ -8734,69 +8609,129 @@
    "score": 48
   },
   {
-   "name": "kadevin/ilab-conjure",
-   "url": "https://github.com/kadevin/ilab-conjure",
-   "stars": 719,
+   "name": "pricingassistant/mrq",
+   "url": "https://github.com/pricingassistant/mrq",
+   "stars": 892,
+   "lang": "Python",
+   "desc": "Mr. Queue - A distributed worker task queue in Python using Redis & gevent",
+   "topics": [],
+   "updated": "2026-07-31",
+   "forks": 115,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 48
+  },
+  {
+   "name": "actions/create-github-app-token",
+   "url": "https://github.com/actions/create-github-app-token",
+   "stars": 904,
    "lang": "JavaScript",
-   "desc": "面向 GPT-image-2 的 AI 图片生成 WebUI 工作台，支持 Codex Responses 与 OpenAI 兼容 API 接入，内置公用图库、多类型 Chip 快捷引用、提示词模板、多任务并发和本地队列管理。An AI image generation WebUI workbench for GPT-image-2 with Codex Responses and OpenAI-",
+   "desc": "GitHub Action for creating a GitHub App Installation Access Token",
    "topics": [
-    "ai-art",
-    "ai-image-generation",
-    "cli",
-    "codex",
-    "fastapi",
-    "generative-ai",
-    "gpt-image-2",
-    "image-editing"
+    "automation",
+    "github-actions",
+    "hacktoberfest",
+    "tokens"
    ],
-   "updated": "2026-10-21",
-   "forks": 119,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 47
+   "updated": "2026-10-22",
+   "forks": 179,
+   "category": "cloud_free",
+   "query": "github actions automation",
+   "score": 48
   },
   {
-   "name": "GregaVrbancic/fastapi-celery",
-   "url": "https://github.com/GregaVrbancic/fastapi-celery",
-   "stars": 663,
+   "name": "oaiwen/BeraChainTools",
+   "url": "https://github.com/oaiwen/BeraChainTools",
+   "stars": 19,
    "lang": "Python",
-   "desc": "Minimal example utilizing fastapi and celery with RabbitMQ for task queue, Redis for celery backend and flower for monitoring the celery tasks.",
+   "desc": "berachain领水，合约交互。berachain claim test tokens,contract interactions.",
    "topics": [
-    "celery",
-    "docker-compose",
-    "fastapi",
-    "flower",
+    "berachain",
+    "blockchain",
     "python",
-    "rabbitmq",
-    "redis"
+    "recaptcha-solver",
+    "web3",
+    "web3py"
    ],
-   "updated": "2026-09-25",
-   "forks": 112,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 47
+   "updated": "2026-04-09",
+   "forks": 4359,
+   "category": "crypto_airdrop",
+   "query": "web3 python tools",
+   "score": 48
   },
   {
-   "name": "wakatime/wakaq",
-   "url": "https://github.com/wakatime/wakaq",
-   "stars": 596,
+   "name": "kevthehermit/PasteHunter",
+   "url": "https://github.com/kevthehermit/PasteHunter",
+   "stars": 1143,
    "lang": "Python",
-   "desc": "Background task queue for Python backed by Redis, a super minimal Celery",
+   "desc": "Scanning pastebin with yara rules",
+   "topics": [],
+   "updated": "2026-10-11",
+   "forks": 220,
+   "category": "security_edr",
+   "query": "yara rules",
+   "score": 48
+  },
+  {
+   "name": "joaoh82/rust_sqlite",
+   "url": "https://github.com/joaoh82/rust_sqlite",
+   "stars": 1089,
+   "lang": "Rust",
+   "desc": "SQLRite - Simple embedded database modeled off SQLite in Rust",
    "topics": [
-    "async",
-    "asynchronous-tasks",
-    "background-jobs",
-    "celery",
-    "distributed",
-    "job-queue",
-    "job-scheduler",
-    "python"
+    "computer-science",
+    "database-design",
+    "databases",
+    "rust-lang",
+    "sqlite-architecture"
    ],
-   "updated": "2026-10-09",
-   "forks": 20,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 47
+   "updated": "2026-10-22",
+   "forks": 55,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 48
+  },
+  {
+   "name": "optimajet/WorkflowEngine.NET",
+   "url": "https://github.com/optimajet/WorkflowEngine.NET",
+   "stars": 994,
+   "lang": "C#",
+   "desc": "Workflow Engine by Optimajet, the embeddable workflow engine for .NET and C#. Approvals, state machines and long-running processes with a visual Workflow Designer, BPMN import and six databases.",
+   "topics": [
+    "approval-workflow",
+    "aspnet-core",
+    "bpmn",
+    "business-process-automation",
+    "csharp",
+    "dotnet",
+    "durable-execution",
+    "mongodb"
+   ],
+   "updated": "2026-10-16",
+   "forks": 264,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 48
+  },
+  {
+   "name": "glebarez/go-sqlite",
+   "url": "https://github.com/glebarez/go-sqlite",
+   "stars": 885,
+   "lang": "Go",
+   "desc": "pure-Go SQLite driver for Go (SQLite embedded)",
+   "topics": [
+    "database",
+    "driver",
+    "go",
+    "golang",
+    "sqlite",
+    "sqlite3"
+   ],
+   "updated": "2026-10-17",
+   "forks": 44,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 48
   },
   {
    "name": "obeli-sk/obelisk",
@@ -8966,52 +8901,9 @@
    "score": 47
   },
   {
-   "name": "Adrijan-Petek/Adrijan-Petek",
-   "url": "https://github.com/Adrijan-Petek/Adrijan-Petek",
-   "stars": 16,
-   "lang": "Python",
-   "desc": "Hi, I’m Adrijan Petek a full-stack Web3 developer passionate about building decentralized apps, crypto tools, and creative digital experiences.  🚀 Exploring React, TypeScript, Python, Solidity, wagmi,",
-   "topics": [
-    "blockchain",
-    "coding",
-    "crypto",
-    "decentralized-apps",
-    "educational",
-    "fullstack-developer",
-    "githug-profile",
-    "learning"
-   ],
-   "updated": "2026-10-22",
-   "forks": 2,
-   "category": "crypto_airdrop",
-   "query": "web3 python tools",
-   "score": 47
-  },
-  {
-   "name": "wlayzz/RopstenCtf",
-   "url": "https://github.com/wlayzz/RopstenCtf",
-   "stars": 16,
-   "lang": "Python",
-   "desc": "RopstenCtf is an easy tool to interact with the ethereum ropsten network for ctf purpose and more. ",
-   "topics": [
-    "blockchain",
-    "ctf",
-    "ctf-tools",
-    "ethereum",
-    "python",
-    "ropsten-network",
-    "web3"
-   ],
-   "updated": "2026-07-30",
-   "forks": 0,
-   "category": "crypto_airdrop",
-   "query": "web3 python tools",
-   "score": 47
-  },
-  {
    "name": "cyberblu3s/CyberBlue",
    "url": "https://github.com/cyberblu3s/CyberBlue",
-   "stars": 565,
+   "stars": 566,
    "lang": "Shell",
    "desc": "CyberSecurity BLUE TEAM containerized platform that brings together open-source tools for SIEM, DFIR, CTI, SOAR, and Network Analysis",
    "topics": [
@@ -9065,41 +8957,6 @@
    "forks": 4,
    "category": "rag_memory",
    "query": "local rag vector database",
-   "score": 47
-  },
-  {
-   "name": "0hq/tinyvector",
-   "url": "https://github.com/0hq/tinyvector",
-   "stars": 769,
-   "lang": "Python",
-   "desc": "A tiny nearest-neighbor embedding database built with SQLite and Pytorch. (In development!)",
-   "topics": [],
-   "updated": "2026-10-11",
-   "forks": 22,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
-   "score": 47
-  },
-  {
-   "name": "KipData/KiteSQL",
-   "url": "https://github.com/KipData/KiteSQL",
-   "stars": 754,
-   "lang": "Rust",
-   "desc": "Embedded relational database and native Rust data API.",
-   "topics": [
-    "data",
-    "database",
-    "embeddings",
-    "myrocks",
-    "oltp",
-    "query-engine",
-    "rocksdb",
-    "rust"
-   ],
-   "updated": "2026-10-09",
-   "forks": 54,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
    "score": 47
   },
   {
@@ -9216,6 +9073,149 @@
    "score": 47
   },
   {
+   "name": "kadevin/ilab-conjure",
+   "url": "https://github.com/kadevin/ilab-conjure",
+   "stars": 719,
+   "lang": "JavaScript",
+   "desc": "面向 GPT-image-2 的 AI 图片生成 WebUI 工作台，支持 Codex Responses 与 OpenAI 兼容 API 接入，内置公用图库、多类型 Chip 快捷引用、提示词模板、多任务并发和本地队列管理。An AI image generation WebUI workbench for GPT-image-2 with Codex Responses and OpenAI-",
+   "topics": [
+    "ai-art",
+    "ai-image-generation",
+    "cli",
+    "codex",
+    "fastapi",
+    "generative-ai",
+    "gpt-image-2",
+    "image-editing"
+   ],
+   "updated": "2026-10-21",
+   "forks": 119,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 47
+  },
+  {
+   "name": "GregaVrbancic/fastapi-celery",
+   "url": "https://github.com/GregaVrbancic/fastapi-celery",
+   "stars": 663,
+   "lang": "Python",
+   "desc": "Minimal example utilizing fastapi and celery with RabbitMQ for task queue, Redis for celery backend and flower for monitoring the celery tasks.",
+   "topics": [
+    "celery",
+    "docker-compose",
+    "fastapi",
+    "flower",
+    "python",
+    "rabbitmq",
+    "redis"
+   ],
+   "updated": "2026-09-25",
+   "forks": 112,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 47
+  },
+  {
+   "name": "wakatime/wakaq",
+   "url": "https://github.com/wakatime/wakaq",
+   "stars": 596,
+   "lang": "Python",
+   "desc": "Background task queue for Python backed by Redis, a super minimal Celery",
+   "topics": [
+    "async",
+    "asynchronous-tasks",
+    "background-jobs",
+    "celery",
+    "distributed",
+    "job-queue",
+    "job-scheduler",
+    "python"
+   ],
+   "updated": "2026-10-09",
+   "forks": 20,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 47
+  },
+  {
+   "name": "Adrijan-Petek/Adrijan-Petek",
+   "url": "https://github.com/Adrijan-Petek/Adrijan-Petek",
+   "stars": 16,
+   "lang": "Python",
+   "desc": "Hi, I’m Adrijan Petek a full-stack Web3 developer passionate about building decentralized apps, crypto tools, and creative digital experiences.  🚀 Exploring React, TypeScript, Python, Solidity, wagmi,",
+   "topics": [
+    "blockchain",
+    "coding",
+    "crypto",
+    "decentralized-apps",
+    "educational",
+    "fullstack-developer",
+    "githug-profile",
+    "learning"
+   ],
+   "updated": "2026-10-22",
+   "forks": 2,
+   "category": "crypto_airdrop",
+   "query": "web3 python tools",
+   "score": 47
+  },
+  {
+   "name": "wlayzz/RopstenCtf",
+   "url": "https://github.com/wlayzz/RopstenCtf",
+   "stars": 16,
+   "lang": "Python",
+   "desc": "RopstenCtf is an easy tool to interact with the ethereum ropsten network for ctf purpose and more. ",
+   "topics": [
+    "blockchain",
+    "ctf",
+    "ctf-tools",
+    "ethereum",
+    "python",
+    "ropsten-network",
+    "web3"
+   ],
+   "updated": "2026-07-30",
+   "forks": 0,
+   "category": "crypto_airdrop",
+   "query": "web3 python tools",
+   "score": 47
+  },
+  {
+   "name": "0hq/tinyvector",
+   "url": "https://github.com/0hq/tinyvector",
+   "stars": 769,
+   "lang": "Python",
+   "desc": "A tiny nearest-neighbor embedding database built with SQLite and Pytorch. (In development!)",
+   "topics": [],
+   "updated": "2026-10-11",
+   "forks": 22,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 47
+  },
+  {
+   "name": "KipData/KiteSQL",
+   "url": "https://github.com/KipData/KiteSQL",
+   "stars": 754,
+   "lang": "Rust",
+   "desc": "Embedded relational database and native Rust data API.",
+   "topics": [
+    "data",
+    "database",
+    "embeddings",
+    "myrocks",
+    "oltp",
+    "query-engine",
+    "rocksdb",
+    "rust"
+   ],
+   "updated": "2026-10-09",
+   "forks": 54,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 47
+  },
+  {
    "name": "chiefovoavicii/SERPO",
    "url": "https://github.com/chiefovoavicii/SERPO",
    "stars": 12,
@@ -9230,28 +9230,6 @@
    "forks": 0,
    "category": "self_evolving",
    "query": "self-evolving codebase",
-   "score": 46
-  },
-  {
-   "name": "rsalmei/clearly",
-   "url": "https://github.com/rsalmei/clearly",
-   "stars": 411,
-   "lang": "Python",
-   "desc": "Clearly see and debug your celery cluster in real time!",
-   "topics": [
-    "asynchronous",
-    "celery",
-    "distributed",
-    "flower",
-    "monitor",
-    "monitoring-tool",
-    "python",
-    "queue"
-   ],
-   "updated": "2026-09-16",
-   "forks": 20,
-   "category": "orchestration",
-   "query": "task queue python",
    "score": 46
   },
   {
@@ -9400,93 +9378,6 @@
    "score": 46
   },
   {
-   "name": "kamsec/nft-minter",
-   "url": "https://github.com/kamsec/nft-minter",
-   "stars": 12,
-   "lang": "Python",
-   "desc": "Python tool for minting NFTs in a batch from single or multiple addresses.",
-   "topics": [
-    "blockchain",
-    "dapp",
-    "minter-blockchain",
-    "nft",
-    "python",
-    "web3",
-    "web3py"
-   ],
-   "updated": "2026-09-23",
-   "forks": 5,
-   "category": "crypto_airdrop",
-   "query": "web3 python tools",
-   "score": 46
-  },
-  {
-   "name": "chronicle/detection-rules",
-   "url": "https://github.com/chronicle/detection-rules",
-   "stars": 522,
-   "lang": "Python",
-   "desc": "Collection of example YARA-L rules for use within Google Security Operations",
-   "topics": [],
-   "updated": "2026-10-19",
-   "forks": 143,
-   "category": "security_edr",
-   "query": "yara rules",
-   "score": 46
-  },
-  {
-   "name": "Karib0u/rustinel",
-   "url": "https://github.com/Karib0u/rustinel",
-   "stars": 513,
-   "lang": "Rust",
-   "desc": "Endpoint detection for Windows, Linux, and macOS. Sigma, YARA, and IOC rules on native telemetry. Written in Rust. No cloud account required.",
-   "topics": [
-    "blue-team",
-    "detection-engineering",
-    "ebpf",
-    "edr",
-    "endpoint-detection",
-    "endpoint-security",
-    "etw",
-    "incident-response"
-   ],
-   "updated": "2026-10-22",
-   "forks": 66,
-   "category": "security_edr",
-   "query": "yara rules",
-   "score": 46
-  },
-  {
-   "name": "Neo23x0/yarAnalyzer",
-   "url": "https://github.com/Neo23x0/yarAnalyzer",
-   "stars": 400,
-   "lang": "Python",
-   "desc": "Yara Rule Analyzer and Statistics",
-   "topics": [],
-   "updated": "2026-10-19",
-   "forks": 68,
-   "category": "security_edr",
-   "query": "yara rules",
-   "score": 46
-  },
-  {
-   "name": "InQuest/yara-rules",
-   "url": "https://github.com/InQuest/yara-rules",
-   "stars": 389,
-   "lang": "Python",
-   "desc": "A collection of YARA rules we wish to share with the world, most probably referenced from http://blog.inquest.net.",
-   "topics": [
-    "threat-hunting",
-    "yara",
-    "yara-rules",
-    "yara-signatures"
-   ],
-   "updated": "2026-10-02",
-   "forks": 56,
-   "category": "security_edr",
-   "query": "yara rules",
-   "score": 46
-  },
-  {
    "name": "konjoai/vectro",
    "url": "https://github.com/konjoai/vectro",
    "stars": 12,
@@ -9506,50 +9397,6 @@
    "forks": 0,
    "category": "rag_memory",
    "query": "local rag vector database",
-   "score": 46
-  },
-  {
-   "name": "Shoshuo/Prismarr",
-   "url": "https://github.com/Shoshuo/Prismarr",
-   "stars": 468,
-   "lang": "Twig",
-   "desc": "A self-hosted media dashboard unifying Radarr, Sonarr, Prowlarr, Jellyseerr, qBittorrent and TMDb in a single Symfony 8 interface. One search bar across the local library and TMDb, one calendar mergin",
-   "topics": [
-    "dashboard",
-    "docker-compose",
-    "frankenphp",
-    "homelab",
-    "jellyseerr",
-    "media-station",
-    "php",
-    "prowlarr"
-   ],
-   "updated": "2026-10-21",
-   "forks": 19,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
-   "score": 46
-  },
-  {
-   "name": "SouravRoy-ETL/slothdb",
-   "url": "https://github.com/SouravRoy-ETL/slothdb",
-   "stars": 412,
-   "lang": "C++",
-   "desc": "An experimental embedded SQL engine in C++20. Query Parquet, CSV, JSON, Arrow, Avro, SQLite, and Excel files directly with SQL, in-process. Early-stage.",
-   "topics": [
-    "analytics",
-    "arrow",
-    "avro",
-    "columnar-database",
-    "cplusplus",
-    "cpp",
-    "csv",
-    "database"
-   ],
-   "updated": "2026-10-15",
-   "forks": 6,
-   "category": "rag_memory",
-   "query": "embeddings sqlite",
    "score": 46
   },
   {
@@ -9796,6 +9643,159 @@
    "score": 46
   },
   {
+   "name": "rsalmei/clearly",
+   "url": "https://github.com/rsalmei/clearly",
+   "stars": 411,
+   "lang": "Python",
+   "desc": "Clearly see and debug your celery cluster in real time!",
+   "topics": [
+    "asynchronous",
+    "celery",
+    "distributed",
+    "flower",
+    "monitor",
+    "monitoring-tool",
+    "python",
+    "queue"
+   ],
+   "updated": "2026-09-16",
+   "forks": 20,
+   "category": "orchestration",
+   "query": "task queue python",
+   "score": 46
+  },
+  {
+   "name": "kamsec/nft-minter",
+   "url": "https://github.com/kamsec/nft-minter",
+   "stars": 12,
+   "lang": "Python",
+   "desc": "Python tool for minting NFTs in a batch from single or multiple addresses.",
+   "topics": [
+    "blockchain",
+    "dapp",
+    "minter-blockchain",
+    "nft",
+    "python",
+    "web3",
+    "web3py"
+   ],
+   "updated": "2026-09-23",
+   "forks": 5,
+   "category": "crypto_airdrop",
+   "query": "web3 python tools",
+   "score": 46
+  },
+  {
+   "name": "chronicle/detection-rules",
+   "url": "https://github.com/chronicle/detection-rules",
+   "stars": 522,
+   "lang": "Python",
+   "desc": "Collection of example YARA-L rules for use within Google Security Operations",
+   "topics": [],
+   "updated": "2026-10-19",
+   "forks": 143,
+   "category": "security_edr",
+   "query": "yara rules",
+   "score": 46
+  },
+  {
+   "name": "Karib0u/rustinel",
+   "url": "https://github.com/Karib0u/rustinel",
+   "stars": 513,
+   "lang": "Rust",
+   "desc": "Endpoint detection for Windows, Linux, and macOS. Sigma, YARA, and IOC rules on native telemetry. Written in Rust. No cloud account required.",
+   "topics": [
+    "blue-team",
+    "detection-engineering",
+    "ebpf",
+    "edr",
+    "endpoint-detection",
+    "endpoint-security",
+    "etw",
+    "incident-response"
+   ],
+   "updated": "2026-10-22",
+   "forks": 66,
+   "category": "security_edr",
+   "query": "yara rules",
+   "score": 46
+  },
+  {
+   "name": "Neo23x0/yarAnalyzer",
+   "url": "https://github.com/Neo23x0/yarAnalyzer",
+   "stars": 400,
+   "lang": "Python",
+   "desc": "Yara Rule Analyzer and Statistics",
+   "topics": [],
+   "updated": "2026-10-19",
+   "forks": 68,
+   "category": "security_edr",
+   "query": "yara rules",
+   "score": 46
+  },
+  {
+   "name": "InQuest/yara-rules",
+   "url": "https://github.com/InQuest/yara-rules",
+   "stars": 389,
+   "lang": "Python",
+   "desc": "A collection of YARA rules we wish to share with the world, most probably referenced from http://blog.inquest.net.",
+   "topics": [
+    "threat-hunting",
+    "yara",
+    "yara-rules",
+    "yara-signatures"
+   ],
+   "updated": "2026-10-02",
+   "forks": 56,
+   "category": "security_edr",
+   "query": "yara rules",
+   "score": 46
+  },
+  {
+   "name": "Shoshuo/Prismarr",
+   "url": "https://github.com/Shoshuo/Prismarr",
+   "stars": 468,
+   "lang": "Twig",
+   "desc": "A self-hosted media dashboard unifying Radarr, Sonarr, Prowlarr, Jellyseerr, qBittorrent and TMDb in a single Symfony 8 interface. One search bar across the local library and TMDb, one calendar mergin",
+   "topics": [
+    "dashboard",
+    "docker-compose",
+    "frankenphp",
+    "homelab",
+    "jellyseerr",
+    "media-station",
+    "php",
+    "prowlarr"
+   ],
+   "updated": "2026-10-21",
+   "forks": 19,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 46
+  },
+  {
+   "name": "SouravRoy-ETL/slothdb",
+   "url": "https://github.com/SouravRoy-ETL/slothdb",
+   "stars": 412,
+   "lang": "C++",
+   "desc": "An experimental embedded SQL engine in C++20. Query Parquet, CSV, JSON, Arrow, Avro, SQLite, and Excel files directly with SQL, in-process. Early-stage.",
+   "topics": [
+    "analytics",
+    "arrow",
+    "avro",
+    "columnar-database",
+    "cplusplus",
+    "cpp",
+    "csv",
+    "database"
+   ],
+   "updated": "2026-10-15",
+   "forks": 6,
+   "category": "rag_memory",
+   "query": "embeddings sqlite",
+   "score": 46
+  },
+  {
    "name": "slinusc/bench360",
    "url": "https://github.com/slinusc/bench360",
    "stars": 8,
@@ -9815,41 +9815,6 @@
    "forks": 5,
    "category": "local_llm",
    "query": "local llm inference engine",
-   "score": 45
-  },
-  {
-   "name": "JoseTomasTocino/yotaq",
-   "url": "https://github.com/JoseTomasTocino/yotaq",
-   "stars": 344,
-   "lang": "Python",
-   "desc": "yotaq - Your Own Task Queue for Python",
-   "topics": [
-    "python",
-    "task-queue",
-    "task-runner"
-   ],
-   "updated": "2026-10-14",
-   "forks": 31,
-   "category": "orchestration",
-   "query": "task queue python",
-   "score": 45
-  },
-  {
-   "name": "TkTech/chancy",
-   "url": "https://github.com/TkTech/chancy",
-   "stars": 291,
-   "lang": "Python",
-   "desc": "A postgres-backed task queue for Python.",
-   "topics": [
-    "background-jobs",
-    "postgresql",
-    "python",
-    "task-queue"
-   ],
-   "updated": "2026-10-19",
-   "forks": 18,
-   "category": "orchestration",
-   "query": "task queue python",
    "score": 45
   },
   {
@@ -9879,66 +9844,100 @@
    "score": 45
   },
   {
-   "name": "BretFisher/docker-ci-automation",
-   "url": "https://github.com/BretFisher/docker-ci-automation",
-   "stars": 358,
-   "lang": "Shell",
-   "desc": "GitHub Actions automation examples with Docker's official actions",
-   "topics": [
-    "buildkit",
-    "ci-cd",
-    "devops",
-    "docker",
-    "docker-build",
-    "dockercon",
-    "github-actions"
-   ],
-   "updated": "2026-10-07",
-   "forks": 380,
+   "name": "infocrud/gobase",
+   "url": "https://github.com/infocrud/gobase",
+   "stars": 6,
+   "lang": "Go",
+   "desc": "Open-source Backend-as-a-Service built with Go + PostgreSQL. Auth, auto-generated REST APIs, realtime subscriptions, file storage, and edge functions — self-host on any VPS in under 60 second",
+   "topics": [],
+   "updated": "2026-06-25",
+   "forks": 0,
    "category": "cloud_free",
-   "query": "github actions automation",
+   "query": "edge functions self-hosted",
    "score": 45
   },
   {
-   "name": "creyD/prettier_action",
-   "url": "https://github.com/creyD/prettier_action",
-   "stars": 318,
-   "lang": "Shell",
-   "desc": "GitHub action for running prettier on your projects pull requests",
+   "name": "taladb/taladb",
+   "url": "https://github.com/taladb/taladb",
+   "stars": 6,
+   "lang": "Rust",
+   "desc": "TalaDB - An open-source embedded vector and document database for building local-first AI applications.",
    "topics": [
-    "automation",
-    "code-quality",
-    "github-action",
-    "hacktoberfest",
-    "javascript",
-    "prettier",
-    "prettier-check",
-    "prettier-js"
+    "document-database",
+    "embeded-database",
+    "hybrid-search",
+    "kotlin",
+    "local-first",
+    "localstorage",
+    "mobile",
+    "native-android"
    ],
-   "updated": "2026-10-15",
-   "forks": 94,
-   "category": "cloud_free",
-   "query": "github actions automation",
+   "updated": "2026-10-21",
+   "forks": 1,
+   "category": "rag_memory",
+   "query": "local rag vector database",
    "score": 45
   },
   {
-   "name": "DokiTeam/build-apps",
-   "url": "https://github.com/DokiTeam/build-apps",
-   "stars": 273,
-   "lang": "",
-   "desc": "Automation for Doki, powered by GitHub",
+   "name": "waseemnasir2k26/reelforge",
+   "url": "https://github.com/waseemnasir2k26/reelforge",
+   "stars": 8,
+   "lang": "HTML",
+   "desc": "Turn one raw take into a captioned vertical reel — locally, free, no per-export fee. faster-whisper transcribes, FFmpeg cuts and burns captions, you keep the file. The self-hosted alternative to paid ",
    "topics": [
-    "actions",
-    "automation",
-    "cd",
-    "ci",
-    "github",
-    "workflow"
+    "ai-video",
+    "auto-captions",
+    "captions",
+    "claude-code",
+    "claude-code-skills",
+    "cli",
+    "content-creation",
+    "faster-whisper"
    ],
-   "updated": "2026-08-23",
-   "forks": 3479,
-   "category": "cloud_free",
-   "query": "github actions automation",
+   "updated": "2026-10-11",
+   "forks": 1,
+   "category": "voice_interface",
+   "query": "whisper alternative python",
+   "score": 45
+  },
+  {
+   "name": "HuskerMinion/techo5",
+   "url": "https://github.com/HuskerMinion/techo5",
+   "stars": 379,
+   "lang": "Go",
+   "desc": "Open firmware for the Echo Show 5, 1st and 2nd gen: Alpine Linux instead of Android, no Alexa. A local Home Assistant voice satellite with its own touch screen, on-device wake word, SSH and A/B over-t",
+   "topics": [
+    "alexa-alternative",
+    "alpine-linux",
+    "checkers",
+    "cronos",
+    "echo-show",
+    "echo-show-5",
+    "esphome",
+    "firmware"
+   ],
+   "updated": "2026-10-22",
+   "forks": 58,
+   "category": "voice_interface",
+   "query": "voice assistant local",
+   "score": 45
+  },
+  {
+   "name": "signalbot-org/signalbot",
+   "url": "https://github.com/signalbot-org/signalbot",
+   "stars": 283,
+   "lang": "Python",
+   "desc": "Micro framework to create your own signal bots.",
+   "topics": [
+    "bot",
+    "library",
+    "python",
+    "signal"
+   ],
+   "updated": "2026-10-21",
+   "forks": 58,
+   "category": "messaging_bridge",
+   "query": "signal bot python",
    "score": 45
   }
  ]

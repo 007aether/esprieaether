@@ -1,10 +1,10 @@
-# 📡 Veille Digest — 2026-10-22 13:33
+# 📡 Veille Digest — 2026-10-22 13:39
 
 **500 repos** across 25 categories.
 
 ## ai_agent_framework
-- [49262★] [HKUDS/nanobot](https://github.com/HKUDS/nanobot) — Ultra-lightweight, open-source, self-hosted personal AI agent framework in Python with Web
-- [52874★] [CherryHQ/cherry-studio](https://github.com/CherryHQ/cherry-studio) — AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified ac
+- [49264★] [HKUDS/nanobot](https://github.com/HKUDS/nanobot) — Ultra-lightweight, open-source, self-hosted personal AI agent framework in Python with Web
+- [52875★] [CherryHQ/cherry-studio](https://github.com/CherryHQ/cherry-studio) — AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified ac
 - [37785★] [khoj-ai/khoj](https://github.com/khoj-ai/khoj) — Your AI second brain. Self-hostable. Get answers from the web or your docs. Build custom a
 - [35060★] [Tencent/WeKnora](https://github.com/Tencent/WeKnora) — Open-source LLM knowledge platform: turn raw documents into a queryable RAG, an autonomous
 - [30242★] [assafelovic/gpt-researcher](https://github.com/assafelovic/gpt-researcher) — An autonomous agent that conducts deep research on any data using any LLM providers
@@ -25,7 +25,7 @@
 
 ## self_evolving
 - [11115★] [aden-hive/hive](https://github.com/aden-hive/hive) — Multi-Agent Harness for Production AI
-- [22262★] [PrimeIntellect-ai/prime-agent](https://github.com/PrimeIntellect-ai/prime-agent) — A self-improving RLM agent for coding workflows and long-running autonomous tasks.
+- [22264★] [PrimeIntellect-ai/prime-agent](https://github.com/PrimeIntellect-ai/prime-agent) — A self-improving RLM agent for coding workflows and long-running autonomous tasks.
 - [7733★] [Human-Agent-Society/reef](https://github.com/Human-Agent-Society/reef) — Infrastructure for continually self‑improving agents
 - [4541★] [kirodotdev/KiroCrew](https://github.com/kirodotdev/KiroCrew) — A persistent workspace for development work that self-improves and continues beyond one se
 - [2161★] [hexo-ai/sia](https://github.com/hexo-ai/sia) — SIA is a Self Improving AI framework to autonomously improve the performance of any AI sys
@@ -110,8 +110,8 @@
 - [11★] [DapCodes/CuanFlow](https://github.com/DapCodes/CuanFlow) — 🚀 OPEN SOURCE - Smart POS & Business Management System. designed to help small to medium-s
 
 ## 🏆 Global Top 10
-- [49262★] [HKUDS/nanobot](https://github.com/HKUDS/nanobot) (ai_agent_framework) — Ultra-lightweight, open-source, self-hosted personal AI agent framework in Pytho
-- [52874★] [CherryHQ/cherry-studio](https://github.com/CherryHQ/cherry-studio) (ai_agent_framework) — AI productivity studio with smart chat, autonomous agents, and 300+ assistants. 
+- [49264★] [HKUDS/nanobot](https://github.com/HKUDS/nanobot) (ai_agent_framework) — Ultra-lightweight, open-source, self-hosted personal AI agent framework in Pytho
+- [52875★] [CherryHQ/cherry-studio](https://github.com/CherryHQ/cherry-studio) (ai_agent_framework) — AI productivity studio with smart chat, autonomous agents, and 300+ assistants. 
 - [37785★] [khoj-ai/khoj](https://github.com/khoj-ai/khoj) (ai_agent_framework) — Your AI second brain. Self-hostable. Get answers from the web or your docs. Buil
 - [35060★] [Tencent/WeKnora](https://github.com/Tencent/WeKnora) (ai_agent_framework) — Open-source LLM knowledge platform: turn raw documents into a queryable RAG, an 
 - [30242★] [assafelovic/gpt-researcher](https://github.com/assafelovic/gpt-researcher) (ai_agent_framework) — An autonomous agent that conducts deep research on any data using any LLM provid
