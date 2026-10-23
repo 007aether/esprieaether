@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-22T17:54:55.979204+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-23T10:35:18.834806+00:00",
+  "cloud_last_run": "2026-10-23T15:58:35.642741+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trump and WLFI Sued by a Circle Shareholder Over $2.5B in UAE Deals",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Bitstamp Review: The Longest-Running Exchange in Crypto",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "PHP2Shell: Why Websites Went Offline and What Crypto Users Must Do Now",
       "source": "https://airdropalert.com/feed"
     },
     {
