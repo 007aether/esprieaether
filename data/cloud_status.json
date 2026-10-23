@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-22T17:54:55.979204+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-23T02:06:52.705695+00:00",
+  "cloud_last_run": "2026-10-23T10:35:18.834806+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is Slippage in Crypto? Why You Get a Different Price Than Expected",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy Uniswap (UNI) for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "PHP2Shell: Why Websites Went Offline and What Crypto Users Must Do Now",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Etherscan Claude Connector: How to Analyse Wallets and Transactions Inside Claude",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is Kimchi? The $40M TRUMP Legend Pump.fun Just Signed",
       "source": "https://airdropalert.com/feed"
     },
     {
