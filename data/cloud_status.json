@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-22T17:54:55.979204+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-22T20:53:20.202919+00:00",
+  "cloud_last_run": "2026-10-23T02:06:52.705695+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "FOMO vs Pump fun: Both Apps Just Built Their Own Bridge, Here Is Who Wins",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is a Crypto Faucet? How Faucets Work and Why Farmers Need Them",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Kimchi Hacked? The QR Code Coin Alon Retweeted Ran to $15M and Rugged",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "Who Is Kimchi? The $40M TRUMP Legend Pump.fun Just Signed",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is a Honeypot in Crypto? The Token You Can Buy but Never Sell",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is a Crypto Bridge and How Does It Work?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is TradFi? Traditional Finance in Crypto Explained",
       "source": "https://airdropalert.com/feed"
     },
     {
