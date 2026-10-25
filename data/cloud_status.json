@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-22T17:54:55.979204+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-25T10:13:46.471181+00:00",
+  "cloud_last_run": "2026-10-25T15:06:08.608239+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Zcash NU7 Lands November 5: Faster Blocks, Frozen Sprout Coins, and Why I Have No ZEC Trade On",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Trump and WLFI Sued by a Circle Shareholder Over $2.5B in UAE Deals",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is Slippage in Crypto? Why You Get a Different Price Than Expected",
       "source": "https://airdropalert.com/feed"
     },
     {
