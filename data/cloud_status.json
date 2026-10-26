@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-22T17:54:55.979204+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-26T01:54:24.093337+00:00",
+  "cloud_last_run": "2026-10-26T11:37:39.668046+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy Ethena (ENA) for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Trading Fundamentals Part 36: Take Profit Strategy for Bitcoin, Altcoins and Big Caps",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Hyperliquid vs Pacifica: The Original Playbook vs Its Solana Heir",
       "source": "https://airdropalert.com/feed"
     },
     {
