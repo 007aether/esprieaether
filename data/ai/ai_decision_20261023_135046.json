@@ -1,0 +1,53 @@
+{
+  "decision_title": "قرار النظام الذكي",
+  "generated_at": "2026-10-23 13:50:46",
+  "decision": {
+    "action": "استمرار التشغيل",
+    "priority": "عالية",
+    "reason": "النظام يعمل بشكل ممتاز",
+    "expected_outcome": "استقرار النظام وأناقة نموه"
+  },
+  "system_health": {
+    "overall_health": "ممتاز",
+    "services_health": "جميع الخدمات نشطة",
+    "agents_health": "جميع الوكلاء مفعّلون",
+    "recommendations": [
+      "استمر في التطوير",
+      "مراقبة كابشرين للبحث",
+      "تحديث دوري للنظام",
+      "تعزيز دمج Sunna",
+      "تطوير القرارات الآلية"
+    ]
+  },
+  "trading_analysis": {
+    "strategy": "متوازن",
+    "risk_level": "منخفض إلى متوسط",
+    "recommendation": "الاستمرار في التداول مع مراقبة دقيقة",
+    "signal": "استمرار",
+    "trade_count": 4,
+    "last_trade": {
+      "asset": "SOL",
+      "signal": "hold",
+      "action": "hold",
+      "confidence": 0.6,
+      "timestamp": "2026-10-23T01:36:35.928098",
+      "portfolio_value": 15400.0,
+      "cash": 8400.0,
+      "stop_loss_pct": 0.05,
+      "take_profit_pct": 0.1
+    }
+  },
+  "news_analysis": {
+    "news_priority": "عالية",
+    "trend": "نمو وتطوير",
+    "recommendation": "متابعة المستجدات والاستثمار بالتدريج"
+  },
+  "actions": [
+    "متابعة التطوير",
+    "مراقبة كابشرين البحث",
+    "إنتاج نشرات تحديث دورية",
+    "تعزيز دمج Sunna",
+    "تنفيذ القرارات الآلية القادمة"
+  ],
+  "confidence": "95%"
+}

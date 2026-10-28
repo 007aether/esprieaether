@@ -436,5 +436,188 @@
   "written": 0,
   "error": "router failed",
   "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T20:27:54.478266+00:00",
+  "written": 0,
+  "idea": "langfuse/langfuse",
+  "module": "langfuse_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\langfuse_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-23T02:38:13.031596+00:00",
+  "written": 0,
+  "idea": "conductor-oss/conductor",
+  "module": "conductor_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\conductor_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-23T08:45:44.006458+00:00",
+  "written": 0,
+  "idea": "PrimeIntellect-ai/prime-agent",
+  "module": "prime_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\prime_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-23T11:46:58.561656+00:00",
+  "written": 1,
+  "idea": "PrimeIntellect-ai/prime-agent",
+  "module": "prime_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\prime_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-23T14:50:03.606775+00:00",
+  "written": 1,
+  "idea": "alibaba/zvec",
+  "module": "zvec_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\zvec_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-23T19:57:36.581045+00:00",
+  "written": 0,
+  "idea": "browseros-ai/BrowserOS",
+  "module": "browseros_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\browseros_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-23T23:00:18.488530+00:00",
+  "written": 1,
+  "idea": "browseros-ai/BrowserOS",
+  "module": "browseros_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\browseros_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T02:05:41.423928+00:00",
+  "written": 0,
+  "idea": "ccfos/nightingale",
+  "module": "nightingale_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\nightingale_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-24T05:08:13.794258+00:00",
+  "written": 1,
+  "idea": "ccfos/nightingale",
+  "module": "nightingale_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\nightingale_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T08:13:47.221528+00:00",
+  "written": 1,
+  "idea": "aden-hive/hive",
+  "module": "hive_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\hive_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T11:16:23.254640+00:00",
+  "written": 1,
+  "idea": "hatchet-dev/hatchet",
+  "module": "hatchet_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\hatchet_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T14:20:05.043575+00:00",
+  "written": 1,
+  "idea": "Human-Agent-Society/reef",
+  "module": "reef_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\reef_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T17:24:55.423143+00:00",
+  "written": 1,
+  "idea": "siddsachar/row-bot",
+  "module": "row_bot_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\row_bot_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T20:30:25.502620+00:00",
+  "written": 1,
+  "idea": "toby-bridges/api-relay-audit",
+  "module": "api_relay_audit_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\api_relay_audit_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T23:32:50.136494+00:00",
+  "written": 1,
+  "idea": "aeonfun/aeon",
+  "module": "aeon_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\aeon_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-25T02:38:43.031827+00:00",
+  "written": 1,
+  "idea": "swarmclawai/swarmclaw",
+  "module": "swarmclaw_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\swarmclaw_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-25T05:41:22.742819+00:00",
+  "written": 0,
+  "idea": "AgnetLabs/Laddr",
+  "module": "laddr_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\laddr_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-25T11:49:07.717718+00:00",
+  "written": 1,
+  "idea": "open-responses/open-responses",
+  "module": "open_responses_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\open_responses_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-25T14:52:10.426552+00:00",
+  "written": 1,
+  "idea": "avivl/cloud-sre-agent",
+  "module": "cloud_sre_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\cloud_sre_agent.py",
+  "valid": true,
+  "errors": []
  }
 ]

@@ -1,4 +1,4 @@
-# 🎯 Skill Harvest — 2026-10-22 13:43
+# 🎯 Skill Harvest — 2026-10-27 14:01
 
 **47** candidates from the veille index · **10** adopt · **5** reference
 

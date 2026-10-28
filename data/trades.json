@@ -1,0 +1,46 @@
+[
+  {
+    "asset": "BTC",
+    "signal": "buy",
+    "action": "buy",
+    "confidence": 0.8,
+    "timestamp": "2026-10-23T01:36:35.920828",
+    "portfolio_value": 17000.0,
+    "cash": 10000.0,
+    "stop_loss_pct": 0.05,
+    "take_profit_pct": 0.1
+  },
+  {
+    "asset": "ETH",
+    "signal": "buy",
+    "action": "buy",
+    "confidence": 0.8,
+    "timestamp": "2026-10-23T01:36:35.921178",
+    "portfolio_value": 16200.0,
+    "cash": 9200.0,
+    "stop_loss_pct": 0.05,
+    "take_profit_pct": 0.1
+  },
+  {
+    "asset": "XRP",
+    "signal": "hold",
+    "action": "hold",
+    "confidence": 0.6,
+    "timestamp": "2026-10-23T01:36:35.926162",
+    "portfolio_value": 15400.0,
+    "cash": 8400.0,
+    "stop_loss_pct": 0.05,
+    "take_profit_pct": 0.1
+  },
+  {
+    "asset": "SOL",
+    "signal": "hold",
+    "action": "hold",
+    "confidence": 0.6,
+    "timestamp": "2026-10-23T01:36:35.928098",
+    "portfolio_value": 15400.0,
+    "cash": 8400.0,
+    "stop_loss_pct": 0.05,
+    "take_profit_pct": 0.1
+  }
+]
