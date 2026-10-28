@@ -4,2353 +4,2353 @@
       "file": "app_factory.log",
       "line": 1,
       "text": "2026-10-15 14:20:43,180 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211006+00:00"
+      "timestamp": "2026-10-28T00:30:43.896268+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 2,
       "text": "2026-10-15 14:20:43,183 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211018+00:00"
+      "timestamp": "2026-10-28T00:30:43.896288+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 3,
       "text": "2026-10-15 14:20:43,183 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211024+00:00"
+      "timestamp": "2026-10-28T00:30:43.896295+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 5,
       "text": "2026-10-15 14:20:43,954 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211032+00:00"
+      "timestamp": "2026-10-28T00:30:43.896305+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 6,
       "text": "2026-10-15 14:20:43,987 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211036+00:00"
+      "timestamp": "2026-10-28T00:30:43.896309+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 7,
       "text": "2026-10-15 14:20:43,988 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211039+00:00"
+      "timestamp": "2026-10-28T00:30:43.896312+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 8,
       "text": "2026-10-15 14:20:43,988 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211043+00:00"
+      "timestamp": "2026-10-28T00:30:43.896317+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 11,
       "text": "2026-10-16 14:00:28,660 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211053+00:00"
+      "timestamp": "2026-10-28T00:30:43.896328+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 12,
       "text": "2026-10-16 14:00:30,692 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211058+00:00"
+      "timestamp": "2026-10-28T00:30:43.896333+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 13,
       "text": "2026-10-16 14:00:30,692 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211061+00:00"
+      "timestamp": "2026-10-28T00:30:43.896336+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 14,
       "text": "2026-10-16 14:00:30,692 | WARNING | app_factory | batch 1 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211065+00:00"
+      "timestamp": "2026-10-28T00:30:43.896340+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 16,
       "text": "2026-10-16 14:00:32,721 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211071+00:00"
+      "timestamp": "2026-10-28T00:30:43.896347+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 17,
       "text": "2026-10-16 14:00:34,754 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211076+00:00"
+      "timestamp": "2026-10-28T00:30:43.896355+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 18,
       "text": "2026-10-16 14:00:34,755 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211079+00:00"
+      "timestamp": "2026-10-28T00:30:43.896357+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 19,
       "text": "2026-10-16 14:00:34,755 | WARNING | app_factory | batch 2 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211083+00:00"
+      "timestamp": "2026-10-28T00:30:43.896362+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 21,
       "text": "2026-10-16 14:00:36,791 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211089+00:00"
+      "timestamp": "2026-10-28T00:30:43.896369+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 22,
       "text": "2026-10-16 14:00:38,828 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211093+00:00"
+      "timestamp": "2026-10-28T00:30:43.896375+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 23,
       "text": "2026-10-16 14:00:38,828 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211096+00:00"
+      "timestamp": "2026-10-28T00:30:43.896378+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 24,
       "text": "2026-10-16 14:00:38,829 | WARNING | app_factory | batch 3 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211100+00:00"
+      "timestamp": "2026-10-28T00:30:43.896382+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 26,
       "text": "2026-10-16 14:00:40,859 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211106+00:00"
+      "timestamp": "2026-10-28T00:30:43.896389+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 27,
       "text": "2026-10-16 14:00:42,895 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211110+00:00"
+      "timestamp": "2026-10-28T00:30:43.896393+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 28,
       "text": "2026-10-16 14:00:42,895 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211113+00:00"
+      "timestamp": "2026-10-28T00:30:43.896396+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 29,
       "text": "2026-10-16 14:00:42,897 | WARNING | app_factory | batch 4 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211117+00:00"
+      "timestamp": "2026-10-28T00:30:43.896400+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 31,
       "text": "2026-10-16 14:00:44,945 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211123+00:00"
+      "timestamp": "2026-10-28T00:30:43.896407+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 32,
       "text": "2026-10-16 14:00:46,994 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211128+00:00"
+      "timestamp": "2026-10-28T00:30:43.896411+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 33,
       "text": "2026-10-16 14:00:47,012 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211130+00:00"
+      "timestamp": "2026-10-28T00:30:43.896416+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 34,
       "text": "2026-10-16 14:00:47,013 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211134+00:00"
+      "timestamp": "2026-10-28T00:30:43.896420+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 36,
       "text": "2026-10-16 14:00:49,048 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211140+00:00"
+      "timestamp": "2026-10-28T00:30:43.896427+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 37,
       "text": "2026-10-16 14:00:51,127 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211145+00:00"
+      "timestamp": "2026-10-28T00:30:43.896432+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 38,
       "text": "2026-10-16 14:00:51,136 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211147+00:00"
+      "timestamp": "2026-10-28T00:30:43.896435+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 39,
       "text": "2026-10-16 14:00:51,142 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211151+00:00"
+      "timestamp": "2026-10-28T00:30:43.896438+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 41,
       "text": "2026-10-16 14:00:53,516 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211157+00:00"
+      "timestamp": "2026-10-28T00:30:43.896445+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 42,
       "text": "2026-10-16 14:00:55,555 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211162+00:00"
+      "timestamp": "2026-10-28T00:30:43.896451+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 43,
       "text": "2026-10-16 14:00:55,555 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211164+00:00"
+      "timestamp": "2026-10-28T00:30:43.896454+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 44,
       "text": "2026-10-16 14:00:55,556 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211168+00:00"
+      "timestamp": "2026-10-28T00:30:43.896458+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 46,
       "text": "2026-10-16 14:00:57,562 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211174+00:00"
+      "timestamp": "2026-10-28T00:30:43.896465+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 47,
       "text": "2026-10-16 14:00:59,587 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211178+00:00"
+      "timestamp": "2026-10-28T00:30:43.896470+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 48,
       "text": "2026-10-16 14:00:59,587 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211181+00:00"
+      "timestamp": "2026-10-28T00:30:43.896472+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 49,
       "text": "2026-10-16 14:00:59,587 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211185+00:00"
+      "timestamp": "2026-10-28T00:30:43.896478+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 52,
       "text": "2026-10-16 14:01:07,339 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211198+00:00"
+      "timestamp": "2026-10-28T00:30:43.896507+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 53,
       "text": "2026-10-16 14:01:09,362 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211202+00:00"
+      "timestamp": "2026-10-28T00:30:43.896512+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 54,
       "text": "2026-10-16 14:01:09,362 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211205+00:00"
+      "timestamp": "2026-10-28T00:30:43.896514+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 55,
       "text": "2026-10-16 14:01:09,362 | WARNING | app_factory | batch 1 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211209+00:00"
+      "timestamp": "2026-10-28T00:30:43.896518+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 57,
       "text": "2026-10-16 14:01:11,384 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211215+00:00"
+      "timestamp": "2026-10-28T00:30:43.896525+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 58,
       "text": "2026-10-16 14:01:13,407 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211219+00:00"
+      "timestamp": "2026-10-28T00:30:43.896531+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 59,
       "text": "2026-10-16 14:01:13,407 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211222+00:00"
+      "timestamp": "2026-10-28T00:30:43.896534+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 60,
       "text": "2026-10-16 14:01:13,407 | WARNING | app_factory | batch 2 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211226+00:00"
+      "timestamp": "2026-10-28T00:30:43.896538+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 62,
       "text": "2026-10-16 14:01:15,432 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211232+00:00"
+      "timestamp": "2026-10-28T00:30:43.896545+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 63,
       "text": "2026-10-16 14:01:17,469 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211236+00:00"
+      "timestamp": "2026-10-28T00:30:43.896551+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 64,
       "text": "2026-10-16 14:01:17,469 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211239+00:00"
+      "timestamp": "2026-10-28T00:30:43.896555+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 65,
       "text": "2026-10-16 14:01:17,469 | WARNING | app_factory | batch 3 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211243+00:00"
+      "timestamp": "2026-10-28T00:30:43.896559+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 67,
       "text": "2026-10-16 14:01:19,495 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211249+00:00"
+      "timestamp": "2026-10-28T00:30:43.896566+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 68,
       "text": "2026-10-16 14:01:21,549 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211254+00:00"
+      "timestamp": "2026-10-28T00:30:43.896570+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 69,
       "text": "2026-10-16 14:01:21,549 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211257+00:00"
+      "timestamp": "2026-10-28T00:30:43.896573+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 70,
       "text": "2026-10-16 14:01:21,549 | WARNING | app_factory | batch 4 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211261+00:00"
+      "timestamp": "2026-10-28T00:30:43.896577+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 72,
       "text": "2026-10-16 14:01:23,585 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211268+00:00"
+      "timestamp": "2026-10-28T00:30:43.896584+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 73,
       "text": "2026-10-16 14:01:25,626 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211273+00:00"
+      "timestamp": "2026-10-28T00:30:43.896588+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 74,
       "text": "2026-10-16 14:01:25,626 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211275+00:00"
+      "timestamp": "2026-10-28T00:30:43.896591+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 75,
       "text": "2026-10-16 14:01:25,626 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211279+00:00"
+      "timestamp": "2026-10-28T00:30:43.896595+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 77,
       "text": "2026-10-16 14:01:27,645 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211285+00:00"
+      "timestamp": "2026-10-28T00:30:43.896602+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 78,
       "text": "2026-10-16 14:01:29,667 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211290+00:00"
+      "timestamp": "2026-10-28T00:30:43.896606+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 79,
       "text": "2026-10-16 14:01:29,667 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211292+00:00"
+      "timestamp": "2026-10-28T00:30:43.896609+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 80,
       "text": "2026-10-16 14:01:29,667 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211296+00:00"
+      "timestamp": "2026-10-28T00:30:43.896613+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 82,
       "text": "2026-10-16 14:01:31,699 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211302+00:00"
+      "timestamp": "2026-10-28T00:30:43.896620+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 83,
       "text": "2026-10-16 14:01:33,732 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211306+00:00"
+      "timestamp": "2026-10-28T00:30:43.896625+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 84,
       "text": "2026-10-16 14:01:33,733 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211310+00:00"
+      "timestamp": "2026-10-28T00:30:43.896628+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 85,
       "text": "2026-10-16 14:01:33,733 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211314+00:00"
+      "timestamp": "2026-10-28T00:30:43.896632+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 87,
       "text": "2026-10-16 14:01:35,771 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211321+00:00"
+      "timestamp": "2026-10-28T00:30:43.896639+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 88,
       "text": "2026-10-16 14:01:37,820 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.211325+00:00"
+      "timestamp": "2026-10-28T00:30:43.896644+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 89,
       "text": "2026-10-16 14:01:37,820 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211328+00:00"
+      "timestamp": "2026-10-28T00:30:43.896647+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 90,
       "text": "2026-10-16 14:01:37,820 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211332+00:00"
+      "timestamp": "2026-10-28T00:30:43.896651+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 93,
       "text": "2026-10-17 14:09:25,992 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211339+00:00"
+      "timestamp": "2026-10-28T00:30:43.896659+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 96,
       "text": "2026-10-17 14:10:05,281 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211347+00:00"
+      "timestamp": "2026-10-28T00:30:43.896667+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 101,
       "text": "2026-10-17 14:14:42,649 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211357+00:00"
+      "timestamp": "2026-10-28T00:30:43.896677+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 104,
       "text": "2026-10-17 14:15:22,476 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211364+00:00"
+      "timestamp": "2026-10-28T00:30:43.896685+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 105,
       "text": "2026-10-17 14:15:26,048 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211368+00:00"
+      "timestamp": "2026-10-28T00:30:43.896689+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 106,
       "text": "2026-10-17 14:15:26,048 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211371+00:00"
+      "timestamp": "2026-10-28T00:30:43.896693+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 107,
       "text": "2026-10-17 14:15:26,049 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211375+00:00"
+      "timestamp": "2026-10-28T00:30:43.896700+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 109,
       "text": "2026-10-17 14:15:26,055 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211380+00:00"
+      "timestamp": "2026-10-28T00:30:43.896706+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 110,
       "text": "2026-10-17 14:15:26,071 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211384+00:00"
+      "timestamp": "2026-10-28T00:30:43.896714+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 111,
       "text": "2026-10-17 14:15:26,072 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211387+00:00"
+      "timestamp": "2026-10-28T00:30:43.896717+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 112,
       "text": "2026-10-17 14:15:26,072 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211390+00:00"
+      "timestamp": "2026-10-28T00:30:43.896721+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 114,
       "text": "2026-10-17 14:15:26,412 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211396+00:00"
+      "timestamp": "2026-10-28T00:30:43.896728+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 115,
       "text": "2026-10-17 14:15:26,612 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211400+00:00"
+      "timestamp": "2026-10-28T00:30:43.896733+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 116,
       "text": "2026-10-17 14:15:26,613 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211403+00:00"
+      "timestamp": "2026-10-28T00:30:43.896736+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 117,
       "text": "2026-10-17 14:15:26,613 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211406+00:00"
+      "timestamp": "2026-10-28T00:30:43.896742+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 119,
       "text": "2026-10-17 14:15:26,712 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211412+00:00"
+      "timestamp": "2026-10-28T00:30:43.896748+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 120,
       "text": "2026-10-17 14:15:26,764 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211416+00:00"
+      "timestamp": "2026-10-28T00:30:43.896754+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 121,
       "text": "2026-10-17 14:15:26,765 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211418+00:00"
+      "timestamp": "2026-10-28T00:30:43.896757+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 122,
       "text": "2026-10-17 14:15:26,765 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211422+00:00"
+      "timestamp": "2026-10-28T00:30:43.896761+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 125,
       "text": "2026-10-18 14:24:22,840 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211430+00:00"
+      "timestamp": "2026-10-28T00:30:43.896771+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 128,
       "text": "2026-10-18 14:25:01,017 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211437+00:00"
+      "timestamp": "2026-10-28T00:30:43.896778+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 129,
       "text": "2026-10-18 14:25:10,913 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211441+00:00"
+      "timestamp": "2026-10-28T00:30:43.896783+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 130,
       "text": "2026-10-18 14:25:10,913 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211444+00:00"
+      "timestamp": "2026-10-28T00:30:43.896786+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 131,
       "text": "2026-10-18 14:25:10,913 | WARNING | app_factory | batch 2 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211448+00:00"
+      "timestamp": "2026-10-28T00:30:43.896789+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 133,
       "text": "2026-10-18 14:25:10,934 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211453+00:00"
+      "timestamp": "2026-10-28T00:30:43.896796+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 134,
       "text": "2026-10-18 14:25:10,953 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211457+00:00"
+      "timestamp": "2026-10-28T00:30:43.896800+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 135,
       "text": "2026-10-18 14:25:10,953 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211460+00:00"
+      "timestamp": "2026-10-28T00:30:43.896802+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 136,
       "text": "2026-10-18 14:25:10,953 | WARNING | app_factory | batch 3 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211464+00:00"
+      "timestamp": "2026-10-28T00:30:43.896806+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 138,
       "text": "2026-10-18 14:25:10,999 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211469+00:00"
+      "timestamp": "2026-10-28T00:30:43.896812+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 139,
       "text": "2026-10-18 14:25:11,020 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211473+00:00"
+      "timestamp": "2026-10-28T00:30:43.896816+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 140,
       "text": "2026-10-18 14:25:11,020 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211475+00:00"
+      "timestamp": "2026-10-28T00:30:43.896820+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 141,
       "text": "2026-10-18 14:25:11,021 | WARNING | app_factory | batch 4 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211479+00:00"
+      "timestamp": "2026-10-28T00:30:43.896824+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 143,
       "text": "2026-10-18 14:25:11,056 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211485+00:00"
+      "timestamp": "2026-10-28T00:30:43.896831+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 144,
       "text": "2026-10-18 14:25:11,076 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211488+00:00"
+      "timestamp": "2026-10-28T00:30:43.896835+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 145,
       "text": "2026-10-18 14:25:11,076 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211491+00:00"
+      "timestamp": "2026-10-28T00:30:43.896837+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 146,
       "text": "2026-10-18 14:25:11,076 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211495+00:00"
+      "timestamp": "2026-10-28T00:30:43.896841+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 148,
       "text": "2026-10-18 14:25:11,101 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211500+00:00"
+      "timestamp": "2026-10-28T00:30:43.896849+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 149,
       "text": "2026-10-18 14:25:11,120 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211504+00:00"
+      "timestamp": "2026-10-28T00:30:43.896853+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 150,
       "text": "2026-10-18 14:25:11,120 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211507+00:00"
+      "timestamp": "2026-10-28T00:30:43.896858+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 151,
       "text": "2026-10-18 14:25:11,120 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211511+00:00"
+      "timestamp": "2026-10-28T00:30:43.896863+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 153,
       "text": "2026-10-18 14:25:11,157 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211516+00:00"
+      "timestamp": "2026-10-28T00:30:43.896869+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 154,
       "text": "2026-10-18 14:25:11,197 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211520+00:00"
+      "timestamp": "2026-10-28T00:30:43.896873+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 155,
       "text": "2026-10-18 14:25:11,197 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211522+00:00"
+      "timestamp": "2026-10-28T00:30:43.896876+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 156,
       "text": "2026-10-18 14:25:11,197 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211526+00:00"
+      "timestamp": "2026-10-28T00:30:43.896879+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 158,
       "text": "2026-10-18 14:25:11,237 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211532+00:00"
+      "timestamp": "2026-10-28T00:30:43.896885+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 159,
       "text": "2026-10-18 14:25:11,254 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211535+00:00"
+      "timestamp": "2026-10-28T00:30:43.896889+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 160,
       "text": "2026-10-18 14:25:11,254 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211538+00:00"
+      "timestamp": "2026-10-28T00:30:43.896893+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 161,
       "text": "2026-10-18 14:25:11,254 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211542+00:00"
+      "timestamp": "2026-10-28T00:30:43.896899+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 166,
       "text": "2026-10-19 14:32:37,147 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211553+00:00"
+      "timestamp": "2026-10-28T00:30:43.896912+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 169,
       "text": "2026-10-19 14:33:18,180 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211559+00:00"
+      "timestamp": "2026-10-28T00:30:43.896920+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 172,
       "text": "2026-10-19 14:33:53,428 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211566+00:00"
+      "timestamp": "2026-10-28T00:30:43.896929+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 173,
       "text": "2026-10-19 14:34:07,393 | WARNING | app_factory | batch 4 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211569+00:00"
+      "timestamp": "2026-10-28T00:30:43.896933+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 175,
       "text": "2026-10-19 14:34:07,414 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211575+00:00"
+      "timestamp": "2026-10-28T00:30:43.896939+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 176,
       "text": "2026-10-19 14:34:08,644 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211578+00:00"
+      "timestamp": "2026-10-28T00:30:43.896943+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 177,
       "text": "2026-10-19 14:34:08,645 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211581+00:00"
+      "timestamp": "2026-10-28T00:30:43.896946+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 178,
       "text": "2026-10-19 14:34:08,645 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211585+00:00"
+      "timestamp": "2026-10-28T00:30:43.896950+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 180,
       "text": "2026-10-19 14:34:08,684 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211590+00:00"
+      "timestamp": "2026-10-28T00:30:43.896956+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 181,
       "text": "2026-10-19 14:34:08,712 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211594+00:00"
+      "timestamp": "2026-10-28T00:30:43.896960+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 182,
       "text": "2026-10-19 14:34:08,713 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211598+00:00"
+      "timestamp": "2026-10-28T00:30:43.896966+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 183,
       "text": "2026-10-19 14:34:08,713 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211601+00:00"
+      "timestamp": "2026-10-28T00:30:43.896969+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 185,
       "text": "2026-10-19 14:34:08,734 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211608+00:00"
+      "timestamp": "2026-10-28T00:30:43.896977+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 186,
       "text": "2026-10-19 14:34:08,761 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211629+00:00"
+      "timestamp": "2026-10-28T00:30:43.896981+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 187,
       "text": "2026-10-19 14:34:08,761 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211631+00:00"
+      "timestamp": "2026-10-28T00:30:43.896984+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 188,
       "text": "2026-10-19 14:34:08,761 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211635+00:00"
+      "timestamp": "2026-10-28T00:30:43.896988+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 190,
       "text": "2026-10-19 14:34:08,793 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211640+00:00"
+      "timestamp": "2026-10-28T00:30:43.896994+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 191,
       "text": "2026-10-19 14:34:08,822 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211644+00:00"
+      "timestamp": "2026-10-28T00:30:43.896998+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 192,
       "text": "2026-10-19 14:34:08,822 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211647+00:00"
+      "timestamp": "2026-10-28T00:30:43.897001+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 193,
       "text": "2026-10-19 14:34:08,823 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211650+00:00"
+      "timestamp": "2026-10-28T00:30:43.897005+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 196,
       "text": "2026-10-20 14:40:58,436 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211658+00:00"
+      "timestamp": "2026-10-28T00:30:43.897013+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 199,
       "text": "2026-10-20 14:41:35,563 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211664+00:00"
+      "timestamp": "2026-10-28T00:30:43.897020+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 200,
       "text": "2026-10-20 14:41:37,648 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211668+00:00"
+      "timestamp": "2026-10-28T00:30:43.897025+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 201,
       "text": "2026-10-20 14:41:37,648 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211671+00:00"
+      "timestamp": "2026-10-28T00:30:43.897029+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 202,
       "text": "2026-10-20 14:41:37,648 | WARNING | app_factory | batch 2 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211675+00:00"
+      "timestamp": "2026-10-28T00:30:43.897033+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 204,
       "text": "2026-10-20 14:41:37,667 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211680+00:00"
+      "timestamp": "2026-10-28T00:30:43.897041+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 205,
       "text": "2026-10-20 14:41:37,683 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211684+00:00"
+      "timestamp": "2026-10-28T00:30:43.897045+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 206,
       "text": "2026-10-20 14:41:37,684 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211687+00:00"
+      "timestamp": "2026-10-28T00:30:43.897048+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 207,
       "text": "2026-10-20 14:41:37,684 | WARNING | app_factory | batch 3 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211690+00:00"
+      "timestamp": "2026-10-28T00:30:43.897052+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 209,
       "text": "2026-10-20 14:41:37,699 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211696+00:00"
+      "timestamp": "2026-10-28T00:30:43.897058+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 210,
       "text": "2026-10-20 14:41:37,714 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211700+00:00"
+      "timestamp": "2026-10-28T00:30:43.897063+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 211,
       "text": "2026-10-20 14:41:37,714 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211703+00:00"
+      "timestamp": "2026-10-28T00:30:43.897066+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 212,
       "text": "2026-10-20 14:41:37,714 | WARNING | app_factory | batch 4 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211707+00:00"
+      "timestamp": "2026-10-28T00:30:43.897070+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 214,
       "text": "2026-10-20 14:41:37,727 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211712+00:00"
+      "timestamp": "2026-10-28T00:30:43.897076+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 215,
       "text": "2026-10-20 14:41:37,735 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211716+00:00"
+      "timestamp": "2026-10-28T00:30:43.897080+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 216,
       "text": "2026-10-20 14:41:37,736 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211718+00:00"
+      "timestamp": "2026-10-28T00:30:43.897084+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 217,
       "text": "2026-10-20 14:41:37,736 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211722+00:00"
+      "timestamp": "2026-10-28T00:30:43.897088+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 219,
       "text": "2026-10-20 14:41:37,760 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211727+00:00"
+      "timestamp": "2026-10-28T00:30:43.897094+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 220,
       "text": "2026-10-20 14:41:37,769 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211731+00:00"
+      "timestamp": "2026-10-28T00:30:43.897100+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 221,
       "text": "2026-10-20 14:41:37,770 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211734+00:00"
+      "timestamp": "2026-10-28T00:30:43.897103+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 222,
       "text": "2026-10-20 14:41:37,770 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211737+00:00"
+      "timestamp": "2026-10-28T00:30:43.897107+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 224,
       "text": "2026-10-20 14:41:37,792 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211743+00:00"
+      "timestamp": "2026-10-28T00:30:43.897113+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 225,
       "text": "2026-10-20 14:41:37,802 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211747+00:00"
+      "timestamp": "2026-10-28T00:30:43.897117+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 226,
       "text": "2026-10-20 14:41:37,803 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211749+00:00"
+      "timestamp": "2026-10-28T00:30:43.897120+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 227,
       "text": "2026-10-20 14:41:37,803 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211753+00:00"
+      "timestamp": "2026-10-28T00:30:43.897124+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 229,
       "text": "2026-10-20 14:41:37,815 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211758+00:00"
+      "timestamp": "2026-10-28T00:30:43.897130+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 230,
       "text": "2026-10-20 14:41:37,822 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211762+00:00"
+      "timestamp": "2026-10-28T00:30:43.897134+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 231,
       "text": "2026-10-20 14:41:37,823 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211765+00:00"
+      "timestamp": "2026-10-28T00:30:43.897137+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 232,
       "text": "2026-10-20 14:41:37,823 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211768+00:00"
+      "timestamp": "2026-10-28T00:30:43.897141+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 235,
       "text": "2026-10-21 14:45:14,525 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211776+00:00"
+      "timestamp": "2026-10-28T00:30:43.897149+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 236,
       "text": "2026-10-21 14:45:20,428 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211779+00:00"
+      "timestamp": "2026-10-28T00:30:43.897153+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 237,
       "text": "2026-10-21 14:45:20,428 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211782+00:00"
+      "timestamp": "2026-10-28T00:30:43.897156+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 238,
       "text": "2026-10-21 14:45:20,428 | WARNING | app_factory | batch 1 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211786+00:00"
+      "timestamp": "2026-10-28T00:30:43.897160+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 240,
       "text": "2026-10-21 14:45:22,544 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211791+00:00"
+      "timestamp": "2026-10-28T00:30:43.897166+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 241,
       "text": "2026-10-21 14:45:22,672 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211795+00:00"
+      "timestamp": "2026-10-28T00:30:43.897170+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 242,
       "text": "2026-10-21 14:45:22,672 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211798+00:00"
+      "timestamp": "2026-10-28T00:30:43.897173+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 243,
       "text": "2026-10-21 14:45:22,672 | WARNING | app_factory | batch 2 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211801+00:00"
+      "timestamp": "2026-10-28T00:30:43.897179+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 245,
       "text": "2026-10-21 14:45:22,723 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211807+00:00"
+      "timestamp": "2026-10-28T00:30:43.897185+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 246,
       "text": "2026-10-21 14:45:22,831 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211810+00:00"
+      "timestamp": "2026-10-28T00:30:43.897189+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 247,
       "text": "2026-10-21 14:45:22,831 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211813+00:00"
+      "timestamp": "2026-10-28T00:30:43.897194+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 248,
       "text": "2026-10-21 14:45:22,831 | WARNING | app_factory | batch 3 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211817+00:00"
+      "timestamp": "2026-10-28T00:30:43.897198+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 250,
       "text": "2026-10-21 14:45:22,911 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211822+00:00"
+      "timestamp": "2026-10-28T00:30:43.897204+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 251,
       "text": "2026-10-21 14:45:23,016 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211826+00:00"
+      "timestamp": "2026-10-28T00:30:43.897208+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 252,
       "text": "2026-10-21 14:45:23,016 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211828+00:00"
+      "timestamp": "2026-10-28T00:30:43.897211+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 253,
       "text": "2026-10-21 14:45:23,016 | WARNING | app_factory | batch 4 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211832+00:00"
+      "timestamp": "2026-10-28T00:30:43.897215+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 255,
       "text": "2026-10-21 14:45:23,108 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211837+00:00"
+      "timestamp": "2026-10-28T00:30:43.897223+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 256,
       "text": "2026-10-21 14:45:23,221 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211841+00:00"
+      "timestamp": "2026-10-28T00:30:43.897227+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 257,
       "text": "2026-10-21 14:45:23,221 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211844+00:00"
+      "timestamp": "2026-10-28T00:30:43.897230+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 258,
       "text": "2026-10-21 14:45:23,221 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211847+00:00"
+      "timestamp": "2026-10-28T00:30:43.897234+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 260,
       "text": "2026-10-21 14:45:23,300 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211853+00:00"
+      "timestamp": "2026-10-28T00:30:43.897240+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 261,
       "text": "2026-10-21 14:45:23,398 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211856+00:00"
+      "timestamp": "2026-10-28T00:30:43.897244+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 262,
       "text": "2026-10-21 14:45:23,398 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211859+00:00"
+      "timestamp": "2026-10-28T00:30:43.897247+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 263,
       "text": "2026-10-21 14:45:23,398 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211863+00:00"
+      "timestamp": "2026-10-28T00:30:43.897251+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 265,
       "text": "2026-10-21 14:45:23,505 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211868+00:00"
+      "timestamp": "2026-10-28T00:30:43.897258+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 266,
       "text": "2026-10-21 14:45:23,584 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211872+00:00"
+      "timestamp": "2026-10-28T00:30:43.897263+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 267,
       "text": "2026-10-21 14:45:23,585 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211875+00:00"
+      "timestamp": "2026-10-28T00:30:43.897265+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 268,
       "text": "2026-10-21 14:45:23,585 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211878+00:00"
+      "timestamp": "2026-10-28T00:30:43.897270+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 270,
       "text": "2026-10-21 14:45:23,685 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211884+00:00"
+      "timestamp": "2026-10-28T00:30:43.897276+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 271,
       "text": "2026-10-21 14:45:23,741 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211888+00:00"
+      "timestamp": "2026-10-28T00:30:43.897282+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 272,
       "text": "2026-10-21 14:45:23,742 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211890+00:00"
+      "timestamp": "2026-10-28T00:30:43.897286+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 273,
       "text": "2026-10-21 14:45:23,742 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211894+00:00"
+      "timestamp": "2026-10-28T00:30:43.897292+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 276,
       "text": "2026-10-21 14:47:14,650 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211901+00:00"
+      "timestamp": "2026-10-28T00:30:43.897300+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 279,
       "text": "2026-10-21 14:48:01,304 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211908+00:00"
+      "timestamp": "2026-10-28T00:30:43.897309+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 280,
       "text": "2026-10-21 14:48:09,049 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211912+00:00"
+      "timestamp": "2026-10-28T00:30:43.897313+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 281,
       "text": "2026-10-21 14:48:09,049 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211914+00:00"
+      "timestamp": "2026-10-28T00:30:43.897316+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 282,
       "text": "2026-10-21 14:48:09,049 | WARNING | app_factory | batch 2 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211918+00:00"
+      "timestamp": "2026-10-28T00:30:43.897321+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 284,
       "text": "2026-10-21 14:48:09,129 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211924+00:00"
+      "timestamp": "2026-10-28T00:30:43.897328+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 285,
       "text": "2026-10-21 14:48:09,201 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211927+00:00"
+      "timestamp": "2026-10-28T00:30:43.897332+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 286,
       "text": "2026-10-21 14:48:09,201 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211930+00:00"
+      "timestamp": "2026-10-28T00:30:43.897336+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 287,
       "text": "2026-10-21 14:48:09,201 | WARNING | app_factory | batch 3 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211934+00:00"
+      "timestamp": "2026-10-28T00:30:43.897340+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 289,
       "text": "2026-10-21 14:48:09,257 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211939+00:00"
+      "timestamp": "2026-10-28T00:30:43.897348+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 290,
       "text": "2026-10-21 14:48:09,274 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211943+00:00"
+      "timestamp": "2026-10-28T00:30:43.897352+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 291,
       "text": "2026-10-21 14:48:09,274 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211946+00:00"
+      "timestamp": "2026-10-28T00:30:43.897355+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 292,
       "text": "2026-10-21 14:48:09,274 | WARNING | app_factory | batch 4 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211949+00:00"
+      "timestamp": "2026-10-28T00:30:43.897359+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 294,
       "text": "2026-10-21 14:48:09,316 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211955+00:00"
+      "timestamp": "2026-10-28T00:30:43.897365+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 295,
       "text": "2026-10-21 14:48:09,363 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211958+00:00"
+      "timestamp": "2026-10-28T00:30:43.897369+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 296,
       "text": "2026-10-21 14:48:09,364 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211961+00:00"
+      "timestamp": "2026-10-28T00:30:43.897372+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 297,
       "text": "2026-10-21 14:48:09,364 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211965+00:00"
+      "timestamp": "2026-10-28T00:30:43.897377+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 299,
       "text": "2026-10-21 14:48:09,469 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211970+00:00"
+      "timestamp": "2026-10-28T00:30:43.897383+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 300,
       "text": "2026-10-21 14:48:09,548 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211974+00:00"
+      "timestamp": "2026-10-28T00:30:43.897387+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 301,
       "text": "2026-10-21 14:48:09,548 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211977+00:00"
+      "timestamp": "2026-10-28T00:30:43.897390+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 302,
       "text": "2026-10-21 14:48:09,548 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211980+00:00"
+      "timestamp": "2026-10-28T00:30:43.897394+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 304,
       "text": "2026-10-21 14:48:09,677 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211986+00:00"
+      "timestamp": "2026-10-28T00:30:43.897400+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 305,
       "text": "2026-10-21 14:48:09,723 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.211989+00:00"
+      "timestamp": "2026-10-28T00:30:43.897404+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 306,
       "text": "2026-10-21 14:48:09,723 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.211992+00:00"
+      "timestamp": "2026-10-28T00:30:43.897407+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 307,
       "text": "2026-10-21 14:48:09,723 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.211996+00:00"
+      "timestamp": "2026-10-28T00:30:43.897411+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 309,
       "text": "2026-10-21 14:48:09,745 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212001+00:00"
+      "timestamp": "2026-10-28T00:30:43.897419+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 310,
       "text": "2026-10-21 14:48:09,774 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212005+00:00"
+      "timestamp": "2026-10-28T00:30:43.897423+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 311,
       "text": "2026-10-21 14:48:09,775 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212008+00:00"
+      "timestamp": "2026-10-28T00:30:43.897426+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 312,
       "text": "2026-10-21 14:48:09,775 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212011+00:00"
+      "timestamp": "2026-10-28T00:30:43.897430+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 318,
       "text": "2026-10-22 14:52:08,358 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212023+00:00"
+      "timestamp": "2026-10-28T00:30:43.897443+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 321,
       "text": "2026-10-22 14:52:41,094 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212030+00:00"
+      "timestamp": "2026-10-28T00:30:43.897451+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 322,
       "text": "2026-10-22 14:52:44,153 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212034+00:00"
+      "timestamp": "2026-10-28T00:30:43.897457+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 323,
       "text": "2026-10-22 14:52:44,154 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212036+00:00"
+      "timestamp": "2026-10-28T00:30:43.897459+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 324,
       "text": "2026-10-22 14:52:44,154 | WARNING | app_factory | batch 2 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212040+00:00"
+      "timestamp": "2026-10-28T00:30:43.897464+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 326,
       "text": "2026-10-22 14:52:44,427 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212046+00:00"
+      "timestamp": "2026-10-28T00:30:43.897471+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 327,
       "text": "2026-10-22 14:52:44,603 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212049+00:00"
+      "timestamp": "2026-10-28T00:30:43.897476+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 328,
       "text": "2026-10-22 14:52:44,609 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212052+00:00"
+      "timestamp": "2026-10-28T00:30:43.897478+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 329,
       "text": "2026-10-22 14:52:44,610 | WARNING | app_factory | batch 3 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212056+00:00"
+      "timestamp": "2026-10-28T00:30:43.897483+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 331,
       "text": "2026-10-22 14:52:44,785 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212061+00:00"
+      "timestamp": "2026-10-28T00:30:43.902967+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 332,
       "text": "2026-10-22 14:52:45,010 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212065+00:00"
+      "timestamp": "2026-10-28T00:30:43.902986+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 333,
       "text": "2026-10-22 14:52:45,010 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212067+00:00"
+      "timestamp": "2026-10-28T00:30:43.903005+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 334,
       "text": "2026-10-22 14:52:45,010 | WARNING | app_factory | batch 4 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212071+00:00"
+      "timestamp": "2026-10-28T00:30:43.903012+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 336,
       "text": "2026-10-22 14:52:45,287 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212076+00:00"
+      "timestamp": "2026-10-28T00:30:43.903019+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 337,
       "text": "2026-10-22 14:52:45,545 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212080+00:00"
+      "timestamp": "2026-10-28T00:30:43.903023+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 338,
       "text": "2026-10-22 14:52:45,545 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212083+00:00"
+      "timestamp": "2026-10-28T00:30:43.903028+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 339,
       "text": "2026-10-22 14:52:45,545 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212086+00:00"
+      "timestamp": "2026-10-28T00:30:43.903032+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 341,
       "text": "2026-10-22 14:52:45,736 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212092+00:00"
+      "timestamp": "2026-10-28T00:30:43.903039+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 342,
       "text": "2026-10-22 14:52:45,915 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212096+00:00"
+      "timestamp": "2026-10-28T00:30:43.903045+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 343,
       "text": "2026-10-22 14:52:45,915 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212098+00:00"
+      "timestamp": "2026-10-28T00:30:43.903048+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 344,
       "text": "2026-10-22 14:52:45,915 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212102+00:00"
+      "timestamp": "2026-10-28T00:30:43.903053+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 346,
       "text": "2026-10-22 14:52:46,181 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212108+00:00"
+      "timestamp": "2026-10-28T00:30:43.903059+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 347,
       "text": "2026-10-22 14:52:46,586 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212111+00:00"
+      "timestamp": "2026-10-28T00:30:43.903063+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 348,
       "text": "2026-10-22 14:52:46,586 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212114+00:00"
+      "timestamp": "2026-10-28T00:30:43.903066+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 349,
       "text": "2026-10-22 14:52:46,586 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212118+00:00"
+      "timestamp": "2026-10-28T00:30:43.903071+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 351,
       "text": "2026-10-22 14:52:46,911 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212123+00:00"
+      "timestamp": "2026-10-28T00:30:43.903077+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 352,
       "text": "2026-10-22 14:52:47,118 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212127+00:00"
+      "timestamp": "2026-10-28T00:30:43.903081+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 353,
       "text": "2026-10-22 14:52:47,118 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212130+00:00"
+      "timestamp": "2026-10-28T00:30:43.903086+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 354,
       "text": "2026-10-22 14:52:47,118 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212133+00:00"
+      "timestamp": "2026-10-28T00:30:43.903090+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 356,
       "text": "2026-10-22 14:53:01,339 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212139+00:00"
+      "timestamp": "2026-10-28T00:30:43.903098+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 357,
       "text": "2026-10-22 14:53:01,439 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212142+00:00"
+      "timestamp": "2026-10-28T00:30:43.903102+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 358,
       "text": "2026-10-22 14:53:01,439 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212145+00:00"
+      "timestamp": "2026-10-28T00:30:43.903105+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 359,
       "text": "2026-10-22 14:53:01,440 | WARNING | app_factory | batch 2 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212149+00:00"
+      "timestamp": "2026-10-28T00:30:43.903109+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 361,
       "text": "2026-10-22 14:53:01,487 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212154+00:00"
+      "timestamp": "2026-10-28T00:30:43.903117+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 362,
       "text": "2026-10-22 14:53:01,626 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212158+00:00"
+      "timestamp": "2026-10-28T00:30:43.903122+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 363,
       "text": "2026-10-22 14:53:01,626 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212161+00:00"
+      "timestamp": "2026-10-28T00:30:43.903125+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 364,
       "text": "2026-10-22 14:53:01,626 | WARNING | app_factory | batch 3 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212164+00:00"
+      "timestamp": "2026-10-28T00:30:43.903129+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 366,
       "text": "2026-10-22 14:53:01,683 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212170+00:00"
+      "timestamp": "2026-10-28T00:30:43.903135+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 367,
       "text": "2026-10-22 14:53:01,915 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212174+00:00"
+      "timestamp": "2026-10-28T00:30:43.903139+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 368,
       "text": "2026-10-22 14:53:01,916 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212177+00:00"
+      "timestamp": "2026-10-28T00:30:43.903142+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 369,
       "text": "2026-10-22 14:53:01,916 | WARNING | app_factory | batch 4 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212181+00:00"
+      "timestamp": "2026-10-28T00:30:43.903150+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 371,
       "text": "2026-10-22 14:53:02,137 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212186+00:00"
+      "timestamp": "2026-10-28T00:30:43.903156+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 372,
       "text": "2026-10-22 14:53:02,369 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212190+00:00"
+      "timestamp": "2026-10-28T00:30:43.903160+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 373,
       "text": "2026-10-22 14:53:02,370 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212193+00:00"
+      "timestamp": "2026-10-28T00:30:43.903166+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 374,
       "text": "2026-10-22 14:53:02,370 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212196+00:00"
+      "timestamp": "2026-10-28T00:30:43.903170+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 376,
       "text": "2026-10-22 14:53:02,525 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212202+00:00"
+      "timestamp": "2026-10-28T00:30:43.903176+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 377,
       "text": "2026-10-22 14:53:02,763 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212205+00:00"
+      "timestamp": "2026-10-28T00:30:43.903181+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 378,
       "text": "2026-10-22 14:53:02,763 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212208+00:00"
+      "timestamp": "2026-10-28T00:30:43.903183+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 379,
       "text": "2026-10-22 14:53:02,763 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212212+00:00"
+      "timestamp": "2026-10-28T00:30:43.903189+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 381,
       "text": "2026-10-22 14:53:02,977 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212217+00:00"
+      "timestamp": "2026-10-28T00:30:43.903195+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 382,
       "text": "2026-10-22 14:53:03,164 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212221+00:00"
+      "timestamp": "2026-10-28T00:30:43.903199+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 383,
       "text": "2026-10-22 14:53:03,165 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212224+00:00"
+      "timestamp": "2026-10-28T00:30:43.903203+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 384,
       "text": "2026-10-22 14:53:03,165 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212228+00:00"
+      "timestamp": "2026-10-28T00:30:43.903207+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 386,
       "text": "2026-10-22 14:53:03,366 | WARNING | app_factory | router aether-local failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212233+00:00"
+      "timestamp": "2026-10-28T00:30:43.903213+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 387,
       "text": "2026-10-22 14:53:03,594 | WARNING | app_factory | router aether-cloud failed: HTTP Error 502: BAD GATEWAY — trying next",
-      "timestamp": "2026-10-27T23:59:07.212237+00:00"
+      "timestamp": "2026-10-28T00:30:43.903218+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 388,
       "text": "2026-10-22 14:53:03,594 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212240+00:00"
+      "timestamp": "2026-10-28T00:30:43.903221+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 389,
       "text": "2026-10-22 14:53:03,594 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212243+00:00"
+      "timestamp": "2026-10-28T00:30:43.903225+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 443,
       "text": "2026-10-26 15:29:34,431 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212323+00:00"
+      "timestamp": "2026-10-28T00:30:43.903318+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 444,
       "text": "2026-10-26 15:29:36,476 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212330+00:00"
+      "timestamp": "2026-10-28T00:30:43.903323+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 445,
       "text": "2026-10-26 15:29:36,476 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212333+00:00"
+      "timestamp": "2026-10-28T00:30:43.903326+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 446,
       "text": "2026-10-26 15:29:36,476 | WARNING | app_factory | batch 1 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212336+00:00"
+      "timestamp": "2026-10-28T00:30:43.903330+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 448,
       "text": "2026-10-26 15:29:38,533 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212343+00:00"
+      "timestamp": "2026-10-28T00:30:43.903336+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 449,
       "text": "2026-10-26 15:29:40,578 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212347+00:00"
+      "timestamp": "2026-10-28T00:30:43.903341+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 450,
       "text": "2026-10-26 15:29:40,578 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212350+00:00"
+      "timestamp": "2026-10-28T00:30:43.903344+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 451,
       "text": "2026-10-26 15:29:40,578 | WARNING | app_factory | batch 2 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212353+00:00"
+      "timestamp": "2026-10-28T00:30:43.903348+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 453,
       "text": "2026-10-26 15:29:42,628 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212359+00:00"
+      "timestamp": "2026-10-28T00:30:43.903357+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 454,
       "text": "2026-10-26 15:29:44,668 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212364+00:00"
+      "timestamp": "2026-10-28T00:30:43.903362+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 455,
       "text": "2026-10-26 15:29:44,668 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212366+00:00"
+      "timestamp": "2026-10-28T00:30:43.903365+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 456,
       "text": "2026-10-26 15:29:44,668 | WARNING | app_factory | batch 3 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212370+00:00"
+      "timestamp": "2026-10-28T00:30:43.903369+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 458,
       "text": "2026-10-26 15:29:46,709 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212376+00:00"
+      "timestamp": "2026-10-28T00:30:43.903375+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 459,
       "text": "2026-10-26 15:29:48,730 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212381+00:00"
+      "timestamp": "2026-10-28T00:30:43.903381+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 460,
       "text": "2026-10-26 15:29:48,730 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212383+00:00"
+      "timestamp": "2026-10-28T00:30:43.903385+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 461,
       "text": "2026-10-26 15:29:48,731 | WARNING | app_factory | batch 4 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212387+00:00"
+      "timestamp": "2026-10-28T00:30:43.903389+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 463,
       "text": "2026-10-26 15:29:50,793 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212393+00:00"
+      "timestamp": "2026-10-28T00:30:43.903395+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 464,
       "text": "2026-10-26 15:29:52,846 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212397+00:00"
+      "timestamp": "2026-10-28T00:30:43.903400+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 465,
       "text": "2026-10-26 15:29:52,846 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212400+00:00"
+      "timestamp": "2026-10-28T00:30:43.903403+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 466,
       "text": "2026-10-26 15:29:52,846 | WARNING | app_factory | batch 5 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212404+00:00"
+      "timestamp": "2026-10-28T00:30:43.903409+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 468,
       "text": "2026-10-26 15:29:54,891 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212410+00:00"
+      "timestamp": "2026-10-28T00:30:43.903416+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 469,
       "text": "2026-10-26 15:29:56,940 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212414+00:00"
+      "timestamp": "2026-10-28T00:30:43.903422+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 470,
       "text": "2026-10-26 15:29:56,940 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212417+00:00"
+      "timestamp": "2026-10-28T00:30:43.903425+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 471,
       "text": "2026-10-26 15:29:56,940 | WARNING | app_factory | batch 6 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212421+00:00"
+      "timestamp": "2026-10-28T00:30:43.903430+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 473,
       "text": "2026-10-26 15:29:58,982 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212427+00:00"
+      "timestamp": "2026-10-28T00:30:43.903437+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 474,
       "text": "2026-10-26 15:30:01,024 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212432+00:00"
+      "timestamp": "2026-10-28T00:30:43.903441+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 475,
       "text": "2026-10-26 15:30:01,025 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212436+00:00"
+      "timestamp": "2026-10-28T00:30:43.903444+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 476,
       "text": "2026-10-26 15:30:01,025 | WARNING | app_factory | batch 7 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212440+00:00"
+      "timestamp": "2026-10-28T00:30:43.903448+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 478,
       "text": "2026-10-26 15:30:03,072 | WARNING | app_factory | router aether-local failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212447+00:00"
+      "timestamp": "2026-10-28T00:30:43.903455+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 479,
       "text": "2026-10-26 15:30:05,120 | WARNING | app_factory | router aether-cloud failed: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée> — trying next",
-      "timestamp": "2026-10-27T23:59:07.212451+00:00"
+      "timestamp": "2026-10-28T00:30:43.903461+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 480,
       "text": "2026-10-26 15:30:05,120 | ERROR | app_factory | all router chains failed",
-      "timestamp": "2026-10-27T23:59:07.212454+00:00"
+      "timestamp": "2026-10-28T00:30:43.903465+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 481,
       "text": "2026-10-26 15:30:05,120 | WARNING | app_factory | batch 8 failed — skipping",
-      "timestamp": "2026-10-27T23:59:07.212457+00:00"
+      "timestamp": "2026-10-28T00:30:43.903469+00:00"
     },
     {
       "file": "app_factory.log",
       "line": 494,
       "text": "2026-10-27 19:24:51,590 | WARNING | app_factory | router aether-local failed: [WinError 10054] Une connexion existante a dû être fermée par l’hôte distant — trying next",
-      "timestamp": "2026-10-27T23:59:07.212480+00:00"
+      "timestamp": "2026-10-28T00:30:43.903493+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 2,
       "text": "2026-10-15 12:19:33,137 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.214949+00:00"
+      "timestamp": "2026-10-28T00:30:43.906696+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 4,
       "text": "2026-10-15 12:28:56,598 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.214964+00:00"
+      "timestamp": "2026-10-28T00:30:43.906714+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 6,
       "text": "2026-10-15 15:31:59,955 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.214970+00:00"
+      "timestamp": "2026-10-28T00:30:43.906720+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 8,
       "text": "2026-10-15 18:35:56,646 | ERROR | jarvis_dev | router error: HTTP Error 502: BAD GATEWAY",
-      "timestamp": "2026-10-27T23:59:07.214975+00:00"
+      "timestamp": "2026-10-28T00:30:43.906726+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 10,
       "text": "2026-10-15 21:41:33,499 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.214980+00:00"
+      "timestamp": "2026-10-28T00:30:43.906732+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 12,
       "text": "2026-10-16 03:47:26,891 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.214986+00:00"
+      "timestamp": "2026-10-28T00:30:43.906737+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 14,
       "text": "2026-10-16 06:51:38,610 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.214991+00:00"
+      "timestamp": "2026-10-28T00:30:43.906742+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 16,
       "text": "2026-10-16 09:56:38,287 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.214995+00:00"
+      "timestamp": "2026-10-28T00:30:43.906748+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 18,
       "text": "2026-10-16 14:00:23,971 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
-      "timestamp": "2026-10-27T23:59:07.215003+00:00"
+      "timestamp": "2026-10-28T00:30:43.906756+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 20,
       "text": "2026-10-16 14:01:04,276 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
-      "timestamp": "2026-10-27T23:59:07.215009+00:00"
+      "timestamp": "2026-10-28T00:30:43.906763+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 22,
       "text": "2026-10-16 17:05:04,858 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
-      "timestamp": "2026-10-27T23:59:07.215016+00:00"
+      "timestamp": "2026-10-28T00:30:43.906770+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 26,
       "text": "2026-10-17 04:44:48,655 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215026+00:00"
+      "timestamp": "2026-10-28T00:30:43.906782+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 28,
       "text": "2026-10-17 07:45:22,365 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
-      "timestamp": "2026-10-27T23:59:07.215033+00:00"
+      "timestamp": "2026-10-28T00:30:43.906789+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 31,
       "text": "2026-10-17 13:53:37,556 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215040+00:00"
+      "timestamp": "2026-10-28T00:30:43.906797+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 33,
       "text": "2026-10-17 16:58:19,296 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215046+00:00"
+      "timestamp": "2026-10-28T00:30:43.906802+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 35,
       "text": "2026-10-17 20:05:33,131 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215051+00:00"
+      "timestamp": "2026-10-28T00:30:43.906808+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 37,
       "text": "2026-10-17 23:13:50,633 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215056+00:00"
+      "timestamp": "2026-10-28T00:30:43.906813+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 39,
       "text": "2026-10-18 02:15:42,776 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215062+00:00"
+      "timestamp": "2026-10-28T00:30:43.906818+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 41,
       "text": "2026-10-18 05:18:49,246 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215067+00:00"
+      "timestamp": "2026-10-28T00:30:43.906823+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 43,
       "text": "2026-10-18 08:19:35,890 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
-      "timestamp": "2026-10-27T23:59:07.215073+00:00"
+      "timestamp": "2026-10-28T00:30:43.906830+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 45,
       "text": "2026-10-18 11:20:16,466 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
-      "timestamp": "2026-10-27T23:59:07.215079+00:00"
+      "timestamp": "2026-10-28T00:30:43.906844+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 47,
       "text": "2026-10-18 14:22:18,761 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215084+00:00"
+      "timestamp": "2026-10-28T00:30:43.906850+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 49,
       "text": "2026-10-18 17:43:50,924 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
-      "timestamp": "2026-10-27T23:59:07.215090+00:00"
+      "timestamp": "2026-10-28T00:30:43.906856+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 51,
       "text": "2026-10-18 17:45:56,368 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
-      "timestamp": "2026-10-27T23:59:07.215096+00:00"
+      "timestamp": "2026-10-28T00:30:43.906863+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 53,
       "text": "2026-10-18 20:50:11,396 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215101+00:00"
+      "timestamp": "2026-10-28T00:30:43.906868+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 55,
       "text": "2026-10-18 23:56:55,012 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215106+00:00"
+      "timestamp": "2026-10-28T00:30:43.906873+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 61,
       "text": "2026-10-19 06:04:56,339 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215122+00:00"
+      "timestamp": "2026-10-28T00:30:43.906890+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 64,
       "text": "2026-10-19 09:07:14,725 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
-      "timestamp": "2026-10-27T23:59:07.215132+00:00"
+      "timestamp": "2026-10-28T00:30:43.906901+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 68,
       "text": "2026-10-19 15:15:12,160 | ERROR | jarvis_dev | router error: HTTP Error 502: BAD GATEWAY",
-      "timestamp": "2026-10-27T23:59:07.215142+00:00"
+      "timestamp": "2026-10-28T00:30:43.906911+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 70,
       "text": "2026-10-19 18:20:19,566 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215146+00:00"
+      "timestamp": "2026-10-28T00:30:43.906916+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 73,
       "text": "2026-10-20 06:36:52,292 | ERROR | jarvis_dev | router error: <urlopen error [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée>",
-      "timestamp": "2026-10-27T23:59:07.215155+00:00"
+      "timestamp": "2026-10-28T00:30:43.906925+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 75,
       "text": "2026-10-20 13:12:18,362 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215160+00:00"
+      "timestamp": "2026-10-28T00:30:43.906931+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 77,
       "text": "2026-10-20 16:14:31,894 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215165+00:00"
+      "timestamp": "2026-10-28T00:30:43.906936+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 79,
       "text": "2026-10-20 16:16:21,580 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215170+00:00"
+      "timestamp": "2026-10-28T00:30:43.906942+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 81,
       "text": "2026-10-20 19:16:07,746 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215176+00:00"
+      "timestamp": "2026-10-28T00:30:43.906948+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 83,
       "text": "2026-10-20 19:21:50,045 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215181+00:00"
+      "timestamp": "2026-10-28T00:30:43.906954+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 85,
       "text": "2026-10-20 22:23:01,555 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215443+00:00"
+      "timestamp": "2026-10-28T00:30:43.906959+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 87,
       "text": "2026-10-20 22:29:21,197 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215450+00:00"
+      "timestamp": "2026-10-28T00:30:43.906964+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 89,
       "text": "2026-10-21 01:27:25,766 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215455+00:00"
+      "timestamp": "2026-10-28T00:30:43.906970+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 91,
       "text": "2026-10-21 01:33:08,200 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215460+00:00"
+      "timestamp": "2026-10-28T00:30:43.906975+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 94,
       "text": "2026-10-21 04:35:12,437 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215468+00:00"
+      "timestamp": "2026-10-28T00:30:43.906987+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 95,
       "text": "2026-10-21 04:35:43,605 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215470+00:00"
+      "timestamp": "2026-10-28T00:30:43.906990+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 97,
       "text": "2026-10-21 07:38:36,179 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215475+00:00"
+      "timestamp": "2026-10-28T00:30:43.906995+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 99,
       "text": "2026-10-21 07:42:44,049 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215480+00:00"
+      "timestamp": "2026-10-28T00:30:43.907000+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 101,
       "text": "2026-10-21 10:41:50,459 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215485+00:00"
+      "timestamp": "2026-10-28T00:30:43.907005+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 103,
       "text": "2026-10-21 10:48:56,946 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215490+00:00"
+      "timestamp": "2026-10-28T00:30:43.907010+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 105,
       "text": "2026-10-21 13:51:21,797 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215495+00:00"
+      "timestamp": "2026-10-28T00:30:43.907015+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 107,
       "text": "2026-10-21 13:52:37,824 | ERROR | jarvis_dev | router error: HTTP Error 502: BAD GATEWAY",
-      "timestamp": "2026-10-27T23:59:07.215500+00:00"
+      "timestamp": "2026-10-28T00:30:43.907020+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 109,
       "text": "2026-10-21 16:54:17,003 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215504+00:00"
+      "timestamp": "2026-10-28T00:30:43.907026+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 111,
       "text": "2026-10-21 16:58:08,000 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215509+00:00"
+      "timestamp": "2026-10-28T00:30:43.907031+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 113,
       "text": "2026-10-21 19:59:04,968 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215514+00:00"
+      "timestamp": "2026-10-28T00:30:43.907036+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 115,
       "text": "2026-10-21 20:00:57,105 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215519+00:00"
+      "timestamp": "2026-10-28T00:30:43.907041+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 118,
       "text": "2026-10-21 23:04:25,517 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215526+00:00"
+      "timestamp": "2026-10-28T00:30:43.907051+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 119,
       "text": "2026-10-21 23:05:03,430 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215529+00:00"
+      "timestamp": "2026-10-28T00:30:43.907054+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 121,
       "text": "2026-10-22 02:07:53,209 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215534+00:00"
+      "timestamp": "2026-10-28T00:30:43.907059+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 123,
       "text": "2026-10-22 02:09:11,094 | ERROR | jarvis_dev | router error: HTTP Error 502: BAD GATEWAY",
-      "timestamp": "2026-10-27T23:59:07.215539+00:00"
+      "timestamp": "2026-10-28T00:30:43.907064+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 125,
       "text": "2026-10-22 05:10:40,240 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215543+00:00"
+      "timestamp": "2026-10-28T00:30:43.907069+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 127,
       "text": "2026-10-22 05:12:02,717 | ERROR | jarvis_dev | router error: HTTP Error 502: BAD GATEWAY",
-      "timestamp": "2026-10-27T23:59:07.215548+00:00"
+      "timestamp": "2026-10-28T00:30:43.907074+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 129,
       "text": "2026-10-22 08:13:46,056 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215553+00:00"
+      "timestamp": "2026-10-28T00:30:43.907080+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 131,
       "text": "2026-10-22 08:18:52,913 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215558+00:00"
+      "timestamp": "2026-10-28T00:30:43.907085+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 133,
       "text": "2026-10-22 11:16:10,062 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215563+00:00"
+      "timestamp": "2026-10-28T00:30:43.907090+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 135,
       "text": "2026-10-22 11:23:07,943 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215568+00:00"
+      "timestamp": "2026-10-28T00:30:43.907095+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 137,
       "text": "2026-10-22 14:19:17,346 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215573+00:00"
+      "timestamp": "2026-10-28T00:30:43.907100+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 139,
       "text": "2026-10-22 14:25:44,281 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215577+00:00"
+      "timestamp": "2026-10-28T00:30:43.907108+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 141,
       "text": "2026-10-22 17:22:51,660 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215582+00:00"
+      "timestamp": "2026-10-28T00:30:43.907113+00:00"
     },
     {
       "file": "jarvis_dev.log",
       "line": 143,
       "text": "2026-10-22 17:28:43,189 | ERROR | jarvis_dev | router error: timed out",
-      "timestamp": "2026-10-27T23:59:07.215587+00:00"
+      "timestamp": "2026-10-28T00:30:43.907118+00:00"
     },
     {
       "file": "kanban.log",
       "line": 20,
       "text": "Error on request:",
-      "timestamp": "2026-10-27T23:59:07.216843+00:00"
+      "timestamp": "2026-10-28T00:30:43.908713+00:00"
     },
     {
       "file": "kanban.log",
       "line": 21,
       "text": "Traceback (most recent call last):",
-      "timestamp": "2026-10-27T23:59:07.216854+00:00"
+      "timestamp": "2026-10-28T00:30:43.908731+00:00"
     },
     {
       "file": "kanban.log",
       "line": 27,
       "text": "MemoryError",
-      "timestamp": "2026-10-27T23:59:07.216864+00:00"
+      "timestamp": "2026-10-28T00:30:43.908741+00:00"
     },
     {
       "file": "supervisor.log",
       "line": 72,
       "text": "[2026-10-19 13:48:33] network: TIMEOUT â€” continuing anyway",
-      "timestamp": "2026-10-27T23:59:07.220622+00:00"
+      "timestamp": "2026-10-28T00:30:43.913959+00:00"
     },
     {
       "file": "supervisor.log",
       "line": 74,
       "text": "[2026-10-19 13:48:54] network: TIMEOUT â€” continuing anyway",
-      "timestamp": "2026-10-27T23:59:07.220637+00:00"
+      "timestamp": "2026-10-28T00:30:43.913977+00:00"
     },
     {
       "file": "supervisor.log",
       "line": 128,
       "text": "[2026-10-27 19:58:01] network: TIMEOUT â€” continuing anyway",
-      "timestamp": "2026-10-27T23:59:07.220701+00:00"
+      "timestamp": "2026-10-28T00:30:43.914045+00:00"
     },
     {
       "file": "supervisor.log",
       "line": 131,
       "text": "[2026-10-27 19:58:36] network: TIMEOUT â€” continuing anyway",
-      "timestamp": "2026-10-27T23:59:07.220708+00:00"
+      "timestamp": "2026-10-28T00:30:43.914052+00:00"
     }
   ],
   "scan_count": 0
