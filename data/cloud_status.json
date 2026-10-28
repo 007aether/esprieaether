@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-22T17:54:55.979204+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-28T17:28:06.773755+00:00",
+  "cloud_last_run": "2026-10-28T21:55:38.859532+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Fed Holds Rates in a 10-2 Vote: Warsh Says the “Monetary Medicine” Is Working",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Kraken HIP-3: Hyperliquid Officially Backs Kraken’s Parent for US Perps",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Keystone Data Breach: 25,964 Buyers Exposed and a Stolen Device Key",
       "source": "https://airdropalert.com/feed"
     },
     {
