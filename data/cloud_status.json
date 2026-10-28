@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-22T17:54:55.979204+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-28T02:41:32.372800+00:00",
+  "cloud_last_run": "2026-10-28T11:42:41.521189+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy WLFI for the First Time",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is Exit Liquidity in Crypto? How to Avoid Becoming It",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Hyperliquid vs Trade.xyz: Native Perps or HIP-3 Markets?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Bitcoin 79K Sweep: Why BTC Dipped, What Fed Week Brings, and My Longs",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is a Sniper Bot in Crypto? Why Bots Always Buy First",
       "source": "https://airdropalert.com/feed"
     },
     {
