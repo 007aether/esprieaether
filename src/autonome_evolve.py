@@ -32,6 +32,7 @@ ROOT = Path(__file__).resolve().parent
 STATE_FILE = ROOT.parent / "data" / "autonome_evolve_state.json"
 LOG_FILE = ROOT.parent / "data" / "autonome_evolve.log"
 ERROR_LOG_FILE = ROOT.parent / "data" / "autonome_errors.log"
+PROJECT_DIR = ROOT.parent
 
 # Autonomous configuration
 CONFIG = {
@@ -414,20 +415,59 @@ def run_cycle():
         apply_fixes(fixes)
 
     # 5. Self-improve
-    log("Step 5: Self-improving...", "INFO")
+    log("Step 5: Self-improving... (A-Evolve style)", "INFO")
     self_improve()
 
-    # 6. Report
+    # 6. Self-Evolution Engine (A-Evolve + AgentFactory style)
+    #   Solve -> Observe -> Evolve -> Gate -> Reload
+    #   Executable subagents from knowledge base
+    import subprocess as _sp
+    try:
+        log("Step 5.5: Running self-evolution engine...", "INFO")
+        # Run evolve agent (A-Evolve style 5-stage loop)
+        _res = []
+        _proc = _sp.run(
+            [sys.executable, str(PROJECT_DIR / "src" / "evolve_agent.py")],
+            capture_output=True, text=True, timeout=120
+        )
+        if _proc.returncode == 0:
+            log("  Evolve engine: OK", "INFO")
+        else:
+            log(f"  Evolve engine failed: {_proc.stderr[:200]}", "ERROR")
+        # Run subagent builder (AgentFactory style: convert KB to executable subagents)
+        _sp.run(
+            [sys.executable, str(PROJECT_DIR / "src" / "subagent_builder.py"), "--build"],
+            capture_output=True, text=True, timeout=120
+        )
+        log("  Subagent builder: OK", "INFO")
+    except Exception as e:
+        log(f"  Evolution engine error: {e}", "ERROR")
+        import traceback
+        traceback.print_exc()
+
+    # 7. Report
     log("Step 6: Generating report...", "INFO")
     generate_report()
 
     # Update state
+    state["current_cycle"] += 1
     state["current_cycle"] += 1
     state["total_cycles"] += 1
     save_state()
 
     log(f"=== Cycle {state['current_cycle']} completed ===", "INFO")
     return decision
+
+# Autonomous Evolution class for Sunna integration
+class AutonomeEvolve:
+    """Autonomous evolution loop for Sunna integration.
+    Provides a run_cycle() method compatible with
+    SunnaIntegrationManager._start_evolve_loop().
+    """
+    
+    def run_cycle(self):
+        """Run one autonomous cycle."""
+        run_cycle()
 
 # Daemon loop
 def run_daemon():

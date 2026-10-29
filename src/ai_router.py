@@ -59,12 +59,22 @@ BRAINS = {
         "min_interval": 0.0,
         "label": "Ollama qwen2.5:3b (local)",
     },
+    "ollama-heavy": {
+        "url": "http://127.0.0.1:11434/v1/chat/completions",
+        "key": None,
+        "model": "jaahas/qwen3.5-uncensored:27b",
+        "min_interval": 0.0,
+        "label": "Ollama jaahas/qwen3.5-uncensored:27b (heavy AI)",
+        "optional": True,
+    },
+    "freellmapi": {
         "url": "https://freellmapi.com/v1/chat/completions",
         "key": os.getenv("FREELLMAPI_KEY", ""),
         "model": "free-auto",
         "min_interval": 0.0,
         "label": "FreeLLMAPI (34 free providers, 7.4B tokens/month)",
         "optional": True,
+    },
     "colibri-local": {
         "url": "http://127.0.0.1:8000/v1/chat/completions",
         "key": None,
@@ -120,12 +130,12 @@ BRAINS = {
 }
 
 CHAINS = {
-    "aether-auto": ["colibri-local", "cherry-studio", "ollama-local", "llm7-fast", "llm7-big", "groq", "minimax"],
-    "aether-local": ["colibri-local", "cherry-studio", "ollama-local"],
+    "aether-auto": ["colibri-local", "cherry-studio", "ollama-local", "ollama-heavy", "llm7-fast", "llm7-big", "groq", "minimax"],
+    "aether-local": ["colibri-local", "cherry-studio", "ollama-local", "ollama-heavy"],
     "aether-cloud": ["llm7-fast", "llm7-big", "groq", "minimax"],
     "aether-groq": ["groq", "llm7-big", "minimax"],
     # aliases so DSH's own default (qwen2.5:3b) also routes through the chain
-    "qwen2.5:3b": ["ollama-local", "llm7-fast"],
+    "qwen2.5:3b": ["ollama-local", "ollama-heavy", "llm7-fast"],
 }
 
 # ── per-agent chains: mesh agents use aether-<agent> ──

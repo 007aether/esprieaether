@@ -19,7 +19,7 @@
 | 🔐 VPN Agent | ✅ | Proton NL |
 | 🔄 GitHub Sync | ✅ | 007aether/esprieaether |
 | 📊 Autonomous Loop | ✅ | 7 مهام |
-| 💰 Somnia Page | ✅ | view-only |
+| 💰 Somnia Page | ✅ | Operational (Production) |
 
 ---
 
@@ -47,7 +47,7 @@
 
 - **Dashboard**: http://localhost:5000
 - **Airdrops**: http://localhost:5000/airdrops
-- **Somnia**: http://localhost:5000/somnia
+- **Somnia**: http://localhost:5000/somnia (Operational/production)
 - **Stats**: http://localhost:5000/stats
 - **Telegram**: @Esprieaether_bot
 - **GitHub**: https://github.com/007aether/esprieaether
@@ -76,7 +76,7 @@
 ## 📌 للمستقبل
 
 - Pharos: جاهز في `integrations/pharos/`
-- Somnia Mainnet: راقب `somnia.network`
+- Somnia Mainnet: ✅ Operational/production
 - وكلاء إضافيون: بحث GitHub
 
 ---

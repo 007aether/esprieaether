@@ -1,81 +1,81 @@
 [
   {
-    "name": "MealMaster",
-    "slug": "mealmaster",
-    "category": "food & drink",
-    "pitch": "Meal planning with grocery list generator",
-    "monetization": "Recipe recommendations based on dietary restrictions",
-    "audience": "Busy professionals, health-conscious individuals",
-    "id": 3,
-    "score": 83
-  },
-  {
-    "name": "SleepSync",
-    "slug": "sleepsync",
-    "category": "health & fitness",
-    "pitch": "Sleep tracker with personalized insights and routines",
-    "monetization": "Sleep sounds library and relaxation exercises",
-    "audience": "Sleep-deprived professionals, young parents",
-    "id": 4,
-    "score": 73
-  },
-  {
-    "name": "GreenGuru",
-    "slug": "greenguru",
-    "category": "sustainability",
-    "pitch": "Eco-friendly product recommendations and reviews",
-    "monetization": "Zero-waste challenge tracker and exclusive discounts",
-    "audience": "Eco-conscious consumers, environmental advocates",
-    "id": 8,
-    "score": 68
-  },
-  {
     "name": "FocusFlow",
     "slug": "focusflow",
-    "category": "productivity",
-    "pitch": "Pomodoro timer with smart breaks and streaks",
-    "monetization": "Customizable break activities and themes",
-    "audience": "Students, freelancers, remote workers",
+    "category": "Productivity",
+    "pitch": "Pomodoro timer with music & sounds personalized for deep focus.",
+    "monetization": "Ad-free experience & custom soundpacks",
+    "audience": "Students & Professionals",
     "id": 1,
-    "score": 58
+    "score": 80
   },
   {
-    "name": "PlantPal",
-    "slug": "plantpal",
-    "category": "lifestyle",
-    "pitch": "Indoor plant care assistant with water reminders",
-    "monetization": "Plant identification, care tips, and exclusive deals",
-    "audience": "Plant enthusiasts, urban gardeners",
-    "id": 2,
-    "score": 58
-  },
-  {
-    "name": "FinanceFlow",
-    "slug": "financeflow",
-    "category": "finance",
-    "pitch": "Budgeting app with recurrent transaction forecasting",
-    "monetization": "Investment tracking and passive income calculator",
-    "audience": "Financial independence seekers, budget-conscious individuals",
+    "name": "TripTrac",
+    "slug": "triptrac",
+    "category": "Travel",
+    "pitch": "All-in-one travel planner with offline maps & guides.",
+    "monetization": "Offline city guides & custom itinerary planning",
+    "audience": "Frequent travelers",
     "id": 6,
-    "score": 55
+    "score": 54
   },
   {
-    "name": "LearnLingo",
-    "slug": "learnlingo",
-    "category": "education",
-    "pitch": "Language learning app with spaced repetition flashcards",
-    "monetization": "Offline mode and custom flashcard creation",
-    "audience": "Language learners, travelers",
+    "name": "MealMaster",
+    "slug": "mealmaster",
+    "category": "Cooking",
+    "pitch": "AI-generated meal plans based on dietary restrictions.",
+    "monetization": "Customized meal plans & step-by-step recipes",
+    "audience": "Health-conscious foodies",
+    "id": 2,
+    "score": 53
+  },
+  {
+    "name": "FinFlow",
+    "slug": "finflow",
+    "category": "Finance",
+    "pitch": "Budgeting app with automatic categorization & insights.",
+    "monetization": "Unlimited accounts & advanced analytics",
+    "audience": "Budget-conscious individuals",
+    "id": 8,
+    "score": 53
+  },
+  {
+    "name": "StudySage",
+    "slug": "studysage",
+    "category": "Education",
+    "pitch": "AI-based flashcard creator for efficient learning.",
+    "monetization": "Unlimited flashcards & smart review system",
+    "audience": "Students & Lifelong learners",
     "id": 5,
+    "score": 50
+  },
+  {
+    "name": "PetPal",
+    "slug": "petpal",
+    "category": "Pet Care",
+    "pitch": "Complete pet care tracker with medication reminders.",
+    "monetization": "Vet records storage & Recall alerts",
+    "audience": "Pet owners",
+    "id": 3,
     "score": 48
   },
   {
-    "name": "ArtBook",
-    "slug": "artbook",
-    "category": "entertainment",
-    "pitch": "Art collection organizer with artwork valuation",
-    "monetization": "Art market news and exclusive art offers",
-    "audience": "Art collectors, art enthusiasts",
+    "name": "SleepScore",
+    "slug": "sleepscore",
+    "category": "Health & Fitness",
+    "pitch": "Sleep tracking with detailed personalized sleep insights.",
+    "monetization": "Advanced sleep analysis & wellness reports",
+    "audience": "Health-conscious individuals",
+    "id": 4,
+    "score": 43
+  },
+  {
+    "name": "WisdomWell",
+    "slug": "wisdomwell",
+    "category": "Self-Care",
+    "pitch": "Mindfulness app with personalized guided meditations.",
+    "monetization": "Unlimited meditations & customizable sessions",
+    "audience": "Mindfulness enthusiasts",
     "id": 7,
     "score": 43
   }

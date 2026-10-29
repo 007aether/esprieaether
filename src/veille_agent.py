@@ -25,6 +25,7 @@ import time
 import urllib.request
 import urllib.parse
 import urllib.error
+import socket
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -98,6 +99,29 @@ def gh_search(query, limit=20, sort="stars"):
     params = urllib.parse.urlencode({
         "q": query, "sort": sort, "order": "desc", "per_page": min(limit, 100),
     })
+    url = f"{GITHUB_API}?{params}"
+    try:
+        req = urllib.request.Request(url, headers=_headers())
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = resp.read()
+            try:
+                return json.loads(data.decode('utf-8'))
+            except UnicodeDecodeError:
+                return json.loads(data.decode('latin-1'))
+    except urllib.error.HTTPError as e:
+        logger.error(f"❌ GitHub API {e.code}: {query}")
+        return []
+    except urllib.error.URLError as e:
+        if isinstance(e.reason, socket.timeout):
+            logger.warning(f"⏱️ {query}: وقت استجابة متوقف")
+        elif isinstance(e.reason, ConnectionResetError):
+            logger.warning(f"🔌 {query}: قطع الاتصال")
+        else:
+            logger.warning(f"⚠️ {query}: {e.reason}")
+        return []
+    except Exception as e:
+        logger.warning(f"⚠️ بحث '{query}': {type(e).__name__}: {e}")
+        return []
     req = urllib.request.Request(f"{GITHUB_API}?{params}", headers=_headers())
     try:
         with urllib.request.urlopen(req, timeout=20) as r:

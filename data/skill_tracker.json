@@ -6,9 +6,122 @@
       "count": 3,
       "last_seen": "2026-10-17T11:13:37.139696+00:00",
       "evidence": "Linked via kit builder"
+    },
+    {
+      "name": "A-EVO-Lab/a-evolve",
+      "outcome": "adopted",
+      "count": 1,
+      "last_seen": "2026-10-28T19:37:41.000000+00:00",
+      "evidence": "A-Evolve 5-stage autonomous evolution loop integrated into autonomous cycle"
+    },
+    {
+      "name": "OpenHands/OpenHands",
+      "outcome": "adopted",
+      "count": 1,
+      "last_seen": "2026-10-28T19:43:00.000000+00:00",
+      "evidence": "OpenHands agent platform layer + coding agent runtime adopted"
+    },
+    {
+      "name": "Agent0/agent0ai/agent0",
+      "outcome": "adopted",
+      "count": 1,
+      "last_seen": "2026-10-28T19:45:00.000000+00:00",
+      "evidence": "Agent0 zero-data self-evolution framework adopted"
+    },
+    {
+      "name": "CrewAI/crewAI",
+      "outcome": "adopted",
+      "count": 1,
+      "last_seen": "2026-10-28T19:47:00.000000+00:00",
+      "evidence": "CrewAI role-based multi-agent orchestration adopted"
     }
   ],
-  "adopted": [],
-  "results": [],
-  "last_updated": "2026-10-21T19:36:06.328570+00:00"
+  "adopted": [
+    {
+      "name": "conductor-oss/conductor",
+      "url": "https://github.com/conductor-oss/conductor",
+      "outcome": "usage",
+      "count": 1,
+      "last_seen": "2026-10-28T18:32:00.000000+00:00",
+      "evidence": "adopted for agent.mesh orchestrator"
+    },
+    {
+      "name": "A-EVO-Lab/a-evolve",
+      "outcome": "adopted",
+      "count": 1,
+      "last_seen": "2026-10-28T19:37:41.000000+00:00",
+      "evidence": "A-Evolve 5-stage autonomous evolution loop integrated into autonomous cycle"
+    },
+    {
+      "name": "AgentFactory/zztatpku/AgentFactory",
+      "outcome": "adopted",
+      "count": 1,
+      "last_seen": "2026-10-28T19:41:00.000000+00:00",
+      "evidence": "AgentFactory executable subagent accumulation integrated into autonomous cycle"
+    },
+    {
+      "name": "OpenHands/OpenHands",
+      "outcome": "adopted",
+      "count": 1,
+      "last_seen": "2026-10-28T19:43:00.000000+00:00",
+      "evidence": "OpenHands agent platform layer + coding agent runtime adopted"
+    },
+    {
+      "name": "Agent0/agent0ai/agent0",
+      "outcome": "adopted",
+      "count": 1,
+      "last_seen": "2026-10-28T19:45:00.000000+00:00",
+      "evidence": "Agent0 zero-data self-evolution framework adopted"
+    },
+    {
+      "name": "CrewAI/crewAI",
+      "outcome": "adopted",
+      "count": 1,
+      "last_seen": "2026-10-28T19:47:00.000000+00:00",
+      "evidence": "CrewAI role-based multi-agent orchestration adopted"
+    }
+  ],
+  "results": [
+    {
+      "skill": "A-EVO-Lab/a-evolve",
+      "decision": "adopt",
+      "score": 46.0,
+      "value": 30,
+      "evidence": "A-Evolve 5-stage autonomous evolution loop integrated into autonomous cycle",
+      "status": "complete"
+    },
+    {
+      "skill": "AgentFactory/zztatpku/AgentFactory",
+      "decision": "adopt",
+      "score": 44.0,
+      "value": 30,
+      "evidence": "AgentFactory executable subagent accumulation integrated into autonomous cycle",
+      "status": "complete"
+    },
+    {
+      "skill": "OpenHands/OpenHands",
+      "decision": "adopt",
+      "score": 43.0,
+      "value": 25,
+      "evidence": "OpenHands agent platform layer + coding agent runtime adopted",
+      "status": "complete"
+    },
+    {
+      "skill": "Agent0/agent0ai/agent0",
+      "decision": "adopt",
+      "score": 42.0,
+      "value": 25,
+      "evidence": "Agent0 zero-data self-evolution framework adopted",
+      "status": "complete"
+    },
+    {
+      "skill": "CrewAI/crewAI",
+      "decision": "adopt",
+      "score": 40.0,
+      "value": 20,
+      "evidence": "CrewAI role-based multi-agent orchestration adopted",
+      "status": "complete"
+    }
+  ],
+  "last_updated": "2026-10-28T19:48:00.000000+00:00"
 }

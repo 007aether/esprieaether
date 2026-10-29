@@ -1,4 +1,4 @@
-# 📡 Veille Digest — 2026-10-27 13:58
+# 📡 Veille Digest — 2026-10-28 18:25
 
 **500 repos** across 25 categories.
 

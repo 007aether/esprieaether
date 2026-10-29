@@ -1163,25 +1163,26 @@ async def cmd_alerts(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @authorized_only
 async def cmd_ask(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """مساعد ذكي شامل"""
-    if not context.args:
-        await update.message.reply_text(
-            "🤖 *Ask Agent*" + chr(10) + chr(10) +
-            "*أمثلة:*" + chr(10) +
-            "• `/ask كم إيردروب؟`" + chr(10) +
-            "• `/ask حالة VPN`" + chr(10) +
-            "• `/ask إحصائيات النظام`" + chr(10) +
-            "• `/ask حالة الخدمات`" + chr(10) +
-            "• `/ask رصيد Somnia`" + chr(10) +
-            "• `/ask اقتراحات التطوير`" + chr(10) +
-            "• `/ask خذ نسخة احتياطية`",
-            parse_mode="Markdown"
-        )
-        return
+    """مساعد ذكي شامل - يفهم كل النصوص مباشرة"""
+    # إذا لم تكتفِ بأي وسيلة، اقرأ النص كله كسؤال مباشر
+    if context.args:
+        question = " ".join(context.args)
+    else:
+        question = (update.message.text or "").strip()
+        if not question:
+            await update.message.reply_text(
+                "🤖 *Ask Agent*" + chr(10) + chr(10) +
+                "*أمثلة:*" + chr(10) +
+                "• `كم إيردروب جديد؟`" + chr(10) +
+                "• `حالة VPN`" + chr(10) +
+                "• `إحصائيات النظام`" + chr(10) +
+                "• `رصيد Somnia`" + chr(10) +
+                "• `هل هادا ممكن؟`",
+                parse_mode="Markdown"
+            )
+            return
 
-    question = " ".join(context.args)
     msg = await update.message.reply_text("🤔 جارٍ التحليل...")
-
     try:
         result = ask_agent.ask(question)
         await msg.edit_text(md_escape(result["answer"]), parse_mode="Markdown", disable_web_page_preview=True)
@@ -2830,12 +2831,12 @@ def main():
             await update.message.reply_text(md_escape(str(out))[:4000], parse_mode="Markdown")
             return
 
-        # ── anything else → LLM brain (Hermes free cloud, fallback Ollama) ──
-        from hermes_bridge_new import HermesBridge
+        # ── anything else → تحويل مباشر لـ Ask Agent (بدون الحاجة لكتابة /ask) ──
+        from ask_agent import AskAgent
         try:
-            brain = HermesBridge()
-            reply = await brain.ask(text, system="أنت EsprieAether — ذكاء النظام الموحّد. خذ من المخزون (π، مذكرات، أهداف، مشاكل، أدوات قيد التشغيل) وأجب باداء المهمة المطلوبة في أقصر وقت. إذا طُلب تشغيل أمر، نفذه وrclّر. اجب بعمليات عن ذكر تقصد.")
-            await update.message.reply_text(md_escape(str(reply))[:4000] or "✅ Ορασε.", parse_mode="Markdown")
+            a = AskAgent()
+            resp = await a.ask(text, system="أنت مساعد EsprieAether — أجب كل سؤال مباشرة. اعرض اسم الخدمة أو النتيجة أو التوضيح القصير بلا تكرار.")
+            await update.message.reply_text(md_escape(resp)[:4000] or "✅ تم الاستماع.", parse_mode="Markdown")
         except Exception as e:
             await update.message.reply_text(f"❌ خطأ: {e}", parse_mode="Markdown")
 

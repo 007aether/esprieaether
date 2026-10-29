@@ -1,10 +1,46 @@
 {
-  "current_cycle": 915,
-  "total_cycles": 915,
+  "current_cycle": 983,
+  "total_cycles": 949,
   "diagnoses": [
     {
       "type": "service_down",
       "services": {
+        "web": {
+          "port": 5000,
+          "path": "/health",
+          "status": false,
+          "local": true
+        },
+        "cloud_desktop": {
+          "port": 5001,
+          "path": "/health",
+          "status": false,
+          "local": true
+        },
+        "sunna": {
+          "port": 5100,
+          "path": "/health",
+          "status": false,
+          "local": true
+        },
+        "integrations": {
+          "port": 5102,
+          "path": "/health",
+          "status": false,
+          "local": true
+        },
+        "kanban": {
+          "port": 5103,
+          "path": "/health",
+          "status": false,
+          "local": true
+        },
+        "homedock": {
+          "port": 5104,
+          "path": "/",
+          "status": false,
+          "local": true
+        },
         "dsh_relay": {
           "port": 5105,
           "path": "/health",
@@ -12,8 +48,8 @@
           "local": true
         }
       },
-      "severity": "medium",
-      "message": "1/12 services are down"
+      "severity": "high",
+      "message": "7/12 services are down"
     }
   ],
   "fixes_applied": [
@@ -12343,6 +12379,594 @@
       "action": "Restart dsh_relay",
       "stage": 1,
       "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "web",
+      "action": "Restart web",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "cloud_desktop",
+      "action": "Restart cloud_desktop",
+      "stage": 1,
+      "status": "applied"
+    },
+    {
+      "type": "restart_service",
+      "service": "sunna",
+      "action": "Restart sunna",
+      "stage": 1,
+      "status": "applied"
     }
   ],
   "learning": [
@@ -17835,914 +18459,213 @@
       "action": "Applied self-improvement",
       "status": "applied",
       "timestamp": "2026-10-26T00:59:40.443077"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T19:28:54.628828"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T19:37:31.673556"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T21:31:53.132657"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T21:35:24.744916"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T21:39:47.289450"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T21:46:07.158265"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T22:19:39.980151"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T22:25:00.887524"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T22:30:44.308984"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T22:36:27.800894"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T22:42:11.332526"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T22:47:54.883021"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T22:53:38.266526"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T22:59:21.687843"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T23:05:05.102450"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T23:10:48.497658"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T23:16:25.832065"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T23:21:56.872804"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T23:27:27.923584"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T23:32:58.932738"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T23:38:29.974101"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T23:44:00.999285"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T23:49:32.056261"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-28T23:55:03.132439"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-29T00:00:34.257855"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-29T00:06:05.294483"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-29T00:11:36.339538"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-29T00:17:07.488302"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-29T00:22:38.394262"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-29T00:28:09.349612"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-29T00:33:40.451238"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-29T00:39:11.516045"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-29T00:44:42.487130"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-10-29T00:50:13.614973"
     }
   ],
   "decisions": [
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T20:43:03.401021",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T20:48:23.082451",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T20:53:42.799049",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T20:59:02.463438",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:04:22.086995",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:09:41.820411",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:15:01.385146",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:20:20.987397",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:25:40.707195",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:31:00.233201",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:36:19.956257",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:41:39.675722",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:46:59.253523",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:52:18.901338",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T21:57:38.553365",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:02:58.233933",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:08:17.744665",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:13:37.414051",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:18:57.126486",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:24:16.792470",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:29:36.353688",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:34:55.943872",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:40:15.568035",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:45:35.200393",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "sunna",
-          "action": "Restart sunna",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:50:52.768408",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "dsh_relay",
-          "action": "Restart dsh_relay",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T22:56:08.302791",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "dsh_relay",
-          "action": "Restart dsh_relay",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T23:01:24.409865",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "dsh_relay",
-          "action": "Restart dsh_relay",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T23:06:39.995866",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "dsh_relay",
-          "action": "Restart dsh_relay",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "repair",
-      "action": "apply auto-fixes",
-      "confidence": 0.75,
-      "timestamp": "2026-10-25T23:11:55.598334",
-      "reason": "High severity issues detected, applying fixes",
-      "fixes": [
-        {
-          "type": "restart_service",
-          "service": "integrations",
-          "action": "Restart integrations",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "kanban",
-          "action": "Restart kanban",
-          "stage": 1,
-          "status": "applied"
-        },
-        {
-          "type": "restart_service",
-          "service": "dsh_relay",
-          "action": "Restart dsh_relay",
-          "stage": 1,
-          "status": "applied"
-        }
-      ]
-    },
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-25T23:17:08.423004",
-      "reason": "System healthy, no urgent action needed"
-    },
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-25T23:22:15.828174",
-      "reason": "System healthy, no urgent action needed"
-    },
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-25T23:27:23.173280",
-      "reason": "System healthy, no urgent action needed"
-    },
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-25T23:32:30.531571",
-      "reason": "System healthy, no urgent action needed"
-    },
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-25T23:37:37.951564",
-      "reason": "System healthy, no urgent action needed"
-    },
     {
       "type": "monitoring",
       "action": "continue monitoring",
@@ -18854,9 +18777,891 @@
       "confidence": 0.85,
       "timestamp": "2026-10-26T00:59:40.442371",
       "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-28T19:28:54.627783",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-28T19:37:31.672775",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-28T21:31:53.131869",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-28T21:35:24.744223",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-28T21:39:47.288753",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "monitoring",
+      "action": "continue monitoring",
+      "confidence": 0.85,
+      "timestamp": "2026-10-28T21:46:07.157548",
+      "reason": "System healthy, no urgent action needed"
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T22:19:39.787944",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T22:25:00.687431",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T22:30:44.173519",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T22:36:27.666175",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T22:42:11.203576",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T22:47:54.763175",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T22:53:38.118189",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T22:59:21.561089",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T23:05:04.985764",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T23:10:48.372251",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T23:16:25.771480",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T23:21:56.815896",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T23:27:27.862619",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T23:32:58.874243",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T23:38:29.917812",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T23:44:00.939116",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T23:49:31.998580",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-28T23:55:03.068944",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-29T00:00:34.200255",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-29T00:06:05.236274",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-29T00:11:36.282591",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-29T00:17:07.430477",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-29T00:22:38.337579",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-29T00:28:09.286075",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-29T00:33:40.375965",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-29T00:39:11.456288",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-29T00:44:42.427433",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-10-29T00:50:13.556681",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "web",
+          "action": "Restart web",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "applied"
+        },
+        {
+          "type": "restart_service",
+          "service": "sunna",
+          "action": "Restart sunna",
+          "stage": 1,
+          "status": "applied"
+        }
+      ]
     }
   ],
-  "last_run": "2026-10-26T00:59:40.441363",
+  "last_run": "2026-10-29T00:50:13.555454",
   "status": "diagnosed",
   "local_pct": 100.0,
   "error_count": 0,

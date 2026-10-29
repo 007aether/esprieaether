@@ -9,7 +9,10 @@ marker = """    app.add_handler(CommandHandler("sunnakanban", cmd_sunnakanban))
     app.add_handler(CommandHandler("obsidian", cmd_obsidian))
 """
 
-new_commands = """
+new_commands += """
+    # ─── NEW: Trade Cycle command (paper trading loop) ───
+    app.add_handler(CommandHandler("flywheel", cmd_flywheel))
+"""
     # ─── NEW: Bot self-maintenance commands (3) ───
     app.add_handler(CommandHandler("bothealth", cmd_bot_health))
     app.add_handler(CommandHandler("botlog", cmd_bot_log))

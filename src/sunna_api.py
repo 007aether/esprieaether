@@ -353,6 +353,8 @@ def enterprise():
 
 
 
+# Main entry point
+if __name__ == "__main__":
     print(f"📋 Sunna API bridge — {SUNNA} — port {PORT}")
     print(f"   sunna dir exists: {SUNNA.exists()}")
     app.run(host="0.0.0.0", port=PORT, threaded=True)
