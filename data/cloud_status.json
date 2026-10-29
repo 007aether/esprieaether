@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-29T17:39:04.316015+00:00",
+  "cloud_last_run": "2026-10-29T22:03:59.692921+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Binance Hack: $5.5 Billion Drained Across Three Chains, $1.8 Billion Frozen",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Polymarket Hack: Trading Halted After a Third-Party Provider Breach",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Coinbase Data Breach? What the Amplitude Leak Exposed and How to Stay Safe",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Robinhood Q3 Earnings: Vlad Tenev Doubles Down on Robinhood Chain as Crypto Revenue Drops 55%",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "FOMC October 28: The Hold Is Priced In, So Warsh’s December Signal Is the Trade",
       "source": "https://airdropalert.com/feed"
     },
     {
