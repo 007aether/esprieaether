@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-29T03:00:05.371333+00:00",
+  "cloud_last_run": "2026-10-29T11:50:29.161693+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is Resistance Dog? The Hooded Dog Behind Telegram’s Number One NFT",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is a Potential Airdrop? How to Spot One Before It Is Announced",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Who Is Cobie? The Poker Pro Who Became Coinbase&#8217;s Product Boss",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is Raoul Pal? The Macro Guru Who Sold Crypto a Supercycle",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Ripple and Robinhood Partnership: RLUSD Heads to the Robinhood App",
       "source": "https://airdropalert.com/feed"
     },
     {
