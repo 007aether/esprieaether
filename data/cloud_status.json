@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-29T11:50:29.161693+00:00",
+  "cloud_last_run": "2026-10-29T17:39:04.316015+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Is Stan Druckenmiller? The Man Who Broke the Bank of England Just Backed Hyperliquid",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "LIBRA Case Dismissed Against Milei Airdrops and NFT News",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "ICE Hyperliquid Deal: HYPE Breaks Out to $88 and My Long Is Now Risk-Free",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "FOMC October 28: The Hold Is Priced In, So Warsh’s December Signal Is the Trade",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy WLFI for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is Exit Liquidity in Crypto? How to Avoid Becoming It",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is Cobie? The Poker Pro Who Became Coinbase&#8217;s Product Boss",
       "source": "https://airdropalert.com/feed"
     },
     {
