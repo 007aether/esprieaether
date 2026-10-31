@@ -92,7 +92,7 @@ class OfflineModeManager:
         # Check Ollama
         try:
             result = subprocess.run(
-                ["curl", "-s", "--max-time", "2", "http://127.0.0.1:11434/api/tags"],
+                ["curl", "-s", "--max-time", "2", "http://127.0.0.1:11435/api/tags"],
                 capture_output=True, text=True, timeout=5
             )
             if result.returncode == 0:

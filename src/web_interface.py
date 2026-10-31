@@ -761,7 +761,7 @@ def settings_page():
         settings = {
             "aether_id": os.getenv("AETHER_ID", "007aether"),
             "aether_email": os.getenv("AETHER_EMAIL", ""),
-            "ollama_host": os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434"),
+            "ollama_host": os.getenv("OLLAMA_HOST", "http://127.0.0.1:11435"),
             "ollama_model": os.getenv("OLLAMA_MODEL", ""),
             "web_host": os.getenv("WEB_HOST", "127.0.0.1"),
             "web_port": os.getenv("WEB_PORT", "5000"),

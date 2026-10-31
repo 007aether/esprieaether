@@ -40,7 +40,7 @@ except ImportError:
     pass
 
 DB_FILE = BASE_DIR / "data" / "vector_memory.db"
-OLLAMA_URL = os.getenv("OLLAMA_URL", "http://127.0.0.1:11434")
+OLLAMA_URL = os.getenv("OLLAMA_URL", "http://127.0.0.1:11435")
 EMBED_MODEL = os.getenv("EMBED_MODEL", "nomic-embed-text")
 
 logger = logging.getLogger("vector_memory")
