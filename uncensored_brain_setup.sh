@@ -30,7 +30,7 @@ ExecStart=/usr/local/bin/ollama serve
 Restart=always
 Environment=HOME=%h
 Environment=PATH=/usr/local/bin:/usr/bin:/bin
-Environment=OLLAMA_MODELS=/root/.ollama/models
+Environment=OLLAMA_MODELS=%h/.ollama/models
 
 [Install]
 WantedBy=default.target
@@ -46,7 +46,7 @@ if [ -f .env ]; then
         echo "" >> .env
         echo "# Uncensored Local Brain" >> .env
         echo "BRAIN_MODEL=qwen2.5-coder:7b-instruct" >> .env
-        echo "BRAIN_HOST=http://localhost:11434" >> .env
+        echo "BRAIN_HOST=http://localhost:11435" >> .env
         echo "BRAIN_TYPE=ollama" >> .env
         echo "BRAIN_LOCAL=true" >> .env
     fi
