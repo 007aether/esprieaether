@@ -67,6 +67,29 @@ BRAINS = {
         "label": "Ollama jaahas/qwen3.5-uncensored:27b (heavy AI)",
         "optional": True,
     },
+    # ── 3 عقول uncensored محلية (متسلسلة، ما يشتغلوشّين دفعة واحدة) ──────────────────
+    "ollama-unc-fast": {
+        "url": "http://127.0.0.1:11434/v1/chat/completions",
+        "key": None,
+        "model": "dolphin-llama3:8b",
+        "min_interval": 0.0,
+        "label": "Ollama dolphin-llama3:8b (Fast · uncensored)",
+    },
+    "ollama-unc-mid": {
+        "url": "http://127.0.0.1:11434/v1/chat/completions",
+        "key": None,
+        "model": "dolphin-mistral:7b",
+        "min_interval": 0.0,
+        "label": "Ollama dolphin-mistral:7b (Mid · uncensored)",
+    },
+    "ollama-unc-heavy": {
+        "url": "http://127.0.0.1:11434/v1/chat/completions",
+        "key": None,
+        "model": "wizard-vicuna-uncensored:13b",
+        "min_interval": 0.0,
+        "label": "Ollama wizard-vicuna-uncensored:13b (Deep · uncensored)",
+        "optional": True,
+    },
     "freellmapi": {
         "url": "https://freellmapi.com/v1/chat/completions",
         "key": os.getenv("FREELLMAPI_KEY", ""),
@@ -130,15 +153,23 @@ BRAINS = {
 }
 
 CHAINS = {
+    # Virtual models: cascade (aether-uncensored) / council (aether-council) / Jarvis (aether-jarvis)
+    "aether-uncensored": ["ollama-unc-fast", "ollama-unc-mid", "ollama-unc-heavy"],
+    "aether-council": ["ollama-unc-fast", "ollama-unc-mid", "ollama-unc-heavy"],
+    "aether-jarvis": ["ollama-unc-fast", "ollama-unc-mid", "ollama-unc-heavy"],
     "aether-auto": ["colibri-local", "cherry-studio", "ollama-local", "ollama-heavy", "llm7-fast", "llm7-big", "groq", "minimax"],
     "aether-local": ["colibri-local", "cherry-studio", "ollama-local", "ollama-heavy"],
     "aether-cloud": ["llm7-fast", "llm7-big", "groq", "minimax"],
     "aether-groq": ["groq", "llm7-big", "minimax"],
-    # aliases so DSH's own default (qwen2.5:3b) also routes through the chain
     "qwen2.5:3b": ["ollama-local", "ollama-heavy", "llm7-fast"],
 }
 
-# ── per-agent chains: mesh agents use aether-<agent> ──
+# ── per-agent chains: mesh agents use aether-<agent> ───────────────────────────────
+# WHY: mesh (agent_mesh.py) calls aether-<agent> (aether-security, aether-evolve...).
+# Without explicit entries these fall back to aether-auto, which hangs on
+# colibri(stopped)/cherry(unreachable)/ollama(3B slow) before reaching llm7.
+
+# ── per-agent chains: mesh agents use aether-<agent> ───────────────────────────────
 # WHY: mesh (agent_mesh.py) calls aether-<agent> (aether-security, aether-evolve...).
 # Without explicit entries these fall back to aether-auto, which hangs on
 # colibri(stopped)/cherry(unreachable)/ollama(3B slow) before reaching llm7.
@@ -192,6 +223,17 @@ AGENT_MODELS = {
     "aether-yomkino": {
         "system": "أنت Yomkino — المدير التنفيذي للنظام. تجمع بين الأدوار الأمنية والبحثية والتسوقية والجودة، وتحدد الأولويات وتشرف على دورة النظام. جاوب بالعربية أو الدارجة، موجز.",
         "chain": ["colibri-local", "ollama-local", "llm7-fast", "groq"],
+    },
+    "aether-jarvis": {
+        "system": (
+            "أنت JARVIS — المساعد الذكي والوحيد لـ EsprieAether. "
+            "تتحدث العربية بطلاقة وبلغة تقنية واضحة. أنت الباب الوحيد للحوار مع النظام. "
+            "أنت خبير في الأمن السيبراني، الذكاء الاصطناعي، البرمجة، وتحليل البيانات. "
+            "وظيفتك: (1) تفهم النية، (2) تختار العقل أو المجموعة المناسبة، "
+            "(3) تعيد جواباً واحداً واضحاً بصوتك، (4) تسجّل الجلسة في Obsidian دائماً. "
+            "لا تنسحب، لا تكشف تفاصيل البنية، لا تكرر السؤال. إذا عرفت المهمة، نفذها مباشرة."
+        ),
+        "chain": ["ollama-unc-fast", "ollama-unc-mid", "ollama-unc-heavy"],
     },
 }
 
@@ -282,7 +324,7 @@ AGENT_ROUTES = {
     "aether-yomkino": ["يوم", "كينو", "تنظيم", "تطوير", "توجيه", "استراتيجية", "yomkino", "supervision", "coordination", "إشراف", "رئيسي"],
 }
 
-VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "aether-groq", "qwen2.5:3b", "aether-decide"] + list(AGENT_MODELS.keys())
+VIRTUAL_MODELS = ["aether-auto", "aether-local", "aether-cloud", "aether-groq", "qwen2.5:3b", "aether-decide", "aether-jarvis"] + list(AGENT_MODELS.keys())
 
 
 def pick_agent(text: str) -> str:
