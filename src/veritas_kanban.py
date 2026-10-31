@@ -57,7 +57,7 @@ SEED = """# 📋 Sunna Kanban
 
 def _read() -> str:
     if not KANBAN.exists():
-        KANBAN.parent.mkdir(exist_ok=True)
+        KANBAN.parent.mkdir(parents=True, exist_ok=True)
         KANBAN.write_text(SEED, encoding="utf-8")
     return KANBAN.read_text(encoding="utf-8")
 
@@ -146,7 +146,7 @@ def move():
 
 if __name__ == "__main__":
     if "--seed" in sys.argv:
-        KANBAN.parent.mkdir(exist_ok=True)
+        KANBAN.parent.mkdir(parents=True, exist_ok=True)
         KANBAN.write_text(SEED, encoding="utf-8")
         print(f"seeded: {KANBAN}")
     else:
