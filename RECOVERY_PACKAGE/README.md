@@ -5,7 +5,7 @@
 ## المكونات
 | المكوّن | الحالة | التفاصيل |
 |--------|--------|----------|
-| 🤖 JARVIS (Ollama qwen2.5:3b) | ✅ | 11434 |
+| 🤖 JARVIS (Ollama qwen2.5:3b) | ✅ | 11435 |
 | 💬 Telegram Bot | ✅ | @Esprieaether_bot (50+ أمر) |
 | 🌐 Web Dashboard | ✅ | Flask على localhost:5000 |
 | 📡 Trade Cycle (Flywheel) | ✅ | 6 وكلاء ورقي فقط (PAPER_ONLY=True) |

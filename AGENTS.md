@@ -33,7 +33,7 @@ Telegram / CLI / TUI
 
 | Service | Port | Purpose |
 |---|---|---|
-| Ollama | 11434 | Local LLM (qwen2.5:3b) |
+| Ollama | 11435 | Local LLM (qwen2.5:3b) |
 | Aether Router | 11435 | 5 brains, 12 virtual models, 7 agents |
 | Orchestrator | 11436 | 7-agent orchestration (OpenAI-compatible) |
 | Web Interface | 5000 | Flask dashboard |
