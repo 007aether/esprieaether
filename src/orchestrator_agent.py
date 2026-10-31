@@ -58,7 +58,7 @@ SERVICES = {
     "homedock":      (5104,  "/health"),
     "jarvis-api":    (8000,  "/api/health"),
     "jarvis-fe":     (3000,  "/"),
-    "ollama":        (11434, "/api/tags"),
+    "ollama":        (11435, "/api/tags"),
     "governor":      (11123, "/"),   # MCP: 500 = alive
 }
 

@@ -26,7 +26,7 @@ class ServiceIntegration:
             "router": {"port": 11435, "status": "active", "integrated": True},
             "agent_mesh": {"port": 11437, "status": "active", "integrated": True},
             "jarvis": {"port": 8000, "status": "active", "integrated": True},
-            "ollama": {"port": 11434, "status": "active", "integrated": True},
+            "ollama": {"port": 11435, "status": "active", "integrated": True},
             "dsh_relay": {"port": 5105, "status": "active", "integrated": True},
             "local_ai": {"port": "local", "status": "active", "integrated": True},
         }

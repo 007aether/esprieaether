@@ -114,7 +114,7 @@ def status():
     """Full system status."""
     services = {}
     for name, url in [
-        ("ollama", "http://127.0.0.1:11434/api/tags"),
+        ("ollama", "http://127.0.0.1:11435/api/tags"),
         ("router", "http://127.0.0.1:11435/health"),
         ("orchestrator", "http://127.0.0.1:11436/health"),
         ("web", "http://127.0.0.1:5000/health"),

@@ -803,7 +803,7 @@ def task_colibri_check() -> dict:
             result["serve"] = "stopped"
         # ollama models
         try:
-            with urllib.request.urlopen("http://127.0.0.1:11434/api/tags", timeout=4) as r:
+            with urllib.request.urlopen("http://127.0.0.1:11435/api/tags", timeout=4) as r:
                 result["ollama_models"] = len(json.loads(r.read()).get("models", []))
         except Exception:
             result["ollama_models"] = 0

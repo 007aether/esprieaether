@@ -119,7 +119,7 @@ def get_all_services():
         "integrations": (5102, "/health"),
         "kanban": (5103, "/health"),
         "homedock": (5104, "/"),
-        "ollama": (11434, "/api/tags"),
+        "ollama": (11435, "/api/tags"),
         "router": (11435, "/health"),
         "orchestrator": (11436, "/health"),
         "agent_mesh": (11437, "/health"),

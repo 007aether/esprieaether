@@ -3,7 +3,7 @@
 watchdog.py — 24/7 self-healing for EsprieAether + DSH stack.
 
 Checks every 60s, restarts anything dead:
-  - ollama   (11434)
+  - ollama   (11435)
   - router   (11435)  ← Aether AI Router (5 brains + 6 agents)
   - orchestrator (11436) ← 7-agent orchestrator
   - web      (5000)
@@ -41,7 +41,7 @@ GOVERNOR_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / "Temp" / "new_repos" /
 SERVICES = {
     "ollama": {
         "kind": "http",
-        "url": "http://127.0.0.1:11434/api/tags",
+        "url": "http://127.0.0.1:11435/api/tags",
         "cmd": [OLLAMA_BIN, "serve"],
     },
     "router": {

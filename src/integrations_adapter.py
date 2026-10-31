@@ -83,7 +83,7 @@ FOLDED_SERVICES = {
 
 # known stack ports (what we map)
 STACK_PORTS = {
-    11434: "ollama", 11435: "router", 11436: "orchestrator",
+    11435: "ollama", 11436: "router", 11436: "orchestrator",
     5000: "web", 5001: "cloud-desktop", 5100: "sunna-api",
     5101: "dsh-bridge", 5102: "integrations", 5103: "kanban", 5104: "homedock", 8000: "jarvis",
 }

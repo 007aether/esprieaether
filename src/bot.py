@@ -1280,7 +1280,7 @@ async def cmd_services(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Ollama دايماً: ping مباشر (كيدوز على systemctl)
     try:
         import requests
-        r = requests.get("http://127.0.0.1:11434/api/tags", timeout=3)
+        r = requests.get("http://127.0.0.1:11435/api/tags", timeout=3)
         if r.status_code == 200:
             models = r.json().get("models", [])
             text += f"🟢 `ollama` (ping): {len(models)} models\n"

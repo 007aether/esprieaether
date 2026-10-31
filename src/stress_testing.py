@@ -117,7 +117,7 @@ class StressTester:
             ("Sunna API", 5100, "/health"),
             ("Integrations", 5102, "/health"),
             ("Kanban", 5103, "/health"),
-            ("Ollama", 11434, "/api/tags"),
+            ("Ollama", 11435, "/api/tags"),
             ("Router", 11435, "/health"),
             ("Orchestrator", 11436, "/health"),
             ("Agent Mesh", 11437, "/health"),
