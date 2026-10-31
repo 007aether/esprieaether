@@ -75,12 +75,12 @@ def _http_ok(url: str, timeout: float = 2.0) -> tuple[bool, float, str]:
 
 
 def check_ollama() -> CheckResult:
-    host = os.environ.get("OLLAMA_HOST", "http://localhost:11434").replace("http://", "").split("/")[0]
+    host = os.environ.get("OLLAMA_HOST", "http://localhost:11435").replace("http://", "").split("/")[0]
     if ":" in host:
         h, p = host.split(":", 1)
         port = int(p)
     else:
-        h, port = host or "localhost", 11434
+        h, port = host or "localhost", 11435
     ok, latency = _port_open(h, port)
     return CheckResult("ollama", ok, "port open" if ok else "unreachable", latency)
 

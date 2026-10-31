@@ -14,7 +14,7 @@ A **sovereign local AI stack** that runs primarily on your machine:
 
 | Component | Port / Location | Role |
 |-----------|-----------------|------|
-| **Ollama (JARVIS)** | 11434 | Local LLM (qwen2.5:3b or better) |
+| **Ollama (JARVIS)** | 11435 | Local LLM (qwen2.5:3b or better) |
 | **AI Router** | 11435 | Multi-brain routing (local → cloud fallback) |
 | **Orchestrator** | 11436 | 7-agent orchestration |
 | **Web Dashboard** | 5000 | Flask control center |
@@ -133,7 +133,7 @@ TELEGRAM_CHAT_ID=
 
 # Optional
 GITHUB_TOKEN=
-OLLAMA_HOST=http://localhost:11434
+OLLAMA_HOST=http://localhost:11435
 OLLAMA_MODEL=qwen2.5:3b
 WEB_PORT=5000
 
