@@ -37,7 +37,7 @@ CRONPULSE_KEY = os.getenv("CRONPULSE_API_KEY", "")
 
 # service -> (port, path)
 SERVICES = {
-    "router": (11435, "/health"),
+    "router": (11436, "/health"),
     "orchestrator": (11436, "/health"),
     "web": (5000, "/health"),
     "cloud-desktop": (5001, "/health"),

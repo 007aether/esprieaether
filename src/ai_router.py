@@ -7,7 +7,7 @@ Brains:
   2. llm7-fast    : mistral-Nemo-Instruct (keyless free cloud)
   3. llm7-big     : gpt-oss:20b           (keyless free cloud, stronger)
 
-DSH → http://localhost:11435/v1 (openai-completions) → router picks the brain.
+DSH → http://localhost:11436/v1 (openai-completions) → router picks the brain.
 
 Virtual models (DSH dropdown):
   aether-auto  → local first, cloud fallback (smart: long prompts → big brain)
@@ -535,7 +535,7 @@ def decide():
 
 
 if __name__ == "__main__":
-    port = int(os.getenv("AETHER_ROUTER_PORT", "11435"))
+    port = int(os.getenv("AETHER_ROUTER_PORT", "11436"))
     print(f"🧠 Aether AI Router — {len(BRAINS)} brains, {len(AGENT_MODELS)} agents — port {port}")
     for m in VIRTUAL_MODELS:
         if m in AGENT_MODELS:

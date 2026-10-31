@@ -23,7 +23,7 @@ class ServiceIntegration:
             "integrations": {"port": 5102, "status": "active", "integrated": True},
             "kanban": {"port": 5103, "status": "active", "integrated": True},
             "homedock": {"port": 5104, "status": "active", "integrated": True},
-            "router": {"port": 11435, "status": "active", "integrated": True},
+            "router": {"port": 11436, "status": "active", "integrated": True},
             "agent_mesh": {"port": 11437, "status": "active", "integrated": True},
             "jarvis": {"port": 8000, "status": "active", "integrated": True},
             "ollama": {"port": 11435, "status": "active", "integrated": True},

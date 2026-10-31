@@ -2559,7 +2559,7 @@ async def cmd_explain(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "📋 *الخدمات التالية:* \n"
             "• web_interface (5000)\n"
             "• agent_mesh (11437)\n"
-            "• ai_router (11435)\n"
+            "• ai_router (11436)\n"
             "• cloud_desktop (5001)\n"
             "• sunna_api (5100)\n"
             "• integrations (5102)\n"
@@ -2599,7 +2599,7 @@ async def cmd_bot_health(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ("web_interface", "5000", "http://127.0.0.1:5000/"),
         ("jarvis-api", "8000", "http://127.0.0.1:8000/api/health"),
         ("agent_mesh", "11437", "http://127.0.0.1:11437/"),
-        ("ai_router", "11435", "http://127.0.0.1:11435/"),
+        ("ai_router", "11436", "http://127.0.0.1:11436/"),
         ("cloud_desktop", "5001", "http://127.0.0.1:5001/"),
         ("sunna_api", "5100", "http://127.0.0.1:5100/"),
         ("integrations", "5102", "http://127.0.0.1:5102/"),

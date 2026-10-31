@@ -20,8 +20,8 @@ The 11 agents (from GitHub integrations):
  10. self-evolve      (built-in)     — self-improvement
  11. router           (built-in)     — 5-brain AI routing
 
-Endpoint: http://127.0.0.1:11436/v1/chat/completions
-DSH: custom provider → baseURL http://localhost:11436/v1
+Endpoint: http://127.0.0.1:11437/v1/chat/completions
+DSH: custom provider → baseURL http://localhost:11437/v1
 """
 
 import json
@@ -46,7 +46,7 @@ def _cors(resp):
     resp.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
     return resp
 
-ROUTER_URL = os.getenv("AETHER_ROUTER_URL", "http://127.0.0.1:11435")
+ROUTER_URL = os.getenv("AETHER_ROUTER_URL", "http://127.0.0.1:11436")
 
 # ── Agent registry ──
 # each agent: name -> {skill, system_prompt, brain_pref}
@@ -220,7 +220,7 @@ def group():
 
 
 if __name__ == "__main__":
-    port = int(os.getenv("AETHER_ORCH_PORT", "11436"))
+    port = int(os.getenv("AETHER_ORCH_PORT", "11437"))
     print(f"🎯 Aether Orchestrator — {len(AGENTS)} agents, 5 brains — port {port}")
     for name, a in AGENTS.items():
         print(f"   aether-{name}: {a['skill']}")

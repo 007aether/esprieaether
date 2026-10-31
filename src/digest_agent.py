@@ -31,7 +31,7 @@ logger = logging.getLogger("digest_agent")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(name)s | %(message)s")
 
 SERVICES = {
-    "router": ("11435", "/v1/models"),
+    "router": ("11436", "/v1/models"),
     "mesh": ("11437", "/health"),
     "web": ("5000", "/health"),
     "cloud-desktop": ("5001", "/health"),

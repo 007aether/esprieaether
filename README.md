@@ -15,7 +15,7 @@ A **sovereign local AI stack** that runs primarily on your machine:
 | Component | Port / Location | Role |
 |-----------|-----------------|------|
 | **Ollama (JARVIS)** | 11435 | Local LLM (qwen2.5:3b or better) |
-| **AI Router** | 11435 | Multi-brain routing (local → cloud fallback) |
+| **AI Router** | 11436 | Multi-brain routing (local → cloud fallback) |
 | **Orchestrator** | 11436 | 7-agent orchestration |
 | **Web Dashboard** | 5000 | Flask control center |
 | **Cloud Desktop** | 5001 | Remote access + tunnel |
@@ -86,7 +86,7 @@ Telegram / CLI / Web
         ↓
    Command Router / Hermes
         ↓
-   AI Router (11435)  ←→  Ollama + cloud fallbacks
+   AI Router (11436)  ←→  Ollama + cloud fallbacks
         ↓
    Orchestrator + Agent Mesh
         ↓

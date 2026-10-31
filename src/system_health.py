@@ -86,7 +86,7 @@ def check_ollama() -> CheckResult:
 
 
 def check_router() -> CheckResult:
-    port = int(os.environ.get("ROUTER_PORT", "11435"))
+    port = int(os.environ.get("ROUTER_PORT", "11436"))
     ok, latency = _port_open("127.0.0.1", port)
     return CheckResult("ai_router", ok, f":{port}", latency)
 

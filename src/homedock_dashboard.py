@@ -29,7 +29,7 @@ PORT = int(os.environ.get("HOMEDOCK_PORT", "5104"))
 # service -> (port, path)
 SERVICES = {
     "ollama": (11435, "/api/tags"),
-    "router": (11435, "/health"),
+    "router": (11436, "/health"),
     "orchestrator": (11436, "/health"),
     "web": (5000, "/health"),
     "cloud-desktop": (5001, "/health"),

@@ -20,7 +20,7 @@
 - 🔁 **اللامركزية الذاتية:** autonome_evolve (570+), autonomous_loop, continuous_development, self_evolve, self_improve
 - 📚 **المعرفة والذاكرة:** Obsidian vault، knowledge_blueprint، knowledge_interface، knowledge_router، vector_memory_agent، memory_layer، memory_optimizer
 - 📈 **التجارة والبيانات:** trade_cycle (6 وكلاء + حُكّام + CoinGecko)، market_watcher، daily_digest، autnpe
-- 🌐 **الخوادم والروابط:** web_interface (Flask :5000)، ai_router (11435)، agent_mesh (11435)، bot (11436)، cloud_desktop (5001)، integrations (8080)، kanban (5103)
+- 🌐 **الخوادم والروابط:** web_interface (Flask :5000)، ai_router (11436)، agent_mesh (11437)، bot (telegram)، cloud_desktop (5001)، integrations (8080)، kanban (5103)
 - 🗄️ **البيانات الذاتية:** trade_cycle.db، knowledge_base.json، esprieaether.db، autonomous logs،autonomous_selfheal_daemon.log
 - 🛡️ **الأمان والصيانة:** watchdog، guardian_agent، backup_agent، cleanup_bot، offline_mode، security_agent، resource_manager
 - 🧪 **التجريب والتطوير:** sandbox_execution، stress_testing، test_knowledge_router، comprehensive_upgrade، kit_builder، development_plan، upgrade_plan.json
@@ -53,7 +53,7 @@ autonome_evolve.py --cycle 1 | --daemon |
 ### 2.3 شبكة الوكلاء (Agent Mesh + Agent Kernel)
 - Agent Mesh (src/agent_mesh.py, port 11435): وسيط للتبادل بين الوكلاء
 - Agent Kernel (src/agent_kernel.py): وحدة بدء التنفيذ لكل وكيل
-- AI Router (src/ai_router.py, port 11435): يختار المودم المناسب (Ollama + LLM7 + Groq + MiniMax)
+- AI Router (src/ai_router.py, port 11436): يختار المودم المناسب (Ollama + LLM7 + Groq + MiniMax)
 
 ### 2.4 روبوت التليغرام
 - `src/bot.py` + الطرفية 50+ أمر

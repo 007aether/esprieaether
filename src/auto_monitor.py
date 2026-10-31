@@ -35,7 +35,7 @@ SERVICES = {
     "integrations": {"port": 5102, "name": "Integrations"},
     "kanban": {"port": 5103, "name": "Kanban"},
     "homedock": {"port": 5104, "name": "HomeDock"},
-    "router": {"port": 11435, "name": "Router"},
+    "router": {"port": 11436, "name": "Router"},
     "orchestrator": {"port": 11436, "name": "Orchestrator"},
     "agent_mesh": {"port": 11437, "name": "Agent Mesh"},
 }

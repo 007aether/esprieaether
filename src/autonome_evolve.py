@@ -120,7 +120,7 @@ def get_all_services():
         "kanban": (5103, "/health"),
         "homedock": (5104, "/"),
         "ollama": (11435, "/api/tags"),
-        "router": (11435, "/health"),
+        "router": (11436, "/health"),
         "orchestrator": (11436, "/health"),
         "agent_mesh": (11437, "/health"),
         "jarvis": (8000, "/api/health"),

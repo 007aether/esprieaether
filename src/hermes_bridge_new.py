@@ -42,9 +42,9 @@ CONFIG = {
         "agent_dir": str(HERMES_AGENT_DIR),
         "bin": HERMES_BIN,
         "home": str(HOME_DIR),
-        "agent_port": 11435,
+        "agent_port": 11436,
     },
-    "bridge": {"port": 11435, "timeout": 30, "max_retries": 3},
+    "bridge": {"port": 11436, "timeout": 30, "max_retries": 3},
 }
 
 CACHE_DIR = Path(os.path.expanduser("~")) / "AppData" / "Local" / "hermes" / "cache"
@@ -279,7 +279,7 @@ class HermesBridge:
                 "redteam", "evolve", "general", "rea", "yomkino", "hermes_bridge"
             ],
             "knowledge_connections": 2,
-            "bridge_port": 11435,
+            "bridge_port": 11436,
         }
         manifest_path = ESPRIEAETHER_DIR / "data" / "integration_manifest.json"
         with open(manifest_path, "w", encoding='utf-8') as f:

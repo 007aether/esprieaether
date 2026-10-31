@@ -7,7 +7,7 @@ talk to EACH OTHER autonomously: each agent posts insights/improvements/ideas
 to a shared board, and other agents can read + build on them. This is how the
 system evolves without waiting for a user prompt.
 
-WHY: The router (11435) + orchestrator (11436) are REQUEST-RESPONSE only.
+WHY: The router (11436) + orchestrator (11437) are REQUEST-RESPONSE only.
 The autonomous_loop runs tasks on a schedule, but tasks are fixed.
 A message board + agent reflection loop turns 7 agents into a self-organizing
 system: each cycle, an agent reads the board, reacts to what others said,
@@ -21,7 +21,7 @@ HOW:
   4. HTTP API: /board (read), /post (write), /think (force one agent cycle),
      /agents, /health
 
-Port: 11437 (after router 11435 + orchestrator 11436)
+Port: 11437 (after router 11436 + orchestrator 11437)
 """
 
 import json
@@ -43,7 +43,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 BOARD_FILE = BASE_DIR / "data" / "agent_board.json"
 PROPOSED_FILE = BASE_DIR / "data" / "agent_proposed_tasks.json"
 
-ROUTER_URL = os.getenv("AETHER_ROUTER_URL", "http://127.0.0.1:11435")
+ROUTER_URL = os.getenv("AETHER_ROUTER_URL", "http://127.0.0.1:11436")
 
 MAX_MESSAGES = 200
 MAX_TASKS = 50
