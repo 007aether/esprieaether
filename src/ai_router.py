@@ -53,14 +53,14 @@ def _cors(resp):
 # ── Brains ──
 BRAINS = {
     "ollama-local": {
-        "url": "http://127.0.0.1:11434/v1/chat/completions",
+        "url": "http://127.0.0.1:11435/v1/chat/completions",
         "key": None,
         "model": "qwen2.5:3b",
         "min_interval": 0.0,
         "label": "Ollama qwen2.5:3b (local)",
     },
     "ollama-heavy": {
-        "url": "http://127.0.0.1:11434/v1/chat/completions",
+        "url": "http://127.0.0.1:11435/v1/chat/completions",
         "key": None,
         "model": "jaahas/qwen3.5-uncensored:27b",
         "min_interval": 0.0,
@@ -69,21 +69,21 @@ BRAINS = {
     },
     # ── 3 عقول uncensored محلية (متسلسلة، ما يشتغلوشّين دفعة واحدة) ──────────────────
     "ollama-unc-fast": {
-        "url": "http://127.0.0.1:11434/v1/chat/completions",
+        "url": "http://127.0.0.1:11435/v1/chat/completions",
         "key": None,
         "model": "dolphin-llama3:8b",
         "min_interval": 0.0,
         "label": "Ollama dolphin-llama3:8b (Fast · uncensored)",
     },
     "ollama-unc-mid": {
-        "url": "http://127.0.0.1:11434/v1/chat/completions",
+        "url": "http://127.0.0.1:11435/v1/chat/completions",
         "key": None,
         "model": "dolphin-mistral:7b",
         "min_interval": 0.0,
         "label": "Ollama dolphin-mistral:7b (Mid · uncensored)",
     },
     "ollama-unc-heavy": {
-        "url": "http://127.0.0.1:11434/v1/chat/completions",
+        "url": "http://127.0.0.1:11435/v1/chat/completions",
         "key": None,
         "model": "wizard-vicuna-uncensored:13b",
         "min_interval": 0.0,

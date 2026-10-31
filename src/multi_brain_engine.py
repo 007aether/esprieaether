@@ -97,28 +97,28 @@ class MultiBrainEngine:
                 "name": "ollama-unc-fast",
                 "type": "local",
                 "model": "dolphin-llama3:8b",
-                "url": "http://127.0.0.1:11434/v1/chat/completions",
+                "url": "http://127.0.0.1:11435/v1/chat/completions",
                 "label": "Fast · dolphin-llama3:8b (uncensored)",
             },
             {
                 "name": "ollama-unc-mid",
                 "type": "local",
                 "model": "dolphin-mistral:7b",
-                "url": "http://127.0.0.1:11434/v1/chat/completions",
+                "url": "http://127.0.0.1:11435/v1/chat/completions",
                 "label": "Mid · dolphin-mistral:7b (uncensored)",
             },
             {
                 "name": "ollama-unc-heavy",
                 "type": "local",
                 "model": "wizard-vicuna-uncensored:13b",
-                "url": "http://127.0.0.1:11434/v1/chat/completions",
+                "url": "http://127.0.0.1:11435/v1/chat/completions",
                 "label": "Deep · wizard-vicuna-uncensored:13b (uncensored)",
             },
             {
                 "name": "ollama-local",
                 "type": "local",
                 "model": "qwen2.5:3b",
-                "url": "http://127.0.0.1:11434/v1/chat/completions",
+                "url": "http://127.0.0.1:11435/v1/chat/completions",
                 "label": "Light · qwen2.5:3b (merge engine / fallback)",
             },
             {
@@ -166,7 +166,7 @@ class MultiBrainEngine:
                 req = urllib.request.Request(
                     brain["url"].replace("/chat/completions", "/models"),
                     headers={"Authorization": "Bearer dummy"},
-                    method="HEAD"
+                    method="GET"
                 )
                 with urllib.request.urlopen(req, timeout=3) as r:
                     results[brain["name"]] = {"status": "healthy", "type": brain["type"]}
