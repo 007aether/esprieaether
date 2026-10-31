@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-31T16:22:36.909892+00:00",
+  "cloud_last_run": "2026-10-31T20:43:16.702777+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Which DEX Is Safe? What a Binance-Style Hack Would Do to Lighter, Hyperliquid, Aster and Variational",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "How to Buy BONK for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is a Jeet in Crypto? Meaning, Origin and Why Everyone Gets Called One",
       "source": "https://airdropalert.com/feed"
     },
     {
