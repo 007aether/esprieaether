@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-30T21:43:18.389139+00:00",
+  "cloud_last_run": "2026-10-31T02:51:48.945757+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trading Fundamentals Part 37: Take Profit Strategy for Meme Coins",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Who Is Stan Druckenmiller? The Man Who Broke the Bank of England Just Backed Hyperliquid",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "LIBRA Case Dismissed Against Milei Airdrops and NFT News",
       "source": "https://airdropalert.com/feed"
     },
     {
