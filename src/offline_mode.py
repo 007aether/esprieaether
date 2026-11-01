@@ -397,7 +397,18 @@ class OfflineModeRunner:
         # Start dashboard (if Flask available)
         print("\n5️⃣  Starting dashboard (if Flask available)...")
         if FLASK_AVAILABLE:
-            print("   🌐 Dashboard will be started by main block")
+            print("   🌐 Starting dashboard on http://localhost:5111...")
+            import threading
+            import time
+
+            # Start Flask server directly without src.ai_expand
+            def start_server():
+                app.run(host="0.0.0.0", port=5111, debug=False, use_reloader=False)
+
+            server_thread = threading.Thread(target=start_server, daemon=True)
+            server_thread.start()
+            time.sleep(2)
+            print("   ✅ Dashboard started on http://localhost:5111")
         else:
             print("   ⚠️  Flask not available, dashboard skipped")
 
@@ -458,22 +469,6 @@ def health():
 if __name__ == "__main__":
     runner = OfflineModeRunner()
     results = runner.run()
-
-    # Start Flask dashboard
-    print("\n" + "=" * 60)
-    print("🌐 Starting Offline Dashboard...")
-    print("=" * 60)
-    print("   📍 URL: http://localhost:5111")
-    print("   📍 API: http://localhost:5111/api")
-    print("   📍 Health: http://localhost:5111/health")
-
-    import threading
-
-    def start_server():
-        app.run(host="0.0.0.0", port=5111, debug=False, use_reloader=False)
-
-    server_thread = threading.Thread(target=start_server, daemon=True)
-    server_thread.start()
 
     # Keep alive
     try:
