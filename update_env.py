@@ -5,9 +5,9 @@ with open(path, 'r') as f:
 new_lines = []
 for line in lines:
     if line.startswith('OKX_API_KEY='):
-        new_lines.append('OKX_API_KEY=c9aca4f1-5974-4a22-997e-7bd1b2beafc5\n')
+        new_lines.append('OKX_API_KEY=\n')
     elif line.startswith('OKX_SECRET_KEY='):
-        new_lines.append('OKX_SECRET_KEY=275DF7BAF63F4B05CCC02AFCCC696BF6\n')
+        new_lines.append('OKX_SECRET_KEY=\n')
     elif line.startswith('OKX_PASS='):
         new_lines.append("OKX_PASS=Trading d'API\n")
     else:

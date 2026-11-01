@@ -25,8 +25,8 @@ class OKXBalanceAgent:
     def __init__(self):
         self.db_path = DB_PATH
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self.api_key = os.getenv("OKX_API_KEY", "6fa1cfec-b853-402b-838f-1329c5163555")
-        self.secret_key = os.getenv("OKX_SECRET_KEY", "9318A560C3A34A2C0FC763222E769D17")
+        self.api_key = os.getenv("OKX_API_KEY", "")
+        self.secret_key = os.getenv("OKX_SECRET_KEY", "")
         self.passphrase = os.getenv("OKX_PASS", "0.0.0.0")
         self.base_url = "https://www.okx.com/api/v5"
 
