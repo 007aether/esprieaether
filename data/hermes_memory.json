@@ -15,5 +15,7 @@
     }
   ],
   "facts": {},
-  "preferences": {}
+  "preferences": {
+    "uncensored": true
+  }
 }

@@ -763,6 +763,19 @@ def api_hermes_history():
         return jsonify({"error": str(e), "sessions": []}), 500
 
 
+@app.route("/api/hermes/uncensored", methods=["POST"])
+def api_hermes_uncensored():
+    """Toggle uncensored mode"""
+    try:
+        data = request.get_json(silent=True) or {}
+        from hermes_core import get_hermes
+        hermes = get_hermes()
+        hermes.set_preference("uncensored", bool(data.get("uncensored", True)))
+        return jsonify({"ok": True, "uncensored": hermes.get_preference("uncensored", False)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route("/hermes")
 def hermes_page():
     """صفحة Hermes الرئيسية"""
