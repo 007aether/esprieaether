@@ -1,28 +1,56 @@
 {% extends "base.html" %}
 {% block title %}JARVIS{% endblock %}
-{% block page_title %}💬 JARVIS — مساعد EsprieAether{% endblock %}
+{% block page_title %}🎙️ JARVIS — Hermes Voice{% endblock %}
 
 {% block content %}
+<style>
+.chat-wrap{max-width:800px;margin:0 auto;padding:20px}
+.chat-box{height:60vh;overflow-y:auto;border:1px solid #333;border-radius:12px;padding:16px;background:#0d1117;margin-bottom:12px}
+.msg{padding:10px 14px;border-radius:12px;margin:6px 0;max-width:80%;word-wrap:break-word;line-height:1.6}
+.msg.user{background:#1f6feb;color:#fff;margin-left:auto;text-align:left}
+.msg.bot{background:#161b22;border:1px solid #30363d;color:#e6edf3;margin-right:auto;text-align:left}
+.chat-form{display:flex;gap:8px}
+.chat-form input{flex:1;padding:12px;border-radius:8px;border:1px solid #30363d;background:#0d1117;color:#e6edf3;font-size:16px}
+.chat-form button{padding:12px 20px;border-radius:8px;border:none;background:#1f6feb;color:#fff;font-size:16px;cursor:pointer}
+.chat-form button:disabled{background:#333;cursor:not-allowed}
+.voice-row{display:flex;gap:8px;margin-top:8px;align-items:center}
+.voice-btn{padding:10px 16px;border-radius:8px;border:1px solid #30363d;background:#161b22;color:#e6edf3;cursor:pointer;font-size:14px}
+.voice-btn.recording{background:#da3633;border-color:#da3633;color:#fff;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.status{font-size:12px;color:#8b949e;margin-top:4px}
+</style>
+
 <div class="chat-wrap">
   <div class="chat-box" id="chat-box">
-    <div class="msg bot">مرحباً! أنا JARVIS. اسألني أي شيء.</div>
+    <div class="msg bot">🎙️ مرحبا! أنا Hermes. تكلم معي صوتياً أو اكتب رسالتك.</div>
   </div>
+
   <form class="chat-form" id="chat-form">
     <input type="text" id="chat-input" placeholder="اكتب رسالتك…" autocomplete="off" />
-    <button type="submit">إرسال</button>
+    <button type="submit" id="send-btn">إرسال</button>
   </form>
+
+  <div class="voice-row">
+    <button class="voice-btn" id="voice-btn">🎤 تسجيل صوتي</button>
+    <span class="status" id="voice-status">اضغط للتسجيل</span>
+  </div>
 </div>
 
 <script>
-document.getElementById("chat-form").addEventListener("submit", async function (e) {
-  e.preventDefault();
-  const input = document.getElementById("chat-input");
-  const box = document.getElementById("chat-box");
-  const text = input.value.trim();
+const box = document.getElementById("chat-box");
+const form = document.getElementById("chat-form");
+const input = document.getElementById("chat-input");
+const voiceBtn = document.getElementById("voice-btn");
+const voiceStatus = document.getElementById("voice-status");
+let mediaRecorder = null;
+let audioChunks = [];
+
+async function sendMessage(text) {
   if (!text) return;
-  box.insertAdjacentHTML("beforeend", `<div class="msg user">${text}</div>`);
+  box.insertAdjacentHTML("beforeend", `<div class="msg user">${escapeHtml(text)}</div>`);
   input.value = "";
   box.scrollTop = box.scrollHeight;
+
   try {
     const r = await fetch("/api/hermes", {
       method: "POST",
@@ -30,11 +58,110 @@ document.getElementById("chat-form").addEventListener("submit", async function (
       body: JSON.stringify({ prompt: text }),
     });
     const d = await r.json();
-    box.insertAdjacentHTML("beforeend", `<div class="msg bot">${d.response || d.error || "…"}</div>`);
+    const reply = d.response || d.error || "…";
+    box.insertAdjacentHTML("beforeend", `<div class="msg bot">${escapeHtml(reply)}</div>`);
+    box.scrollTop = box.scrollHeight;
+    
+    // Text-to-speech
+    if (reply && !d.error) {
+      speak(reply);
+    }
   } catch (err) {
-    box.insertAdjacentHTML("beforeend", `<div class="msg bot">⚠️ ${err}</div>`);
+    box.insertAdjacentHTML("beforeend", `<div class="msg bot">⚠️ ${escapeHtml(String(err))}</div>`);
   }
   box.scrollTop = box.scrollHeight;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "ar-SA";
+  utter.rate = 1.0;
+  utter.pitch = 1.0;
+  window.speechSynthesis.speak(utter);
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  sendMessage(input.value.trim());
 });
+
+voiceBtn.addEventListener("click", async () => {
+  if (!window.MediaRecorder) {
+    voiceStatus.textContent = "المتصفح لا يدعم التسجيل الصوتي";
+    return;
+  }
+
+  if (mediaRecorder && mediaRecorder.state === "recording") {
+    mediaRecorder.stop();
+    voiceBtn.textContent = "🎤 تسجيل صوتي";
+    voiceBtn.classList.remove("recording");
+    voiceStatus.textContent = "جاري المعالجة…";
+    return;
+  }
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) audioChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = async () => {
+      stream.getTracks().forEach(t => t.stop());
+      const blob = new Blob(audioChunks, { type: "audio/webm" });
+      voiceStatus.textContent = "جاري التعرف على الصوت…";
+      
+      try {
+        // Use Web Speech API for transcription
+        const text = await transcribeAudio(blob);
+        if (text) {
+          input.value = text;
+          sendMessage(text);
+        } else {
+          voiceStatus.textContent = "لم يتم التعرف على الصوت";
+        }
+      } catch (err) {
+        voiceStatus.textContent = "خطأ: " + err.message;
+      }
+    };
+
+    mediaRecorder.start();
+    voiceBtn.textContent = "⏹️ إيقاف";
+    voiceBtn.classList.add("recording");
+    voiceStatus.textContent = "جاري التسجيل…";
+  } catch (err) {
+    voiceStatus.textContent = "خطأ في الوصول للميكروفون: " + err.message;
+  }
+});
+
+async function transcribeAudio(blob) {
+  // Try Web Speech API (Chrome/Edge)
+  return new Promise((resolve) => {
+    if (!window.webkitSpeechRecognition && !window.SpeechRecognition) {
+      resolve(null);
+      return;
+    }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = "ar-SA";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event) => {
+      resolve(event.results[0][0].transcript);
+    };
+    recognition.onerror = () => resolve(null);
+    recognition.start();
+  });
+}
 </script>
 {% endblock %}
