@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-10-31T20:43:16.702777+00:00",
+  "cloud_last_run": "2026-11-01T02:44:17.028841+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Are the Winklevoss Twins? From Facebook to Gemini&#8217;s Rough IPO",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Ethereum Airdrop Checker: Find Airdrops on Ethereum and Its Layer 2s",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy BONK for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
