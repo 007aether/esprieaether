@@ -725,9 +725,56 @@ def api_hermes_status():
         return jsonify({"error": str(e)}), 500
 
 
-# ═══════════════════════════════════════════════════════════════
+@app.route("/api/hermes/context/clear", methods=["POST"])
+def api_hermes_clear_context():
+    """Effacer le contexte de Hermes"""
+    try:
+        from hermes_core import get_hermes
+        hermes = get_hermes()
+        hermes.clear_context()
+        return jsonify({"ok": True})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/hermes/preferences", methods=["POST"])
+def api_hermes_preferences():
+    """Mettre à jour les préférences"""
+    try:
+        data = request.get_json(silent=True) or {}
+        from hermes_core import get_hermes
+        hermes = get_hermes()
+        for key in ("language", "style", "voice"):
+            if key in data:
+                hermes.set_preference(key, data[key])
+        return jsonify({"ok": True, "preferences": hermes.memory.get("preferences", {})})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/hermes/history")
+def api_hermes_history():
+    """Historique des sessions"""
+    try:
+        from hermes_core import get_hermes
+        hermes = get_hermes()
+        return jsonify({"sessions": hermes.get_recent_sessions(20)})
+    except Exception as e:
+        return jsonify({"error": str(e), "sessions": []}), 500
+
+
+@app.route("/hermes")
+def hermes_page():
+    """صفحة Hermes الرئيسية"""
+    return render_template(
+        "hermes.html",
+        aether_id=os.getenv("AETHER_ID", "007aether"),
+    )
+
+
+#  ═══════════════════════════════════════════════════════════
 #  🚀 Main Entry Point — يجب أن يكون في نهاية الملف
-# ═══════════════════════════════════════════════════════════════
+#  ═══════════════════════════════════════════════════════════
 
 
 

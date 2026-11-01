@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+{% block title %}Hermes{% endblock %}
+{% block page_title %}🧠 Hermes — EsprieAether Brain{% endblock %}
+
+{% block content %}
+<style>
+.hermes-container{max-width:900px;margin:0 auto;padding:20px}
+.chat-wrap{display:grid;grid-template-columns:1fr 320px;gap:16px}
+.chat-main{display:flex;flex-direction:column;gap:12px}
+.chat-box{height:55vh;overflow-y:auto;border:1px solid #30363d;border-radius:12px;padding:16px;background:#0d1117}
+.msg{padding:10px 14px;border-radius:12px;margin:6px 0;max-width:85%;word-wrap:break-word;line-height:1.7;white-space:pre-wrap}
+.msg.user{background:#1f6feb;color:#fff;margin-left:auto;text-align:left;border-bottom-right-radius:4px}
+.msg.bot{background:#161b22;border:1px solid #30363d;color:#e6edf3;margin-right:auto;text-align:left;border-bottom-left-radius:4px}
+.msg.system{background:#1c1e24;border:1px solid #8b949e;color:#8b949e;text-align:center;font-size:12px;margin:0 auto}
+.chat-form{display:flex;gap:8px}
+.chat-form input{flex:1;padding:12px;border-radius:8px;border:1px solid #30363d;background:#0d1117;color:#e6edf3;font-size:15px}
+.chat-form button{padding:12px 20px;border-radius:8px;border:none;background:#1f6feb;color:#fff;font-size:15px;cursor:pointer;font-weight:600}
+.chat-form button:disabled{background:#333;cursor:not-allowed}
+.sidebar{display:flex;flex-direction:column;gap:12px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:14px}
+.card h3{margin:0 0 8px;font-size:14px;color:#8b949e;text-transform:uppercase;letter-spacing:.5px}
+.card .value{font-size:20px;font-weight:700;color:#e6edf3}
+.card .sub{font-size:12px;color:#8b949e;margin-top:4px}
+.btn{width:100%;padding:10px;border-radius:8px;border:1px solid #30363d;background:#0d1117;color:#e6edf3;cursor:pointer;font-size:13px;margin-top:6px}
+.btn:hover{background:#21262d}
+.btn.danger{border-color:#da3633;color:#f85149}
+.voice-row{display:flex;gap:8px;align-items:center;margin-top:8px}
+.voice-btn{flex:1;padding:10px;border-radius:8px;border:1px solid #30363d;background:#161b22;color:#e6edf3;cursor:pointer;font-size:13px}
+.voice-btn.recording{background:#da3633;border-color:#da3633;color:#fff;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.history{margin-top:8px;max-height:180px;overflow-y:auto;font-size:12px}
+.history-item{padding:6px 8px;border-bottom:1px solid #21262d;cursor:pointer;border-radius:6px}
+.history-item:hover{background:#21262d}
+.history-item .ts{color:#8b949e;font-size:11px}
+.preferences{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.preferences label{font-size:12px;color:#8b949e;display:flex;justify-content:space-between;align-items:center}
+.preferences select,.preferences input{padding:6px 8px;border-radius:6px;border:1px solid #30363d;background:#0d1117;color:#e6edf3;font-size:13px}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:6px}
+.status-dot.online{background:#3fb950}
+.status-dot.offline{background:#f85149}
+@media(max-width:800px){.chat-wrap{grid-template-columns:1fr}.sidebar{display:none}}
+</style>
+
+<div class="hermes-container">
+  <div class="chat-wrap">
+    <div class="chat-main">
+      <div class="chat-box" id="chat-box">
+        <div class="msg system">🧠 Hermes Core v2.0 — cloud-first • contexte • mémoire persistante</div>
+        <div class="msg bot">مرحبا! أنا Hermes. تكلم معي نصياً أو صوتياً. استخدم الأزرار الجانبية للتحكم.</div>
+      </div>
+
+      <form class="chat-form" id="chat-form">
+        <input type="text" id="chat-input" placeholder="اكتب رسالتك…" autocomplete="off" />
+        <button type="submit" id="send-btn">إرسال</button>
+      </form>
+
+      <div class="voice-row">
+        <button class="voice-btn" id="voice-btn">🎤 تسجيل صوتي</button>
+        <button class="voice-btn" id="tts-btn">🔊 قراءة الرد</button>
+        <span style="font-size:12px;color:#8b949e" id="voice-status">اضغط للتسجيل</span>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="card">
+        <h3>Status</h3>
+        <div class="value">Hermes <span class="status-dot online" id="status-dot"></span></div>
+        <div class="sub" id="status-model"> modèle: ...</div>
+        <div class="sub" id="status-ctx"> contexte: 0</div>
+        <button class="btn" id="refresh-status"> Rafraîchir</button>
+      </div>
+
+      <div class="card">
+        <h3>Préférences</h3>
+        <div class="preferences">
+          <label>Langue
+            <select id="pref-lang">
+              <option value="arabic">العربية</option>
+              <option value="english">English</option>
+              <option value="mixed">Mixed</option>
+            </select>
+          </label>
+          <label>Style
+            <select id="pref-style">
+              <option value="concise">Court</option>
+              <option value="detailed">Détaillé</option>
+              <option value="technical">Technique</option>
+            </select>
+          </label>
+        </div>
+        <button class="btn" id="save-prefs"> Sauvegarder</button>
+      </div>
+
+      <div class="card">
+        <h3>Actions</h3>
+        <button class="btn" id="clear-ctx"> Effacer le contexte</button>
+        <button class="btn" id="export-chat"> Exporter la discussion</button>
+      </div>
+
+      <div class="card">
+        <h3>Historique récent</h3>
+        <div class="history" id="history">
+          <div style="color:#8b949e;font-size:12px">Chargement...</div>
+        </div>
+        <button class="btn" id="refresh-history"> Rafraîchir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const box = document.getElementById("chat-box");
+const form = document.getElementById("chat-form");
+const input = document.getElementById("chat-input");
+const voiceBtn = document.getElementById("voice-btn");
+const ttsBtn = document.getElementById("tts-btn");
+const voiceStatus = document.getElementById("voice-status");
+let mediaRecorder = null;
+let audioChunks = [];
+let currentReply = "";
+
+async function sendMessage(text) {
+  if (!text) return;
+  box.insertAdjacentHTML("beforeend", `<div class="msg user">${escapeHtml(text)}</div>`);
+  input.value = "";
+  box.scrollTop = box.scrollHeight;
+
+  try {
+    const r = await fetch("/api/hermes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: text }),
+    });
+    const d = await r.json();
+    currentReply = d.response || d.error || "…";
+    box.insertAdjacentHTML("beforeend", `<div class="msg bot">${escapeHtml(currentReply)}</div>`);
+    box.scrollTop = box.scrollHeight;
+  } catch (err) {
+    box.insertAdjacentHTML("beforeend", `<div class="msg bot">⚠️ ${escapeHtml(String(err))}</div>`);
+  }
+  box.scrollTop = box.scrollHeight;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  const lang = document.getElementById("pref-lang")?.value || "ar-SA";
+  utter.lang = lang === "arabic" ? "ar-SA" : lang === "english" ? "en-US" : "ar-SA";
+  utter.rate = 1.0;
+  utter.pitch = 1.0;
+  window.speechSynthesis.speak(utter);
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  sendMessage(input.value.trim());
+});
+
+voiceBtn.addEventListener("click", async () => {
+  if (!window.MediaRecorder) {
+    voiceStatus.textContent = "Navigateur ne supporte pas l'enregistrement";
+    return;
+  }
+
+  if (mediaRecorder && mediaRecorder.state === "recording") {
+    mediaRecorder.stop();
+    voiceBtn.textContent = "🎤 تسجيل صوتي";
+    voiceBtn.classList.remove("recording");
+    voiceStatus.textContent = "جاري المعالجة…";
+    return;
+  }
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) audioChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = async () => {
+      stream.getTracks().forEach(t => t.stop());
+      voiceStatus.textContent = "جاري التعرف على الصوت…";
+      const text = await transcribeAudio();
+      if (text) {
+        input.value = text;
+        sendMessage(text);
+      } else {
+        voiceStatus.textContent = "لم يتم التعرف على الصوت";
+      }
+    };
+
+    mediaRecorder.start();
+    voiceBtn.textContent = "⏹️ إيقاف";
+    voiceBtn.classList.add("recording");
+    voiceStatus.textContent = "جاري التسجيل…";
+  } catch (err) {
+    voiceStatus.textContent = "خطأ: " + err.message;
+  }
+});
+
+ttsBtn.addEventListener("click", () => {
+  if (currentReply) speak(currentReply);
+});
+
+async function transcribeAudio() {
+  return new Promise((resolve) => {
+    if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+      resolve(null);
+      return;
+    }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = document.getElementById("pref-lang")?.value === "english" ? "en-US" : "ar-SA";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event) => {
+      resolve(event.results[0][0].transcript);
+    };
+    recognition.onerror = () => resolve(null);
+    recognition.start();
+  });
+}
+
+document.getElementById("clear-ctx")?.addEventListener("click", async () => {
+  await fetch("/api/hermes/context/clear", { method: "POST" });
+  box.insertAdjacentHTML("beforeend", `<div class="msg system">Contexte effacé</div>`);
+});
+
+document.getElementById("export-chat")?.addEventListener("click", () => {
+  const messages = [];
+  box.querySelectorAll(".msg").forEach((el) => {
+    messages.push(el.textContent.trim());
+  });
+  const blob = new Blob([messages.join("\n\n")], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "hermes-chat.txt";
+  a.click();
+});
+
+document.getElementById("save-prefs")?.addEventListener("click", async () => {
+  const lang = document.getElementById("pref-lang").value;
+  const style = document.getElementById("pref-style").value;
+  await fetch("/api/hermes/preferences", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ language: lang, style: style }),
+  });
+  alert("Préférences sauvegardées");
+});
+
+document.getElementById("refresh-status")?.addEventListener("click", async () => {
+  const r = await fetch("/api/hermes/status");
+  const d = await r.json();
+  document.getElementById("status-model").textContent = "Modèle: " + (d.model || d.active_engine || "?");
+  document.getElementById("status-ctx").textContent = "Contexte: " + (d.context_length || 0);
+});
+
+document.getElementById("refresh-history")?.addEventListener("click", async () => {
+  const r = await fetch("/api/hermes/history");
+  const d = await r.json();
+  const container = document.getElementById("history");
+  if (!d.sessions || !d.sessions.length) {
+    container.innerHTML = '<div style="color:#8b949e">Aucun historique</div>';
+    return;
+  }
+  container.innerHTML = d.sessions.slice(-8).reverse().map(s => `
+    <div class="history-item" data-prompt="${escapeHtml(s.prompt || '')}">
+      <div>${escapeHtml((s.prompt || '').substring(0, 60))}</div>
+      <div class="ts">${(s.ts || '').substring(0, 19)}</div>
+    </div>
+  `).join("");
+});
+
+// Load initial state
+(async () => {
+  const r = await fetch("/api/hermes/status");
+  const d = await r.json();
+  if (d.model) document.getElementById("status-model").textContent = "Modèle: " + d.model;
+  if (d.context_length !== undefined) document.getElementById("status-ctx").textContent = "Contexte: " + d.context_length;
+  if (d.preferences) {
+    if (d.preferences.language) document.getElementById("pref-lang").value = d.preferences.language;
+    if (d.preferences.style) document.getElementById("pref-style").value = d.preferences.style;
+  }
+  document.getElementById("refresh-history")?.click();
+})();
+</script>
+{% endblock %}

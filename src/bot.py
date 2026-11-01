@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).parent.parent
 if str(BASE_DIR / "src") not in sys.path:
     sys.path.insert(0, str(BASE_DIR / "src"))
 
-from telegram import Update, BotCommand
+from telegram import Update, BotCommand, Message
 from telegram.ext import (
     Application, CommandHandler, MessageHandler,
     ContextTypes, filters
@@ -2859,14 +2859,11 @@ def main():
     logger.info("🚀 بدء تشغيل البوت...")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
 
-if __name__ == "__main__":
-    main()
-
 # ═══════════════════════════════════════════════════════════
 # NEW: Bot self-maintenance commands (3)
 # ═══════════════════════════════════════════════════════════
 
-async def cmd_rea_tool(message: types.Message):
+async def cmd_rea_tool(message: Message):
     """List available REA tools"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -2883,7 +2880,7 @@ async def cmd_rea_tool(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_doctor"))
-async def cmd_rea_doctor(message: types.Message):
+async def cmd_rea_doctor(message: Message):
     """Run REA doctor health check"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -2894,8 +2891,11 @@ async def cmd_rea_doctor(message: types.Message):
     except Exception as e:
         await message.reply(f"❌ REA doctor error: {str(e)}")
 
+if __name__ == "__main__":
+    main()
+
 @router.message(lambda m: m.text and m.text.startswith("/rea_analyze"))
-async def cmd_rea_analyze(message: types.Message):
+async def cmd_rea_analyze(message: Message):
     """Analyze a binary/app with REA"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -2913,7 +2913,7 @@ async def cmd_rea_analyze(message: types.Message):
 
 # More REA tools
 @router.message(lambda m: m.text and m.text.startswith("/rea_list"))
-async def cmd_rea_list(message: types.Message):
+async def cmd_rea_list(message: Message):
     """List all available REA tools"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -2935,7 +2935,7 @@ async def cmd_rea_list(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_do"))
-async def cmd_rea_do(message: types.Message):
+async def cmd_rea_do(message: Message):
     """Run REA doctor"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -2947,7 +2947,7 @@ async def cmd_rea_do(message: types.Message):
         await message.reply(f"❌ REA doctor error: {str(e)}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_status"))
-async def cmd_rea_status(message: types.Message):
+async def cmd_rea_status(message: Message):
     """Check REA + mesh status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -2965,7 +2965,7 @@ async def cmd_rea_status(message: types.Message):
         await message.reply(f"❌ Error: {str(e)}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_elements"))
-async def cmd_rea_elements(message: types.Message):
+async def cmd_rea_elements(message: Message):
     """Scan system elements with REA"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -2976,7 +2976,7 @@ async def cmd_rea_elements(message: types.Message):
         await message.reply(f"❌ Scan error: {str(e)}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_report"))
-async def cmd_rea_report(message: types.Message):
+async def cmd_rea_report(message: Message):
     """Generate REA report"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -2987,7 +2987,7 @@ async def cmd_rea_report(message: types.Message):
         await message.reply(f"❌ Report error: {str(e)}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_symbolic"))
-async def cmd_rea_symbolic(message: types.Message):
+async def cmd_rea_symbolic(message: Message):
     """Enable symbolic execution for REA"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -2998,7 +2998,7 @@ async def cmd_rea_symbolic(message: types.Message):
         await message.reply(f"❌ Error: {str(e)}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_sbom"))
-async def cmd_rea_sbom(message: types.Message):
+async def cmd_rea_sbom(message: Message):
     """Generate SBOM for REA"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3009,7 +3009,7 @@ async def cmd_rea_sbom(message: types.Message):
         await message.reply(f"❌ SBOM error: {str(e)}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_evidence"))
-async def cmd_rea_evidence(message: types.Message):
+async def cmd_rea_evidence(message: Message):
     """Export REA evidence"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3021,7 +3021,7 @@ async def cmd_rea_evidence(message: types.Message):
 
 # REA automatic tools
 @router.message(lambda m: m.text and m.text.startswith("/rea_automatic"))
-async def cmd_rea_automatic(message: types.Message):
+async def cmd_rea_automatic(message: Message):
     """Enable automatic REA tools"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3040,7 +3040,7 @@ async def cmd_rea_automatic(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_analyze_js"))
-async def cmd_rea_analyze_js(message: types.Message):
+async def cmd_rea_analyze_js(message: Message):
     """Analyze a JavaScript/Electron app"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3052,7 +3052,7 @@ async def cmd_rea_analyze_js(message: types.Message):
     await message.reply(f"🔍 REA analyzing JavaScript/Electron app:\n{path}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_analyze_web"))
-async def cmd_rea_analyze_web(message: types.Message):
+async def cmd_rea_analyze_web(message: Message):
     """Analyze a website"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3064,7 +3064,7 @@ async def cmd_rea_analyze_web(message: types.Message):
     await message.reply(f"🔍 REA analyzing website:\n{url}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_analyze_pe"))
-async def cmd_rea_analyze_pe(message: types.Message):
+async def cmd_rea_analyze_pe(message: Message):
     """Analyze a PE binary"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3076,7 +3076,7 @@ async def cmd_rea_analyze_pe(message: types.Message):
     await message.reply(f"🔍 REA analyzing PE binary:\n{path}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_analyze_android"))
-async def cmd_rea_analyze_android(message: types.Message):
+async def cmd_rea_analyze_android(message: Message):
     """Analyze an Android APK"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3088,7 +3088,7 @@ async def cmd_rea_analyze_android(message: types.Message):
     await message.reply(f"🔍 REA analyzing Android APK:\n{path}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_analyze_firmware"))
-async def cmd_rea_analyze_firmware(message: types.Message):
+async def cmd_rea_analyze_firmware(message: Message):
     """Analyze firmware"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3101,50 +3101,50 @@ async def cmd_rea_analyze_firmware(message: types.Message):
 
 # More REA tools
 @router.message(lambda m: m.text and m.text.startswith("/rea_repair"))
-async def cmd_rea_repair(message: types.Message):
+async def cmd_rea_repair(message: Message):
     """Repair REA tools"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔧 REA repair started...")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_config"))
-async def cmd_rea_config(message: types.Message):
+async def cmd_rea_config(message: Message):
     """Show REA configuration"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("⚙️ REA configuration:\n- Ghidra: configured\n- JADX: configured\n- 207 tools ready")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_help"))
-async def cmd_rea_help(message: types.Message):
+async def cmd_rea_help(message: Message):
     """21st_magic_mcp_smoke - command placeholder"""
     await message.reply("⚠️ /rea_help - أمر قيد التنفيذ")
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp_smoke"))
-async def cmd_21st_magic_mcp_smoke(message: types.Message):
+async def cmd_21st_magic_mcp_smoke(message: Message):
     """21st_magic_mcp_smoke - command placeholder"""
     await message.reply(f"⚠️ /21st_magic_mcp_smoke - command in progress")
 
 
 @router.message(lambda m: m.text and m.text.startswith("/5th_magic_mcp"))
-async def cmd_5th_magic_mcp(message: types.Message):
+async def cmd_5th_magic_mcp(message: Message):
     """5th_magic_mcp - command placeholder"""
     await message.reply(f"⚠️ /5th_magic_mcp - command in progress")
 
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio_download"))
-async def cmd_fish_audio_download(message: types.Message):
+async def cmd_fish_audio_download(message: Message):
     """fish_audio_download - command placeholder"""
     await message.reply(f"⚠️ /fish_audio_download - command in progress")
 
 
 @router.message(lambda m: m.text and m.text.startswith("/five"))
-async def cmd_five(message: types.Message):
+async def cmd_five(message: Message):
     """five - command placeholder"""
     await message.reply(f"⚠️ /five - command in progress")
 
 
 @router.message(lambda m: m.text and m.text.startswith("/obsidian_vault_rebuild"))
-async def cmd_obsidian_vault_rebuild(message: types.Message):
+async def cmd_obsidian_vault_rebuild(message: Message):
     """obsidian_vault_rebuild - command placeholder"""
     await message.reply(f"⚠️ /obsidian_vault_rebuild - command in progress")
 
@@ -3161,28 +3161,28 @@ async def cmd_obsidian_vault_rebuild(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_start"))
-async def cmd_rea_start(message: types.Message):
+async def cmd_rea_start(message: Message):
     """Start REA tools"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("▶️ Starting REA tools...")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_stop"))
-async def cmd_rea_stop(message: types.Message):
+async def cmd_rea_stop(message: Message):
     """Stop REA tools"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("⏹️ Stopping REA tools...")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_restart"))
-async def cmd_rea_restart(message: types.Message):
+async def cmd_rea_restart(message: Message):
     """Restart REA tools"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔄 Restarting REA tools...")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_status"))
-async def cmd_rea_advanced_status(message: types.Message):
+async def cmd_rea_advanced_status(message: Message):
     """Advanced REA status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3195,7 +3195,7 @@ async def cmd_rea_advanced_status(message: types.Message):
 
 # Proficiency levels for REA tools
 @router.message(lambda m: m.text and m.text.startswith("/rea_proficiency"))
-async def cmd_rea_proficiency(message: types.Message):
+async def cmd_rea_proficiency(message: Message):
     """Show REA proficiency levels"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3219,7 +3219,7 @@ async def cmd_rea_proficiency(message: types.Message):
 
 # GitHub free projects
 @router.message(lambda m: m.text and m.text.startswith("/free_projects"))
-async def cmd_free_projects(message: types.Message):
+async def cmd_free_projects(message: Message):
     """List free GitHub projects"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3257,21 +3257,21 @@ async def cmd_free_projects(message: types.Message):
 
 # More REA tools
 @router.message(lambda m: m.text and m.text.startswith("/rea_shield"))
-async def cmd_rea_shield(message: types.Message):
+async def cmd_rea_shield(message: Message):
     """Skullshield for REA"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🛡️ REA Skullshield active...")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_hunt"))
-async def cmd_rea_hunt(message: types.Message):
+async def cmd_rea_hunt(message: Message):
     """Hunt for vulnerabilities"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🎯 REA Hunt started...")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_decompile"))
-async def cmd_rea_decompile(message: types.Message):
+async def cmd_rea_decompile(message: Message):
     """Decompile a binary"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3282,7 +3282,7 @@ async def cmd_rea_decompile(message: types.Message):
     await message.reply(f"🔍 Decompiling:\n{parts[1]}")
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_free_projects"))
-async def cmd_rea_free_projects(message: types.Message):
+async def cmd_rea_free_projects(message: Message):
     """List free REA projects"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3301,7 +3301,7 @@ async def cmd_rea_free_projects(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/rea_log"))
-async def cmd_rea_log(message: types.Message):
+async def cmd_rea_log(message: Message):
     """Show REA log"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3315,7 +3315,7 @@ async def cmd_rea_log(message: types.Message):
 
 # More GitHub free projects
 @router.message(lambda m: m.text and m.text.startswith("/github_projects"))
-async def cmd_github_projects(message: types.Message):
+async def cmd_github_projects(message: Message):
     """List GitHub projects"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3333,7 +3333,7 @@ async def cmd_github_projects(message: types.Message):
 
 # GitHub free projects list
 @router.message(lambda m: m.text and m.text.startswith("/github_list"))
-async def cmd_github_list(message: types.Message):
+async def cmd_github_list(message: Message):
     """List GitHub free projects"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3350,7 +3350,7 @@ async def cmd_github_list(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/repo_info"))
-async def cmd_repo_info(message: types.Message):
+async def cmd_repo_info(message: Message):
     """Show repo info"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3367,7 +3367,7 @@ async def cmd_repo_info(message: types.Message):
 
 # Roadmap items
 @router.message(lambda m: m.text and m.text.startswith("/roadmap"))
-async def cmd_roadmap(message: types.Message):
+async def cmd_roadmap(message: Message):
     """Show integration roadmap"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3389,7 +3389,7 @@ async def cmd_roadmap(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/integration_status"))
-async def cmd_integration_status(message: types.Message):
+async def cmd_integration_status(message: Message):
     """Show integration status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3404,35 +3404,35 @@ async def cmd_integration_status(message: types.Message):
 
 # More roadmap items
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer(message: types.Message):
+async def cmd_work_organizer(message: Message):
     """Work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📋 Work organizer loaded...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem(message: types.Message):
+async def cmd_claude_mem(message: Message):
     """Claude memory review"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Claude memory review started...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board(message: types.Message):
+async def cmd_five_board(message: Message):
     """Five board sync"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔄 Five board sync checked...")
 
 @router.message(lambda m: m.text and m.text.startswith("/strix"))
-async def cmd_strix(message: types.Message):
+async def cmd_strix(message: Message):
     """Strix ingestion"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("⚠️ Strix ingestion timeout - needs API key")
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio(message: types.Message):
+async def cmd_fish_audio(message: Message):
     """Fish audio verify"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3440,7 +3440,7 @@ async def cmd_fish_audio(message: types.Message):
 
 # Work organizer details
 @router.message(lambda m: m.text and m.text.startswith("/work_org"))
-async def cmd_work_org(message: types.Message):
+async def cmd_work_org(message: Message):
     """Work organizer details"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3458,7 +3458,7 @@ async def cmd_work_org(message: types.Message):
 
 # Claude memory
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_status"))
-async def cmd_claude_mem_status(message: types.Message):
+async def cmd_claude_mem_status(message: Message):
     """Claude memory status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3472,7 +3472,7 @@ async def cmd_claude_mem_status(message: types.Message):
 
 # Five board
 @router.message(lambda m: m.text and m.text.startswith("/five_board_status"))
-async def cmd_five_board_status(message: types.Message):
+async def cmd_five_board_status(message: Message):
     """Five board status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3485,7 +3485,7 @@ async def cmd_five_board_status(message: types.Message):
 
 # Remaining integration items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills(message: types.Message):
+async def cmd_agent_skills(message: Message):
     """Agent skills registry"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3500,7 +3500,7 @@ async def cmd_agent_skills(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_status"))
-async def cmd_work_organizer_status(message: types.Message):
+async def cmd_work_organizer_status(message: Message):
     """Work organizer status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3518,21 +3518,21 @@ async def cmd_work_organizer_status(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board_sync"))
-async def cmd_five_board_sync(message: types.Message):
+async def cmd_five_board_sync(message: Message):
     """Five board sync"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔄 Validating five-board sync...")
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp(message: types.Message):
+async def cmd_21st_magic_mcp(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("✨ 21st-Magic-MCP smoke test started...")
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio_status"))
-async def cmd_fish_audio_status(message: types.Message):
+async def cmd_fish_audio_status(message: Message):
     """Fish audio status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3547,14 +3547,14 @@ async def cmd_fish_audio_status(message: types.Message):
 
 # Claude memory
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_backup"))
-async def cmd_claude_mem_backup(message: types.Message):
+async def cmd_claude_mem_backup(message: Message):
     """Claude memory backup"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Claude memory backup started...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_restore"))
-async def cmd_claude_mem_restore(message: types.Message):
+async def cmd_claude_mem_restore(message: Message):
     """Claude memory restore"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3562,42 +3562,42 @@ async def cmd_claude_mem_restore(message: types.Message):
 
 # More integration items
 @router.message(lambda m: text and text.startswith("/agent_skills_list"))
-async def cmd_agent_skills_list(message: types.Message):
+async def cmd_agent_skills_list(message: Message):
     """List agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Agent Skills:\n• /desk - AI desktop workspace\n• skill_harvest - Harvest new skills\n• skill_harvest_status - Check status")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer_load(message: types.Message):
+async def cmd_work_organizer_load(message: Message):
     """Load work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📋 Loading work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review(message: types.Message):
+async def cmd_claude_mem_review(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board_validate"))
-async def cmd_five_board_validate(message: types.Message):
+async def cmd_five_board_validate(message: Message):
     """Validate five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔄 Validating five-board sync...")
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp_status"))
-async def cmd_21st_magic_mcp_status(message: types.Message):
+async def cmd_21st_magic_mcp_status(message: Message):
     """21st magic MCP status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("✨ 21st-Magic-MCP smoke test: checking handshake...")
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio_test"))
-async def cmd_fish_audio_test(message: types.Message):
+async def cmd_fish_audio_test(message: Message):
     """Test fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3605,7 +3605,7 @@ async def cmd_fish_audio_test(message: types.Message):
 
 # Self-heal
 @router.message(lambda m: m.text and m.text.startswith("/self_heal"))
-async def cmd_self_heal(message: types.Message):
+async def cmd_self_heal(message: Message):
     """Self-heal watchdog"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3613,7 +3613,7 @@ async def cmd_self_heal(message: types.Message):
 
 # Obsidian vault
 @router.message(lambda m: m.text and m.text.startswith("/obsidian_vault"))
-async def cmd_obsidian_vault(message: types.Message):
+async def cmd_obsidian_vault(message: Message):
     """Obsidian vault rebuild"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3621,7 +3621,7 @@ async def cmd_obsidian_vault(message: types.Message):
 
 # More free projects
 @router.message(lambda m: m.text and m.text.startswith("/free_projects_list"))
-async def cmd_free_projects_list(message: types.Message):
+async def cmd_free_projects_list(message: Message):
     """List free projects"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3639,21 +3639,21 @@ async def cmd_free_projects_list(message: types.Message):
 
 # Final roadmap items
 @router.message(lambda m: m.text and m.text.startswith("/repo_manager"))
-async def cmd_repo_manager(message: types.Message):
+async def cmd_repo_manager(message: Message):
     """Repo manager"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Repo manager loaded...")
 
 @router.message(lambda m: m.text and m.text.startswith("/repo_sync"))
-async def cmd_repo_sync(message: types.Message):
+async def cmd_repo_sync(message: Message):
     """Repo sync"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📤 Syncing repo...")
 
 @router.message(lambda m: m.text and m.text.startswith("/repo_status"))
-async def cmd_repo_status(message: types.Message):
+async def cmd_repo_status(message: Message):
     """Repo status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3661,7 +3661,7 @@ async def cmd_repo_status(message: types.Message):
 
 # Tool availability check
 @router.message(lambda m: m.text and m.text.startswith("/tool_availability"))
-async def cmd_tool_availability(message: types.Message):
+async def cmd_tool_availability(message: Message):
     """Check tool availability"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3678,14 +3678,14 @@ async def cmd_tool_availability(message: types.Message):
 
 # Priority 1 items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit(message: types.Message):
+async def cmd_agent_skills_audit(message: Message):
     """Audit agent-skills registry"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start(message: types.Message):
+async def cmd_work_organizer_start(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3693,7 +3693,7 @@ async def cmd_work_organizer_start(message: types.Message):
 
 # Priority 2 items
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_fix"))
-async def cmd_claude_mem_fix(message: types.Message):
+async def cmd_claude_mem_fix(message: Message):
     """Fix claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3701,7 +3701,7 @@ async def cmd_claude_mem_fix(message: types.Message):
 
 # Priority 3 items
 @router.message(lambda m: m.text and m.text.startswith("/five_board_check"))
-async def cmd_five_board_check(message: types.Message):
+async def cmd_five_board_check(message: Message):
     """Check five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3709,14 +3709,14 @@ async def cmd_five_board_check(message: types.Message):
 
 # Priority 4 items
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp_test"))
-async def cmd_21st_magic_mcp_test(message:types.Message):
+async def cmd_21st_magic_mcp_test(message:Message):
     """Test 21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("✨ Testing 21st-Magic-MCP handshake...")
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio_check"))
-async def cmd_fish_audio_check(message: types.Message):
+async def cmd_fish_audio_check(message: Message):
     """Check fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3724,7 +3724,7 @@ async def cmd_fish_audio_check(message: types.Message):
 
 # Self-heal
 @router.message(lambda m: m.text and m.text.startswith("/self_heal_restart"))
-async def cmd_self_heal_restart(message: types.Message):
+async def cmd_self_heal_restart(message: Message):
     """Restart watchdog"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3732,7 +3732,7 @@ async def cmd_self_heal_restart(message: types.Message):
 
 # More remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_list"))
-async def cmd_agent_skills_list(message: types.Message):
+async def cmd_agent_skills_list(message: Message):
     """List agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3744,42 +3744,42 @@ async def cmd_agent_skills_list(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer_load(message: types.Message):
+async def cmd_work_organizer_load(message: Message):
     """Load work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📋 Loading work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_sync"))
-async def cmd_work_organizer_sync(message: types.Message):
+async def cmd_work_organizer_sync(message: Message):
     """Sync work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Syncing work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_expand"))
-async def cmd_claude_mem_expand(message: types.Message):
+async def cmd_claude_mem_expand(message: Message):
     """Expand claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Expanding claude mem...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board_clear"))
-async def cmd_five_board_clear(message: types.Message):
+async def cmd_five_board_clear(message: Message):
     """Clear five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔄 Clearing five board sync...")
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp_status"))
-async def cmd_21st_magic_mcp_status(message: types.Message):
+async def cmd_21st_magic_mcp_status(message: Message):
     """21st MCP status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("✨ 21st-Magic-MCP: handshake test...")
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio_check"))
-async def cmd_fish_audio_check2(message: types.Message):
+async def cmd_fish_audio_check2(message: Message):
     """Check fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3787,7 +3787,7 @@ async def cmd_fish_audio_check2(message: types.Message):
 
 # Self-heal
 @router.message(lambda m: m.text and m.text.startswith("/self_heal"))
-async def cmd_self_heal2(message: types.Message):
+async def cmd_self_heal2(message: Message):
     """Self-heal"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3795,7 +3795,7 @@ async def cmd_self_heal2(message: types.Message):
 
 # Obsidian vault
 @router.message(lambda m: m.text and m.text.startswith("/obsidian_refresh"))
-async def cmd_obsidian_refresh(message: types.Message):
+async def cmd_obsidian_refresh(message: Message):
     """Obsidian refresh"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3803,7 +3803,7 @@ async def cmd_obsidian_refresh(message: types.Message):
 
 # More remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_info"))
-async def cmd_agent_skills_info(message: types.Message):
+async def cmd_agent_skills_info(message: Message):
     """Agent skills info"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3815,7 +3815,7 @@ async def cmd_agent_skills_info(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_status"))
-async def cmd_work_organizer_status2(message: types.Message):
+async def cmd_work_organizer_status2(message: Message):
     """Work organizer status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3826,7 +3826,7 @@ async def cmd_work_organizer_status2(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_status"))
-async def cmd_claude_mem_status2(message: types.Message):
+async def cmd_claude_mem_status2(message: Message):
     """Claude mem status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3837,7 +3837,7 @@ async def cmd_claude_mem_status2(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board_status"))
-async def cmd_five_board_status2(message: types.Message):
+async def cmd_five_board_status2(message: Message):
     """Five board status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3848,7 +3848,7 @@ async def cmd_five_board_status2(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp_status"))
-async def cmd_21st_magic_mcp_status2(message: types.Message):
+async def cmd_21st_magic_mcp_status2(message: Message):
     """21st magic MCP status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3859,7 +3859,7 @@ async def cmd_21st_magic_mcp_status2(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio_status"))
-async def cmd_fish_audio_status2(message: types.Message):
+async def cmd_fish_audio_status2(message: Message):
     """Fish audio status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3871,42 +3871,42 @@ async def cmd_fish_audio_status2(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit2(message: types.Message):
+async def cmd_agent_skills_audit2(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start2(message: types.Message):
+async def cmd_work_organizer_start2(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review2(message: types.Message):
+async def cmd_claude_mem_review2(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board_validate"))
-async def cmd_five_board_validate2(message: types.Message):
+async def cmd_five_board_validate2(message: Message):
     """Validate five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔄 Validating five-board sync...")
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp_smoke"))
-async def cmd_21st_magic_mcp_smoke2(message: types.Message):
+async def cmd_21st_magic_mcp_smoke2(message: Message):
     """21st MCP smoke test"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("✨ 21st-Magic-MCP: smoke test handshake...")
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio_download"))
-async def cmd_fish_audio_download2(message: types.Message):
+async def cmd_fish_audio_download2(message: Message):
     """Check fish audio download"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3914,14 +3914,14 @@ async def cmd_fish_audio_download2(message: types.Message):
 
 # Self-heal
 @router.message(lambda m: m.text and m.text.startswith("/self_heal"))
-async def cmd_self_heal3(message: types.Message):
+async def cmd_self_heal3(message: Message):
     """Self-heal"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔧 Self-heal: restarting watchdog services...")
 
 @router.message(lambda m: m.text and m.text.startswith("/obsidian_vault_rebuild"))
-async def cmd_obsidian_vault_rebuild2(message: types.Message):
+async def cmd_obsidian_vault_rebuild2(message: Message):
     """Rebuild obsidian vault graph"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3929,7 +3929,7 @@ async def cmd_obsidian_vault_rebuild2(message: types.Message):
 
 # Remaining items all
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills3(message: types.Message):
+async def cmd_agent_skills3(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3940,7 +3940,7 @@ async def cmd_agent_skills3(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer3(message: types.Message):
+async def cmd_work_organizer3(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3951,7 +3951,7 @@ async def cmd_work_organizer3(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem3(message: types.Message):
+async def cmd_claude_mem3(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3962,7 +3962,7 @@ async def cmd_claude_mem3(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five"))
-async def cmd_five3(message: types.Message):
+async def cmd_five3(message: Message):
     """five"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3973,7 +3973,7 @@ async def cmd_five3(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp3(message: types.Message):
+async def cmd_21st_magic_mcp3(message: Message):
     """21st-magic-mcp"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3984,7 +3984,7 @@ async def cmd_21st_magic_mcp3(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio3(message: types.Message):
+async def cmd_fish_audio3(message: Message):
     """fish-audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -3995,7 +3995,7 @@ async def cmd_fish_audio3(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/strix"))
-async def cmd_strix3(message: types.Message):
+async def cmd_strix3(message: Message):
     """strix"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4008,7 +4008,7 @@ async def cmd_strix3(message: types.Message):
 
 # Remaining roadmap items
 @router.message(lambda m: m.text and m.text.startswith("/strix_test"))
-async def cmd_strix_test(message: types.Message):
+async def cmd_strix_test(message: Message):
     """Strix test"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4019,7 +4019,7 @@ async def cmd_strix_test(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_test"))
-async def cmd_agent_skills_test(message: types.Message):
+async def cmd_agent_skills_test(message: Message):
     """Agent skills test"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4031,7 +4031,7 @@ async def cmd_agent_skills_test(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_test"))
-async def cmd_work_organizer_test(message: types.Message):
+async def cmd_work_organizer_test(message: Message):
     """Work organizer test"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4042,7 +4042,7 @@ async def cmd_work_organizer_test(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_test"))
-async def cmd_claude_mem_test(message: types.Message):
+async def cmd_claude_mem_test(message: Message):
     """Claude mem test"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4053,7 +4053,7 @@ async def cmd_claude_mem_test(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board_test"))
-async def cmd_five_board_test(message: types.Message):
+async def cmd_five_board_test(message: Message):
     """Five board test"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4064,7 +4064,7 @@ async def cmd_five_board_test(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp_test"))
-async def cmd_21st_magic_mcp_test2(message: types.Message):
+async def cmd_21st_magic_mcp_test2(message: Message):
     """21st MCP test"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4075,7 +4075,7 @@ async def cmd_21st_magic_mcp_test2(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio_test"))
-async def cmd_fish_audio_test2(message: types.Message):
+async def cmd_fish_audio_test2(message: Message):
     """Fish audio test"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4087,42 +4087,42 @@ async def cmd_fish_audio_test2(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit3(message: types.Message):
+async def cmd_agent_skills_audit3(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start3(message: types.Message):
+async def cmd_work_organizer_start3(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review3(message: types.Message):
+async def cmd_claude_mem_review3(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board_validate"))
-async def cmd_five_board_validate3(message: types.Message):
+async def cmd_five_board_validate3(message: Message):
     """Validate five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔄 Validating five-board sync...")
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp_smoke"))
-async def cmd_21st_magic_mcp_smoke3(message: types.Message):
+async def cmd_21st_magic_mcp_smoke3(message: Message):
     """21st MCP smoke test"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("✨ 21st-Magic-MCP: smoke test handshake...")
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio_check"))
-async def cmd_fish_audio_check3(message: types.Message):
+async def cmd_fish_audio_check3(message: Message):
     """Check fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4130,7 +4130,7 @@ async def cmd_fish_audio_check3(message: types.Message):
 
 # Remaining roadmap items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills4(message: types.Message):
+async def cmd_agent_skills4(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4140,7 +4140,7 @@ async def cmd_agent_skills4(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit4(message: types.Message):
+async def cmd_agent_skills_audit4(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4149,7 +4149,7 @@ async def cmd_agent_skills_audit4(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer4(message: types.Message):
+async def cmd_work_organizer4(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4159,14 +4159,14 @@ async def cmd_work_organizer4(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start4(message: types.Message):
+async def cmd_work_organizer_start4(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem4(message: types.Message):
+async def cmd_claude_mem4(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4176,7 +4176,7 @@ async def cmd_claude_mem4(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review4(message: types.Message):
+async def cmd_claude_mem_review4(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4184,7 +4184,7 @@ async def cmd_claude_mem_review4(message: types.Message):
 
 # Remaining roadmap items
 @router.message(lambda m: m.text and m.text.startswith("/five"))
-async def cmd_five4(message: types.Message):
+async def cmd_five4(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4194,7 +4194,7 @@ async def cmd_five4(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp4(message: types.Message):
+async def cmd_21st_magic_mcp4(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4204,7 +4204,7 @@ async def cmd_21st_magic_mcp4(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio4(message: types.Message):
+async def cmd_fish_audio4(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4214,7 +4214,7 @@ async def cmd_fish_audio4(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/strix"))
-async def cmd_strix4(message: types.Message):
+async def cmd_strix4(message: Message):
     """strix"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4226,7 +4226,7 @@ async def cmd_strix4(message: types.Message):
 
 # Complete remaining roadmap items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills5(message: types.Message):
+async def cmd_agent_skills5(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4236,7 +4236,7 @@ async def cmd_agent_skills5(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer5(message: types.Message):
+async def cmd_work_organizer5(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4246,7 +4246,7 @@ async def cmd_work_organizer5(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem5(message: types.Message):
+async def cmd_claude_mem5(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4256,7 +4256,7 @@ async def cmd_claude_mem5(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board5(message: types.Message):
+async def cmd_five_board5(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4266,7 +4266,7 @@ async def cmd_five_board5(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp5(message: types.Message):
+async def cmd_21st_magic_mcp5(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4276,7 +4276,7 @@ async def cmd_21st_magic_mcp5(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio5(message: types.Message):
+async def cmd_fish_audio5(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4287,7 +4287,7 @@ async def cmd_fish_audio5(message: types.Message):
 
 # Complete remaining roadmap items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills6(message: types.Message):
+async def cmd_agent_skills6(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4297,14 +4297,14 @@ async def cmd_agent_skills6(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit6(message: types.Message):
+async def cmd_agent_skills_audit6(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer6(message: types.Message):
+async def cmd_work_organizer6(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4314,14 +4314,14 @@ async def cmd_work_organizer6(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start6(message: types.Message):
+async def cmd_work_organizer_start6(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem6(message: types.Message):
+async def cmd_claude_mem6(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4331,14 +4331,14 @@ async def cmd_claude_mem6(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review6(message: types.Message):
+async def cmd_claude_mem_review6(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board6(message: types.Message):
+async def cmd_five_board6(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4348,7 +4348,7 @@ async def cmd_five_board6(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/5th_magic_mcp"))
-async def cmd_5th_magic_mcp6(message: types.Message):
+async def cmd_5th_magic_mcp6(message: Message):
     """5th magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4358,7 +4358,7 @@ async def cmd_5th_magic_mcp6(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio6(message: types.Message):
+async def cmd_fish_audio6(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4369,7 +4369,7 @@ async def cmd_fish_audio6(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills7(message: types.Message):
+async def cmd_agent_skills7(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4379,14 +4379,14 @@ async def cmd_agent_skills7(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit7(message: types.Message):
+async def cmd_agent_skills_audit7(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer7(message: types.Message):
+async def cmd_work_organizer7(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4396,14 +4396,14 @@ async def cmd_work_organizer7(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start7(message: types.Message):
+async def cmd_work_organizer_start7(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem7(message: types.Message):
+async def cmd_claude_mem7(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4413,14 +4413,14 @@ async def cmd_claude_mem7(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review7(message: types.Message):
+async def cmd_claude_mem_review7(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board7(message: types.Message):
+async def cmd_five_board7(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4430,7 +4430,7 @@ async def cmd_five_board7(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp7(message: types.Message):
+async def cmd_21st_magic_mcp7(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4440,7 +4440,7 @@ async def cmd_21st_magic_mcp7(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio7(message: types.Message):
+async def cmd_fish_audio7(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4451,7 +4451,7 @@ async def cmd_fish_audio7(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills8(message: types.Message):
+async def cmd_agent_skills8(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4461,7 +4461,7 @@ async def cmd_agent_skills8(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer8(message: types.Message):
+async def cmd_work_organizer8(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4471,7 +4471,7 @@ async def cmd_work_organizer8(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem8(message: types.Message):
+async def cmd_claude_mem8(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4481,7 +4481,7 @@ async def cmd_claude_mem8(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board8(message: types.Message):
+async def cmd_five_board8(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4491,7 +4491,7 @@ async def cmd_five_board8(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp8(message: types.Message):
+async def cmd_21st_magic_mcp8(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4501,7 +4501,7 @@ async def cmd_21st_magic_mcp8(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio8(message: types.Message):
+async def cmd_fish_audio8(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4511,7 +4511,7 @@ async def cmd_fish_audio8(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/strix"))
-async def cmd_strix5(message: types.Message):
+async def cmd_strix5(message: Message):
     """strix"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4523,7 +4523,7 @@ async def cmd_strix5(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills9(message: types.Message):
+async def cmd_agent_skills9(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4533,7 +4533,7 @@ async def cmd_agent_skills9(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer9(message: types.Message):
+async def cmd_work_organizer9(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4543,7 +4543,7 @@ async def cmd_work_organizer9(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem9(message: types.Message):
+async def cmd_claude_mem9(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4553,7 +4553,7 @@ async def cmd_claude_mem9(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board9(message: types.Message):
+async def cmd_five_board9(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4563,7 +4563,7 @@ async def cmd_five_board9(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp9(message: types.Message):
+async def cmd_21st_magic_mcp9(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4573,7 +4573,7 @@ async def cmd_21st_magic_mcp9(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio9(message: types.Message):
+async def cmd_fish_audio9(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4583,7 +4583,7 @@ async def cmd_fish_audio9(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/strix"))
-async def cmd_strix6(message: types.Message):
+async def cmd_strix6(message: Message):
     """strix"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4595,7 +4595,7 @@ async def cmd_strix6(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills10(message: types.Message):
+async def cmd_agent_skills10(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4605,14 +4605,14 @@ async def cmd_agent_skills10(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit10(message: types.Message):
+async def cmd_agent_skills_audit10(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer10(message: types.Message):
+async def cmd_work_organizer10(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4622,14 +4622,14 @@ async def cmd_work_organizer10(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start10(message: types.Message):
+async def cmd_work_organizer_start10(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem10(message: types.Message):
+async def cmd_claude_mem10(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4639,14 +4639,14 @@ async def cmd_claude_mem10(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review10(message: types.Message):
+async def cmd_claude_mem_review10(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board10(message: types.Message):
+async def cmd_five_board10(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4656,7 +4656,7 @@ async def cmd_five_board10(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp10(message: types.Message):
+async def cmd_21st_magic_mcp10(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4666,7 +4666,7 @@ async def cmd_21st_magic_mcp10(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio10(message: types.Message):
+async def cmd_fish_audio10(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4677,49 +4677,49 @@ async def cmd_fish_audio10(message: types.Message):
 
 # Final remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_registry"))
-async def cmd_agent_skills_registry(message: types.Message):
+async def cmd_agent_skills_registry(message: Message):
     """Agent skills registry"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Agent Skills Registry:\n• /desk - AI desktop workspace\n• skill_harvest - Harvest new skills\n• skill_harvest_status - Check status")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer_load(message: types.Message):
+async def cmd_work_organizer_load(message: Message):
     """Load work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📋 Loading work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem_load(message: types.Message):
+async def cmd_claude_mem_load(message: Message):
     """Claude memory"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Loading claude mem...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board_load(message: types.Message):
+async def cmd_five_board_load(message: Message):
     """Five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔄 Loading five board sync...")
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp_load(message: types.Message):
+async def cmd_21st_magic_mcp_load(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("✨ Loading 21st-Magic-MCP handshake test...")
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio_load(message: types.Message):
+async def cmd_fish_audio_load(message: Message):
     """Fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🔊 Loading fish audio download pipeline...")
 
 @router.message(lambda m: m.text and m.text.startswith("/strix"))
-async def cmd_strix_load(message: types.Message):
+async def cmd_strix_load(message: Message):
     """Strix"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4727,7 +4727,7 @@ async def cmd_strix_load(message: types.Message):
 
 # Complete remaining roadmap items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills11(message: types.Message):
+async def cmd_agent_skills11(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4737,14 +4737,14 @@ async def cmd_agent_skills11(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit11(message: types.Message):
+async def cmd_agent_skills_audit11(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer11(message: types.Message):
+async def cmd_work_organizer11(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4754,14 +4754,14 @@ async def cmd_work_organizer11(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start11(message: types.Message):
+async def cmd_work_organizer_start11(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem11(message: types.Message):
+async def cmd_claude_mem11(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4771,14 +4771,14 @@ async def cmd_claude_mem11(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review11(message: types.Message):
+async def cmd_claude_mem_review11(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board11(message: types.Message):
+async def cmd_five_board11(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4788,7 +4788,7 @@ async def cmd_five_board11(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp11(message: types.Message):
+async def cmd_21st_magic_mcp11(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4798,7 +4798,7 @@ async def cmd_21st_magic_mcp11(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio11(message: types.Message):
+async def cmd_fish_audio11(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4809,7 +4809,7 @@ async def cmd_fish_audio11(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills12(message: types.Message):
+async def cmd_agent_skills12(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4819,7 +4819,7 @@ async def cmd_agent_skills12(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer12(message: types.Message):
+async def cmd_work_organizer12(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4829,7 +4829,7 @@ async def cmd_work_organizer12(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem12(message: types.Message):
+async def cmd_claude_mem12(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4839,7 +4839,7 @@ async def cmd_claude_mem12(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board12(message: types.Message):
+async def cmd_five_board12(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4849,7 +4849,7 @@ async def cmd_five_board12(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp12(message: types.Message):
+async def cmd_21st_magic_mcp12(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4859,7 +4859,7 @@ async def cmd_21st_magic_mcp12(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio12(message: types.Message):
+async def cmd_fish_audio12(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4870,7 +4870,7 @@ async def cmd_fish_audio12(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills13(message: types.Message):
+async def cmd_agent_skills13(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4880,14 +4880,14 @@ async def cmd_agent_skills13(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit13(message: types.Message):
+async def cmd_agent_skills_audit13(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer13(message: types.Message):
+async def cmd_work_organizer13(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4897,14 +4897,14 @@ async def cmd_work_organizer13(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start13(message: types.Message):
+async def cmd_work_organizer_start13(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem13(message: types.Message):
+async def cmd_claude_mem13(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4914,14 +4914,14 @@ async def cmd_claude_mem13(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review13(message: types.Message):
+async def cmd_claude_mem_review13(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board13(message: types.Message):
+async def cmd_five_board13(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4931,7 +4931,7 @@ async def cmd_five_board13(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp13(message: types.Message):
+async def cmd_21st_magic_mcp13(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4941,7 +4941,7 @@ async def cmd_21st_magic_mcp13(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio13(message: types.Message):
+async def cmd_fish_audio13(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4952,7 +4952,7 @@ async def cmd_fish_audio13(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills14(message: types.Message):
+async def cmd_agent_skills14(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4962,14 +4962,14 @@ async def cmd_agent_skills14(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit14(message: types.Message):
+async def cmd_agent_skills_audit14(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer14(message: types.Message):
+async def cmd_work_organizer14(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4979,14 +4979,14 @@ async def cmd_work_organizer14(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start14(message: types.Message):
+async def cmd_work_organizer_start14(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem14(message: types.Message):
+async def cmd_claude_mem14(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -4996,14 +4996,14 @@ async def cmd_claude_mem14(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review14(message: types.Message):
+async def cmd_claude_mem_review14(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board14(message: types.Message):
+async def cmd_five_board14(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5013,7 +5013,7 @@ async def cmd_five_board14(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp14(message: types.Message):
+async def cmd_21st_magic_mcp14(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5023,7 +5023,7 @@ async def cmd_21st_magic_mcp14(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio14(message: types.Message):
+async def cmd_fish_audio14(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5034,7 +5034,7 @@ async def cmd_fish_audio14(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills15(message: types.Message):
+async def cmd_agent_skills15(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5044,7 +5044,7 @@ async def cmd_agent_skills15(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer15(message: types.Message):
+async def cmd_work_organizer15(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5054,7 +5054,7 @@ async def cmd_work_organizer15(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem15(message: types.Message):
+async def cmd_claude_mem15(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5064,7 +5064,7 @@ async def cmd_claude_mem15(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board15(message: types.Message):
+async def cmd_five_board15(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5074,7 +5074,7 @@ async def cmd_five_board15(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp15(message: types.Message):
+async def cmd_21st_magic_mcp15(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5084,7 +5084,7 @@ async def cmd_21st_magic_mcp15(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio15(message: types.Message):
+async def cmd_fish_audio15(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5094,7 +5094,7 @@ async def cmd_fish_audio15(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/strix"))
-async def cmd_strix7(message: types.Message):
+async def cmd_strix7(message: Message):
     """strix"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5106,7 +5106,7 @@ async def cmd_strix7(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills16(message: types.Message):
+async def cmd_agent_skills16(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5116,14 +5116,14 @@ async def cmd_agent_skills16(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit16(message: types.Message):
+async def cmd_agent_skills_audit16(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer16(message: types.Message):
+async def cmd_work_organizer16(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5133,14 +5133,14 @@ async def cmd_work_organizer16(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start16(message: types.Message):
+async def cmd_work_organizer_start16(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem16(message: types.Message):
+async def cmd_claude_mem16(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5150,14 +5150,14 @@ async def cmd_claude_mem16(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review16(message: types.Message):
+async def cmd_claude_mem_review16(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board16(message: types.Message):
+async def cmd_five_board16(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5167,7 +5167,7 @@ async def cmd_five_board16(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp16(message: types.Message):
+async def cmd_21st_magic_mcp16(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5177,7 +5177,7 @@ async def cmd_21st_magic_mcp16(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio16(message: types.Message):
+async def cmd_fish_audio16(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5188,7 +5188,7 @@ async def cmd_fish_audio16(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills17(message: types.Message):
+async def cmd_agent_skills17(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5198,14 +5198,14 @@ async def cmd_agent_skills17(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit17(message: types.Message):
+async def cmd_agent_skills_audit17(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer17(message: types.Message):
+async def cmd_work_organizer17(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5215,14 +5215,14 @@ async def cmd_work_organizer17(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start17(message: types.Message):
+async def cmd_work_organizer_start17(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem17(message: types.Message):
+async def cmd_claude_mem17(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5232,14 +5232,14 @@ async def cmd_claude_mem17(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review17(message: types.Message):
+async def cmd_claude_mem_review17(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board17(message: types.Message):
+async def cmd_five_board17(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5249,7 +5249,7 @@ async def cmd_five_board17(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp17(message: types.Message):
+async def cmd_21st_magic_mcp17(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5259,7 +5259,7 @@ async def cmd_21st_magic_mcp17(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio17(message: types.Message):
+async def cmd_fish_audio17(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5270,7 +5270,7 @@ async def cmd_fish_audio17(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills18(message: types.Message):
+async def cmd_agent_skills18(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5280,7 +5280,7 @@ async def cmd_agent_skills18(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer18(message: types.Message):
+async def cmd_work_organizer18(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5290,7 +5290,7 @@ async def cmd_work_organizer18(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem18(message: types.Message):
+async def cmd_claude_mem18(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5300,7 +5300,7 @@ async def cmd_claude_mem18(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board18(message: types.Message):
+async def cmd_five_board18(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5310,7 +5310,7 @@ async def cmd_five_board18(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp18(message: types.Message):
+async def cmd_21st_magic_mcp18(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5320,7 +5320,7 @@ async def cmd_21st_magic_mcp18(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio18(message: types.Message):
+async def cmd_fish_audio18(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5330,7 +5330,7 @@ async def cmd_fish_audio18(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/strix"))
-async def cmd_strix8(message: types.Message):
+async def cmd_strix8(message: Message):
     """strix"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5342,7 +5342,7 @@ async def cmd_strix8(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills19(message: types.Message):
+async def cmd_agent_skills19(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5352,7 +5352,7 @@ async def cmd_agent_skills19(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer19(message: types.Message):
+async def cmd_work_organizer19(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5362,7 +5362,7 @@ async def cmd_work_organizer19(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem19(message: types.Message):
+async def cmd_claude_mem19(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5372,7 +5372,7 @@ async def cmd_claude_mem19(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board19(message: types.Message):
+async def cmd_five_board19(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5382,7 +5382,7 @@ async def cmd_five_board19(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp19(message: types.Message):
+async def cmd_21st_magic_mcp19(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5392,7 +5392,7 @@ async def cmd_21st_magic_mcp19(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio19(message: types.Message):
+async def cmd_fish_audio19(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5402,7 +5402,7 @@ async def cmd_fish_audio19(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/strix"))
-async def cmd_strix9(message: types.Message):
+async def cmd_strix9(message: Message):
     """strix"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5414,7 +5414,7 @@ async def cmd_strix9(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills20(message: types.Message):
+async def cmd_agent_skills20(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5424,14 +5424,14 @@ async def cmd_agent_skills20(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit20(message: types.Message):
+async def cmd_agent_skills_audit20(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer20(message: types.Message):
+async def cmd_work_organizer20(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5441,14 +5441,14 @@ async def cmd_work_organizer20(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start20(message: types.Message):
+async def cmd_work_organizer_start20(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem20(message: types.Message):
+async def cmd_claude_mem20(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5458,14 +5458,14 @@ async def cmd_claude_mem20(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review20(message: types.Message):
+async def cmd_claude_mem_review20(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board20(message: types.Message):
+async def cmd_five_board20(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5475,7 +5475,7 @@ async def cmd_five_board20(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp20(message: types.Message):
+async def cmd_21st_magic_mcp20(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5485,7 +5485,7 @@ async def cmd_21st_magic_mcp20(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio20(message: types.Message):
+async def cmd_fish_audio20(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5496,7 +5496,7 @@ async def cmd_fish_audio20(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills21(message: types.Message):
+async def cmd_agent_skills21(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5506,14 +5506,14 @@ async def cmd_agent_skills21(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit21(message: types.Message):
+async def cmd_agent_skills_audit21(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer21(message: types.Message):
+async def cmd_work_organizer21(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5523,14 +5523,14 @@ async def cmd_work_organizer21(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start21(message: types.Message):
+async def cmd_work_organizer_start21(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem21(message: types.Message):
+async def cmd_claude_mem21(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5540,14 +5540,14 @@ async def cmd_claude_mem21(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review21(message: types.Message):
+async def cmd_claude_mem_review21(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board21(message: types.Message):
+async def cmd_five_board21(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5557,7 +5557,7 @@ async def cmd_five_board21(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp21(message: types.Message):
+async def cmd_21st_magic_mcp21(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5567,7 +5567,7 @@ async def cmd_21st_magic_mcp21(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio21(message: types.Message):
+async def cmd_fish_audio21(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5578,7 +5578,7 @@ async def cmd_fish_audio21(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills22(message: types.Message):
+async def cmd_agent_skills22(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5588,7 +5588,7 @@ async def cmd_agent_skills22(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer22(message: types.Message):
+async def cmd_work_organizer22(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5598,7 +5598,7 @@ async def cmd_work_organizer22(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem22(message: types.Message):
+async def cmd_claude_mem22(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5608,7 +5608,7 @@ async def cmd_claude_mem22(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board22(message: types.Message):
+async def cmd_five_board22(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5618,7 +5618,7 @@ async def cmd_five_board22(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp22(message: types.Message):
+async def cmd_21st_magic_mcp22(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5628,7 +5628,7 @@ async def cmd_21st_magic_mcp22(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio22(message: types.Message):
+async def cmd_fish_audio22(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5639,7 +5639,7 @@ async def cmd_fish_audio22(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills23(message: types.Message):
+async def cmd_agent_skills23(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5649,7 +5649,7 @@ async def cmd_agent_skills23(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer23(message: types.Message):
+async def cmd_work_organizer23(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5659,7 +5659,7 @@ async def cmd_work_organizer23(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem23(message: types.Message):
+async def cmd_claude_mem23(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5669,7 +5669,7 @@ async def cmd_claude_mem23(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board23(message: types.Message):
+async def cmd_five_board23(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5679,7 +5679,7 @@ async def cmd_five_board23(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp23(message: types.Message):
+async def cmd_21st_magic_mcp23(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5689,7 +5689,7 @@ async def cmd_21st_magic_mcp23(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio23(message: types.Message):
+async def cmd_fish_audio23(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5700,7 +5700,7 @@ async def cmd_fish_audio23(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills24(message: types.Message):
+async def cmd_agent_skills24(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5710,14 +5710,14 @@ async def cmd_agent_skills24(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit24(message: types.Message):
+async def cmd_agent_skills_audit24(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer24(message: types.Message):
+async def cmd_work_organizer24(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5727,14 +5727,14 @@ async def cmd_work_organizer24(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start24(message: types.Message):
+async def cmd_work_organizer_start24(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem24(message: types.Message):
+async def cmd_claude_mem24(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5744,14 +5744,14 @@ async def cmd_claude_mem24(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review24(message: types.Message):
+async def cmd_claude_mem_review24(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board24(message: types.Message):
+async def cmd_five_board24(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5761,7 +5761,7 @@ async def cmd_five_board24(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp24(message: types.Message):
+async def cmd_21st_magic_mcp24(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5771,7 +5771,7 @@ async def cmd_21st_magic_mcp24(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio24(message: types.Message):
+async def cmd_fish_audio24(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5782,7 +5782,7 @@ async def cmd_fish_audio24(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills25(message: types.Message):
+async def cmd_agent_skills25(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5792,14 +5792,14 @@ async def cmd_agent_skills25(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit25(message: types.Message):
+async def cmd_agent_skills_audit25(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer25(message: types.Message):
+async def cmd_work_organizer25(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5809,14 +5809,14 @@ async def cmd_work_organizer25(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start25(message: types.Message):
+async def cmd_work_organizer_start25(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem25(message: types.Message):
+async def cmd_claude_mem25(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5826,14 +5826,14 @@ async def cmd_claude_mem25(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review25(message: types.Message):
+async def cmd_claude_mem_review25(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board25(message: types.Message):
+async def cmd_five_board25(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5843,7 +5843,7 @@ async def cmd_five_board25(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp25(message: types.Message):
+async def cmd_21st_magic_mcp25(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5853,7 +5853,7 @@ async def cmd_21st_magic_mcp25(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio25(message: types.Message):
+async def cmd_fish_audio25(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5864,7 +5864,7 @@ async def cmd_fish_audio25(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills26(message: types.Message):
+async def cmd_agent_skills26(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5874,7 +5874,7 @@ async def cmd_agent_skills26(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer26(message: types.Message):
+async def cmd_work_organizer26(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5884,7 +5884,7 @@ async def cmd_work_organizer26(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem26(message: types.Message):
+async def cmd_claude_mem26(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5894,7 +5894,7 @@ async def cmd_claude_mem26(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board26(message: types.Message):
+async def cmd_five_board26(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5904,7 +5904,7 @@ async def cmd_five_board26(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp26(message: types.Message):
+async def cmd_21st_magic_mcp26(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5914,7 +5914,7 @@ async def cmd_21st_magic_mcp26(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio2 (message: types.Message):
+async def cmd_fish_audio2 (message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5925,7 +5925,7 @@ async def cmd_fish_audio2 (message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills27(message: types.Message):
+async def cmd_agent_skills27(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5935,14 +5935,14 @@ async def cmd_agent_skills27(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit27(message: types.Message):
+async def cmd_agent_skills_audit27(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer27(message: types.Message):
+async def cmd_work_organizer27(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5952,14 +5952,14 @@ async def cmd_work_organizer27(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start27(message: types.Message):
+async def cmd_work_organizer_start27(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem27(message: types.Message):
+async def cmd_claude_mem27(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5969,14 +5969,14 @@ async def cmd_claude_mem27(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review27(message: types.Message):
+async def cmd_claude_mem_review27(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board27(message: types.Message):
+async def cmd_five_board27(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5986,7 +5986,7 @@ async def cmd_five_board27(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp27(message: types.Message):
+async def cmd_21st_magic_mcp27(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -5996,7 +5996,7 @@ async def cmd_21st_magic_mcp27(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio27(message: types.Message):
+async def cmd_fish_audio27(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6007,7 +6007,7 @@ async def cmd_fish_audio27(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills28(message: types.Message):
+async def cmd_agent_skills28(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6017,7 +6017,7 @@ async def cmd_agent_skills28(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer28(message: types.Message):
+async def cmd_work_organizer28(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6027,7 +6027,7 @@ async def cmd_work_organizer28(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem28(message: types.Message):
+async def cmd_claude_mem28(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6037,7 +6037,7 @@ async def cmd_claude_mem28(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board28(message: types.Message):
+async def cmd_five_board28(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6047,7 +6047,7 @@ async def cmd_five_board28(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp28(message: types.Message):
+async def cmd_21st_magic_mcp28(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6057,7 +6057,7 @@ async def cmd_21st_magic_mcp28(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio28(message: types.Message):
+async def cmd_fish_audio28(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6068,7 +6068,7 @@ async def cmd_fish_audio28(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills29(message: types.Message):
+async def cmd_agent_skills29(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6078,14 +6078,14 @@ async def cmd_agent_skills29(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit29(message: types.Message):
+async def cmd_agent_skills_audit29(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer29(message: types.Message):
+async def cmd_work_organizer29(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6095,14 +6095,14 @@ async def cmd_work_organizer29(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start29(message: types.Message):
+async def cmd_work_organizer_start29(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem29(message: types.Message):
+async def cmd_claude_mem29(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6112,14 +6112,14 @@ async def cmd_claude_mem29(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review29(message: types.Message):
+async def cmd_claude_mem_review29(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board29(message: types.Message):
+async def cmd_five_board29(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6129,7 +6129,7 @@ async def cmd_five_board29(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp29(message: types.Message):
+async def cmd_21st_magic_mcp29(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6139,7 +6139,7 @@ async def cmd_21st_magic_mcp29(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio29(message: types.Message):
+async def cmd_fish_audio29(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6150,7 +6150,7 @@ async def cmd_fish_audio29(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills30(message: types.Message):
+async def cmd_agent_skills30(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6160,7 +6160,7 @@ async def cmd_agent_skills30(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer30(message: types.Message):
+async def cmd_work_organizer30(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6170,7 +6170,7 @@ async def cmd_work_organizer30(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem30(message: types.Message):
+async def cmd_claude_mem30(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6180,7 +6180,7 @@ async def cmd_claude_mem30(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board30(message: types.Message):
+async def cmd_five_board30(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6190,7 +6190,7 @@ async def cmd_five_board30(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp30(message: types.Message):
+async def cmd_21st_magic_mcp30(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6200,7 +6200,7 @@ async def cmd_21st_magic_mcp30(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio30(message: types.Message):
+async def cmd_fish_audio30(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6211,7 +6211,7 @@ async def cmd_fish_audio30(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills31(message: types.Message):
+async def cmd_agent_skills31(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6221,14 +6221,14 @@ async def cmd_agent_skills31(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit31(message: types.Message):
+async def cmd_agent_skills_audit31(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer31(message: types.Message):
+async def cmd_work_organizer31(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6238,14 +6238,14 @@ async def cmd_work_organizer31(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start31(message: types.Message):
+async def cmd_work_organizer_start31(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem31(message: types.Message):
+async def cmd_claude_mem31(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6255,14 +6255,14 @@ async def cmd_claude_mem31(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review31(message: types.Message):
+async def cmd_claude_mem_review31(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board31(message: types.Message):
+async def cmd_five_board31(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6272,7 +6272,7 @@ async def cmd_five_board31(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp31(message: types.Message):
+async def cmd_21st_magic_mcp31(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6282,7 +6282,7 @@ async def cmd_21st_magic_mcp31(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio31(message: types.Message):
+async def cmd_fish_audio31(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6293,7 +6293,7 @@ async def cmd_fish_audio31(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills32(message: types.Message):
+async def cmd_agent_skills32(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6303,7 +6303,7 @@ async def cmd_agent_skills32(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer32(message: types.Message):
+async def cmd_work_organizer32(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6313,7 +6313,7 @@ async def cmd_work_organizer32(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem32(message: types.Message):
+async def cmd_claude_mem32(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6323,7 +6323,7 @@ async def cmd_claude_mem32(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board32(message: types.Message):
+async def cmd_five_board32(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6333,7 +6333,7 @@ async def cmd_five_board32(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp32(message: types.Message):
+async def cmd_21st_magic_mcp32(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6343,7 +6343,7 @@ async def cmd_21st_magic_mcp32(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio32(message: types.Message):
+async def cmd_fish_audio32(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6354,7 +6354,7 @@ async def cmd_fish_audio32(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills33(message: types.Message):
+async def cmd_agent_skills33(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6364,14 +6364,14 @@ async def cmd_agent_skills33(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit33(message: types.Message):
+async def cmd_agent_skills_audit33(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer33(message: types.Message):
+async def cmd_work_organizer33(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6381,14 +6381,14 @@ async def cmd_work_organizer33(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start33(message: types.Message):
+async def cmd_work_organizer_start33(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem33(message: types.Message):
+async def cmd_claude_mem33(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6398,14 +6398,14 @@ async def cmd_claude_mem33(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review33(message: types.Message):
+async def cmd_claude_mem_review33(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board33(message: types.Message):
+async def cmd_five_board33(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6415,7 +6415,7 @@ async def cmd_five_board33(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp33(message: types.Message):
+async def cmd_21st_magic_mcp33(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6425,7 +6425,7 @@ async def cmd_21st_magic_mcp33(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio33(message: types.Message):
+async def cmd_fish_audio33(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6436,7 +6436,7 @@ async def cmd_fish_audio33(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills34(message: types.Message):
+async def cmd_agent_skills34(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6446,7 +6446,7 @@ async def cmd_agent_skills34(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer34(message: types.Message):
+async def cmd_work_organizer34(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6456,7 +6456,7 @@ async def cmd_work_organizer34(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem34(message: types.Message):
+async def cmd_claude_mem34(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6466,7 +6466,7 @@ async def cmd_claude_mem34(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board34(message: types.Message):
+async def cmd_five_board34(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6476,7 +6476,7 @@ async def cmd_five_board34(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp34(message: types.Message):
+async def cmd_21st_magic_mcp34(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6486,7 +6486,7 @@ async def cmd_21st_magic_mcp34(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio34(message: types.Message):
+async def cmd_fish_audio34(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6497,7 +6497,7 @@ async def cmd_fish_audio34(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills35(message: types.Message):
+async def cmd_agent_skills35(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6507,14 +6507,14 @@ async def cmd_agent_skills35(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit35(message: types.Message):
+async def cmd_agent_skills_audit35(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer35(message: types.Message):
+async def cmd_work_organizer35(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6524,14 +6524,14 @@ async def cmd_work_organizer35(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start35(message: types.Message):
+async def cmd_work_organizer_start35(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem35(message: types.Message):
+async def cmd_claude_mem35(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6541,14 +6541,14 @@ async def cmd_claude_mem35(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review35(message: types.Message):
+async def cmd_claude_mem_review35(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board35(message: types.Message):
+async def cmd_five_board35(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6558,7 +6558,7 @@ async def cmd_five_board35(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp35(message: types.Message):
+async def cmd_21st_magic_mcp35(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6568,7 +6568,7 @@ async def cmd_21st_magic_mcp35(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio35(message: types.Message):
+async def cmd_fish_audio35(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6579,7 +6579,7 @@ async def cmd_fish_audio35(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills36(message: types.Message):
+async def cmd_agent_skills36(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6589,7 +6589,7 @@ async def cmd_agent_skills36(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer36(message: types.Message):
+async def cmd_work_organizer36(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6599,7 +6599,7 @@ async def cmd_work_organizer36(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem36(message: types.Message):
+async def cmd_claude_mem36(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6609,7 +6609,7 @@ async def cmd_claude_mem36(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board36(message: types.Message):
+async def cmd_five_board36(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6619,7 +6619,7 @@ async def cmd_five_board36(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp36(message: types.Message):
+async def cmd_21st_magic_mcp36(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6629,7 +6629,7 @@ async def cmd_21st_magic_mcp36(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio36(message: types.Message):
+async def cmd_fish_audio36(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6640,7 +6640,7 @@ async def cmd_fish_audio36(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills37(message: types.Message):
+async def cmd_agent_skills37(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6650,7 +6650,7 @@ async def cmd_agent_skills37(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer37(message: types.Message):
+async def cmd_work_organizer37(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6660,7 +6660,7 @@ async def cmd_work_organizer37(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem37(message: types.Message):
+async def cmd_claude_mem37(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6670,7 +6670,7 @@ async def cmd_claude_mem37(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board37(message: types.Message):
+async def cmd_five_board37(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6680,7 +6680,7 @@ async def cmd_five_board37(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp37(message: types.Message):
+async def cmd_21st_magic_mcp37(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6690,7 +6690,7 @@ async def cmd_21st_magic_mcp37(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio37(message: types.Message):
+async def cmd_fish_audio37(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6701,7 +6701,7 @@ async def cmd_fish_audio37(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills38(message: types.Message):
+async def cmd_agent_skills38(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6711,7 +6711,7 @@ async def cmd_agent_skills38(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer38(message: types.Message):
+async def cmd_work_organizer38(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6721,7 +6721,7 @@ async def cmd_work_organizer38(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem38(message: types.Message):
+async def cmd_claude_mem38(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6731,7 +6731,7 @@ async def cmd_claude_mem38(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board38(message: types.Message):
+async def cmd_five_board38(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6741,7 +6741,7 @@ async def cmd_five_board38(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp38(message: types.Message):
+async def cmd_21st_magic_mcp38(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6751,7 +6751,7 @@ async def cmd_21st_magic_mcp38(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio38(message: types.Message):
+async def cmd_fish_audio38(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6762,7 +6762,7 @@ async def cmd_fish_audio38(message: types.Message):
 
 # Strix blocking issue
 @router.message(lambda m: m.text and m.text.startswith("/strix_blocked"))
-async def cmd_strix_blocked(message: types.Message):
+async def cmd_strix_blocked(message: Message):
     """Strix blocking issue"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6775,7 +6775,7 @@ async def cmd_strix_blocked(message: types.Message):
 
 # Complete integration roadmap
 @router.message(lambda m: m.text and m.text.startswith("/integration_status"))
-async def cmd_integration_status(message: types.Message):
+async def cmd_integration_status(message: Message):
     """Integration status"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6790,7 +6790,7 @@ async def cmd_integration_status(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills39(message: types.Message):
+async def cmd_agent_skills39(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6800,7 +6800,7 @@ async def cmd_agent_skills39(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer39(message: types.Message):
+async def cmd_work_organizer39(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6810,7 +6810,7 @@ async def cmd_work_organizer39(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem39(message: types.Message):
+async def cmd_claude_mem39(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6820,7 +6820,7 @@ async def cmd_claude_mem39(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board39(message: types.Message):
+async def cmd_five_board39(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6830,7 +6830,7 @@ async def cmd_five_board39(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp39(message: types.Message):
+async def cmd_21st_magic_mcp39(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6840,7 +6840,7 @@ async def cmd_21st_magic_mcp39(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio39(message: types.Message):
+async def cmd_fish_audio39(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6851,7 +6851,7 @@ async def cmd_fish_audio39(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills39(message: types.Message):
+async def cmd_agent_skills39(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6861,14 +6861,14 @@ async def cmd_agent_skills39(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit39(message: types.Message):
+async def cmd_agent_skills_audit39(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer39(message: types.Message):
+async def cmd_work_organizer39(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6878,14 +6878,14 @@ async def cmd_work_organizer39(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start39(message: types.Message):
+async def cmd_work_organizer_start39(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem39(message: types.Message):
+async def cmd_claude_mem39(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6895,14 +6895,14 @@ async def cmd_claude_mem39(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review39(message: types.Message):
+async def cmd_claude_mem_review39(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board39(message: types.Message):
+async def cmd_five_board39(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6912,7 +6912,7 @@ async def cmd_five_board39(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp39(message: types.Message):
+async def cmd_21st_magic_mcp39(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6922,7 +6922,7 @@ async def cmd_21st_magic_mcp39(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio39(message: types.Message):
+async def cmd_fish_audio39(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6933,7 +6933,7 @@ async def cmd_fish_audio39(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills40(message: types.Message):
+async def cmd_agent_skills40(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6943,7 +6943,7 @@ async def cmd_agent_skills40(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer40(message: types.Message):
+async def cmd_work_organizer40(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6953,7 +6953,7 @@ async def cmd_work_organizer40(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem40(message: types.Message):
+async def cmd_claude_mem40(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6963,7 +6963,7 @@ async def cmd_claude_mem40(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board40(message: types.Message):
+async def cmd_five_board40(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6973,7 +6973,7 @@ async def cmd_five_board40(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp40(message: types.Message):
+async def cmd_21st_magic_mcp40(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6983,7 +6983,7 @@ async def cmd_21st_magic_mcp40(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio40(message: types.Message):
+async def cmd_fish_audio40(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -6994,7 +6994,7 @@ async def cmd_fish_audio40(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills41(message: types.Message):
+async def cmd_agent_skills41(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7004,14 +7004,14 @@ async def cmd_agent_skills41(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit41(message: types.Message):
+async def cmd_agent_skills_audit41(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer41(message: types.Message):
+async def cmd_work_organizer41(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7021,14 +7021,14 @@ async def cmd_work_organizer41(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start41(message: types.Message):
+async def cmd_work_organizer_start41(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem41(message: types.Message):
+async def cmd_claude_mem41(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7038,14 +7038,14 @@ async def cmd_claude_mem41(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review41(message: types.Message):
+async def cmd_claude_mem_review41(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board41(message: types.Message):
+async def cmd_five_board41(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7055,7 +7055,7 @@ async def cmd_five_board41(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp41(message: types.Message):
+async def cmd_21st_magic_mcp41(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7065,7 +7065,7 @@ async def cmd_21st_magic_mcp41(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio41(message: types.Message):
+async def cmd_fish_audio41(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7076,7 +7076,7 @@ async def cmd_fish_audio41(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills42(message: types.Message):
+async def cmd_agent_skills42(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7086,7 +7086,7 @@ async def cmd_agent_skills42(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer42(message: types.Message):
+async def cmd_work_organizer42(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7096,7 +7096,7 @@ async def cmd_work_organizer42(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem42(message: types.Message):
+async def cmd_claude_mem42(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7106,7 +7106,7 @@ async def cmd_claude_mem42(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board42(message: types.Message):
+async def cmd_five_board42(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7116,7 +7116,7 @@ async def cmd_five_board42(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp42(message: types.Message):
+async def cmd_21st_magic_mcp42(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7126,7 +7126,7 @@ async def cmd_21st_magic_mcp42(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio42(message: types.Message):
+async def cmd_fish_audio42(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7137,7 +7137,7 @@ async def cmd_fish_audio42(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills43(message: types.Message):
+async def cmd_agent_skills43(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7147,7 +7147,7 @@ async def cmd_agent_skills43(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer43(message: types.Message):
+async def cmd_work_organizer43(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7157,7 +7157,7 @@ async def cmd_work_organizer43(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem43(message: types.Message):
+async def cmd_claude_mem43(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7167,7 +7167,7 @@ async def cmd_claude_mem43(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board43(message: types.Message):
+async def cmd_five_board43(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7177,7 +7177,7 @@ async def cmd_five_board43(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp43(message: types.Message):
+async def cmd_21st_magic_mcp43(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7187,7 +7187,7 @@ async def cmd_21st_magic_mcp43(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio43(message: types.Message):
+async def cmd_fish_audio43(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7198,7 +7198,7 @@ async def cmd_fish_audio43(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills44(message: types.Message):
+async def cmd_agent_skills44(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7208,7 +7208,7 @@ async def cmd_agent_skills44(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer44(message: types.Message):
+async def cmd_work_organizer44(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7218,7 +7218,7 @@ async def cmd_work_organizer44(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem44(message: types.Message):
+async def cmd_claude_mem44(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7228,7 +7228,7 @@ async def cmd_claude_mem44(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board44(message: types.Message):
+async def cmd_five_board44(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7238,7 +7238,7 @@ async def cmd_five_board44(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp44(message: types.Message):
+async def cmd_21st_magic_mcp44(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7248,7 +7248,7 @@ async def cmd_21st_magic_mcp44(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio44(message: types.Message):
+async def cmd_fish_audio44(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7259,7 +7259,7 @@ async def cmd_fish_audio44(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills45(message: types.Message):
+async def cmd_agent_skills45(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7269,7 +7269,7 @@ async def cmd_agent_skills45(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer45(message: types.Message):
+async def cmd_work_organizer45(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7279,7 +7279,7 @@ async def cmd_work_organizer45(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem45(message: types.Message):
+async def cmd_claude_mem45(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7289,7 +7289,7 @@ async def cmd_claude_mem45(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board45(message: types.Message):
+async def cmd_five_board45(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7299,7 +7299,7 @@ async def cmd_five_board45(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp45(message: types.Message):
+async def cmd_21st_magic_mcp45(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7309,7 +7309,7 @@ async def cmd_21st_magic_mcp45(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio45(message: types.Message):
+async def cmd_fish_audio45(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7320,7 +7320,7 @@ async def cmd_fish_audio45(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills46(message: types.Message):
+async def cmd_agent_skills46(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7330,7 +7330,7 @@ async def cmd_agent_skills46(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer46(message: types.Message):
+async def cmd_work_organizer46(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7340,7 +7340,7 @@ async def cmd_work_organizer46(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem46(message: types.Message):
+async def cmd_claude_mem46(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7350,7 +7350,7 @@ async def cmd_claude_mem46(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board46(message: types.Message):
+async def cmd_five_board46(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7360,7 +7360,7 @@ async def cmd_five_board46(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp46(message: types.Message):
+async def cmd_21st_magic_mcp46(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7370,7 +7370,7 @@ async def cmd_21st_magic_mcp46(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio46(message: types.Message):
+async def cmd_fish_audio46(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7381,7 +7381,7 @@ async def cmd_fish_audio46(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills47(message: types.Message):
+async def cmd_agent_skills47(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7391,14 +7391,14 @@ async def cmd_agent_skills47(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit47(message: types.Message):
+async def cmd_agent_skills_audit47(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer47(message: types.Message):
+async def cmd_work_organizer47(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7408,14 +7408,14 @@ async def cmd_work_organizer47(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start47(message: types.Message):
+async def cmd_work_organizer_start47(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem47(message: types.Message):
+async def cmd_claude_mem47(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7425,14 +7425,14 @@ async def cmd_claude_mem47(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review47(message: types.Message):
+async def cmd_claude_mem_review47(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board47(message: types.Message):
+async def cmd_five_board47(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7442,7 +7442,7 @@ async def cmd_five_board47(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp47(message: types.Message):
+async def cmd_21st_magic_mcp47(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7452,7 +7452,7 @@ async def cmd_21st_magic_mcp47(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio47(message: types.Message):
+async def cmd_fish_audio47(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7463,7 +7463,7 @@ async def cmd_fish_audio47(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills48(message: types.Message):
+async def cmd_agent_skills48(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7473,7 +7473,7 @@ async def cmd_agent_skills48(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer48(message: types.Message):
+async def cmd_work_organizer48(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7483,7 +7483,7 @@ async def cmd_work_organizer48(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem48(message: types.Message):
+async def cmd_claude_mem48(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7493,7 +7493,7 @@ async def cmd_claude_mem48(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board48(message: types.Message):
+async def cmd_five_board48(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7503,7 +7503,7 @@ async def cmd_five_board48(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp48(message: types.Message):
+async def cmd_21st_magic_mcp48(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7513,7 +7513,7 @@ async def cmd_21st_magic_mcp48(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio48(message: types.Message):
+async def cmd_fish_audio48(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7524,7 +7524,7 @@ async def cmd_fish_audio48(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills49(message: types.Message):
+async def cmd_agent_skills49(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7534,14 +7534,14 @@ async def cmd_agent_skills49(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit49(message: types.Message):
+async def cmd_agent_skills_audit49(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer49(message: types.Message):
+async def cmd_work_organizer49(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7551,14 +7551,14 @@ async def cmd_work_organizer49(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start49(message: types.Message):
+async def cmd_work_organizer_start49(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem49(message: types.Message):
+async def cmd_claude_mem49(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7568,14 +7568,14 @@ async def cmd_claude_mem49(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review49(message: types.Message):
+async def cmd_claude_mem_review49(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board49(message: types.Message):
+async def cmd_five_board49(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7585,7 +7585,7 @@ async def cmd_five_board49(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp49(message: types.Message):
+async def cmd_21st_magic_mcp49(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7595,7 +7595,7 @@ async def cmd_21st_magic_mcp49(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio49(message: types.Message):
+async def cmd_fish_audio49(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7606,7 +7606,7 @@ async def cmd_fish_audio49(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills50(message: types.Message):
+async def cmd_agent_skills50(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7616,7 +7616,7 @@ async def cmd_agent_skills50(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer50(message: types.Message):
+async def cmd_work_organizer50(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7626,7 +7626,7 @@ async def cmd_work_organizer50(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem50(message: types.Message):
+async def cmd_claude_mem50(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7636,7 +7636,7 @@ async def cmd_claude_mem50(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board50(message: types.Message):
+async def cmd_five_board50(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7646,7 +7646,7 @@ async def cmd_five_board50(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp50(message: types.Message):
+async def cmd_21st_magic_mcp50(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7656,7 +7656,7 @@ async def cmd_21st_magic_mcp50(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio50(message: types.Message):
+async def cmd_fish_audio50(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7667,7 +7667,7 @@ async def cmd_fish_audio50(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills51(message: types.Message):
+async def cmd_agent_skills51(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7677,7 +7677,7 @@ async def cmd_agent_skills51(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer51(message: types.Message):
+async def cmd_work_organizer51(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7687,7 +7687,7 @@ async def cmd_work_organizer51(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem51(message: types.Message):
+async def cmd_claude_mem51(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7697,7 +7697,7 @@ async def cmd_claude_mem51(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board51(message: types.Message):
+async def cmd_five_board51(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7707,7 +7707,7 @@ async def cmd_five_board51(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp51(message: types.Message):
+async def cmd_21st_magic_mcp51(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7717,7 +7717,7 @@ async def cmd_21st_magic_mcp51(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio51(message: types.Message):
+async def cmd_fish_audio51(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7728,7 +7728,7 @@ async def cmd_fish_audio51(message: types.Message):
 
 # Complete remaining items
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills"))
-async def cmd_agent_skills52(message: types.Message):
+async def cmd_agent_skills52(message: Message):
     """agent-skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7738,14 +7738,14 @@ async def cmd_agent_skills52(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/agent_skills_audit"))
-async def cmd_agent_skills_audit52(message: types.Message):
+async def cmd_agent_skills_audit52(message: Message):
     """Audit agent skills"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("📦 Auditing agent-skills registry metadata...")
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer"))
-async def cmd_work_organizer52(message: types.Message):
+async def cmd_work_organizer52(message: Message):
     """work-organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7755,14 +7755,14 @@ async def cmd_work_organizer52(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/work_organizer_start"))
-async def cmd_work_organizer_start52(message: types.Message):
+async def cmd_work_organizer_start52(message: Message):
     """Start work organizer"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("🚀 Starting work organizer...")
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem"))
-async def cmd_claude_mem52(message: types.Message):
+async def cmd_claude_mem52(message: Message):
     """claude-mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7772,14 +7772,14 @@ async def cmd_claude_mem52(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/claude_mem_review"))
-async def cmd_claude_mem_review52(message: types.Message):
+async def cmd_claude_mem_review52(message: Message):
     """Review claude mem"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
     await message.reply("💭 Reviewing claude mem truncation...")
 
 @router.message(lambda m: m.text and m.text.startswith("/five_board"))
-async def cmd_five_board52(message: types.Message):
+async def cmd_five_board52(message: Message):
     """five board"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7789,7 +7789,7 @@ async def cmd_five_board52(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/21st_magic_mcp"))
-async def cmd_21st_magic_mcp52(message: types.Message):
+async def cmd_21st_magic_mcp52(message: Message):
     """21st magic MCP"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return
@@ -7799,7 +7799,7 @@ async def cmd_21st_magic_mcp52(message: types.Message):
     )
 
 @router.message(lambda m: m.text and m.text.startswith("/fish_audio"))
-async def cmd_fish_audio52(message: types.Message):
+async def cmd_fish_audio52(message: Message):
     """fish audio"""
     if message.chat.id not in ALLOWED_CHAT_IDS:
         return

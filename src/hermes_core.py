@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-ESPRIEAETHER — Hermes Core
-The sovereign brain. Routes to best available brain.
+ESPRIEAETHER — Hermes Core v2
+Cloud-first sovereign brain with advanced capabilities.
 """
 
 import json
@@ -14,21 +14,21 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Cloud brains (no key required for llm7)
+# Cloud brains (free tier, no key required for llm7)
 CLOUD_BRAINS = [
     {
         "name": "llm7-fast",
         "url": "https://api.llm7.io/v1/chat/completions",
         "key": "ollama-local",
         "model": "mistral-Nemo-Instruct-2407",
-        "min_interval": 6.5,
+        "priority": 1,
     },
     {
         "name": "llm7-big",
         "url": "https://api.llm7.io/v1/chat/completions",
         "key": "ollama-local",
         "model": "gpt-oss:20b",
-        "min_interval": 6.5,
+        "priority": 2,
     },
 ]
 
@@ -38,7 +38,7 @@ LOCAL_BRAIN = {
     "url": os.getenv("OLLAMA_URL", "http://127.0.0.1:11435/v1/chat/completions"),
     "key": None,
     "model": os.getenv("OLLAMA_MODEL", "qwen2.5:3b"),
-    "min_interval": 0.0,
+    "priority": 3,
 }
 
 class HermesCore:
@@ -47,7 +47,8 @@ class HermesCore:
         self.memory_file.parent.mkdir(parents=True, exist_ok=True)
         self.memory = self._load_memory()
         self.session_start = datetime.now(timezone.utc).isoformat()
-        self._last_request = {}
+        self._context_window = []
+        self._max_context = 20
     
     def _load_memory(self):
         if self.memory_file.exists():
@@ -55,7 +56,17 @@ class HermesCore:
                 return json.loads(self.memory_file.read_text(encoding="utf-8"))
             except Exception:
                 pass
-        return {"sessions": [], "facts": {}, "preferences": {}}
+        return {
+            "sessions": [],
+            "facts": {},
+            "preferences": {
+                "language": "arabic",
+                "style": "concise",
+                "voice": "ar-EG-SalmaNeural"
+            },
+            "tools": {},
+            "agents": {}
+        }
     
     def _save_memory(self):
         self.memory_file.write_text(
@@ -73,8 +84,15 @@ class HermesCore:
     def recall(self, key):
         return self.memory.get("facts", {}).get(key, {}).get("value")
     
+    def set_preference(self, key, value):
+        self.memory.setdefault("preferences", {})[key] = value
+        self._save_memory()
+    
+    def get_preference(self, key, default=None):
+        return self.memory.get("preferences", {}).get(key, default)
+    
     def _call_brain(self, brain, messages, timeout=60):
-        """Call a single brain."""
+        """Call a single brain with error handling."""
         payload = {
             "model": brain["model"],
             "messages": messages,
@@ -97,18 +115,32 @@ class HermesCore:
             return content
         return None
     
-    def think(self, prompt: str) -> str:
-        """Main thinking — tries cloud first, then local."""
-        messages = [
-            {"role": "system", "content": self._system_prompt()},
-            {"role": "user", "content": prompt}
-        ]
+    def think(self, prompt: str, context: list = None) -> str:
+        """Main thinking with context window and fallback chain."""
+        # Build messages with context
+        messages = [{"role": "system", "content": self._system_prompt()}]
         
-        # Try cloud brains first (llm7 is free, no key needed)
-        for brain in CLOUD_BRAINS:
+        # Add context window
+        if context:
+            messages.extend(context[-self._max_context:])
+        else:
+            # Use internal context
+            messages.extend(self._context_window[-self._max_context:])
+        
+        # Add current prompt
+        messages.append({"role": "user", "content": prompt})
+        
+        # Try cloud brains first (priority order)
+        for brain in sorted(CLOUD_BRAINS, key=lambda x: x.get("priority", 99)):
             try:
                 content = self._call_brain(brain, messages)
-                if content:
+                if content and len(content.strip()) > 0:
+                    # Update context
+                    self._context_window.append({"role": "user", "content": prompt})
+                    self._context_window.append({"role": "assistant", "content": content})
+                    if len(self._context_window) > self._max_context * 2:
+                        self._context_window = self._context_window[-self._max_context * 2:]
+                    
                     self._log_session(prompt, content, brain["name"])
                     return content
             except Exception as e:
@@ -117,43 +149,86 @@ class HermesCore:
         # Fallback to local Ollama
         try:
             content = self._call_brain(LOCAL_BRAIN, messages, timeout=90)
-            if content:
+            if content and len(content.strip()) > 0:
+                self._context_window.append({"role": "user", "content": prompt})
+                self._context_window.append({"role": "assistant", "content": content})
+                if len(self._context_window) > self._max_context * 2:
+                    self._context_window = self._context_window[-self._max_context * 2:]
+                
                 self._log_session(prompt, content, LOCAL_BRAIN["name"])
                 return content
         except Exception as e:
             pass
         
-        return "[Hermes: no brain available — cloud and local failed]"
+        return "[Hermes: جميع les cerveaux sont indisponibles]"
     
     def _system_prompt(self) -> str:
-        return """أنت Hermes — العقل الرئيسي لـ ESPRIEAETHER.
-أنت مسؤول، مباشر، وذي عقلية تقنية.
-تتحدث العربية بطلاقة.
-لا تكرر السؤال. لا تقدم شروعات غير ضرورية.
-إذا عرفت المهمة، نفذها مباشرة."""
+        lang = self.get_preference("language", "arabic")
+        style = self.get_preference("style", "concise")
+        
+        base = "أنت Hermes — العقل الرئيسي لـ ESPRIEAETHER. "
+        if lang == "arabic":
+            base += "تتحدث العربية بطلاقة. "
+        base += "مباشر، تقني، بدون حشو. "
+        if style == "concise":
+            base += "إجابات قصيرة. "
+        elif style == "detailed":
+            base += "إجابات مفصلة مع أمثلة. "
+        base += "إذا عرفت المهمة، نفذها مباشرة."
+        return base
     
     def _log_session(self, prompt, response, model):
         self.memory["sessions"].append({
             "ts": datetime.now(timezone.utc).isoformat(),
             "model": model,
             "prompt": prompt[:200],
-            "response_preview": response[:200]
+            "response_preview": response[:200],
+            "language": self.get_preference("language", "arabic")
         })
         if len(self.memory["sessions"]) > 100:
             self.memory["sessions"] = self.memory["sessions"][-100:]
         self._save_memory()
     
+    def get_context(self) -> list:
+        return self._context_window
+    
+    def clear_context(self):
+        self._context_window = []
+    
     def status(self) -> dict:
         return {
             "brain": "Hermes",
+            "version": "2.0",
             "mode": "cloud-first",
             "cloud_brains": len(CLOUD_BRAINS),
             "local_brain": LOCAL_BRAIN["name"],
             "ollama_url": LOCAL_BRAIN["url"],
             "memory_items": len(self.memory.get("facts", {})),
             "sessions": len(self.memory.get("sessions", [])),
+            "context_length": len(self._context_window),
+            "preferences": self.memory.get("preferences", {}),
             "uptime": datetime.now(timezone.utc).isoformat()
         }
+    
+    def get_recent_sessions(self, limit=10):
+        return self.memory.get("sessions", [])[-limit:]
+    
+    def search_memory(self, query):
+        """Search through sessions and facts."""
+        results = []
+        q = query.lower()
+        
+        # Search sessions
+        for session in self.memory.get("sessions", []):
+            if q in session.get("prompt", "").lower() or q in session.get("response_preview", "").lower():
+                results.append({"type": "session", "data": session})
+        
+        # Search facts
+        for key, fact in self.memory.get("facts", {}).items():
+            if q in key.lower() or q in str(fact.get("value", "")).lower():
+                results.append({"type": "fact", "key": key, "data": fact})
+        
+        return results
 
 # Singleton
 _hermes = None
