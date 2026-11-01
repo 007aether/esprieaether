@@ -20,31 +20,31 @@ from pathlib import Path
 
 HOME = Path(os.path.expanduser("~"))
 VAULT = HOME / "ObsidianVault" / "EsprieAether"
-ESPRIE = HOME / "Desktop" / "esprieaether"
-SUNNA = HOME / "Desktop" / "Sunna-Equipe-Industrial"
+ESPRIE = HOME / "esprieaether"
+SUNNA = HOME / "Sunna-Equipe-Industrial"
 
 # services: name -> (port, links)
 SERVICES = {
     "ollama": (11435, ["router"]),
-    "router": (11436, ["ollama", "orchestrator", "JEV", "Apollo-agent", "OKX"]),
-    "orchestrator": (11436, ["router"]),
+    "router": (11436, ["ollama-local", "orchestrator", "JEV", "Apollo-agent", "OKX"]),
+    "orchestrator": (11436, ["router", "mesh"]),
     "web": (5000, ["router", "cloud-desktop", "control-center"]),
     "cloud-desktop": (5001, ["web", "Tor", "VPS"]),
     "sunna-api": (5100, ["Sunna", "prices", "netlify", "kanban"]),
     "dsh-bridge": (5101, ["DeepSeek-Harness"]),
-    "integrations": (5102, ["all-integrations"]),
+    "integrations": (5102, ["integrations"]),
     "kanban": (5103, ["Sunna", "Veritas-Kanban"]),
-    "homedock": (5104, ["all-integrations", "control-center"]),
+    "homedock": (5104, ["integrations", "control-center"]),
     "jarvis": (8000, ["OSINT", "Exa", "Anthropic", "Gemini"]),
     "jarvis-frontend": (3000, ["jarvis", "OSINT"]),
 }
 
 BOTS = {
-    "netlify-keepalive": ["Netlify", "Sunna"],
+    "netlify-keepalive": ["netlify", "Sunna"],
     "bot-heartbeat": ["Telegram", "watchdog"],
     "price-tracker": ["PriceGhost", "Sunna", "devis"],
-    "sunna-web-bot": ["Netlify", "GMB", "Sunna"],
-    "watchdog": ["all-services"],
+    "sunna-web-bot": ["netlify", "GMB", "Sunna"],
+    "watchdog": ["_Index"],
 }
 
 INTEGRATIONS = ["Checkmate", "Portracker", "Ask4Me", "PriceGhost", "Cronpulse",
@@ -61,22 +61,22 @@ INTEGRATIONS = ["Checkmate", "Portracker", "Ask4Me", "PriceGhost", "Cronpulse",
 
 # agents: name -> links
 AGENTS = {
-    "airdrop": ["crypto"], "ask": ["router"], "bandwidth": ["infra"],
-    "browser": ["infra"], "calendar": ["productivity"], "cloud": ["VPS"],
+    "airdrop": ["crypto"], "ask": ["router"], "bandwidth": ["docker"],
+    "browser": ["docker"], "calendar": ["productivity"], "cloud": ["VPS"],
     "email": ["Sunna", "productivity"], "file": ["productivity"],
-    "github": ["cloud", "VPS", "Sunna"], "guardian": ["infra"], "hermes": ["router"],
+    "github": ["cloud", "VPS", "Sunna"], "guardian": ["docker"], "hermes": ["router"],
     "jarvis-bridge": ["jarvis"], "market": ["crypto"], "needle": ["crypto"],
     "pharos": ["crypto"], "planner": ["productivity"],
-    "terminal": ["infra"], "vault": ["security"], "vpn": ["VPN"],
+    "terminal": ["docker"], "vault": ["security"], "vpn": ["VPN"],
     "research-monitor": ["research"], "semantic-memory": ["memory"],
-    "rea": ["REA", "Ghidra", "reverse-engineering"],
-    "deepseek-harness": ["deepseek", "brain", "ai", "skil"],
+    "rea": ["REA", "Ghidra"],
+    "deepseek-harness": ["deepseek-harness"],
     "colibri": ["colibri", "router"],
-    "orchestrator": ["mesh", "infra"],
-    "digest": ["mesh", "infra"],
+    "orchestrator": ["mesh", "docker"],
+    "digest": ["mesh", "docker"],
     "skill-harvester": ["mesh", "research"],
     "work-organizer": ["productivity"],
-    "self-heal": ["guardian", "infra"],
+    "self-heal": ["guardian", "docker"],
 }
 
 # sunna topics: name -> (body, links)
@@ -106,19 +106,19 @@ BRAINS = {
     "OSINT": ("16 agents — face ID + swarm + synthesis", ["jarvis", "Exa"]),
     "OKX": ("Connector + trading bot (DRY-RUN). withdrawal refused by code", ["router"]),
     "DeepSeek-Harness": ("DSH — browser-capable agent", ["dsh-bridge"]),
-    "colibri": ("Qwen3-Coder-30B-A3B MoE (19.4GB, D:) — `coli serve` :8000 — strongest local brain, wired to router", ["router", "ai_router", "colibri_launcher"]),
+    "colibri": ("Qwen3-Coder-30B-A3B MoE (19.4GB, D:) — `coli serve` :8000 — strongest local brain, wired to router", ["router", "colibri"]),
     "ollama-local": ("qwen2.5:3b (1.9GB, C:) — fast local brain + fallback", ["router"]),
-    "mesh": ("7-agent mesh — evolve/security/research/market/quality/redteam/general — shared board :11437", ["router", "agent_mesh", "evolve", "security", "research"]),
-    "REA": ("Reverse Engineer Anything (morluto/rea 226K) — Ghidra 12.1.4 + JDK 25 — native PE + JS/Electron analysis", ["rea_agent", "Ghidra"]),
-    "JARVIS-intel": ("Real-time person intelligence — Next.js :3000 + FastAPI :8000 — capture/identify/research", ["jarvis", "IntelBoard"]),
-    "Ghidra": ("12.1.4 + JDK 25 — REA analysis engine (D:/AetherData/rea)", ["REA", "rea_agent"]),
+    "mesh": ("7-agent mesh — evolve/security/research/market/quality/redteam/general — shared board :11437", ["router", "mesh", "orchestrator", "security", "research"]),
+    "REA": ("Reverse Engineer Anything (morluto/rea 226K) — Ghidra 12.1.4 + JDK 25 — native PE + JS/Electron analysis", ["rea", "Ghidra"]),
+    "JARVIS-intel": ("Real-time person intelligence — Next.js :3000 + FastAPI :8000 — capture/identify/research", ["jarvis", "JARVIS-intel"]),
+    "Ghidra": ("12.1.4 + JDK 25 — REA analysis engine (D:/AetherData/rea)", ["REA", "rea"]),
 }
 
 # infra: name -> (body, links)
 INFRA = {
     "VPS": ("SSH tunnel + zero-trust. `docs/VPS_TOR_DOCKER.md`", ["cloud-desktop", "Octelium"]),
     "Tor": ("3 documented fixes. `docs/VPS_TOR_DOCKER.md`", ["cloud-desktop", "VPS"]),
-    "VPN": ("WireGuard — `vpn_agent.py` + auto-reconnect daemon", ["infra", "cloud-desktop"]),
+    "VPN": ("WireGuard — `vpn_agent.py` + auto-reconnect daemon", ["docker", "cloud-desktop"]),
     "docker": ("homedock + dozzle + runtipi", ["homedock"]),
 }
 
@@ -136,8 +136,8 @@ META = {
     "memory": ("semantic-memory — persistent context", ["semantic-memory"]),
     "research": ("research-monitor — news 24/7", ["research-monitor"]),
     "crypto": ("airdrop + market + needle + pharos", ["airdrop", "market", "needle", "pharos"]),
-    "bandwidth": ("bandwidth_agent + TraffMonetizer — passive income from traffic", ["TraffMonetizer", "infra"]),
-    "governor-edr": ("Local-first Windows threat detection agent (4B LLM + MITRE + YARA + Telegram HITL). integrations/governor-edr", ["security", "guardian", "infra", "Telegram"]),
+    "bandwidth": ("bandwidth_agent + TraffMonetizer — passive income from traffic", ["TraffMonetizer", "docker"]),
+    "governor-edr": ("Local-first Windows threat detection agent (4B LLM + MITRE + YARA + Telegram HITL). integrations/governor-edr", ["security", "guardian", "docker", "Telegram"]),
 }
 
 
@@ -216,8 +216,8 @@ def main():
     # builder rewrites these notes from docs/ on every run, wiping them. Inject
     # a Related section here so links survive rebuilds.
     DOC_LINKS = {
-        "SOP_WIKI": ["devis", "Sunna", "prices", "factures", "kanban", "all-services"],
-        "GAP_ANALYSIS": ["all-services", "control-center", "SOP_WIKI", "all-integrations"],
+        "SOP_WIKI": ["devis", "Sunna", "prices", "kanban", "_Index"],
+        "GAP_ANALYSIS": ["_Index", "control-center", "SOP_WIKI", "integrations"],
     }
     for src_name, tags in [("SOP_WIKI.md", ["doc", "sop"]), ("GAP_ANALYSIS.md", ["doc", "gap"])]:
         s = ESPRIE / "docs" / src_name
