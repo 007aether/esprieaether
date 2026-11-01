@@ -279,3 +279,12 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("✅ Social linking complete!")
     print("=" * 60)
+
+# Social media integration for esprieaether brand
+def init_social_media():
+    from social_media_config import get_status, enable_platform
+    return get_status()
+
+def setup_social_platform(platform, **kwargs):
+    from social_media_config import enable_platform
+    enable_platform(platform, **kwargs)
