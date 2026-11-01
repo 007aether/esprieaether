@@ -35,9 +35,9 @@ CLOUD_BRAINS = [
 # Local brain (Ollama) - may be broken
 LOCAL_BRAIN = {
     "name": "ollama-local",
-    "url": os.getenv("OLLAMA_URL", "http://127.0.0.1:11435/v1/chat/completions"),
+    "url": os.getenv("OLLAMA_URL", "http://127.0.0.1:11434/v1/chat/completions"),
     "key": None,
-    "model": os.getenv("OLLAMA_MODEL", "qwen2.5:3b"),
+    "model": os.getenv("OLLAMA_MODEL", "wizard-vicuna-uncensored:13b"),
     "priority": 3,
 }
 

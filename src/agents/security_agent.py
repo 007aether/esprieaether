@@ -28,7 +28,7 @@ LOG_FILE = BASE_DIR / "data" / "logs" / "security_agent.log"
 
 # Security rules
 SECURITY_RULES = {
-    "monitor_port": {"ports": [22, 80, 443, 5000, 5001, 5100, 5103, 5105, 11435, 11436, 11437], "description": "منافذ الخدمات الرئيسية"},
+    "monitor_port": {"ports": [22, 80, 443, 5000, 5001, 5100, 5103, 5105, 11434, 11436, 11437], "description": "منافذ الخدمات الرئيسية"},
     "monitor_process": {"processes": ["python", "java", "node", "socat", "ngrok"], "description": "عمليات الخدمات الرئيسية"},
     "allowed_ips": {"description": "السيرفرات والخوادم المسموح بالوصول"},
 }
@@ -74,7 +74,7 @@ class SecurityAgent:
             "5103": "Kanban Board",
             "5103": "Kanban Board",
             "5105": "Sunna Dashboard",
-            "11435": "AI Router",
+            "11434": "AI Router",
             "11436": "Orchestrator",
             "11437": "Agent Mesh"
         }

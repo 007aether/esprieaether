@@ -48,7 +48,7 @@ LOG_FILE = BASE_DIR / "data" / "logs" / "orchestrator_agent.log"
 # ── the full system map ──────────────────────────────────────────────
 # name -> (port, health_path)
 SERVICES = {
-    "router":        (11435, "/v1/models"),
+    "router":        (11434, "/v1/models"),
     "mesh":          (11437, "/health"),
     "web":           (5000,  "/health"),
     "cloud-desktop": (5001,  "/health"),
@@ -58,7 +58,7 @@ SERVICES = {
     "homedock":      (5104,  "/health"),
     "jarvis-api":    (8000,  "/api/health"),
     "jarvis-fe":     (3000,  "/"),
-    "ollama":        (11435, "/api/tags"),
+    "ollama":        (11434, "/api/tags"),
     "governor":      (11123, "/"),   # MCP: 500 = alive
 }
 

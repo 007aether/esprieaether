@@ -1288,7 +1288,7 @@ async def cmd_services(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Ollama دايماً: ping مباشر (كيدوز على systemctl)
     try:
         import requests
-        r = requests.get("http://127.0.0.1:11435/api/tags", timeout=3)
+        r = requests.get("http://127.0.0.1:11434/api/tags", timeout=3)
         if r.status_code == 200:
             models = r.json().get("models", [])
             text += f"🟢 `ollama` (ping): {len(models)} models\n"
@@ -1577,7 +1577,7 @@ async def cmd_integrations(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text += "\n🧠 *AI Brains:*\n"
         try:
             import urllib.request, json as _json
-            with urllib.request.urlopen("http://127.0.0.1:11435/stats", timeout=5) as r:
+            with urllib.request.urlopen("http://127.0.0.1:11434/stats", timeout=5) as r:
                 stats = _json.loads(r.read())
             for brain, st in stats.get("brains", {}).items():
                 ok = st.get("ok", 0)

@@ -43,7 +43,7 @@ class SimpleGUI:
             "Kanban Board (5103)": 5103,
             "Sunna API (5100)": 5100,
             "Sunna Dashboard (5105)": 5105,
-            "AI Router (11435)": 11435,
+            "AI Router (11434)": 11434,
             "Orchestrator (11436)": 11436,
             "Agent Mesh (11437)": 11437,
         }

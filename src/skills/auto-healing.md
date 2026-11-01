@@ -23,7 +23,7 @@ Auto-restarts crashed services. Ensures 24/7 operation.
 | Service | Port | Health Check |
 |---|---|---|
 | Agent Mesh | 11437 | /health endpoint |
-| Router | 11435 | /health endpoint |
+| Router | 11434 | /health endpoint |
 | Web Interface | 5000 | HTTP 200 |
 | Jarvis API | 8000 | /health endpoint |
 | Sunna API | 5100 | HTTP 200 |

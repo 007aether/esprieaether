@@ -14,7 +14,7 @@ This agent continuously monitors ESPRIEAETHER, responds to system state, and ini
 
 ## Capabilities
 
-- Monitor Router (11435) health and brain status
+- Monitor Router (11434) health and brain status
 - Verify Agent Mesh (11437) agent count and board state
 - Check Colibri server (8000) availability
 - Monitor Supervisor logs and trigger repairs

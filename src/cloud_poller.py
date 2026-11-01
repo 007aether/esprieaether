@@ -128,7 +128,7 @@ def probe_services():
     """Quick local health sweep for the cloud's status board."""
     import urllib.request
     services = {
-        "router": "http://127.0.0.1:11435/v1/models",
+        "router": "http://127.0.0.1:11434/v1/models",
         "mesh": "http://127.0.0.1:11437/health",
         "web": "http://127.0.0.1:5000/health",
         "sunna": "http://127.0.0.1:5100/health",

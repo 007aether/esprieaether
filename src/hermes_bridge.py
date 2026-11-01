@@ -47,7 +47,7 @@ class HermesBridge:
         self.timeout = int(os.getenv("HERMES_TIMEOUT", "120"))
 
         # Fallback المحلي
-        self.ollama_host = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11435")
+        self.ollama_host = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
         self.ollama_model = os.getenv("OLLAMA_MODEL", "qwen2.5:3b")
 
         self.history: list = []

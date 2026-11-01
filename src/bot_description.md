@@ -12,6 +12,6 @@ WHAT IT DOES:
 HOW TO USE:
 → Send any message (Arabic/English/French) → Bot responds via Hermes router
 → Use commands: /deepseek /skills /mesh /bothealth /restart
-→ Bot connects to Router (11435) and serves through Telegram interface
+→ Bot connects to Router (11434) and serves through Telegram interface
 
 STATUS: Token verified (.env) / Bot file exists (src/bot.py) / Ready for interaction

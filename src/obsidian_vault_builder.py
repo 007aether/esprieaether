@@ -25,7 +25,7 @@ SUNNA = HOME / "Sunna-Equipe-Industrial"
 
 # services: name -> (port, links)
 SERVICES = {
-    "ollama": (11435, ["router"]),
+    "ollama": (11434, ["router"]),
     "router": (11436, ["ollama-local", "orchestrator", "JEV", "Apollo-agent", "OKX"]),
     "orchestrator": (11436, ["router", "mesh"]),
     "web": (5000, ["router", "cloud-desktop", "control-center"]),

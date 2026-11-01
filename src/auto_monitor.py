@@ -6,7 +6,7 @@ Automated health monitoring + weekly report generator.
 Runs as a cron job every hour.
 
 Features:
-  - Checks all 8 services (5000, 5001, 5102, 5103, 5104, 11435, 11436, 11437)
+  - Checks all 8 services (5000, 5001, 5102, 5103, 5104, 11434, 11436, 11437)
   - Logs health status to data/monitor.log
   - Auto-reports problems via Hermes bridge
   - Generates weekly report at midnight

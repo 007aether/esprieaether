@@ -33,7 +33,7 @@ class HealthCheckAgent:
             {"name": "Kanban Board", "port": 5103},
             {"name": "Sunna API", "port": 5100},
             {"name": "Sunna Dashboard", "port": 5105},
-            {"name": "AI Router", "port": 11435},
+            {"name": "AI Router", "port": 11434},
             {"name": "Orchestrator", "port": 11436},
             {"name": "Agent Mesh", "port": 11437},
             {"name": "Telegram Bot", "port": None},

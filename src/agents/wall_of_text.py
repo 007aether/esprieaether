@@ -54,7 +54,7 @@ class WallOfText:
                 {"name": "Kanban Board", "port": 5103, "status": "✅"},
                 {"name": "Sunna API", "port": 5100, "status": "✅"},
                 {"name": "Sunna Dashboard", "port": 5105, "status": "✅"},
-                {"name": "AI Router", "port": 11435, "status": "✅"},
+                {"name": "AI Router", "port": 11434, "status": "✅"},
                 {"name": "Orchestrator", "port": 11436, "status": "✅"},
                 {"name": "Agent Mesh", "port": 11437, "status": "✅"},
                 {"name": "Telegram Bot", "port": None, "status": "✅"},

@@ -159,8 +159,8 @@
       <div class="stat"><div class="n cya">JEV</div><div class="l">Decisions</div></div>
     </div>
     <div class="links">
-      <a href="http://localhost:11435/stats" target="_blank">Router Stats ↗</a>
-      <a href="http://localhost:11435/decide" target="_blank">JEV /decide ↗</a>
+      <a href="http://localhost:11434/stats" target="_blank">Router Stats ↗</a>
+      <a href="http://localhost:11434/decide" target="_blank">JEV /decide ↗</a>
     </div>
   </div>
   <div class="card">
@@ -233,7 +233,7 @@ async function refresh() {
   // Services (direct health checks)
   const svcs = [
     ['Ollama', 'http://127.0.0.1:11434/api/tags'],
-    ['Router', 'http://127.0.0.1:11435/health'],
+    ['Router', 'http://127.0.0.1:11434/health'],
     ['Orchestrator', 'http://127.0.0.1:11436/health'],
     ['Web', 'http://127.0.0.1:5000/health'],
     ['Cloud Desktop', 'http://127.0.0.1:5001/health'],
@@ -248,7 +248,7 @@ async function refresh() {
 
   // Brains
   try {
-    const b = await j('http://127.0.0.1:11435/stats');
+    const b = await j('http://127.0.0.1:11434/stats');
     document.getElementById('brains').innerHTML = Object.entries(b.brains || {}).map(([k, v]) =>
       row(dot(v.healthy) + v.label || k, `ok:${v.ok} fail:${v.fail}`, v.healthy ? 'ok' : 'err')).join('');
   } catch (e) {

@@ -58,7 +58,7 @@ class DailyReport:
             "Sunna API (5100)": self._check_port(5100),
             "Kanban Board (5103)": self._check_port(5103),
             "Sunna Dashboard (5105)": self._check_port(5105),
-            "AI Router (11435)": self._check_port(11435),
+            "AI Router (11434)": self._check_port(11434),
             "Orchestrator (11436)": self._check_port(11436),
             "Agent Mesh (11437)": self._check_port(11437),
             "Cloud Desktop (5173)": self._check_port(5173),

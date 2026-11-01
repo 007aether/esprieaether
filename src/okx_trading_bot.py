@@ -34,7 +34,7 @@ DRY_RUN = os.getenv("BOT_DRY_RUN", "1") == "1"           # default: simulate onl
 LOG = REPO / "Coordination" / "okx_bot.log"
 STATE = REPO / "Coordination" / "okx_bot_state.json"
 
-ROUTER_DECIDE = os.getenv("AETHER_ROUTER", "http://127.0.0.1:11435") + "/decide"
+ROUTER_DECIDE = os.getenv("AETHER_ROUTER", "http://127.0.0.1:11434") + "/decide"
 
 
 def log(msg: str):

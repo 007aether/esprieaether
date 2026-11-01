@@ -56,11 +56,11 @@ logging.basicConfig(
 # Common error patterns → known causes → proposed fixes
 ERROR_PATTERNS = {
     # Router errors
-    "router.*11435.*connection": {
+    "router.*11434.*connection": {
         "cause": "Router not responding or port conflict",
         "fix": "Restart ai_router.py service",
         "severity": "high",
-        "learned": "Check port 11435 availability before starting router"
+        "learned": "Check port 11434 availability before starting router"
     },
     # Agent mesh errors
     "agent_mesh.*error": {

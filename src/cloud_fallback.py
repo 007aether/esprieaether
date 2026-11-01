@@ -38,7 +38,7 @@ GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 TOGETHER_BASE_URL = os.getenv("TOGETHER_BASE_URL", "https://api.together.xyz/v1")
 TOGETHER_MODEL = os.getenv("TOGETHER_MODEL", "meta-llama/Llama-3.3-70B-Instruct-Turbo")
 
-OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11435")
+OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "openbmb/MiniCPM5-2B")
 OLLAMA_MODEL_FAST = os.getenv("OLLAMA_MODEL_FAST", "qwen2.5:3b")
 OLLAMA_MODEL_BALANCED = os.getenv("OLLAMA_MODEL_BALANCED", "openbmb/MiniCPM5-2B")
