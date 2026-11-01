@@ -111,6 +111,14 @@ try:
 except Exception:
     from jarvis_bridge import JarvisBridge
     jarvis = JarvisBridge()
+
+# Hermes Core — the sovereign brain of ESPRIEAETHER
+try:
+    from hermes_core import get_hermes
+    hermes = get_hermes()
+except Exception:
+    hermes = None
+
 cloud = CloudFallback()
 ask_agent = AskAgent()
 alerts = SmartAlerts()

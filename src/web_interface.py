@@ -682,19 +682,27 @@ def api_jarvis():
 
 @app.route("/api/hermes", methods=["POST"])
 def api_hermes():
-    """API محادثة HERMES (محرك سحابي مع fallback لـ Ollama)"""
+    """API محادثة HERMES (العقل الرئيسي)"""
     try:
         data = request.get_json(silent=True) or {}
         prompt = (data.get("prompt") or "").strip()
         if not prompt:
             return jsonify({"error": "empty prompt"}), 400
         try:
-            from hermes_bridge import HermesBridge
+            from hermes_core import get_hermes
+            hermes = get_hermes()
+            response = hermes.think(prompt)
+            status = hermes.status()
+            return jsonify({"response": response, "engine": "hermes", "model": status.get("model", "?")})
         except ImportError:
-            from src.hermes_bridge import HermesBridge
-        bridge = HermesBridge()
-        response = bridge.ask(prompt)
-        return jsonify({"response": response, "engine": bridge.status()["active_engine"]})
+            # Fallback to old bridge if hermes_core not available
+            try:
+                from hermes_bridge import HermesBridge
+            except ImportError:
+                from src.hermes_bridge import HermesBridge
+            bridge = HermesBridge()
+            response = bridge.ask(prompt)
+            return jsonify({"response": response, "engine": "bridge"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -704,10 +712,15 @@ def api_hermes_status():
     """حالة محرك Hermes"""
     try:
         try:
-            from hermes_bridge import HermesBridge
+            from hermes_core import get_hermes
+            hermes = get_hermes()
+            return jsonify(hermes.status())
         except ImportError:
-            from src.hermes_bridge import HermesBridge
-        return jsonify(HermesBridge().status())
+            try:
+                from hermes_bridge import HermesBridge
+            except ImportError:
+                from src.hermes_bridge import HermesBridge
+            return jsonify(HermesBridge().status())
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

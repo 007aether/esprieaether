@@ -1,0 +1,12 @@
+{
+  "sessions": [
+    {
+      "ts": "2026-11-01T01:10:44.634657+00:00",
+      "model": "llm7-fast",
+      "prompt": "مرحبا، أنا Hermes. كيف حالك؟",
+      "response_preview": "أنا بخير، المعمم.تحية طيبة. ما هوujourd'hui yılda إلى يولينغтета؟"
+    }
+  ],
+  "facts": {},
+  "preferences": {}
+}
