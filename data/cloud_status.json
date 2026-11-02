@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-02T02:52:45.490991+00:00",
+  "cloud_last_run": "2026-11-02T13:55:55.986228+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy PENGU for the First Time",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Robinhood vs Coinbase: Which App Is Better for Crypto?",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "What Is a SIM Swap Attack? How Hackers Steal Crypto With Just Your Phone Number",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Kraken vs Binance: The Security Veteran Against the Exchange That Just Lost $6.3B",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Trading Fundamentals Part 37: Take Profit Strategy for Meme Coins",
       "source": "https://airdropalert.com/feed"
     },
     {
