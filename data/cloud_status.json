@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-02T13:55:55.986228+00:00",
+  "cloud_last_run": "2026-11-03T00:05:32.544862+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Mercado Bitcoin Hack: Brazil’s Biggest Exchange Halts Withdrawals",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Midterms and Bitcoin: Why I Expect a Rally Once the Votes Are Counted",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "ETH Bounce After the Binance Hack: Why I Went Long at $2,284",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "Who Are the Winklevoss Twins? From Facebook to Gemini&#8217;s Rough IPO",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Which DEX Is Safe? What a Binance-Style Hack Would Do to Lighter, Hyperliquid, Aster and Variational",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "StonkFun Hack: Website Hit by Step Drainer, Now Restored",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is a SIM Swap Attack? How Hackers Steal Crypto With Just Your Phone Number",
       "source": "https://airdropalert.com/feed"
     },
     {
