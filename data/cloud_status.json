@@ -2,12 +2,32 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-03T00:05:32.544862+00:00",
+  "cloud_last_run": "2026-11-03T13:04:23.635027+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Zcash Grants Dispute: Why ZEC Dropped 10% and Why I Longed It",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Biggest Exchange Hacks Ever: 15 Crypto Heists Ranked",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Point Farming Strategy: How I Farm Airdrop Points Without Wasting Capital",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy SUI for the First Time",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "North Korea Denies Binance Hack While FBI and Secret Service Say Otherwise",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -28,26 +48,6 @@
     },
     {
       "title": "Robinhood vs Coinbase: Which App Is Better for Crypto?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Solana Airdrop Checker: How to Scan Your SOL Wallet for Missed Airdrops",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Crypto Pre-Market Trading: How to Trade a Token Before It Launches",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "I Helped Build a Poker Bot in 2015. It Barely Broke Even",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Crypto Pump and Dump: How the Scheme Works and How to Spot One",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Are the Winklevoss Twins? From Facebook to Gemini&#8217;s Rough IPO",
       "source": "https://airdropalert.com/feed"
     },
     {
