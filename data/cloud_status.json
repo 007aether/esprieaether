@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-04T03:28:39.848274+00:00",
+  "cloud_last_run": "2026-11-04T13:20:56.931245+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is Elysium? Kinetiq’s HYPE Layer 2 for Hyperliquid Explained",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Democrats Sweep Congress, Bitcoin Dips Then Bounces: My Overnight Trades",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Best Crypto Exchange UAE: Licensed Picks for Dubai and Abu Dhabi",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "North Korea Denies Binance Hack While FBI and Secret Service Say Otherwise",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Mercado Bitcoin Hack: Brazil’s Biggest Exchange Halts Withdrawals",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Midterms and Bitcoin: Why I Expect a Rally Once the Votes Are Counted",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "ETH Bounce After the Binance Hack: Why I Went Long at $2,284",
       "source": "https://airdropalert.com/feed"
     },
     {
