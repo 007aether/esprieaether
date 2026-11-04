@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-04T13:20:56.931245+00:00",
+  "cloud_last_run": "2026-11-04T22:55:54.871515+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trump Coin Midterms: Why TRUMP and WLFI Are Red While Crypto Is Green",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "How to Buy SUI for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "North Korea Denies Binance Hack While FBI and Secret Service Say Otherwise",
       "source": "https://airdropalert.com/feed"
     },
     {
