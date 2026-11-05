@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-04T22:55:54.871515+00:00",
+  "cloud_last_run": "2026-11-05T03:51:14.105070+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Research Meme Coins: Who Is Buying, and Are They Any Good?",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Robinhood vs Kraken: Simple App or Serious Exchange?",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Biggest Exchange Hacks Ever: 15 Crypto Heists Ranked",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Point Farming Strategy: How I Farm Airdrop Points Without Wasting Capital",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy SUI for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
