@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-06T03:48:16.398523+00:00",
+  "cloud_last_run": "2026-11-06T13:17:30.833242+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy Bitcoin in Paraguay: A Guide for Everyone Burned by the Ueno Bank Freeze",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Best Crypto Exchange Nigeria: What Still Works for Naira in 2026",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "What Is Elysium? Kinetiq’s HYPE Layer 2 for Hyperliquid Explained",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Democrats Sweep Congress, Bitcoin Dips Then Bounces: My Overnight Trades",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Best Crypto Exchange UAE: Licensed Picks for Dubai and Abu Dhabi",
       "source": "https://airdropalert.com/feed"
     },
     {
