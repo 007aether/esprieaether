@@ -2,12 +2,28 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-06T13:17:30.833242+00:00",
+  "cloud_last_run": "2026-11-06T22:27:09.649073+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Is ZachXBT? The Crypto Detective Nobody Asked For and Everybody Needs",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Nubank and Mercado Pago Suspend Crypto Transfers: One Vendor Froze Three Countries",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "MEXC FinCEN Order: US Treasury Cuts MEXC Off From the US Financial System",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trump Media Sells Bitcoin? $342M Moved, WLFI Buys Back, and Justin Sun Strikes Again",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -32,22 +48,6 @@
     },
     {
       "title": "How to Bridge to Elysium: Three Routes Into Kinetiq’s HYPE Layer 2",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Research Meme Coins: Who Is Buying, and Are They Any Good?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Robinhood vs Kraken: Simple App or Serious Exchange?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Trump Coin Midterms: Why TRUMP and WLFI Are Red While Crypto Is Green",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is Elysium? Kinetiq’s HYPE Layer 2 for Hyperliquid Explained",
       "source": "https://airdropalert.com/feed"
     },
     {
