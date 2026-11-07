@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-06T22:27:09.649073+00:00",
+  "cloud_last_run": "2026-11-07T03:21:17.495830+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Are Bundles in Crypto? How Devs Hide Supply in Meme Coins",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy Fartcoin for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Why Is Bitcoin Down? Every Reason Behind a BTC Dip, Explained",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Ueno Bank Collapse: 3 Million Paraguayans Locked Out, and Why Bitcoin Can’t Do That to You",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Bridge to Elysium: Three Routes Into Kinetiq’s HYPE Layer 2",
       "source": "https://airdropalert.com/feed"
     },
     {
