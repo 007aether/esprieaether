@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-07T03:21:17.495830+00:00",
+  "cloud_last_run": "2026-11-07T11:58:01.636295+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Biggest Crypto Hacks of All Time: Exchanges, DeFi and Wallets Ranked",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Airdrop Exit Strategy: How I Sell an Airdrop Without Regret",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Why Is Bitcoin Down? Every Reason Behind a BTC Dip, Explained",
       "source": "https://airdropalert.com/feed"
     },
     {
