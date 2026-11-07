@@ -2,12 +2,28 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-07T11:58:01.636295+00:00",
+  "cloud_last_run": "2026-11-07T17:17:59.500392+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "The Sahil Files: Is Ansem the KOL Bubblemaps Is About to Expose?",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Paraguay Bank Crisis: Peña Ousted, Crypto Hacks and Airdrop Updates",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Binance France Shutdown: Accounts Close December 31, and Binance Spain Gets the Same Email",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Keplr Wallet Hit by Web3Auth Breach: What Google and Apple Login Users Must Do Now",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -32,22 +48,6 @@
     },
     {
       "title": "MEXC FinCEN Order: US Treasury Cuts MEXC Off From the US Financial System",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Trump Media Sells Bitcoin? $342M Moved, WLFI Buys Back, and Justin Sun Strikes Again",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy Bitcoin in Paraguay: A Guide for Everyone Burned by the Ueno Bank Freeze",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Best Crypto Exchange Nigeria: What Still Works for Naira in 2026",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Airdrop Exit Strategy: How I Sell an Airdrop Without Regret",
       "source": "https://airdropalert.com/feed"
     },
     {
