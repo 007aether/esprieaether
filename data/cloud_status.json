@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-08T02:50:25.143371+00:00",
+  "cloud_last_run": "2026-11-08T12:16:35.317167+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Polymarket Restricted Countries: Can You Use Polymarket Where You Live?",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is a Transaction Signature? A Beginner’s Guide to Signing in Crypto",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "How to Buy Fartcoin for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is ZachXBT? The Crypto Detective Nobody Asked For and Everybody Needs",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Nubank and Mercado Pago Suspend Crypto Transfers: One Vendor Froze Three Countries",
       "source": "https://airdropalert.com/feed"
     },
     {
