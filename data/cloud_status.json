@@ -2,12 +2,28 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-09T03:09:34.552560+00:00",
+  "cloud_last_run": "2026-11-09T14:27:29.595873+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Elysium Launch Day: Hyperliquid’s First Layer 2 Is Live, Here Is What Actually Shipped",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "HYPE Elysium Launch Day: Why I Am Long HYPE at $73 Again",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Best Crypto Exchange Spain: Licensed Platforms Now That Binance Is Winding Down",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Altcoin Season Index Explained: What It Measures and How to Read It",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -32,22 +48,6 @@
     },
     {
       "title": "What Is a Transaction Signature? A Beginner’s Guide to Signing in Crypto",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Robinhood vs OKX: Stock App or Crypto Exchange?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "The Sahil Files: Is Ansem the KOL Bubblemaps Is About to Expose?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Paraguay Bank Crisis: Peña Ousted, Crypto Hacks and Airdrop Updates",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Binance France Shutdown: Accounts Close December 31, and Binance Spain Gets the Same Email",
       "source": "https://airdropalert.com/feed"
     },
     {
