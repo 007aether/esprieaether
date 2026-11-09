@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-08T21:23:48.161337+00:00",
+  "cloud_last_run": "2026-11-09T03:09:34.552560+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Is Machi Big Brother? From L.A. Boyz to Hyperliquid’s King of Liquidations",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy BNB for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Binance France Shutdown: Accounts Close December 31, and Binance Spain Gets the Same Email",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Keplr Wallet Hit by Web3Auth Breach: What Google and Apple Login Users Must Do Now",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Biggest Crypto Hacks of All Time: Exchanges, DeFi and Wallets Ranked",
       "source": "https://airdropalert.com/feed"
     },
     {
