@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-09T14:27:29.595873+00:00",
+  "cloud_last_run": "2026-11-10T00:54:01.567313+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Cupsey Bubblemaps Exposé: The Public Wallet Was the Bait",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "XTEN Tokenomics Explained: What Extended Points Holders Should Do Before TGE",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Galxe Shutting Down Quests: What to Claim Before December 15",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "Best Crypto Exchange France: Where to Trade After Binance Closed Its Doors",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "HyperEVM Airdrop Checker: How to Check Your Hyperliquid Wallet for Airdrops",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Polymarket Restricted Countries: Can You Use Polymarket Where You Live?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is a Transaction Signature? A Beginner’s Guide to Signing in Crypto",
       "source": "https://airdropalert.com/feed"
     },
     {
