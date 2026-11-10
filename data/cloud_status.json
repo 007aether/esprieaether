@@ -2,12 +2,32 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-10T00:54:01.567313+00:00",
+  "cloud_last_run": "2026-11-10T13:50:24.643127+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "worse_query iOS Sandbox Escape: Is Your Crypto Wallet at Risk?",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is a Free Mint? The NFT Launch Format Where You Only Pay Gas",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Hyperliquid Referral Code: 4% Off Trading Fees With Our Code",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How Many Wallets Should You Farm Airdrops With? My Honest Answer",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Bitstamp vs Bybit: Old Guard or Modern Trading Venue?",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -28,26 +48,6 @@
     },
     {
       "title": "HYPE Elysium Launch Day: Why I Am Long HYPE at $73 Again",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Best Crypto Exchange Spain: Licensed Platforms Now That Binance Is Winding Down",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Altcoin Season Index Explained: What It Measures and How to Read It",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is Machi Big Brother? From L.A. Boyz to Hyperliquid’s King of Liquidations",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy BNB for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Best Crypto Exchange France: Where to Trade After Binance Closed Its Doors",
       "source": "https://airdropalert.com/feed"
     },
     {
