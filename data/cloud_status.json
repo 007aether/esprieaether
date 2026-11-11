@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-11T13:00:40.190259+00:00",
+  "cloud_last_run": "2026-11-11T23:44:41.914545+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Warren Takes Senate Banking: What It Means for Polymarket and the POLY Airdrop",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Across Protocol Hack: How a Domain Hijack Turned a Trusted Bridge Into a Phishing Page",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Arcus Exploit: How a Subaccount Bug Drained $2.23M and Why Users Lost Nothing",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "What Is a Free Mint? The NFT Launch Format Where You Only Pay Gas",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Hyperliquid Referral Code: 4% Off Trading Fees With Our Code",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How Many Wallets Should You Farm Airdrops With? My Honest Answer",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Bitstamp vs Bybit: Old Guard or Modern Trading Venue?",
       "source": "https://airdropalert.com/feed"
     },
     {
