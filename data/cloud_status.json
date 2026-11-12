@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-11T23:44:41.914545+00:00",
+  "cloud_last_run": "2026-11-12T04:28:24.626158+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Is Cirrus? The NFT Flipper Who Became Crypto’s Sharpest Opportunity Hunter",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Bitstamp vs Kraken: Which Veteran Exchange Is Better?",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "CPI 0.4%: ETH Dips to $2,031 and the Bullish Divergence I’m Watching",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "worse_query iOS Sandbox Escape: Is Your Crypto Wallet at Risk?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is a Free Mint? The NFT Launch Format Where You Only Pay Gas",
       "source": "https://airdropalert.com/feed"
     },
     {
