@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-12T04:28:24.626158+00:00",
+  "cloud_last_run": "2026-11-12T14:02:40.398883+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Zcash Below $1,000: Why ZEC Broke Its Floor and Where My Orders Sit",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Crypto Security Glossary: 80+ Hack, Wallet and Scam Terms Explained",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "How to Buy TAO for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Nvidia Stock Price After the Jensen Huang Probe: Key Levels and Why I Sit Out",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "CPI 0.4%: ETH Dips to $2,031 and the Bullish Divergence I’m Watching",
       "source": "https://airdropalert.com/feed"
     },
     {
