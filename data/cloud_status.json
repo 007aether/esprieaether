@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-13T03:43:10.967049+00:00",
+  "cloud_last_run": "2026-11-13T13:29:07.870089+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "ETH Under $2,000: Higher Low or Breakdown? The Levels I’m Watching",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Best Crypto Exchange Switzerland: Tax-Free Gains, CHF Rails and Who Serves Swiss Users",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Bitstamp vs Kraken: Which Veteran Exchange Is Better?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Warren Takes Senate Banking: What It Means for Polymarket and the POLY Airdrop",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Across Protocol Hack: How a Domain Hijack Turned a Trusted Bridge Into a Phishing Page",
       "source": "https://airdropalert.com/feed"
     },
     {
