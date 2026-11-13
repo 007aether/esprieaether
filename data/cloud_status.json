@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-12T22:54:55.625116+00:00",
+  "cloud_last_run": "2026-11-13T03:43:10.967049+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Sui Airdrop Checker: How to Find Airdrops in Your Sui Wallet",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy VIRTUAL for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Across Protocol Hack: How a Domain Hijack Turned a Trusted Bridge Into a Phishing Page",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Arcus Exploit: How a Subaccount Bug Drained $2.23M and Why Users Lost Nothing",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is Lazarus Group? Inside North Korea’s Crypto Hacking Machine",
       "source": "https://airdropalert.com/feed"
     },
     {
