@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-13T13:29:07.870089+00:00",
+  "cloud_last_run": "2026-11-13T22:56:39.632594+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Is the Bull Market Canceled? Why I Stopped Trying to Time the Bottom",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Who Is Cirrus? The NFT Flipper Who Became Crypto’s Sharpest Opportunity Hunter",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Bitstamp vs Kraken: Which Veteran Exchange Is Better?",
       "source": "https://airdropalert.com/feed"
     },
     {
