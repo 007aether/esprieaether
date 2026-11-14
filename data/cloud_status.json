@@ -2,12 +2,28 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-14T12:34:38.273093+00:00",
+  "cloud_last_run": "2026-11-14T21:43:17.347778+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "TRUMP Under $1: The Most Famous Meme Chart in History Just Broke a Dollar",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Kava Lend Exploit: KAVA Crashes 42% as Bridged Tokens Get Dumped on BSC",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Is Charles Hoskinson Leaving Cardano? What “My Job Is Done” Really Means",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "HYPE Under $70: Why Hyperliquid Fell and the Air Pocket Below",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -32,22 +48,6 @@
     },
     {
       "title": "Best Crypto Exchange Switzerland: Tax-Free Gains, CHF Rails and Who Serves Swiss Users",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Sui Airdrop Checker: How to Find Airdrops in Your Sui Wallet",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy VIRTUAL for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Anthropic IPO: Every Crypto Route Into ANT Before It Lists",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Jensen Huang Resigns: Nvidia Hits $149 as the Market Prices a Post-Jensen Era",
       "source": "https://airdropalert.com/feed"
     },
     {
