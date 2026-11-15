@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-14T21:43:17.347778+00:00",
+  "cloud_last_run": "2026-11-15T03:18:20.279845+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Best Crypto Exchange Saudi Arabia: Trading Riyals in a Market Without a Rulebook",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy Pi Network for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Is the Bull Market Canceled? Why I Stopped Trying to Time the Bottom",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "ETH Under $2,000: Higher Low or Breakdown? The Levels I’m Watching",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Best Crypto Exchange Switzerland: Tax-Free Gains, CHF Rails and Who Serves Swiss Users",
       "source": "https://airdropalert.com/feed"
     },
     {
