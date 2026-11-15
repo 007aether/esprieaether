@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-15T03:18:20.279845+00:00",
+  "cloud_last_run": "2026-11-15T13:00:00.572542+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "What Is ERC-6551? Token-Bound Accounts, the Standard That Gives NFTs a Wallet",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Gate.com vs OKX: Biggest Catalog or Better All-Rounder?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Is the Bull Market Canceled? Why I Stopped Trying to Time the Bottom",
       "source": "https://airdropalert.com/feed"
     },
     {
