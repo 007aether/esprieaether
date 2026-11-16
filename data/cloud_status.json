@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-15T22:08:59.282024+00:00",
+  "cloud_last_run": "2026-11-16T03:20:32.954602+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Duel Casino Review: Zero Edge Originals, 50% Rakeback and a Polarizing Founder",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Gate.com vs MEXC: Which Altcoin Exchange Wins?",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "HYPE Under $70: Why Hyperliquid Fell and the Air Pocket Below",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is Proof of Reserves? How to Check an Exchange Actually Holds Your Crypto",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Airdrop Capital Allocation: How I Split My Money Across Farms",
       "source": "https://airdropalert.com/feed"
     },
     {
