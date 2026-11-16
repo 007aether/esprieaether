@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-16T03:20:32.954602+00:00",
+  "cloud_last_run": "2026-11-16T14:04:15.524160+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Exchange Protection Funds Explained: SAFU, Bitget’s Fund and Who Actually Pays You Back",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Is Charles Hoskinson Leaving Cardano? What “My Job Is Done” Really Means",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "HYPE Under $70: Why Hyperliquid Fell and the Air Pocket Below",
       "source": "https://airdropalert.com/feed"
     },
     {
