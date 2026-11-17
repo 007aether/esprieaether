@@ -2,12 +2,32 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-16T14:04:15.524160+00:00",
+  "cloud_last_run": "2026-11-17T01:09:07.215336+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy Chainlink for the First Time",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Backpack CFTC Approval: First Onchain Derivatives Exchange Lands in the US as HYPE, ASTER and LIT Bounce",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Zcash Vote Opens as ZEC Slides Into My Buy Ladder",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trump Gala VIP: I Made the Top 29 for the Price of a Coffee",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Lighter Hack: $15.5M Drained Through Leaked Market Maker API Keys",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -28,26 +48,6 @@
     },
     {
       "title": "What Is ERC-6551? Token-Bound Accounts, the Standard That Gives NFTs a Wallet",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Best Crypto Exchange Saudi Arabia: Trading Riyals in a Market Without a Rulebook",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy Pi Network for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "TRUMP Under $1: The Most Famous Meme Chart in History Just Broke a Dollar",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Kava Lend Exploit: KAVA Crashes 42% as Bridged Tokens Get Dumped on BSC",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Is Charles Hoskinson Leaving Cardano? What “My Job Is Done” Really Means",
       "source": "https://airdropalert.com/feed"
     },
     {
