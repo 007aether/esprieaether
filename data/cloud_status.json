@@ -2,12 +2,28 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-17T14:58:04.236922+00:00",
+  "cloud_last_run": "2026-11-18T00:04:07.301283+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trezor Skladon Breach, WLFI Buyback, CoinGecko Deal and Airdrop Updates",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Pump.fun Polymarket Integration: The Meme Coin App Now Takes Bets",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "GTA 6 Crypto: Is There an Official Coin, or Just Meme Coin Traps?",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Nvidia Earnings Tonight: The First Report Without Jensen Huang",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -32,22 +48,6 @@
     },
     {
       "title": "Trump Gala VIP: I Made the Top 29 for the Price of a Coffee",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Lighter Hack: $15.5M Drained Through Leaked Market Maker API Keys",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Exchange Protection Funds Explained: SAFU, Bitget’s Fund and Who Actually Pays You Back",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Duel Casino Review: Zero Edge Originals, 50% Rakeback and a Polarizing Founder",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Gate.com vs MEXC: Which Altcoin Exchange Wins?",
       "source": "https://airdropalert.com/feed"
     },
     {
