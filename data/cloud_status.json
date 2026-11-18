@@ -2,12 +2,28 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-18T14:38:37.137687+00:00",
+  "cloud_last_run": "2026-11-18T23:38:12.659744+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Fed Minutes Today: How Big Is the December Hike Camp, and Where Bitcoin Breaks",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Ledger Dubai: Two Buyers Drained for $604K After Buying From an Authorized Store",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Optimizely Hack: How One Testing Tool Put Crypto-Stealing Code on HSBC, BBC and Ledger",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "BNB Below $600: How My Short Played Out and the Levels I Watch Now",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -32,22 +48,6 @@
     },
     {
       "title": "GTA 6 Crypto: Is There an Official Coin, or Just Meme Coin Traps?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Nvidia Earnings Tonight: The First Report Without Jensen Huang",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "OKX Referral Code: airdropalert for Welcome Rewards and a Fee Rebate",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "White Hat vs Black Hat vs Grey Hat: Who Is Really Hacking Crypto",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy Chainlink for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
