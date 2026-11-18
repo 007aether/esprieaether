@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-18T00:04:07.301283+00:00",
+  "cloud_last_run": "2026-11-18T14:38:37.137687+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trading Fundamentals Part 38: Crypto Liquidation Explained",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Is 0xQuit? The Yuga Labs White Hat Who Keeps Saving NFTs",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "OKX vs Blofin: Full-Service Giant or Futures Specialist?",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "How to Buy Chainlink for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Backpack CFTC Approval: First Onchain Derivatives Exchange Lands in the US as HYPE, ASTER and LIT Bounce",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Zcash Vote Opens as ZEC Slides Into My Buy Ladder",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Trump Gala VIP: I Made the Top 29 for the Price of a Coffee",
       "source": "https://airdropalert.com/feed"
     },
     {
