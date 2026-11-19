@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-18T23:38:12.659744+00:00",
+  "cloud_last_run": "2026-11-19T04:39:25.637086+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Best Crypto Exchange Germany: MiCA-Licensed Picks After the July Cut-Off",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Pump.fun Polymarket Integration: The Meme Coin App Now Takes Bets",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "GTA 6 Crypto: Is There an Official Coin, or Just Meme Coin Traps?",
       "source": "https://airdropalert.com/feed"
     },
     {
