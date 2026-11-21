@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-20T23:25:51.844262+00:00",
+  "cloud_last_run": "2026-11-21T04:23:51.571164+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Is ICObeast? From Airdrop Farmer to Kalshi’s Crypto Lead",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Starknet Airdrop Checker: How to Check Your Wallet for STRK and Starknet Airdrops",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Best Crypto Exchange Germany: MiCA-Licensed Picks After the July Cut-Off",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Fed Minutes Today: How Big Is the December Hike Camp, and Where Bitcoin Breaks",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Ledger Dubai: Two Buyers Drained for $604K After Buying From an Authorized Store",
       "source": "https://airdropalert.com/feed"
     },
     {
