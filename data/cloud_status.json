@@ -2,12 +2,16 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-22T13:40:00.753257+00:00",
+  "cloud_last_run": "2026-11-22T22:52:48.176623+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trump Gala Expectations: Why I Am Going a Third Time",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -44,10 +48,6 @@
     },
     {
       "title": "Hyperliquid Restricted Countries: Can You Use Hyperliquid Where You Live?",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is a Smart Contract Audit? Why “Audited” Protocols Still Get Drained",
       "source": "https://airdropalert.com/feed"
     },
     {
