@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-22T22:52:48.176623+00:00",
+  "cloud_last_run": "2026-11-23T04:12:13.936756+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy Hedera for the First Time",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Is Mando? The Bond Trader Behind Rektguy, Mando Minutes and Yeet",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Starknet Airdrop Checker: How to Check Your Wallet for STRK and Starknet Airdrops",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "n0n Ransomware Leaks Visa, Mastercard and JPMorgan Data: Keep Your Guard Up",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Hyperliquid Restricted Countries: Can You Use Hyperliquid Where You Live?",
       "source": "https://airdropalert.com/feed"
     },
     {
