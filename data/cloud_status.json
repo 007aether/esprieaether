@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-23T04:12:13.936756+00:00",
+  "cloud_last_run": "2026-11-23T16:36:04.225016+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Kicked Out of Trump Gala: My VIP Night Ended in a Rainy Parking Lot",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "When to Quit an Airdrop Farm (and When to Stay)",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "What Is a Layer 2? Blockchains Explained for Absolute Beginners",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is ICObeast? From Airdrop Farmer to Kalshi’s Crypto Lead",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Starknet Airdrop Checker: How to Check Your Wallet for STRK and Starknet Airdrops",
       "source": "https://airdropalert.com/feed"
     },
     {
