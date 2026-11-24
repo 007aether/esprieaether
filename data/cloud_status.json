@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-24T03:30:02.627243+00:00",
+  "cloud_last_run": "2026-11-24T16:32:45.248956+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Ansem Hacked? His Pump Wallet Dumped ANSEM and the Coin Halved",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Jensen Huang Reinstated: What Nvidia Announced",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "How to Use Aave: A Beginner’s Step-by-Step Guide",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "The Crypto Wedding Gift With a Six-Year Lock",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "What Is a Supply Chain Attack in Crypto? How Bybit, Ledger and DMM Got Hit Through Someone Else",
       "source": "https://airdropalert.com/feed"
     },
     {
