@@ -1,0 +1,87 @@
+{
+  "newsletter_title": "تحديث النظام - ESPRIEAETHER",
+  "generated_at": "2026-10-23 13:49:22",
+  "system_status": {
+    "services_active": 7,
+    "agents_active": 13,
+    "bots_connected": 5,
+    "status": "🔄 نظام متطور تماماً"
+  },
+  "services_list": [
+    {
+      "name": "JARVIS Web Dashboard",
+      "port": 5000,
+      "status": "✅"
+    },
+    {
+      "name": "Cloud Desktop",
+      "port": 5001,
+      "status": "✅"
+    },
+    {
+      "name": "Kanban Board",
+      "port": 5103,
+      "status": "✅"
+    },
+    {
+      "name": "Sunna API",
+      "port": 5100,
+      "status": "✅"
+    },
+    {
+      "name": "Sunna Dashboard",
+      "port": 5105,
+      "status": "✅"
+    },
+    {
+      "name": "AI Router",
+      "port": 11435,
+      "status": "✅"
+    },
+    {
+      "name": "Agent Mesh",
+      "port": 11437,
+      "status": "✅"
+    },
+    {
+      "name": "Telegram Bot",
+      "status": "✅"
+    }
+  ],
+  "agents_list": [
+    "Network Monitor",
+    "Security Agent",
+    "Memory Agent",
+    "Trading Bot",
+    "Error Fix Agent",
+    "Arabic Support",
+    "Knowledge Base",
+    "Health Check",
+    "News Agent",
+    "Wall of Text",
+    "Paper Trading",
+    "Backup & Rollback"
+  ],
+  "bots_list": [
+    "bot-heartbeat",
+    "netlify-keepalive",
+    "price-tracker",
+    "sunna-web-bot",
+    "watchdog"
+  ],
+  "new_features": [
+    "1. نظام النشرات التحديثية التلقائي",
+    "2. ربط كامل مع Sunna",
+    "3. اتخاذ قرارات آلي بناءً على البيانات",
+    "4. كابشرينين للبحث المستمر",
+    "5. تقارير تلقائية متقدمة"
+  ],
+  "system_health": "✅ صحي تماماً - لا مشاكل",
+  "next_updates": [
+    "تحديث نضام النظام بعد 1 أسبوع",
+    "إضافة ميزات البحث التلقائي",
+    "تطوير القرارات الآلية",
+    "ربط بيانات السوق الحية",
+    "تحسين الواجهة والمحاذاة"
+  ]
+}

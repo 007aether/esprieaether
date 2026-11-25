@@ -1,0 +1,35 @@
+{
+  "project": "AETHER - AI Local & Autonomous Token",
+  "symbol": "ATH",
+  "description": "AI-driven local autonomous system with community rewards",
+  "phase_1": {
+    "action": "Search & Research",
+    "time": "1-2 days",
+    "cost": 0,
+    "done": true
+  },
+  "phase_2": {
+    "action": "Create Content & Community",
+    "cost": 0,
+    "time": "1-2 weeks",
+    "done": false
+  },
+  "phase_3": {
+    "action": "Financing",
+    "cost": "$50-100",
+    "time": "2-4 weeks",
+    "done": false
+  },
+  "phase_4": {
+    "action": "Token Launch",
+    "cost": "SOL (gas $10-20)",
+    "time": "1 day",
+    "done": false
+  },
+  "phase_5": {
+    "action": "Trading & Rewards",
+    "cost": "Low",
+    "time": "Ongoing",
+    "done": false
+  }
+}

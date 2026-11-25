@@ -1,0 +1,27 @@
+{
+  "name": "AETHER",
+  "symbol": "ATH",
+  "description": "الذكاء الاصطناعي المحلي والذاتي",
+  "vision": "رابط البشر بالذكاء الاصطناعي التقني",
+  "tagline": "فيتقن الذكاء الاصطناعي. نبني المستقبل.",
+  "socials": {
+    "github": "https://github.com/007aether/pump-token",
+    "twitter": "https://x.com/aether_token",
+    "telegram": "https://t.me/aether_chat",
+    "discord": "https://discord.gg/aether_dg"
+  },
+  "channels": ["X/Twitter", "Telegram", "Discord", "GitHub", "TikTok"],
+  "budget": {
+    "minimum": 10.00,
+    "recommended": 100.00,
+    "target": 500.00
+  },
+  "phases": [
+    {"id": 1, "name": "إعداد GitHub", "cost": 0, "time": "1-2 أيام", "done": true},
+    {"id": 2, "name": "كتابة المحتوى التسويقي", "cost": 0, "time": "1-2 أيام", "done": true},
+    {"id": 3, "name": "إعداد المجتمع", "cost": 0, "time": "1-2 أسابيع", "done": false},
+    {"id": 4, "name": "تجميع التمويل", "cost": 50.00, "time": "2-4 أسابيع", "done": false},
+    {"id": 5, "name": "إطلاق العملة على pump.fun", "cost": 10.00, "time": "1 يوم", "done": false},
+    {"id": 6, "name": "التسويق والتوزيع", "cost": 50.00, "time": "2-3 أسابيع", "done": false}
+  ]
+}

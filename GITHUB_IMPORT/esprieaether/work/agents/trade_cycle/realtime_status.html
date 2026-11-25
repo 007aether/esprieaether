@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESPRIEAETHER - لوحة التحكم الحية</title>
+<style>
+  :root {
+    --bg: #0a0a1a;
+    --card: #1a1a2e;
+    --text: #e0e0e0;
+    --accent: #00d4ff;
+    --accent2: #ff6b9d;
+    --success: #00ff88;
+    --warning: #ffd700;
+    --danger: #ff4444;
+    --border: #2a2a4e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 20px;
+    font-size: 14px;
+  }
+  h1 { font-size: 24px; margin-bottom: 10px; color: var(--accent); }
+  h2 { font-size: 18px; margin-bottom: 10px; color: var(--text); }
+  .container { max-width: 1400px; margin: 0 auto; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .card h2 { margin-bottom: 15px; }
+  .stat { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+  .stat-item { background: var(--bg); padding: 15px; border-radius: 8px; border: 1px solid var(--border); }
+  .stat-item .label { font-size: 12px; color: #888; text-transform: uppercase; }
+  .stat-item .value { font-size: 24px; font-weight: bold; color: var(--text); }
+  .stat-item .sub { font-size: 12px; color: #888; }
+  .success { color: var(--success); }
+  .danger { color: var(--danger); }
+  .warning { color: var(--warning); }
+  .trades-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .trades-table th, .trades-table td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border); }
+  .trades-table th { color: #888; font-size: 11px; text-transform: uppercase; }
+  .trading-badge { padding: 3px 8px; border-radius: 4px; font-size: 12px; color: white; }
+  .trading-badge.active { background: var(--success); }
+  .trading-badge.inactive { background: var(--danger); }
+  .trading-badge.pending { background: var(--warning); }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
+  .status-dot.green { background: var(--success); }
+  .status-dot.red { background: var(--danger); }
+  .status-dot.yellow { background: var(--warning); }
+  .live-indicator { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--success); animation: pulse 1s infinite; margin-right: 5px; }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+  .footer { margin-top: 20px; text-align: center; color: #666; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📊 ESPRIEAETHER - لوحة التحكم الحية</h1>
+  <div class="stat">
+    <div class="stat-item">
+      <div class="label">حالة الدورة</div>
+      <div class="value" id="cycle-status">جاري التحميل...</div>
+    </div>
+    <div class="stat-item">
+      <div class="label">إحصائيات التداول</div>
+      <div class="value" id="trading-stats">جاري التحميل...</div>
+    </div>
+  </div>
+  <h2>📈 آخر الصفقات</h2>
+  <table class="trades-table">
+    <thead>
+      <tr>
+        <th>الرمز</th>
+        <th>الاتجاه</th>
+        <th>الحجم</th>
+        <th>السعر</th>
+        <th>الحالة</th>
+        <th>الوقت</th>
+      </tr>
+    </thead>
+    <tbody id="trades-body">
+      <tr><td colspan="6" style="text-align: center; color: #666;">جاري التحميل...</td></tr>
+    </tbody>
+  </table>
+  <h2>🔍 آخر البحوث</h2>
+  <table class="trades-table">
+    <thead>
+      <tr>
+        <th>الرمز</th>
+        <th>المصدر</th>
+        <th>السعر</th>
+        <th>التغير</th>
+        <th>الوقت</th>
+      </tr>
+    </thead>
+    <tbody id="research-body">
+      <tr><td colspan="5" style="text-align: center; color: #666;">جاري التحميل...</td></tr>
+    </tbody>
+  </table>
+  <h2>💬 آخر التغذيات الراجعة</h2>
+  <div class="grid" style="margin-top: 10px;">
+    <div class="card" style="margin-bottom: 0;">
+      <div id="feedback-body" style="color: #888;">جاري التحميل...</div>
+    </div>
+  </div>
+  <div class="footer">
+    <p>ESPRIEAETHER - نظام تداول ذكي آلي 🚀 | آخر تحديث: <span id="last-update">جاري التحميل...</span></p>
+  </div>
+</div>
+<script>
+// تحديث المؤقت
+setInterval(() => {
+  document.getElementById('last-update').textContent = new Date().toLocaleTimeString('ar');
+}, 1000);
+
+// تحميل البيانات الحية
+async function loadDashboard() {
+  try {
+    const response = await fetch('/api/status');
+    const data = await response.json();
+    
+    // تحديث حالة الدورة
+    const cycle = document.getElementById('cycle-status');
+    if (data.cycle) {
+      cycle.innerHTML = `<span class="status-dot ${data.cycle.status === 'ok' ? 'green' : 'red'}"></span> ${data.cycle.status} - ${data.cycle.phase}`;
+    }
+    
+    // تحديث إحصائيات التداول
+    const stats = data.trading;
+    const statsEl = document.getElementById('trading-stats');
+    if (stats) {
+      const direction = stats.total_pnl >= 0 ? 'success' : 'danger';
+      statsEl.innerHTML = `
+        <span class="trading-badge ${stats.total_trades > 0 ? 'active' : 'inactive'}">
+          صفقات: ${stats.total_trades}
+        </span> |
+        <span class="trading-badge ${stats.total_pnl >= 0 ? 'active' : 'inactive'}">
+          ربح: ${stats.total_pnl} $
+        </span> |
+        <span class="trading-badge">صافى: ${stats.avg_pnl} $
+        </span> |
+        <span class="trading-badge pending">مفتوحة: ${stats.open_trades}
+        </span>
+      `;
+    }
+    
+    // تحديث trades
+    const tradesBody = document.getElementById('trades-body');
+    if (data.recent_trades && data.recent_trades.length > 0) {
+      tradesBody.innerHTML = data.recent_trades.map(t => `
+        <tr>
+          <td><span style="color: ${t.side === 'buy' ? '#00ff88' : '#ff4444'}">${t.symbol}</span></td>
+          <td style="color: ${t.side === 'buy' ? '#00ff88' : '#ff4444'};">${t.side === 'buy' ? 'شراء' : 'بيع'}</td>
+          <td>${t.size}</td>
+          <td>${t.price}</td>
+          <td class="trading-badge ${t.status === 'closed' ? 'active' : 'pending'}">${t.status}</td>
+          <td>${new Date(t.created_at).toLocaleTimeString('ar')}</td>
+        </tr>
+      `).join('');
+    } else {
+      tradesBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #666;">لا توجد صفقات حديثة</td></tr>`;
+    }
+    
+    // تحديث البحوث
+    const researchBody = document.getElementById('research-body');
+    if (data.recent_research && data.recent_research.length > 0) {
+      researchBody.innerHTML = data.recent_research.map(r => `
+        <tr>
+          <td><span style="color: #00d4ff;">${r.symbol}</span></td>
+          <td>${r.source}</td>
+          <td>${r.price || '—'}</td>
+          <td style="color: ${r.change_24h >= 0 ? '#00ff88' : '#ff4444'};">${r.change_24h || '—'}%</td>
+          <td>${new Date(r.created_at).toLocaleTimeString('ar')}</td>
+        </tr>
+      `).join('');
+    } else {
+      researchBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #666;">لا توجد بحث حديث</td></tr>`;
+    }
+    
+    // تحديث التغذية الراجعة
+    const feedbackBody = document.getElementById('feedback-body');
+    if (data.recent_feedback && data.recent_feedback.length > 0) {
+      feedbackBody.innerHTML = data.recent_feedback.map(f => `
+        <div style="background: var(--card); padding: 10px; border-radius: 8px; margin-bottom: 8px; border: 1px solid var(--border);">
+          <div style="font-size: 12px; color: #888;">${f.summary}</div>
+          <div style="font-size: 11px; color: #666; margin-top: 3px;">${f.changes || ''}</div>
+        </div>
+      `).join('');
+    } else {
+      feedbackBody.innerHTML = `<div style="color: #888; text-align: center;">لا توجد تغذية راجعة حديثة</div>`;
+    }
+    
+  } catch (error) {
+    console.error('خطأ في جلب البيانات:', error);
+  }
+}
+
+// تحديث كل 5 ثوان
+setInterval(loadDashboard, 5000);
+loadDashboard();
+</script>
+</body>
+</html>

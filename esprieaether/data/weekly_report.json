@@ -1,0 +1,94 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>تقرير الأسبوع - EsprieAether</title>
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; color: #333; }
+            .container { max-width: 1000px; margin: 0 auto; }
+            h1 { color: #2c3e50; }
+            h2 { color: #34495e; }
+            .card { background: white; border-radius: 8px; padding: 20px; margin: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .stat { display: inline-block; width: 30%; padding: 15px; margin: 10px; background: #f8f9fa; border-radius: 8px; text-align: center; }
+            .stat .number { font-size: 28px; font-weight: bold; color: #3498db; }
+            .stat .label { color: #6c757d; }
+            .tag { display: inline-block; background: #e9ecef; color: #495057; padding: 2px 8px; border-radius: 3px; font-size: 12px; margin-right: 5px; }
+            .lesson { background: #fff3cd; border-left: 4px solid #ffc107; padding: 10px; margin: 10px 0; border-radius: 4px; }
+            .badge { display: inline-block; padding: 3px 8px; border-radius: 3px; font-size: 12px; color: white; }
+            .badge-green { background: #28a745; }
+            .badge-blue { background: #17a2b8; }
+            .badge-orange { background: #fd7e14; }
+            footer { text-align: center; color: #999; padding: 20px; }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <h1>📊 تقرير الأسبوع - EsprieAether</h1>
+        <p class="subtitle">تاريخ التقرير: 2026-10-21 19:36 UTC</p>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="number">200</div>
+                <div class="label">رسائل المedian</div>
+            </div>
+            <div class="stat">
+                <div class="number">50</div>
+                <div class="label">المهام الإجمالية</div>
+            </div>
+            <div class="stat">
+                <div class="number">6</div>
+                <div class="label">المهام المقترحة</div>
+            </div>
+            <div class="stat">
+                <div class="number">44</div>
+                <div class="label">المهام المكتملة</div>
+            </div>
+            <div class="stat">
+                <div class="number">0</div>
+                <div class="label">مهارات تم اعتمادها</div>
+            </div>
+            <div class="stat">
+                <div class="number">1</div>
+                <div class="label">مهارات متابعة</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🧠 الدروس المست-conjugate الأسبوعية</h2>
+            <p class="subtitle">أحدث 10 كلمة رائجة لدى النظام</p>
+            <div id="lessons">
+                <div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [weekly_report] report generated: 200 messages, 50 tasks</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div><div class="lesson">📌 [knowledge] route=18 sections, 10 adopt</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🔗 تتبيل المهارات</h2>
+            <p class="subtitle">المهارات المقترحة: 47 | الم cutoffs: 0</p>
+            <div id="skills">
+                <span class="tag">✅ CherryHQ/cherry-studio</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📋 أنشطة الأسبوع</h2>
+            <p class="subtitle">رسائل المedian (200)</p>
+            <div id="activities">
+                <span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: رسالة اختبار للمعرفة</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: رسالة اختبار للمعرفة</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span><span class="tag">knowledge: رسالة اختبار للمعرفة</span><span class="tag">knowledge: - [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد
+- [local_llm]: 0 ا</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>EsprieAether Sovereign Local AI · تقارير الأسبوع</p>
+        </footer>
+    </div>
+    </body>
+    </html>
+    

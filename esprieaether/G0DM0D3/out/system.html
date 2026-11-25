@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ESPRIEATHER — SYSTEM SERVICES</title>
+<style>
+  :root { --bg:#04090f; --panel:#0a1622; --cyan:#48e6ff; --amber:#ffb347; --red:#ff5c6c; --green:#6cf0a8; }
+  * { box-sizing:border-box }
+  body { margin:0; min-height:100vh; color:#cfefff; font:14px/1.5 Consolas,"Courier New",monospace;
+         background:radial-gradient(circle at 50% -10%,#0d2c3d,#04090f 62%) }
+  header { padding:16px 22px; border-bottom:1px solid #17435a; display:flex; gap:16px; align-items:center }
+  h1 { margin:0; font-size:18px; letter-spacing:.35em; color:var(--cyan) }
+  .tag { font-size:11px; color:#6f91a5; letter-spacing:.15em }
+  a { color:#48e6ff; text-decoration:none }
+  .wrap { max-width:1240px; margin:0 auto; padding:18px; display:grid; grid-template-columns:260px 1fr; gap:16px }
+  .card { background:linear-gradient(180deg,rgba(10,26,38,.95),rgba(6,14,22,.95)); border:1px solid #17435a;
+          border-radius:10px; padding:16px; box-shadow:0 0 24px #00131f inset }
+  .card h2 { margin:0 0 12px; font-size:11px; letter-spacing:.22em; color:#6f91a5; font-weight:600 }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px }
+  #reactor { width:200px; height:200px; margin:6px auto; position:relative; border-radius:50%;
+    border:2px solid #1d6e8a; background:radial-gradient(circle,#0b3a4d 0%,#04121b 70%);
+    display:grid; place-items:center; animation:pulse 3.2s ease-in-out infinite }
+  #reactor::before,#reactor::after { content:""; position:absolute; border-radius:50%; border:1px dashed #2c88a5;
+    inset:18px; animation:spin 18s linear infinite }
+  #reactor::after { inset:40px; border-style:dotted; animation-direction:reverse }
+  .core { width:64px; height:64px; clip-path:polygon(50% 0,100% 38%,82% 100%,18% 100%,0 38%);
+    background:linear-gradient(180deg,#8cf4ff,#1686a8); filter:drop-shadow(0 0 14px var(--cyan)) }
+  #satellites { position:absolute; inset:0; pointer-events:none }
+  .sat { position:absolute; width:18px; height:18px; border-radius:50%; display:grid; place-items:center;
+    font-size:9px; border:1px solid #2c88a5; background:#04121b; color:#5d7d90 }
+  #sat-brain { top:4px; left:calc(50% - 9px) } #sat-voice { top:calc(50% - 9px); right:4px }
+  #sat-services { bottom:4px; left:calc(50% - 9px) } #sat-network { top:calc(50% - 9px); left:4px }
+  .sat.ok { color:var(--green); border-color:var(--green); box-shadow:0 0 10px var(--green) }
+  .sat.warn { color:var(--amber); border-color:var(--amber) }
+  .ok { color:var(--green) } .warn { color:var(--amber) } .err { color:var(--red) } .dim { color:#5d7d90 }
+  .row { display:flex; justify-content:space-between; gap:10px; padding:5px 0 }
+  .bar { height:5px; background:#123447; border-radius:4px; margin-top:5px; overflow:hidden }
+  .bar > i { display:block; height:100%; background:var(--cyan) }
+  ul { list-style:none; margin:0; padding:0 } li { padding:6px 0; border-bottom:1px solid #102c3b }
+  .stamp { font-size:10px; color:#4d6d7e; text-align:right; padding:10px 20px }
+  @keyframes spin { to { transform:rotate(360deg) } }
+  @keyframes pulse { 50% { box-shadow:0 0 34px #1b90b455 } }
+</style>
+</head>
+<body>
+<header>
+  <h1>ESPRIEATHER</h1>
+  <span class="tag">SYSTEM SERVICES · 127.0.0.1 · LOCAL · WITHOUT CLOUD</span>
+  <span class="tag" id="clock"></span>
+  <a class="tag" href="jarvis.html">VOICE</a>
+</header>
+<div class="wrap">
+  <section class="card">
+    <h2>RÉACTEUR</h2>
+    <div id="reactor" title="Visualisation — no execution control">
+      <div class="core"></div>
+      <div id="satellites" aria-label="état réel des services">
+        <span id="sat-brain" class="sat" title="cerveau local">B</span>
+        <span id="sat-voice" class="sat" title="voix locale">V</span>
+        <span id="sat-services" class="sat" title="services locaux">S</span>
+        <span id="sat-network" class="sat" title="réseau">N</span>
+      </div>
+    </div>
+    <div id="status" class="dim">état: chargement…</div>
+    <div class="row"><span>horodatage</span><span class="dim" id="checked">—</span></div>
+  </section>
+  <div class="tiles">
+    <section class="card"><h2>SERVICES</h2><div id="services" class="dim">chargement…</div></section>
+    <section class="card"><h2>ROBOTS / CERVEAU</h2><div id="robots" class="dim">chargement…</div></section>
+    <section class="card"><h2>ATTENTION</h2><ul id="attention"><li class="dim">chargement…</li></ul></section>
+    <section class="card"><h2>REGISTRE</h2><div id="ledger" class="dim">chargement…</div></section>
+    <section class="card"><h2>RÉSEAU</h2><div id="internet" class="dim">chargement…</div></section>
+    <section class="card"><h2>VOIX</h2><div id="voice" class="dim">chargement…</div></section>
+    <section class="card"><h2>MESURE CERVEAU LOCAL</h2><div id="brainMetrics" class="dim">no_data_source</div></section>
+  </div>
+</div>
+<div class="stamp" id="stamp">mise à jour: —</div>
+<script>
+(function () {
+  "use strict";
+  var ATT = "/jarvis/api/jarvis/attention";
+  var SYS = "/jarvis/api/system/status";
+  var lastSystem = null;
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (v) { return String(v == null ? "—" : v).replace(/[&<>"]/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var row = function (a, b, cls) { return '<div class="row"><span>' + esc(a) + '</span><span class="' +
+    (cls || "dim") + '">' + esc(b) + '</span></div>'; };
+
+  function renderAttention(d) {
+    var items = d && Array.isArray(d.items) ? d.items : [];
+    $("attention").innerHTML = items.length ? items.slice(0, 8).map(function (i) {
+      var cls = i.level === "error" ? "err" : i.level === "warning" ? "warn" : "dim";
+      return '<li><span class="' + cls + '">' + esc(i.level) + '</span> · ' + esc(i.reason) +
+             ' <span class="dim">/ ' + esc(i.detail) + '</span></li>';
+    }).join("") : '<li class="ok">rien à signaler</li>';
+    $("checked").textContent = esc(d && d.checkedAt || "no_data_source");
+    var good = d && d.needsAttention === false;
+    $("status").innerHTML = row("global", good ? "NOMINAL" : "À VÉRIFIER", good ? "ok" : "warn");
+    $("reactor").style.filter = good ? "none" : "hue-rotate(120deg)";
+    var led = d && d.ledger || {}, s = led.stats || {};
+    $("ledger").innerHTML = led.available
+      ? row("succès / échec / timeout", esc(s.succeeded) + " / " + esc(s.failed) + " / " + esc(s.timed_out), "ok") +
+        row("en cours", esc(s.running), s.running ? "warn" : "ok") +
+        (led.recent || []).slice(0, 4).map(function (r) {
+          return row(r.status, r.action + " / " + r.actor, r.status === "succeeded" ? "dim" : "warn");
+        }).join("")
+      : row("registre", "no_data_source", "warn");
+    var n = d && d.internet || {};
+    $("internet").innerHTML = row("réseau", n.available ? esc(n.mode || "internet") : "no_data_source",
+      n.available ? "ok" : "warn") + row("hôte", n.host || "—") + row("vérifié", n.checkedAt || "—");
+    var v = d && d.voice || {};
+    var pct = Math.round((Number(v.level) || 0) * 100);
+    $("voice").innerHTML = row("mode", v.available ? esc(v.mode) : "no_data_source", v.available ? "ok" : "warn") +
+      row("état", esc(v.stage || "idle")) + row("daemon", v.running ? "actif" : "arrêté", v.running ? "ok" : "warn") +
+      row("activité", pct + "%") + '<div class="bar"><i style="width:' + pct + '%"></i></div>';
+  }
+
+  function renderSystem(s) {
+    var r = s && s.robots || {}, q = r.quality || {}, b = s && s.brains || {}, g = s && s.graph || {};
+    var ok = Boolean(q.pythonOk && q.dashboardPassed && b.available);
+    $("services").innerHTML = row("qualité", ok ? "OPERATIONNEL" : "VÉRIFIER", ok ? "ok" : "warn") +
+      row("python", esc(q.pythonRan || "—")) + row("dashboard", esc(q.dashboardPassed)) +
+      '<div class="bar"><i style="width:' + (ok ? 100 : 40) + '%"></i></div>' +
+      row("vault", r.vault && r.vault.ok ? "OK" : "no_data_source", r.vault && r.vault.ok ? "ok" : "warn") +
+      row("sources manquantes", (r.backlog && r.backlog.missingSources || []).join(",") || "aucune");
+    $("robots").innerHTML = row("cerveau actif", b.active || "no_data_source", b.available ? "ok" : "warn") +
+      row("modèles", esc(b.count || 0)) + row("graphe", esc(g.nodes || 0) + " nœuds / " + esc(g.edges || 0) + " liens") +
+      row("sentinel", r.sentinel && r.sentinel.ok ? "OK" : "no_data_source", r.sentinel && r.sentinel.ok ? "ok" : "warn");
+  }
+
+  function renderSatellites(s, d) {
+    var b = s && s.brains || {}, q = s && s.robots && s.robots.quality || {};
+    var v = d && d.voice || {}, n = d && d.internet || {};
+    var set = function (id, ok, known) {
+      var el = $(id); if (!el) return;
+      el.className = "sat " + (!known ? "dim" : ok ? "ok" : "warn");
+      el.textContent = !known ? "?" : ok ? "+" : "-";
+      el.title = id + ": " + (!known ? "no_data_source" : ok ? "ok" : "à vérifier");
+    };
+    set("sat-brain", b.available === true, b.available != null);
+    set("sat-voice", v.running === true, v.available != null);
+    set("sat-services", q.pythonOk === true && q.dashboardPassed === true,
+      q.pythonOk != null || q.dashboardPassed != null);
+    set("sat-network", n.available === true, n.available != null);
+  }
+
+  function renderBrainMetrics(m) {
+    var x = m || {};
+    if (x.available !== true || !isFinite(Number(x.tokensPerSecond))) {
+      $("brainMetrics").innerHTML = row("mesure", "no_data_source", "warn") +
+        row("raison", esc(x.reason || "aucune réponse locale mesurée"));
+      return;
+    }
+    $("brainMetrics").innerHTML =
+      row("modèle", esc(x.model || "—"), "ok") +
+      row("vitesse", esc(Math.round(Number(x.tokensPerSecond) * 100) / 100) + " /s", "ok") +
+      row("réponse", esc(x.elapsedMs) + " ms") +
+      row("complétion", esc(x.completionTokens)) +
+      row("mesuré", esc(x.checkedAt || "—"));
+  }
+
+  function load() {
+    var lastAttention = null;
+    fetch(ATT, { cache: "no-store" }).then(function (r) { return r.json(); })
+      .then(function (d) { lastAttention = d; renderAttention(d);
+        var s = lastSystem; if (s) renderSatellites(s, d); })
+      .catch(function () { $("attention").innerHTML = '<li class="warn">API locale indisponible</li>'; });
+    fetch(SYS, { cache: "no-store" }).then(function (r) { return r.json(); })
+      .then(function (s) { lastSystem = s; renderSystem(s); renderBrainMetrics(s.brainMetrics);
+        var d = lastAttention; if (d) renderSatellites(s, d); })
+      .catch(function () { $("services").textContent = "API locale indisponible"; });
+    $("stamp").textContent = "mise à jour: " + new Date().toLocaleTimeString();
+  }
+  $("clock").textContent = new Date().toLocaleString();
+  load();
+  setInterval(load, 5000);
+})();
+</script>
+</body>
+</html>

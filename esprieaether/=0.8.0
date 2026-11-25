@@ -1,0 +1,25 @@
+Collecting vllm
+  Using cached vllm-0.8.3.tar.gz (6.6 MB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × installing build dependencies for vllm did not run successfully.
+  │ exit code: 1
+  ╰─> [12 lines of output]
+      Collecting cmake>=3.26
+        Using cached cmake-4.4.4-py3-none-win_amd64.whl.metadata (7.0 kB)
+      Collecting ninja
+        Using cached ninja-1.13.2-py3-none-win_amd64.whl.metadata (5.4 kB)
+      Collecting packaging
+        Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+      Collecting setuptools>=61
+        Using cached setuptools-84.0.0-py3-none-any.whl.metadata (6.6 kB)
+      Collecting setuptools-scm>=8.0
+        Using cached setuptools_scm-10.3.4-py3-none-any.whl.metadata (6.7 kB)
+      ERROR: Could not find a version that satisfies the requirement torch==2.6.0 (from versions: none)
+      ERROR: No matching distribution found for torch==2.6.0
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+ERROR: Failed to build 'vllm' when installing build dependencies for vllm

@@ -1,0 +1,30 @@
+{
+  "name": "AETHER",
+  "symbol": "ATH",
+  "description": "الذكاء الاصطناعي المحلي والذاتي",
+  "vision": "رابط البشر بالذكاء الاصطناعي التقني",
+  "tagline": "فيتقن الذكاء الاصطناعي. نبني المستقبل.",
+  "socials": {
+    "twitter": "https://x.com/aether_token",
+    "telegram": "https://t.me/aether_chat",
+    "discord": "https://discord.gg/aether_dg",
+    "github": "https://github.com/007aether/pump-token"
+  },
+  "budget": {
+    "minimum": 10.0,
+    "recommended": 100.0,
+    "target": 500.0
+  },
+  "channels": [
+    "X/Twitter",
+    "Telegram",
+    "Discord",
+    "GitHub",
+    "TikTok"
+  ],
+  "timeline": {
+    "preparation": "2026-10-21",
+    "launch": "2026-11-15",
+    "promotion": "2026-11-30"
+  }
+}

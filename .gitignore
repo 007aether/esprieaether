@@ -9,7 +9,6 @@ logs/
 .DS_Store
 integrations/
 .env.bak
-
 # ECC junctions (Windows junction points, not real dirs)
 .ecc/skills
 .ecc/agents
@@ -40,3 +39,25 @@ integrations/vito
 integrations/obsidian-graphify
 integrations/governor-edr
 data/logs$lg.err
+dist/
+node_modules/
+.venv/
+.tools/
+models/
+state/
+esprieaether/state/
+**/.venv/
+**/models/
+**/node_modules/
+*.key
+*.pem
+.env.*
+BACKUP_*/
+nul
+NUL
+**/nul
+**/NUL
+.git/
+**/.git/
+.git__commit_disabled/
+**/.git__commit_disabled/

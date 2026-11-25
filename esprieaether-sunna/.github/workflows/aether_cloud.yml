@@ -1,0 +1,72 @@
+name: Aether Cloud Agent
+
+on:
+  # 1) Remote control from Telegram/anywhere — GitHub Issues
+  issues:
+    types: [opened]
+
+  # 2) Manual trigger from GitHub UI
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'What to do'
+        required: true
+        default: 'status'
+        type: choice
+        options: [status, scan, health]
+
+  # 3) Scheduled — free 24/7 "cron" (cloud VPS replacement)
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  aether-cloud:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: pip install requests feedparser
+
+      # ── Remote command mode (issue opened = user typed a command) ──
+      - name: Execute issue command
+        if: github.event_name == 'issues'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          python scripts/cloud_agent.py --mode issue \
+            --issue-number "$ISSUE_NUMBER" \
+            --issue-body "$ISSUE_BODY"
+
+      # ── Scheduled mode (every 6h: scan + health + report) ──
+      - name: Scheduled cloud cycle
+        if: github.event_name == 'schedule'
+        run: |
+          python scripts/cloud_agent.py --mode scheduled
+
+      # ── Manual mode (from GitHub Actions UI) ──
+      - name: Manual action
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          python scripts/cloud_agent.py --mode manual --action "${{ github.event.inputs.action }}"
+
+      # ── Push results back (board + scan data = backup + remote read) ──
+      - name: Commit results
+        run: |
+          git config user.name "aether-cloud"
+          git config user.email "cloud@aether.local"
+          git add -A
+          git diff --staged --quiet || git commit -m "☁️ Cloud agent run $(date -u +%Y-%m-%d_%H:%M)"
+          git push

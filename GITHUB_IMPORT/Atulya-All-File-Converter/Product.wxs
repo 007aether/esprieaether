@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="*" 
+             Name="Atulya File Converter" 
+             Language="1033" 
+             Version="0.1.0" 
+             Manufacturer="Atulya AI" 
+             UpgradeCode="9D5A3A1F-87E4-429C-A0F6-91E5B4B27C12">
+        
+        <Package InstallerVersion="500" 
+                 Compressed="yes" 
+                 InstallScope="perMachine" 
+                 Description="100% Private Offline File Converter" />
+
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+        <MediaTemplate EmbedCab="yes" />
+
+        <Feature Id="ProductFeature" Title="Atulya File Converter" Level="1">
+            <ComponentGroupRef Id="ProductComponents" />
+            <ComponentRef Id="ApplicationShortcut" />
+            <ComponentRef Id="DesktopShortcut" />
+        </Feature>
+    </Product>
+
+    <Fragment>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFiles64Folder">
+                <Directory Id="INSTALLFOLDER" Name="Atulya File Converter" />
+            </Directory>
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ApplicationProgramsFolder" Name="Atulya File Converter"/>
+            </Directory>
+            <Directory Id="DesktopFolder" Name="Desktop" />
+        </Directory>
+    </Fragment>
+
+    <Fragment>
+        <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+            <Component Id="MainExecutable" Guid="C4D2E1A9-3B8F-4F7C-9E1A-2D4B6C8E0F1A">
+                <File Id="AtulyaConvertExe" Source="dist\atulya-convert.exe" KeyPath="yes" />
+                <Environment Id="PATH" Name="PATH" Value="[INSTALLFOLDER]" Permanent="no" Part="last" Action="set" System="yes" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+
+    <Fragment>
+        <DirectoryRef Id="ApplicationProgramsFolder">
+            <Component Id="ApplicationShortcut" Guid="A1B2C3D4-E5F6-7A8B-9C0D-1E2F3A4B5C6D">
+                <Shortcut Id="ApplicationStartMenuShortcut" 
+                          Name="Atulya File Converter" 
+                          Description="100% Private Offline File Converter"
+                          Target="[INSTALLFOLDER]atulya-convert.exe"
+                          WorkingDirectory="INSTALLFOLDER"/>
+                <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+                <RegistryValue Root="HKCU" Key="Software\Atulya\FileConverter" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="DesktopFolder">
+            <Component Id="DesktopShortcut" Guid="B2C3D4E5-F6A7-8B9C-0D1E-2F3A4B5C6D7E">
+                <Shortcut Id="ApplicationDesktopShortcut"
+                          Name="Atulya File Converter"
+                          Description="100% Private Offline File Converter"
+                          Target="[INSTALLFOLDER]atulya-convert.exe"
+                          WorkingDirectory="INSTALLFOLDER"/>
+                <RegistryValue Root="HKCU" Key="Software\Atulya\FileConverter" Name="desktop_shortcut" Type="integer" Value="1" KeyPath="yes"/>
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+</Wix>

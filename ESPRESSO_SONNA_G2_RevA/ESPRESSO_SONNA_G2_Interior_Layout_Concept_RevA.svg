@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1120" viewBox="0 0 1500 1120">
+<defs>
+  <style>
+    .bg{fill:#f5f7f9}.ink{fill:#203447}.muted{fill:#566574}.line{stroke:#203447;stroke-width:4;fill:none}
+    .thin{stroke:#64717d;stroke-width:2;fill:none}.dash{stroke:#ba8053;stroke-width:3;stroke-dasharray:10 8;fill:#fff8f1}
+    .blue{stroke:#3d6e86;stroke-width:3;stroke-dasharray:8 6;fill:#eaf3f7}.amber{stroke:#a77137;stroke-width:3;stroke-dasharray:8 6;fill:#fff3df}
+    .red{fill:#a53732}.ar{font-family:Arial,'Segoe UI',sans-serif;direction:rtl;unicode-bidi:plaintext;}
+    .en{font-family:Arial,'Segoe UI',sans-serif}.title{font-size:28px;font-weight:bold}.sub{font-size:19px}
+    .h{font-size:24px;font-weight:bold}.label{font-size:19px;font-weight:bold}.small{font-size:16px}
+  </style>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a77137"/></marker>
+</defs>
+<rect class="bg" width="1500" height="1120"/>
+<text x="80" y="70" class="ink en title">ESPRESSO SONNA G2 — INTERNAL PACKAGE CONCEPT | REV A</text>
+<text x="700" y="108" class="muted ar sub">توزيع تصوري للمكونات — مناطق الحجز فقط — الوحدات الداخلية غير مختارة</text>
+<rect x="1120" y="42" width="300" height="70" rx="12" fill="#fff0ed" stroke="#a53732" stroke-width="3"/>
+<text x="1270" y="85" text-anchor="middle" class="red en label">NOT FOR FABRICATION</text>
+
+<text x="700" y="180" class="ink ar h">المسقط العلوي — مناطق داخلية تصورية</text>
+<text x="180" y="220" class="muted ar small">الخلف</text>
+<rect x="120" y="240" width="600" height="416" rx="18" fill="#dfe5e9" stroke="#203447" stroke-width="5"/>
+<rect x="142" y="262" width="175" height="138" rx="10" class="blue"/>
+<text x="229" y="300" text-anchor="middle" class="ink ar label">مضخة / ماء</text>
+<text x="229" y="330" text-anchor="middle" class="muted en small">supplier module</text>
+<text x="229" y="361" text-anchor="middle" class="muted ar small">المقاس والموقع لاحقاً</text>
+
+<rect x="335" y="262" width="210" height="138" rx="10" class="dash"/>
+<text x="440" y="299" text-anchor="middle" class="ink ar label">وحدة حرارية / مائية</text>
+<text x="440" y="330" text-anchor="middle" class="muted en small">approved module only</text>
+<text x="440" y="362" text-anchor="middle" class="muted ar small">بدون تصميم غلاية أو حارق</text>
+
+<rect x="565" y="262" width="133" height="138" rx="10" class="amber"/>
+<text x="631" y="302" text-anchor="middle" class="ink ar label">حجرة</text>
+<text x="631" y="330" text-anchor="middle" class="ink ar label">التحكم</text>
+<text x="631" y="367" text-anchor="middle" class="muted ar small">فصل يحدده المختص</text>
+
+<rect x="170" y="454" width="220" height="145" rx="10" class="blue"/>
+<circle cx="280" cy="500" r="24" fill="#b8c5ce" stroke="#203447" stroke-width="3"/>
+<path d="M280 522 L311 550" stroke="#203447" stroke-width="8" stroke-linecap="round"/>
+<text x="280" y="578" text-anchor="middle" class="ink en label">GROUP 1</text>
+<rect x="450" y="454" width="220" height="145" rx="10" class="blue"/>
+<circle cx="560" cy="500" r="24" fill="#b8c5ce" stroke="#203447" stroke-width="3"/>
+<path d="M560 522 L591 550" stroke="#203447" stroke-width="8" stroke-linecap="round"/>
+<text x="560" y="578" text-anchor="middle" class="ink en label">GROUP 2</text>
+<line x1="132" y1="625" x2="708" y2="625" stroke="#a53732" stroke-width="5"/>
+<text x="420" y="649" text-anchor="middle" class="red ar small">الواجهة الأمامية والصينية القابلة للإزالة</text>
+<text x="700" y="691" class="muted ar small">الأبعاد الخارجية: W=750 مم مختار | D=520 مم مؤقت</text>
+<text x="700" y="722" class="red ar small">المستطيلات مناطق حجز تقريبية؛ ليست أبعاد القطع أو مواقع تثبيت.</text>
+
+<text x="1350" y="180" class="ink ar h">مقطع جانبي — غلاف خارجي</text>
+<text x="850" y="220" class="muted ar small">الأمام ←</text>
+<rect x="850" y="270" width="390" height="350" rx="16" fill="#dfe5e9" stroke="#203447" stroke-width="5"/>
+<rect x="875" y="314" width="145" height="95" rx="9" class="blue"/>
+<text x="947" y="350" text-anchor="middle" class="ink ar label">مجموعة</text>
+<text x="947" y="379" text-anchor="middle" class="ink ar label">التحضير</text>
+<rect x="1038" y="314" width="174" height="95" rx="9" class="dash"/>
+<text x="1125" y="350" text-anchor="middle" class="ink ar label">وحدة المورد</text>
+<text x="1125" y="379" text-anchor="middle" class="muted ar small">حرارة / ماء</text>
+<rect x="878" y="452" width="143" height="112" rx="9" class="blue"/>
+<text x="949" y="494" text-anchor="middle" class="ink ar label">خدمة الماء</text>
+<text x="949" y="524" text-anchor="middle" class="muted ar small">موضع غير نهائي</text>
+<rect x="1038" y="452" width="174" height="112" rx="9" class="amber"/>
+<text x="1125" y="492" text-anchor="middle" class="ink ar label">تحكم كهربائي</text>
+<text x="1125" y="523" text-anchor="middle" class="muted ar small">الفصل وفق المورد</text>
+<text x="1045" y="595" text-anchor="middle" class="red ar small">بدون مسارات توصيل</text>
+<text x="850" y="656" class="muted ar small">D=520 وH=500 مم مؤقتان</text>
+
+<rect x="80" y="785" width="1340" height="126" rx="16" fill="#fff0ed" stroke="#a53732" stroke-width="3"/>
+<text x="750" y="825" text-anchor="middle" class="red ar h">نسخة GAS: مجموعة الغاز وموقعها يحددهما المورد والمهندس المؤهل</text>
+<text x="750" y="860" text-anchor="middle" class="red ar sub">لا يتضمن هذا الرسم تصميم حارق، مسار بوتان، وعاء ضغط، غلاية، أو مخطط كهربائي.</text>
+<text x="750" y="891" text-anchor="middle" class="muted ar small">يلزم اختيار الوحدات الحقيقية ومراجعة الفصل والخدمة والسلامة قبل CAD Rev B.</text>
+
+<rect x="80" y="950" width="1340" height="105" rx="14" fill="#edf3f6" stroke="#708594" stroke-width="2"/>
+<text x="250" y="990" class="ink ar label">حالة القياسات:</text>
+<text x="1370" y="990" class="muted ar sub">العرض 750 مم مختار من المستخدم — الارتفاع 500 مم والعمق 520 مم مؤقتان.</text>
+<text x="1370" y="1025" class="muted ar small">المخطط للتغليف والتواصل مع الموردين فقط؛ لا يُستعمل للقص أو التجميع الوظيفي أو التشغيل.</text>
+</svg>

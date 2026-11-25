@@ -1,0 +1,1235 @@
+[
+ {
+  "ts": "2026-10-15T11:49:56.250243+00:00",
+  "task_id": "task-1792023730565",
+  "agent": "evolve",
+  "title": "للرد على الإعلان الأخير، قمنا بتحديث الرسالة الأولى إلى آخر محتوى تم تقييمه.",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T11:49:56.293613+00:00",
+  "task_id": "task-1792024092498",
+  "agent": "evolve",
+  "title": "يجب تحديث وتحديث البروتوكولات لتقليل الثغرات الهجومية، وإجراء تقييم وتحديث بين الوكلاء، وإعادة تقييم",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T11:50:13.424914+00:00",
+  "task_id": "task-1792024103268",
+  "agent": "evolve",
+  "title": "تعد مشكلة تحديث البروتوكولات والتحقق من مزامنة نسخ الوكلاء أولويات حاسمة. سيجرى تقييم وتحديث البروتو",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T11:50:13.477575+00:00",
+  "task_id": "task-1792024356617",
+  "agent": "evolve",
+  "title": "يجب تحديث وتحديث البروتوكولات للحد من الثغرات الهجومية، وإجراء تقييم وتحديث بين الوكلاء، وإعادة تقيي",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T11:50:14.326282+00:00",
+  "task_id": "task-1792029349787",
+  "agent": "evolve",
+  "title": " tighten email authentication protocols, unify security protocols, enhance collaboration among agent",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T11:50:14.408671+00:00",
+  "task_id": "task-1792029362971",
+  "agent": "evolve",
+  "title": "تحسين معاينة البريد الإلكتروني إلى أمان أقوى وتعزيز التعاون بين الوكلاء لتجنب الهجمات الجماعية. تعزي",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T11:50:15.239268+00:00",
+  "task_id": "task-1792029485108",
+  "agent": "evolve",
+  "title": "تحسين آلية معاينة البريد الإلكتروني إلى أمان أقوى وتعزيز التعاون بين الوكلاء لتجنب الهجمات الجماعية.",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T11:50:15.303302+00:00",
+  "task_id": "task-1792035389942",
+  "agent": "evolve",
+  "title": "حسن وحدة معاينة البريد الإلكتروني للرغم من قدرتها الهجين. توحيد بروتوكولات التحقق لزيادة الأمن والإش",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T11:50:16.316743+00:00",
+  "task_id": "task-1792046728000",
+  "agent": "evolve",
+  "title": "تحسين وحدة معاينة البريد الإلكتروني وتوحيد بروتوكولات التحقق. توزيع الوحدات والأمان الجيد لتجنب الهج",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T11:50:16.389511+00:00",
+  "task_id": "task-1792058299290",
+  "agent": "evolve",
+  "title": "تحسين وحدة معاينة البريد الإلكتروني للأمان الأعلى، ثم تقسيم الوحدة الواحدة لتعزيز الأمان وأصلاح المش",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T12:54:52.425455+00:00",
+  "task_id": "task-1792068160444",
+  "agent": "evolve",
+  "title": "المهمة: تحديث وحدة معاينة البريد الإلكتروني باعتبارها منافذ عميقة للاختراق ومتكاملة بروتوكولات التحق",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T13:11:42.510217+00:00",
+  "task_id": "task-1792069542615",
+  "agent": "evolve",
+  "title": "الآن نركز على تحديث وحدة معاينة البريد الإلكتروني بتفاصيل أمنية جديدة. يجب ترقية الوحدة لتكون أمانة ",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T14:19:24.589345+00:00",
+  "task_id": "fix-1792072884521",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في autonomous.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T15:25:23.281648+00:00",
+  "task_id": "fix-1792076960780",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في autonomous.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T15:25:23.358264+00:00",
+  "task_id": "fix-1792076988393",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في autonomous.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T16:21:22.518584+00:00",
+  "task_id": "task-1792080815579",
+  "agent": "evolve",
+  "title": "إعادة تشغيل وحدة معاينة البريد الإلكتروني للأمان الأقوى، مع توحيد بروتوكولات الأمن وتوسع التمكين للأ",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-15T16:38:58.575129+00:00",
+  "task_id": "fix-1792081314059",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في autonomous.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T17:14:29.628686+00:00",
+  "task_id": "fix-1792083361454",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في autonomous.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T17:14:30.552622+00:00",
+  "task_id": "fix-1792083389492",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في autonomous.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T17:33:31.976163+00:00",
+  "task_id": "fix-1792083406530",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في autonomous.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T18:47:54.772223+00:00",
+  "task_id": "fix-1792089336275",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في autonomous.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T19:30:52.737664+00:00",
+  "task_id": "fix-1792091372998",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في bot.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T19:30:53.180920+00:00",
+  "task_id": "fix-1792091394975",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في bot.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-15T19:47:14.062538+00:00",
+  "task_id": "fix-1792091442769",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في bot.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-16T02:57:11.481812+00:00",
+  "task_id": "fix-1792118281543",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في orchestrator.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-16T02:57:11.859844+00:00",
+  "task_id": "fix-1792118294436",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في orchestrator.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-16T03:13:15.887302+00:00",
+  "task_id": "fix-1792118307722",
+  "agent": "self_improve",
+  "title": "إصلاح خطأ في web.err",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-16T04:54:09.705139+00:00",
+  "task_id": "task-1792125953547",
+  "agent": "evolve",
+  "title": "واجهتنا مشكلة في خطأ في الوسيطات. تم تنفيذها مع رقابة تلقائية. النموذج الحالي يتعامل مع 7 أ Agents. ",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-16T08:00:30.232772+00:00",
+  "task_id": "task-1792137235302",
+  "agent": "evolve",
+  "title": "أExecutable مهام:",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-16T11:17:57.121296+00:00",
+  "task_id": "task-1792148610574",
+  "agent": "evolve",
+  "title": "نحتاج لتحسين كود التحقق الإلكتروني وتحديث البرامج لمكافحة الفيروسات بشكل مستمر، وتعزيز سياسات الشراك",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-17T01:41:03.923236+00:00",
+  "task_id": "task-1792200421528",
+  "agent": "evolve",
+  "title": "نحتاج لتطوير سياسات الشراكة الآمنة وتحديث كود التحقق الإلكتروني وبرامج مكافحة الفيروسات باستمرار. يج",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-17T04:43:15.038095+00:00",
+  "task_id": "task-1792211812127",
+  "agent": "evolve",
+  "title": "من المهم تطوير سياسات الشراكة الآمنة وتحديث كود التحقق الإلكتروني وبرامج مكافحة الفيروسات، فكما تم إ",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-17T10:17:17.505210+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T10:17:19.577768+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T10:35:26.229514+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T10:35:28.316984+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T10:54:29.334340+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T10:54:31.414981+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T11:12:34.859701+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T11:12:34.946304+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T11:30:16.559585+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T11:30:16.636466+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T11:48:05.337475+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T11:48:05.369105+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T12:05:59.470625+00:00",
+  "task_id": "task-1792234288714",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T12:05:59.575823+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T12:24:08.239728+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T12:24:08.313263+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T12:44:00.687905+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T12:44:00.737753+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T12:59:33.863177+00:00",
+  "task_id": "task-1792235452004",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T12:59:34.101971+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T13:16:12.288082+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T13:16:12.396968+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T13:31:33.321636+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T13:31:35.502336+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T13:52:04.244450+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T13:52:04.307901+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T14:07:09.365195+00:00",
+  "task_id": "task-1792235725215",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T14:07:14.688413+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T14:26:01.703873+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T14:26:01.756062+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T14:41:51.812458+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T14:41:51.910605+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T14:58:02.469049+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T14:58:02.522871+00:00",
+  "task_id": "task-1792235965112",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T15:13:56.105368+00:00",
+  "task_id": "task-1792235965800",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T15:14:00.876306+00:00",
+  "task_id": "task-1792245561239",
+  "agent": "evolve",
+  "title": "الخادم رصد تكرار تنفيذ مهمة معينة من قبل الوكلاء. نستثمر في زيادة كفاءة وتحسين استجابة النظام. تقنيا",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T17:21:10.525686+00:00",
+  "task_id": "task-1792257044777",
+  "agent": "evolve",
+  "title": "الشأن الآن هو استمرارية معالجة المعرفة من الشانقن (18 أقسام) ورصد تكرار الاعتراف بها. مهمة قادمة هي:",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-17T20:29:27.034951+00:00",
+  "task_id": "task-1792268685407",
+  "agent": "evolve",
+  "title": "أولويتي حاليا تصحيح النظام وإصلاح محاولات التكرار.还需加快处理并减少安全操作的重复执行。也要扩大对安全模式的监控。",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-17T23:42:20.971796+00:00",
+  "task_id": "task-1792279886253",
+  "agent": "evolve",
+  "title": "تحسين الرصد والأمن في نظام EsprieAether،尤其加强对于社会工程攻击和未知威胁的识别，减少系统错误响应及完善安全协议。",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-18T21:42:36.018664+00:00",
+  "task_id": "task-1792358845751",
+  "agent": "evolve",
+  "title": "المهمة هي تطوير وإطلاق أدوات جديدة للكشف عن الهجمات الاجتماعية والهجمات الداخلية، مع تحسين تقنيات ال",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-19T00:43:14.058865+00:00",
+  "task_id": "task-1792370043000",
+  "agent": "evolve",
+  "title": "تحسين الرصد والأمان: تطوير معايير أمنية جديدة وتحديث سياسات الشراكة الآمنة. تنفيذ تطوير تقنيات للكشف",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-19T03:46:53.280064+00:00",
+  "task_id": "task-1792381395797",
+  "agent": "evolve",
+  "title": "نحتاج إلى تحديث سياسات الشراكة الآمنة وتطوير تقنيات الكشف عن الفيروسات والتحقق الإلكتروني. يجب أيضًا",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-19T05:26:47.083757+00:00",
+  "task_id": "task-1792386641927",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-19T05:26:47.118686+00:00",
+  "task_id": "task-1792386671239",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-19T07:14:22.469169+00:00",
+  "task_id": "task-1792393805004",
+  "agent": "evolve",
+  "title": "تحسين سياسات الشراكة وتعزيز عمليات الرصد والأمان المستمرة. تنسيق بين الوكلاء لحماية النظام من التهدي",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-19T07:14:23.077790+00:00",
+  "task_id": "task-1792393900158",
+  "agent": "evolve",
+  "title": "المهمة الجديدة هي تطوير سياسات الشراكة وتعزيز مكافحة الفيروسات والتحقق الإلكتروني. يجب الاتصال بين ا",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-19T20:13:38.525825+00:00",
+  "task_id": "task-1792440014645",
+  "agent": "evolve",
+  "title": "الع介质 الجديد تطوير سياسات الشراكة وتعزيز مكافحة الفيروسات والتحقق الإلكتروني وتأكيد التنسيق بين الوك",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-20T13:10:44.048937+00:00",
+  "task_id": "task-1792486968278",
+  "agent": "evolve",
+  "title": "任務 القائمة هي تنفيذ تطوير سياسات الشراكة وتعزيز مكافحة الفيروسات والتحقق الإلكتروني، وأهمية توسيع ال",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-20T13:27:10.727455+00:00",
+  "task_id": "task-1792502332208",
+  "agent": "evolve",
+  "title": "المهمة هي تطوير وتحديث سياسات الشراكة والتحقق الإلكتروني، وأيضًا تحسين مكافحة الفيروسات وتطوير الاتص",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-20T15:50:55.271797+00:00",
+  "task_id": "task-1792511438729",
+  "agent": "evolve",
+  "title": "مهمة تجريبية - اختبار Task Executor",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-20T16:36:11.976395+00:00",
+  "task_id": "task-1792513706733",
+  "agent": "evolve",
+  "title": "الخطة هي تنفيذ تحديث كود التحقق الإلكتروني وتحديث سياسات الشراكة. التركيز على تحسين الرصد وتكثيف الت",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-21T05:24:09.840571+00:00",
+  "task_id": "task-1792559680661",
+  "agent": "evolve",
+  "title": "تطوير وتحديث سياسات الشراكة وإعادة الاتصال بين الوكلاء يكفي لتعزيز الأمان والحفاظ على الثقة بين المس",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T05:24:23.716382+00:00",
+  "task_id": "task-1792559861184",
+  "agent": "evolve",
+  "title": "الخطة القادمة تعزيز البرمجيات الإضافية وتحديث برامج مكافحة الفيروسات المستمرة. التواصل بين الوكلاء ض",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T18:29:07.631496+00:00",
+  "task_id": "task-1792606459408",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T18:29:07.692404+00:00",
+  "task_id": "task-1792606462171",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T18:29:47.566620+00:00",
+  "task_id": "task-1792606498576",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T18:29:47.618039+00:00",
+  "task_id": "task-1792606502046",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T19:01:08.953108+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T19:01:10.087334+00:00",
+  "task_id": "task-1792608543592",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T19:36:06.652603+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T19:36:18.912969+00:00",
+  "task_id": "task-1792610435265",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T19:38:00.348294+00:00",
+  "task_id": null,
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T19:38:03.340893+00:00",
+  "task_id": "task-1792610821758",
+  "agent": "evolve",
+  "title": "معالجة معرفة جديدة من الش안건 (18 أقسام)",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T20:41:06.873212+00:00",
+  "task_id": "task-1792614943065",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T20:41:08.429625+00:00",
+  "task_id": "task-1792614997982",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T20:59:47.414618+00:00",
+  "task_id": "task-1792615963541",
+  "agent": "evolve",
+  "title": "تنفيذ مهمة معالجة معرفة جديدة من الشأنقان (18 قسم) في نظام EsprieAether. تحديث واجهة المستخدم للاشار",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T21:09:02.486892+00:00",
+  "task_id": "task-1792616426578",
+  "agent": "evolve",
+  "title": "مهام تغيير واجهة المستخدم وتحديث تطبيقها وجعلها تعرف من التكرارات، تحسين كشف الهجمات الداخلية وال ex",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T21:26:22.679215+00:00",
+  "task_id": "task-1792617578956",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T21:52:52.012070+00:00",
+  "task_id": "task-1792619317397",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T22:24:55.026986+00:00",
+  "task_id": "task-1792621045861",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T22:24:57.530073+00:00",
+  "task_id": "task-1792621293772",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T22:33:51.554167+00:00",
+  "task_id": "task-1792621467252",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T22:33:51.696339+00:00",
+  "task_id": "task-1792621887740",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T22:41:31.377996+00:00",
+  "task_id": "task-1792621974685",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T22:41:40.704462+00:00",
+  "task_id": "task-1792622075858",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T22:50:29.689665+00:00",
+  "task_id": "task-1792622102849",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T22:50:37.274011+00:00",
+  "task_id": "task-1792622134962",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T23:10:46.228570+00:00",
+  "task_id": "task-1792623990981",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T23:45:09.108354+00:00",
+  "task_id": "task-1792626021863",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-21T23:45:09.303554+00:00",
+  "task_id": "task-1792626160737",
+  "agent": "test_agent",
+  "title": "Test task",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-22T00:06:29.434980+00:00",
+  "task_id": "task-1792627305984",
+  "agent": "evolve",
+  "title": "نستمر في تنفيذ مهام اختبار طاقم العمل. قمنا بنجاح بـ 6 مهام تجريبية في سلسلة الرسائل الأخيرة. نتذكر ",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-22T00:19:09.464435+00:00",
+  "task_id": "task-1792627988894",
+  "agent": "evolve",
+  "title": "نبدأ بتطوير الذكاء الاصطناعي لتحديد المهام التكرارية وتحسين الأمان، مع مراقبة خاصة للمهام وتفتيش الب",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-22T06:39:38.777961+00:00",
+  "task_id": "task-1792650886517",
+  "agent": "evolve",
+  "title": "يجب تنفيذ تطوير الذكاء الاصطناعي لتحسين كود التحقق الإلكتروني والأمان. تدريب الوكيلين على استخدام ال",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-22T09:22:56.027556+00:00",
+  "task_id": "task-1792660697411",
+  "agent": "evolve",
+  "title": "سنتناول تطوير كود التحقق الإلكتروني وكفاءته وتطوير الذكاء الاصطناعي لتحديد المهام التكرارية وأيضاً ت",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-22T09:48:25.756343+00:00",
+  "task_id": "task-1792662172832",
+  "agent": "evolve",
+  "title": "ابدأ بتقويم وأ安全性 عبر تطوير كود التحقق الإلكتروني وتوزيع تحديثات متكررة. بحث مكثف عن الثغرات في الذك",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-22T12:36:52.606623+00:00",
+  "task_id": "task-1792672110359",
+  "agent": "evolve",
+  "title": "هنا الجمل الثلاثة الأولى للمرحلة الأولى القابلة للتنفيذ:",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-22T16:06:34.870323+00:00",
+  "task_id": "task-1792684860241",
+  "agent": "evolve",
+  "title": "نذكر الأولوية القصوى لتطوير كود التحقق وأمن المعلومات. نحسن قدرات الذكاء الاصطناعي للأمان وأيضا تحدي",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-22T22:12:57.522659+00:00",
+  "task_id": "task-1792706899914",
+  "agent": "evolve",
+  "title": "هدفنا هو تطوير وثبات تطبيقات تحقق الأمان وإدارة الأمان بشكل أكبر باستخدام الذكاء الاصطناعي، خصوصاً ف",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-23T01:21:52.136624+00:00",
+  "task_id": "task-1792718236953",
+  "agent": "evolve",
+  "title": "ستركز أول خطوة على تطوير كود التحقق بأمان إضافي. تأكد من أمن الذكاء الاصطناعي وأمن الشكاوى. ابدأ بال",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-23T04:32:15.736038+00:00",
+  "task_id": "task-1792729359027",
+  "agent": "evolve",
+  "title": "ت的研发 ت集中在 تطوير الذكاء الاصطناعي لتحسين أمن كود التحقق والشكاوى. يجب تطوير تطبيقات الذكاء الاصطناعي ",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-23T07:44:44.108784+00:00",
+  "task_id": "task-1792740618692",
+  "agent": "evolve",
+  "title": "التركيز على تطوير الذكاء الاصطناعي وتحسين أمن كود التحقق وأمن المعلومات. أولوية تطوير كود التحقق الأ",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-23T10:44:04.584654+00:00",
+  "task_id": "task-1792751711104",
+  "agent": "evolve",
+  "title": "تحسين تطبيق كود التحقق وأمن المعلومات باستخدام الذكاء الاصطناعي. تطوير البرمجيات الأمنية والذكاء الا",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-23T13:59:13.951342+00:00",
+  "task_id": "task-1792763100638",
+  "agent": "evolve",
+  "title": "تحسين تطبيق كود التحقق وأمن المعلومات باستخدام الذكاء الاصطناعي كأولوية رئيسية. التركيز على تحسين أم",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-23T17:02:21.274288+00:00",
+  "task_id": "task-1792774495240",
+  "agent": "evolve",
+  "title": "ه目标 تنفيذ تحسينات في تطبيق كود التحقق وأمن المعلومات باستخدام الذكاء الاصطناعي. التركيز على التوازن ",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-23T20:16:59.229771+00:00",
+  "task_id": "task-1792785823333",
+  "agent": "evolve",
+  "title": "الأولوية هى تطوير الذكاء الاصطناعي لتحسين الأمان في كود التحقق وأمن المعلومات، مع الحفاظ على التشفير",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-25T21:11:50.335969+00:00",
+  "task_id": "task-1792962312673",
+  "agent": "evolve",
+  "title": "背上 الذكاء الاصطناعي، خاصة لتطوير كود التحقق وأمن المعلومات. ت unify سياسات الأمن وتحليل التهديدات لض",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-26T00:28:41.650264+00:00",
+  "task_id": "task-1792973671730",
+  "agent": "evolve",
+  "title": "المهمة التنفيذية: استثمر في الذكاء الاصطناعي للتطوير وكود التحقق وأمن المعلومات، خاصة في تحسين النما",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-27T00:48:54.876134+00:00",
+  "task_id": "task-1793061893728",
+  "agent": "evolve",
+  "title": "التركيز على تطوير الذكاء الاصطناعي لتقوية كود التحقق وأمن المعلومات في بيئة مشابهة لإنتاج. تطوير سيا",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-27T04:06:35.687957+00:00",
+  "task_id": "task-1793073159559",
+  "agent": "evolve",
+  "title": " tasked بتطوير بيئات اختبار الذكاء الاصطناعي مشابهة لإنتاج، للتحقق من أمان كود التحقق والمعلومات. ال",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-27T07:05:08.015294+00:00",
+  "task_id": "task-1793084494197",
+  "agent": "evolve",
+  "title": "هدفنا هو تطوير بيئات اختبار ديناميكية للأمان الذكي للكود وتكرار العمليات لإضافة تطبيقات الذكاء في ال",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-27T11:32:48.447074+00:00",
+  "task_id": "task-1793100349955",
+  "agent": "evolve",
+  "title": "واجهة الأمان والذكاء الاصطناعي هم المركز. تطوير بيئات مشابهة لإنتاج لتحديد الثغرات وتحسين كود التحقق",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-27T14:37:29.943831+00:00",
+  "task_id": "task-1793111636674",
+  "agent": "evolve",
+  "title": "التركيز على تطوير الذكاء الاصطناعي لأمن البيئات وأمن المعلومات وتوسيع البيئات المشابهة لإنتاج لإخطار",
+  "kind": "info",
+  "ok": true,
+  "action": "acknowledged"
+ },
+ {
+  "ts": "2026-10-27T19:43:18.753711+00:00",
+  "task_id": "task-1793129696261",
+  "agent": "evolve",
+  "title": "هندسة تطوير الذكاء الاصطناعي للأمان، التركيز على تحليل أخطاء التدريب لجعل الكود أصعب لنظام الخصم وتح",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-28T01:47:32.452343+00:00",
+  "task_id": "task-1793151791950",
+  "agent": "evolve",
+  "title": "المرورbys ChatGPT movimento de BatchExecution تت uit de ark!",
+  "kind": "code",
+  "ok": true,
+  "action": "queued for auto_apply (sandboxed)"
+ },
+ {
+  "ts": "2026-10-28T18:32:00.592581+00:00",
+  "task_id": "task-1793211708705",
+  "agent": "evolve",
+  "title": "المسدد nhìn الاسم posa للم مورد التالي:jenafeature_engineer] على تنميط وإنتاج نماذج ذكاء اصطناعي لزي",
+  "kind": "research",
+  "ok": true,
+  "action": "stored in memory"
+ }
+]

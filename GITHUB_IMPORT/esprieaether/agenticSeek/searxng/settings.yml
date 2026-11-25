@@ -1,0 +1,49 @@
+# AgenticSeek SearXNG settings.
+#
+# This file is INTENTIONALLY MINIMAL.
+#
+# It used to be a full copy of SearXNG's default settings.yml. Every time the
+# searxng/searxng:latest image was updated, engines that upstream had removed
+# or renamed failed to load from the stale copy at startup
+# (FileNotFoundError, e.g. "reddit", "presearch", "adobe_stock", "loc"), and
+# searches could come back empty.
+#
+# `use_default_settings` tells SearXNG to merge this file over the settings
+# bundled with the running image, so engine definitions always match the image
+# version. Only the overrides AgenticSeek needs live here.
+#
+# Docs: https://docs.searxng.org/admin/settings/settings.html#use-default-settings
+
+use_default_settings:
+  engines:
+    # Onion/Tor engines: AgenticSeek runs no Tor daemon, so SearXNG marks them
+    # inactive at startup and logs "can't register engine" errors for them.
+    # Removing them keeps the logs clean; "general" searches are unaffected.
+    remove:
+      - ahmia
+      - torch
+
+general:
+  instance_name: "AgenticSeek SearXNG"
+  donation_url: false
+
+search:
+  # AgenticSeek's searxSearch tool parses the HTML results page; "json" is
+  # added so the tool (and curl, for debugging) can use the stable JSON API
+  # as a fallback that survives UI/template changes.
+  formats:
+    - html
+    - json
+
+server:
+  # Local, private instance: the bot limiter is not needed and requires a
+  # reachable Redis/Valkey (it caused "The limiter requires Valkey" errors).
+  limiter: false
+  secret_key: "supersecret"  # overwritten by the SEARXNG_SECRET_KEY env var
+  method: "POST"
+
+outgoing:
+  # SearXNG's 3.0s default is aggressive for an agent that fires many
+  # searches: engine timeouts get engines temporarily banned, which then
+  # shows up as "no search results" downstream.
+  request_timeout: 6.0

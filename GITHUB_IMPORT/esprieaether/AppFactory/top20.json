@@ -1,0 +1,82 @@
+[
+  {
+    "name": "FocusFlow",
+    "slug": "focusflow",
+    "category": "Productivity",
+    "pitch": "Pomodoro timer with music & sounds personalized for deep focus.",
+    "monetization": "Ad-free experience & custom soundpacks",
+    "audience": "Students & Professionals",
+    "id": 1,
+    "score": 80
+  },
+  {
+    "name": "TripTrac",
+    "slug": "triptrac",
+    "category": "Travel",
+    "pitch": "All-in-one travel planner with offline maps & guides.",
+    "monetization": "Offline city guides & custom itinerary planning",
+    "audience": "Frequent travelers",
+    "id": 6,
+    "score": 54
+  },
+  {
+    "name": "MealMaster",
+    "slug": "mealmaster",
+    "category": "Cooking",
+    "pitch": "AI-generated meal plans based on dietary restrictions.",
+    "monetization": "Customized meal plans & step-by-step recipes",
+    "audience": "Health-conscious foodies",
+    "id": 2,
+    "score": 53
+  },
+  {
+    "name": "FinFlow",
+    "slug": "finflow",
+    "category": "Finance",
+    "pitch": "Budgeting app with automatic categorization & insights.",
+    "monetization": "Unlimited accounts & advanced analytics",
+    "audience": "Budget-conscious individuals",
+    "id": 8,
+    "score": 53
+  },
+  {
+    "name": "StudySage",
+    "slug": "studysage",
+    "category": "Education",
+    "pitch": "AI-based flashcard creator for efficient learning.",
+    "monetization": "Unlimited flashcards & smart review system",
+    "audience": "Students & Lifelong learners",
+    "id": 5,
+    "score": 50
+  },
+  {
+    "name": "PetPal",
+    "slug": "petpal",
+    "category": "Pet Care",
+    "pitch": "Complete pet care tracker with medication reminders.",
+    "monetization": "Vet records storage & Recall alerts",
+    "audience": "Pet owners",
+    "id": 3,
+    "score": 48
+  },
+  {
+    "name": "SleepScore",
+    "slug": "sleepscore",
+    "category": "Health & Fitness",
+    "pitch": "Sleep tracking with detailed personalized sleep insights.",
+    "monetization": "Advanced sleep analysis & wellness reports",
+    "audience": "Health-conscious individuals",
+    "id": 4,
+    "score": 43
+  },
+  {
+    "name": "WisdomWell",
+    "slug": "wisdomwell",
+    "category": "Self-Care",
+    "pitch": "Mindfulness app with personalized guided meditations.",
+    "monetization": "Unlimited meditations & customizable sessions",
+    "audience": "Mindfulness enthusiasts",
+    "id": 7,
+    "score": 43
+  }
+]

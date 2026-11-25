@@ -1,0 +1,76 @@
+{
+  "title": "دليل JARVIS // CLASSIFIED",
+  "version": "1.0",
+  "date": "2026-10-17",
+  "status": "completed",
+  "description": "Dana kamil A-Z l-khidmat li-l-web_interface l-3000, l-api l-8000, kullat l-servicies, w kif a3malha.",
+  "access_points": {
+    "web_main": "http://localhost:3000/",
+    "api": "http://localhost:8000/api/",
+    "web_interface": "http://localhost:5000/",
+    "cloud_desktop": "http://localhost:5001/",
+    "homedock": "http://localhost:5104/"
+  },
+  "services": [
+    {
+      "name": "web_interface",
+      "port": 5000,
+      "status": "running"
+    },
+    {
+      "name": "cloud_desktop",
+      "port": 5001,
+      "status": "running"
+    },
+    {
+      "name": "homedock",
+      "port": 5104,
+      "status": "running"
+    },
+    {
+      "name": "jarvis_fe",
+      "port": 3000,
+      "status": "running"
+    },
+    {
+      "name": "sunna_api",
+      "port": 5100,
+      "status": "running"
+    },
+    {
+      "name": "integrations",
+      "port": 5102,
+      "status": "running"
+    },
+    {
+      "name": "kanban",
+      "port": 5103,
+      "status": "running"
+    },
+    {
+      "name": "router",
+      "port": 11435,
+      "status": "running"
+    },
+    {
+      "name": "governor",
+      "port": 11123,
+      "status": "running"
+    },
+    {
+      "name": "ollama",
+      "port": 11434,
+      "status": "running"
+    },
+    {
+      "name": "agent_mesh",
+      "port": 11437,
+      "status": "running"
+    },
+    {
+      "name": "cloud_bridge",
+      "port": 5106,
+      "status": "running"
+    }
+  ]
+}

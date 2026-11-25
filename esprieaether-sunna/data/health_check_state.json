@@ -1,0 +1,93 @@
+{
+  "timestamp": "2026-10-23T01:36:37.380521",
+  "system": {
+    "cpu": 32.1,
+    "memory": 73.6,
+    "disk": 82.8
+  },
+  "services": [
+    {
+      "name": "JARVIS Web",
+      "port": 5000,
+      "status": "ok"
+    },
+    {
+      "name": "Cloud Desktop",
+      "port": 5001,
+      "status": "ok"
+    },
+    {
+      "name": "Kanban Board",
+      "port": 5103,
+      "status": "ok"
+    },
+    {
+      "name": "Sunna API",
+      "port": 5100,
+      "status": "ok"
+    },
+    {
+      "name": "Sunna Dashboard",
+      "port": 5105,
+      "status": "ok"
+    },
+    {
+      "name": "AI Router",
+      "port": 11435,
+      "status": "ok"
+    },
+    {
+      "name": "Orchestrator",
+      "port": 11436,
+      "status": "ok"
+    },
+    {
+      "name": "Agent Mesh",
+      "port": 11437,
+      "status": "ok"
+    },
+    {
+      "name": "Telegram Bot",
+      "port": null,
+      "status": "down"
+    }
+  ],
+  "agents": [
+    {
+      "name": "network_monitor.py",
+      "status": "down"
+    },
+    {
+      "name": "security_agent.py",
+      "status": "down"
+    },
+    {
+      "name": "memory_agent.py",
+      "status": "down"
+    },
+    {
+      "name": "daily_report.py",
+      "status": "down"
+    },
+    {
+      "name": "predictive_analyzer.py",
+      "status": "down"
+    },
+    {
+      "name": "trading_bot.py",
+      "status": "down"
+    },
+    {
+      "name": "error_fix_agent.py",
+      "status": "down"
+    },
+    {
+      "name": "arabic_support.py",
+      "status": "down"
+    },
+    {
+      "name": "knowledge_base.py",
+      "status": "down"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}التحليلات{% endblock %}
+{% block page_title %}📈 التحليلات{% endblock %}
+{% block content %}
+<div class="grid">
+<div class="card"><h2>الأحداث</h2><div class="kv"><span>Total</span><b>{{ total_events }}</b></div></div>
+<div class="card"><h2>الذاكرة</h2><div class="kv"><span>Entries</span><b>{{ memory_count }}</b></div></div>
+<div class="card"><h2>Guardian</h2>
+<div class="kv"><span>Blocked</span><b>{{ guardian_stats.blocked if guardian_stats else 0 }}</b></div>
+<div class="kv"><span>Checks</span><b>{{ guardian_stats.total_checks if guardian_stats else 0 }}</b></div>
+</div>
+</div>
+{% endblock %}

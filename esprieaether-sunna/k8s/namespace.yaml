@@ -1,0 +1,55 @@
+---
+# ESPRIEAETHER-SUNNA Kubernetes Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: esprieaether
+  labels:
+    app: esprieaether-sunna
+    version: "2.0"
+    environment: production
+  annotations:
+    description: "ESPRIEAETHER Agent OS - Executive Director for Sunna Company"
+    last-updated: "2026-11-21"
+---
+# Resource Quota to prevent resource exhaustion
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: esprieaether-quota
+  namespace: esprieaether
+spec:
+  hard:
+    requests.cpu: "16"
+    requests.memory: "32Gi"
+    limits.cpu: "32"
+    limits.memory: "64Gi"
+    persistentvolumeclaims: "10"
+    services: "10"
+    pods: "50"
+  scopes:
+  - BestEffort
+  - NotBestEffort
+---
+# LimitRange for default resource requests/limits
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: esprieaether-limits
+  namespace: esprieaether
+spec:
+  - default:
+      cpu: "500m"
+      memory: "512Mi"
+    defaultRequest:
+      cpu: "250m"
+      memory: "256Mi"
+    type: Container
+  - max:
+      cpu: "4"
+      memory: "8Gi"
+    type: Container
+  - min:
+      cpu: "100m"
+      memory: "128Mi"
+    type: Container

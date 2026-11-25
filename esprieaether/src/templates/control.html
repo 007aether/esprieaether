@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🧠 EsprieAether — Unified Control Center</title>
+<style>
+  :root { --bg:#0a0e14; --fg:#e6edf3; --mut:#7d8590; --card:#11161d; --brd:#21262d; --acc:#2f81f7; --ok:#3fb950; --err:#f85149; --warn:#d29922; --pur:#a371f7; --cyan:#39c5cf; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--fg); font:14px/1.6 -apple-system,'Segoe UI',Roboto,'Noto Sans Arabic',sans-serif; padding:24px; max-width:1500px; margin:0 auto; }
+  h1 { font-size:22px; margin-bottom:2px; }
+  h1 .logo { color:var(--acc); }
+  .sub { color:var(--mut); margin-bottom:22px; font-size:13px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; margin-bottom:14px; }
+  .card { background:var(--card); border:1px solid var(--brd); border-radius:12px; padding:18px; }
+  .card h2 { font-size:12px; color:var(--mut); text-transform:uppercase; letter-spacing:1px; margin-bottom:14px; display:flex; align-items:center; gap:6px; }
+  .row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--brd); }
+  .row:last-child { border-bottom:none; }
+  .name { color:var(--fg); font-weight:500; }
+  .val { font-family:ui-monospace,'Cascadia Code',monospace; font-size:12px; color:var(--mut); }
+  .ok { color:var(--ok); } .err { color:var(--err); } .warn { color:var(--warn); } .pur { color:var(--pur); } .cyan { color:var(--cyan); }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-inline-end:7px; vertical-align:middle; }
+  .big { font-size:28px; font-weight:700; }
+  .stats { display:flex; gap:18px; flex-wrap:wrap; }
+  .stat { text-align:center; }
+  .stat .n { font-size:24px; font-weight:700; }
+  .stat .l { font-size:11px; color:var(--mut); text-transform:uppercase; letter-spacing:.5px; }
+  a { color:var(--acc); text-decoration:none; } a:hover { text-decoration:underline; }
+  .tag { display:inline-block; background:var(--brd); color:var(--fg); padding:3px 10px; border-radius:14px; font-size:11px; margin:2px; }
+  .tag.pur { background:#a371f722; color:var(--pur); }
+  .tag.cyan { background:#39c5cf22; color:var(--cyan); }
+  button { background:var(--acc); color:#fff; border:none; padding:7px 14px; border-radius:7px; cursor:pointer; font-size:13px; }
+  button:hover { opacity:.85; }
+  input { background:var(--bg); color:var(--fg); border:1px solid var(--brd); border-radius:7px; padding:7px 10px; font-size:13px; width:100%; margin:4px 0; font-family:ui-monospace,monospace; }
+  pre { background:var(--bg); border:1px solid var(--brd); border-radius:7px; padding:10px; font-size:12px; overflow:auto; max-height:180px; white-space:pre-wrap; }
+  .bar { height:6px; background:var(--brd); border-radius:3px; overflow:hidden; margin-top:4px; }
+  .bar > div { height:100%; background:var(--ok); border-radius:3px; transition:width .5s; }
+  .links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  .links a { background:var(--brd); padding:5px 12px; border-radius:7px; font-size:12px; }
+  .links a:hover { background:var(--acc); color:#fff; text-decoration:none; }
+  .harness { display:inline-block; padding:2px 8px; border-radius:5px; font-size:10px; font-weight:600; margin-inline-end:4px; }
+  .h-hermes { background:#2f81f722; color:var(--acc); } .h-ecc { background:#a371f722; color:var(--pur); }
+  .h-sunna { background:#3fb95022; color:var(--ok); } .h-dsh { background:#d2992222; color:var(--warn); }
+  .h-aether { background:#39c5cf22; color:var(--cyan); }
+</style>
+</head>
+<body>
+<h1><span class="logo">🧠</span> EsprieAether — Unified Control Center</h1>
+<div class="sub">5 harnesses · 1 system · <span id="clock"></span></div>
+
+<div class="grid">
+  <div class="card">
+    <h2>🖥️ Services</h2>
+    <div id="services"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>🧠 AI Brains (5)</h2>
+    <div id="brains"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>🎯 Agents (7)</h2>
+    <div id="agents"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>🤖 Robots (60)</h2>
+    <div id="robots"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>📋 Sunna Kanban</h2>
+    <div id="kanban"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="https://github.com/BradGroux/veritas-kanban" target="_blank">Veritas ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag pur">markdown</span><span class="tag grn">no DB</span>
+    </div>
+  </div>
+  <div class="card">
+    <h2>📈 Sunna Prices</h2>
+    <div id="sunnaprix"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="http://127.0.0.1:5100/health" target="_blank">Sunna API ↗</a>
+      <a href="https://github.com/clucraft/PriceGhost" target="_blank">PriceGhost ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag grn">live</span><span class="tag">6h refresh</span><span class="tag cya">devis feed</span>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🏭 SUNNA Company</h2>
+    <div id="sunna"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div id="sunnaweb" style="margin-top:8px"></div>
+    <div class="links">
+      <a href="http://127.0.0.1:5100/health" target="_blank">Sunna API ↗</a>
+      <a href="http://127.0.0.1:5100/" target="_blank">Dashboard ↗</a>
+      <a href="https://hilarious-panda-dea573.netlify.app" target="_blank">Live Site ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag grn">SARL AU</span><span class="tag">5 bots</span><span class="tag">7 agents</span>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🧩 ECC Substrate</h2>
+    <div class="stats">
+      <div class="stat"><div class="n pur">311</div><div class="l">Skills</div></div>
+      <div class="stat"><div class="n pur">71</div><div class="l">Agents</div></div>
+      <div class="stat"><div class="n pur">97</div><div class="l">Commands</div></div>
+      <div class="stat"><div class="n pur">7</div><div class="l">Hooks</div></div>
+    </div>
+    <div class="links">
+      <a href="https://github.com/affaan-m/ECC" target="_blank">ECC Repo ↗</a>
+      <a href="https://ecc.tools" target="_blank">ecc.tools ↗</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🧩 Integrations</h2>
+    <div id="integrations"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="http://127.0.0.1:5104/" target="_blank">HomeDock ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag pur">15 catalog</span><span class="tag grn">checkmate</span><span class="tag cya">portracker</span>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🎯 JARVIS OSINT</h2>
+    <div id="jarvis"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="https://github.com/affaan-m/JARVIS" target="_blank">JARVIS Repo ↗</a>
+      <a href="http://127.0.0.1:5001/docs" target="_blank">API Docs ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag pur">16 agents</span><span class="tag cyan">OSINT</span><span class="tag">Face ID</span>
+    </div>
+  </div>
+  <div class="card">
+    <h2>💰 OKX Exchange</h2>
+    <div id="okx"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links">
+      <a href="https://www.okx.com/trade-spot/btc-usdt" target="_blank">OKX BTC-USDT ↗</a>
+      <a href="https://www.okx.com/account/my-api" target="_blank">API Management ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag grn">read+trade</span><span class="tag">no withdrawal</span>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🧠 JEV Decisions</h2>
+    <div class="stats">
+      <div class="stat"><div class="n pur">6</div><div class="l">Brains</div></div>
+      <div class="stat"><div class="n pur">13</div><div class="l">Models</div></div>
+      <div class="stat"><div class="n pur">7</div><div class="l">Agents</div></div>
+      <div class="stat"><div class="n cya">JEV</div><div class="l">Decisions</div></div>
+    </div>
+    <div class="links">
+      <a href="http://localhost:11435/stats" target="_blank">Router Stats ↗</a>
+      <a href="http://localhost:11435/decide" target="_blank">JEV /decide ↗</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🤖 Trading Bot</h2>
+    <div class="stats">
+      <div class="stat"><div class="n grn">spot</div><div class="l">Mode</div></div>
+      <div class="stat"><div class="n cya">JEV</div><div class="l">Brain</div></div>
+      <div class="stat"><div class="n org">2%</div><div class="l">Daily cap</div></div>
+      <div class="stat"><div class="n pur">10%</div><div class="l">Max pos</div></div>
+    </div>
+    <div class="links">
+      <a href="https://github.com/007aether/esprieaether/blob/main/src/okx_trading_bot.py" target="_blank">Bot Code ↗</a>
+      <a href="https://www.okx.com/trade-spot/btc-usdt" target="_blank">OKX BTC ↗</a>
+    </div>
+    <div style="margin-top:6px">
+      <span class="tag grn">DRY-RUN</span><span class="tag">no leverage</span><span class="tag">no short</span>
+    </div>
+  </div>
+  <div class="card">
+    <h2>💰 TraffMonetizer</h2>
+    <div id="tm"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+    <div class="links"><a href="https://app.traffmonetizer.com/dashboard" target="_blank">📊 Dashboard ↗</a></div>
+  </div>
+  <div class="card">
+    <h2>👥 Group</h2>
+    <div id="group"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+  <div class="card">
+    <h2>🔗 SSH Tunnel</h2>
+    <div id="tunnel"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>🏗️ Harness Topology</h2>
+  <div style="line-height:2.2; font-size:13px;">
+    <span class="harness h-hermes">HERMES</span> operator shell (front door)<br>
+    &nbsp;&nbsp;↳ <span class="harness h-ecc">ECC</span> 311 skills + 71 agents + 97 commands<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;↳ <span class="harness h-aether">AETHER</span> router (6 brains, 13 models)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ <span class="harness h-sunna">SUNNA</span> team workspace<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ <span class="harness h-dsh">DSH</span> headless + desktop UI<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ 60 robots · 7 agents · Telegram · Cloud desktop
+  </div>
+</div>
+
+<div class="grid" style="margin-top:14px;">
+  <div class="card">
+    <h2>⚡ Remote Exec</h2>
+    <input id="cmd" placeholder="أمر shell — مثال: dir" onkeydown="if(event.key==='Enter')runExec()">
+    <div style="margin:8px 0"><button onclick="runExec()">تنفيذ</button> <button onclick="refresh()">🔄 تحديث</button></div>
+    <pre id="out">—</pre>
+  </div>
+  <div class="card">
+    <h2>📊 System Metrics</h2>
+    <div id="metrics"><div class="row"><span class="name">جارٍ الفحص...</span></div></div>
+  </div>
+</div>
+
+<script>
+window.__TOKEN = window.__TOKEN || '';
+const CD = 'http://127.0.0.1:5002'; // Cloud Desktop écoute sur 5002 (5001 = gateway)
+
+async function j(u, opt) { const r = await fetch(u, opt); return r.json(); }
+function row(name, val, cls) { return `<div class="row"><span class="name">${name}</span><span class="val ${cls||''}">${val}</span></div>`; }
+function dot(on) { return `<span class="dot" style="background:${on?'var(--ok)':'var(--err)'}"></span>`; }
+
+async function refresh() {
+  document.getElementById('clock').textContent = new Date().toLocaleString('ar');
+
+  // Services — cerveaux via proxy même origine (pas de CORS sur :31416/:31415)
+  let svcHtml = '';
+  try {
+    const b = await j('/api/brain/status');
+    for (const s of b.services) {
+      const label = s.name === 'local-brain' ? 'Local Brain' : 'FreeLLMAPI';
+      svcHtml += row(dot(s.up) + label, s.up ? '✅ 200' : '❌ down', s.up ? 'ok' : 'err');
+    }
+  } catch (e) {
+    svcHtml += row(dot(false) + 'Local Brain', '❌ down', 'err');
+    svcHtml += row(dot(false) + 'FreeLLMAPI', '❌ down', 'err');
+  }
+  const svcs = [
+    ['Router', 'http://127.0.0.1:11435/health'],
+    ['Orchestrator', 'http://127.0.0.1:11436/health'],
+    ['Web', 'http://127.0.0.1:5000/api/health'],
+    ['Cloud Desktop', 'http://127.0.0.1:5002/health'],
+    ['Dashboard', 'http://127.0.0.1:5100/health'],
+  ];
+  for (const [n, u] of svcs) {
+    let ok = false;
+    try { const r = await fetch(u, {signal: AbortSignal.timeout(4000)}); ok = r.status < 500; } catch (e) {}
+    svcHtml += row(dot(ok) + n, ok ? '✅ 200' : '❌ down', ok ? 'ok' : 'err');
+  }
+  document.getElementById('services').innerHTML = svcHtml;
+
+  // Brains
+  try {
+    const b = await j('http://127.0.0.1:11435/stats');
+    document.getElementById('brains').innerHTML = Object.entries(b.brains || {}).map(([k, v]) =>
+      row(dot(v.healthy) + v.label || k, `ok:${v.ok} fail:${v.fail}`, v.healthy ? 'ok' : 'err')).join('');
+  } catch (e) {
+    document.getElementById('brains').innerHTML = row(dot(false) + 'router', 'offline', 'err');
+  }
+
+  // Agents
+  try {
+    const a = await j('http://127.0.0.1:11436/agents');
+    document.getElementById('agents').innerHTML = Object.entries(a).map(([k, v]) =>
+      row(k, v.skill, 'pur')).join('');
+  } catch (e) {
+    document.getElementById('agents').innerHTML = row(dot(false) + 'orchestrator', 'offline', 'err');
+  }
+
+  // Robots
+  try {
+    const r = await j('http://127.0.0.1:5000/api/robots/engine/stats');
+    document.getElementById('robots').innerHTML =
+      `<div class="stats"><div class="stat"><div class="n ok">${r.ok||60}</div><div class="l">OK</div></div>` +
+      `<div class="stat"><div class="n err">${r.error||0}</div><div class="l">Errors</div></div>` +
+      `<div class="stat"><div class="n">${r.cycle||1}</div><div class="l">Cycles</div></div></div>`;
+  } catch (e) {
+    document.getElementById('robots').innerHTML = row('60 robots', 'via /robots page', '');
+  }
+
+  // Kanban — board réel lu sur :5103
+  try {
+    const kb = await j('http://127.0.0.1:5103/board');
+    const t = (kb.todo || []).length, d = (kb.doing || []).length, dn = (kb.done || []).length;
+    let kRow = row(dot(true) + 'board', 'online', 'ok') +
+               row('todo', t + ' items', t > 0 ? 'org' : '') +
+               row('doing', d + ' items', d > 0 ? 'cya' : '') +
+               row('done', dn + ' items', 'grn');
+    for (const it of (kb.todo || []).slice(0, 2)) kRow += row('•', String(it.title).slice(0, 40), '');
+    document.getElementById('kanban').innerHTML = kRow;
+  } catch (e) {
+    document.getElementById('kanban').innerHTML = row(dot(false) + 'board', 'offline', 'err');
+  }
+
+  // SUNNA — seulement les routes réellement exposées par la API (:5100)
+  try {
+    const r = await fetch('http://127.0.0.1:5100/health', {signal: AbortSignal.timeout(3000)});
+    const sOk = r.status < 500;
+    document.getElementById('sunna').innerHTML = row(dot(sOk) + 'Bridge', sOk ? 'online' : 'offline', sOk ? 'ok' : 'err') +
+      row('État', 'voir /api/local/status sur :5000', 'cya');
+  } catch (e) {
+    document.getElementById('sunna').innerHTML = row(dot(false) + 'Bridge', 'offline', 'err') +
+      row('État', 'voir /api/local/status sur :5000', 'cya');
+  }
+  document.getElementById('sunnaweb').innerHTML = row(dot(false) + 'Site', 'not deployed locally', 'err');
+  document.getElementById('sunnaprix').innerHTML = row(dot(false) + 'Tracker', 'source indisponible', 'warn');
+
+  // OKX
+  try {
+    const o = await j('/api/okx'); // route servie par Flask :5000, pas par Cloud Desktop
+    if (o && o.connected) {
+      document.getElementById('okx').innerHTML =
+        row(dot(true) + 'API', 'connected', 'ok') +
+        row('BTC-USDT', '$' + Number(o.btc_usdt).toLocaleString(), 'pur') +
+        row('ETH-USDT', '$' + Number(o.eth_usdt).toLocaleString(), 'cya') +
+        row('Equity', '$' + (Number(o.total_equity) || 0).toFixed(2), Number(o.total_equity) > 0 ? 'ok' : 'warn');
+    } else {
+      document.getElementById('okx').innerHTML = row(dot(false) + 'API', o.error || 'disconnected', 'err');
+    }
+  } catch (e) {}
+
+  // Integrations — catalogue réel lu sur :5102
+  try {
+    const ig = await j('http://127.0.0.1:5102/list');
+    let iRow = row(dot(true) + 'adapter', 'online', 'ok') +
+               row('Linked', ig.linked + '/' + ig.total, ig.linked > 0 ? 'ok' : 'warn');
+    for (const o of (ig.integrations || []).filter(x => x.priority === 'high').slice(0, 4)) {
+      iRow += row((o.linked ? dot(true) : dot(false)) + o.name, o.use, o.linked ? 'ok' : 'warn');
+    }
+    document.getElementById('integrations').innerHTML = iRow;
+  } catch (e) {
+    document.getElementById('integrations').innerHTML = row(dot(false) + 'adapter', 'offline', 'err');
+  }
+
+  // JARVIS
+  try {
+    let jvOk = false;
+    try { const r = await fetch('http://127.0.0.1:5000/api/health', {signal: AbortSignal.timeout(3000)}); jvOk = r.status < 500; } catch (e) {}
+    document.getElementById('jarvis').innerHTML =
+      row(dot(jvOk) + 'Backend', jvOk ? 'online' : 'offline', jvOk ? 'ok' : 'warn') +
+      row('Agents', '16 (LinkedIn, X, Instagram, Exa, Darkweb...)', 'pur') +
+      row('Pipeline', 'Face ID → swarm → synthesis', '') +
+      row('API keys', 'exa ✓ openai ✓ gemini ✓ anthropic ✓', 'ok');
+  } catch (e) {}
+
+  // TM
+  try {
+    const t = await j(CD + '/tm');
+    document.getElementById('tm').innerHTML =
+      row(dot(t.running) + 'TraffMonetizer', t.running ? `${t.connections} conn` : 'offline', t.running ? 'ok' : 'err') +
+      row('accepting', t.accepting ? 'yes ✅' : 'no', t.accepting ? 'ok' : 'warn') +
+      row('device', (t.device_id || '').slice(0, 16) + '…', '');
+  } catch (e) {}
+
+  // Group
+  try {
+    const g = await j(CD + '/group');
+    document.getElementById('group').innerHTML = (g.members || []).map(m =>
+      `<span class="tag">${m.name} · ${m.role}</span>`).join('');
+  } catch (e) {}
+
+  // Tunnel — état seul, jamais l'hôte/l'utilisateur/l'empreinte
+  try {
+    const t = await j(CD + '/tunnel/status');
+    document.getElementById('tunnel').innerHTML = t.pid
+      ? row(dot(true) + 'active', 'session locale', 'ok')
+      : row(dot(false) + 'inactive', t.configured ? 'identifiants présents — pas de session' : 'non configuré (TUNNEL_HOST/USER absents)', 'warn');
+  } catch (e) {}
+
+  // Metrics (disk)
+  try {
+    const s = await j(CD + '/status');
+    const p = s.processes || {};
+    document.getElementById('metrics').innerHTML =
+      Object.entries(p).map(([k, v]) => row(k, v, v > 0 ? 'ok' : 'err')).join('');
+  } catch (e) {}
+}
+
+async function runExec() {
+  const cmd = document.getElementById('cmd').value;
+  if (!cmd) return;
+  const out = document.getElementById('out');
+  out.textContent = '...';
+  try {
+    const r = await fetch(CD + '/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Token': window.__TOKEN || '' },
+      body: JSON.stringify({ cmd, timeout: 60 }),
+    });
+    const res = await r.json();
+    out.textContent = res.error ? ('❌ ' + res.error) : (res.stdout || res.stderr || '(empty)') + `\n[exit ${res.exit_code}]`;
+  } catch (e) { out.textContent = '❌ ' + e; }
+}
+
+refresh();
+setInterval(refresh, 20000);
+</script>
+</body>
+</html>

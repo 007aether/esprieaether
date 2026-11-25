@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ESPRIEATHER — Centro de mando local</title>
+<style>
+  :root { --bg:#04090f; --panel:#0a1622; --cyan:#48e6ff; --amber:#ffb347; --red:#ff5c6c; --green:#6cf0a8; }
+  * { box-sizing:border-box }
+  body { margin:0; background:radial-gradient(circle at 50% -10%,#0d2c3d,#04090f 60%); color:#cfefff;
+         font:14px/1.5 Consolas,"Courier New",monospace; min-height:100vh }
+  header { padding:16px 22px; border-bottom:1px solid #17435a; display:flex; align-items:center; gap:16px }
+  h1 { margin:0; font-size:18px; letter-spacing:.35em; color:var(--cyan) }
+  .tag { font-size:11px; color:#6f91a5; letter-spacing:.15em }
+  .grid { display:grid; grid-template-columns:260px 1fr; gap:16px; padding:18px; max-width:1200px; margin:0 auto }
+  .card { background:linear-gradient(180deg,rgba(10,26,38,.95),rgba(6,14,22,.95));
+          border:1px solid #17435a; border-radius:10px; padding:16px; box-shadow:0 0 24px #00131f inset }
+  .card h2 { margin:0 0 12px; font-size:11px; letter-spacing:.22em; color:#6f91a5; font-weight:600 }
+  /* Réacteur — purement décoratif, aucun contrôle d'exécution */
+  #reactor { width:200px; height:200px; margin:6px auto; position:relative; border-radius:50%;
+    border:2px solid #1d6e8a; background:radial-gradient(circle,#0b3a4d 0%,#04121b 70%);
+    display:grid; place-items:center; animation:pulse 3.2s ease-in-out infinite }
+  #reactor::before,#reactor::after { content:""; position:absolute; border-radius:50%;
+    border:1px dashed #2c88a5; inset:18px; animation:spin 18s linear infinite }
+  #reactor::after { inset:40px; border-style:dotted; animation-direction:reverse }
+  .core { width:64px; height:64px; clip-path:polygon(50% 0,100% 38%,82% 100%,18% 100%,0 38%);
+    background:linear-gradient(180deg,#8cf4ff,#1686a8); filter:drop-shadow(0 0 14px var(--cyan)) }
+  /* Satellites: indicateurs de lecture uniquement, jamais de commande */
+  #satellites { position:absolute; inset:0; pointer-events:none }
+  .sat { position:absolute; width:18px; height:18px; border-radius:50%; display:grid; place-items:center;
+    font-size:9px; border:1px solid #2c88a5; background:#04121b; color:#5d7d90 }
+  #sat-brain { top:4px; left:calc(50% - 9px) } #sat-voice { top:calc(50% - 9px); right:4px }
+  #sat-services { bottom:4px; left:calc(50% - 9px) } #sat-network { top:calc(50% - 9px); left:4px }
+  .sat.ok { color:var(--green); border-color:var(--green); box-shadow:0 0 10px var(--green) }
+  .sat.warn { color:var(--amber); border-color:var(--amber) }
+  .ok { color:var(--green) } .warn { color:var(--amber) } .err { color:var(--red) } .dim { color:#5d7d90 }
+  ul { list-style:none; margin:0; padding:0 } li { padding:6px 0; border-bottom:1px solid #102c3b }
+  .right { display:grid; gap:16px }
+  .row { display:flex; justify-content:space-between; gap:10px; padding:5px 0 }
+  .bar { height:5px; background:#123447; border-radius:4px; margin-top:5px; overflow:hidden }
+  .bar > i { display:block; height:100%; background:var(--cyan) }
+  .stamp { font-size:10px; color:#4d6d7e; text-align:right; padding:10px 20px }
+  @keyframes spin { to { transform:rotate(360deg) } }
+  @keyframes pulse { 50% { box-shadow:0 0 34px #1b90b455 } }
+  /* Visage local : deux rendus, zéro ressource externe, zéro contrôle d'exécution */
+  .face-wrap { display:grid; grid-template-columns:340px 1fr; gap:16px; align-items:center }
+  #face { width:340px; height:300px; position:relative; perspective:900px; overflow:hidden;
+          border:1px solid #1d6e8a; border-radius:12px; display:grid; place-items:center;
+          background:radial-gradient(circle at 50% 42%,#0d4157,#04121b 70%) }
+  #face::after { content:""; position:absolute; inset:0; pointer-events:none;
+          background:repeating-linear-gradient(0deg,#48e6ff0a 0 1px,transparent 1px 4px) }
+  #faceCanvas { width:320px; height:280px; transform-style:preserve-3d; transition:transform .15s ease-out }
+  #facePortrait { position:absolute; inset:12px; display:grid; place-items:center }
+  #facePortrait svg { width:230px; height:260px; filter:drop-shadow(0 0 12px #48e6ff55) }
+  .face-info .row { font-size:13px }
+  #camVideo { position:absolute; right:10px; bottom:10px; width:112px; height:84px; object-fit:cover;
+              border:1px solid #2c88a5; border-radius:6px; transform:scaleX(-1); background:#020a10 }
+  #camSample { display:none }
+  /* Sentinelle locale : flux SSE en lecture seule, aucun contrôle d'exécution */
+  .sentinel-wrap { display:grid; grid-template-columns:300px 1fr; gap:16px; align-items:center }
+  #sentinelCanvas { width:300px; height:230px; border:1px solid #1d6e8a; border-radius:12px;
+                    background:radial-gradient(circle at 50% 50%,#082b3b,#04121b 72%) }
+  #sentinelWave { width:100%; height:54px; border:1px solid #123447; border-radius:6px; background:#04121b }
+  .agent { display:flex; align-items:center; gap:8px; padding:3px 0; font-size:12px }
+  .agent .dim { margin-left:auto }
+  .dot { width:8px; height:8px; border-radius:50%; background:#5d7d90; display:inline-block }
+  .dot.active { background:var(--green); box-shadow:0 0 8px var(--green) }
+  .dot.running { background:var(--cyan); box-shadow:0 0 8px var(--cyan) }
+  .dot.offline { background:#5d7d90 }
+  .dot.absent { background:var(--amber) }
+  button { background:#0d2c3d; color:#cfefff; border:1px solid #2c88a5; border-radius:6px;
+           padding:6px 10px; cursor:pointer; font:inherit; letter-spacing:.08em }
+  a { color:#48e6ff; text-decoration:none }
+  .atulya-bar { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px }
+  #atulyaFrame { width:100%; height:620px; border:1px solid #17435a; border-radius:8px; background:#04121b }
+</style>
+</head>
+<body>
+<header>
+  <h1>ESPRIEATHER</h1>
+  <span class="tag">CENTRO DE MANDO LOCAL · 127.0.0.1 · SEM NUVEM · SEM CHAVE</span>
+  <span class="tag" id="clock"></span>
+  <a class="tag" href="system.html">SYSTEM</a>
+</header>
+<div class="grid">
+  <section class="card">
+    <h2>ESTADO DO SISTEMA</h2>
+    <div id="reactor" title="Indicador visual — nenhuma ação é executada daqui">
+      <div class="core"></div>
+      <div id="satellites" aria-label="état réel des services">
+        <span id="sat-brain" class="sat" title="cerveau local">B</span>
+        <span id="sat-voice" class="sat" title="voix locale">V</span>
+        <span id="sat-services" class="sat" title="services locaux">S</span>
+        <span id="sat-network" class="sat" title="réseau">N</span>
+      </div>
+    </div>
+    <div id="services" class="dim">a carregar…</div>
+    <div id="internet" class="dim">rede: a carregar…</div>
+    <div id="voice" class="dim">voz: a carregar…</div>
+  </section>
+  <div class="right">
+    <section class="card">
+      <h2>INTERFACE VOCALE · DEUX VISAGES LOCAUX</h2>
+      <div class="face-wrap">
+        <div id="face" title="Visage piloté par l'état vocal local — aucune commande">
+          <video id="camVideo" autoplay playsinline muted hidden aria-label="caméra locale"></video>
+          <canvas id="camSample" width="32" height="32"></canvas>
+          <canvas id="faceCanvas" width="320" height="280" aria-label="visage holographique local"></canvas>
+          <div id="facePortrait" hidden>
+            <svg viewBox="0 0 200 220" role="img" aria-label="portrait stylisé local">
+              <defs>
+                <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#173d52"/><stop offset="1" stop-color="#071924"/>
+                </linearGradient>
+              </defs>
+              <ellipse cx="100" cy="112" rx="62" ry="80" fill="url(#skin)" stroke="#48e6ff" stroke-width="1.5"/>
+              <path d="M38 106 Q42 32 100 34 Q158 32 162 106 Q140 70 100 70 Q60 70 38 106" fill="#031019" stroke="#2c88a5"/>
+              <ellipse id="pEyeL" cx="78" cy="108" rx="9" ry="5" fill="#8cf4ff"/>
+              <ellipse id="pEyeR" cx="122" cy="108" rx="9" ry="5" fill="#8cf4ff"/>
+              <path d="M100 114 L94 138 Q100 142 106 138" fill="none" stroke="#3ea6c4" stroke-width="1.5"/>
+              <path id="pMouth" d="M80 158 Q100 166 120 158" fill="none" stroke="#8cf4ff" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M55 176 Q100 208 145 176" fill="none" stroke="#2c88a5" stroke-width="1"/>
+            </svg>
+          </div>
+        </div>
+        <div class="face-info">
+          <div class="row"><span>état</span><span id="faceStage" class="dim">no_data_source</span></div>
+          <div class="row"><span>activité</span><span id="faceLevel" class="dim">0%</span></div>
+          <div class="bar"><i id="faceBar" style="width:0%"></i></div>
+          <div class="row"><span>rendu</span><button id="faceMode" type="button">portrait</button></div>
+          <div class="row"><span>caméra PC</span><button id="camToggle" type="button">activer</button></div>
+          <div class="row"><span>reconnaissance</span><button id="enrollBtn" type="button">enrôler</button></div>
+          <div class="row"><span>identité</span><span id="identity" class="dim">non enrôlé</span></div>
+          <div class="row"><span>données locales</span><button id="resetProfileBtn" type="button">supprimer le profil</button></div>
+          <div class="row"><span>autorisation</span><span id="camPermission" class="dim">à demander</span></div>
+          <div class="row"><span>source</span><span class="dim">state/voice_status.json</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <h2>ATENÇÃO NECESSÁRIA</h2>
+      <ul id="attention"><li class="dim">a carregar…</li></ul>
+    </section>
+    <section class="card">
+      <h2>ROBÔS / CEREBRO LOCAL</h2>
+      <div id="robots" class="dim">a carregar…</div>
+    </section>
+    <section class="card">
+      <h2>REGISTRO DE EXECUÇÃO</h2>
+      <div id="ledger" class="dim">a carregar…</div>
+    </section>
+    <section class="card">
+      <h2>CAPACIDADES · ESTADO REAL</h2>
+      <div id="capabilities" class="dim">a carregar…</div>
+    </section>
+    <section class="card">
+      <h2>AÇÕES · DECISÃO EXPLÍCITA</h2>
+      <div id="approvals" class="dim">a carregar…</div>
+    </section>
+    <section class="card">
+      <h2>ATULYA · MÓDULO IMPORTADO</h2>
+      <div class="atulya-bar">
+        <div id="atulya" class="dim">a carregar…</div>
+        <button id="atulyaOpen" type="button">abrir Atulya</button>
+      </div>
+      <iframe id="atulyaFrame" title="Atulya local" allow="camera; microphone; geolocation" hidden></iframe>
+    </section>
+    <section class="card">
+      <h2>SENTINEL · ATIVIDADE LOCAL (SSE 1s)</h2>
+      <div class="sentinel-wrap">
+        <canvas id="sentinelCanvas" width="300" height="230" aria-label="holograma local dos agentes"></canvas>
+        <div>
+          <div id="sentinelAgents" class="dim">a carregar…</div>
+          <canvas id="sentinelWave" width="600" height="54" aria-label="atividade recente"></canvas>
+          <div class="row"><span>fluxo</span><span id="sentinelState" class="dim">no_data_source</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="stamp" id="stamp">atualização: —</div>
+<script>
+(function () {
+  "use strict";
+  var ATT = "/jarvis/api/jarvis/attention";
+  var SYS = "/jarvis/api/system/status";
+  var CAP = "/jarvis/api/jarvis/capabilities";
+  var ATU = "/jarvis/api/jarvis/atulya";
+  var SEN = "/sentinel/events";
+  var sentinel = { ts: 0, tools: {} }, wave = [];
+  var lastSystem = null, lastAttention = null;
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (v) { return String(v == null ? "-" : v).replace(/[&<>"]/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+
+  var face = { stage: "idle", level: 0 };
+  var faceMode = "hologram";
+
+  function setFace(v) {
+    face.stage = (v && v.stage) || "idle";
+    face.level = typeof (v && v.level) === "number" ? v.level : 0;
+    var label = face.stage === "speaking" ? "kayjawab" : face.stage === "listening" ? "kaysma3" :
+                face.stage === "thinking" ? "kayfekker" : "khadem";
+    $("faceStage").textContent = label + " · " + face.stage;
+    $("faceStage").className = face.stage === "speaking" ? "ok" : face.stage === "idle" ? "dim" : "warn";
+    $("faceLevel").textContent = Math.round(face.level * 100) + "%";
+    $("faceBar").style.width = Math.round(face.level * 100) + "%";
+  }
+
+  function drawFace(now) {
+    var c = $("faceCanvas");
+    if (c && faceMode === "hologram") {
+      var x = c.getContext("2d"), w = c.width, h = c.height, t = now / 1000;
+      var active = face.stage !== "idle";
+      var open = face.stage === "speaking" ? 4 + face.level * 22 + Math.sin(t * 13) * 3 :
+                 face.stage === "thinking" ? 2 : 1;
+      x.clearRect(0, 0, w, h);
+      x.save();
+      x.translate(w / 2, h / 2);
+      x.strokeStyle = active ? "#48e6ff" : "#1d6e8a";
+      for (var r = 0; r < 3; r++) {
+        x.save(); x.rotate(t * (r % 2 ? -0.12 : 0.16) + r);
+        x.beginPath(); x.ellipse(0, 0, 104 + r * 18, 122 + r * 12, 0, 0, Math.PI * 2);
+        x.globalAlpha = active ? 0.5 - r * 0.12 : 0.22 - r * 0.05; x.stroke(); x.restore();
+      }
+      x.globalAlpha = 1;
+      x.fillStyle = "#082b3b"; x.strokeStyle = "#48e6ff"; x.lineWidth = 1.6;
+      x.beginPath(); x.ellipse(0, -6, 68, 88, 0, 0, Math.PI * 2); x.fill(); x.stroke();
+      x.fillStyle = active ? "#8cf4ff" : "#2c88a5";
+      var blink = (t % 4.3) < 0.12 ? 1 : 7;
+      x.fillRect(-42, -22, 26, blink); x.fillRect(16, -22, 26, blink);
+      x.strokeStyle = "#48e6ff"; x.lineWidth = 2;
+      x.beginPath(); x.ellipse(0, 38, Math.max(2, open), Math.max(1, open * 0.6), 0, 0, Math.PI * 2); x.stroke();
+      if (face.stage === "listening") {
+        x.globalAlpha = 0.25 + 0.2 * Math.sin(t * 6);
+        x.beginPath(); x.arc(0, 0, 126 + (t * 22) % 34, 0, Math.PI * 2); x.stroke(); x.globalAlpha = 1;
+      }
+      if (face.stage === "thinking") {
+        var y = -80 + (t * 90) % 160; x.globalAlpha = 0.6;
+        x.beginPath(); x.moveTo(-68, y); x.lineTo(68, y); x.stroke(); x.globalAlpha = 1;
+      }
+      x.restore();
+    }
+    var p = $("facePortrait");
+    if (p && faceMode === "portrait") {
+      var mouth = $("pMouth"), dip = 158 + (face.stage === "speaking" ? 5 + face.level * 14 + Math.sin(now / 70) * 3 : 2);
+      if (mouth) mouth.setAttribute("d", "M80 158 Q100 " + dip.toFixed(1) + " 120 158");
+      var ry = (now % 4300) < 130 ? 1 : 5;
+      var l = $("pEyeL"), rr = $("pEyeR");
+      if (l) l.setAttribute("ry", ry); if (rr) rr.setAttribute("ry", ry);
+    }
+    requestAnimationFrame(drawFace);
+  }
+
+  function applyFaceMode() {
+    var canvas = $("faceCanvas"), portrait = $("facePortrait"), button = $("faceMode");
+    if (!canvas || !portrait || !button) return;
+    canvas.hidden = faceMode !== "hologram";
+    portrait.hidden = faceMode !== "portrait";
+    button.textContent = faceMode === "hologram" ? "portrait" : "hologram";
+  }
+
+  /* Reconnaissance 100 % locale : caméra + micro du PC, empreintes gardées dans ce navigateur.
+     Aucune image, aucun son et aucune signature ne quitte la machine ; aucun appel réseau ajouté. */
+  var PROF_KEY = "sunnavok-esprieather-profile-v1";
+  var camStream = null, profile = null;
+  try { profile = JSON.parse(localStorage.getItem(PROF_KEY) || "null"); } catch (e) { profile = null; }
+
+  function norm(v) {
+    var s = 0, i;
+    for (i = 0; i < v.length; i++) s += v[i] * v[i];
+    s = Math.sqrt(s) || 1;
+    for (i = 0; i < v.length; i++) v[i] = v[i] / s;
+    return v;
+  }
+  function sim(a, b) {
+    if (!a || !b || a.length !== b.length) return 0;
+    var s = 0, i;
+    for (i = 0; i < a.length; i++) s += a[i] * b[i];
+    return s;
+  }
+  function faceSignature() {
+    var v = $("camVideo"), c = $("camSample");
+    if (!v || !c || !camStream || v.readyState < 2) return null;
+    var x = c.getContext("2d", { willReadFrequently: true });
+    x.drawImage(v, 0, 0, c.width, c.height);
+    var d = x.getImageData(0, 0, c.width, c.height).data, out = [];
+    for (var i = 0; i < d.length; i += 16) {
+      out.push((d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114) / 255);
+    }
+    return norm(out);
+  }
+  function voiceSignature() {
+    return new Promise(function (resolve) {
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !Ctx) { resolve(null); return; }
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(function (s) {
+        try {
+          var ctx = new Ctx(), src = ctx.createMediaStreamSource(s), an = ctx.createAnalyser();
+          an.fftSize = 256; src.connect(an);
+          var bins = new Uint8Array(an.frequencyBinCount), acc = [], n = 0, i;
+          for (i = 0; i < bins.length; i++) acc.push(0);
+          var timer = setInterval(function () {
+            an.getByteFrequencyData(bins);
+            for (var j = 0; j < bins.length; j++) acc[j] += bins[j];
+            n++;
+            if (n >= 12) {
+              clearInterval(timer);
+              for (var k = 0; k < acc.length; k++) acc[k] = acc[k] / n / 255;
+              s.getTracks().forEach(function (t) { t.stop(); });
+              ctx.close(); resolve(norm(acc));
+            }
+          }, 50);
+        } catch (e) {
+          s.getTracks().forEach(function (t) { t.stop(); });
+          resolve(null);
+        }
+      }).catch(function () { resolve(null); });
+    });
+  }
+  function setIdentity(text, cls) {
+    var el = $("identity");
+    if (el) { el.textContent = text; el.className = cls || "dim"; }
+  }
+  function refreshIdentity() {
+    if (!profile) { setIdentity("non enrôlé", "dim"); return; }
+    var f = faceSignature();
+    if (!f || !camStream) { setIdentity("profil local · caméra éteinte", "dim"); return; }
+    var score = sim(f, profile.face || []);
+    setIdentity((score >= 0.82 ? "reconnu · ESPRIEATHER" : "inconnu") + " · " + score.toFixed(2),
+      score >= 0.82 ? "ok" : "warn");
+  }
+  function camOn() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      return Promise.reject(new Error("no_camera_api"));
+    }
+    return navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(function (s) {
+      camStream = s;
+      var v = $("camVideo");
+      v.srcObject = s; v.hidden = false;
+      $("camToggle").textContent = "arrêter";
+      setIdentity("caméra active", "dim");
+      return s;
+    });
+  }
+  function camOff() {
+    if (camStream) { camStream.getTracks().forEach(function (t) { t.stop(); }); camStream = null; }
+    var v = $("camVideo");
+    if (v) { v.srcObject = null; v.hidden = true; }
+    $("camToggle").textContent = "activer";
+  }
+  function enroll() {
+    var p = camStream ? Promise.resolve() : camOn();
+    p.then(function () {
+      return new Promise(function (done) {
+        var v = $("camVideo");
+        if (v.readyState >= 2) done();
+        else v.addEventListener("loadeddata", done, { once: true });
+      });
+    }).then(function () { return voiceSignature(); }).then(function (voice) {
+      var face = faceSignature();
+      profile = { face: face || [], voice: voice || [], enrolledAt: new Date().toISOString() };
+      try { localStorage.setItem(PROF_KEY, JSON.stringify(profile)); } catch (e) {}
+      setIdentity(face && face.length ? "enrôlé · ESPRIEATHER" : "enrôlement incomplet",
+        face && face.length ? "ok" : "warn");
+      refreshIdentity();
+    }).catch(function (e) {
+      setIdentity("accès refusé: " + (e && e.name || "camera"), "warn");
+    });
+  }
+  function resetProfile() {
+    try { localStorage.removeItem(PROF_KEY); } catch (e) {}
+    profile = null;
+    setIdentity("profil local supprimé", "dim");
+  }
+  function checkPermission() {
+    var el = $("camPermission");
+    if (!el) return;
+    if (!navigator.permissions || !navigator.permissions.query) { el.textContent = "gérée par le navigateur"; return; }
+    navigator.permissions.query({ name: "camera" }).then(function (p) {
+      el.textContent = p.state === "granted" ? "accordée" : p.state === "prompt" ? "à autoriser" :
+        "refusée — autoriser depuis la barre d'adresse";
+    }).catch(function () { el.textContent = "gérée par le navigateur"; });
+  }
+
+  function renderAttention(data) {
+    var box = $("attention");
+    if (!data || !Array.isArray(data.items)) { box.innerHTML = '<li class="warn">sem dados</li>'; return; }
+    if (!data.items.length) { box.innerHTML = '<li class="ok">tudo verde — nada a fazer</li>'; return; }
+    box.innerHTML = data.items.map(function (i) {
+      var cls = i.level === "error" ? "err" : (i.level === "warning" ? "warn" : "dim");
+      return '<li><span class="' + cls + '">' + esc(i.level) + '</span> · ' + esc(i.reason) +
+             ' <span class="dim">/ ' + esc(i.detail) + '</span></li>';
+    }).join("");
+  }
+
+  function renderSystem(data) {
+    var r = data.robots || {}, b = data.brains || {}, g = data.graph || {};
+    var q = r.quality || {};
+    $("robots").innerHTML =
+      '<div class="row"><span>sentinel</span><span class="' + (r.sentinel && r.sentinel.ok ? "ok" : "warn") + '">' +
+        esc(r.sentinel && r.sentinel.summary || "sem dado") + '</span></div>' +
+      '<div class="row"><span>python</span><span class="' + (q.pythonOk ? "ok" : "warn") + '">' + esc(q.pythonRan) + "/87</span></div>" +
+      '<div class="row"><span>dashboard</span><span class="' + (q.dashboardPassed ? "ok" : "warn") + '">' + esc(q.dashboardPassed) + "/9</span></div>" +
+      '<div class="row"><span>cérebro local</span><span class="' + (b.available ? "ok" : "warn") + '">' +
+        esc(b.active || "indisponível") + ' (' + esc(b.count) + ')</span></div>' +
+      '<div class="row"><span>grafo</span><span>' + esc(g.nodes) + ' nós / ' + esc(g.edges) + ' arestas</span></div>';
+
+    var led = (data.ledger || {});
+    var ok = q.pythonOk && q.dashboardPassed && b.available;
+    $("services").innerHTML =
+      '<div class="row"><span>qualidade</span><span class="' + (ok ? "ok" : "warn") + '">' +
+        (ok ? "OPERACIONAL" : "VERIFICAR") + '</span><div class="bar"><i style="width:' + (ok ? 100 : 40) + '%"></i></div></div>' +
+      '<div class="row"><span>vault</span><span class="' + (r.vault && r.vault.ok ? "ok" : "warn") + '">' +
+        esc(r.vault && r.vault.ok ? " OK" : "?") + '</span></div>' +
+      '<div class="row"><span>fontes locais</span><span class="dim">' +
+        esc((r.backlog && r.backlog.missingSources || []).join(",") || "todas") + '</span></div>';
+    $("reactor").style.filter = ok ? "none" : "hue-rotate(120deg)";
+  }
+
+  function renderLedger(led) {
+    var s = led && led.stats || {};
+    var recent = led && led.recent || [];
+    $("ledger").innerHTML =
+      '<div class="row"><span>sucesso / falha / timeout</span><span class="ok">' +
+        esc(s.succeeded) + ' / <span class="err">' + esc(s.failed) + '</span> / <span class="warn">' + esc(s.timed_out) + '</span></span></div>' +
+      (led && led.available
+        ? recent.slice(0, 5).map(function (r) {
+            return '<li class="dim">' + esc(r.status) + ' · ' + esc(r.action) + ' · ' + esc(r.actor) + '</li>';
+          }).join("")
+        : '<div class="dim">sem registro local (no_data_source)</div>');
+  }
+
+  function renderInternet(net) {
+    var n = net || {};
+    var up = n.available === true;
+    var cls = up ? "ok" : "warn";
+    var label = up ? "INTERNET · " + esc(n.host || "público") : "SEM INTERNET";
+    var reason = n.reason ? " · " + esc(n.reason) : "";
+    $("internet").innerHTML =
+      '<div class="row"><span>rede</span><span class="' + cls + '">' + label + '</span></div>' +
+      '<div class="row"><span>modo</span><span class="dim">' + esc(n.mode || "no_data_source") +
+        (n.latencyMs != null ? " · " + esc(n.latencyMs) + "ms" : "") + '</span></div>' +
+      '<div class="row"><span>verificado</span><span class="dim">' +
+        esc(n.checkedAt || "no_data_source") + reason + '</span></div>';
+  }
+
+  function renderVoice(v) {
+    var x = v || {};
+    var up = x.available === true;
+    $("voice").innerHTML =
+      '<div class="row"><span>voz</span><span class="' + (up ? "ok" : "warn") + '">' +
+        (up ? esc(x.mode || "always_on_voice") : esc(x.reason || "no_data_source")) + '</span></div>' +
+      '<div class="row"><span>ouvi</span><span class="dim">' + esc(x.lastHeard || "—") + '</span></div>' +
+      '<div class="row"><span>respondi</span><span class="dim">' + esc(x.lastReply || "—") + '</span></div>' +
+      '<div class="row"><span>état visage</span><span class="dim">' + esc(x.stage || "idle") + '</span></div>';
+  }
+
+  function renderCapabilities(data) {
+    var list = data && Array.isArray(data.capabilities) ? data.capabilities : [];
+    var cls = function (s) { return s === "live_verified" ? "ok" : s === "not_available" ? "warn" : "dim"; };
+    $("capabilities").innerHTML = list.length ? list.map(function (c) {
+      var proof = (c.evidence || []).slice(0, 2).map(function (e) {
+        return esc(e.source) + "." + esc(e.field) + "=" + esc(e.value);
+      }).join(" · ");
+      return '<div class="row"><span>' + esc(c.id) + '</span><span class="' + cls(c.status) + '">' +
+        esc(c.status) + '</span></div><div class="dim" title="' + esc(c.next) + '">' + esc(proof) + '</div>';
+    }).join("") : '<div class="dim">no_data_source</div>';
+  }
+
+  function renderAtulya(data) {
+    var box = $("atulya");
+    if (!data || data.imported !== true) {
+      box.innerHTML = '<div class="dim">no_data_source</div>';
+      return;
+    }
+    var cls = function (s) {
+      return s === "live_verified" ? "ok" : s === "implemented_unverified" ? "warn" :
+        s === "needs_user_data" ? "dim" : "err";
+    };
+    var list = Array.isArray(data.features) ? data.features : [];
+    box.innerHTML = '<div class="row"><span>' + esc(data.source) + '</span><span class="ok">' +
+      esc(data.version) + '</span></div><div class="dim">' + esc(data.fileCount) +
+      ' arquivos · ' + esc(data.launcher) + '</div>' + list.slice(0, 7).map(function (f) {
+        return '<div class="row"><span>' + esc(f.id) + '</span><span class="' +
+          cls(f.status) + '">' + esc(f.status) + '</span></div>';
+      }).join("");
+  }
+
+  var APP = "/jarvis/api/jarvis/approvals";
+  var APP_DECIDE = "/jarvis/api/jarvis/approvals/"; // décision loopback, jamais un service externe
+  function renderApprovals(data) {
+    var box = $("approvals");
+    var items = data && Array.isArray(data.items) ? data.items : [];
+    if (!data || data.available !== true || !items.length) {
+      box.innerHTML = '<div class="dim">' + esc(data && data.reason || "no_data_source") + '</div>';
+      return;
+    }
+    box.innerHTML = items.slice(0, 6).map(function (a) {
+      var canDecide = a.status === "proposed";
+      var act = esc(a.action || "action"), tgt = esc(a.target || "—");
+      var row = '<div class="row"><span>' + act + ' · ' + tgt + '</span><span class="' +
+        (a.status === "proposed" ? "warn" : a.status === "denied" ? "err" : "ok") + '">' +
+        esc(a.status) + '</span></div>';
+      if (canDecide) {
+        row += '<button type="button" class="decide" data-id="' + esc(a.id) +
+          '" data-decision="approved_once">approuver une fois</button>' +
+          '<button type="button" class="decide" data-id="' + esc(a.id) +
+          '" data-decision="denied">refuser</button>';
+      }
+      return row;
+    }).join("");
+    var buttons = box.querySelectorAll("button.decide");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener("click", function () {
+        var self = this, id = self.getAttribute("data-id"), decision = self.getAttribute("data-decision");
+        self.disabled = true;
+        fetch(APP_DECIDE + encodeURIComponent(id), {
+          method: "PUT",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ decision: decision })
+        }).then(function (r) { return r.json(); }).then(function () { load(); })
+          .catch(function () { self.disabled = false; });
+      });
+    }
+  }
+
+  /* Sentinelle : un seul flux SSE local, aucun envoi, aucune commande. */
+  function renderSentinelAgents(frame) {
+    var box = $("sentinelAgents");
+    if (!box) return;
+    var tools = frame && frame.tools || {};
+    var keys = Object.keys(tools);
+    if (!keys.length) { box.innerHTML = '<div class="dim">no_data_source</div>'; return; }
+    var order = ["opencode", "codex", "claude", "atulya"];
+    keys.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+    box.innerHTML = keys.map(function (k) {
+      var t = tools[k] || {};
+      var states = ["active", "running", "offline", "absent"];
+      var st = states.indexOf(t.state) >= 0 ? t.state : "offline";
+      var pct = Math.round(typeof t.level === "number" ? t.level * 100 : 0);
+      return '<div class="agent"><span class="dot ' + st + '"></span><span>' + esc(t.label || k) +
+             '</span><span class="dim">' + esc(st) + '</span><span class="' + (pct ? "ok" : "dim") +
+             '">' + pct + '%</span></div>';
+    }).join("");
+  }
+
+  function connectSentinel() {
+    var st = $("sentinelState");
+    if (typeof EventSource !== "function") {
+      if (st) { st.textContent = "no_data_source"; st.className = "dim"; }
+      return;
+    }
+    var es;
+    try { es = new EventSource(SEN); } catch (e) {
+      if (st) { st.textContent = "no_data_source"; st.className = "dim"; }
+      return;
+    }
+    es.onmessage = function (ev) {
+      var frame = null;
+      try { frame = JSON.parse(ev.data); } catch (e) { return; }
+      if (!frame || !frame.tools) return;
+      sentinel = frame;
+      renderSentinelAgents(frame);
+      var keys = Object.keys(frame.tools);
+      var sum = 0;
+      keys.forEach(function (k) {
+        var lv = frame.tools[k] && frame.tools[k].level;
+        sum += typeof lv === "number" ? lv : 0;
+      });
+      wave.push(Math.min(1, sum / Math.max(1, keys.length)));
+      if (wave.length > 80) wave.shift();
+      if (st) {
+        st.textContent = "flux local · " + new Date().toLocaleTimeString();
+        st.className = "ok";
+      }
+    };
+    es.onerror = function () {
+      if (st) { st.textContent = "no_data_source"; st.className = "dim"; }
+    };
+  }
+
+  function drawSentinel(now) {
+    var c = $("sentinelCanvas");
+    if (!c) return;
+    var x = c.getContext("2d"), w = c.width, h = c.height, t = now / 1000;
+    var tools = sentinel.tools || {}, keys = Object.keys(tools);
+    var total = 0;
+    keys.forEach(function (k) {
+      var lv = tools[k] && tools[k].level;
+      total += typeof lv === "number" ? lv : 0;
+    });
+    var active = total > 0.05, cx = w / 2, cy = h / 2;
+    x.clearRect(0, 0, w, h);
+    var halo = x.createRadialGradient(cx, cy, 8, cx, cy, 112);
+    halo.addColorStop(0, active ? "#1d7a95" : "#0d3a4d");
+    halo.addColorStop(1, "#04121b00");
+    x.fillStyle = halo;
+    x.beginPath(); x.arc(cx, cy, 112, 0, Math.PI * 2); x.fill();
+    for (var i = 0; i < 3; i++) {
+      x.save(); x.translate(cx, cy);
+      x.rotate(t * (i % 2 ? -0.22 : 0.18) + i * 1.1);
+      x.strokeStyle = "#48e6ff";
+      x.globalAlpha = active ? 0.45 - i * 0.1 : 0.18;
+      x.beginPath(); x.ellipse(0, 0, 70 + i * 22, 30 + i * 12, 0, 0, Math.PI * 2); x.stroke();
+      x.restore();
+    }
+    x.globalAlpha = 1;
+    x.strokeStyle = active ? "#8cf4ff" : "#2c88a5";
+    x.lineWidth = 1.4;
+    x.beginPath(); x.arc(cx, cy, 30 + (active ? Math.sin(t * 6) * 3 : 0), 0, Math.PI * 2); x.stroke();
+    x.fillStyle = "#48e6ff33"; x.fill();
+    var colors = { active:"#6cf0a8", running:"#48e6ff", offline:"#5d7d90", absent:"#ffb347" };
+    keys.forEach(function (k, j) {
+      var tool = tools[k] || {};
+      var st = colors[tool.state] || colors.offline;
+      var a = t * 0.3 + j * (Math.PI * 2 / Math.max(1, keys.length));
+      var rx = 92 + (j % 2) * 14, ry = 44 + (j % 2) * 10;
+      var px = cx + Math.cos(a) * rx, py = cy + Math.sin(a) * ry;
+      x.strokeStyle = "#1d6e8a"; x.globalAlpha = 0.4;
+      x.beginPath(); x.moveTo(cx, cy); x.lineTo(px, py); x.stroke(); x.globalAlpha = 1;
+      x.fillStyle = st;
+      x.beginPath(); x.arc(px, py, 4 + (typeof tool.level === "number" ? tool.level * 4 : 0), 0, Math.PI * 2); x.fill();
+      x.fillStyle = "#6f91a5"; x.font = "9px Consolas,monospace";
+      x.fillText(String(tool.label || k).slice(0, 10), px + 7, py + 3);
+    });
+    var sy = cy - 70 + ((t * 40) % 140);
+    x.strokeStyle = "#48e6ff"; x.globalAlpha = 0.22;
+    x.beginPath(); x.moveTo(8, sy); x.lineTo(w - 8, sy); x.stroke(); x.globalAlpha = 1;
+    var wc = $("sentinelWave");
+    if (wc) {
+      var wx = wc.getContext("2d"), ww = wc.width, wh = wc.height;
+      wx.clearRect(0, 0, ww, wh);
+      wx.strokeStyle = "#1d6e8a"; wx.globalAlpha = 0.35;
+      wx.beginPath(); wx.moveTo(0, wh / 2); wx.lineTo(ww, wh / 2); wx.stroke(); wx.globalAlpha = 1;
+      if (wave.length > 1) {
+        wx.strokeStyle = active ? "#6cf0a8" : "#48e6ff"; wx.lineWidth = 1.5;
+        wx.beginPath();
+        wave.forEach(function (v, i) {
+          var px = i * (ww - 2) / (wave.length - 1) + 1, py = wh - 2 - v * (wh - 4);
+          if (i === 0) wx.moveTo(px, py); else wx.lineTo(px, py);
+        });
+        wx.stroke();
+      }
+    }
+    requestAnimationFrame(drawSentinel);
+  }
+
+  function renderSatellites(s, d) {
+    var b = s && s.brains || {}, q = s && s.robots && s.robots.quality || {};
+    var v = d && d.voice || {}, n = d && d.internet || {};
+    var set = function (id, ok, known) {
+      var el = $(id); if (!el) return;
+      el.className = "sat " + (!known ? "dim" : ok ? "ok" : "warn");
+      el.textContent = !known ? "?" : ok ? "+" : "-";
+      el.title = id + ": " + (!known ? "no_data_source" : ok ? "ok" : "à vérifier");
+    };
+    set("sat-brain", b.available === true, b.available != null);
+    set("sat-voice", v.running === true, v.available != null);
+    set("sat-services", q.pythonOk === true && q.dashboardPassed === true,
+      q.pythonOk != null || q.dashboardPassed != null);
+    set("sat-network", n.available === true, n.available != null);
+  }
+
+  function load() {
+    fetch(APP, { cache: "no-store" }).then(function (r) { return r.json(); })
+      .then(renderApprovals)
+      .catch(function () { $("approvals").textContent = "no_data_source"; });
+    fetch(CAP, { cache: "no-store" }).then(function (r) { return r.json(); })
+      .then(renderCapabilities)
+      .catch(function () { $("capabilities").textContent = "no_data_source"; });
+    fetch(ATU, { cache: "no-store" }).then(function (r) { return r.json(); })
+      .then(renderAtulya)
+      .catch(function () { $("atulya").textContent = "no_data_source"; });
+    fetch(ATT, { cache: "no-store" }).then(function (r) { return r.json(); })
+      .then(function (d) { lastAttention = d; renderAttention(d); renderLedger(d.ledger);
+        renderInternet(d.internet); renderVoice(d.voice);
+        var s = lastSystem; if (s) renderSatellites(s, d);
+        var voice = d.voice || {}; if (voice.stage) setFace(voice); refreshIdentity(); })
+      .catch(function () { $("attention").innerHTML = '<li class="warn">API local indisponível</li>'; });
+    fetch(SYS, { cache: "no-store" }).then(function (r) { return r.json(); })
+      .then(function (s) { lastSystem = s; renderSystem(s); var d = lastAttention;
+        if (d) renderSatellites(s, d); })
+      .catch(function () { $("services").textContent = "API local indisponível"; });
+    $("stamp").textContent = "atualização: " + new Date().toLocaleTimeString();
+  }
+  try { faceMode = localStorage.getItem("sunnavok-face-mode-v1") || "hologram"; } catch (e) { faceMode = "hologram"; }
+  applyFaceMode();
+  requestAnimationFrame(drawFace);
+  $("faceMode").addEventListener("click", function () {
+    faceMode = faceMode === "hologram" ? "portrait" : "hologram";
+    try { localStorage.setItem("sunnavok-face-mode-v1", faceMode); } catch (e) {}
+    applyFaceMode();
+  });
+  $("camToggle").addEventListener("click", function () {
+    if (camStream) { camOff(); setIdentity("caméra éteinte", "dim"); }
+    else camOn().catch(function (e) { setIdentity("accès refusé: " + (e && e.name || "camera"), "warn"); });
+  });
+  $("enrollBtn").addEventListener("click", enroll);
+  $("resetProfileBtn").addEventListener("click", resetProfile);
+  $("atulyaOpen").addEventListener("click", function () {
+    var frame = $("atulyaFrame");
+    if (frame.hidden) {
+      frame.src = "/atulya/";
+      frame.hidden = false;
+      $("atulyaOpen").textContent = "fechar Atulya";
+    } else {
+      frame.hidden = true;
+      frame.removeAttribute("src");
+      $("atulyaOpen").textContent = "abrir Atulya";
+    }
+  });
+  checkPermission();
+  refreshIdentity();
+  $("face").addEventListener("pointermove", function (e) {
+    var r = $("face").getBoundingClientRect();
+    var dx = (e.clientX - r.left) / r.width - 0.5, dy = (e.clientY - r.top) / r.height - 0.5;
+    $("faceCanvas").style.transform = "rotateY(" + (dx * 14).toFixed(1) + "deg) rotateX(" + (-dy * 10).toFixed(1) + "deg)";
+    $("facePortrait").style.transform = "rotateY(" + (dx * 10).toFixed(1) + "deg)";
+  });
+  $("face").addEventListener("pointerleave", function () {
+    $("faceCanvas").style.transform = ""; $("facePortrait").style.transform = "";
+  });
+  $("clock").textContent = new Date().toLocaleString();
+  load();
+  setInterval(load, 5000);
+  connectSentinel();
+  requestAnimationFrame(drawSentinel);
+})();
+</script>
+</body>
+</html>

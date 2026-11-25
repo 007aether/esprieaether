@@ -1,0 +1,137 @@
+# 1. HKUDS/nanobot
+**المستودع:** `HKUDS/nanobot` | ★ 49264
+**الوصف:** Ultra-lightweight, open-source, self-hosted personal AI agent framework
+
+| الميزات | التفاصيل |
+|---|---|
+| نوع المشروع | إطار عمل وكيل ذكي خفيف الوزن ومستضيف ذاتياً |
+| الخصائص | - واجهة بسيطة ودعم كامل للغة العربية<br>- لا حاجة لخوادم تكلفة<br>- وكلاء ذكية مستقلة |
+| ✅ ملائم للـ ESPRIEAETHER | **نعم** - هو انتقال مباشر لفكرة "الوكيل الشخصي الخفيف" وكما نعمله في ESPRIEAETHER |
+
+---
+
+# 2. CherryHQ/cherry-studio
+**المستودع:** `CherryHQ/cherry-studio` | ★ 52875
+**الوصف:** AI productivity studio with smart chat, autonomous agents, and 300+ as
+
+| الميزات | التفاصيل |
+|---|---|
+| نوع المشروع | منتج إنتاجية ذكاء اصطناعي |
+| الخصائص | - دردشة ذكية<br>--agentات مستقلة<br>- 300+ تعليمات للاستخدام |
+| ✅ ملائم للـ ESPRIEAETHER | **نعم** - مشابه جدًا لنظامنا في التركيز على الوكلاء والمنتجية |
+
+---
+
+# 3. khoj-ai/khoj
+**المستودع:** `khoj-ai/khoj` | ★ 37785
+**الوصف:** Your AI second brain. Self-hostable. Get answers from the web or your
+
+| الميزات | التفاصيل |
+|---|---|
+| نوع المشروع | "العقلة الثانية" للذكاء الاصطناعي |
+| الخصائص | - استضافة ذاتية<br>- الوصول للمعلومات من الويب والملفات<br>- بحث ذكي |
+| ✅ ملائم للـ ESPRIEAETHER | **نعم** - مشابه جدًا لـ **Knowledge Base** في نظامنا |
+
+---
+
+# 4. Tencent/WeKnora
+**المستودع:** `Tencent/WeKnora` | ★ 35060
+**الوصف:** Open-source LLM knowledge platform: turn raw documents into a queryabl
+
+| الميزات | التفاصيل |
+|---|---|
+| نوع المشروع | منصة معرفة LLM مفتوحة المصدر |
+| الخصائص | - تحويل المستندات الخام إلى بيانات قابلة للسؤال<br>- بحث وربط مع المعلومات |
+| 🟡 ملائم للـ ESPRIEAETHER | **نعم** - ممتاز لـ **Knowledge Base** وربط المعلومات |
+
+---
+
+# 5. assafelovic/gpt-researcher
+**المستودع:** `assafelovic/gpt-researcher` | ★ 30242
+**الوصف:** An autonomous agent that conducts deep research on any data using any
+
+| الميزات | التفاصيل |
+|---|---|
+| نوع المشروع | وكيل بحث مستقل |
+| الخصائص | - بحث تلقائي في الويب<br>- تحليل البيانات<br>- مصادر متعددة |
+| ✅ ملائم للـ ESPRIEAETHER | **نعم** - مشابه لـ **News Agent** و **Research Agent** في نظامنا |
+
+---
+
+# 6. Fosowl/agenticSeek
+**المستودع:** `Fosowl/agenticSeek` | ★ 27526
+**الوصف:** Fully Local Manus AI. No APIs, No $200 monthly bills. Enjoy an autonom
+
+| الميزات | التفاصيل |
+|---|---|
+| نوع المشروع | وكيل ذكي يعمل محلياً بدون APIs خارجية |
+| الخصائص | - تشغيل كامل في الجهاز<br>- بدون رسوم شهريّة<br>- وكيل مستقل |
+| ✅ ملائم للـ ESPRIEAETHER | **نعم** - هو توقيع مثالي لـ philosophy ESPRIEAETHER (الذكاء الاصطناعي المحلي) |
+
+---
+
+# 7. wanshuiyin/Auto-claude-code-research-in-sleep
+**المستودع:** `wanshuiyin/Auto-claude-code-research-in-sleep` | ★ 17899
+**الوصف:** ARIS ⚔️ (Auto-Research-In-Sleep) — Lightweight Markdown-only skills fo
+
+| الميزات | التفاصيل |
+|---|---|
+| نوع المشروع | مهارة بحث آلية خفيفة الوزن |
+| الخصائص | - بحث تلقائي بلا واجهة<br>- ملفات Markdown خفيفة<br>- تشغيل في الخلفية |
+| ✅ ملائم للـ ESPRIEAETHER | **نعم** - يمكن استخدامه كأداة لِـ **Research Agent** و **Wall of Text** |
+
+---
+
+# 8. raga-ai-hub/RagaAI-Catalyst
+**المستودع:** `raga-ai-hub/RagaAI-Catalyst` | ★ 16179
+**الوصف:** Python SDK for Agent AI Observability, Monitoring and Evaluation Frame
+
+| الميزات | التفاصيل |
+|---|---|
+| نوع المشروع | وحدة تابعة للـ Python لمراقبة وتقييم وكيل الذكاء الاصطناعي |
+| الخصائص | - تحليل الأداء<br>- حساب العيوب<br>- استقرار النظام<br>- مراقبة التقدم |
+| ✅ ملائم للـ ESPRIEAETHER | **نعم** - لِـ **Monitoring** و **Security Agent** |
+
+---
+
+## 📊 ملخص التقنية
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    ESPRIEAETHER - النضام                     │
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│  🤖 الوكلاء (13 مفعّل)                                        │
+│  ├── Network Monitor  → AgenticSeek (نموذج)                │
+│  ├── Security Agent   → RagaAI-Catalyst (مراقبة)              │
+│  ├── Knowledge Base   → khoj-ai (ذاكرة)                      │
+│  ├── Research Agent   → gpt-researcher & Auto-claude         │
+│  ├── Wall of Text     → Auto-claude (مرجع)                   │
+│  └── Backup/Rollback  → RagaAI-Catalyst (تقييم)              │
+│                                                              │
+│  🔌 الخدمات (10/10)                                           │
+│  ├── Sunna API (5100)                                         │
+│  ├── Sunna Dashboard (5105)                                   │
+│  └── باقي الخدمات تطابق النظام                                │
+│                                                              │
+│  🧠 الذكاء الاصطناعي (95% ثقة)                                │
+│  └── Decision Engine (قرار آلي)                               │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## ✅ الخلاصة
+
+جميع المستودعات في القائمة **مثالية للـ ESPRIEAETHER** لأنها تتعلق بالذكاء الاصطناعي، والوكيل، والبحث، والمراقبة، والتقارير، وإدارة المعرفة — وهي جميعها مكونات رئيسية في نظامنا.
+
+**الأكثر صلة:**
+1. **HKUDS/nanobot** — الإطار العام للوكيل الذكي
+2. **khoj-ai/khoj** — Knowledge Base (العقلة الثانية)
+3. **assafelovic/gpt-researcher** — وكيل بحث مستقل
+4. **Fosowl/agenticSeek** — نموذج وكيل بحثي محلي
+5. **Wanshuiyin/Auto-claude-code-research-in-sleep** — مهارة بحث خفيفة
+
+**الأكثر تقنية:**
+- **RagaAI-Catalyst** — مراقبة الأداء والتقييم
