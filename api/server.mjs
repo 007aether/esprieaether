@@ -23,6 +23,7 @@ const DEFAULT_VISION_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'vision_self
 const DEFAULT_MCP_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'mcp_selfcheck.json');
 const DEFAULT_VAULT_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'vault_memory_selfcheck.json');
 const DEFAULT_EGRESS_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'egress_selfcheck.json');
+const DEFAULT_BARGE_REVIEW = join(ROOT, 'esprieaether', 'state', 'barge_in_review.json');
 const VOICE_STAGES = new Set(['idle', 'listening', 'thinking', 'speaking']);
 const REPORT_FILES = {
   quality: 'quality_guard_report.json',
@@ -500,6 +501,7 @@ export async function buildCapabilities(
     voiceStatusPath = DEFAULT_VOICE_STATUS,
     voiceInboxPath = DEFAULT_VOICE_INBOX,
     egressPath = DEFAULT_EGRESS_EVIDENCE,
+    bargeReviewPath = DEFAULT_BARGE_REVIEW,
   } = {}
 ) {
   if (actionRequestsPath === DEFAULT_ACTION_REQUESTS) await ensureActionRequests(actionRequestsPath);
@@ -510,10 +512,16 @@ export async function buildCapabilities(
   const actions = await readJsonFile(actionRequestsPath);
   const voice = await readJsonFile(voiceStatusPath);
   const egress = await readJsonFile(egressPath);
+  const bargeReview = await readJsonFile(bargeReviewPath);
+  const invalidBarge = new Set(
+    (Array.isArray(bargeReview?.invalidTimestamps) ? bargeReview.invalidTimestamps : [])
+      .map((value) => Date.parse(value)).filter(Number.isFinite)
+  );
+  const bargeRejected = invalidBarge.size > 0;
   const voiceSuccess = await lastMatchingLine(voiceInboxPath, (row) =>
     isFreshLine(row) && row.ok === true && row.spoken === true && row.engine === 'local-brain');
   const bargeEvent = await lastMatchingLine(voiceInboxPath, (row) =>
-    isFreshLine(row) && row.reason === 'barge_in');
+    isFreshLine(row) && row.reason === 'barge_in' && !invalidBarge.has(Date.parse(row.ts)));
   const approvalDecision = await lastMatchingLine(actionAuditPath, (row) =>
     isFreshLine(row) && (typeof row.transition === 'string'
       ? row.transition.includes('->') : Boolean(row.from && row.to)));
@@ -572,6 +580,7 @@ export async function buildCapabilities(
   } else {
     add('barge-in', 'implemented_unverified', [
       { source: 'voice_inbox.jsonl', field: 'reason', value: 'no_recent_event' },
+      ...(bargeRejected ? [{ source: 'barge_in_review.json', field: 'review', value: 'invalidated' }] : []),
     ], 'Interrompre réellement la parole pendant une réponse locale');
   }
 
@@ -893,6 +902,7 @@ export function createDashboardServer({
   voiceStatusPath = DEFAULT_VOICE_STATUS,
   voiceInboxPath = DEFAULT_VOICE_INBOX,
   egressPath = DEFAULT_EGRESS_EVIDENCE,
+  bargeReviewPath = DEFAULT_BARGE_REVIEW,
   atulyaDir = DEFAULT_ATULYA_DIR,
   voice = {},
   log = defaultLog,
@@ -948,6 +958,7 @@ export function createDashboardServer({
           ...(await buildCapabilities(reportsDir, {
             brainMetricsPath, actionRequestsPath, actionAuditPath, voiceStatusPath, voiceInboxPath,
             egressPath,
+            bargeReviewPath,
           })), requestId,
         });
         return;

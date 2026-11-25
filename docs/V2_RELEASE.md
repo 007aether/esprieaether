@@ -1,4 +1,4 @@
-# ESPRIEATHER v2.1.0 — version locale complète
+# ESPRIEATHER v2.1.1 — version locale complète
 
 ## Nouveautés issues du reverse-engineering des 20 dépôts
 
@@ -17,7 +17,14 @@
 - **Garde de sortie locale (J92)** : `egress_guard.py` refuse tout hôte de modèle
   non-loopback et tout bouton `open_website` vers un réseau privé. Preuve réelle
   dans `egress_selfcheck.json`, visible comme `local-egress-guard` dans le HUD.
-- **Packaging v2.1** : `package.json` et `manifest.json` en `2.1.0`, ajout au
+- **Approbation réelle (J76)** : `PUT` loopback vérifié sur `/api/jarvis/approvals/<id>`,
+  transition `proposed→approved_once` tracée dans `action_audit.jsonl`.
+- **Revue barge-in (J94)** : deux lignes `barge_in` désavouées parce que le micro
+  est resté silencieux pendant la parole (0.0005 crête contre 0.18 de seuil) ;
+  la capacité repasse `implemented_unverified`, sans réussite inventée.
+- **Dépôt de sources (J93)** : `sources_intake.py` copie uniquement un fichier réel,
+  calcule son SHA-256 et trace la provenance. Aucune source fournie pour l'instant.
+- **Packaging v2.1.1** : `package.json` et `manifest.json` en `2.1.1`, ajout au
   manifest des modules locaux, des outils Atulya et des rapports d'analyse.
 
 ## Vérifications réelles (25/11/2026)

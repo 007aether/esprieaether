@@ -15,6 +15,7 @@ let actionsPath;
 let voiceInboxPath;
 let actionAuditPath;
 let egressPath;
+let bargeReviewPath;
 let server;
 let base;
 let now;
@@ -32,6 +33,7 @@ before(async () => {
   voiceInboxPath = join(dir, 'state', 'voice_inbox.jsonl');
   actionAuditPath = join(dir, 'state', 'action_audit.jsonl');
   egressPath = join(dir, 'state', 'egress_selfcheck.json');
+  bargeReviewPath = join(dir, 'state', 'barge_in_review.json');
   await mkdir(reportsDir, { recursive: true });
   await mkdir(join(dir, 'state'), { recursive: true });
   await writeFile(join(reportsDir, 'quality_guard_report.json'), JSON.stringify({
@@ -76,6 +78,7 @@ before(async () => {
     voiceInboxPath,
     actionAuditPath,
     egressPath,
+    bargeReviewPath,
     log: () => {},
   });
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
@@ -94,6 +97,7 @@ function caps(reports, overrides = {}) {
     voiceInboxPath,
     actionAuditPath,
     egressPath,
+    bargeReviewPath,
     ...overrides,
   });
 }
@@ -142,6 +146,17 @@ test('J92: local-egress-guard dépend d’une preuve fraîche, pas du code seul'
   const absent = await caps(reportsDir, { egressPath: join(staleDir, 'absent.json') });
   const absentGuard = absent.capabilities.find((item) => item.id === 'local-egress-guard');
   assert.equal(absentGuard.status, 'not_available');
+});
+
+test('J94: un barge_in désavoué par la revue micro ne reste pas live_verified', async () => {
+  const reviewPath = join(dir, 'state', 'barge_in_review_invalid.json');
+  await writeFile(reviewPath, JSON.stringify({
+    invalidTimestamps: [now], reason: 'mic_input_silent', reviewedAt: now,
+  }), 'utf8');
+  const result = await caps(reportsDir, { bargeReviewPath: reviewPath });
+  const barge = result.capabilities.find((item) => item.id === 'barge-in');
+  assert.equal(barge.status, 'implemented_unverified');
+  assert.ok(barge.evidence.some((item) => item.field === 'review'));
 });
 
 test('A2: absence de preuve reste not_available, jamais une réussite inventée', async () => {
