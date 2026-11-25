@@ -1,0 +1,106 @@
+{
+ "NEXT_ACTIONS": [
+  {
+   "name": "agent-skills",
+   "source": "anthropics/skills",
+   "status": "open",
+   "priority": 1,
+   "next_action": "Audit agent-skill registry metadata",
+   "owner_agent": "self_improve",
+   "updated_at": "2026-10-16T02:03:24.184944+00:00",
+   "note": "agent-skills harness package from anthropics"
+  },
+  {
+   "name": "work-organizer",
+   "source": "local",
+   "status": "open",
+   "priority": 1,
+   "next_action": "Review and start",
+   "owner_agent": "work_organizer",
+   "updated_at": "2026-10-16T02:03:24.184961+00:00",
+   "note": "Workspace organizer for integration tasks"
+  },
+  {
+   "name": "claude-mem",
+   "source": "local",
+   "status": "open",
+   "priority": 2,
+   "next_action": "Review claude-mem truncation",
+   "owner_agent": "jarvis_dev",
+   "updated_at": "2026-10-16T02:03:24.184969+00:00",
+   "note": "Long memory entries get truncated in the router round-trip"
+  },
+  {
+   "name": "five",
+   "source": "local",
+   "status": "open",
+   "priority": 3,
+   "next_action": "Validate five-board sync",
+   "owner_agent": "jarvis_dev",
+   "updated_at": "2026-10-16T02:03:24.184974+00:00",
+   "note": "five-board connector sync jitter"
+  },
+  {
+   "name": "21st-magic-mcp",
+   "source": "github",
+   "status": "open",
+   "priority": 4,
+   "next_action": "Smoke-test MCP handshake",
+   "owner_agent": "jarvis_dev",
+   "updated_at": "2026-10-16T02:03:24.184980+00:00",
+   "note": "MCP gateway smoke test"
+  },
+  {
+   "name": "fish-audio",
+   "source": "local",
+   "status": "open",
+   "priority": 4,
+   "next_action": "Verify audio model download pipeline",
+   "owner_agent": "jarvis_dev",
+   "updated_at": "2026-10-16T02:03:24.184983+00:00",
+   "note": "Model download hangs mid-stream"
+  }
+ ],
+ "ISSUES": [
+  {
+   "name": "self-heal",
+   "source": "local",
+   "status": "issue",
+   "priority": 2,
+   "next_action": "Restart watchdog services",
+   "owner_agent": "self_improve",
+   "updated_at": "2026-10-16T02:03:24.184966+00:00",
+   "note": "Services stall after a crash; watchdog does not restart them"
+  },
+  {
+   "name": "obsidian-vault",
+   "source": "local",
+   "status": "issue",
+   "priority": 3,
+   "next_action": "Rebuild vault link graph",
+   "owner_agent": "self_improve",
+   "updated_at": "2026-10-16T02:03:24.184972+00:00",
+   "note": "Backlink graph out of sync after bulk edits"
+  },
+  {
+   "name": "strix",
+   "source": "local",
+   "status": "blocked",
+   "priority": 3,
+   "next_action": "Fix strix ingestion timeout",
+   "owner_agent": "jarvis_dev",
+   "updated_at": "2026-10-16T02:03:24.184977+00:00",
+   "note": "API key expired; awaiting credentials"
+  },
+  {
+   "name": "free-llm-apis",
+   "source": "local",
+   "status": "issue",
+   "priority": 5,
+   "next_action": "Audit free-llm-apis key rotation",
+   "owner_agent": "self_improve",
+   "updated_at": "2026-10-16T02:03:24.184985+00:00",
+   "note": "Rotation endpoint silently drops expired keys"
+  }
+ ]
+}

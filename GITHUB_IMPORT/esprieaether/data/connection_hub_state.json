@@ -1,0 +1,10 @@
+{
+  "status": "connected",
+  "version": "1.0.0",
+  "connected_at": "2026-10-18T08:16:05.539232+00:00",
+  "last_health_check": null,
+  "message_count": 16,
+  "knowledge_connections": 6,
+  "skill_connections": 2,
+  "agent_connections": 2
+}

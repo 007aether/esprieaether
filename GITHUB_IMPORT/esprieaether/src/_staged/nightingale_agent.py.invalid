@@ -1,0 +1,30 @@
+# NIGHTINGALE.py
+# هذا المodule يقوم بجمع البيانات
+# اللغة العربية
+# This module collects data
+
+import time
+from datetime import datetime
+
+# افتراضي/ثابت
+INTERVAL_MIN = 5  # تجربة كل 5 دقائق
+TAGS = ["nightingale", "autonomous", "data_collection"]
+
+def main() -> int:
+    """
+    تجمع البيانات الرئيسية
+    This function collects main data
+    """
+    collected_data = {
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "status": "success",
+        "data_collection_time": INTERVAL_MIN,
+    }
+    return 0
+
+if __name__ == "__main__":
+    while True:
+        # تنفيذ الوظيفة الرئيسية
+        main()
+        # انتظار التوقف بين الجولات
+        time.sleep(INTERVAL_MIN * 60)

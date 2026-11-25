@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}الإعدادات{% endblock %}
+{% block page_title %}⚙️ الإعدادات{% endblock %}
+{% block content %}
+<div class="card"><h2>إعدادات النظام</h2>
+<div class="kv"><span>AETHER_ID</span><b>{{ aether_id }}</b></div>
+<div class="kv"><span>Email</span><b>{{ aether_email or '—' }}</b></div>
+<div class="kv"><span>Ollama Host</span><b>{{ ollama_host }}</b></div>
+<div class="kv"><span>Ollama Model</span><b>{{ ollama_model or '—' }}</b></div>
+<div class="kv"><span>Web Host</span><b>{{ web_host }}:{{ web_port }}</b></div>
+</div>
+{% endblock %}

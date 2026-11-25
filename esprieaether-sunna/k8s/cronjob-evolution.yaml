@@ -1,0 +1,84 @@
+---
+# ESPRIEAETHER-SUNNA Self-Evolution CronJob
+# Runs the self-evolution engine on a schedule to continuously improve code quality
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: esprieaether-evolution
+  namespace: esprieaether
+  labels:
+    app: esprieaether-sunna
+    component: evolution
+spec:
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  successfulJobsHistoryLimit: 10
+  failedJobsHistoryLimit: 5
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    metadata:
+      labels:
+        app: esprieaether-sunna
+        component: evolution
+    spec:
+      backoffLimit: 3
+      activeDeadlineSeconds: 3600  # 1 hour timeout
+      template:
+        metadata:
+          labels:
+            app: esprieaether-sunna
+            component: evolution
+          annotations:
+            prometheus.io/scrape: "false"
+        spec:
+          restartPolicy: OnFailure
+          terminationGracePeriodSeconds: 300
+          containers:
+          - name: evolution
+            image: esprieaether-sunna:latest
+            imagePullPolicy: IfNotPresent
+            command:
+            - python
+            - brain/self_evolution.py
+            - "--cycle"
+            - "--auto-apply"
+            envFrom:
+            - configMapRef:
+                name: esprieaether-config
+            - secretRef:
+                name: esprieaether-secrets
+            resources:
+              requests:
+                cpu: "500m"
+                memory: "512Mi"
+              limits:
+                cpu: "2"
+                memory: "2Gi"
+            volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: evolution-reports
+              mountPath: /app/evolution_reports
+          volumes:
+          - name: data
+            persistentVolumeClaim:
+              claimName: evolution-pvc
+          - name: evolution-reports
+            emptyDir: {}
+---
+# Evolution PersistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: evolution-pvc
+  namespace: esprieaether
+  labels:
+    app: esprieaether-sunna
+    component: evolution
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard
+  volumeMode: Filesystem

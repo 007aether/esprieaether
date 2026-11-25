@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}الإيردروبات{% endblock %}
+{% block page_title %}📡 الإيردروبات{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-2">
+  <div class="card stat">
+    <div class="stat-label">الإجمالي</div>
+    <div class="stat-value" id="total-count">—</div>
+    <div class="stat-sub">إيردروب في القاعدة</div>
+  </div>
+
+  <div class="card stat">
+    <div class="stat-label">آخر تحديث</div>
+    <div class="stat-value" id="last-update" style="font-size: 18px;">—</div>
+    <div class="stat-sub">من RSS</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 class="card-title">📡 أحدث الإيردروبات</h3>
+  <button class="btn btn-primary" onclick="syncAirdrops()" id="sync-btn">🔄 جلب فوري</button>
+  <div id="status" style="margin: 12px 0; color: var(--muted);"></div>
+  <div id="airdrop-list"></div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function loadAirdrops() {
+  try {
+    const r = await fetch('/api/airdrops?limit=30');
+    const d = await r.json();
+
+    document.getElementById('total-count').textContent = d.total || 0;
+
+    const list = document.getElementById('airdrop-list');
+    if (!d.items || d.items.length === 0) {
+      list.innerHTML = '<p class="muted">لا توجد إيردروبات بعد</p>';
+      return;
+    }
+
+    let html = '<table class="table"><thead><tr><th>#</th><th>العنوان</th><th>المصدر</th></tr></thead><tbody>';
+    d.items.forEach((item, i) => {
+      const title = (item.title || '').substring(0, 100);
+      const source = item.source ? new URL(item.source).hostname : '—';
+      html += `<tr>
+        <td>${i + 1}</td>
+        <td><a href="${item.link}" target="_blank" style="color: var(--primary);">${title}</a></td>
+        <td class="mono">${source}</td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+    list.innerHTML = html;
+
+  } catch (e) {
+    document.getElementById('airdrop-list').innerHTML =
+      `<p class="danger">⚠️ ${e.message}</p>`;
+  }
+}
+
+async function syncAirdrops() {
+  const btn = document.getElementById('sync-btn');
+  const status = document.getElementById('status');
+  btn.disabled = true;
+  status.textContent = '⏳ جارٍ الجلب...';
+
+  try {
+    const r = await fetch('/api/airdrops/sync', {method: 'POST'});
+    const d = await r.json();
+
+    if (d.status === 'ok') {
+      status.textContent = `✅ جُلب: ${d.fetched} | جديد: ${d.new} | الإجمالي: ${d.total}`;
+      await loadAirdrops();
+    } else {
+      status.textContent = `❌ ${d.error}`;
+    }
+  } catch (e) {
+    status.textContent = `❌ ${e.message}`;
+  }
+
+  btn.disabled = false;
+}
+
+loadAirdrops();
+setInterval(loadAirdrops, 30000);
+</script>
+{% endblock %}

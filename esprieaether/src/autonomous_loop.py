@@ -1,0 +1,1532 @@
+# Copyright (c) 2026 EsprieAmine / EsprieAether
+# All rights reserved.
+# ESPRIE AETHER V8 — Autonomous AI System
+
+"""
+⚡ EsprieAether - Autonomous Loop
+الحلقة الذكية التي تشغّل كل الوكلاء تلقائياً 24/7
+"""
+import os
+import sys
+import json
+import time
+import subprocess
+import logging
+from datetime import datetime
+from datetime import datetime, timezone
+from pathlib import Path
+
+# إعداد المسار
+BASE_DIR = Path(__file__).parent.parent
+sys.path.insert(0, str(BASE_DIR / "src"))
+
+from dotenv import load_dotenv
+load_dotenv(BASE_DIR / ".env")
+
+from jarvis_bridge import JarvisBridge
+from github_agent import GitHubAgent
+from vpn_agent import VPNAgent
+from airdrop_agent import AirdropAgent
+from email_agent import EmailAgent
+from notify_agent import NotifyAgent
+from self_evolve import SelfEvolve
+from cloud_fallback import CloudFallback
+from github_evolve import GitHubEvolve
+from guardian_agent import GuardianAgent
+from log_analyzer import LogAnalyzer
+from daily_digest import DailyDigest
+from pharos_agent import PharosAgent
+# ─── Logger ───
+LOG_FILE = BASE_DIR / "autonomous.log"
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILE, encoding="utf-8"),
+        logging.StreamHandler(),
+    ],
+)
+logger = logging.getLogger("autonomous")
+
+# ─── الوكيلات ───
+jarvis = JarvisBridge()
+github = GitHubAgent()
+vpn = VPNAgent()
+airdrop_agent = AirdropAgent()
+email_agent = EmailAgent()
+notify = NotifyAgent()
+evolve = SelfEvolve()
+cloud = CloudFallback()
+github_evolve = GitHubEvolve()
+guardian = GuardianAgent()
+analyzer = LogAnalyzer()
+digest = DailyDigest()
+pharos = PharosAgent()
+
+# ─── المسارات ───
+STATE_FILE = BASE_DIR / "autonomous_state.json"
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+
+# ═══════════════════════════════════════
+#  الحالة
+# ═══════════════════════════════════════
+def load_state() -> dict:
+    if STATE_FILE.exists():
+        try:
+            return json.loads(STATE_FILE.read_text())
+        except Exception:
+            pass
+    return {
+        "started_at": datetime.now().isoformat(),
+        "cycles": 0,
+        "last_run": {},
+    }
+
+
+def save_state(state: dict):
+    STATE_FILE.write_text(json.dumps(state, indent=2, ensure_ascii=False))
+
+
+# ═══════════════════════════════════════
+#  إرسال Telegram
+# ═══════════════════════════════════════
+def send_telegram(message: str):
+    """إرسال رسالة لبوت Telegram"""
+    if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
+        return
+
+    try:
+        import requests
+        requests.post(
+            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+            json={
+                "chat_id": TELEGRAM_CHAT_ID,
+                "text": message,
+                "parse_mode": "Markdown",
+            },
+            timeout=30,
+        )
+    except Exception as e:
+        logger.error(f"فشل إرسال Telegram: {e}")
+
+
+# ═══════════════════════════════════════
+#  المهام
+# ═══════════════════════════════════════
+
+def task_health_check() -> dict:
+    """فحص صحة النظام"""
+    result = {"name": "health_check", "status": "ok"}
+
+    # Ollama
+    ollama = jarvis.ping()
+    result["ollama"] = ollama["status"]
+
+    # الخدمات
+    services = {}
+    for svc in ["aether-web", "aether-bot"]:
+        try:
+            r = subprocess.run(
+                ["systemctl", "is-active", svc],
+                capture_output=True, text=True, timeout=5
+            )
+            services[svc] = r.stdout.strip()
+        except Exception:
+            services[svc] = "unknown"
+    result["services"] = services
+
+    # psutil
+    try:
+        import psutil
+        result["cpu"] = psutil.cpu_percent(interval=0.5)
+        result["ram"] = psutil.virtual_memory().percent
+    except Exception:
+        pass
+
+    return result
+
+
+def task_security_scan() -> dict:
+    """فحص المنافذ المفتوحة"""
+    result = {"name": "security_scan", "status": "ok", "ports": []}
+    try:
+        r = subprocess.run(
+            ["ss", "-tlnp"],
+            capture_output=True, text=True, timeout=10
+        )
+        lines = r.stdout.strip().split("\n")[1:]
+        for line in lines[:20]:
+            parts = line.split()
+            if len(parts) >= 4:
+                result["ports"].append({
+                    "local": parts[3],
+                    "process": parts[5] if len(parts) > 5 else "—",
+                })
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_github_sync() -> dict:
+    """مزامنة GitHub (git CLI)"""
+    result = {"name": "github_sync", "status": "ok"}
+
+    # git CLI شغال دايماً (PyGithub اختياري)
+    if not github.git_status().get("remote"):
+        result["status"] = "skipped"
+        result["reason"] = "GitHub remote ناقص"
+        return result
+
+    # git CLI كيدير add -A (المشروع كامل)
+    push = github.push_files(
+        message=f"⚡ Auto-sync ({datetime.now().strftime('%Y-%m-%d %H:%M')})"
+    )
+    result["push"] = push
+    return result
+
+
+
+
+def task_daily_report() -> dict:
+    """تقرير يومي"""
+    return {
+        "name": "daily_report",
+        "status": "ok",
+        "timestamp": datetime.now().isoformat(),
+    }
+def task_weekly_email() -> dict:
+    """إرسال التقرير الأسبوعي بالبريد"""
+    result = {"name": "weekly_email", "status": "ok"}
+
+    if not email_agent.is_configured():
+        result["status"] = "skipped"
+        result["reason"] = "SMTP غير مُعدّ"
+        return result
+
+    # تحقق من اليوم والساعة
+    import datetime
+    from datetime import datetime, timezone
+    now = datetime.datetime.now()
+    target_day = os.getenv("WEEKLY_REPORT_DAY", "monday").lower()
+    target_hour = int(os.getenv("WEEKLY_REPORT_HOUR", "9"))
+
+    days_map = {
+        "monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+        "friday": 4, "saturday": 5, "sunday": 6,
+    }
+    target_weekday = days_map.get(target_day, 0)
+
+    # إذا لم يكن اليوم والساعة، تخطَّ
+    if now.weekday() != target_weekday:
+        result["status"] = "skipped"
+        result["reason"] = f"ليس يوم {target_day}"
+        return result
+
+    if now.hour != target_hour:
+        result["status"] = "skipped"
+        result["reason"] = f"ليس الساعة {target_hour}"
+        return result
+
+    # أرسل البريد
+    try:
+        send_result = email_agent.send_weekly_report()
+        result["email"] = send_result
+
+        if send_result.get("status") == "ok":
+            send_telegram("📧 *تم إرسال التقرير الأسبوعي بالبريد*")
+        else:
+            result["status"] = "error"
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+
+    return result
+def task_airdrop_sync() -> dict:
+    """مزامنة الإيردروبات من RSS + scrapers + scoring ذكي"""
+    result = {"name": "airdrop_sync", "status": "ok"}
+    try:
+        # ── RSS feeds ──
+        items = airdrop_agent.fetch_all()
+        new = airdrop_agent.save_airdrops(items)
+        total = airdrop_agent.count()
+
+        result["fetched"] = len(items)
+        result["new"] = new
+        result["total"] = total
+
+        # ── Specialized scrapers (airdrops.io, CMC, GitHub) ──
+        try:
+            from airdrop_scraper import scrape_all
+            scraped = scrape_all()
+            result["scraped"] = len(scraped)
+            items = items + scraped
+        except Exception as se:
+            result["scrape_error"] = str(se)
+
+        # ── Smart scoring with deep enrichment ──
+        from airdrop_scorer import score_all, top_candidates, format_telegram
+        score_all(items, enrich=True, enrich_limit=20, deep_enrich=True)
+        cands = top_candidates(limit=5, min_grade="B")
+        result["grade_A"] = sum(1 for c in cands if c["grade"] == "A")
+        result["grade_B"] = sum(1 for c in cands if c["grade"] == "B")
+        result["deep_enriched"] = True
+
+        # إشعار إذا كان هناك جديد
+        if new > 0:
+            send_telegram(
+                f"📡 *إيردروبات جديدة!*\n\n"
+                f"🆕 جديد: `{new}`\n"
+                f"📊 الإجمالي: `{total}`\n\n"
+                f"_أرسل /airdrops لعرض أحدث 5_"
+            )
+
+        # ── إشعار الفرص المؤهلة (Grade A/B) ──
+        if cands:
+            digest = format_telegram(limit=5)
+            send_telegram(digest)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+        # إشعار ntfy
+        if new > 0:
+            notify.info(
+                "📡 إيردروبات جديدة",
+                f"{new} إيردروب جديد | الإجمالي: {total}"
+            )  
+    return result
+def task_github_evolve() -> dict:
+    """البحث في GitHub عن تحسينات - كل 24 ساعة"""
+    result = {"name": "github_evolve", "status": "ok"}
+    try:
+        run_result = github_evolve.run()
+        result.update(run_result)
+
+        if run_result.get("status") == "ok" and run_result.get("suggestions_count", 0) > 0:
+            count = run_result["suggestions_count"]
+            send_telegram(
+                f"🔍 *GitHub Evolve*\n\n"
+                f"📊 مستودعات: `{run_result['results_count']}`\n"
+                f"🧬 اقتراحات جديدة: `{count}`\n\n"
+                f"_استخدم /evolve للعرض_"
+            )
+            notify.info(
+                "🔍 GitHub Evolve",
+                f"{count} اقتراح جديد من GitHub"
+            )
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+def task_self_evolve() -> dict:
+    """تحليل وتوليد اقتراحات التطوير الذاتي"""
+    result = {"name": "self_evolve", "status": "ok"}
+    try:
+        suggestions = evolve.suggest_improvements()
+        result["suggestions_count"] = len(suggestions)
+
+        if suggestions:
+            notify.info(
+                "🧠 اقتراحات تطوير جديدة",
+                f"{len(suggestions)} اقتراح | استخدم /evolve في Telegram"
+            )
+            send_telegram(
+                f"🧠 *اقتراحات تطوير جديدة*\n\n"
+                f"📊 عدد: `{len(suggestions)}`\n\n"
+                f"_استخدم /evolve للعرض_"
+            )
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_cloud_health() -> dict:
+    """مراقبة حالة Cloud/Internet"""
+    result = {"name": "cloud_health", "status": "ok"}
+    try:
+        online = cloud.is_online(force=True)
+        result["online"] = online
+
+        if not online:
+            # إشعار عند انقطاع الإنترنت
+            notify.warning(
+                "⚠️ الإنترنت مقطوع",
+                "التبديل إلى Local (qwen2.5:3b)"
+            )
+            result["status"] = "offline"
+        else:
+            result["cloud_model"] = cloud.state.get("cloud_requests", 0)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_guardian() -> dict:
+    """حراسة وإصلاح تلقائي - كل 5 دقائق"""
+    result = {"name": "guardian", "status": "ok"}
+    try:
+        check = guardian.full_check()
+        result["errors"] = check["errors_count"]
+        result["fixes"] = len(check["fixes"])
+
+        # إشعار فقط عند وجود إصلاحات
+        if check["fixes"]:
+            fixes_text = chr(10).join("- " + f["action"] for f in check["fixes"])
+            send_telegram(
+                "🛡️ *Guardian أصلح أخطاء*" + chr(10) + chr(10) +
+                "🔧 " + str(len(check["fixes"])) + " إصلاح" + chr(10) +
+                fixes_text
+            )
+            notify.info(
+                "🛡️ Guardian",
+                str(len(check["fixes"])) + " إصلاح تلقائي"
+            )
+
+        # إشعار عند أخطاء لم تُصلح
+        if check["errors_count"] > 0 and not check["fixes"]:
+            logger.warning(f"⚠️ {check['errors_count']} خطأ بدون إصلاح")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+def task_log_analysis() -> dict:
+    """تحليل السجلات - يومياً"""
+    result = {"name": "log_analysis", "status": "ok"}
+    try:
+        r = analyzer.analyze()
+        result["status"] = r.get("status", "unknown")
+
+        if r.get("status") == "ok":
+            stats = r["report"]["stats"]
+            analysis = r["report"].get("analysis", "")[:300]
+
+            send_telegram(
+                "📊 *تحليل السجلات*" + chr(10) + chr(10) +
+                f"أخطاء: `{stats['errors']}`" + chr(10) +
+                f"تحذيرات: `{stats['warnings']}`" + chr(10) + chr(10) +
+                analysis
+            )
+            notify.info(
+                "📊 تحليل السجلات",
+                f"{stats['errors']} خطأ، {stats['warnings']} تحذير"
+            )
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+def task_daily_digest() -> dict:
+    """تقرير يومي شامل - كل 24 ساعة"""
+    result = {"name": "daily_digest", "status": "ok"}
+    try:
+        text = digest.format_telegram()
+        send_telegram(text)
+
+        # نسخة بالبريد
+        email_result = digest.send_email()
+        result["email"] = email_result.get("status", "unknown")
+
+        notify.info("📊 التقرير اليومي", "تم الإرسال")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+def task_pharos() -> dict:
+    """مراقبة Pharos Testnet - كل ساعة"""
+    result = {"name": "pharos", "status": "ok"}
+    try:
+        balance = pharos.get_balance()
+        result["balance"] = balance.get("balance", "0")
+        result["connected"] = balance.get("connected", False)
+
+        # إشعار إذا كان Faucet جاهزاً
+        if pharos.can_claim():
+            notify.info(
+                "🔷 Pharos Faucet جاهز",
+                "افتح: https://testnet.pharosnetwork.xyz"
+            )
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+def task_vpn_check() -> dict:
+    """فحص حالة VPN وإعادة التشغيل تلقائياً إذا توقف"""
+    result = {"name": "vpn_check", "status": "skipped"}
+
+    # Windows: WireGuard wg-quick/sudo غير متوفر — نمرّ المهمة بصمت
+    import platform
+    if platform.system() == "Windows":
+        result["reason"] = "windows — wireguard (wg-quick/sudo) غير متوفر"
+        return result
+
+    if not vpn.is_active():
+        logger.warning("⚠️ VPN متوقف — جارٍ إعادة التشغيل...")
+        restart_result = vpn.connect()
+
+        if restart_result["status"] == "connected":
+            result["action"] = "restarted"
+            result["status"] = "restarted"
+            send_telegram(
+                "🔄 *VPN أُعيد تشغيله تلقائياً*\n"
+                f"الواجهة: `{vpn.interface}`"
+            )
+            notify.warning(
+                "🔐 VPN توقف",
+                f"تم إعادة التشغيل: {restart_result['status']}"
+            )
+        else:
+            result["status"] = "failed"
+            result["error"] = restart_result.get("message")
+            send_telegram(
+                f"⚠️ *VPN متوقف ولم يُعد تشغيله*\n"
+                f"السبب: `{restart_result.get('message', 'خطأ')}`"
+            )
+    else:
+        info = vpn.get_wg_info()
+        result["ip"] = vpn.get_ip(ipv4=True)
+        result["handshake"] = info.get("latest_handshake", "—")
+
+    return result
+def should_run(state: dict, task_name: str, interval: int) -> bool:
+    """هل يجب تشغيل المهمة الآن؟"""
+    last = state["last_run"].get(task_name)
+    if not last:
+        return True
+    try:
+        last_dt = datetime.fromisoformat(last)
+        return (datetime.now() - last_dt).total_seconds() >= interval
+    except Exception:
+        return True
+
+
+# ═══════════════════════════════════════
+#  الحلقة الرئيسية
+# ═══════════════════════════════════════
+
+SCHEDULE = {
+    "vpn_check": 5 * 60,
+    "cloud_health": 5 * 60,
+    "guardian": 5 * 60,
+    "log_analysis": 24 * 60 * 60,
+    "pharos": 60 * 60,
+    "airdrop_sync": 6 * 60 * 60,
+    "agent_mesh": 3 * 60 * 60,
+    "cloud_bridge": 10 * 60,
+    "veille": 24 * 60 * 60,
+    "weekly_email": 60 * 60,
+    "self_evolve": 24 * 60 * 60,
+    "github_evolve": 24 * 60 * 60,
+    "daily_digest": 24 * 60 * 60,
+    "health_check": 5 * 60,
+    "security_scan": 60 * 60,
+    "github_sync": 60 * 60,
+    "daily_report": 6 * 60 * 60,
+    # ═══ المهام الجديدة v2 ═══
+    "research_monitor": 6 * 60 * 60,       # كل 6 ساعات
+    "semantic_memory": 60 * 60,            # كل ساعة
+    "analytics_report": 12 * 60 * 60,      # كل 12 ساعة
+    "guardian_check": 60 * 60,             # كل ساعة
+    "inference_test": 2 * 60 * 60,         # كل ساعتين
+    # ═══ Sunna bots ═══
+    "sunna_veille": 6 * 60 * 60,           # كل 6 ساعات
+    "sunna_prices": 24 * 60 * 60,          # يومياً
+    "sunna_facture_check": 24 * 60 * 60,   # يومياً
+    "sunna_bilan": 24 * 60 * 60,           # يومياً
+    "sunna_costing": 12 * 60 * 60,         # كل 12 ساعة
+    "sunna_offres": 12 * 60 * 60,          # كل 12 ساعة
+    "cleanup": 24 * 60 * 60,               # يومياً
+    "vector_memory": 6 * 60 * 60,          # كل 6 ساعات
+    "backup": 24 * 60 * 60,                # يومياً
+    "skill_harvest": 24 * 60 * 60,         # يومياً (after veille)
+    "digest": 12 * 60 * 60,                # كل 12 ساعة
+    "voice_check": 24 * 60 * 60,           # يومياً — TTS engine
+    "colibri_check": 24 * 60 * 60,         # يومياً — model download
+    "mobile_pwa_check": 24 * 60 * 60,      # يومياً — PWA routes
+    "rea_check": 24 * 60 * 60,             # يومياً — REA CLI + engines
+    "obsidian_refresh": 24 * 60 * 60,      # يومياً — knowledge graph rebuild
+    "task_executor": 15 * 60,              # كل 15 دقيقة — execute mesh-proposed tasks
+    "self_improve": 30 * 60,               # كل 30 دقيقة — learn from errors
+    "github_like": 5 * 60,                 # كل 5 دقائق — track GitHub likes
+    "cherry_bridge": 15 * 60,              # كل 15 دقائق — cherry gateway + board mirror
+    "jarvis_dev": 3 * 60 * 60,             # كل 3 ساعات — JARVIS writes a new agent
+    "graph_fixer": 24 * 60 * 60,           # يومياً — repair orphan notes + rebuild graph
+    "app_factory": 24 * 60 * 60,           # يومياً — generate 60 app ideas → top 20
+    "colibri_autostart": 10 * 60,          # كل 10 دقائق — auto-start serve when ready
+    "dsh_bridge": 5 * 60,                  # كل 5 دقائق — JARVIS⇄DSH relay health + DSH detect
+    "dsh_launcher": 10 * 60,               # كل 10 دقائق — auto-launch DSH web when installed
+    "work_organizer": 6 * 60 * 60,         # كل 6 ساعات — roadmap & work queue
+    "self_heal": 5 * 60,                   # كل 5 دقائق — self-healing
+}
+
+
+def task_research_monitor() -> dict:
+    try:
+        from research_monitor import ResearchMonitor
+        rm = ResearchMonitor()
+        report = rm.run()
+        return {"status": "ok", "new_items": report["total_new"]}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_semantic_memory() -> dict:
+    """المصدر الحقيقي: vector_memory_agent (بدل وحدة semantic_memory_v2 الغائبة)."""
+    from local_task_sources import semantic_memory_snapshot
+
+    return semantic_memory_snapshot(remember_cycle=True)
+
+
+def task_analytics_report() -> dict:
+    """بدون وحدة analytics: unavailable صريح بدل صفر مزيف."""
+    from local_task_sources import analytics_snapshot
+
+    return analytics_snapshot()
+
+
+def task_guardian_check() -> dict:
+    """بدون وحدة guardian_v2: unavailable صريح بدل stats مزيفة."""
+    from local_task_sources import guardian_snapshot
+
+    return guardian_snapshot()
+
+
+def task_inference_test() -> dict:
+    try:
+        from inference_router import get_provider
+        return {"status": "ok", "routing": {
+            "simple": get_provider("hi")["provider"],
+            "medium": get_provider("مقالة")["provider"],
+            "complex": get_provider("حلل")["provider"],
+            "sensitive": get_provider("محفظة")["provider"],
+        }}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+# ═══════════════════════════════════════
+#  Sunna bot tasks (wired from ~/Desktop/Sunna-Equipe-Industrial/bots)
+# ═══════════════════════════════════════
+SUNNA_BOTS = Path.home() / "Desktop" / "Sunna-Equipe-Industrial" / "bots"
+PY = str(BASE_DIR / ".venv" / "Scripts" / "python.exe")
+
+
+def _run_sunna_bot(script: str, args: list = None, timeout: int = 180) -> dict:
+    """Run a Sunna bot script and return its output."""
+    script_path = SUNNA_BOTS / script
+    if not script_path.exists():
+        return {"status": "error", "error": f"not found: {script}"}
+    cmd = [PY, str(script_path)] + (args or [])
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout,
+                           cwd=str(SUNNA_BOTS.parent))
+        out = (r.stdout or "").strip()
+        return {"status": "ok" if r.returncode == 0 else "error",
+                "output": out[-2000:], "returncode": r.returncode}
+    except subprocess.TimeoutExpired:
+        return {"status": "error", "error": "timeout"}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+def task_sunna_veille() -> dict:
+    """Veille — GitHub repo monitoring (187→500 repos)."""
+    result = {"name": "sunna_veille", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("veille_bot.py", ["run"])
+        result.update(run_result)
+        if run_result.get("status") == "ok":
+            out = run_result.get("output", "")
+            # extract total line if present
+            for line in out.splitlines():
+                if "المجموع" in line or "جديد" in line:
+                    result["summary"] = line.strip()
+                    break
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_sunna_prices() -> dict:
+    """Live steel/galva/zinc price tracker."""
+    result = {"name": "sunna_prices", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("sunna_price_tracker.py", ["run"])
+        result.update(run_result)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_sunna_facture_check() -> dict:
+    """Facture builder check."""
+    result = {"name": "sunna_facture_check", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("facture_builder.py", ["--list"])
+        result.update(run_result)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_sunna_bilan() -> dict:
+    """Sunna daily auto-bilan (revenue + catalogue + actions)."""
+    result = {"name": "sunna_bilan", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("bilan_bot.py", ["--days", "7", "--json"])
+        result.update(run_result)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_sunna_costing() -> dict:
+    """Sunna cost engine — estimate every catalogue product against live prices."""
+    result = {"name": "sunna_costing", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("cost_estimator_agent.py", ["--estimate-all"])
+        result.update(run_result)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_cleanup() -> dict:
+    """Disk cleanup — old logs, caches, git gc."""
+    result = {"name": "cleanup", "status": "ok"}
+    try:
+        import cleanup_bot
+        import io
+        import contextlib
+        buf = io.StringIO()
+        sys.argv = ["cleanup_bot.py", "--days", "3", "--apply", "--json"]
+        with contextlib.redirect_stdout(buf):
+            cleanup_bot.main()
+        data = json.loads(buf.getvalue())
+        result["freed_mb"] = data.get("freed_mb", 0)
+        result["removed_count"] = data.get("removed_count", 0)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_vector_memory() -> dict:
+    """Persist the latest mesh insights + daily digest into vector memory."""
+    result = {"name": "vector_memory", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        from vector_memory_agent import VectorMemory
+        vm = VectorMemory()
+        # remember the freshest board messages so they stay recallable
+        board_file = BASE_DIR / "data" / "agent_board.json"
+        remembered = 0
+        if board_file.exists():
+            board = json.loads(board_file.read_text(encoding="utf-8"))
+            for m in board[-10:]:
+                vm.remember(
+                    f"[{m.get('agent','?')}] {m.get('text','')[:300]}",
+                    kind="insight",
+                    source=f"mesh:{m.get('agent','?')}",
+                    importance=0.6,
+                    tags=m.get("tags", []),
+                )
+                remembered += 1
+        result["remembered"] = remembered
+        result["stats"] = vm.stats()
+        vm.close()
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_voice_check() -> dict:
+    """Verify TTS engine + voice_agent availability (daily)."""
+    result = {"name": "voice_check", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import voice_agent
+        result["tts"] = getattr(voice_agent, "TTS_AVAILABLE", False)
+        result["stt"] = getattr(voice_agent, "STT_AVAILABLE", False)
+        # quick TTS smoke test (cached audio)
+        out = voice_agent.TTS_CACHE_DIR / "check.mp3"
+        if not out.exists():
+            voice_agent.tts_to_file("test", "check", "ar")
+        result["cache_files"] = len(list(voice_agent.TTS_CACHE_DIR.glob("*.mp3")))
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_colibri_check() -> dict:
+    """Check colibri model download + API availability (daily)."""
+    result = {"name": "colibri_check", "status": "ok"}
+    try:
+        model_dir = Path(os.environ.get("COLIBRI_MODEL_DIR", "D:/AetherData/colibri-models"))
+        qwen_dir = model_dir / "qwen3-coder-30b"
+        if qwen_dir.exists():
+            shards = list(qwen_dir.glob("*.safetensors"))
+            result["shards"] = len(shards)
+            result["total_gb"] = round(sum(s.stat().st_size for s in shards) / 1e9, 1)
+            result["complete"] = len(shards) >= 50
+        else:
+            result["status"] = "missing"
+            result["shards"] = 0
+        # API alive?
+        import urllib.request
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:8000/v1/models", timeout=4) as r:
+                result["serve"] = "running"
+        except Exception:
+            result["serve"] = "stopped"
+        # ollama models
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:11434/api/tags", timeout=4) as r:
+                result["ollama_models"] = len(json.loads(r.read()).get("models", []))
+        except Exception:
+            result["ollama_models"] = 0
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_colibri_autostart() -> dict:
+    """Auto-start coli serve once download completes (every 10 min)."""
+    result = {"name": "colibri_autostart", "status": "ok"}
+    try:
+        # already running?
+        import urllib.request
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:8000/v1/models", timeout=4) as r:
+                result["serve"] = "already running"
+                return result
+        except Exception:
+            pass
+        # download complete?
+        sys.path.insert(0, str(BASE_DIR / "bots"))
+        import colibri_launcher as cl
+        dl_ok, dl_msg = cl.download_complete()
+        result["download"] = dl_msg
+        if dl_ok:
+            ok = cl.start_serve(detached=True)
+            result["started"] = ok
+            if ok:
+                cl.save_state(status="running", url=cl.SERVE_URL,
+                              model=cl.MODEL_NAME,
+                              ts=time.strftime("%Y-%m-%dT%H:%M:%S%z"))
+                logger.info("🚀 colibri serve auto-started (download complete)")
+        else:
+            result["started"] = False
+            result["reason"] = "download incomplete"
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_dsh_bridge() -> dict:
+    """JARVIS⇄DSH relay health + DSH detect (every 5 min).
+    Confirms the relay is alive and reports whether DSH itself is running
+    or the system is on local-fallback. Never blocks the mesh loop."""
+    result = {"name": "dsh_bridge", "status": "ok"}
+    try:
+        import urllib.request
+        # relay alive?
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:5105/health", timeout=4) as r:
+                import json as _json
+                h = _json.loads(r.read().decode())
+                result["relay"] = "up"
+                result["dsh_running"] = h.get("dsh_running")
+                result["fallback"] = h.get("fallback")
+        except Exception:
+            result["relay"] = "down"
+            result["note"] = "relay not responding — watchdog will restart it"
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_dsh_launcher() -> dict:
+    """Auto-launch DSH web server once installed (every 10 min).
+    DSH gives JARVIS a real browser (CDP 19387) instead of local-fallback."""
+    result = {"name": "dsh_launcher", "status": "ok"}
+    try:
+        import urllib.request
+        # already running?
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:3080/", timeout=4) as r:
+                result["dsh_web"] = "already running"
+                return result
+        except Exception:
+            pass
+        # installed?
+        sys.path.insert(0, str(BASE_DIR / "bots"))
+        import dsh_launcher as dl
+        chk = dl.check()
+        result["bin_exists"] = chk.get("bin_exists")
+        if not chk.get("bin_exists"):
+            result["launched"] = False
+            result["reason"] = "DSH not installed yet (npm install running)"
+            return result
+        # launch
+        r = dl.launch()
+        result["launched"] = r.get("ok")
+        if r.get("ok"):
+            result["url"] = r.get("url")
+            logger.info("🚀 DSH web auto-launched (JARVIS⇄DSH relay now uses DSH)")
+        else:
+            result["error"] = r.get("error")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_mobile_pwa_check() -> dict:
+    """Verify PWA template + manifest are reachable (daily)."""
+    result = {"name": "mobile_pwa_check", "status": "ok"}
+    try:
+        import urllib.request
+        for name, url in (("pwa", "http://127.0.0.1:5000/mobile"),
+                          ("manifest", "http://127.0.0.1:5000/manifest.json")):
+            try:
+                with urllib.request.urlopen(url, timeout=4) as r:
+                    result[name] = r.status
+            except Exception:
+                result[name] = 0
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_jarvis_dev() -> dict:
+    """JARVIS writes a NEW mesh agent from a veille/skill idea (every 3h)."""
+    result = {"name": "jarvis_dev", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "jarvis_dev.py"), "--once"],
+            capture_output=True, text=True, timeout=180,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            import json as _json
+            try:
+                data = _json.loads(r.stdout.strip().splitlines()[-1])
+                result["written"] = data.get("written", 0)
+                result["module"] = data.get("module", "")
+            except Exception:
+                pass
+        elif r.stderr:
+            result["status"] = "error"
+            result["error"] = r.stderr[:150]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
+def task_self_improve() -> dict:
+    """SELF-HEAL: scan logs, diagnose, learn, propose fixes (every 5 min)"""
+    result = {"name": "self_improve", "status": "ok", "errors_found": 0, "patterns_learned": 0, "fixes_proposed": 0}
+
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import self_improve as si
+
+        # Scan logs
+        errors = si.scan_logs()
+        result["errors_found"] = len(errors)
+
+        if errors:
+            # Learn from errors
+            learned, unknown = si.learn_from_errors(errors)
+            result["patterns_learned"] = len(learned)
+            result["unknown"] = len(unknown)
+
+            # Propose fixes
+            fixes = si.propose_fixes(learned)
+            result["fixes_proposed"] = len(fixes)
+
+            # Apply fixes (force mode for critical/high)
+            for fix in fixes:
+                if fix["severity"] in ("critical", "high"):
+                    si.apply_fix(fix)
+                    state["applied_fixes"].append({
+                        "pattern": fix["pattern"],
+                        "fix": fix["fix"],
+                        "result": "applied",
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                    })
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+
+    return result
+    return result
+
+
+def task_cherry_bridge() -> dict:
+    """Check Cherry Studio gateway + mirror mesh board into its web UI (every 15min)."""
+    result = {"name": "cherry_bridge", "status": "ok"}
+    try:
+        import subprocess
+        # check reachability (cheap); mirror only if connected
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "cherry_bridge.py"), "--check"],
+            capture_output=True, text=True, timeout=20,
+        )
+        if r.returncode == 0 and '"ok": true' in r.stdout:
+            r2 = subprocess.run(
+                [sys.executable, str(BASE_DIR / "bots" / "cherry_bridge.py"), "--mirror"],
+                capture_output=True, text=True, timeout=25,
+            )
+            result["connected"] = True
+        else:
+            result["connected"] = False
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
+def task_graph_fixer() -> dict:
+    """Repair knowledge graph: link orphan notes + rebuild graph (daily)."""
+    result = {"name": "graph_fixer", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "graph_fixer.py"), "--fix"],
+            capture_output=True, text=True, timeout=120,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            import json as _json
+            try:
+                data = _json.loads(r.stdout.strip().splitlines()[-1])
+                result["fixed"] = data.get("fixed", 0)
+                result["orphans_found"] = data.get("orphans_found", 0)
+            except Exception:
+                pass
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
+def task_app_factory() -> dict:
+    """App Factory: regenerate 60 app ideas → top 20 (daily, autonomous pipeline)."""
+    result = {"name": "app_factory", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "app_factory.py"), "ideate"],
+            capture_output=True, text=True, timeout=600,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            import json as _json
+            try:
+                data = _json.loads(r.stdout.strip().splitlines()[-1])
+                result["generated"] = data.get("generated", 0)
+                result["top"] = data.get("top", 0)
+            except Exception:
+                pass
+        else:
+            result["status"] = "error"
+            result["error"] = (r.stderr or r.stdout or "")[:150]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
+def task_obsidian_refresh() -> dict:
+    """Rebuild the Obsidian knowledge graph daily (notes + links)."""
+    result = {"name": "obsidian_refresh", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "src" / "obsidian_vault_builder.py")],
+            capture_output=True, text=True, timeout=120,
+        )
+        if r.returncode == 0:
+            out = r.stdout
+            # count notes from output
+            result["output"] = out.strip().splitlines()[-1] if out.strip() else ""
+        else:
+            result["status"] = "error"
+            result["error"] = (r.stderr or r.stdout or "")[:200]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_task_executor() -> dict:
+    """Execute mesh-proposed tasks — close the loop (every 15 min)."""
+    result = {"name": "task_executor", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "bots" / "task_executor.py"), "--once"],
+            capture_output=True, text=True, timeout=120,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            import json as _json
+            try:
+                data = _json.loads(r.stdout.strip().splitlines()[-1])
+                result["executed"] = data.get("executed", 0)
+                result["pending_left"] = data.get("pending", 0)
+            except Exception:
+                result["raw"] = r.stdout[:100]
+        else:
+            result["status"] = "error"
+            result["error"] = (r.stderr or r.stdout or "")[:150]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:150]
+    return result
+
+
+def task_rea_check() -> dict:
+    """Verify REA CLI + analysis engine availability (daily)."""
+    result = {"name": "rea_check", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import rea_agent
+        d = rea_agent.doctor()
+        result["rea_ok"] = d.get("ok", False)
+        if d.get("ok"):
+            checks = d.get("checks", {})
+            if isinstance(checks, dict):
+                result["healthy_checks"] = sum(1 for v in checks.get("scope_checks", []) if v.get("ok"))
+                result["total_checks"] = len(checks.get("scope_checks", []))
+                # ghidra ready?
+                result["ghidra"] = any(c.get("name") == "ghidra" and c.get("ok")
+                                       for c in checks.get("scope_checks", []))
+        else:
+            result["error"] = d.get("error", "?")[:150]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_backup() -> dict:
+    """Encrypted local backup of both workspaces' data (daily)."""
+    result = {"name": "backup", "status": "ok"}
+    try:
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, str(BASE_DIR / "src" / "backup_agent.py"), "--json"],
+            capture_output=True, text=True, timeout=300,
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            data = json.loads(r.stdout.strip().splitlines()[-1])
+            result["files"] = data.get("files", 0)
+            result["archive_mb"] = data.get("archive_mb", 0)
+            result["engine"] = data.get("engine", "?")
+            result["path"] = data.get("path", "")
+        else:
+            result["status"] = "error"
+            result["error"] = (r.stderr or r.stdout or "")[:200]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_skill_harvest() -> dict:
+    """Harvest the veille index into adopt/reference skill candidates."""
+    result = {"name": "skill_harvest", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import skill_harvester
+        candidates = skill_harvester.harvest()
+        result["total"] = len(candidates)
+        result["adopt"] = sum(1 for c in candidates if c["decision"] == "adopt")
+        result["reference"] = sum(1 for c in candidates if c["decision"] == "reference")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_digest() -> dict:
+    """Daily observability digest — services + board + cloud + memory."""
+    result = {"name": "digest", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import digest_agent
+        digest = digest_agent.build_digest()
+        result["services_up"] = digest.get("services_up", 0)
+        result["services_total"] = digest.get("services_total", 0)
+        result["memory_total"] = digest.get("memory_total", 0)
+        result["digest_file"] = digest.get("digest_file", "")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_sunna_offres() -> dict:
+    """Offres bot — offers/scraping."""
+    result = {"name": "sunna_offres", "status": "ok"}
+    try:
+        run_result = _run_sunna_bot("offres_bot.py", ["run"])
+        result.update(run_result)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)
+    return result
+
+
+def task_agent_mesh() -> dict:
+    """Agent mesh cycle — agents talk to each other and evolve the system."""
+    result = {"name": "agent_mesh", "status": "ok"}
+    try:
+        import urllib.request
+        req = urllib.request.Request(
+            "http://127.0.0.1:11437/cycle",
+            data=json.dumps({"rounds": 1}).encode(),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=540) as r:
+            mesh = json.loads(r.read())
+        result["agents_thought"] = mesh.get("agents_thought", 0)
+        result["board_total"] = mesh.get("board_total", 0)
+        # surface any proposed tasks
+        tasks = [r for r in mesh.get("results", []) if r.get("task")]
+        if tasks:
+            result["proposed_tasks"] = [
+                {"agent": t["agent"], "title": t["task"]["title"][:100]}
+                for t in tasks
+            ]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_cloud_bridge() -> dict:
+    """GitHub cloud bridge — pull cloud commands, execute them, push results."""
+    result = {"name": "cloud_bridge", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR))
+        import cloud_poller
+        report = cloud_poller.poll_once()
+        result["pulled"] = report.get("pull", False)
+        result["executed"] = len(report.get("executed", []))
+        result["pushed"] = report.get("pushed", False)
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_work_organizer() -> dict:
+    """INTEGRATION ROADMAP & WORK QUEUE organizer — runs bots/work_organizer.py."""
+    result = {"name": "work_organizer", "status": "ok"}
+    try:
+        import subprocess
+        proc = subprocess.run(
+            ["python", "bots/work_organizer.py", "--status"],
+            cwd=str(BASE_DIR), capture_output=True, text=True, timeout=120,
+        )
+        report = proc.stdout or proc.stderr
+        result["report"] = report
+        result["exit"] = proc.returncode
+        if proc.returncode != 0:
+            result["status"] = "error"
+            result["error"] = report[-500:]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_self_heal() -> dict:
+    """SELF-HEAL agent — checks services and restarts what went down (non-blocking)."""
+    result = {"name": "self_heal", "status": "ok"}
+    try:
+        import subprocess
+        proc = subprocess.run(
+            ["python", "bots/self_heal.py", "--check"],
+            cwd=str(BASE_DIR), capture_output=True, text=True, timeout=180,
+        )
+        report = proc.stdout or proc.stderr
+        result["report"] = report
+        result["exit"] = proc.returncode
+        if proc.returncode != 0:
+            result["status"] = "error"
+            result["error"] = report[-500:]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def task_veille() -> dict:
+    """24/7 tech watch — GitHub harvest across 25 categories."""
+    result = {"name": "veille", "status": "ok"}
+    try:
+        sys.path.insert(0, str(BASE_DIR / "src"))
+        import veille_agent
+        index = veille_agent.harvest(per_query=20, target="esprieaether")
+        total = sum(len(v) for v in index.values())
+        payload = veille_agent.save_index(index)
+        veille_agent.write_digest(payload)
+        result["harvested"] = total
+        result["index_total"] = payload["total"]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = str(e)[:200]
+    return result
+
+
+def run_cycle(state: dict):
+    """دورة واحدة"""
+    logger.info(f"═══ دورة #{state['cycles']} ═══")
+
+    tasks = {
+        "vpn_check": task_vpn_check,
+        "guardian": task_guardian,
+        "log_analysis": task_log_analysis,
+        "pharos": task_pharos,
+        "daily_digest": task_daily_digest,
+        "cloud_health": task_cloud_health,
+        "airdrop_sync": task_airdrop_sync,
+        "agent_mesh": task_agent_mesh,
+        "cloud_bridge": task_cloud_bridge,
+        "veille": task_veille,
+        "weekly_email": task_weekly_email,
+        "self_evolve": task_self_evolve,
+        "github_evolve": task_github_evolve,
+        "health_check": task_health_check,
+        "security_scan": task_security_scan,
+        "github_sync": task_github_sync,
+        "research_monitor": task_research_monitor,
+        "semantic_memory": task_semantic_memory,
+        "analytics_report": task_analytics_report,
+        "guardian_check": task_guardian_check,
+        "inference_test": task_inference_test,
+        "sunna_veille": task_sunna_veille,
+        "sunna_prices": task_sunna_prices,
+        "sunna_facture_check": task_sunna_facture_check,
+        "sunna_bilan": task_sunna_bilan,
+        "sunna_costing": task_sunna_costing,
+        "sunna_offres": task_sunna_offres,
+        "cleanup": task_cleanup,
+        "vector_memory": task_vector_memory,
+        "backup": task_backup,
+        "skill_harvest": task_skill_harvest,
+        "digest": task_digest,
+        "voice_check": task_voice_check,
+        "colibri_check": task_colibri_check,
+        "mobile_pwa_check": task_mobile_pwa_check,
+        "rea_check": task_rea_check,
+        "obsidian_refresh": task_obsidian_refresh,
+        "task_executor": task_task_executor,
+        "self_improve": task_self_improve,
+        "cherry_bridge": task_cherry_bridge,
+        "jarvis_dev": task_jarvis_dev,
+        "graph_fixer": task_graph_fixer,
+        "app_factory": task_app_factory,
+        "colibri_autostart": task_colibri_autostart,
+        "dsh_bridge": task_dsh_bridge,
+        "dsh_launcher": task_dsh_launcher,
+        "work_organizer": task_work_organizer,
+        "self_heal": task_self_heal,
+    }
+
+    for name, func in tasks.items():
+        interval = SCHEDULE[name]
+        if not should_run(state, name, interval):
+            continue
+
+        try:
+            logger.info(f"▶ تشغيل: {name}")
+            result = func()
+            state["last_run"][name] = datetime.now().isoformat()
+            logger.info(f"✅ {name}: {result.get('status')}")
+
+            # إشعارات خاصة
+            if name == "somnia_check" and result.get("balance_stt"):
+                logger.info(f"💰 Somnia: {result['balance_stt']} STT")
+
+            if name == "daily_report":
+                send_telegram(format_report(state, result))
+
+        except Exception as e:
+            logger.error(f"❌ {name}: {e}")
+
+    state["cycles"] += 1
+    save_state(state)
+
+def format_report(state: dict, report: dict) -> str:
+    """تنسيق تقرير Telegram"""
+    return f"""
+⚡ *EsprieAether — تقرير دوري*
+
+📊 *الحالة العامة*
+• الدورات: `{state['cycles']}`
+• آخر تحديث: `{report['timestamp'][:19]}`
+
+🔍 *آخر فحوصات:*
+• Health: `{state['last_run'].get('health_check', '—')[:19]}`
+• GitHub: `{state['last_run'].get('github_sync', '—')[:19]}`
+• Somnia: `{state['last_run'].get('somnia_check', '—')[:19]}`
+
+_التقرير التالي بعد 6 ساعات_
+"""
+
+
+def main():
+    """بدء الحلقة"""
+    logger.info("═" * 60)
+    logger.info("⚡ ESPRIEAETHER — AUTONOMOUS LOOP")
+    logger.info("═" * 60)
+
+    state = load_state()
+    logger.info(f"📂 بدء من الدورة: {state['cycles']}")
+    logger.info(f"⏰ وقت البدء: {state['started_at']}")
+
+    # إشعار البداية
+    send_telegram(
+        f"🚀 *EsprieAether بدأ التشغيل*\n"
+        f"الدورات السابقة: `{state['cycles']}`\n"
+        f"الوقت: `{datetime.now().strftime('%H:%M:%S')}`"
+    )
+
+    try:
+        while True:
+            try:
+                run_cycle(state)
+            except Exception as e:
+                logger.error(f"خطأ في الدورة: {e}")
+
+            # انتظار 60 ثانية بين الفحوصات
+            time.sleep(300)
+    except KeyboardInterrupt:
+        logger.info("⏹️ إيقاف يدوي")
+        send_telegram("⏹️ EsprieAether توقف يدوياً")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+# ── REA Tasks ────────────────────────────────────────────────────────────
+def task_rea_check() -> dict:
+    """Daily REA health check (Ghidra/JADX/Hopper)"""
+    from rea_agent import doctor
+    result = {"task": "rea_check", "status": "ok", "report": doctor()}
+    # Log to file
+    log_file = BASE_DIR / "data" / "logs" / "autonomous_loop.log"
+    try:
+        with open(log_file, "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().isoformat()}] REA check: {result['report']}\n")
+    except Exception:
+        pass
+    return result
+
+def task_rea_elements() -> dict:
+    """Automatic REA elements scan (CG systems, binaries, apps)"""
+    from rea_agent import analyze
+    result = {"task": "rea_elements", "status": "ok", "scan": "pe, js, website, app"}
+    log_file = BASE_DIR / "data" / "logs" / "autonomous_loop.log"
+    try:
+        with open(log_file, "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().isoformat()}] REA elements scan: {result}\n")
+    except Exception:
+        pass
+    return result
+
+def task_rea_report() -> dict:
+    """Generate REA daily report"""
+    import json
+    from pathlib import Path
+    report = {
+        "task": "rea_report",
+        "date": datetime.now().isoformat(),
+        "rea_state": "checking",
+        "tools_available": [
+            "Ghidra (PE analysis)",
+            "JADX (Android decompiler)",
+            "REA CLI (reverse engine tools)",
+            "Agent mesh (rea agent)"
+        ],
+        "recommendations": [
+            "Install GRE (Hopper) for macOS/macOS",
+            "Configure IDA registration",
+            "Add free GitHub projects to REA tools"
+        ]
+    }
+    data_dir = BASE_DIR / "data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    report_file = data_dir / "rea_report.json"
+    with open(report_file, "w", encoding="utf-8") as f:
+        json.dump(report, f, indent=2, ensure_ascii=False)
+    return report
+
+def task_rea_symbolic() -> dict:
+    """Symbolic execution for binaries"""
+    result = {"task": "rea_symbolic", "status": "ready", "note": "Enable symbolic execution for PE/ELF binaries"}
+    return result
+
+
+# ═══════════════════════════════════════
+#  GitHub Like Agent
+# ═══════════════════════════════════════
+try:
+    from github_like import GitHubLike
+    github_like = GitHubLike()
+    logger.info("✅ GitHubLike agent loaded")
+except ImportError as e:
+    github_like = None
+    logger.warning(f"⚠️ GitHubLike not loaded: {e}")
+
+
+# ═══════════════════════════════════════
+#  Task: github_like (track likes)
+# ═══════════════════════════════════════
+def task_github_like(state: dict) -> dict:
+    """Track likes on GitHub repos"""
+    if github_like is None:
+        return {"name": "github_like", "status": "skipped", "message": "GitHubLike not loaded"}
+
+    try:
+        result = github_like.get_stats()
+        logger.info(f"❤️ GitHub Likes: {result['total_likes']} total")
+        return {
+            "name": "github_like",
+            "status": "ok",
+            "stats": result,
+            "count": result["total_likes"]
+        }
+    except Exception as e:
+        logger.error(f"❌ GitHubLike error: {e}")
+        return {"name": "github_like", "status": "error", "message": str(e)}
+
+
+# ═══════════════════════════════════════
+#  Wire into run_cycle
+# ═══════════════════════════════════════

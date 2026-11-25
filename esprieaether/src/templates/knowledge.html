@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}المعرفة{% endblock %}
+{% block page_title %}📚 بحث في المعرفة المحلية{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>ابحث في قاعدة المعرفة</h2>
+  <p class="muted">البحث يتم محلياً في <code>data/knowledge_base/knowledge_index.json</code> — ما كاينش اتصال خارجي.</p>
+  <form id="kb-form" style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0">
+    <input id="kb-q" type="search" placeholder="كلمة مفتاحية — مثال: SUNNAVOK" style="flex:1;min-width:220px;padding:8px" />
+    <button type="submit" class="btn">بحث</button>
+    <button type="button" class="btn ghost" id="kb-stats">إحصائيات</button>
+  </form>
+  <p id="kb-status" class="muted" role="status" aria-live="polite"></p>
+  <div id="kb-results"></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(function () {
+  const form = document.getElementById('kb-form');
+  const input = document.getElementById('kb-q');
+  const out = document.getElementById('kb-results');
+  const status = document.getElementById('kb-status');
+
+  function clear() { out.textContent = ''; }
+  function line(label, value) {
+    const row = document.createElement('div');
+    row.className = 'kv';
+    const b = document.createElement('b');
+    b.textContent = label;
+    const span = document.createElement('span');
+    span.textContent = value;
+    row.append(b, span);
+    return row;
+  }
+  function renderItem(item) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.margin = '8px 0';
+    const source = document.createElement('div');
+    source.textContent = '📄 ' + (item.source || 'unknown') + ' · ' + (item.stored_at || '');
+    const tags = document.createElement('div');
+    tags.className = 'tag';
+    tags.textContent = (item.tags || []).join(' · ');
+    const text = document.createElement('p');
+    text.textContent = item.text || '';
+    card.append(source, tags, text);
+    return card;
+  }
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const q = input.value.trim();
+    clear();
+    if (!q) { status.textContent = 'أدخل كلمة مفتاحية أولاً.'; return; }
+    status.textContent = 'جارٍ البحث…';
+    try {
+      const r = await fetch('/api/knowledge/search?q=' + encodeURIComponent(q));
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const data = await r.json();
+      status.textContent = data.total + ' نتيجة لـ «' + q + '»';
+      if (!data.total) return;
+      for (const item of data.results) out.appendChild(renderItem(item));
+    } catch (e) {
+      status.textContent = 'تعذر البحث محلياً: ' + e.message;
+    }
+  });
+  document.getElementById('kb-stats').addEventListener('click', async () => {
+    clear();
+    status.textContent = 'جارٍ قراءة الإحصائيات…';
+    try {
+      const data = await (await fetch('/api/knowledge/stats')).json();
+      status.textContent = data.total + ' عنصر مفهرس';
+      out.appendChild(line('المصادر', Object.keys(data.sources || {}).join(', ') || '—'));
+      out.appendChild(line('الأوسمة', (data.top_tags || []).map(t => t[0]).join(', ') || '—'));
+    } catch (e) {
+      status.textContent = 'تعذرت قراءة الإحصائيات: ' + e.message;
+    }
+  });
+})();
+</script>
+{% endblock %}

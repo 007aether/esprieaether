@@ -1,0 +1,193 @@
+{
+  "last_report": {
+    "date": "2026-10-23",
+    "timestamp": "2026-10-23 20:08:34",
+    "system_status": {
+      "timestamp": "2026-10-23T20:08:34.597752",
+      "services": {
+        "JARVIS Web (5000)": {
+          "port": 5000,
+          "healthy": true
+        },
+        "Cloud Desktop (5001)": {
+          "port": 5001,
+          "healthy": true
+        },
+        "Sunna API (5100)": {
+          "port": 5100,
+          "healthy": true
+        },
+        "Kanban Board (5103)": {
+          "port": 5103,
+          "healthy": true
+        },
+        "Sunna Dashboard (5105)": {
+          "port": 5105,
+          "healthy": true
+        },
+        "AI Router (11435)": {
+          "port": 11435,
+          "healthy": true
+        },
+        "Orchestrator (11436)": {
+          "port": 11436,
+          "healthy": true
+        },
+        "Agent Mesh (11437)": {
+          "port": 11437,
+          "healthy": true
+        },
+        "Cloud Desktop (5173)": {
+          "port": 5173,
+          "healthy": true
+        }
+      },
+      "total_services": 9,
+      "healthy_services": 9,
+      "down_services": 0
+    },
+    "services": {
+      "healthy": 9,
+      "down": 0,
+      "total": {
+        "JARVIS Web (5000)": {
+          "port": 5000,
+          "healthy": true
+        },
+        "Cloud Desktop (5001)": {
+          "port": 5001,
+          "healthy": true
+        },
+        "Sunna API (5100)": {
+          "port": 5100,
+          "healthy": true
+        },
+        "Kanban Board (5103)": {
+          "port": 5103,
+          "healthy": true
+        },
+        "Sunna Dashboard (5105)": {
+          "port": 5105,
+          "healthy": true
+        },
+        "AI Router (11435)": {
+          "port": 11435,
+          "healthy": true
+        },
+        "Orchestrator (11436)": {
+          "port": 11436,
+          "healthy": true
+        },
+        "Agent Mesh (11437)": {
+          "port": 11437,
+          "healthy": true
+        },
+        "Cloud Desktop (5173)": {
+          "port": 5173,
+          "healthy": true
+        }
+      }
+    },
+    "summary": "النظام يعمل بعمال: 9/9 (100.0%)",
+    "recommendations": [
+      "✅ كل الخدمات تعمل بشكل سليم"
+    ]
+  },
+  "reports_generated": 1,
+  "reports": [
+    {
+      "date": "2026-10-23",
+      "timestamp": "2026-10-23 20:08:34",
+      "system_status": {
+        "timestamp": "2026-10-23T20:08:34.597752",
+        "services": {
+          "JARVIS Web (5000)": {
+            "port": 5000,
+            "healthy": true
+          },
+          "Cloud Desktop (5001)": {
+            "port": 5001,
+            "healthy": true
+          },
+          "Sunna API (5100)": {
+            "port": 5100,
+            "healthy": true
+          },
+          "Kanban Board (5103)": {
+            "port": 5103,
+            "healthy": true
+          },
+          "Sunna Dashboard (5105)": {
+            "port": 5105,
+            "healthy": true
+          },
+          "AI Router (11435)": {
+            "port": 11435,
+            "healthy": true
+          },
+          "Orchestrator (11436)": {
+            "port": 11436,
+            "healthy": true
+          },
+          "Agent Mesh (11437)": {
+            "port": 11437,
+            "healthy": true
+          },
+          "Cloud Desktop (5173)": {
+            "port": 5173,
+            "healthy": true
+          }
+        },
+        "total_services": 9,
+        "healthy_services": 9,
+        "down_services": 0
+      },
+      "services": {
+        "healthy": 9,
+        "down": 0,
+        "total": {
+          "JARVIS Web (5000)": {
+            "port": 5000,
+            "healthy": true
+          },
+          "Cloud Desktop (5001)": {
+            "port": 5001,
+            "healthy": true
+          },
+          "Sunna API (5100)": {
+            "port": 5100,
+            "healthy": true
+          },
+          "Kanban Board (5103)": {
+            "port": 5103,
+            "healthy": true
+          },
+          "Sunna Dashboard (5105)": {
+            "port": 5105,
+            "healthy": true
+          },
+          "AI Router (11435)": {
+            "port": 11435,
+            "healthy": true
+          },
+          "Orchestrator (11436)": {
+            "port": 11436,
+            "healthy": true
+          },
+          "Agent Mesh (11437)": {
+            "port": 11437,
+            "healthy": true
+          },
+          "Cloud Desktop (5173)": {
+            "port": 5173,
+            "healthy": true
+          }
+        }
+      },
+      "summary": "النظام يعمل بعمال: 9/9 (100.0%)",
+      "recommendations": [
+        "✅ كل الخدمات تعمل بشكل سليم"
+      ]
+    }
+  ]
+}

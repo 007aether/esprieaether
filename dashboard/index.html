@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SUNNAVOK — لوحة المشروع</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <div class="brand">
+          <h1>SUNNAVOK</h1>
+          <span class="ltr">SUNNA EQUIPE INDUSTRIAL · SEI</span>
+          <a class="ltr" href="https://github.com/007aether/esprieaether" target="_blank" rel="noopener noreferrer">GitHub · ESPRIEAETHER</a>
+          <a class="ltr" href="https://github.com/007aether" target="_blank" rel="noopener noreferrer">GitHub · 007aether</a>
+        </div>
+        <p>لوحة المشروع: السياق ديال المحادثة مجموع فبلاصة وحدة، ومعاه الأدوات اللي خاصانا باش نكملو الخدمة.</p>
+        <p id="save-status" class="save-status" role="status" aria-live="polite">التعديلات كتتحفظ تلقائياً فهاد المتصفح.</p>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="أقسام المشروع">
+      <div class="tabs-inner" role="tablist">
+        <button role="tab" id="tab-home" data-tab="home" aria-controls="panel-home" aria-selected="true">الرئيسية</button>
+        <button role="tab" id="tab-branches" data-tab="branches" aria-controls="panel-branches" aria-selected="false" tabindex="-1">الفروع</button>
+        <button role="tab" id="tab-workshop" data-tab="workshop" aria-controls="panel-workshop" aria-selected="false" tabindex="-1">الورشة</button>
+        <button role="tab" id="tab-cost" data-tab="cost" aria-controls="panel-cost" aria-selected="false" tabindex="-1">التكلفة وثمن البيع</button>
+        <button role="tab" id="tab-coffee" data-tab="coffee" aria-controls="panel-coffee" aria-selected="false" tabindex="-1">ماكينة القهوة G2</button>
+        <button role="tab" id="tab-inventory" data-tab="inventory" aria-controls="panel-inventory" aria-selected="false" tabindex="-1">الجرد</button>
+        <button role="tab" id="tab-todo" data-tab="todo" aria-controls="panel-todo" aria-selected="false" tabindex="-1">اللي باقي</button>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Home -->
+      <section class="panel" role="tabpanel" id="panel-home" aria-labelledby="tab-home">
+        <p class="notice">
+          <strong>مهم:</strong> هاد اللوحة مبنية على نص المحادثة فقط. ملفات Word وCAD والصور باقين فحاسوبك وما
+          تنقلوش لهنا. لائحة الملفات كاينة فقسم «الفروع».
+        </p>
+
+        <div class="grid">
+          <div class="card">
+            <span class="stat-label">الورشة</span>
+            <span class="stat-value">12 × 6 م · 72 م²</span>
+            <span class="muted">العلو 2.5 م · المدخل فواجهة 6 م</span>
+          </div>
+          <div class="card">
+            <span class="stat-label">الفروع</span>
+            <span class="stat-value">8 موثقة + 1 فكرة</span>
+            <span class="muted">الوثائق بالعربية والفرنسية</span>
+          </div>
+          <div class="card">
+            <span class="stat-label">الدفعة الحالية</span>
+            <span class="stat-value" id="home-batch">—</span>
+            <span class="muted" id="home-products">—</span>
+          </div>
+          <div class="card dark">
+            <span class="stat-label muted">الخطوة الجاية</span>
+            <span class="stat-value">الأثمان + الجرد</span>
+            <div class="actions">
+              <button type="button" class="btn accent small" data-goto="cost">حساب التكلفة</button>
+              <button type="button" class="btn accent small" data-goto="inventory">جرد الآلات</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="card">
+            <h2>الشركة</h2>
+            <ul class="dots">
+              <li>SEI شركة مستقلة عن <span class="ltr">Four Amine</span>؛ هاد الأخير هو النشاط الحالي، والانتقال تدريجي.</li>
+              <li>الورشة فـGarage الوالد بسيدي مومن: الاستعمال مجاني دابا مع أداء الماء والضوء.</li>
+              <li>عند بداية إنتاج SEI: 3,000 درهم شهرياً للوالد، مسجلة كمصروف مستقبلي.</li>
+              <li>المقر الإداري بالتوطين فوسط الدار البيضاء؛ الورشة موقع إنتاج منفصل.</li>
+              <li>الخطوة المتفق عليها: جرد الآلات والمعدات والمواد قبل السجل الإداري والمحاسبي.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h2>شنو تدار حتى دابا</h2>
+            <ol class="clean steps">
+              <li><span class="n">1</span><span>تصميم الورشة: القياسات، تصور 3D، ومخطط علوي 2D أولي.</span></li>
+              <li><span class="n">2</span><span>وثائق الفروع الثمانية بالعربية والفرنسية، ودليل الشركة الموحد.</span></li>
+              <li><span class="n">3</span><span>تسجيل دفعة الإنتاج: أفران، عربات، طابلة، معالف ومشارب.</span></li>
+              <li><span class="n">4</span><span>فرع القهوة: <span class="ltr">ESPRESSO SONNA G2</span> — حزمة Rev A تصورية.</span></li>
+              <li><span class="n">5</span><span>هيكلة Obsidian وربط Hermes بمجلد SUNNAVOK.</span></li>
+              <li><span class="n">6</span><span>تثبيت سياق الشركة والاتفاق على الجرد كخطوة جاية.</span></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row-between">
+            <h2>حالة النظام (مباشرة من الحرّاس)</h2>
+            <button type="button" class="btn ghost small" id="status-refresh">تحديث</button>
+          </div>
+          <p class="muted">الأرقام كتجي من تقارير SYS_01..04 اللي كيكتبها الـ daemon كل 60 ثانية؛ ما كاينش تخمين.</p>
+          <dl class="kv status-list" id="system-status" aria-live="polite">
+            <dt>الحالة</dt><dd>جارٍ القراءة…</dd>
+          </dl>
+          <p class="muted" id="system-status-time"></p>
+        </div>
+
+        <div class="card">
+          <div class="row-between">
+            <h2>سجل التدقيق (J)</h2>
+            <button type="button" class="btn ghost small" id="audit-refresh">تحديث</button>
+          </div>
+          <p class="muted">آخر الجالونات من <span class="ltr">PROJECT_MAP.md</span>، كيقرأها الحارس <span class="ltr">SYS_05</span> محلياً.</p>
+          <ul class="clean" id="agent-audit-feed" aria-live="polite">
+            <li>جارٍ القراءة…</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Branches -->
+      <section class="panel" role="tabpanel" id="panel-branches" aria-labelledby="tab-branches" hidden>
+        <div class="panel-head">
+          <h2>الفروع ديال SEI</h2>
+          <p class="muted">كل فرع عندو ملف بالعربية وملف بالفرنسية. المواصفات اللي ما تأكداتش خليناها خانات فارغة.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="row-between"><h3 class="branch-name">SEI AGRO</h3><span class="tag">AR + FR</span></div>
+            <p>معدات المواشي: معالف ومشارب، وحاضنة البيض.</p>
+            <p class="muted">القياسات القديمة مرجعية فقط؛ خاصها تثبيت.</p>
+          </article>
+          <article class="card">
+            <div class="row-between"><h3 class="branch-name">SEI BAKERY</h3><span class="tag">AR + FR</span></div>
+            <p>معدات المخابز: أفران، عربات الخبز، والطاولات.</p>
+            <p class="muted">باقي الصور والقياسات الحقيقية ديال المنتجات.</p>
+          </article>
+          <article class="card">
+            <div class="row-between"><h3 class="branch-name">SEI MÉTAL &amp; STRUCTURES</h3><span class="tag">AR + FR</span></div>
+            <p>الهياكل والمشاريع المعدنية.</p>
+          </article>
+          <article class="card">
+            <div class="row-between"><h3 class="branch-name">SEI BÂTIMENT &amp; CONSTRUCTION</h3><span class="tag">AR + FR</span></div>
+            <p>استمارات فرع البناء والتشييد.</p>
+          </article>
+          <article class="card">
+            <div class="row-between"><h3 class="branch-name">SEI INDUSTRIAL MACHINERY</h3><span class="tag">AR + FR</span></div>
+            <p>ملف الآلات الصناعية: 7 أقسام و18 جدول.</p>
+            <p class="muted">القدرة والأبعاد والإنتاجية فارغة حتى القياس والموافقة.</p>
+          </article>
+          <article class="card">
+            <div class="row-between"><h3 class="branch-name">SEI MODULAR &amp; MOBILITY</h3><span class="tag">AR + FR</span></div>
+            <p>الوحدات المتنقلة: من استقبال الطلب ومعاينة الموقع حتى التركيب والتسليم. 7 أقسام و18 جدول.</p>
+          </article>
+          <article class="card">
+            <div class="row-between"><h3 class="branch-name">SEI TRAILERS &amp; TRANSPORT</h3><span class="tag">AR + FR</span></div>
+            <p>المقطورات: الطلب، الحمولة والمركبة الجارة، المواصفات، الفحوص والتسليم. 7 أقسام و18 جدول.</p>
+          </article>
+          <article class="card">
+            <div class="row-between"><h3 class="branch-name">SEI ENGINEERING &amp; TRADE</h3><span class="tag">AR + FR</span></div>
+            <p>الدراسات والتوريد: نطاق الدراسة، مقارنة الموردين، التكلفة والاستلام. 7 أقسام و17 جدول.</p>
+          </article>
+          <article class="card">
+            <div class="row-between"><h3>معدات القهوة</h3><span class="tag warn">فكرة أولية</span></div>
+            <p>فرع جديد: تصميم وصناعة ماكينة إسبريسو محلياً.</p>
+            <div class="actions"><button type="button" class="btn ghost small" data-goto="coffee">تفاصيل G2</button></div>
+          </article>
+        </div>
+
+        <div class="card">
+          <h2>الملفات اللي فحاسوبك</h2>
+          <p class="muted">
+            المجلد: <span class="ltr">C:\Users\aether\Documents\Codex\2026-11-04\https-chatgpt-com-g-g-p\outputs\SUNNAVOK</span>
+          </p>
+          <ul class="files ltr">
+            <li>PROJECT_CONTEXT_AR.md</li>
+            <li>00_HOME_SUNNAVOK.md</li>
+            <li>.hermes.md</li>
+            <li>README_OBSIDIAN_HERMES_AR.md</li>
+            <li>SUNNAVOK_Company_Master_Guide_AR / FR.docx</li>
+            <li>SUNNAVOK_SEI_AGRO_Dossier_AR / FR.docx</li>
+            <li>SUNNAVOK_SEI_BAKERY_Dossier_AR / FR.docx</li>
+            <li>SUNNAVOK_SEI_METAL_Dossier_AR / FR.docx</li>
+            <li>SUNNAVOK_SEI_BATIMENT_Formulaires_AR / FR.docx</li>
+            <li>SUNNAVOK_SEI_INDUSTRIAL_MACHINERY_AR / FR.docx</li>
+            <li>SUNNAVOK_SEI_MODULAR_MOBILITY_AR / FR.docx</li>
+            <li>SUNNAVOK_SEI_TRAILERS_TRANSPORT_AR / FR.docx</li>
+            <li>SUNNAVOK_SEI_ENGINEERING_TRADE_AR / FR.docx</li>
+            <li>sunna_workshop_layout_6x12.png / .pdf</li>
+            <li>ESPRESSO SONNA G2 Rev A: DXF, SVG, SCAD, OBJ + MTL</li>
+          </ul>
+          <p class="muted">باقي ما دازتش معاينة شكل صفحات Word قبل الطباعة.</p>
+        </div>
+      </section>
+
+      <!-- Workshop -->
+      <section class="panel" role="tabpanel" id="panel-workshop" aria-labelledby="tab-workshop" hidden>
+        <div class="panel-head">
+          <h2>الورشة: 12 × 6 م، علو 2.5 م</h2>
+          <p class="muted">التوزيع تقريبي ومقترح. الرفوف والتجهيزات ما خاصهاش تكون عالية بزاف حيث العلو 2.5 م.</p>
+        </div>
+
+        <div class="split">
+          <figure class="drawing">
+            <div id="plan"></div>
+            <figcaption>المخطط مرسوم كيف كتشوف الورشة من المدخل: اليسار يسار، والخلف الفوق.</figcaption>
+          </figure>
+
+          <div class="panel">
+            <div class="card">
+              <h3>قياسات الواجهة (6 م)</h3>
+              <p class="muted">
+                المعروف: جوج بيبان فالواجهة، واحد فيهم «2 متر وشوية». الباقي خاصو قياس. عمّر بالمتر من اليسار لليمين.
+              </p>
+              <div class="fields">
+                <div class="field">
+                  <label for="f-a">من الزاوية اليسرى حتى الباب 1</label>
+                  <input id="f-a" type="number" min="0" step="0.01" inputmode="decimal" />
+                </div>
+                <div class="field">
+                  <label for="f-d1">عرض الباب 1</label>
+                  <input id="f-d1" type="number" min="0" step="0.01" inputmode="decimal" />
+                </div>
+                <div class="field">
+                  <label for="f-gap">المسافة بين البابين</label>
+                  <input id="f-gap" type="number" min="0" step="0.01" inputmode="decimal" />
+                </div>
+                <div class="field">
+                  <label for="f-d2">عرض الباب 2</label>
+                  <input id="f-d2" type="number" min="0" step="0.01" inputmode="decimal" />
+                </div>
+                <div class="field">
+                  <label for="f-b">من الباب 2 حتى الزاوية اليمنى</label>
+                  <input id="f-b" type="number" min="0" step="0.01" inputmode="decimal" />
+                </div>
+              </div>
+              <p id="facade-status" class="status" role="status" aria-live="polite"></p>
+              <div class="field">
+                <label for="f-notes">النوافذ، الأعمدة، ومقاسات الماكينات</label>
+                <input id="f-notes" type="text" placeholder="مثال: نافذة فالحيط اليمين على بعد 4 م من المدخل" />
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>المناطق المقترحة</h3>
+              <dl class="kv">
+                <dt>قدّام</dt>
+                <dd>الاستقبال، ودخول وخروج المواد.</dd>
+                <dt>اليسار</dt>
+                <dd>تخزين الحديد والأنابيب.</dd>
+                <dt>الوسط</dt>
+                <dd>ممر الحركة، عرض مقترح 0.9 م.</dd>
+                <dt>اليمين</dt>
+                <dd>الحفر، القطع والجلخ.</dd>
+                <dt>الخلف</dt>
+                <dd>اللحام TIG/MIG بستائر الحماية، والتجميع.</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Costing -->
+      <section class="panel" role="tabpanel" id="panel-cost" aria-labelledby="tab-cost" hidden>
+        <div class="panel-head">
+          <h2>تكلفة الدفعة وثمن البيع</h2>
+          <p class="muted">
+            دخّل الأثمان ديال الوحدة الواحدة من كل منتوج. الخانات فارغة حيث الأثمان الحقيقية باقي ما وصلاتش.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>الإعدادات العامة</h3>
+          <div class="fields">
+            <div class="field">
+              <label for="g-rate">ثمن ساعة الخدمة <span class="muted">(درهم)</span></label>
+              <input id="g-rate" type="number" min="0" step="any" inputmode="decimal" value="" />
+            </div>
+            <div class="field">
+              <label for="g-cons">المستهلكات <span class="muted">(% من المواد)</span></label>
+              <input id="g-cons" type="number" min="0" step="any" inputmode="decimal" value="5" />
+            </div>
+            <div class="field">
+              <label for="g-over">المصاريف العامة <span class="muted">(%)</span></label>
+              <input id="g-over" type="number" min="0" step="any" inputmode="decimal" value="0" />
+            </div>
+            <div class="field">
+              <label for="g-margin">هامش الربح <span class="muted">(% فوق التكلفة)</span></label>
+              <input id="g-margin" type="number" min="0" step="any" inputmode="decimal" value="30" />
+            </div>
+          </div>
+          <p class="muted">
+            5% و30% غير قيم بداية، بدّلهم كيف بغيتي. المستهلكات: أقراص الجلخ، سلك اللحام، الغاز. المصاريف العامة: الماء،
+            الضوء، والكراء المستقبلي.
+          </p>
+        </div>
+
+        <div id="products" class="panel"></div>
+
+        <div class="actions">
+          <button type="button" class="btn ghost" id="add-product">زيد منتوج</button>
+          <button type="button" class="btn" data-goto="todo">جمع المعطيات كنص</button>
+        </div>
+
+        <div class="card dark" aria-live="polite">
+          <h3>مجموع الدفعة</h3>
+          <div class="totals">
+            <div>
+              <div class="stat-label muted">التكلفة</div>
+              <div class="stat-value" id="t-cost"></div>
+            </div>
+            <div>
+              <div class="stat-label muted">المبيعات</div>
+              <div class="stat-value" id="t-sales"></div>
+            </div>
+            <div>
+              <div class="stat-label muted">الربح</div>
+              <div class="stat-value" id="t-profit"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>كيفاش كيتحسب</h3>
+          <ul class="dots">
+            <li>المواد = الصاج + الحديد + القطع.</li>
+            <li>تكلفة الوحدة = (المواد + الطيّ + المستهلكات + ساعات الخدمة × ثمن الساعة + النقل) + المصاريف العامة.</li>
+            <li>ثمن البيع = تكلفة الوحدة + هامش الربح. قارنو مع ثمن السوق قبل ما تعتمدو.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Coffee -->
+      <section class="panel" role="tabpanel" id="panel-coffee" aria-labelledby="tab-coffee" hidden>
+        <div class="panel-head">
+          <h2><span class="ltr">ESPRESSO SONNA G2</span></h2>
+          <p class="muted">ماكينة إسبريسو بجوج مجموعات. الحالة: Rev A، تصور خارجي وداخلي فقط، ماشي رسم قص أو تصنيع.</p>
+        </div>
+
+        <p class="notice">
+          <strong>السلامة أولاً:</strong> الحارق، مسار البوتان، وعاء الضغط والأسلاك ما كيتصنعوش حتى يحددهم مورّد
+          ويراجعهم مختص. خلي شراء inox والقص حتى تتثبت القياسات.
+        </p>
+
+        <div class="split">
+          <figure class="drawing">
+            <svg viewBox="0 0 430 330" role="img" aria-labelledby="g2-title">
+              <title id="g2-title">رسم رمزي للواجهة الأمامية ديال الماكينة: جوج مجموعات تحضير، أزرار S و M و L فوق كل مجموعة، وعصا بخار فكل جنب.</title>
+              <rect x="35" y="30" width="360" height="240" rx="10" class="m-body" />
+              <rect x="35" y="30" width="360" height="26" rx="10" class="m-dark" />
+              <rect x="55" y="236" width="320" height="20" rx="4" class="m-dark" />
+              <g>
+                <circle cx="118" cy="96" r="10" class="m-btn" /><text x="118" y="99" text-anchor="middle" class="m-btn-text">S</text>
+                <circle cx="145" cy="96" r="10" class="m-btn" /><text x="145" y="99" text-anchor="middle" class="m-btn-text">M</text>
+                <circle cx="172" cy="96" r="10" class="m-btn" /><text x="172" y="99" text-anchor="middle" class="m-btn-text">L</text>
+                <circle cx="145" cy="150" r="24" class="m-dark" />
+                <path d="M145 174 v16 h-34" class="m-line" />
+              </g>
+              <g>
+                <circle cx="258" cy="96" r="10" class="m-btn" /><text x="258" y="99" text-anchor="middle" class="m-btn-text">S</text>
+                <circle cx="285" cy="96" r="10" class="m-btn" /><text x="285" y="99" text-anchor="middle" class="m-btn-text">M</text>
+                <circle cx="312" cy="96" r="10" class="m-btn" /><text x="312" y="99" text-anchor="middle" class="m-btn-text">L</text>
+                <circle cx="285" cy="150" r="24" class="m-dark" />
+                <path d="M285 174 v16 h34" class="m-line" />
+              </g>
+              <path d="M70 120 v70 l-14 26" class="m-line" />
+              <path d="M360 120 v70 l14 26" class="m-line" />
+              <text x="215" y="298" text-anchor="middle" class="dim">العرض 750 مم (مختار)</text>
+              <text transform="translate(414 150) rotate(90)" text-anchor="middle" class="dim">العلو 500 مم (مؤقت)</text>
+              <text x="215" y="320" text-anchor="middle" class="dim">العمق 520 مم (مؤقت)</text>
+            </svg>
+            <figcaption>رسم رمزي: مواقع الأزرار والمجموعات ماشي نهائية.</figcaption>
+          </figure>
+
+          <div class="card">
+            <h3>الاختيارات المثبتة</h3>
+            <dl class="kv">
+              <dt>النسخ</dt>
+              <dd>GAS بقنينة بوتان، وMIX بالغاز والكهرباء.</dd>
+              <dt>المجموعات</dt>
+              <dd>جوج مجموعات تحضير.</dd>
+              <dt>المادة والطابع</dt>
+              <dd>inox مصقول، طابع إيطالي عصري.</dd>
+              <dt>التحكم</dt>
+              <dd>يدوي: أزرار S/M/L بالضغط المستمر، وكتوقف ملي كتطلق. بلا جرعات أوتوماتيكية.</dd>
+              <dt>الميزانية</dt>
+              <dd>15,000 درهم كسقف للهيكل الخارجي غير التشغيلي؛ المكونات والهندسة والاختبارات بميزانية منفصلة.</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="card">
+            <h3>باش نوصلو لـRev B</h3>
+            <ul class="dots">
+              <li>موديل وأبعاد مجموعتي التحضير، المضخة، ووحدة التسخين والتحكم.</li>
+              <li>مصدر الماء، ومواضع البخار والماء الساخن.</li>
+              <li>الخلوصات، سماكة inox والثنيات.</li>
+              <li>دور الكهرباء فكل نسخة: واش غير للمضخة والتحكم؟</li>
+              <li>العمق 520 مم خاصو يتراجع حسب المكونات والصيانة.</li>
+              <li>تجربة الفكرة مع مقاهي ووحدات متنقلة قبل الاستثمار.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>المطابقة</h3>
+            <p>المراجع اللي تسجلات: وزارة الصناعة والتجارة، معيار <span class="ltr">IMANOR NM EN 203-1</span>، ونصوص وزارة الانتقال الطاقي حول أجهزة الضغط وGPL.</p>
+            <p class="muted">شنو كينطبق بالضبط على ماكينة الإسبريسو خاص تأكدو الجهة المختصة قبل أي تسويق.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inventory -->
+      <section class="panel" role="tabpanel" id="panel-inventory" aria-labelledby="tab-inventory" hidden>
+        <div class="panel-head">
+          <h2>جرد الآلات والمعدات</h2>
+          <p class="muted">
+            الأسماء الأولى مأخوذة من وصف الورشة فالمحادثة؛ صحّحها، وزيد الباقي وحدة بوحدة مع العدد، الحالة، الملكية وثمن
+            الشراء أو الفاتورة.
+          </p>
+        </div>
+
+        <div id="inventory" class="panel"></div>
+
+        <div class="actions">
+          <button type="button" class="btn ghost" id="add-item">زيد آلة أو معدة</button>
+          <button type="button" class="btn" data-goto="todo">جمع المعطيات كنص</button>
+        </div>
+
+        <div class="card dark" aria-live="polite">
+          <h3>ملخص الجرد</h3>
+          <div class="totals">
+            <div>
+              <div class="stat-label muted">عدد الأنواع</div>
+              <div class="stat-value" id="inv-lines"></div>
+            </div>
+            <div>
+              <div class="stat-label muted">عدد الوحدات</div>
+              <div class="stat-value" id="inv-units"></div>
+            </div>
+            <div>
+              <div class="stat-label muted">قيمة الشراء</div>
+              <div class="stat-value" id="inv-value"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Todo -->
+      <section class="panel" role="tabpanel" id="panel-todo" aria-labelledby="tab-todo" hidden>
+        <div class="panel-head">
+          <h2>اللي باقي، بالأولوية</h2>
+          <p class="muted">علّم على اللي سالا.</p>
+        </div>
+
+        <ul class="clean">
+          <li class="check">
+            <input type="checkbox" id="c1" data-title="أثمان وكميات مواد الدفعة" />
+            <div class="body">
+              <label for="c1">أثمان وكميات مواد الدفعة</label>
+              <span class="muted">الصاج، الحديد، القطع، الطيّ، ساعات الخدمة، المستهلكات والنقل.</span>
+            </div>
+            <button type="button" class="btn ghost small" data-goto="cost">فتح</button>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="c2" data-title="جرد الآلات والمعدات والمواد" />
+            <div class="body">
+              <label for="c2">جرد الآلات والمعدات والمواد</label>
+              <span class="muted">قبل استكمال السجل الإداري والمحاسبي.</span>
+            </div>
+            <button type="button" class="btn ghost small" data-goto="inventory">فتح</button>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="c3" data-title="قياسات واجهة الورشة" />
+            <div class="body">
+              <label for="c3">قياسات واجهة الورشة</label>
+              <span class="muted">عرض ومكان البابين، النوافذ، الأعمدة، ومقاسات ومواقع الماكينات.</span>
+            </div>
+            <button type="button" class="btn ghost small" data-goto="workshop">فتح</button>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="c4" data-title="صور وقياسات حقيقية للمنتجات" />
+            <div class="body">
+              <label for="c4">صور وقياسات حقيقية للمنتجات</label>
+              <span class="muted">الأفران، العربات، الطابلة، المعالف والمشارب، قبل رسومات التصنيع.</span>
+            </div>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="c5" data-title="مكونات ماكينة القهوة G2" />
+            <div class="body">
+              <label for="c5">مكونات ماكينة القهوة G2</label>
+              <span class="muted">كتالوجات مجموعات التحضير، المضخة ووحدة التسخين، ثم مراجعة مختص للغاز والضغط والكهرباء.</span>
+            </div>
+            <button type="button" class="btn ghost small" data-goto="coffee">فتح</button>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="c6" data-title="إتمام ربط Hermes وObsidian" />
+            <div class="body">
+              <label for="c6">إتمام ربط Hermes وObsidian</label>
+              <span class="muted">تسجيل حساب Codex داخل Hermes، وفتح مجلد SUNNAVOK كـvault فـObsidian.</span>
+            </div>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="c7" data-title="مراجعة ملفات Word قبل الطباعة" />
+            <div class="body">
+              <label for="c7">مراجعة ملفات Word قبل الطباعة</label>
+              <span class="muted">المحتوى تراجع بنيوياً؛ شكل الصفحات باقي.</span>
+            </div>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="c8" data-title="إعدادات البوتات وSunna API" />
+            <div class="body">
+              <label for="c8">إعدادات البوتات وSunna API</label>
+              <span class="muted">توكن خاص لكل بوت ومعرّف شات رقمي، ومسار بيانات صحيح لـSunna API.</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="card">
+          <h3>جمع المعطيات كنص</h3>
+          <p class="muted">
+            المعطيات كتتحفظ تلقائياً فهاد المتصفح وعلى هاد الجهاز. مسح بيانات المتصفح أو استعمال جهاز آخر يقدر يحيدها؛ استعمل «جمع ونسخ» باش تحتافظ بنسخة وتشاركها فالشات.
+          </p>
+          <div class="actions">
+            <button type="button" class="btn accent" id="export-btn">جمع ونسخ</button>
+            <button type="button" class="btn" id="report-btn">تقرير تنفيذي</button>
+            <button type="button" class="btn ghost" id="json-export-btn">نسخة JSON</button>
+            <label class="btn ghost" for="json-import-input">استيراد JSON</label>
+            <input class="sr-only" type="file" id="json-import-input" accept="application/json,.json" />
+          </div>
+          <p id="export-status" class="muted" role="status" aria-live="polite"></p>
+          <label class="sr-only" for="export-out">النص المجموع</label>
+          <textarea id="export-out" readonly placeholder="النص غادي يبان هنا."></textarea>
+        </div>
+      </section>
+    </main>
+
+    <script id="sunnavok-initial-state" type="application/json">{ "__sunnavok_placeholder": true }</script>
+    <script src="./app.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,42 @@
+newmtl stainless
+Ka 0.15 0.15 0.15
+Kd 0.77 0.8 0.83
+Ks 0.25 0.25 0.25
+Ns 30
+
+newmtl fascia
+Ka 0.15 0.15 0.15
+Kd 0.86 0.88 0.9
+Ks 0.25 0.25 0.25
+Ns 30
+
+newmtl dark
+Ka 0.15 0.15 0.15
+Kd 0.28 0.33 0.38
+Ks 0.25 0.25 0.25
+Ns 30
+
+newmtl chrome
+Ka 0.15 0.15 0.15
+Kd 0.72 0.76 0.79
+Ks 0.25 0.25 0.25
+Ns 30
+
+newmtl copper
+Ka 0.15 0.15 0.15
+Kd 0.73 0.48 0.29
+Ks 0.25 0.25 0.25
+Ns 30
+
+newmtl rubber
+Ka 0.15 0.15 0.15
+Kd 0.18 0.21 0.24
+Ks 0.25 0.25 0.25
+Ns 30
+
+newmtl tray
+Ka 0.15 0.15 0.15
+Kd 0.42 0.47 0.52
+Ks 0.25 0.25 0.25
+Ns 30
+

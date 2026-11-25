@@ -1,0 +1,279 @@
+[
+  {
+    "id": "sug_20260928_165837_0",
+    "timestamp": "2026-09-28T16:58:37.700838",
+    "file": "jarvis_bridge.py",
+    "action": "زيادة timeout من 120 إلى 180 ثانية في دالة ask عند الاتصال بـ Jarvis API",
+    "raw": "[FILE: jarvis_bridge.py] [ACTION: زيادة timeout من 120 إلى 180 ثانية في دالة ask عند الاتصال بـ Jarvis API]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_165837_1",
+    "timestamp": "2026-09-28T16:58:37.700867",
+    "file": "cloud_fallback.py",
+    "action": "تقليل حجم النسخBackup من 5GB إلى 3GB في دالة create_backup",
+    "raw": "[FILE: cloud_fallback.py] [ACTION: تقليل حجم النسخBackup من 5GB إلى 3GB في دالة create_backup]",
+    "status": "skipped",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    },
+    "backup": "/home/esprieaether/AETHER_V8/_self_evolve_backups/cloud_fallback.py.20260928_214158.bak",
+    "error": "Cloud رفض التعديل"
+  },
+  {
+    "id": "sug_20260928_171207_1",
+    "timestamp": "2026-09-28T17:12:07.050411",
+    "file": "autonomous_loop.py",
+    "action": "زيادة فاصلة Time Sleep من 60 ثانية إلى 300 ثانية (5 دقيقة) في دالة run_loop لخفض تكرار الدورات غير الضرورية",
+    "raw": "[FILE: autonomous_loop.py] [ACTION: زيادة فاصلة Time Sleep من 60 ثانية إلى 300 ثانية (5 دقيقة) في دالة run_loop لخفض تكرار الدورات غير الضرورية]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_171207_2",
+    "timestamp": "2026-09-28T17:12:07.050436",
+    "file": "github_agent.py",
+    "action": "زيادة مدة الانتظار (Retry-After) من 60 ثانية إلى 300 ثانية عند تلقي رمز 429 (Too Many Requests) من GitHub API ل evitar حظر الـ IP",
+    "raw": "[FILE: github_agent.py] [ACTION: زيادة مدة الانتظار (Retry-After) من 60 ثانية إلى 300 ثانية عند تلقي رمز 429 (Too Many Requests) من GitHub API ل evitar حظر الـ IP]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_180848_0",
+    "timestamp": "2026-09-28T18:08:48.580938",
+    "file": "jarvis_bridge.py",
+    "action": "زيادة timeout من 120 إلى 180 ثانية في دالة ask عند الاتصال بـ JarvisAPI",
+    "raw": "[FILE: jarvis_bridge.py] [ACTION: زيادة timeout من 120 إلى 180 ثانية في دالة ask عند الاتصال بـ JarvisAPI]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_180848_2",
+    "timestamp": "2026-09-28T18:08:48.581010",
+    "file": "self_evolve.py",
+    "action": "تغيير المعامل max_iterations من 5 إلى 3 في دالة evolve_code لتحديد عدد مرات التكرار التلقائي",
+    "raw": "[FILE: self_evolve.py] [ACTION: تغيير المعامل max_iterations من 5 إلى 3 في دالة evolve_code لتحديد عدد مرات التكرار التلقائي]",
+    "status": "auto_applied",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    },
+    "applied_at": "2026-09-28T22:50:23.108072",
+    "old_size": 14628,
+    "new_size": 14628
+  },
+  {
+    "id": "sug_20260928_203017_1",
+    "timestamp": "2026-09-28T20:30:17.274952",
+    "file": "web_interface.py",
+    "action": "تحسين استجابة واجهة المستخدم خلال 200 مللي ثانية عن طريق تقليل حجم صورة الخلفية من 2 ميغابايت إلى 500 كيلوبايت في قسم التحميل",
+    "raw": "[FILE: web_interface.py] [ACTION: تحسين استجابة واجهة المستخدم خلال 200 مللي ثانية عن طريق تقليل حجم صورة الخلفية من 2 ميغابايت إلى 500 كيلوبايت في قسم التحميل]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_203017_2",
+    "timestamp": "2026-09-28T20:30:17.274981",
+    "file": "autonomous_loop.py",
+    "action": "زيادة تكرار فحص الحالة من كل 60 ثانية إلى كل 30 ثانية في دالة main_loop لتحسين الاستجابة السريعة لل/connect events",
+    "raw": "[FILE: autonomous_loop.py] [ACTION: زيادة تكرار فحص الحالة من كل 60 ثانية إلى كل 30 ثانية في دالة main_loop لتحسين الاستجابة السريعة لل/connect events]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_212005_0",
+    "timestamp": "2026-09-28T21:20:05.297533",
+    "file": "cloud_fallback.py",
+    "action": "زيادة عدد مرات Retry من 3 إلى 5 في دالة activate_fallback مع تأخير اتصالات الشبكة من 5 ثواني إلى 7 ثواني",
+    "raw": "[FILE: cloud_fallback.py] [ACTION: زيادة عدد مرات Retry من 3 إلى 5 في دالة activate_fallback مع تأخير اتصالات الشبكة من 5 ثواني إلى 7 ثواني]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_212005_1",
+    "timestamp": "2026-09-28T21:20:05.297577",
+    "file": "guardian_agent.py",
+    "action": "تعديل عتبة تحليل السجلات من 100 سطر إلى 150 سطر في دالة scan_logs للكشف عن الأخطاء المتكررة",
+    "raw": "[FILE: guardian_agent.py] [ACTION: تعديل عتبة تحليل السجلات من 100 سطر إلى 150 سطر في دالة scan_logs للكشف عن الأخطاء المتكررة]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_212005_2",
+    "timestamp": "2026-09-28T21:20:05.297602",
+    "file": "smart_alerts.py",
+    "action": "تقليل interval فحص النشاط من 60 ثانية إلى 45 ثانية في دالة check_activity لتسريع استجابة التحذيرات",
+    "raw": "[FILE: smart_alerts.py] [ACTION: تقليل interval فحص النشاط من 60 ثانية إلى 45 ثانية في دالة check_activity لتسريع استجابة التحذيرات]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_212355_0",
+    "timestamp": "2026-09-28T21:23:55.351876",
+    "file": "jarvis_bridge.py",
+    "action": "زيادة timeout من 120 إلى 180 ثانية في دالة ask_jarvis عند استلام طلبات معقدة، وesterday timeout من 60 إلى 90 ثانية في دالة get_status",
+    "raw": "[FILE: jarvis_bridge.py] [ACTION: زيادة timeout من 120 إلى 180 ثانية في دالة ask_jarvis عند استلام طلبات معقدة، وesterday timeout من 60 إلى 90 ثانية في دالة get_status]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_212842_1",
+    "timestamp": "2026-09-28T21:28:42.628779",
+    "file": "bot.py",
+    "action": "زيادة timeout الاتصال بالـ API من 30 إلى 45 ثانية في دالة initialize_clients مع إضافة retry logic بـ 3 مرات تباعاً عند فشل الاتصال",
+    "raw": "[FILE: bot.py] [ACTION: زيادة timeout الاتصال بالـ API من 30 إلى 45 ثانية في دالة initialize_clients مع إضافة retry logic بـ 3 مرات تباعاً عند فشل الاتصال]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_212955_0",
+    "timestamp": "2026-09-28T21:29:55.430771",
+    "file": "jarvis_bridge.py",
+    "action": "زيادة timeout من 120 إلى 180 ثانية في دالة ask Jarvis، وال movements من 60 إلى 90 ثانية في دالة process_command، مع إضافة إخطار عند تجاوز 75% من المدة",
+    "raw": "[FILE: jarvis_bridge.py] [ACTION: زيادة timeout من 120 إلى 180 ثانية في دالة ask Jarvis، وال movements من 60 إلى 90 ثانية في دالة process_command، مع إضافة إخطار عند تجاوز 75% من المدة]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_212955_1",
+    "timestamp": "2026-09-28T21:29:55.430806",
+    "file": "log_analyzer.py",
+    "action": "تغيير مستوى التسجل الافتراضي من INFO إلى DEBUG في دالة initialize، وزيادة حجم الملف المؤقت من 10MB إلى 50MB في دالة rotate_logs",
+    "raw": "[FILE: log_analyzer.py] [ACTION: تغيير مستوى التسجل الافتراضي من INFO إلى DEBUG في دالة initialize، وزيادة حجم الملف المؤقت من 10MB إلى 50MB في دالة rotate_logs]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  },
+  {
+    "id": "sug_20260928_212955_2",
+    "timestamp": "2026-09-28T21:29:55.430827",
+    "file": "cloud_fallback.py",
+    "action": "تقليل عدد المحاول الفورية من 5 إلى 3، وزيادة الفاصل بين المحاول من 5 إلى 10 ثانية في دالة attempt_connection",
+    "raw": "[FILE: cloud_fallback.py] [ACTION: تقليل عدد المحاول الفورية من 5 إلى 3، وزيادة الفاصل بين المحاول من 5 إلى 10 ثانية في دالة attempt_connection]",
+    "status": "pending",
+    "analysis": {
+      "status": "ok",
+      "total_lines": 1,
+      "errors": 0,
+      "warnings": 0,
+      "successes": 0,
+      "error_patterns": {},
+      "sample_errors": []
+    }
+  }
+]

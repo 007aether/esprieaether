@@ -1,0 +1,100 @@
+---
+# ESPRIEAETHER-SUNNA Ingress Configuration
+# Routes external traffic to the API and Dashboard services
+# Requires: Ingress controller (nginx, Traefik, etc.) and cert-manager for TLS
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: esprieaether-ingress
+  namespace: esprieaether
+  labels:
+    app: esprieaether-sunna
+    component: ingress
+  annotations:
+    # Nginx Ingress Controller annotations
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-buffering: "on"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    nginx.ingress.kubernetes.io/upstream-keepalive: "true"
+    nginx.ingress.kubernetes.io/upstream-keepalive-requests: "1000"
+    nginx.ingress.kubernetes.io/upstream-keepalive-timeout: "60s"
+    nginx.ingress.kubernetes.io/client-body-buffer-size: "16k"
+    nginx.ingress.kubernetes.io/large-client-header-buffers: "4 16k"
+    nginx.ingress.kubernetes.io/limit-conn: "100"
+    nginx.ingress.kubernetes.io/limit-conn-rate: "50"
+    nginx.ingress.kubernetes.io/limit-conn-dry-run: "false"
+    # CORS annotations
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type, Authorization, X-API-Version, X-Request-ID"
+    nginx.ingress.kubernetes.io/cors-expose-headers: "X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-Request-ID"
+    # Redirect HTTP to HTTPS
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # Custom headers
+    nginx.ingress.kubernetes.io/add-headers: "esprieaether/configmap"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - api.esprieaether.com
+    - dashboard.esprieaether.com
+    secretName: esprieaether-tls
+  rules:
+  - host: api.esprieaether.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sunna-api
+            port:
+              number: 5100
+  - host: dashboard.esprieaether.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sunna-dashboard
+            port:
+              number: 5105
+
+---
+# Alternative Ingress for WebSocket (if needed)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: esprieaether-ws-ingress
+  namespace: esprieaether
+  labels:
+    app: esprieaether-sunna
+    component: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-buffering: "on"
+    nginx.ingress.kubernetes.io/upgrade: "$http_upgrade"
+    nginx.ingress.kubernetes.io/connection: "$http_connection_upgrade"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - ws.esprieaether.com
+    secretName: esprieaether-tls
+  rules:
+  - host: ws.esprieaether.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sunna-dashboard
+            port:
+              number: 5105

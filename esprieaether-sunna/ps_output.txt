@@ -1,0 +1,74 @@
+     UID     PID    PPID  TTY        STIME COMMAND
+ESPRIEAE    4249       1 ?        18:56:28 /usr/bin/bash -c source /c/Users/ESPRIEAETHER/AppData/Local/hermes/cache/terminal/hermes-snap-5f8efee3eabc.sh >/dev/null 2>&1 || true
+export AI_AGENT="${AI_AGENT:-hermes-agent}" HERMES_AGENT="${HERMES_AGENT:-true}"
+export GIT_PAGER="${GIT_PAGER:-cat}" PAGER="${PAGER:-cat}"
+builtin cd -- /c/Users/ESPRIEAETHER/Desktop/esprieaether || exit 126
+eval 'cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 -c "
+import subprocess
+import os
+
+# Redirect output to a file, then read it
+with open('\''ps_output.txt'\'', '\''wb'\'') as f:
+    subprocess.run(['\''ps'\'', '\''-ef'\''], stdout=f, stderr=subprocess.DEVNULL)
+
+# Read the file
+with open('\''ps_output.txt'\'', '\''rb'\'') as f:
+    content = f.read()
+
+# Decode with latin-1 (no errors)
+text = content.decode('\''latin-1'\'')
+print('\''=== PROCESSES (first 500 chars) ==='\'')
+print(text[:500])
+" 2>&1 | head -20'
+__hermes_ec=$?
+umask 077
+__hermes_snap_tmp=$(mktemp /c/Users/ESPRIEAETHER/AppData/Local/hermes/cache/terminal/hermes-snap-5f8efee3eabc.sh.tmp.XXXXXXXXXX) && { { ( unset ${!HERMES_SESSION_*} ${!HERMES_CRON_AUTO_DELIVER_*} ${!HERMES_BROWSER_CONTROL_*} AI_AGENT HERMES_AGENT HERMES_DELEGATED_CHILD_CONTEXT HERMES_CRON_SESSION ${!HERMES_RPC_*} HERMES_KERNEL_DIR HERMES_UI_SESSION_ID 2>/dev/null; export -p; ) || true; } > "$__hermes_snap_tmp" && mv -f "$__hermes_snap_tmp" /c/Users/ESPRIEAETHER/AppData/Local/hermes/cache/terminal/hermes-snap-5f8efee3eabc.sh; } 2>/dev/null || rm -f "$__hermes_snap_tmp" 2>/dev/null || true
+printf '\n__HERMES_CWD_5f8efee3eabc__%s__HERMES_CWD_5f8efee3eabc__\n' "$(pwd -P)"
+exit $__hermes_ec 
+ESPRIEAE    2741       1 ?        18:42:29 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 work/autonomous/self_heal_daemon.py 
+ESPRIEAE    2046       1 ?        18:33:57 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe src/ai_router.py kñ 
+ESPRIEAE    1798       1 ?        18:24:33 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe src/autonome_evolve.py --daemon lfá 
+ESPRIEAE    1850    1848 ?        18:26:22 head -5 
+ESPRIEAE    4252       1 ?        18:56:28 ps -ef 
+ESPRIEAE    3373       1 ?        18:47:55 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 work/autonomous/self_heal_daemon.py 
+ESPRIEAE    2545       1 ?        18:39:41 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 work/autonomous/self_heal_daemon.py 
+ESPRIEAE    2181       1 ?        18:36:09 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    4250    4249 ?        18:56:28 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe -c "
+import subprocess
+import os
+
+# Redirect output to a file, then read it
+with open('ps_output.txt', 'wb') as f:
+    subprocess.run(['ps', '-ef'], stdout=f, stderr=subprocess.DEVNULL)
+
+# Read the file
+with open('ps_output.txt', 'rb') as f:
+    content = f.read()
+
+# Decode with latin-1 (no errors)
+text = content.decode('latin-1')
+print('=== PROCESSES (first 500 chars) ===')
+print(text[:500])
+"  theq 
+ESPRIEAE    3512       1 ?        18:49:08 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 work/autonomous/self_heal_daemon.py 
+ESPRIEAE    2059       1 ?        18:34:24 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 src/ai_router.py > /tmp/airouter2.log 2>&1 
+ESPRIEAE    2477       1 ?        18:38:53 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py p/airouter2.loÑ 
+ESPRIEAE    3886       1 ?        18:52:34 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 work/autonomous/self_heal_daemon.py 
+ESPRIEAE    2079    2059 ?        18:34:24 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe src/ai_router.py kñ 
+ESPRIEAE    3906    3886 ?        18:52:34 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    3776    3756 ?        18:51:26 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    3532    3512 ?        18:49:08 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    3393    3373 ?        18:47:56 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    4018       1 ?        18:53:42 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 work/autonomous/self_heal_daemon.py 
+ESPRIEAE    2565    2545 ?        18:39:41 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    3227       1 ?        18:46:47 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 work/autonomous/self_heal_daemon.py 
+ESPRIEAE    2871    2851 ?        18:43:38 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    2988    2968 ?        18:44:35 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    4038    4018 ?        18:53:42 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    3247    3227 ?        18:46:47 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    2761    2741 ?        18:42:30 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    4251    4249 ?        18:56:28 head -20 
+ESPRIEAE    2368       1 ?        18:38:04 C:\Users\ESPRIEAETHER\AppData\Local\Microsoft\WindowsApps\python3.exe work/autonomous/self_heal_daemon.py eal_daemon.py Ñ 
+ESPRIEAE    3756       1 ?        18:51:26 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 work/autonomous/self_heal_daemon.py 
+ESPRIEAE    2851       1 ?        18:43:37 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 work/autonomous/self_heal_daemon.py 
+ESPRIEAE    2968       1 ?        18:44:35 /usr/bin/bash -lic set +m; cd /c/Users/ESPRIEAETHER/Desktop/esprieaether && python3 work/autonomous/self_heal_daemon.py 

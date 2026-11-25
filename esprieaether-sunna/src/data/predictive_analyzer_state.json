@@ -1,0 +1,198 @@
+{
+  "market_data": [
+    {
+      "asset": "BTC",
+      "price": 144.61,
+      "change_24h": 6.11,
+      "volume_24h": 103000,
+      "timestamp": "2026-10-23T20:08:34.609979"
+    },
+    {
+      "asset": "ETH",
+      "price": 144.61,
+      "change_24h": 6.11,
+      "volume_24h": 103000,
+      "timestamp": "2026-10-23T20:08:34.609993"
+    },
+    {
+      "asset": "XRP",
+      "price": 144.61,
+      "change_24h": 6.11,
+      "volume_24h": 103000,
+      "timestamp": "2026-10-23T20:08:34.609997"
+    },
+    {
+      "asset": "SOL",
+      "price": 144.61,
+      "change_24h": 6.11,
+      "volume_24h": 103000,
+      "timestamp": "2026-10-23T20:08:34.610000"
+    },
+    {
+      "asset": "DOGE",
+      "price": 154.61,
+      "change_24h": 6.11,
+      "volume_24h": 104000,
+      "timestamp": "2026-10-23T20:08:34.610003"
+    },
+    {
+      "asset": "ADA",
+      "price": 144.61,
+      "change_24h": 6.11,
+      "volume_24h": 103000,
+      "timestamp": "2026-10-23T20:08:34.610006"
+    }
+  ],
+  "trend_analysis": [
+    {
+      "asset": "BTC",
+      "price": 144.61,
+      "change_24h": 6.11,
+      "trend": "صعودي 📈",
+      "volatility": 0.611,
+      "confidence": 1.0,
+      "timestamp": "2026-10-23T20:08:34.610581"
+    },
+    {
+      "asset": "ETH",
+      "price": 144.61,
+      "change_24h": 6.11,
+      "trend": "صعودي 📈",
+      "volatility": 0.611,
+      "confidence": 1.0,
+      "timestamp": "2026-10-23T20:08:34.610594"
+    },
+    {
+      "asset": "XRP",
+      "price": 144.61,
+      "change_24h": 6.11,
+      "trend": "صعودي 📈",
+      "volatility": 0.611,
+      "confidence": 1.0,
+      "timestamp": "2026-10-23T20:08:34.610597"
+    },
+    {
+      "asset": "SOL",
+      "price": 144.61,
+      "change_24h": 6.11,
+      "trend": "صعودي 📈",
+      "volatility": 0.611,
+      "confidence": 1.0,
+      "timestamp": "2026-10-23T20:08:34.610599"
+    },
+    {
+      "asset": "DOGE",
+      "price": 154.61,
+      "change_24h": 6.11,
+      "trend": "صعودي 📈",
+      "volatility": 0.611,
+      "confidence": 1.0,
+      "timestamp": "2026-10-23T20:08:34.610601"
+    },
+    {
+      "asset": "ADA",
+      "price": 144.61,
+      "change_24h": 6.11,
+      "trend": "صعودي 📈",
+      "volatility": 0.611,
+      "confidence": 1.0,
+      "timestamp": "2026-10-23T20:08:34.610603"
+    }
+  ],
+  "predictions": [
+    {
+      "asset": "BTC",
+      "direction": "صعودي",
+      "predicted_move": 9.17,
+      "confidence": 1.0,
+      "recommendation": "🔼 شراء (Buy) - يوجد اتجاه صعودي قوي",
+      "risk_level": "🟠 عالية",
+      "timestamp": "2026-10-23T20:08:34.611288"
+    },
+    {
+      "asset": "ETH",
+      "direction": "صعودي",
+      "predicted_move": 9.17,
+      "confidence": 1.0,
+      "recommendation": "🔼 شراء (Buy) - يوجد اتجاه صعودي قوي",
+      "risk_level": "🟠 عالية",
+      "timestamp": "2026-10-23T20:08:34.611316"
+    },
+    {
+      "asset": "XRP",
+      "direction": "صعودي",
+      "predicted_move": 9.17,
+      "confidence": 1.0,
+      "recommendation": "🔼 شراء (Buy) - يوجد اتجاه صعودي قوي",
+      "risk_level": "🟠 عالية",
+      "timestamp": "2026-10-23T20:08:34.611321"
+    },
+    {
+      "asset": "SOL",
+      "direction": "صعودي",
+      "predicted_move": 9.17,
+      "confidence": 1.0,
+      "recommendation": "🔼 شراء (Buy) - يوجد اتجاه صعودي قوي",
+      "risk_level": "🟠 عالية",
+      "timestamp": "2026-10-23T20:08:34.611329"
+    },
+    {
+      "asset": "DOGE",
+      "direction": "صعودي",
+      "predicted_move": 9.17,
+      "confidence": 1.0,
+      "recommendation": "🔼 شراء (Buy) - يوجد اتجاه صعودي قوي",
+      "risk_level": "🟠 عالية",
+      "timestamp": "2026-10-23T20:08:34.611332"
+    },
+    {
+      "asset": "ADA",
+      "direction": "صعودي",
+      "predicted_move": 9.17,
+      "confidence": 1.0,
+      "recommendation": "🔼 شراء (Buy) - يوجد اتجاه صعودي قوي",
+      "risk_level": "🟠 عالية",
+      "timestamp": "2026-10-23T20:08:34.611335"
+    }
+  ],
+  "notifications": [
+    {
+      "type": "risk_alert",
+      "asset": "BTC",
+      "message": "⚠️ BTC: مستوى مخاطر عالية (🟠 عالية)",
+      "timestamp": "2026-10-23T20:08:34.611288"
+    },
+    {
+      "type": "risk_alert",
+      "asset": "ETH",
+      "message": "⚠️ ETH: مستوى مخاطر عالية (🟠 عالية)",
+      "timestamp": "2026-10-23T20:08:34.611316"
+    },
+    {
+      "type": "risk_alert",
+      "asset": "XRP",
+      "message": "⚠️ XRP: مستوى مخاطر عالية (🟠 عالية)",
+      "timestamp": "2026-10-23T20:08:34.611321"
+    },
+    {
+      "type": "risk_alert",
+      "asset": "SOL",
+      "message": "⚠️ SOL: مستوى مخاطر عالية (🟠 عالية)",
+      "timestamp": "2026-10-23T20:08:34.611329"
+    },
+    {
+      "type": "risk_alert",
+      "asset": "DOGE",
+      "message": "⚠️ DOGE: مستوى مخاطر عالية (🟠 عالية)",
+      "timestamp": "2026-10-23T20:08:34.611332"
+    },
+    {
+      "type": "risk_alert",
+      "asset": "ADA",
+      "message": "⚠️ ADA: مستوى مخاطر عالية (🟠 عالية)",
+      "timestamp": "2026-10-23T20:08:34.611335"
+    }
+  ],
+  "last_run": "2026-10-23T20:08:34.611990",
+  "status": "idle"
+}

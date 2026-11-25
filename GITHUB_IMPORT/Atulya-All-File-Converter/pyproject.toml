@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atulya-all-file-converter"
+dynamic = ["version"]
+description = "Private offline PDF, image, document and media converter — any file to any format"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+dependencies = [
+    "click>=8.0",
+    "rich>=12.0",
+    "pandas>=1.3",
+    "openpyxl>=3.0",
+    "xlsxwriter>=3.0",
+    "pillow>=9.0",
+    "pyyaml>=6.0",
+    "tomli>=2.0; python_version < '3.11'",
+    "tomli-w>=1.0",
+    "chardet>=5.0",
+]
+
+[project.optional-dependencies]
+pdf = ["PyMuPDF"]
+docx = ["python-docx"]
+ocr = ["pytesseract"]
+ods = ["odfpy"]
+web = ["fastapi>=0.100", "uvicorn>=0.20", "python-multipart>=0.0.5"]
+all = ["PyMuPDF", "python-docx", "pytesseract", "odfpy", "fastapi>=0.100", "uvicorn>=0.20", "python-multipart>=0.0.5"]
+
+[project.scripts]
+atulya-convert = "atulya_all_file_converter.cli:main"
+atulya-convert-server = "atulya_all_file_converter.server:serve"
+
+[tool.setuptools.dynamic]
+version = {attr = "atulya_all_file_converter.__version__"}
+
+
+[tool.setuptools.packages.find]
+include = ["atulya_all_file_converter*"]
+

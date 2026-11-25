@@ -1,0 +1,623 @@
+[
+ {
+  "ts": "2026-10-15T12:19:33.137520+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-15T12:28:56.598452+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-15T15:31:59.955885+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-15T18:35:56.646736+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-15T21:41:33.499376+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-16T03:47:26.891642+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-16T06:51:38.610695+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-16T09:56:38.287972+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-16T14:00:23.972110+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-16T14:01:04.276481+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-16T17:05:04.858576+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-17T01:42:17.196303+00:00",
+  "written": 0,
+  "idea": "thedotmack/claude-mem",
+  "module": "claude_mem_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\claude_mem_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-17T04:44:48.655965+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-17T07:45:22.366023+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "thedotmack/claude-mem"
+ },
+ {
+  "ts": "2026-10-17T13:53:37.556747+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-17T16:58:19.297036+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-17T20:05:33.131432+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-17T23:13:50.633574+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-18T02:15:42.776530+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-18T05:18:49.246921+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-18T08:19:35.890739+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-18T11:20:16.466954+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-18T14:22:18.761508+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-18T17:43:50.926597+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-18T17:45:56.369934+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-18T20:50:11.396603+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-18T23:56:55.013136+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-19T03:00:58.413717+00:00",
+  "written": 0,
+  "idea": "CherryHQ/cherry-studio",
+  "module": "cherry_studio_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\cherry_studio_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-19T06:04:56.340097+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "CherryHQ/cherry-studio"
+ },
+ {
+  "ts": "2026-10-19T06:06:13.864762+00:00",
+  "written": 1,
+  "idea": "HKUDS/nanobot",
+  "module": "nanobot_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\nanobot_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-19T09:07:14.725778+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "khoj-ai/khoj"
+ },
+ {
+  "ts": "2026-10-19T12:11:20.719720+00:00",
+  "written": 0,
+  "idea": "khoj-ai/khoj",
+  "module": "khoj_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\khoj_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-19T15:15:12.161298+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "khoj-ai/khoj"
+ },
+ {
+  "ts": "2026-10-19T18:20:19.566398+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "khoj-ai/khoj"
+ },
+ {
+  "ts": "2026-10-20T06:36:52.292231+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-20T13:12:18.362406+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-20T16:14:31.894758+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-20T16:16:21.580827+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-20T19:16:07.746713+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-20T19:21:50.045226+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-20T22:23:01.555603+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-20T22:29:21.197623+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T01:27:25.766945+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T01:33:08.201019+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T04:35:12.437966+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T04:35:43.605681+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T07:38:36.179634+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T07:42:44.049264+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T10:41:50.459855+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T10:48:56.947160+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T13:51:21.798158+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T13:52:37.824931+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T16:54:17.003492+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T16:58:08.000829+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T19:59:04.968766+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T20:00:57.106108+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T23:04:25.517522+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-21T23:05:03.430649+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T02:07:53.209928+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T02:09:11.095550+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T05:10:40.240859+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T05:12:02.717743+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T08:13:46.056428+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T08:18:52.913383+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T11:16:10.062719+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T11:23:07.943733+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T14:19:17.346542+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T14:25:44.282157+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T17:22:51.660562+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T17:28:43.189907+00:00",
+  "written": 0,
+  "error": "router failed",
+  "idea": "langfuse/langfuse"
+ },
+ {
+  "ts": "2026-10-22T20:27:54.478266+00:00",
+  "written": 0,
+  "idea": "langfuse/langfuse",
+  "module": "langfuse_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\langfuse_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-23T02:38:13.031596+00:00",
+  "written": 0,
+  "idea": "conductor-oss/conductor",
+  "module": "conductor_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\conductor_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-23T08:45:44.006458+00:00",
+  "written": 0,
+  "idea": "PrimeIntellect-ai/prime-agent",
+  "module": "prime_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\prime_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-23T11:46:58.561656+00:00",
+  "written": 1,
+  "idea": "PrimeIntellect-ai/prime-agent",
+  "module": "prime_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\prime_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-23T14:50:03.606775+00:00",
+  "written": 1,
+  "idea": "alibaba/zvec",
+  "module": "zvec_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\zvec_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-23T19:57:36.581045+00:00",
+  "written": 0,
+  "idea": "browseros-ai/BrowserOS",
+  "module": "browseros_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\browseros_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-23T23:00:18.488530+00:00",
+  "written": 1,
+  "idea": "browseros-ai/BrowserOS",
+  "module": "browseros_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\browseros_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T02:05:41.423928+00:00",
+  "written": 0,
+  "idea": "ccfos/nightingale",
+  "module": "nightingale_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\nightingale_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-24T05:08:13.794258+00:00",
+  "written": 1,
+  "idea": "ccfos/nightingale",
+  "module": "nightingale_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\nightingale_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T08:13:47.221528+00:00",
+  "written": 1,
+  "idea": "aden-hive/hive",
+  "module": "hive_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\hive_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T11:16:23.254640+00:00",
+  "written": 1,
+  "idea": "hatchet-dev/hatchet",
+  "module": "hatchet_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\hatchet_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T14:20:05.043575+00:00",
+  "written": 1,
+  "idea": "Human-Agent-Society/reef",
+  "module": "reef_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\reef_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T17:24:55.423143+00:00",
+  "written": 1,
+  "idea": "siddsachar/row-bot",
+  "module": "row_bot_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\row_bot_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T20:30:25.502620+00:00",
+  "written": 1,
+  "idea": "toby-bridges/api-relay-audit",
+  "module": "api_relay_audit_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\api_relay_audit_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-24T23:32:50.136494+00:00",
+  "written": 1,
+  "idea": "aeonfun/aeon",
+  "module": "aeon_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\aeon_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-25T02:38:43.031827+00:00",
+  "written": 1,
+  "idea": "swarmclawai/swarmclaw",
+  "module": "swarmclaw_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\swarmclaw_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-25T05:41:22.742819+00:00",
+  "written": 0,
+  "idea": "AgnetLabs/Laddr",
+  "module": "laddr_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\laddr_agent.py",
+  "valid": false,
+  "errors": [
+   "missing module docstring"
+  ]
+ },
+ {
+  "ts": "2026-10-25T11:49:07.717718+00:00",
+  "written": 1,
+  "idea": "open-responses/open-responses",
+  "module": "open_responses_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\open_responses_agent.py",
+  "valid": true,
+  "errors": []
+ },
+ {
+  "ts": "2026-10-25T14:52:10.426552+00:00",
+  "written": 1,
+  "idea": "avivl/cloud-sre-agent",
+  "module": "cloud_sre_agent",
+  "path": "C:\\Users\\ESPRIEAETHER\\Desktop\\esprieaether\\src\\_staged\\cloud_sre_agent.py",
+  "valid": true,
+  "errors": []
+ }
+]

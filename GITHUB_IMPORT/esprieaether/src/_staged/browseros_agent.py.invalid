@@ -1,0 +1,27 @@
+# BrowserOS: An Autonomous Agent Module for BrowserOS System
+# This Module is designed for gathering data from a website.
+# It includes constants for interval and tags, and a function to
+# gather data without making network calls or calling destructive functionalities.
+#
+# Author: [Your Name]
+# Date: [Current Date]
+# Version: [Current Version]
+
+class BrowserOSAgent:
+    """
+    Agent Class for gathering data from websites. It doesn't make network calls and follows
+    a defined interval for next data collection.
+    """
+    INTERVAL_MIN = 10  # Time interval in minutes before the data is collected again
+    TAGS = ["data_collection", "website_gathering"]  # Tags associated with the data gathering process
+
+    def gather(self) -> dict:
+        """
+        This method defines how data is collected. As an example, it could look in local storage,
+        databases, or a local file to find information about websites to gather. 
+        For now, it simply returns {"website": "example.com", "data": "found"}.
+        """
+        data_sources = ["local_storage", "database", "file_system"]
+        website = "example.com"
+        data_info = {"website": website, "data": "found"}
+        return data_info

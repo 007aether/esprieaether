@@ -1,0 +1,110 @@
+{
+  "alerts": [
+    {
+      "type": "service_down",
+      "port": "5000",
+      "name": "JARVIS Web",
+      "timestamp": "2026-10-23T20:08:34.527736"
+    },
+    {
+      "type": "service_down",
+      "port": "5001",
+      "name": "Cloud Desktop",
+      "timestamp": "2026-10-23T20:08:34.527749"
+    },
+    {
+      "type": "service_down",
+      "port": "5100",
+      "name": "Sunna API",
+      "timestamp": "2026-10-23T20:08:34.527751"
+    },
+    {
+      "type": "service_down",
+      "port": "5103",
+      "name": "Kanban Board",
+      "timestamp": "2026-10-23T20:08:34.527752"
+    },
+    {
+      "type": "service_down",
+      "port": "5105",
+      "name": "Sunna Dashboard",
+      "timestamp": "2026-10-23T20:08:34.527754"
+    },
+    {
+      "type": "service_down",
+      "port": "11435",
+      "name": "AI Router",
+      "timestamp": "2026-10-23T20:08:34.527756"
+    },
+    {
+      "type": "service_down",
+      "port": "11436",
+      "name": "Orchestrator",
+      "timestamp": "2026-10-23T20:08:34.527760"
+    },
+    {
+      "type": "service_down",
+      "port": "11437",
+      "name": "Agent Mesh",
+      "timestamp": "2026-10-23T20:08:34.527761"
+    }
+  ],
+  "violations": [],
+  "checked_ports": {
+    "5000": {
+      "healthy": false,
+      "name": "JARVIS Web",
+      "port": "5000",
+      "error": "'str' object cannot be interpreted as an integer"
+    },
+    "5001": {
+      "healthy": false,
+      "name": "Cloud Desktop",
+      "port": "5001",
+      "error": "'str' object cannot be interpreted as an integer"
+    },
+    "5100": {
+      "healthy": false,
+      "name": "Sunna API",
+      "port": "5100",
+      "error": "'str' object cannot be interpreted as an integer"
+    },
+    "5103": {
+      "healthy": false,
+      "name": "Kanban Board",
+      "port": "5103",
+      "error": "'str' object cannot be interpreted as an integer"
+    },
+    "5105": {
+      "healthy": false,
+      "name": "Sunna Dashboard",
+      "port": "5105",
+      "error": "'str' object cannot be interpreted as an integer"
+    },
+    "11435": {
+      "healthy": false,
+      "name": "AI Router",
+      "port": "11435",
+      "error": "'str' object cannot be interpreted as an integer"
+    },
+    "11436": {
+      "healthy": false,
+      "name": "Orchestrator",
+      "port": "11436",
+      "error": "'str' object cannot be interpreted as an integer"
+    },
+    "11437": {
+      "healthy": false,
+      "name": "Agent Mesh",
+      "port": "11437",
+      "error": "'str' object cannot be interpreted as an integer"
+    }
+  },
+  "checked_processes": [],
+  "security_events": [],
+  "last_check": null,
+  "running_processes": [],
+  "found_files": [
+    "data/vault.key"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "supported_languages": [
+    "ar",
+    "en"
+  ],
+  "current_language": "ar",
+  "rtl_enabled": true,
+  "emoji_support": true,
+  "arabic_font": "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
+  "commands": {},
+  "translations": {},
+  "last_updated": null
+}

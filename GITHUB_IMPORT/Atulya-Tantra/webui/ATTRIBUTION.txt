@@ -1,0 +1,12 @@
+Atulya WebUI — artwork and renderer provenance
+
+Atulya WebUI
+- The Atulya name, mark, page shell, custom WebUI styles, the scene background, the humanoid
+  character state images (webui/scene/), and the WebGL scene renderer (webui/renderer.js) are
+  part of the Atulya-Tantra project and are covered by the repository LICENSE.
+
+Third-party code inside the renderer bundle
+- webui/renderer.js embeds third-party libraries, including Three.js (MIT). Their license
+  notices are kept inside the bundle; keep them intact when modifying or redistributing it.
+- Gesture recognition uses Google MediaPipe Tasks Vision (Apache-2.0), downloaded at setup into
+  models/runtime/mediapipe/ with its LICENSE and NOTICE files; it is not committed here.

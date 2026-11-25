@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knowledge Graph — EsprieAether</title>
+<style>
+  :root {
+    --bg: #0a0d08;
+    --bg-card: #121610;
+    --foreground: #c8d6b0;
+    --accent: #4ade80;
+    --muted: #8a9a7e;
+    --border: #2a3a28;
+    --accent-dim: #1a2a18;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans Arabic', 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--foreground);
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    padding: 2rem;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 2rem;
+    background: linear-gradient(180deg, var(--bg-card), var(--bg));
+    border-radius: 8px;
+  }
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .header .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+  }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .stat-box {
+    flex: 1;
+    min-width: 200px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat-box .number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-box .label {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .graph-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  .graph-container h2 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .controls input {
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--foreground);
+    font-family: inherit;
+    flex: 1;
+    min-width: 200px;
+  }
+  .controls button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .controls button:hover {
+    background: #22c55e;
+  }
+  .heatmap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .heatmap-item {
+    flex: 1;
+    min-width: 150px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+  }
+  .heatmap-item h3 {
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .heatmap-item table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .heatmap-item th, .heatmap-item td {
+    padding: 0.5rem;
+    text-align: right;
+    border: 1px solid var(--border);
+  }
+  .heatmap-item th {
+    background: var(--accent-dim);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .footer {
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 2px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📊 knowledge graph (معلومات مرتبطة)</h1>
+  <p class="subtitle">نظام EsprieAether — التفاعل بين المعلومات والمفاهيم</p>
+</div>
+
+<div class="stats">
+  <div class="stat-box">
+    <div class="number">86</div>
+    <div class="label">عقدة معرفة</div>
+  </div>
+  <div class="stat-box">
+    <div class="number">1531</div>
+    <div class="label">علاقة</div>
+  </div>
+  <div class="stat-box">
+    <div class="number">8</div>
+    <div class="label">وسم (Tags)</div>
+  </div>
+</div>
+
+<div class="graph-container">
+  <h2>🔍 بحث في المعرفة</h2>
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="ابحث عن كلمة مفتاحية...">
+    <button onclick="searchKnowledge()">🔍 بحث</button>
+    <button onclick="clearSearch()">✕ مسح</button>
+  </div>
+  <div id="results"></div>
+</div>
+
+<div class="heatmap">
+  <div class="heatmap-item">
+    <h3>📊 الوسوم (Tags)</h3>
+    <table id="heatmap-tags">
+      <tr><th>وسم</th><th>العدد</th></tr>
+      <tr><td style='color: #4ade80'>knowledge</td><td>50</td></tr>
+<tr><td style='color: #4ade80'>route</td><td>32</td></tr>
+<tr><td style='color: #4ade80'>verdict</td><td>32</td></tr>
+<tr><td style='color: #4ade80'>ai</td><td>18</td></tr>
+<tr><td style='color: #4ade80'>local</td><td>18</td></tr>
+<tr><td style='color: #4ade80'>school</td><td>18</td></tr>
+<tr><td style='color: #4ade80'>exam</td><td>18</td></tr>
+<tr><td style='color: #4ade80'>test</td><td>18</td></tr>
+
+    </table>
+  </div>
+  <div class="heatmap-item">
+    <h3>📊 المصادر (Sources)</h3>
+    <table id="heatmap-sources">
+      <tr><th>المصدر</th><th>العدد</th></tr>
+      <tr><td style='color: #f59e0b'>veille</td><td>86</td></tr>
+
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  <p>📘 نظام EsprieAether Knowledge Graph — 2026-10-18 08:00</p>
+</div>
+
+<script>
+const nodes_data = [{"id": "n0#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#4ade80", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:23:03.817691+00:00"}, {"id": "n1#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#f59e0b", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:34:21.685510+00:00"}, {"id": "n2#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T10:34:21.878993+00:00"}, {"id": "n3#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T10:34:21.887196+00:00"}, {"id": "n4#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#f472b6", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T10:34:21.895867+00:00"}, {"id": "n5#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#34d399", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:34:54.692539+00:00"}, {"id": "n6#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#fbbf24", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T10:34:54.891624+00:00"}, {"id": "n7#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#f87171", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T10:34:54.898892+00:00"}, {"id": "n8#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T10:34:54.909052+00:00"}, {"id": "n9#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:35:37.068910+00:00"}, {"id": "n10#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#4ade80", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T10:35:37.264836+00:00"}, {"id": "n11#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#f59e0b", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T10:35:37.274160+00:00"}, {"id": "n12#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T10:35:37.283120+00:00"}, {"id": "n13#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:37:39.494651+00:00"}, {"id": "n14#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#f472b6", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T10:37:39.699518+00:00"}, {"id": "n15#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#34d399", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T10:37:39.708026+00:00"}, {"id": "n16#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#fbbf24", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T10:37:39.718864+00:00"}, {"id": "n17#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#f87171", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:45:03.622566+00:00"}, {"id": "n18#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T10:45:03.805872+00:00"}, {"id": "n19#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T10:45:03.813547+00:00"}, {"id": "n20#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#4ade80", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T10:45:03.825686+00:00"}, {"id": "n21#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#f59e0b", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:49:49.905608+00:00"}, {"id": "n22#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T10:49:50.105685+00:00"}, {"id": "n23#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T10:49:50.114243+00:00"}, {"id": "n24#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#f472b6", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T10:49:50.125980+00:00"}, {"id": "n25#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#34d399", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:49:50.238394+00:00"}, {"id": "n26#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#fbbf24", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:51:28.209494+00:00"}, {"id": "n27#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#f87171", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T10:51:28.396484+00:00"}, {"id": "n28#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T10:51:28.404501+00:00"}, {"id": "n29#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T10:51:28.416227+00:00"}, {"id": "n30#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#4ade80", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:51:28.681256+00:00"}, {"id": "n31#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#f59e0b", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:51:44.339709+00:00"}, {"id": "n32#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T10:51:44.528229+00:00"}, {"id": "n33#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T10:51:44.538517+00:00"}, {"id": "n34#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#f472b6", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T10:51:44.550142+00:00"}, {"id": "n35#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#34d399", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:51:44.659400+00:00"}, {"id": "n36#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#fbbf24", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:53:14.856548+00:00"}, {"id": "n37#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#f87171", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T10:53:15.045811+00:00"}, {"id": "n38#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T10:53:15.055444+00:00"}, {"id": "n39#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T10:53:15.066433+00:00"}, {"id": "n40#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#4ade80", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T10:53:15.173404+00:00"}, {"id": "n41#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#f59e0b", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:10:23.454378+00:00"}, {"id": "n42#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:10:51.977972+00:00"}, {"id": "n43#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:11:04.632628+00:00"}, {"id": "n44#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#f472b6", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T11:11:04.853359+00:00"}, {"id": "n45#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#34d399", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T11:11:04.863155+00:00"}, {"id": "n46#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#fbbf24", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T11:11:04.876163+00:00"}, {"id": "n47#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#f87171", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:11:30.882691+00:00"}, {"id": "n48#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T11:11:31.105954+00:00"}, {"id": "n49#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T11:11:31.115200+00:00"}, {"id": "n50#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#4ade80", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T11:11:31.127237+00:00"}, {"id": "n51#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#f59e0b", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:13:36.731050+00:00"}, {"id": "n52#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T11:13:36.956918+00:00"}, {"id": "n53#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T11:13:36.966077+00:00"}, {"id": "n54#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#f472b6", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T11:13:36.979946+00:00"}, {"id": "n55#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#34d399", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:13:37.086505+00:00"}, {"id": "n56#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#fbbf24", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:14:40.376063+00:00"}, {"id": "n57#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#f87171", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T11:14:40.654487+00:00"}, {"id": "n58#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T11:14:40.668978+00:00"}, {"id": "n59#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T11:14:40.686481+00:00"}, {"id": "n60#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#4ade80", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:14:40.818602+00:00"}, {"id": "n61#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#f59e0b", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:15:24.695153+00:00"}, {"id": "n62#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T11:15:24.898935+00:00"}, {"id": "n63#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T11:15:24.910105+00:00"}, {"id": "n64#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#f472b6", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T11:15:24.924130+00:00"}, {"id": "n65#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#34d399", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:15:25.179677+00:00"}, {"id": "n66#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#fbbf24", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:16:34.415524+00:00"}, {"id": "n67#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#f87171", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T11:16:34.611704+00:00"}, {"id": "n68#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T11:16:34.624252+00:00"}, {"id": "n69#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T11:16:34.639483+00:00"}, {"id": "n70#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#4ade80", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:16:34.748085+00:00"}, {"id": "n71#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#f59e0b", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:17:36.448276+00:00"}, {"id": "n72#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T11:17:36.650839+00:00"}, {"id": "n73#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T11:17:36.661161+00:00"}, {"id": "n74#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#f472b6", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T11:17:36.674364+00:00"}, {"id": "n75#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#34d399", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:17:36.783167+00:00"}, {"id": "n76#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#fbbf24", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:18:23.523215+00:00"}, {"id": "n77#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#f87171", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T11:18:23.717648+00:00"}, {"id": "n78#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T11:18:23.729591+00:00"}, {"id": "n79#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T11:18:23.743125+00:00"}, {"id": "n80#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#4ade80", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:18:23.854470+00:00"}, {"id": "n81#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#f59e0b", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:19:25.089168+00:00"}, {"id": "n82#أنظمة الذكاء الاصطنا", "label": "أنظمة الذكاء الاصطناعي المحلية", "type": "knowledge", "color": "#60a5fa", "source": "veille", "tags": ["ai", "local"], "stored_at": "2026-10-17T11:19:25.283725+00:00"}, {"id": "n83#امتحان مدرسي", "label": "امتحان مدرسي", "type": "knowledge", "color": "#a78bfa", "source": "veille", "tags": ["school", "exam"], "stored_at": "2026-10-17T11:19:25.294794+00:00"}, {"id": "n84#اختبار للحفظ: نظام ا", "label": "اختبار للحفظ: نظام الحركة والاسترجاع", "type": "knowledge", "color": "#f472b6", "source": "veille", "tags": ["test", "knowledge"], "stored_at": "2026-10-17T11:19:25.307458+00:00"}, {"id": "n85#- [ai_agent_framewor", "label": "- [ai_agent_framework]: 1 اقتراح متوحّد، 4 لم يحدد القرار بعد\n- [local_llm]: 0 ا", "type": "knowledge", "color": "#34d399", "source": "veille", "tags": ["knowledge", "route", "verdict"], "stored_at": "2026-10-17T11:19:25.760264+00:00"}];
+const tags_data = [["knowledge", 50], ["route", 32], ["verdict", 32], ["ai", 18], ["local", 18], ["school", 18], ["exam", 18], ["test", 18]];
+const sources_data = [["veille", 86]];
+
+function searchKnowledge() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const results = document.getElementById('results');
+  const matches = nodes_data.filter(n => n.label.toLowerCase().includes(q));
+  let html = '<h3>نتائج البحث: ' + matches.length + ' نتائج</h3>';
+  matches.forEach(n => {
+    html += `<div class="result-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 0.8rem;">
+      <strong>${n.label}</strong><br>
+      <span style="color: var(--muted); font-size: 0.85rem;">${n.source} | tags: ${n.tags.join(', ')}</span>
+    </div>`;
+  });
+  results.innerHTML = html;
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('results').innerHTML = '';
+}
+
+function buildTagsTable(tags) {
+  const colorScheme = ['#4ade80', '#f59e0b', '#60a5fa', '#a78bfa', '#f472b6', '#34d399', '#fbbf24', '#f87171', '#60a5fa', '#a78bfa'];
+  let html = '<tr><th>وسم</th><th>العدد</th></tr>';
+  tags.forEach((t, i) => {
+    const color = colorScheme[i % 10];
+    html += `<tr><td style="color: ${color}">${t[0]}</td><td>${t[1]}</td></tr>`;
+  });
+  return html;
+}
+
+function buildSourcesTable(sources) {
+  const colorScheme = ['#4ade80', '#f59e0b', '#60a5fa', '#a78bfa', '#f472b6'];
+  let html = '<tr><th>المصدر</th><th>العدد</th></tr>';
+  sources.forEach((s, i) => {
+    const color = colorScheme[i % 5];
+    html += `<tr><td style="color: ${color}">${s[0]}</td><td>${s[1]}</td></tr>`;
+  });
+  return html;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const resultsEl = document.getElementById('results');
+  resultsEl.innerHTML = '<div style="color: var(--muted);">اكتب كلمة مفتاحية في حقل البحث واضغط على بحث...</div>';
+  document.getElementById('heatmap-tags').innerHTML = buildTagsTable(tags_data);
+  document.getElementById('heatmap-sources').innerHTML = buildSourcesTable(sources_data);
+});
+</script>
+
+</body>
+</html>

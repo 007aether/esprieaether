@@ -1,0 +1,40 @@
+# Data
+data/*.db
+data/*.db-*
+data/logs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets
+.env
+*.session
+.bot_token
+.bot_token.old
+.telegram_chat_id
+.telegram_credentials.json
+.wallet_secrets.json
+.creds.json
+.all_credentials.enc
+
+# Backups
+*.bak
+*.old
+AETHER_backups/
+
+# OS
+.DS_Store
+Thumbs.db
+.pexels_api_key
+.youtube_client_secret.json
+.youtube_token.json
+.pexels_api_key
+content_output/
+
+# Encrypted Vault Files (never commit these)
+.config/aether-secrets/
+*.enc
+*.enc.old
