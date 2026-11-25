@@ -80,10 +80,10 @@ def reply(delay):
 
 
 def test_the_acknowledgement_is_spoken_at_once_and_never_says_one_moment():
-    # The acknowledgement comes from the user's own words, so it is spoken before the tool finishes.
-    assert reply(0.0) == "Checking the weather. Clear, 25 °C."
-    assert reply(0.5) == "Checking the weather. Clear, 25 °C."
-    assert "One moment" not in reply(0.5)
+    # L'acquittement vient des mots de l'utilisateur : il est dit avant la fin de l'outil.
+    assert reply(0.0) == "كنشوف الطقس. Clear, 25 °C."
+    assert reply(0.5) == "كنشوف الطقس. Clear, 25 °C."
+    assert "لحظة من فضلك" not in reply(0.5)
 
 
 def test_play_music_never_claims_playback(project_temp_dir, monkeypatch):

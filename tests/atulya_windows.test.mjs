@@ -17,6 +17,12 @@ test('J102: le HUD offre Atulya en fenêtre flottante déplaçable', async () =>
   assert.doesNotMatch(html, /onclick/i);
 });
 
+test('J102: fenêtre flottante fermable au clavier et nommée en darija', async () => {
+  const html = await readFile(HUD, 'utf8');
+  assert.match(html, /id="atulyaHandle"[^>]*aria-label="أتوليا · نافذة عائمة قابلة للسحب"/);
+  assert.match(html, /addEventListener\("keydown", function \(e\) \{[\s\S]*?e\.key === "Escape"[\s\S]*?closeAtulyaDock\(\)/);
+});
+
 test('J102: une page Atulya complète et autonome reste accessible', async () => {
   const html = await readFile(HUD, 'utf8');
   assert.match(html, /id="atulyaStandalone"[^>]*target="_blank"|target="_blank"[^>]*id="atulyaStandalone"/);

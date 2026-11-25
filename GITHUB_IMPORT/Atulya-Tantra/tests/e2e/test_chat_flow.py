@@ -191,4 +191,4 @@ def test_provider_failure_does_not_expose_secret_in_response_status_or_logs(
     caplog.set_level(logging.DEBUG)
     response_text, status_text, logs = asyncio.run(exercise())
     assert "sk-test-secret-value" not in response_text + status_text + logs
-    assert "model provider failed" in response_text.lower()
+    assert "ما قدرش مزود النموذج" in response_text

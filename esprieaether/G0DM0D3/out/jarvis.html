@@ -178,7 +178,7 @@
         </div>
       </div>
       <div id="atulyaDock" hidden>
-        <div id="atulyaHandle">
+        <div id="atulyaHandle" aria-label="أتوليا · نافذة عائمة قابلة للسحب">
           <span>أتوليا · نافذة عائمة</span>
           <span class="spacer"></span>
           <button id="atulyaDockStandalone" type="button" title="صفحة كاملة مستقلة">صفحة كاملة</button>
@@ -787,6 +787,9 @@
   $("atulyaDockClose").addEventListener("click", closeAtulyaDock);
   $("atulyaDockStandalone").addEventListener("click", openAtulyaStandalone);
   $("atulyaStandalone").addEventListener("click", function (e) { e.preventDefault(); openAtulyaStandalone(); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !atulyaDock.hidden) closeAtulyaDock();
+  });
   $("atulyaHandle").addEventListener("pointerdown", function (e) {
     if (e.target.closest("button")) return;
     atulyaDrag = { x: e.clientX, y: e.clientY, left: atulyaDock.offsetLeft, top: atulyaDock.offsetTop };

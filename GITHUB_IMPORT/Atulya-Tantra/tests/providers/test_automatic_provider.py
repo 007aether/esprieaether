@@ -129,7 +129,7 @@ def test_auto_provider_enforces_overall_cloud_attempt_budget() -> None:
     try:
         asyncio.run(provider.complete([Message(role="user", content="Hi")]))
     except ProviderError as exc:
-        assert "available" in str(exc).lower()
+        assert "متاح" in str(exc)
     else:
         raise AssertionError("Provider call should stop at its overall cloud budget")
 

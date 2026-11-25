@@ -192,7 +192,7 @@ function proxyAtulya(req, res, stripPrefix = "") {
       method: req.method,
       path: upstreamPath,
       headers: requestHeaders,
-      timeout: stream ? 0 : 15000,
+      timeout: stream ? 0 : 120000,
     },
     (atuRes) => {
       const headers = { ...atuRes.headers };

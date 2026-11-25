@@ -34,13 +34,13 @@ class Backend:
 def test_ack_cache_hit_survives_restart_and_keeps_voice_and_language_separate(project_temp_dir):
     backend = Backend()
     speech = CachedSpeech(backend, project_temp_dir)
-    original = speech.synthesize("Checking the weather.", language="en")
+    original = speech.synthesize("كنشوف الطقس.", language="en")
     assert len(backend.calls) == 1 and backend.calls[0][1]["num_steps"] == 8
-    assert CachedSpeech(backend, project_temp_dir).synthesize("Checking the weather. ") == original
+    assert CachedSpeech(backend, project_temp_dir).synthesize("كنشوف الطقس. ") == original
     assert len(backend.calls) == 1
-    assert speech.cached_audio("Checking the weather.", speaker_id=1) is None
-    assert speech.cached_audio("Checking the weather.", language="hi") is None
-    speech.synthesize("Checking the weather.", speaker_id=1)
+    assert speech.cached_audio("كنشوف الطقس.", speaker_id=1) is None
+    assert speech.cached_audio("كنشوف الطقس.", language="hi") is None
+    speech.synthesize("كنشوف الطقس.", speaker_id=1)
     assert len(backend.calls) == 2
     assert backend.num_steps == 4  # cache generation must not mutate concurrent answer configuration
 
@@ -71,7 +71,7 @@ def test_cached_synthesis_api_works_without_loading_engine(project_temp_dir, mon
 
     backend = Backend()
     speech = CachedSpeech(backend, project_temp_dir / "cache")
-    speech.synthesize("Checking the weather.")
+    speech.synthesize("كنشوف الطقس.")
     backend.ready = False
     monkeypatch.setattr(server, "LocalSupertonicTTS", lambda *a, **k: speech)
     app = server.create_app(Settings(assistant_name="Atulya", host="127.0.0.1", port=8501,
@@ -81,7 +81,7 @@ def test_cached_synthesis_api_works_without_loading_engine(project_temp_dir, mon
     async def run():
         async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://localhost") as client:
             authenticate_test_admin(client, app)
-            response = await client.post("/api/voice/synthesize", json={"text": "Checking the weather."})
+            response = await client.post("/api/voice/synthesize", json={"text": "كنشوف الطقس."})
             assert response.status_code == 200 and response.content == _wav()
             missing = await client.post("/api/voice/synthesize", json={"text": "Uncached answer."})
             assert missing.status_code == 503
@@ -111,7 +111,7 @@ def test_voice_answer_quality_does_not_change_read_aloud_or_acknowledgements(pro
         async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://localhost") as client:
             authenticate_test_admin(client, app)
             for body in ({"text": "An ordinary answer."}, {"text": "An ordinary answer.", "mode": "voice"},
-                         {"text": "Checking the weather.", "mode": "voice"}):
+                         {"text": "كنشوف الطقس.", "mode": "voice"}):
                 assert (await client.post("/api/voice/synthesize", json=body)).status_code == 200
 
     asyncio.run(run())

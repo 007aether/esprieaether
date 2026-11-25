@@ -15,11 +15,16 @@ from .types import BrainError, BrainReply, Message, ToolCall
 
 # Instant acknowledgements from the user's words alone (no model round trip): spoken within ms.
 _INTENT_FILLERS = (
-    (re.compile(r"\b(weather|temperature|rain|forecast|humid|मौसम|बारिश)\b", re.I), "Checking the weather."),
-    (re.compile(r"\b(news|headlines|खबर|समाचार)\b", re.I), "Pulling up the headlines."),
-    (re.compile(r"\b(meeting|calendar|schedule|appointment)s?\b", re.I), "Checking your calendar."),
-    (re.compile(r"\b(remember|recall|what did i (say|tell)|do you know my)\b", re.I), "Let me check what I remember."),
-    (re.compile(r"\b(status|server|uptime|health)\b", re.I), "Checking the systems."),
+    (re.compile(r"\b(weather|temperature|rain|forecast|humid|मौसम|बारिश|طقس|الطقس|جو|الجو|مطر|المطر)\b", re.I),
+     "كنشوف الطقس."),
+    (re.compile(r"\b(news|headlines|खबर|समाचार|أخبار|خبر)\b", re.I),
+     "كنجيب الأخبار."),
+    (re.compile(r"\b(meeting|calendar|schedule|appointment)s?\b|\b(مواعيد|تقويم|اجتماع)\b", re.I),
+     "كنشوف المواعيد."),
+    (re.compile(r"\b(remember|recall|what did i (say|tell)|do you know my)\b|\b(حفظت|تذكر|ذاكرة)\b", re.I),
+     "كنشوف اللي حفظت."),
+    (re.compile(r"\b(status|server|uptime|health)\b|\b(حالة|نظام|أنظمة|سيرفر)\b", re.I),
+     "كنفحص الأنظمة."),
 )
 
 
@@ -30,23 +35,25 @@ def instant_ack(text: str) -> str:
     return ""
 
 
+DEFAULT_FILLER = "لحظة من فضلك."
+
 _FILLERS = {
-    "get_weather": "Checking the weather.",
-    "get_news": "Pulling up the headlines.",
+    "get_weather": "كنشوف الطقس.",
+    "get_news": "كنجيب الأخبار.",
     "calculate": "",
     "get_time": "",
-    "recall_memories": "Let me check what I remember.",
-    "search_past_chats": "Looking through our past conversations.",
-    "list_meetings": "Checking your calendar.",
-    "add_meeting": "Adding that to your calendar.",
-    "search_files": "Searching your files.",
-    "use_skill": "On it.",
+    "recall_memories": "كنشوف اللي حفظت.",
+    "search_past_chats": "كنقلب فالمحادثات القديمة.",
+    "list_meetings": "كنشوف المواعيد.",
+    "add_meeting": "كنزيدها للمواعيد.",
+    "search_files": "كنقلب فالملفات.",
+    "use_skill": "أنا كديرها.",
 }
 
 
 def _tool_filler(calls) -> str:
     """A short spoken acknowledgement for slow tools; empty for instant ones."""
-    phrases = [_FILLERS.get(call.name, "One moment.") for call in calls]
+    phrases = [_FILLERS.get(call.name, DEFAULT_FILLER) for call in calls]
     phrases = [phrase for phrase in dict.fromkeys(phrases) if phrase]
     return (" ".join(phrases[:2]) + " ") if phrases else ""
 
@@ -86,9 +93,9 @@ class Brain:
         except BrainError:
             raise
         except Exception as exc:
-            raise BrainError("The model provider failed while generating a reply") from exc
+            raise BrainError("ما قدرش مزود النموذج يولّد الجواب.") from exc
         if not isinstance(text, str) or not text.strip():
-            raise BrainError("The model provider returned an empty reply")
+            raise BrainError("مزود النموذج رجّع جواب فاضي.")
         return BrainReply(text=text.strip(), provider=self._provider.name, model=self._provider.model)
 
     @property
@@ -212,12 +219,12 @@ class Brain:
         except BrainError:
             raise
         except Exception as exc:
-            raise BrainError("The model provider failed while generating a reply") from exc
+            raise BrainError("ما قدرش مزود النموذج يولّد الجواب.") from exc
 
     async def respond_with_tools(self, conversation: Sequence[Message], toolbox, *, system_instructions: str = "") -> BrainReply:
         """Non-streaming convenience for channels like Telegram."""
         text = "".join([chunk async for chunk in self.stream(
             conversation, system_instructions=system_instructions, toolbox=toolbox)]).strip()
         if not text:
-            raise BrainError("The model provider returned an empty reply")
+            raise BrainError("مزود النموذج رجّع جواب فاضي.")
         return BrainReply(text=text, provider=self._provider.name, model=self._provider.model)

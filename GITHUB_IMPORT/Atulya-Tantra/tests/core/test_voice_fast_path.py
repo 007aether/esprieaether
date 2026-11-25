@@ -38,7 +38,7 @@ def test_weather_fast_path_stream_and_json_use_profile_without_model(project_tem
             assert "Tomorrow in Sangam Vihar: 20 to 31 degrees, rain 0 percent." in data["text"] and data["ui"] == []
             streamed = await client.post("/api/chat", json={**body, "stream": True})
             events = [json.loads(line[6:]) for line in streamed.text.splitlines() if line.startswith("data: ")]
-            assert events[0]["text"].strip() == "Checking the weather."
+            assert events[0]["text"].strip() == "كنشوف الطقس."
             assert "Tomorrow in Sangam Vihar: 20 to 31 degrees, rain 0 percent." in events[-2]["text"]
             assert events[-1]["done"] and events[-1]["receipt"]["arguments"] == {"when": "tomorrow"}
             assert not provider.turns

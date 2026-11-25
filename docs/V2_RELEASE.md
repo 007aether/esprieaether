@@ -106,12 +106,16 @@
   identifiants DOM et les noms de variables JS ne changent pas ; les valeurs
   dynamiques passent par `darija()` ou `tr()` avant affichage.
 - **Page autonome + fenêtre flottante (J102)** : `/atulya/` sert la page complète
-  en local, et le HUD propose Atulya dans une fenêtre déplaçable, sans `onclick`,
-  sans `POST` littéral et sans CDN.
+  en local, et le HUD propose Atulya dans une fenêtre déplaçable, fermable par
+  `Escape`, sans `onclick`, sans `POST` littéral et sans CDN.
 - **Preuve d'éveil vocal (J103)** : `atulya-wake --evidence` écrit
   `wake_selfcheck.json` en local avec `ok`, `hits`, `peak`, `device` et `ts`.
   `api/server.mjs` n'accorde `live_verified` que sur un dossier frais (TTL 7 jours)
   avec `ok=true` et `hits>0` ; sinon la capacité reste `implemented_unverified`.
+- **Acquittements et erreurs en darija (J105)** : les phrases instantanées
+  (`Checking the systems.` → `كنفحص الأنظمة.`, `One moment.` → `لحظة من فضلك.`)
+  et tous les messages `BrainError` / `ProviderError` sont en arabe marocain.
+  Les mots-clés darija (`الطقس`, `حالة النظام`, …) déclenchent aussi l'acquittement.
 - **Traduction des documents de test** : les assertions de `briefing_settings`
   suivent le nouveau libellé darija du briefing matinal.
 
@@ -136,12 +140,14 @@
 
 ## Tests
 
-- Node : **1052 pass / 0 fail** sur 68 fichiers `tests\*.test.mjs`,
-  dont le test d'origine du pont `J100` et le nouveau contrôle darija des
-  pages `jarvis.html` / `system.html`.
+- Node : **1054 pass / 0 fail** sur 68 fichiers `tests\*.test.mjs`,
+  dont le test d'origine du pont `J100`, le contrôle darija des pages
+  `jarvis.html` / `system.html`, le délai `120000` du relais et la fermeture
+  clavier de la fenêtre flottante.
 - Node ciblé (pont, darija, install/update) : **155/155**.
 - Python unittest : **246 tests OK** sur le routeur local `:31416`.
-- Atulya pytest : **553 passed, 3 skipped**, 16 subtests passés (0 fail).
+- Atulya pytest : **560 passed, 3 skipped**, 16 subtests passés (0 fail),
+  dont les 7 nouveaux contrôles darija des acquittements et des erreurs (J105).
 - Aucun upload, token cloud ou clé externe.
 
 ## شنو ناقص (MADA YANKOSONA)
@@ -156,7 +162,7 @@
 | `barge-in` | `implemented_unverified` | حدث `barge_in` حقيقي أثناء الكلام؛ الميكرو ما عطاش إشارة فوق العتبة 0.18. |
 | `atulya-wake` | `implemented_unverified` | كلمة إيقاظ حقيقية تطلع `hits>0` فـ `wake_selfcheck.json`؛ التجربة الأخيرة 12 ثانية عطات `hits=0`. |
 | موافقة HUD | `implemented_unverified` | `PUT` loopback حقيقي على `/api/jarvis/approvals/<id>` مسجل فـ `action_audit.jsonl`. |
-| `/api/chat` غير-streaming | نقطة معروفة | `timeout=15000` كيرجّع `503` تحت الحمل؛ الـ UI كيستعمل streaming. الرفع لـ `120000` ما وافق عليهش، فما تبدّلش. |
+| `/api/chat` غير-streaming | تحسّن بعد موافقة | الـ `timeout` ولا `120000` فـ `serve_g0dm0d3.mjs`، الـ UI كيستعمل streaming. |
 | محادثة كاملة بمصادقة | غير متحقق | كيتطلب passkey ديال المالك؛ تحققنا غير بـ `401 {"detail":"Sign in with your Atulya passkey to continue."}` بدل `403`. هاد الـ `401` هو بوابة المصادقة العادية على `/api/*` (ما كاينش خطأ)، والـ `/api/health` كيرجّع `200`. |
 | حزمة pytest قديمة (root) | خارج release gate | 45 passed / 7 failed بسبب مسارات وصلاحيات قديمة (`C:/Users/ESPRIEAETHER/...`)؛ ماشي من هاد الإصدار. |
 

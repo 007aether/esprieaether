@@ -158,22 +158,22 @@ class OpenAICompatibleProvider:
             body = response.json()
         except httpx.HTTPStatusError as exc:
             raise ProviderError(
-                f"{self.name} returned HTTP {exc.response.status_code}",
+                f"{self.name} رجّع HTTP {exc.response.status_code}",
                 status_code=exc.response.status_code,
             ) from None
         except (httpx.HTTPError, ValueError) as exc:
-            raise ProviderError(f"Could not get a valid reply from {self.name}") from exc
+            raise ProviderError(f"ما قدرتش ناخد جواب صحيح من {self.name}") from exc
 
         try:
             content = body["choices"][0]["message"]["content"]
         except (KeyError, IndexError, TypeError) as exc:
-            raise ProviderError(f"{self.name} returned an unexpected response") from exc
+            raise ProviderError(f"{self.name} رجّع جواب غير متوقع") from exc
         if isinstance(content, list):
             content = "".join(
                 block.get("text", "") for block in content if isinstance(block, dict)
             )
         if not isinstance(content, str) or not content.strip():
-            raise ProviderError(f"{self.name} returned an empty reply")
+            raise ProviderError(f"{self.name} رجّع جواب فاضي")
         return content.strip()
 
     async def stream(self, messages: Sequence[Message], tools: Sequence[dict] | None = None):
@@ -223,7 +223,7 @@ class OpenAICompatibleProvider:
                         delta = delta_body.get("content") or ""
                         call_deltas = delta_body.get("tool_calls") or []
                     except (ValueError, KeyError, IndexError, TypeError, AttributeError) as exc:
-                        raise ProviderError(f"{self.name} returned an unexpected stream") from exc
+                        raise ProviderError(f"{self.name} رجّع تدفق غير متوقع") from exc
                     for position, call in enumerate(call_deltas):
                         if not isinstance(call, dict):
                             continue
@@ -244,9 +244,9 @@ class OpenAICompatibleProvider:
                 if slot["name"]:
                     yield ToolCall(slot["id"] or f"call_{index}", slot["name"], slot["arguments"] or "{}")
         except httpx.HTTPStatusError as exc:
-            raise ProviderError(f"{self.name} returned HTTP {exc.response.status_code}", status_code=exc.response.status_code) from None
+            raise ProviderError(f"{self.name} رجّع HTTP {exc.response.status_code}", status_code=exc.response.status_code) from None
         except (httpx.HTTPError, ValueError) as exc:
-            raise ProviderError(f"Could not get a valid reply from {self.name}") from exc
+            raise ProviderError(f"ما قدرتش ناخد جواب صحيح من {self.name}") from exc
 
     async def aclose(self) -> None:
         if self._owns_client:
@@ -302,18 +302,18 @@ class OllamaProvider:
             body = response.json()
         except httpx.HTTPStatusError as exc:
             raise ProviderError(
-                f"Ollama returned HTTP {exc.response.status_code}",
+                f"Ollama رجّع HTTP {exc.response.status_code}",
                 status_code=exc.response.status_code,
             ) from None
         except (httpx.HTTPError, ValueError) as exc:
-            raise ProviderError("Could not connect to Ollama or read its response") from exc
+            raise ProviderError("ما قدرتش نتصل بـ Ollama ولا نقرأ الجواب ديالو") from exc
 
         try:
             content = body["message"]["content"]
         except (KeyError, TypeError) as exc:
-            raise ProviderError("Ollama returned an unexpected response") from exc
+            raise ProviderError("Ollama رجّع جواب غير متوقع") from exc
         if not isinstance(content, str) or not content.strip():
-            raise ProviderError("Ollama returned an empty reply")
+            raise ProviderError("Ollama رجّع جواب فاضي")
         return content.strip()
 
     @staticmethod
@@ -350,7 +350,7 @@ class OllamaProvider:
                         chunk = body.get("message", {}).get("content", "")
                         calls = body.get("message", {}).get("tool_calls") or []
                     except (ValueError, TypeError, AttributeError) as exc:
-                        raise ProviderError("Ollama returned an unexpected stream") from exc
+                        raise ProviderError("Ollama رجّع تدفق غير متوقع") from exc
                     if isinstance(chunk, str) and chunk:
                         yield chunk
                     for index, call in enumerate(calls):
@@ -363,10 +363,10 @@ class OllamaProvider:
                         break
         except httpx.HTTPStatusError as exc:
             raise ProviderError(
-                f"Ollama returned HTTP {exc.response.status_code}", status_code=exc.response.status_code
+                f"Ollama رجّع HTTP {exc.response.status_code}", status_code=exc.response.status_code
             ) from None
         except (httpx.HTTPError, ValueError) as exc:
-            raise ProviderError("Could not connect to Ollama or read its response") from exc
+            raise ProviderError("ما قدرتش نتصل بـ Ollama ولا نقرأ الجواب ديالو") from exc
 
     async def aclose(self) -> None:
         if self._owns_client:
@@ -487,11 +487,11 @@ class AutomaticProvider:
                 await asyncio.to_thread(self._ensure_local)
                 reply = await self._local_provider.complete(messages)
             except Exception as exc:
-                raise ProviderError("No configured model provider could answer. Check provider access or local setup.") from exc
+                raise ProviderError("ما قدرش أي مزود نموذج مضبوط يجاوب. تحقق من الإعدادات المحلية.") from exc
             self._active = self._local_provider
             return reply
 
-        raise ProviderError("No configured model provider is available.")
+        raise ProviderError("ما كاين أي مزود نموذج متاح.")
 
     def _ordered_providers(self) -> list[ChatProvider]:
         providers = list(self._providers)
@@ -614,8 +614,8 @@ class AutomaticProvider:
                 self._active = self._local_provider
                 return
             except Exception as exc:
-                raise ProviderError("No configured model provider could answer. Check provider access or local setup.") from exc
-        raise ProviderError("No configured model provider is available.")
+                raise ProviderError("ما قدرش أي مزود نموذج مضبوط يجاوب. تحقق من الإعدادات المحلية.") from exc
+        raise ProviderError("ما كاين أي مزود نموذج متاح.")
 
     def warm(self) -> None:
         """Start the local model up front when no cloud provider is configured."""

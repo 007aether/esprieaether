@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import http from "node:http";
 import { spawn } from "node:child_process";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -149,4 +150,10 @@ test("HUD: pont loopback vers Atulya, même origine, sans script externe", async
     await new Promise((resolve) => upstream.close(resolve));
     await new Promise((resolve) => dashboard.close(resolve));
   }
+});
+
+test("pont: le relais non-streaming attend assez longtemps le cerveau local", async () => {
+  const source = await readFile(SERVER, "utf8");
+  assert.match(source, /timeout:\s*stream\s*\?\s*0\s*:\s*120000/);
+  assert.doesNotMatch(source, /timeout:\s*stream\s*\?\s*0\s*:\s*15000/);
 });
