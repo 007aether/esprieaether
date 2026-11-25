@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-25T01:40:05.455177+00:00",
+  "cloud_last_run": "2026-11-25T16:14:50.599755+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Zcash Below $700: ZEC Walks Through My Buy Ladder Before the Vote Ends",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Bybit Referral Code AATRADE: Welcome Rewards Up to $30k, Plus the Bybit EU Code",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "When to Quit an Airdrop Farm (and When to Stay)",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy Hedera for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is Mando? The Bond Trader Behind Rektguy, Mando Minutes and Yeet",
       "source": "https://airdropalert.com/feed"
     },
     {
