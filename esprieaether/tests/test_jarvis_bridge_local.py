@@ -75,6 +75,21 @@ class JarvisBridgeLocalTest(unittest.TestCase):
         self.assertEqual(status["status"], "online")
         self.assertTrue(status["model_ready"])
 
+    def test_constructor_accepts_a_loopback_override(self):
+        bot = bridge.JarvisBridge(host="http://localhost:31416/")
+        self.assertEqual(bot.host, "http://localhost:31416")
+
+    def test_constructor_refuses_remote_or_secret_bearing_hosts(self):
+        for host in (
+            "http://api.example.com/v1",
+            "http://192.168.1.10:11434",
+            "http://user:pw@127.0.0.1:31416",
+            "https://127.0.0.1:31416",
+        ):
+            with self.subTest(host=host):
+                with self.assertRaises(ValueError):
+                    bridge.JarvisBridge(host=host)
+
 
 if __name__ == "__main__":
     unittest.main()

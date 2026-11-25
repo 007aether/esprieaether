@@ -9,8 +9,16 @@ from __future__ import annotations
 
 import asyncio
 import re
+import sys
 from dataclasses import dataclass
-from urllib.parse import urlsplit
+from pathlib import Path
+
+# La même garde de sortie que le pont local : un lien proposé ne doit jamais
+# pointer vers le loopback ou un réseau privé (HN #8, #21).
+_LOCAL_SRC = Path(__file__).resolve().parents[4] / "esprieaether" / "src"
+if str(_LOCAL_SRC) not in sys.path:
+    sys.path.insert(0, str(_LOCAL_SRC))
+from egress_guard import is_public_https_url  # noqa: E402
 
 
 @dataclass(frozen=True)
@@ -37,14 +45,7 @@ _VAULT = re.compile(r"Search my Obsidian vault for (.{1,80})\.", re.I)
 
 
 def _safe_https(url: str) -> str | None:
-    try:
-        parts = urlsplit(url)
-    except ValueError:
-        return None
-    if (parts.scheme != "https" or not parts.hostname or parts.username or parts.password
-            or parts.query or parts.fragment):
-        return None
-    return url
+    return url if is_public_https_url(url) else None
 
 
 def match_intent(text: str) -> WebIntent | None:

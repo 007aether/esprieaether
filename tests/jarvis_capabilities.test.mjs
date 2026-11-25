@@ -14,6 +14,7 @@ let metricsPath;
 let actionsPath;
 let voiceInboxPath;
 let actionAuditPath;
+let egressPath;
 let server;
 let base;
 let now;
@@ -30,6 +31,7 @@ before(async () => {
   actionsPath = join(dir, 'state', 'action_requests.json');
   voiceInboxPath = join(dir, 'state', 'voice_inbox.jsonl');
   actionAuditPath = join(dir, 'state', 'action_audit.jsonl');
+  egressPath = join(dir, 'state', 'egress_selfcheck.json');
   await mkdir(reportsDir, { recursive: true });
   await mkdir(join(dir, 'state'), { recursive: true });
   await writeFile(join(reportsDir, 'quality_guard_report.json'), JSON.stringify({
@@ -62,12 +64,18 @@ before(async () => {
   await writeFile(actionAuditPath, `${JSON.stringify({
     at: now, id: 'act-1', from: 'proposed', to: 'done', actor: 'hud',
   })}\n`, 'utf8');
+  await writeFile(egressPath, JSON.stringify({
+    ok: true, checkedAt: now, loopbackOnly: true, webLinksPublicHttpsOnly: true,
+    modelHost: 'http://127.0.0.1:31416',
+    blocked: ['http://api.example.com/v1', 'https://127.0.0.1/'],
+  }), 'utf8');
   server = createDashboardServer({
     reportsDir,
     brainMetricsPath: metricsPath,
     actionRequestsPath: actionsPath,
     voiceInboxPath,
     actionAuditPath,
+    egressPath,
     log: () => {},
   });
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
@@ -85,6 +93,7 @@ function caps(reports, overrides = {}) {
     actionRequestsPath: actionsPath,
     voiceInboxPath,
     actionAuditPath,
+    egressPath,
     ...overrides,
   });
 }
@@ -109,6 +118,30 @@ test('A2: chaque capacité a un statut honnête, une preuve et une étape suivan
   assert.equal(brain.status, 'live_verified');
   const sources = result.capabilities.find((item) => item.id === 'documentary-sources');
   assert.equal(sources.status, 'needs_user_data');
+});
+
+test('J92: local-egress-guard dépend d’une preuve fraîche, pas du code seul', async () => {
+  const live = await caps(reportsDir);
+  const guard = live.capabilities.find((item) => item.id === 'local-egress-guard');
+  assert.ok(guard, 'capacité absente: local-egress-guard');
+  assert.equal(guard.status, 'live_verified');
+  assert.equal(guard.evidence[0].field, 'loopbackOnly');
+  assert.equal(guard.evidence[0].value, true);
+  assert.ok(guard.verifiedAt && guard.expiresAt);
+
+  const staleDir = await mkdtemp(join(dir, 'stale-egress-'));
+  const stalePath = join(staleDir, 'egress.json');
+  await writeFile(stalePath, JSON.stringify({
+    ok: true, checkedAt: '2020-01-01T00:00:00Z', loopbackOnly: true,
+  }), 'utf8');
+  const stale = await caps(reportsDir, { egressPath: stalePath });
+  const staleGuard = stale.capabilities.find((item) => item.id === 'local-egress-guard');
+  assert.notEqual(staleGuard.status, 'live_verified');
+  assert.ok(Date.parse(staleGuard.expiresAt) < Date.now());
+
+  const absent = await caps(reportsDir, { egressPath: join(staleDir, 'absent.json') });
+  const absentGuard = absent.capabilities.find((item) => item.id === 'local-egress-guard');
+  assert.equal(absentGuard.status, 'not_available');
 });
 
 test('A2: absence de preuve reste not_available, jamais une réussite inventée', async () => {

@@ -20,6 +20,8 @@ from typing import Generator, Optional
 import requests
 from dotenv import load_dotenv
 
+from egress_guard import assert_loopback_url
+
 load_dotenv(Path(__file__).parent.parent / ".env")
 
 # L'ancien OLLAMA_HOST du .env pointait vers :11434 (arrêté) : il n'est plus
@@ -29,7 +31,7 @@ DEFAULT_MODEL = "dolphin3"
 REQUEST_TIMEOUT = float(os.getenv("ESPRIE_LOCAL_TIMEOUT", "120"))
 MAX_RETRIES = 1
 MAX_RETRY_WAIT = 5.0
-LOCAL_HOST = os.getenv("JARVIS_BRIDGE_HOST", DEFAULT_HOST).rstrip("/")
+LOCAL_HOST = assert_loopback_url(os.getenv("JARVIS_BRIDGE_HOST", DEFAULT_HOST))
 LOCAL_MODEL = os.getenv("JARVIS_BRIDGE_MODEL", DEFAULT_MODEL)
 
 logger = logging.getLogger("jarvis_bridge")
@@ -43,7 +45,7 @@ class JarvisBridge:
     """جسر موحّد للتواصل مع الذكاء المحلي"""
 
     def __init__(self, host: str = LOCAL_HOST, model: str = LOCAL_MODEL):
-        self.host = host.rstrip("/")
+        self.host = assert_loopback_url(host)
         self.model = model
         self.history: list = []
         self.max_history = 20

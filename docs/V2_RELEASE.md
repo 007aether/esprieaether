@@ -1,4 +1,4 @@
-# ESPRIEATHER v2.0.0 — version locale complète
+# ESPRIEATHER v2.1.0 — version locale complète
 
 ## Nouveautés issues du reverse-engineering des 20 dépôts
 
@@ -14,8 +14,11 @@
 - **Preuve visuelle obligatoire** : `vision_ready=true` ne suffit plus.
   `atulya-vision` passe `live_verified` seulement avec une inférence récente
   (TTL 7 jours) dans `esprieaether/state/vision_selfcheck.json`.
-- **Packaging v2** : `package.json` et `manifest.json` en `2.0.0`, ajout au
-  manifest des modules locaux, des outils Atulya et du rapport d'analyse.
+- **Garde de sortie locale (J92)** : `egress_guard.py` refuse tout hôte de modèle
+  non-loopback et tout bouton `open_website` vers un réseau privé. Preuve réelle
+  dans `egress_selfcheck.json`, visible comme `local-egress-guard` dans le HUD.
+- **Packaging v2.1** : `package.json` et `manifest.json` en `2.1.0`, ajout au
+  manifest des modules locaux, des outils Atulya et des rapports d'analyse.
 
 ## Vérifications réelles (25/11/2026)
 

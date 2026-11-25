@@ -22,6 +22,7 @@ const DEFAULT_ATULYA_DIR = join(ROOT, 'GITHUB_IMPORT', 'Atulya-Tantra');
 const DEFAULT_VISION_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'vision_selfcheck.json');
 const DEFAULT_MCP_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'mcp_selfcheck.json');
 const DEFAULT_VAULT_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'vault_memory_selfcheck.json');
+const DEFAULT_EGRESS_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'egress_selfcheck.json');
 const VOICE_STAGES = new Set(['idle', 'listening', 'thinking', 'speaking']);
 const REPORT_FILES = {
   quality: 'quality_guard_report.json',
@@ -498,6 +499,7 @@ export async function buildCapabilities(
     actionAuditPath = DEFAULT_ACTION_AUDIT,
     voiceStatusPath = DEFAULT_VOICE_STATUS,
     voiceInboxPath = DEFAULT_VOICE_INBOX,
+    egressPath = DEFAULT_EGRESS_EVIDENCE,
   } = {}
 ) {
   if (actionRequestsPath === DEFAULT_ACTION_REQUESTS) await ensureActionRequests(actionRequestsPath);
@@ -507,6 +509,7 @@ export async function buildCapabilities(
   const metrics = await readJsonFile(brainMetricsPath);
   const actions = await readJsonFile(actionRequestsPath);
   const voice = await readJsonFile(voiceStatusPath);
+  const egress = await readJsonFile(egressPath);
   const voiceSuccess = await lastMatchingLine(voiceInboxPath, (row) =>
     isFreshLine(row) && row.ok === true && row.spoken === true && row.engine === 'local-brain');
   const bargeEvent = await lastMatchingLine(voiceInboxPath, (row) =>
@@ -625,6 +628,26 @@ export async function buildCapabilities(
       { source: 'action_requests.json', field: 'pending', value: pending },
       { source: 'action_audit.jsonl', field: 'decisions', value: 0 },
     ], 'Proposer une action locale puis l’accorder ou la refuser explicitement depuis le HUD');
+  }
+
+  const egressEvidence = egress ? [
+    { source: 'egress_selfcheck.json', field: 'loopbackOnly', value: Boolean(egress.loopbackOnly) },
+    { source: 'egress_selfcheck.json', field: 'webLinksPublicHttpsOnly',
+      value: Boolean(egress.webLinksPublicHttpsOnly) },
+    { source: 'egress_selfcheck.json', field: 'modelHost', value: String(egress.modelHost || '') },
+  ] : [
+    { source: 'egress_selfcheck.json', field: 'selfcheck', value: 'no_data_source' },
+  ];
+  if (egress && egress.ok === true && egress.loopbackOnly === true
+      && egress.webLinksPublicHttpsOnly === true && isFreshLine(egress)) {
+    add('local-egress-guard', 'live_verified', egressEvidence,
+      'Revérifier les URL locales et les liens publics avant expiration', lineStamp(egress));
+  } else if (egress) {
+    add('local-egress-guard', 'implemented_unverified', egressEvidence,
+      'Relancer le selfcheck de sortie locale', lineStamp(egress));
+  } else {
+    add('local-egress-guard', 'not_available', egressEvidence,
+      'Produire une preuve de sortie locale avec le selfcheck egress');
   }
 
   return {
@@ -869,6 +892,7 @@ export function createDashboardServer({
   actionAuditPath = DEFAULT_ACTION_AUDIT,
   voiceStatusPath = DEFAULT_VOICE_STATUS,
   voiceInboxPath = DEFAULT_VOICE_INBOX,
+  egressPath = DEFAULT_EGRESS_EVIDENCE,
   atulyaDir = DEFAULT_ATULYA_DIR,
   voice = {},
   log = defaultLog,
@@ -923,6 +947,7 @@ export function createDashboardServer({
         send(res, 200, {
           ...(await buildCapabilities(reportsDir, {
             brainMetricsPath, actionRequestsPath, actionAuditPath, voiceStatusPath, voiceInboxPath,
+            egressPath,
           })), requestId,
         });
         return;
