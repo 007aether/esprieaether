@@ -20,6 +20,8 @@ from dataclasses import dataclass, field, replace
 from datetime import datetime
 from pathlib import Path
 
+import httpx
+
 from tools.plugins.audit import record_tool_run
 from tools.plugins.registry import PluginContext
 from tools.plugins.productivity.web_reminders import create_reminder, list_reminders, edit_reminder, cancel_reminder
@@ -1194,9 +1196,47 @@ async def _calendar_delete(args: dict, ctx: PluginContext | None) -> str:
     return await calendar_delete(ctx.user_id, _text(args, "event_id", 120))
 
 
+# The JARVIS bridge is local-only by construction: the model chooses a view, never
+# a URL. All paths are fixed here, so a tool call cannot be turned into an SSRF.
+JARVIS_LOOPBACK = "http://127.0.0.1:3860"
+JARVIS_VIEWS = {
+    "capabilities": "/jarvis/api/jarvis/capabilities",
+    "system": "/jarvis/api/system/status",
+    "attention": "/jarvis/api/jarvis/attention",
+    "approvals": "/jarvis/api/jarvis/approvals",
+    "atulya": "/jarvis/api/jarvis/atulya",
+    "health": "/api/health",
+}
+
+
+async def _jarvis_status(args: dict, ctx: PluginContext | None) -> str:
+    extra = set(args) - {"view"}
+    if extra:
+        raise ValueError("only 'view' is accepted; the URL is fixed to the local JARVIS bridge")
+    view = str(args.get("view") or "capabilities").strip().lower()
+    if view not in JARVIS_VIEWS:
+        raise ValueError(f"view must be one of: {', '.join(JARVIS_VIEWS)}")
+    url = JARVIS_LOOPBACK + JARVIS_VIEWS[view]
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            response = await client.get(url)
+    except (httpx.HTTPError, OSError) as exc:
+        return f"JARVIS local bridge unavailable: {type(exc).__name__}. Nothing was changed."
+    if response.status_code != 200:
+        return f"JARVIS local bridge returned HTTP {response.status_code}. Nothing was changed."
+    try:
+        payload = response.json()
+    except ValueError:
+        return "JARVIS local bridge returned invalid JSON. Nothing was changed."
+    return json.dumps(payload, ensure_ascii=False, separators=(",", ":"))[:4000]
+
+
 # Approval policy: read-only -> direct; reversible own-data writes -> direct;
 # destructive, outside-world or device actions -> confirm. tests/plugins/test_approval_policy.py enforces it.
 TOOLS: tuple[Tool, ...] = (
+    Tool("jarvis_status", "Read the local JARVIS dashboard over loopback. 'view' may be capabilities, system, attention, approvals, atulya or health. Read-only; never approves or executes an action.",
+         _params({"view": {"type": "string", "enum": list(JARVIS_VIEWS)}}, []), _jarvis_status, "local-utilities", timeout=8),
+
     Tool("open_website", "Prepare a clickable HTTPS website button in Telegram or the WebUI/app. The user taps it on their device; do not claim a remote browser opened.",
          _params({"url": {"type": "string"}, "label": {"type": "string"}}, ["url"]), _open_website, "local-utilities", True),
     Tool("prepare_phone_action", "Prepare an SMS composer or dialer request for the owner's Android app. User opens Phone actions and taps; composing does not send and dialing does not place a call.",
@@ -1327,7 +1367,7 @@ TOOLS: tuple[Tool, ...] = (
     Tool("update_profile", "Save a lasting user preference: voice (male/female speaking voice), "
          "assistant_nickname (what this user wants to call you, "
          "e.g. 'call yourself Tony'), preferred_name, city, language "
-         "(auto, english, hindi, hinglish, marathi, tamil, spanish, … lowercase name), tone "
+         "(darija, auto, english, hindi, hinglish, marathi, tamil, spanish, … lowercase name), tone "
          "(atulya/friendly/formal/brief/witty), length (short/normal/detailed), work_style, or about.",
          _params({"field": {"type": "string", "enum": ["voice", "assistant_nickname", "preferred_name", "city", "language", "tone", "length",
                                                         "work_style", "about"]},
@@ -1588,7 +1628,7 @@ def record_activity(name: str, outcome: str) -> None:
 
 # Small spoken-turn tool set: every schema costs prompt-processing time on a CPU (LOG.md M1-0).
 VOICE_TOOLS = ("get_weather", "get_time", "learn_lesson", "list_lessons", "create_reminder", "list_reminders", "open_app",
-               "search_files", "read_document", "media_control", "get_news", "remember_fact")
+               "search_files", "read_document", "media_control", "get_news", "remember_fact", "jarvis_status")
 VOICE_INSTRUCTIONS = (
     "This is a spoken conversation. Answer in one or two short spoken sentences: no markdown, lists, links or emoji.\n"
     "Use a tool whenever it gives a fresher or exact answer (weather, time, news, reminders); never invent tool results.\n"

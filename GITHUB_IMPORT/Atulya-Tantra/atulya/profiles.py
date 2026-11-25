@@ -16,7 +16,7 @@ from pathlib import Path
 
 CHOICES = {
     # Any language Whisper can hear; local Supertonic speaks English/Hindi, others use the browser voice.
-    "language": ("auto", "english", "hindi", "hinglish", "marathi", "bengali", "gujarati", "punjabi", "tamil",
+    "language": ("darija", "auto", "english", "hindi", "hinglish", "marathi", "bengali", "gujarati", "punjabi", "tamil",
                  "telugu", "kannada", "malayalam", "urdu", "nepali", "spanish", "french", "german", "portuguese",
                  "italian", "russian", "arabic", "turkish", "japanese", "korean", "chinese", "indonesian"),
     "tone": ("atulya", "friendly", "formal", "brief", "witty"),
@@ -355,6 +355,7 @@ def profile_instructions(profile: dict[str, str]) -> str:
     }.get(profile.get("tone", "atulya"), "calm, capable and warm")
     chosen = profile.get("language", "auto")
     language = {
+        "darija": "Always reply in Moroccan Darija with Arabic script (الدارجة المغربية بحروف عربية), whatever language the user used.",
         "auto": "Reply in the language the user used.",
         "hindi": "Reply in Hindi (Devanagari).",
         "hinglish": "Reply in natural Hinglish (Hindi-English mix, Latin script).",

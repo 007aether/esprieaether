@@ -14,6 +14,7 @@ from tools.plugins.toolkit import TOOLS, ActionQueue, PluginContext, Toolbox, UN
 # read-only -> direct; reversible own-data writes -> direct;
 # destructive, outside-world or device actions -> confirm.
 POLICY = {
+    "jarvis_status": "direct",
     "open_website": "direct",
     "prepare_phone_action": "direct",
     "queue_music": "direct",

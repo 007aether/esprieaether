@@ -1,4 +1,4 @@
-# ESPRIEATHER v2.1.3 — version locale complète
+# ESPRIEATHER v2.1.4 — version locale complète
 
 ## Nouveautés issues du reverse-engineering des 20 dépôts
 
@@ -42,7 +42,19 @@
 - **Téléphone / APK** : l'appareil `iip` est appairé (`device_type=android`) mais
   `status=offline`, `seen=0`, un job `ping` reste en file d'attente : aucune preuve
   de polling ou de réception. L'APK n'est pas disponible dans le dépôt.
-- **Packaging v2.1.3** : `package.json` et `manifest.json` en `2.1.3`, ajout au
+- **Darija par défaut** : `persona.build_system_prompt` impose la réponse en arabe
+  marocain avec lettres arabes, quelle que soit la langue d'entrée ; le profil
+  propriétaire est passé à `language=darija` et `darija` est mappé vers `ar` pour
+  Whisper local. `ATULYA_FORCE_DARIJA=0` reste un désactivation explicite.
+- **Outil `jarvis_status`** : Atulya lit JARVIS sur `http://127.0.0.1:3860` via
+  des chemins fixes (`capabilities`, `system`, `attention`, `approvals`, `atulya`,
+  `health`). Le modèle ne peut fournir aucune URL : pas de SSRF, pas d'approbation
+  ou d'action déclenchée par cet outil. Disponible aussi en voix.
+- **Autonomie owner activée** : `state/atulya/autonomy.json` contient
+  `outside_messages=auto` à la demande explicite du propriétaire. Les outils
+  confirmés par l'owner peuvent s'exécuter sans invite supplémentaire ; aucun
+  SMS/appel n'a été envoyé lors de la configuration.
+- **Packaging v2.1.4** : `package.json` et `manifest.json` en `2.1.4`, ajout au
   manifest des modules locaux, des outils Atulya et des rapports d'analyse.
 
 ## Vérifications réelles (25/11/2026)

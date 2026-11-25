@@ -18,7 +18,7 @@ _PROFILE_LANGUAGES = {
     "urdu": "ur", "nepali": "ne", "spanish": "es", "french": "fr", "german": "de",
     "portuguese": "pt", "italian": "it", "russian": "ru", "arabic": "ar", "turkish": "tr",
     "japanese": "ja", "korean": "ko", "chinese": "zh", "indonesian": "id",
-    "auto": None, "hinglish": None,
+    "auto": None, "hinglish": None, "darija": "ar",
 }
 
 
