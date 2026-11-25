@@ -2,12 +2,20 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-24T16:32:45.248956+00:00",
+  "cloud_last_run": "2026-11-25T01:40:05.455177+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Who Is Jeff Yan? The Hyperliquid Founder Who Gave Away Billions",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Chainflip Hack: $12 Million Gone and the Bounty Deadline Has Passed",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -40,14 +48,6 @@
     },
     {
       "title": "Who Is Mando? The Bond Trader Behind Rektguy, Mando Minutes and Yeet",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Trump Gala Expectations: Why I Am Going a Third Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Use Aave: A Beginner’s Step-by-Step Guide",
       "source": "https://airdropalert.com/feed"
     },
     {
