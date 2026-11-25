@@ -77,6 +77,23 @@ test('J97: Atulya tourne en continu, au démarrage PC, toujours en arabe marocai
   assert.doesNotMatch(startup, /https?:\/\//);
 });
 
+test('J106: le serveur journalise la cause des BrainError sans changer le message vocal', async () => {
+  const server = await readFile(join(VENDOR, 'atulya', 'server.py'), 'utf8');
+  assert.match(server, /record_brain_failure\(/);
+  assert.match(server, /stage=["']chat_stream["']/);
+  assert.match(server, /stage=["']chat_nonstream["']/);
+  assert.match(server, /الجواب توقف فجأة/);
+});
+
+test('J108: le superviseur n envoie pas d ArgumentList vide et isole les pannes de demarrage', async () => {
+  const keeper = await readFile(join(ROOT, 'esprieaether', 'scripts', 'keep_alive.ps1'), 'utf8');
+  assert.match(keeper, /\$argList = @\(\$svc\.Args/);
+  assert.match(keeper, /if \(\$argList\.Count -gt 0\)/);
+  assert.match(keeper, /START_FAILED/);
+  assert.match(keeper, /SkipStart=\$true/);
+  assert.doesNotMatch(keeper, /Start-Process -FilePath \$svc\.Exe -ArgumentList @\(\$svc\.Args\)/);
+});
+
 test('J80: atulya-core est live_verified seulement avec une preuve HTTP locale', async () => {
   const live = await buildAtulya(VENDOR, async () => ({
     status: 'ok', brain_configured: true,

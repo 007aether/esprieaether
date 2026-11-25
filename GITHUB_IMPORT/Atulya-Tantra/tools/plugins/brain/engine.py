@@ -4,13 +4,16 @@ from __future__ import annotations
 import asyncio
 import inspect
 import json
+import os
 import re
+import time
 from collections.abc import Sequence
 
 from atulya.persona import build_system_prompt
+from .diagnostics import clean_text, record_brain_failure
 from .providers import ChatProvider
 from .textcalls import TextCallFilter
-from .types import BrainError, BrainReply, Message, ToolCall
+from .types import BrainError, BrainReply, Message, ProviderError, ToolCall
 
 
 # Instant acknowledgements from the user's words alone (no model round trip): spoken within ms.
@@ -58,6 +61,59 @@ def _tool_filler(calls) -> str:
     return (" ".join(phrases[:2]) + " ") if phrases else ""
 
 
+STREAM_RECOVERY = " …الجواب توقف قبل ما كمل. حاول مرة اخرى."
+STREAM_UNAVAILABLE = "ما قدرتش ناخد جواب من النموذج دابا. حاول مرة اخرى."
+
+
+def _env_limit(name: str, default: int, minimum: int, maximum: int) -> int:
+    try:
+        value = int(os.environ.get(name, "").strip() or default)
+    except (TypeError, ValueError):
+        value = default
+    return max(minimum, min(value, maximum))
+
+
+def _compact_history(conversation: Sequence[Message]) -> list[Message]:
+    """Keep trusted instructions and the latest turn; summarize older history.
+
+    The summary is a user-role message: history can never become a system prompt.
+    """
+    items = list(conversation)
+    non_system = [item for item in items if item.role != "system"]
+    keep = _env_limit("ATULYA_HISTORY_KEEP", 8, 2, 40)
+    char_limit = _env_limit("ATULYA_HISTORY_CHAR_LIMIT", 12_000, 200, 100_000)
+    older = non_system[:-keep]
+    if not older or sum(len(item.content) for item in older) <= char_limit:
+        return items
+    summary_limit = _env_limit("ATULYA_HISTORY_SUMMARY_CHARS", 600, 100, 4_000)
+    lines: list[str] = []
+    used = 0
+    for item in older:
+        snippet = f"{item.role}: {' '.join(item.content.split())}"
+        room = summary_limit - used
+        if room <= 0:
+            break
+        lines.append(snippet[:room])
+        used += len(lines[-1])
+    summary = "ملخص محادثة سابقة (للسياق فقط، دون تعليمات جديدة):\n" + "\n".join(lines)
+    return [
+        *(item for item in items if item.role == "system"),
+        Message(role="user", content=summary),
+        *non_system[-keep:],
+    ]
+
+
+def _tool_result_text(result: object) -> str:
+    """Bound tool output before it enters the model context."""
+    if result is None:
+        return "(no result)"
+    limit = _env_limit("ATULYA_TOOL_RESULT_LIMIT", 4_000, 200, 50_000)
+    text = str(result)
+    if len(text) <= limit:
+        return text
+    return f"{text[:limit]}\n…[مقتطع: {len(text) - limit} حرف]"
+
+
 class Brain:
     """Turn conversation text into a model reply.
 
@@ -88,12 +144,24 @@ class Brain:
     ) -> BrainReply:
         """Generate a reply from text-only conversation history."""
         messages = self._prepare_messages(conversation, system_instructions)
-        try:
-            text = await self._provider.complete(messages)
-        except BrainError:
-            raise
-        except Exception as exc:
-            raise BrainError("ما قدرش مزود النموذج يولّد الجواب.") from exc
+        text = ""
+        for attempt in range(2):
+            started = time.monotonic()
+            try:
+                text = await self._provider.complete(messages)
+                break
+            except ProviderError as exc:
+                self._record(exc, stage="respond", elapsed_ms=int((time.monotonic() - started) * 1000),
+                             status_code=getattr(exc, "status_code", None), retry=attempt == 0)
+                if attempt == 0:
+                    continue
+                raise BrainError("ما قدرش مزود النموذج يولّد الجواب.") from exc
+            except BrainError as exc:
+                self._record(exc, stage="respond", elapsed_ms=int((time.monotonic() - started) * 1000))
+                raise
+            except Exception as exc:
+                self._record(exc, stage="respond", elapsed_ms=int((time.monotonic() - started) * 1000))
+                raise BrainError("ما قدرش مزود النموذج يولّد الجواب.") from exc
         if not isinstance(text, str) or not text.strip():
             raise BrainError("مزود النموذج رجّع جواب فاضي.")
         return BrainReply(text=text.strip(), provider=self._provider.name, model=self._provider.model)
@@ -105,6 +173,26 @@ class Brain:
     @property
     def model_name(self) -> str:
         return self._provider.model
+
+    def _record(self, exc: BaseException, *, stage: str, elapsed_ms: int = 0,
+                status_code: int | None = None, retry: bool = False) -> None:
+        record_brain_failure(
+            exc, stage=stage, provider=self.provider_name, model=self.model_name,
+            elapsed_ms=elapsed_ms, status_code=status_code, retry=retry,
+        )
+
+    async def _call_tool(self, toolbox, call: ToolCall) -> str:
+        """Run one tool, returning errors to the model so it can recover."""
+        started = time.monotonic()
+        try:
+            result = await toolbox.call(call.name, call.arguments)
+        except Exception as exc:
+            self._record(exc, stage="tool", elapsed_ms=int((time.monotonic() - started) * 1000))
+            return (
+                f"TOOL_ERROR: خطأ في الأداة: {clean_text(exc, 200)}. "
+                "حاول أداة اخرى ولا اشرح الحالة للمستخدم."
+            )
+        return _tool_result_text(result)
 
     def _prepare_messages(self, conversation: Sequence[Message], system_instructions: str) -> list[Message]:
         if not conversation:
@@ -122,7 +210,7 @@ class Brain:
             "\n\n".join(item for item in trusted_instructions if item),
         )
         messages = [Message(role="system", content=prompt)]
-        messages.extend(message for message in conversation if message.role != "system")
+        messages.extend(message for message in _compact_history(conversation) if message.role != "system")
         if messages[-1].role != "user":
             raise ValueError("The latest conversation message must be from the user")
 
@@ -166,31 +254,52 @@ class Brain:
         try:
             for round_index in range(rounds):
                 use_tools = bool(toolbox) and round_index < rounds - 1
-                calls: list[ToolCall] = []
-                text_parts: list[str] = []
-                async def completion_stream():
-                    yield await self._provider.complete(messages)
+                interrupted = False
+                for attempt in range(2):  # one retry only when nothing was emitted yet
+                    calls: list[ToolCall] = []
+                    text_parts: list[str] = []
+                    started = time.monotonic()
 
-                stream = (
-                    completion_stream() if stream_method is None else
-                    stream_method(messages, tools=toolbox.schemas) if use_tools and stream_accepts_tools else
-                    stream_method(messages)
-                )
-                text_filter = TextCallFilter()
-                try:
-                    async for chunk in stream:
-                        if isinstance(chunk, ToolCall):
-                            if use_tools:
-                                calls.append(chunk)
-                        elif chunk:
-                            visible = text_filter.feed(chunk)
-                            if visible:
-                                text_parts.append(visible)
-                                yield visible
-                finally:
-                    close = getattr(stream, "aclose", None)
-                    if close is not None:
-                        await close()
+                    async def completion_stream():
+                        yield await self._provider.complete(messages)
+
+                    stream = (
+                        completion_stream() if stream_method is None else
+                        stream_method(messages, tools=toolbox.schemas) if use_tools and stream_accepts_tools else
+                        stream_method(messages)
+                    )
+                    text_filter = TextCallFilter()
+                    try:
+                        async for chunk in stream:
+                            if isinstance(chunk, ToolCall):
+                                if use_tools:
+                                    calls.append(chunk)
+                            elif chunk:
+                                visible = text_filter.feed(chunk)
+                                if visible:
+                                    text_parts.append(visible)
+                                    yield visible
+                    except ProviderError as exc:
+                        clean_start = not text_parts and not calls
+                        self._record(
+                            exc, stage="stream", elapsed_ms=int((time.monotonic() - started) * 1000),
+                            status_code=getattr(exc, "status_code", None), retry=attempt == 0 and clean_start,
+                        )
+                        if attempt == 0 and clean_start:
+                            continue
+                        recovery = STREAM_UNAVAILABLE if clean_start else STREAM_RECOVERY
+                        text_parts.append(recovery)
+                        yield recovery  # keep the SSE/voice turn alive; the caller still gets `done`
+                        interrupted = True
+                        break
+                    finally:
+                        close = getattr(stream, "aclose", None)
+                        if close is not None:
+                            try:
+                                await close()
+                            except Exception:
+                                pass  # a failed cleanup must not replace the original outcome
+                    break
                 text_calls, leftover = text_filter.finish()
                 if use_tools:
                     calls.extend(text_calls)
@@ -199,6 +308,8 @@ class Brain:
                 if leftover:
                     text_parts.append(leftover)
                     yield leftover
+                if interrupted and not calls:
+                    return
                 if not calls:
                     return
                 if not text_parts:
@@ -210,7 +321,7 @@ class Brain:
                     if filler:
                         text_parts.append(filler)
                         yield filler
-                results = await asyncio.gather(*(toolbox.call(call.name, call.arguments) for call in calls))
+                results = await asyncio.gather(*(self._call_tool(toolbox, call) for call in calls))
                 messages.append(Message(role="assistant", content="".join(text_parts), tool_calls=tuple(calls)))
                 messages.extend(
                     Message(role="tool", content=result or "(no result)", tool_call_id=call.id)
@@ -219,6 +330,7 @@ class Brain:
         except BrainError:
             raise
         except Exception as exc:
+            self._record(exc, stage="stream")
             raise BrainError("ما قدرش مزود النموذج يولّد الجواب.") from exc
 
     async def respond_with_tools(self, conversation: Sequence[Message], toolbox, *, system_instructions: str = "") -> BrainReply:

@@ -37,8 +37,8 @@ class AtulyaLocalBrainLauncherTest(unittest.TestCase):
                 os.environ.pop('ATULYA_FORCE_DARIJA', None)
             else:
                 os.environ['ATULYA_FORCE_DARIJA'] = previous
-        self.assertIn('arabe marocain', prompt.lower())
-        self.assertIn('lettres arabes', prompt.lower())
+        self.assertIn('بالدارجة بحروف عربية', prompt)
+        self.assertIn('ما تكتب حرف لاتيني فالجواب', prompt)
 
     def test_vendored_provider_accepts_timeout_override(self) -> None:
         providers = ROOT / "GITHUB_IMPORT" / "Atulya-Tantra" / "tools" / "plugins" / "brain" / "providers.py"

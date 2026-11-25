@@ -303,6 +303,7 @@ class SessionAuthMiddleware:
         await self._audited(scope, receive, authenticated_send, user_id, admin_route=admin_route)
 
 from tools.plugins.brain import AutomaticProvider, Brain, BrainError, Message, OllamaProvider, OpenAICompatibleProvider
+from tools.plugins.brain.diagnostics import record_brain_failure
 from tools.plugins.communications.channels import WebUIChannel
 from tools.plugins.communications.channels.telegram import TelegramChannel
 from . import sysmon
@@ -2429,6 +2430,7 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                 status_code=503,
                 detail="Chat is unavailable right now. Please try again later.",
             )
+        chat_started = time.monotonic()
         try:
             image_url = None
             if request.image:
@@ -2597,6 +2599,11 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
         except ValueError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
         except BrainError as exc:
+            record_brain_failure(
+                exc, stage="chat_nonstream", provider=brain.provider_name if brain else "",
+                model=brain.model_name if brain else "",
+                elapsed_ms=int((time.monotonic() - chat_started) * 1000),
+            )
             issue_state["issue"] = {"message": str(exc), "source": "chat"}
             raise HTTPException(status_code=503, detail=str(exc)) from exc
         if request.stream:
@@ -2621,7 +2628,11 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                         asyncio.get_running_loop().run_in_executor(None, LocalLlamaRuntime.save_voice_prefix_once)
                     if issue_state["issue"] and issue_state["issue"].get("source") == "chat":
                         issue_state["issue"] = None
-                except BrainError:
+                except BrainError as exc:
+                    record_brain_failure(
+                        exc, stage="chat_stream", provider=brain.provider_name, model=brain.model_name,
+                        elapsed_ms=int((time.monotonic() - chat_started) * 1000),
+                    )
                     issue_state["issue"] = {"message": "تدفق النموذج توقف فجأة.", "source": "chat"}
                     yield f"data: {json.dumps({'error': 'الجواب توقف فجأة. حاول مرة اخرى ولا صيّح الرسالة.'})}\n\n"
 

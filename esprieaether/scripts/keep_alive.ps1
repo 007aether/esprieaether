@@ -70,21 +70,42 @@ function Stop-PortOwner([int]$port) {
 
 function Start-Managed([hashtable]$svc) {
     $backup = @{}
-    foreach ($key in $svc.Env.Keys) {
-        $backup[$key] = [Environment]::GetEnvironmentVariable($key)
-        [Environment]::SetEnvironmentVariable($key, [string]$svc.Env[$key])
+    if ($svc.ContainsKey('Env') -and $svc.Env) {
+        foreach ($key in $svc.Env.Keys) {
+            $backup[$key] = [Environment]::GetEnvironmentVariable($key)
+            [Environment]::SetEnvironmentVariable($key, [string]$svc.Env[$key])
+        }
+    }
+    $argList = @()
+    if ($svc.ContainsKey('Args') -and $svc.Args) {
+        $argList = @($svc.Args | Where-Object { $_ -ne $null -and $_ -ne '' })
     }
     try {
         $out = Join-Path $logDir ($svc.Name + '.out.log')
         $err = Join-Path $logDir ($svc.Name + '.err.log')
-        Start-Process -FilePath $svc.Exe -ArgumentList @($svc.Args) -WorkingDirectory $svc.Cwd `
-            -WindowStyle Hidden -RedirectStandardOutput $out -RedirectStandardError $err | Out-Null
+        if ($argList.Count -gt 0) {
+            Start-Process -FilePath $svc.Exe -ArgumentList $argList -WorkingDirectory $svc.Cwd `
+                -WindowStyle Hidden -RedirectStandardOutput $out -RedirectStandardError $err | Out-Null
+        } else {
+            Start-Process -FilePath $svc.Exe -WorkingDirectory $svc.Cwd `
+                -WindowStyle Hidden -RedirectStandardOutput $out -RedirectStandardError $err | Out-Null
+        }
     } finally {
         foreach ($key in $backup.Keys) {
             [Environment]::SetEnvironmentVariable($key, $backup[$key])
         }
     }
     Log ("START {0} (:{1})" -f $svc.Name, $svc.Port)
+}
+
+function Start-Tracked([hashtable]$svc) {
+    try {
+        Start-Managed $svc
+        return $true
+    } catch {
+        Log ("START_FAILED {0} (:{1}): {2}" -f $svc.Name, $svc.Port, $_.Exception.Message)
+        return $false
+    }
 }
 
 $services = @(
@@ -100,7 +121,9 @@ $services = @(
     @{ Name='ai-router';      Port=11435; Exe=$py;   Args=@('src\ai_router.py'); Cwd=$base },
     @{ Name='orchestrator';   Port=11436; Exe=$py;   Args=@('src\orchestrator.py'); Cwd=$base },
     @{ Name='agent-mesh';     Port=11437; Exe=$py;   Args=@('src\agent_mesh.py'); Cwd=$base },
-    @{ Name='freellmapi';     Port=31415; Exe='C:\Users\aether\Downloads\FreeLLMAPI-0.16.37-win\FreeLLMAPI.exe'; Args=@(); Cwd='C:\Users\aether\Downloads\FreeLLMAPI-0.16.37-win' },
+    # Demarrage manuel uniquement : l'ancien lancement automatique échouait chaque minute
+    # (ArgumentList vide) et interrompait toute la tournée de superviseur.
+    @{ Name='freellmapi';     Port=31415; Exe='C:\Users\aether\Downloads\FreeLLMAPI-0.16.37-win\FreeLLMAPI.exe'; Args=@(); Cwd='C:\Users\aether\Downloads\FreeLLMAPI-0.16.37-win'; SkipStart=$true },
     @{ Name='local-brain';    Port=31416; Exe=$py;   Args=@('-m','src.local_brain'); Cwd=$base },
     @{ Name='atulya';         Port=8501;  Exe=$py;   Args=@('-m','atulya.cli','serve'); Cwd=$root; Env=@{
         PYTHONPATH=$vendor;
@@ -132,14 +155,19 @@ function Invoke-Pass {
     $up = 0; $down = 0; $fixed = 0
     foreach ($svc in $services) {
         if (-not (Test-Port $svc.Port)) {
-            $down++; Start-Managed $svc; $fixed++
+            $down++
+            if ($svc.ContainsKey('SkipStart') -and $svc.SkipStart) {
+                Log ("SKIP {0} (:{1}) demarrage manuel requis" -f $svc.Name, $svc.Port)
+                continue
+            }
+            if (Start-Tracked $svc) { $fixed++ }
             continue
         }
         if ($httpChecks.ContainsKey($svc.Port)) {
             if (-not (Test-Http $svc.Port $httpChecks[$svc.Port])) {
                 $down++; Log ("UNHEALTHY {0} (:{1})" -f $svc.Name, $svc.Port)
                 Stop-PortOwner $svc.Port
-                Start-Managed $svc; $fixed++
+                if (Start-Tracked $svc) { $fixed++ }
                 continue
             }
         }
@@ -149,16 +177,14 @@ function Invoke-Pass {
     $daemon = Get-CimInstance Win32_Process -Filter "Name='python.exe'" -ErrorAction SilentlyContinue |
         Where-Object { $_.CommandLine -like '*robot_daemon.py*' }
     if (-not $daemon) {
-        Start-Managed @{ Name='robot-daemon'; Port=0; Exe=$py; Args=@('robot_daemon.py','--interval','60'); Cwd=$base }
-        $fixed++
+        if (Start-Tracked @{ Name='robot-daemon'; Port=0; Exe=$py; Args=@('robot_daemon.py','--interval','60'); Cwd=$base }) { $fixed++ }
     }
 
     if ($legacyVoice) {
         $voice = Get-CimInstance Win32_Process -Filter "Name='python.exe'" -ErrorAction SilentlyContinue |
             Where-Object { $_.CommandLine -like '*voice_daemon.py*' }
         if (-not $voice) {
-            Start-Managed @{ Name='voice-daemon'; Port=0; Exe=$py; Args=@('voice_daemon.py'); Cwd=$base }
-            $fixed++
+            if (Start-Tracked @{ Name='voice-daemon'; Port=0; Exe=$py; Args=@('voice_daemon.py'); Cwd=$base }) { $fixed++ }
         }
         $voiceState = $(if ($voice) { 'ok' } else { 'started' })
     } else {

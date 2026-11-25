@@ -69,8 +69,9 @@
   (music, TTS, device companion, skills) peuvent être appliquées sans click,
   avec rollback si les tests échouent ; WebUI, brain, auth et setup exigent
   toujours une approbation. Aucun SMS, appel ou action d'appareil envoyé.
-- **Packaging v2.1.6** : `package.json` et `manifest.json` en `2.1.6`, ajout au
-  manifest des modules locaux, des outils Atulya et des rapports d'analyse.
+- **Packaging v2.1.6** : `package.json` et `manifest.json` en `2.1.6`,
+  **782 fichiers** inventoriés, ajout au manifest des modules locaux, des outils
+  Atulya et des rapports d'analyse.
 - **Répondeur unique (J97/J98)** : le superviseur 24/7 garde Atulya et le HUD en
   vie, et désactive le daemon vocal JARVIS hérité par défaut (`voice=atulya-only`).
   `ESPRIE_LEGACY_VOICE=1` le réactive explicitement ; la persona Atulya ne dit plus
@@ -116,6 +117,22 @@
   (`Checking the systems.` → `كنفحص الأنظمة.`, `One moment.` → `لحظة من فضلك.`)
   et tous les messages `BrainError` / `ProviderError` sont en arabe marocain.
   Les mots-clés darija (`الطقس`, `حالة النظام`, …) déclenchent aussi l'acquittement.
+- **Journal de panne sans secret (J106)** : `brain_errors.jsonl` n'enregistre
+  qu'une liste blanche de champs (`type`, cause, étape, fournisseur, modèle,
+  durée, code HTTP, nouvelle tentative). Le texte libre est filtré et plafonné ;
+  aucun prompt, en-tête, jeton ni mot de passe n'est persisté. Le serveur trace
+  désormais la cause avant d'envoyer le message vocal générique.
+- **Reprise de flux et garde-fous (J107/J109)** : une seule nouvelle tentative
+  quand le flux tombe avant le premier mot ; sinon une phrase darija explicite
+  termine la réponse et le `done` SSE reste émis. Les résultats d'outils sont
+  plafonnés, les erreurs d'outils sont rendues au modèle pour correction, et
+  l'historique long est résumé sans jamais transformer l'historique en prompt
+  système.
+- **Superviseur résilient (J108)** : plus de `-ArgumentList` vide ; chaque
+  démarrage est isolé et journalisé (`START_FAILED`) sans arrêter la tournée.
+  FreeLLMAPI reste hors démarrage automatique tant que le propriétaire ne le
+  demande pas explicitement.
+- **تنبيهات اللوحة (J110)** : `guard_failed/python` كان جاي من اختبار قديم كيتوقع صيغة فرنسية فـ `persona.py`؛ تصلّح باش يتحقق من الدارجة بحروف عربية. `guard_failed/endpoints` وخدمات `down` كانو كيعتابرو `dsh_bridge` و`llm_gateway` أخطاء، وهم خدمات ببدء يدوي/مستقل؛ ولا كيتسجلو كـ `manual_services_down` معلومة غير خطأ. العدّاد التراكمي `failed_runs` و`timed_out_runs` ولا معلومة، والإنذار كيبقى غير للفشل القريب فـ `run_needs_attention`. التعديلات كتطلب إعادة تحميل الحارس والمشغل باش تبان فاللوحة.
 - **Traduction des documents de test** : les assertions de `briefing_settings`
   suivent le nouveau libellé darija du briefing matinal.
 
@@ -140,14 +157,20 @@
 
 ## Tests
 
-- Node : **1054 pass / 0 fail** sur 68 fichiers `tests\*.test.mjs`,
+- Node : **1058 pass / 0 fail** sur 68 fichiers `tests\*.test.mjs`,
   dont le test d'origine du pont `J100`, le contrôle darija des pages
-  `jarvis.html` / `system.html`, le délai `120000` du relais et la fermeture
-  clavier de la fenêtre flottante.
-- Node ciblé (pont, darija, install/update) : **155/155**.
-- Python unittest : **246 tests OK** sur le routeur local `:31416`.
-- Atulya pytest : **560 passed, 3 skipped**, 16 subtests passés (0 fail),
-  dont les 7 nouveaux contrôles darija des acquittements et des erreurs (J105).
+  `jarvis.html` / `system.html`, le délai `120000` du relais, la fermeture
+  clavier de la fenêtre flottante, les contrôles J106/J108 et le contrôle J110
+  des services en démarrage manuel.
+- Node ciblé (pont, darija, install/update) : **157/157** (155 + les 2 contrôles J106/J108).
+- Python unittest : **250 tests OK / 0 fail** (246 + J110), dont le service
+  sentinel qui ne traite plus `dsh_bridge` et `llm_gateway` comme des erreurs.
+- Atulya pytest : **566 passed, 3 skipped**, 16 subtests passés (0 fail),
+  dont les 7 contrôles darija (J105) et les 6 nouveaux contrôles J106/J109
+  (journal sans secret, reprise de flux, erreurs d'outils, plafond de résultat,
+  compression de l'historique). La dernière re-vérification pytest est bloquée
+  par l'absence du module local `webauthn` dans cet interpréteur, sans lien avec
+  ces changements ; le résultat 566 reste celui de la passe validée.
 - Aucun upload, token cloud ou clé externe.
 
 ## شنو ناقص (MADA YANKOSONA)
@@ -160,10 +183,14 @@
 | `documentary-sources` | `needs_user_data` | مسارات حقيقية لملفات `legal` / `fiscal` / `travail` باش يتحسب SHA-256 ديالها. |
 | APK / جهاز `iip` | `needs_user_data` | APK أو ربط جهاز أندرويد؛ الجهاز دابا `offline`، `seen=0`، وطلب `ping` مصفوف بلا إيصال. ما تدار أي فعل جهاز. |
 | `barge-in` | `implemented_unverified` | حدث `barge_in` حقيقي أثناء الكلام؛ الميكرو ما عطاش إشارة فوق العتبة 0.18. |
+| سجل توقف الجواب | `implemented_unverified` | أول توقف حقيقي كيكتب سطر فـ `brain_errors.jsonl`؛ الاختبارات غطّات الحالات، ولكن ما وقعش توقف جديد فالسيرفر الحي بعد TDD. |
 | `atulya-wake` | `implemented_unverified` | كلمة إيقاظ حقيقية تطلع `hits>0` فـ `wake_selfcheck.json`؛ التجربة الأخيرة 12 ثانية عطات `hits=0`. |
-| موافقة HUD | `implemented_unverified` | `PUT` loopback حقيقي على `/api/jarvis/approvals/<id>` مسجل فـ `action_audit.jsonl`. |
+| موافقة HUD | `live_verified` | `action_audit.jsonl` فيه `act-9ec94b52eb`: `proposed->approved_once` فـ `2026-11-25T09:03:37.179Z` من `hud`. |
+| تنبيهات `guard_failed/python` و`guard_failed/endpoints` | `implemented_unverified` | الإصلاحات تكتبو، ولكن الحارس والمشغل الحي مازالو كيقراو الكود القديم؛ كيتطلب إعادة تحميل بلا restart بلا موافقة صريحة. |
+| عدّاد `failed_runs` / `timed_out_runs` التراكمي | `implemented_unverified` | ولا معلومة فالـ dashboard؛ الإنذار كيبقى للفشل القريب غير. كيتطلب إعادة تحميل `api/server.mjs`. |
+| self-heal ديال الـ supervisor | `implemented_unverified` | إعادة تحميل `keep_alive.ps1` باش يقرأ الإصلاح الجديد؛ ما تدارش restart بلا موافقة صريحة. |
 | `/api/chat` غير-streaming | تحسّن بعد موافقة | الـ `timeout` ولا `120000` فـ `serve_g0dm0d3.mjs`، الـ UI كيستعمل streaming. |
 | محادثة كاملة بمصادقة | غير متحقق | كيتطلب passkey ديال المالك؛ تحققنا غير بـ `401 {"detail":"Sign in with your Atulya passkey to continue."}` بدل `403`. هاد الـ `401` هو بوابة المصادقة العادية على `/api/*` (ما كاينش خطأ)، والـ `/api/health` كيرجّع `200`. |
-| حزمة pytest قديمة (root) | خارج release gate | 45 passed / 7 failed بسبب مسارات وصلاحيات قديمة (`C:/Users/ESPRIEAETHER/...`)؛ ماشي من هاد الإصدار. |
+| حزمة unittest محلية (root) | تحقّق بعد J110 | **250 passed / 0 fail**؛ كان فيها اختبار واحد كيتوقع صيغة فرنسية قديمة فـ `persona.py`، تصلّح باش يقرأ الدارجة بحروف عربية. |
 
 اللي تقدر تعطيني دابا: عنوان MCP خارجي، مسارات المستندات، APK/جهاز مربوط، ولا passkey للتحقق من المحادثة. غير ما تعطينيش كلمات مرور ولا أسرار فالملفات.

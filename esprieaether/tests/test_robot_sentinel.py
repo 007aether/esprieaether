@@ -56,6 +56,22 @@ class RobotSentinelTest(unittest.TestCase):
         self.assertTrue(result["ok"])
         self.assertIn("Ollama", result["summary"])
 
+    def test_manual_services_down_are_expected_not_error(self):
+        import urllib.error
+
+        def fake_urlopen(url, timeout):
+            if ":5101" in url or ":31415" in url:
+                raise urllib.error.URLError("refused")
+            return _Resp(200)
+
+        with patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            result = robot_engine.h_service_health("SYS_01")
+        self.assertTrue(result["ok"])
+        self.assertIn("up=8/10", result["summary"])
+        self.assertEqual(result["detail"]["down"], ["dsh_bridge", "llm_gateway"])
+        self.assertEqual(result["detail"]["expected_down"], ["dsh_bridge", "llm_gateway"])
+        self.assertEqual(result["detail"]["unexpected_down"], [])
+
 
 if __name__ == "__main__":
     unittest.main()

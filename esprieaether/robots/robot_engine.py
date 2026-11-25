@@ -91,6 +91,10 @@ LOCAL_SERVICES = (
     ("local_brain", 31416, "/health"),
 )
 
+# Ces deux services sont volontairement hors du démarrage automatique :
+# dsh_bridge appartient à son propre processus, llm_gateway (FreeLLMAPI) est manuel.
+MANUAL_LOCAL_SERVICES = ("dsh_bridge", "llm_gateway")
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
@@ -201,10 +205,17 @@ def h_service_health(robot_id: str) -> dict:
                     down.append(name)
         except Exception:
             down.append(name)
+    expected_down = [name for name in down if name in MANUAL_LOCAL_SERVICES]
+    unexpected_down = [name for name in down if name not in MANUAL_LOCAL_SERVICES]
     return {
-        "ok": not down,
+        "ok": not unexpected_down,
         "summary": f"up={len(up)}/{len(LOCAL_SERVICES)} down={','.join(down) or 'none'}",
-        "detail": {"up": up, "down": down},
+        "detail": {
+            "up": up,
+            "down": down,
+            "expected_down": expected_down,
+            "unexpected_down": unexpected_down,
+        },
     }
 
 

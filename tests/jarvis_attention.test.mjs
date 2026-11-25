@@ -148,3 +148,41 @@ test('attention: état Internet public, honnête et sans secret', async () => {
   assert.equal(absent.internet.available, false);
   assert.equal(absent.internet.reason, 'no_data_source');
 });
+
+test('attention: les services en démarrage manuel ne sont pas une erreur', async () => {
+  const manualReports = join(dir, 'manual-reports');
+  await mkdir(manualReports, { recursive: true });
+  await writeFile(join(manualReports, 'quality_guard_report.json'), JSON.stringify({
+    checked_at: '2026-11-25T22:44:05',
+    endpoints: 'up=8/10 down=dsh_bridge,llm_gateway',
+    checks: { python: true, dashboard: true, env: true, endpoints: true, graph: true },
+  }), 'utf8');
+  await writeFile(join(manualReports, 'local_brain_verification.json'), JSON.stringify({
+    checked_at: '2026-11-25T22:44:05',
+    router_health: { active: 'dolphin3', count: 3 },
+  }), 'utf8');
+  const result = await buildAttention(manualReports, join(dir, 'state', 'absent.json'));
+  const reasons = result.items.map((item) => item.reason);
+  assert.ok(!reasons.includes('guard_failed'));
+  assert.ok(!reasons.includes('services_down'));
+  assert.ok(reasons.includes('manual_services_down'));
+  assert.equal(result.needsAttention, false);
+});
+
+test('attention: le total cumulé des échecs n\'est plus une alerte', async () => {
+  const totalLedgerPath = join(dir, 'state', 'ledger-total.json');
+  await writeFile(totalLedgerPath, JSON.stringify({
+    generatedAt: '2026-11-25T22:58:50Z',
+    available: true,
+    stats: { succeeded: 154945, failed: 19799, timed_out: 6, cancelled: 0, running: 0, total: 174750 },
+    runs: [
+      { id: 3, action: 'agent_audit', actor: 'SYS_05', status: 'succeeded', createdAt: '2026-11-25T22:58:50Z' },
+      { id: 2, action: 'vault_guard', actor: 'SYS_03', status: 'succeeded', createdAt: '2026-11-25T22:58:50Z' },
+    ],
+  }), 'utf8');
+  const result = await buildAttention(reportsDir, totalLedgerPath, internetPath);
+  assert.equal(result.items.find((item) => item.reason === 'failed_runs'), undefined);
+  assert.ok(result.items.some((item) => item.reason === 'failed_runs_total' && item.level === 'info'));
+  assert.ok(result.items.some((item) => item.reason === 'timed_out_runs_total' && item.level === 'info'));
+  assert.equal(result.needsAttention, false);
+});

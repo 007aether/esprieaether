@@ -26,6 +26,7 @@ const DEFAULT_EGRESS_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'egress_self
 const DEFAULT_BARGE_REVIEW = join(ROOT, 'esprieaether', 'state', 'barge_in_review.json');
 const DEFAULT_WAKE_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'wake_selfcheck.json');
 const VOICE_STAGES = new Set(['idle', 'listening', 'thinking', 'speaking']);
+const MANUAL_DOWN_SERVICES = new Set(['dsh_bridge', 'llm_gateway']);
 const REPORT_FILES = {
   quality: 'quality_guard_report.json',
   vault: 'vault_guard_report.json',
@@ -366,8 +367,15 @@ export async function buildAttention(
   for (const [key, value] of Object.entries(quality.checks || {})) {
     if (value === false) add(`guard-${key}`, 'error', 'guard_failed', key);
   }
-  const match = /down=(\d+)/.exec(String(quality.endpoints || ''));
-  if (match && Number(match[1]) > 0) add('services-down', 'error', 'services_down', match[1]);
+  const match = /down=([^\s]+)/.exec(String(quality.endpoints || ''));
+  const downNames = match && match[1] !== 'none'
+    ? match[1].split(',').map((name) => name.trim()).filter(Boolean)
+    : [];
+  if (downNames.length) {
+    const manualOnly = downNames.every((name) => MANUAL_DOWN_SERVICES.has(name));
+    add('services-down', manualOnly ? 'info' : 'error',
+      manualOnly ? 'manual_services_down' : 'services_down', downNames.join(','));
+  }
 
   const missing = Array.isArray(backlog.missing_sources) ? backlog.missing_sources : [];
   if (missing.length) add(`source-${missing.join('-')}`, 'info', 'no_data_source', missing.join(','));
@@ -379,8 +387,11 @@ export async function buildAttention(
   if (ledger) {
     const stats = ledger.stats && typeof ledger.stats === 'object' ? ledger.stats : {};
     for (const key of ['failed', 'timed_out', 'running']) {
-      if (Number(stats[key] || 0) > 0) {
-        add(`ledger-${key}`, key === 'failed' ? 'error' : 'warning', `${key}_runs`, stats[key]);
+      const count = Number(stats[key] || 0);
+      if (count > 0) {
+        const cumulative = key !== 'running';
+        add(`ledger-${key}`, cumulative ? 'info' : 'warning',
+          cumulative ? `${key}_runs_total` : `${key}_runs`, count);
       }
     }
     for (const run of (Array.isArray(ledger.runs) ? ledger.runs : []).slice(0, 12)) {
