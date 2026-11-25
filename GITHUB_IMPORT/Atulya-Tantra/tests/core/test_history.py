@@ -111,6 +111,24 @@ def test_gesture_model_is_served_from_project_model_directory(project_temp_dir: 
     assert status["gesture"] == {"state": "ready", "label": "Model ready · awaiting camera"}
 
 
+def test_gesture_status_accepts_runtime_without_optional_license_docs(project_temp_dir: Path) -> None:
+    models_dir = project_temp_dir / "models"
+    model_path = models_dir / "gesture" / "gesture_recognizer.task"
+    model_path.parent.mkdir(parents=True)
+    model_path.write_bytes(b"local gesture model")
+    from tools.bootstrap import MEDIAPIPE_FILES, MEDIAPIPE_OPTIONAL_FILES
+    for name in MEDIAPIPE_FILES:
+        if name in MEDIAPIPE_OPTIONAL_FILES:
+            continue
+        asset = models_dir / "runtime" / "mediapipe" / name
+        asset.parent.mkdir(parents=True, exist_ok=True)
+        asset.write_bytes(b"test runtime asset")
+    from atulya.server import gesture_asset_status
+    assert gesture_asset_status(models_dir) == {
+        "state": "ready", "label": "Model ready · awaiting camera"
+    }
+
+
 def test_api_rejects_untrusted_host_header(project_temp_dir: Path) -> None:
     settings = Settings(
         assistant_name="Atulya", host="127.0.0.1", port=8501, data_dir=project_temp_dir / "data",

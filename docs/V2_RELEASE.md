@@ -1,4 +1,4 @@
-# ESPRIEATHER v2.1.2 — version locale complète
+# ESPRIEATHER v2.1.3 — version locale complète
 
 ## Nouveautés issues du reverse-engineering des 20 dépôts
 
@@ -32,7 +32,17 @@
   `LICENSE`/`NOTICE.md` dans le paquet npm 1.1.0 ; le modèle
   `gesture_recognizer.task` est installé avec SHA-256
   `97952348…0482` et les fichiers WASM sont vérifiés.
-- **Packaging v2.1.2** : `package.json` et `manifest.json` en `2.1.2`, ajout au
+- **Statut gestuel corrigé** : `gesture_asset_status` n'exige plus les documents
+  optionnels `LICENSE`/`NOTICE.md` absents du paquet npm ; `/api/status` affiche
+  désormais `state=ready`, `Model ready · awaiting camera`.
+- **Vérification navigateur réelle** : Chrome a ouvert `:3860/jarvis.html`, cliqué
+  sur « abrir Atulya », chargé l'iframe `/atulya/` sur la même origine et confirmé
+  les scripts locaux (aucun CDN). Seul `/api/push/subscribe` renvoie 403 (attendu,
+  abonnement push non accordé).
+- **Téléphone / APK** : l'appareil `iip` est appairé (`device_type=android`) mais
+  `status=offline`, `seen=0`, un job `ping` reste en file d'attente : aucune preuve
+  de polling ou de réception. L'APK n'est pas disponible dans le dépôt.
+- **Packaging v2.1.3** : `package.json` et `manifest.json` en `2.1.3`, ajout au
   manifest des modules locaux, des outils Atulya et des rapports d'analyse.
 
 ## Vérifications réelles (25/11/2026)

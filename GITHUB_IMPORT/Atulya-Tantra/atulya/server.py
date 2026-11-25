@@ -679,9 +679,13 @@ def _merge_telegram_owner(data_dir, owner_ids: set[str]) -> None:
 
 
 def gesture_asset_status(models_dir: Path) -> dict:
-    from tools.bootstrap import MEDIAPIPE_FILES
+    from tools.bootstrap import MEDIAPIPE_FILES, MEDIAPIPE_OPTIONAL_FILES
     model_ready = (models_dir / "gesture" / "gesture_recognizer.task").is_file()
-    runtime_ready = all((models_dir / "runtime" / "mediapipe" / name).is_file() for name in MEDIAPIPE_FILES)
+    runtime_ready = all(
+        (models_dir / "runtime" / "mediapipe" / name).is_file()
+        for name in MEDIAPIPE_FILES
+        if name not in MEDIAPIPE_OPTIONAL_FILES
+    )
     ready = model_ready and runtime_ready
     return {"state": "ready" if ready else "setup",
             "label": "Model ready · awaiting camera" if ready else
