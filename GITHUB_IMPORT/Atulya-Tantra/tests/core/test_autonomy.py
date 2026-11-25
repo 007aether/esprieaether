@@ -44,3 +44,16 @@ def test_a_small_skill_edit_applies_when_tests_pass(tmp_path):
     result = shop.auto_apply_since(SINCE, lambda: True)
     assert result["applied"] is True
     assert (root / "tools/skills/demo/SKILL.md").read_text(encoding="utf-8").endswith("more\n")
+
+
+def test_repair_autonomy_requires_an_explicit_policy(tmp_path):
+    data = tmp_path / "data"
+    data.mkdir()
+    policy = data / "autonomy.json"
+    shop = Maintenance(tmp_path / "root", data, tmp_path / "models")
+    policy.write_text('{"outside_messages": "auto"}', encoding="utf-8")
+    assert shop.autonomy_on() is False
+    policy.write_text('{"repairs": "anything_goes"}', encoding="utf-8")
+    assert shop.autonomy_on() is False
+    policy.write_text('{"repairs": "apply_if_tests_pass"}', encoding="utf-8")
+    assert shop.autonomy_on() is True

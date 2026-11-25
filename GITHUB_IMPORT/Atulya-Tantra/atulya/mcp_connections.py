@@ -10,6 +10,22 @@ from urllib.parse import urlsplit
 from uuid import uuid4
 
 
+def _validate_url(url: str) -> None:
+    """Accept HTTPS remotes or loopback HTTP local servers, never anything else.
+
+    The hostname comes from urlsplit, so `localhost`, `127.1`, IPv4-mapped IPv6
+    and userinfo tricks cannot masquerade as a loopback address.
+    """
+    parts = urlsplit(url)
+    loopback_http = parts.scheme == "http" and parts.hostname in {"127.0.0.1", "::1"}
+    remote_https = parts.scheme == "https"
+    if (not (loopback_http or remote_https) or not parts.hostname
+            or parts.username is not None or parts.password is not None
+            or parts.query or parts.fragment):
+        raise ValueError("Use an HTTPS MCP endpoint, or a loopback HTTP MCP endpoint "
+                         "(127.0.0.1 or ::1), without credentials or query parameters")
+
+
 class MCPConnections:
     def __init__(self, data_dir: Path):
         self.path = data_dir / "mcp_connections.json"
@@ -28,9 +44,7 @@ class MCPConnections:
         os.replace(temp, self.path)
 
     async def add(self, name: str, url: str) -> dict:
-        parts = urlsplit(url)
-        if parts.scheme != "https" or not parts.hostname or parts.username or parts.password or parts.query or parts.fragment:
-            raise ValueError("Use an HTTPS MCP endpoint without credentials or query parameters")
+        _validate_url(url)
         if not re.fullmatch(r"[A-Za-z0-9 _-]{1,60}", name):
             raise ValueError("Use a short connection name")
         async with self.lock:
@@ -48,6 +62,7 @@ class MCPConnections:
         item = next((c for c in self.load() if c["id"] == connection_id), None)
         if item is None:
             raise ValueError("Unknown connection")
+        _validate_url(item["url"])
         async def fetch_tools():
             async with Client(item["url"], mode="legacy", read_timeout_seconds=10) as client:
                 listed = await client.list_tools()
@@ -88,6 +103,7 @@ class MCPConnections:
         item = next((c for c in self.load() if c["id"] == connection_id), None)
         if item is None or not item["enabled"] or not any(t["name"] == name and t["granted"] for t in item["tools"]):
             raise ValueError("This MCP tool has not been granted by the owner")
+        _validate_url(item["url"])
         async def invoke():
             async with Client(item["url"], mode="legacy", read_timeout_seconds=10) as client:
                 result = await client.call_tool(name, arguments)

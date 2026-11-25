@@ -169,10 +169,12 @@ function proxySentinel(req, res) {
 function proxyAtulya(req, res, stripPrefix = "") {
   const rawPath = req.url || "/";
   const stream = rawPath.includes("/api/events");
-  const upstreamPath =
-    stripPrefix && rawPath.startsWith(stripPrefix)
-      ? rawPath.slice(stripPrefix.length) || "/"
-      : rawPath;
+  let upstreamPath = rawPath;
+  if (stripPrefix && rawPath.startsWith(stripPrefix)) {
+    const rest = rawPath.slice(stripPrefix.length);
+    // Le HUD ouvre /atulya/ : servir /index.html plutôt que / qui redirigerait vers le HUD.
+    upstreamPath = !rest || rest === "/" ? "/index.html" : rest;
+  }
   const upstream = http.request(
     {
       host: ATULYA_HOST,

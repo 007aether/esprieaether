@@ -32,7 +32,9 @@ def test_capability_api_auth_plugin_toggle_and_owner_isolation(project_temp_dir,
             assert result.status_code == 200
             rows = {r['name']: r for r in (await client.get('/api/capabilities')).json()['capabilities']}
             assert rows['get_weather']['status'] == 'disabled'
-            assert 'get_weather' not in (await client.get('/api/connections')).json()['mcp']['tools']
+            connections = (await client.get('/api/connections')).json()
+            assert 'get_weather' not in connections['mcp']['tools']
+            assert 'loopback' in connections['mcp']['outgoing']
             auth.ensure_user('audit-user', 'Audit user')
             client.cookies.set(SESSION_COOKIE, auth.create_session('audit-user'))
             assert (await client.get('/api/connections')).status_code == 403
@@ -41,3 +43,10 @@ def test_capability_api_auth_plugin_toggle_and_owner_isolation(project_temp_dir,
             assert rows['mcp_call_tool']['status'] == 'needs_connection'
 
     asyncio.run(exercise())
+
+
+def test_webui_mcp_label_mentions_loopback():
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[2]
+    text = (root / "webui" / "controls.js").read_text(encoding="utf-8")
+    assert "loopback" in text.lower()

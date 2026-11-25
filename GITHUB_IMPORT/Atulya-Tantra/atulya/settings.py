@@ -50,6 +50,28 @@ class Settings:
     public_origin: str = ""
     trusted_proxy_ips: str = "127.0.0.1,::1"
     admin_setup_token: str = field(default="", repr=False)
+    landing_url: str = ""
+
+    def __post_init__(self) -> None:
+        """The start page may only point at a loopback JARVIS HUD."""
+        if not self.landing_url:
+            return
+        parsed = urlsplit(self.landing_url)
+        try:
+            parsed_port = parsed.port
+        except ValueError as exc:
+            raise ValueError("ATULYA_LANDING_URL contains an invalid port") from exc
+        if (
+            parsed.scheme not in {"http", "https"}
+            or parsed.hostname not in {"127.0.0.1", "::1"}
+            or parsed_port is None
+            or not 1 <= parsed_port <= 65535
+            or parsed.username is not None
+            or parsed.password is not None
+            or parsed.query
+            or parsed.fragment
+        ):
+            raise ValueError("ATULYA_LANDING_URL must be a loopback HTTP(S) URL without credentials or query parameters")
 
     @classmethod
     def from_environment(cls) -> "Settings":
@@ -108,6 +130,7 @@ class Settings:
             public_origin=public_origin,
             trusted_proxy_ips=trusted_proxy_ips,
             admin_setup_token=admin_setup_token,
+            landing_url=os.environ.get("ATULYA_LANDING_URL", "").strip(),
         )
 
     @property

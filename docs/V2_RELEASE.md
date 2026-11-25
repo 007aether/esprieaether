@@ -1,4 +1,4 @@
-# ESPRIEATHER v2.1.4 — version locale complète
+# ESPRIEATHER v2.1.5 — version locale complète
 
 ## Nouveautés issues du reverse-engineering des 20 dépôts
 
@@ -54,7 +54,22 @@
   `outside_messages=auto` à la demande explicite du propriétaire. Les outils
   confirmés par l'owner peuvent s'exécuter sans invite supplémentaire ; aucun
   SMS/appel n'a été envoyé lors de la configuration.
-- **Packaging v2.1.4** : `package.json` et `manifest.json` en `2.1.4`, ajout au
+- **MCP sortant loopback** : Atulya accepte maintenant un serveur MCP local en
+  `http://127.0.0.1` ou `http://[::1]` en plus de HTTPS distant ; `localhost`,
+  `127.1`, les identifiants, query et fragment restent refusés. L'URL est
+  revérifiée avant chaque test et chaque appel ; le test et l'octroi outil-par-outil
+  restent obligatoires, et le protocole HTTPS distant inchangé.
+- **Page de démarrage HUD** : `ATULYA_LANDING_URL=http://127.0.0.1:3860/jarvis.html`
+  dans `START_ATULYA_TANTRA.cmd` et dans le superviseur `keep_alive.ps1`. `/`
+  redirige vers le HUD, tandis que `/index.html`, `/assistant.js` et `/api/*`
+  restent servis localement par Atulya. Le pont `:3860` traduit `/atulya/` en
+  `/index.html` pour éviter une boucle de redirection dans l'iframe.
+- **Autonomie owner étendue** : `autonomy.json` contient aussi
+  `repairs=apply_if_tests_pass`. Seules les petites réparations listées
+  (music, TTS, device companion, skills) peuvent être appliquées sans click,
+  avec rollback si les tests échouent ; WebUI, brain, auth et setup exigent
+  toujours une approbation. Aucun SMS, appel ou action d'appareil envoyé.
+- **Packaging v2.1.5** : `package.json` et `manifest.json` en `2.1.5`, ajout au
   manifest des modules locaux, des outils Atulya et des rapports d'analyse.
 
 ## Vérifications réelles (25/11/2026)
@@ -73,7 +88,7 @@
 
 ## Tests
 
-- Node : **1025 pass / 0 fail** (`tests\*.test.mjs`).
+- Node : **1030 pass / 0 fail** (`tests\*.test.mjs`).
 - Python unittest : **246 tests OK**.
-- Atulya pytest : **495 passed, 3 skipped**, 12 subtests passés.
+- Atulya pytest : **529 passed, 3 skipped**, 16 subtests passés (dont handshake MCP stdio et boucle locale HUD).
 - Aucun commit, push, upload, token cloud ou clé externe.

@@ -20,6 +20,7 @@ set "ATULYA_MODEL_NAME=dolphin3"
 set "ATULYA_MODEL_BASE_URL=http://127.0.0.1:31416/v1"
 set "ATULYA_MODEL_TIMEOUT=120"
 set "ATULYA_FORCE_DARIJA=1"
+set "ATULYA_LANDING_URL=http://127.0.0.1:3860/jarvis.html"
 set "HF_HUB_DISABLE_SYMLINKS_WARNING=1"
 
 "%PY%" -c "import fastapi, uvicorn, dotenv" >nul 2>&1
@@ -34,6 +35,15 @@ if errorlevel 1 echo [ESPRIEATHER] Optional MCP dependency missing: pip install 
 "%PY%" -c "import faster_whisper" >nul 2>&1
 if errorlevel 1 echo [ESPRIEATHER] Optional voice dependencies missing: see requirements.lock.txt
 
+curl -s -m 2 http://127.0.0.1:3860/v1/health >nul 2>&1
+if errorlevel 1 (
+  set "NODE=%ROOT%\.tools\node-v26.13.1\node.exe"
+  if not exist "!NODE!" set "NODE=node"
+  start "" /min "!NODE!" "%ROOT%\esprieaether\scripts\serve_g0dm0d3.mjs"
+  timeout /t 2 /nobreak >nul
+)
+start "" http://127.0.0.1:3860/jarvis.html
 echo [ESPRIEATHER] Atulya-Tantra loopback on http://127.0.0.1:8501 (local brain 127.0.0.1:31416)
+echo [ESPRIEATHER] Startup page: http://127.0.0.1:3860/jarvis.html
 "%PY%" -m atulya.cli serve
 exit /b !errorlevel!

@@ -108,6 +108,7 @@ $services = @(
         ATULYA_MODEL_TIMEOUT="$localTimeout";
         ESPRIE_LOCAL_TIMEOUT="$localTimeout";
         ATULYA_FORCE_DARIJA='1';
+        ATULYA_LANDING_URL='http://127.0.0.1:3860/jarvis.html';
         HF_HUB_DISABLE_SYMLINKS_WARNING='1'
     } },
     @{ Name='sentinel';       Port=8766;  Exe=$py;   Args=@('scripts\local_sentinel.py'); Cwd=$base; Env=@{ ESPRIE_SENTINEL_PORT='8766' } },

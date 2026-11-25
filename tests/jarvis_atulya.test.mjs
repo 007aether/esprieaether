@@ -49,6 +49,14 @@ test('J95: le HUD ouvre Atulya dans un cadre local sans script externe', async (
   assert.doesNotMatch(html, /https?:\/\/(cdn|unpkg|jsdelivr)/i);
 });
 
+test('J96: le lanceur ouvre le HUD local comme page de démarrage d’Atulya', async () => {
+  const launcher = await readFile(join(ROOT, 'START_ATULYA_TANTRA.cmd'), 'utf8');
+  assert.match(launcher, /set "ATULYA_LANDING_URL=http:\/\/127\.0\.0\.1:3860\/jarvis\.html"/);
+  assert.match(launcher, /start "" http:\/\/127\.0\.0\.1:3860\/jarvis\.html/);
+  const keeper = await readFile(join(ROOT, 'esprieaether', 'scripts', 'keep_alive.ps1'), 'utf8');
+  assert.match(keeper, /ATULYA_LANDING_URL='http:\/\/127\.0\.0\.1:3860\/jarvis\.html'/);
+});
+
 test('J80: atulya-core est live_verified seulement avec une preuve HTTP locale', async () => {
   const live = await buildAtulya(VENDOR, async () => ({
     status: 'ok', brain_configured: true,

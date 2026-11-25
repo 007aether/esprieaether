@@ -66,7 +66,9 @@ test("HUD: pont loopback vers Atulya, même origine, sans script externe", async
   const dashboardPort = await freePort();
   const uiPort = await freePort();
 
+  const seenPaths = [];
   const upstream = http.createServer((req, res) => {
+    seenPaths.push(req.url);
     const headers = {
       "content-type": "application/json; charset=utf-8",
       "x-frame-options": "DENY",
@@ -129,6 +131,8 @@ test("HUD: pont loopback vers Atulya, même origine, sans script externe", async
     assert.equal(page.headers["x-frame-options"], undefined);
     assert.match(page.headers["content-security-policy"] || "", /frame-ancestors 'self'/);
     assert.equal(page.body.includes("https://telegram.org/js/telegram-web-app.js"), false);
+    // Le HUD demande /atulya/ : le pont doit viser /index.html, pas / qui redirige vers le HUD.
+    assert.ok(seenPaths.includes("/index.html"), `upstream paths: ${seenPaths.join(", ")}`);
 
     const status = JSON.parse((await get(`${base}/atulya/api/status`)).body);
     assert.deepEqual(status, { ok: true, path: "/api/status" });

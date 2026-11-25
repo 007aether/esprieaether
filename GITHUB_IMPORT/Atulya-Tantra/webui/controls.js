@@ -227,7 +227,7 @@
         node("h3", "Maintenance access"), node("p", data.maintenance));
       const form = node("form");
       const nameLabel = node("label", "Connection name"), name = node("input"); name.required = true; name.maxLength = 60; nameLabel.append(name);
-      const urlLabel = node("label", "HTTPS MCP endpoint"), url = node("input"); url.required = true; url.type = "url"; url.placeholder = "https://your-server.example/mcp"; urlLabel.append(url);
+      const urlLabel = node("label", "HTTPS or loopback HTTP MCP endpoint"), url = node("input"); url.required = true; url.type = "url"; url.placeholder = "https://your-server.example/mcp or http://127.0.0.1:3001/mcp"; urlLabel.append(url);
       const add = node("button", "Save MCP connection"); add.type = "submit";
       form.append(nameLabel, urlLabel, node("small", "Use an endpoint you trust. Initial support connects servers without authentication. Saving does not grant any tools."), add);
       form.addEventListener("submit", async (event) => {

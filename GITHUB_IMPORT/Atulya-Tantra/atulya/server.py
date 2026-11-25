@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 import httpx
 from fastapi import FastAPI, File, Form, HTTPException, Query, Request, UploadFile
 from fastapi.concurrency import run_in_threadpool
-from fastapi.responses import FileResponse, Response, StreamingResponse
+from fastapi.responses import FileResponse, RedirectResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.middleware.trustedhost import TrustedHostMiddleware
@@ -1936,7 +1936,7 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
             "plugins": command_plugins.manifests,
             "skills": list_skills(),
             "mcp": {
-                "outgoing": "Connect an HTTPS MCP server, test it, and grant specific tools. Every invocation requires approval.",
+                "outgoing": "Connect an HTTPS MCP server, or a local loopback HTTP server (127.0.0.1/::1), test it, and grant specific tools. Every invocation requires approval.",
                 "incoming": "Optional stdio server: an external client launches python -m atulya.cli mcp.",
                 "tools": [tool.name for tool in TOOLS if tool.name in MCP_PUBLIC_TOOLS and any(p["id"] == tool.plugin_id and p["enabled"] for p in command_plugins.manifests)],
             },
@@ -2756,6 +2756,11 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
         if issue_state["issue"] and issue_state["issue"].get("source") == "voice":
             issue_state["issue"] = None
         return {"text": text}
+
+    if config.landing_url:
+        @app.get("/", include_in_schema=False)
+        async def landing_redirect():
+            return RedirectResponse(config.landing_url, status_code=302)
 
     webui = PROJECT_ROOT / "webui"
     app.mount(
