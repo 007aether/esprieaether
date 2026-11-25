@@ -15,6 +15,8 @@ const DASH_HOST = process.env.DASHBOARD_HOST || "127.0.0.1";
 const DASHBOARD_PORT = Number(process.env.DASHBOARD_PORT || 5100);
 const SENT_HOST = process.env.ESPRIE_SENTINEL_HOST || "127.0.0.1";
 const SENT_PORT = Number(process.env.ESPRIE_SENTINEL_PORT || 8766);
+const ATULYA_HOST = process.env.ATULYA_HOST || "127.0.0.1";
+const ATULYA_PORT = Number(process.env.ATULYA_PORT || 8501);
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -162,6 +164,84 @@ function proxySentinel(req, res) {
   req.pipe(upstream);
 }
 
+// Atulya est servi sous la même origine: /atulya/* -> /sur 8501, /api/* -> /api/* sur 8501.
+// On retire les en-têtes qui interdisent l'iframe et tout script CDN du HTML reçu.
+function proxyAtulya(req, res, stripPrefix = "") {
+  const rawPath = req.url || "/";
+  const stream = rawPath.includes("/api/events");
+  const upstreamPath =
+    stripPrefix && rawPath.startsWith(stripPrefix)
+      ? rawPath.slice(stripPrefix.length) || "/"
+      : rawPath;
+  const upstream = http.request(
+    {
+      host: ATULYA_HOST,
+      port: ATULYA_PORT,
+      method: req.method,
+      path: upstreamPath,
+      headers: { ...req.headers, host: `${ATULYA_HOST}:${ATULYA_PORT}` },
+      timeout: stream ? 0 : 15000,
+    },
+    (atuRes) => {
+      const headers = { ...atuRes.headers };
+      delete headers["access-control-allow-origin"];
+      delete headers["content-length"];
+      delete headers["x-frame-options"];
+      headers["content-security-policy"] =
+        "default-src 'self' data: blob:; script-src 'self' 'wasm-unsafe-eval'; " +
+        "style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; " +
+        "media-src 'self' blob: data:; connect-src 'self'; font-src 'self' data:; " +
+        "worker-src 'self' blob:; object-src 'none'; base-uri 'none'; " +
+        "frame-ancestors 'self'; form-action 'self'";
+      headers["x-content-type-options"] = "nosniff";
+      headers["permissions-policy"] =
+        "camera=(self), microphone=(self), geolocation=(self)";
+      headers["cache-control"] = "no-store";
+
+      if (stream) {
+        res.writeHead(atuRes.statusCode || 502, headers);
+        atuRes.pipe(res);
+        return;
+      }
+
+      const chunks = [];
+      atuRes.on("data", (chunk) => chunks.push(chunk));
+      atuRes.on("end", () => {
+        let body = Buffer.concat(chunks);
+        const type = String(atuRes.headers["content-type"] || "");
+        if (type.includes("text/html")) {
+          let html = body.toString("utf8");
+          html = html.replace(
+            /<script[^>]*\bsrc=["']https:\/\/telegram\.org\/js\/telegram-web-app\.js["'][^>]*>\s*<\/script>/gi,
+            ""
+          );
+          body = Buffer.from(html, "utf8");
+        }
+        delete headers["transfer-encoding"];
+        headers["content-length"] = body.length;
+        res.writeHead(atuRes.statusCode || 502, headers);
+        res.end(body);
+      });
+    }
+  );
+  upstream.on("timeout", () => upstream.destroy(new Error("atulya_timeout")));
+  upstream.on("error", (err) => {
+    if (!res.headersSent) {
+      json(res, 503, {
+        error: "atulya_unavailable",
+        reason: err.message === "atulya_timeout" ? "timeout" : "connection_refused",
+        upstream: `${ATULYA_HOST}:${ATULYA_PORT}`,
+      });
+    } else {
+      res.end();
+    }
+  });
+  res.on("close", () => {
+    if (stream) upstream.destroy();
+  });
+  req.pipe(upstream);
+}
+
 const server = http.createServer((req, res) => {
   const url = req.url || "/";
   if (url === "/sentinel/events" || url === "/sentinel/health") {
@@ -174,6 +254,14 @@ const server = http.createServer((req, res) => {
   }
   if (url.startsWith("/jarvis/")) {
     proxyDashboard(req, res);
+    return;
+  }
+  if (url === "/atulya" || url.startsWith("/atulya/")) {
+    proxyAtulya(req, res, "/atulya");
+    return;
+  }
+  if (url === "/api" || url.startsWith("/api/")) {
+    proxyAtulya(req, res);
     return;
   }
   const target = safeTarget(url);

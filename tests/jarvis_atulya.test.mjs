@@ -38,6 +38,17 @@ test('J78: le HUD affiche Atulya sans POST ni onclick', async () => {
   assert.doesNotMatch(html, /\bPOST\b/);
 });
 
+test('J95: le HUD ouvre Atulya dans un cadre local sans script externe', async () => {
+  const html = await readFile(HUD, 'utf8');
+  assert.match(html, /id="atulyaOpen"/);
+  assert.match(html, /id="atulyaFrame"/);
+  assert.match(html, /addEventListener\(['"]click['"]/);
+  assert.match(html, /['"]\/atulya\/['"]/);
+  assert.doesNotMatch(html, /onclick/i);
+  assert.doesNotMatch(html, /telegram\.org\/js/i);
+  assert.doesNotMatch(html, /https?:\/\/(cdn|unpkg|jsdelivr)/i);
+});
+
 test('J80: atulya-core est live_verified seulement avec une preuve HTTP locale', async () => {
   const live = await buildAtulya(VENDOR, async () => ({
     status: 'ok', brain_configured: true,

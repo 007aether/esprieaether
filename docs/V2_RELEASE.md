@@ -1,4 +1,4 @@
-# ESPRIEATHER v2.1.1 — version locale complète
+# ESPRIEATHER v2.1.2 — version locale complète
 
 ## Nouveautés issues du reverse-engineering des 20 dépôts
 
@@ -24,7 +24,15 @@
   la capacité repasse `implemented_unverified`, sans réussite inventée.
 - **Dépôt de sources (J93)** : `sources_intake.py` copie uniquement un fichier réel,
   calcule son SHA-256 et trace la provenance. Aucune source fournie pour l'instant.
-- **Packaging v2.1.1** : `package.json` et `manifest.json` en `2.1.1`, ajout au
+- **Pont HUD ↔ Atulya (J95)** : le serveur `:3860` relaie `/atulya/*` et `/api/*`
+  vers `:8501` sur la même origine, retire `x-frame-options`, remplace la CSP par
+  une politique locale et supprime le script CDN Telegram. Le HUD ouvre Atulya
+  dans un cadre local, sans `onclick` ni ressource externe.
+- **Runtime gestuel local** : `tools/bootstrap.py` tolère l'absence de
+  `LICENSE`/`NOTICE.md` dans le paquet npm 1.1.0 ; le modèle
+  `gesture_recognizer.task` est installé avec SHA-256
+  `97952348…0482` et les fichiers WASM sont vérifiés.
+- **Packaging v2.1.2** : `package.json` et `manifest.json` en `2.1.2`, ajout au
   manifest des modules locaux, des outils Atulya et des rapports d'analyse.
 
 ## Vérifications réelles (25/11/2026)

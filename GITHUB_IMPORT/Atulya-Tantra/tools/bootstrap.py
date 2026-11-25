@@ -39,6 +39,7 @@ MEDIAPIPE_FILES = (
     "wasm/vision_wasm_nosimd_internal.js",
     "wasm/vision_wasm_nosimd_internal.wasm",
 )
+MEDIAPIPE_OPTIONAL_FILES = ("LICENSE", "NOTICE.md")
 MEDIAPIPE_FILE_SHA256 = {
     "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     "NOTICE.md": "075f6a4c1eebbc0a56cb53c0711dea2fac8e20d66cb35085481cb4d83b3183b4",
@@ -93,10 +94,13 @@ def prepare_gesture_assets() -> bool:
     """Install the pinned browser recognizer and model into project-local folders."""
     runtime = PROJECT_ROOT / "models" / "runtime" / "mediapipe"
     model = PROJECT_ROOT / "models" / "gesture" / "gesture_recognizer.task"
+    required_files = tuple(
+        name for name in MEDIAPIPE_FILES if name not in MEDIAPIPE_OPTIONAL_FILES
+    )
     files_ready = all(
         (runtime / name).is_file()
         and _sha256(runtime / name) == MEDIAPIPE_FILE_SHA256[name]
-        for name in MEDIAPIPE_FILES
+        for name in required_files
     )
     if not files_ready:
         print(f"Preparing local gesture recognition runtime (MediaPipe {MEDIAPIPE_VERSION})…", flush=True)
@@ -120,7 +124,12 @@ def prepare_gesture_assets() -> bool:
                 with tarfile.open(archive_path, "r:gz") as archive:
                     for relative in MEDIAPIPE_FILES:
                         member_name = f"package/{relative}"
-                        member = archive.getmember(member_name)
+                        try:
+                            member = archive.getmember(member_name)
+                        except KeyError:
+                            if relative in MEDIAPIPE_OPTIONAL_FILES:
+                                continue
+                            raise
                         extracted = archive.extractfile(member)
                         if extracted is None:
                             raise OSError(f"MediaPipe package file is missing: {relative}")
