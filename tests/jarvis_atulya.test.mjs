@@ -57,6 +57,26 @@ test('J96: le lanceur ouvre le HUD local comme page de démarrage d’Atulya', a
   assert.match(keeper, /ATULYA_LANDING_URL='http:\/\/127\.0\.0\.1:3860\/jarvis\.html'/);
 });
 
+test('J97: Atulya tourne en continu, au démarrage PC, toujours en arabe marocain', async () => {
+  const launcher = await readFile(join(ROOT, 'START_ATULYA_TANTRA.cmd'), 'utf8');
+  const keeper = await readFile(join(ROOT, 'esprieaether', 'scripts', 'keep_alive.ps1'), 'utf8');
+  const startup = await readFile(join(ROOT, 'esprieaether', 'start_esprieaether_247.ps1'), 'utf8');
+  // Arabe marocain forcé dans le lanceur ET dans chaque redémarrage du superviseur.
+  assert.match(launcher, /set "ATULYA_FORCE_DARIJA=1"/);
+  assert.match(keeper, /ATULYA_FORCE_DARIJA='1'/);
+  // 24/7 : un seul superviseur, qui surveille Atulya et le HUD et les relance.
+  assert.match(keeper, /SUNNAVOK_KEEPALIVE_7X24/);
+  assert.match(keeper, /Name='atulya';\s+Port=8501/);
+  assert.match(keeper, /Name='g0dm0d3-ui';\s+Port=3860/);
+  assert.match(keeper, /8501 = '\/api\/health'/);
+  assert.match(keeper, /3860 = '\/v1\/health'/);
+  // Démarrage PC : une seule entrée, verrouillée et sans fenêtre visible.
+  assert.match(startup, /SUNNAVOK_STARTUP_GATE/);
+  assert.match(startup, /keep_alive\.ps1/);
+  assert.match(startup, /-WindowStyle Hidden/);
+  assert.doesNotMatch(startup, /https?:\/\//);
+});
+
 test('J80: atulya-core est live_verified seulement avec une preuve HTTP locale', async () => {
   const live = await buildAtulya(VENDOR, async () => ({
     status: 'ok', brain_configured: true,

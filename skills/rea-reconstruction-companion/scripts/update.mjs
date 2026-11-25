@@ -287,7 +287,7 @@ export async function runUpdate(action, options = {}, context = {}) {
     let state = loadState(location);
     if (action === 'enable') {
       if (!options.packageRoot) throw new Error('Enable requires --package pointing to the verified release folder.');
-      const plan = planInstall({ client: options.client, skillsDir: options.skillsDir || path.dirname(location.root), integration: options.integration, reaSkill: options.reaSkill, check: true }, { packageRoot: options.packageRoot });
+      const plan = planInstall({ client: options.client, skillsDir: options.skillsDir || path.dirname(location.root), integration: options.integration, reaSkill: options.reaSkill, check: true }, { packageRoot: options.packageRoot, packageCache: context.packageCache });
       if (fs.realpathSync.native(plan.destination) !== location.root || applyInstall(plan).status !== 'verified') throw new Error('Install and verify this package at the selected location before enabling checks.');
       versionParts(plan.version);
       // Explicit enable/re-enable binds to the user's selected, verified installation.

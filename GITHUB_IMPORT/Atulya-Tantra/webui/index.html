@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar-MA">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#050b12">
-  <meta name="description" content="Atulya — a more natural way to work.">
-  <title>Atulya</title>
+  <meta name="description" content="أتوليا — طريقة طبيعية باش تخدم محلياً.">
+  <title>أتوليا</title>
   <link rel="manifest" href="./manifest.webmanifest">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="icon" href="./icons/atulya-mark.svg" type="image/svg+xml">
@@ -19,189 +19,189 @@
 </head>
 <body>
   <div id="root"></div>
-  <nav class="quick-controls" aria-label="Atulya controls">
-    <button id="quick-camera" type="button" class="status-btn" data-status="red" aria-pressed="false" title="Camera: Inactive · Click to turn on"><span class="status-pip red"></span><span class="btn-text">Camera</span></button>
-    <button id="quick-gesture" type="button" class="status-btn" data-status="yellow" aria-pressed="true" title="Gestures: Standby (Waiting for camera) · Click to toggle"><span class="status-pip yellow"></span><span class="btn-text">Gestures</span></button>
-    <button id="quick-legend" type="button" class="legend-btn" title="Status Colors & Gestures Guide" aria-label="Status Colors & Gestures Guide"><span class="legend-dots"><i class="pip-green"></i><i class="pip-blue"></i><i class="pip-yellow"></i><i class="pip-red"></i></span><span>Guide</span></button>
-    <button id="quick-reminders" type="button">Reminders</button>
-    <button id="quick-weather" type="button">Weather</button>
-    <button id="quick-schedules" type="button">Schedules</button>
-    <button id="quick-phone" type="button">Phone actions</button>
-    <button id="quick-music" type="button">Music</button>
-    <button id="quick-devices" type="button">Devices</button>
-    <button id="quick-smarthome" type="button">Smart Home</button>
-    <button id="quick-expenses" type="button">Expenses</button>
-    <button id="quick-status" type="button">Dashboard</button>
-    <button id="quick-connections" type="button">Connections</button>
-    <button id="quick-maintenance" type="button">Maintenance</button>
-    <button id="quick-implementation" type="button">Work log</button>
-    <button id="quick-operations" type="button">Server operations</button>
-    <button id="quick-tasks" type="button">Tasks</button>
+  <nav class="quick-controls" aria-label="أدوات أتوليا">
+    <button id="quick-camera" type="button" class="status-btn" data-status="red" aria-pressed="false" title="الكاميرا: موقوفة · اضغط باش تشغّلها"><span class="status-pip red"></span><span class="btn-text">الكاميرا</span></button>
+    <button id="quick-gesture" type="button" class="status-btn" data-status="yellow" aria-pressed="true" title="الإيماءات: كيستنى الكاميرا · اضغط للتبديل"><span class="status-pip yellow"></span><span class="btn-text">الإيماءات</span></button>
+    <button id="quick-legend" type="button" class="legend-btn" title="دليل الألوان والإيماءات" aria-label="دليل الألوان والإيماءات"><span class="legend-dots"><i class="pip-green"></i><i class="pip-blue"></i><i class="pip-yellow"></i><i class="pip-red"></i></span><span>الدليل</span></button>
+    <button id="quick-reminders" type="button">التذكيرات</button>
+    <button id="quick-weather" type="button">الطقس</button>
+    <button id="quick-schedules" type="button">الجدول</button>
+    <button id="quick-phone" type="button">أفعال الجوال</button>
+    <button id="quick-music" type="button">الموسيقى</button>
+    <button id="quick-devices" type="button">الأجهزة</button>
+    <button id="quick-smarthome" type="button">المنزل الذكي</button>
+    <button id="quick-expenses" type="button">المصاريف</button>
+    <button id="quick-status" type="button">لوحة الحالة</button>
+    <button id="quick-connections" type="button">الاتصالات</button>
+    <button id="quick-maintenance" type="button">الصيانة</button>
+    <button id="quick-implementation" type="button">سجل العمل</button>
+    <button id="quick-operations" type="button">عمليات السيرفر</button>
+    <button id="quick-tasks" type="button">المهام</button>
   </nav>
   <dialog id="music-dialog" class="history-dialog" aria-labelledby="music-title">
-    <header><h2 id="music-title">Music on this device</h2><button id="close-music" type="button">Close</button></header>
-    <p>Free YouTube playback inside Atulya. Keep the player open; some videos restrict embedding. Playback starts on your device, not the server.</p>
+    <header><h2 id="music-title">الموسيقى على هاد الجهاز</h2><button id="close-music" type="button">إغلاق</button></header>
+    <p>تشغيل يوتيوب مجاني داخل أتوليا. خلّي المشغّل مفتوح؛ بعض الفيديوهات كتمنع العرض داخل الصفحة. التشغيل كيبدا من جهازك، ماشي من السيرفر.</p>
     <div id="music-player"></div><p id="music-status" role="status"></p>
-    <form id="music-search-form"><label>Song or artist<input id="music-search" required maxlength="150" placeholder="Search music by name"></label><button type="submit">Search</button></form>
+    <form id="music-search-form"><label>الأغنية ولا الفنان<input id="music-search" required maxlength="150" placeholder="ابحث على الأغنية بالاسم"></label><button type="submit">بحث</button></form>
     <div id="music-search-results"></div>
     <div id="music-queue"></div>
-    <form id="music-form"><label>YouTube video link<input id="music-url" type="url" required maxlength="500"></label><button type="submit">Add to queue</button></form>
+    <form id="music-form"><label>رابط فيديو يوتيوب<input id="music-url" type="url" required maxlength="500"></label><button type="submit">زِد للطابور</button></form>
   </dialog>
   <script src="./music.js?v=2" defer></script>
-  <section id="reminder-notices" aria-live="assertive" aria-label="Due reminders"></section>
+  <section id="reminder-notices" aria-live="assertive" aria-label="التذكيرات المستحقة"></section>
   <dialog id="control-dialog" aria-labelledby="control-title">
-    <header><h2 id="control-title">Reminders</h2><button id="close-control" type="button" aria-label="Close controls">Close</button></header>
+    <header><h2 id="control-title">التذكيرات</h2><button id="close-control" type="button" aria-label="إغلاق التحكم">إغلاق</button></header>
     <div id="control-content"></div>
   </dialog>
   <dialog id="legend-dialog" class="legend-dialog" aria-labelledby="legend-title">
     <header>
-      <h2 id="legend-title">Status Indicators & Gestures Guide</h2>
-      <button id="close-legend" type="button" aria-label="Close guide">Close</button>
+      <h2 id="legend-title">دليل مؤشرات الحالة والإيماءات</h2>
+      <button id="close-legend" type="button" aria-label="إغلاق الدليل">إغلاق</button>
     </header>
     <div class="legend-body">
       <section class="legend-section">
-        <h3>System Status Indicators</h3>
-        <p class="legend-intro">Quick control pips and dashboard indicators communicate live real-time hardware & cognitive states:</p>
+        <h3>مؤشرات حالة النظام</h3>
+        <p class="legend-intro">نقاط التحكم السريع ولوحة الحالة كيعطو حالة الجهاز والنموذج فالوقت الحقيقي:</p>
         <div class="legend-items">
           <div class="legend-row">
             <span class="status-pip green"></span>
             <div class="legend-desc">
-              <strong>🟢 Green · Active / Live</strong>
-              <p>Hardware or AI service is streaming and actively processing (e.g. Camera actively capturing, Gestures scanning frames, System operational).</p>
+              <strong>🟢 أخضر · شغّال / مباشر</strong>
+              <p>الجهاز ولا خدمة الذكاء كتشتغل وتعالج دابا (مثال: الكاميرا كتصوّر، الإيماءات كتفحص الإطارات، النظام شغّال).</p>
             </div>
           </div>
           <div class="legend-row">
             <span class="status-pip blue"></span>
             <div class="legend-desc">
-              <strong>🔵 Blue · Ready / Connected</strong>
-              <p>Device or companion is linked, initialized, and ready for queries.</p>
+              <strong>🔵 أزرق · جاهز / متصل</strong>
+              <p>الجهاز ولا التابع مربوط ومهيّأ وجاهز للأسئلة.</p>
             </div>
           </div>
           <div class="legend-row">
             <span class="status-pip yellow"></span>
             <div class="legend-desc">
-              <strong>🟡 Yellow · Standby / Starting</strong>
-              <p>Feature is armed but awaiting prerequisites (e.g. Gestures waiting for Camera feed to activate) or initializing neural weights.</p>
+              <strong>🟡 أصفر · كيستنى / كيبدا</strong>
+              <p>الميزة مهيّأة ولكن كتستنى شرطاً (مثال: الإيماءات كتستنى الكاميرا) ولا كتحمّل أوزان النموذج.</p>
             </div>
           </div>
           <div class="legend-row">
             <span class="status-pip red"></span>
             <div class="legend-desc">
-              <strong>🔴 Red · Inactive / Off</strong>
-              <p>Feature is powered off or disconnected. Click any quick control button to turn it on.</p>
+              <strong>🔴 أحمر · موقوف</strong>
+              <p>الميزة موقولة ولا مقطوعة. اضغط على زر التحكم السريع باش تشغّلها.</p>
             </div>
           </div>
         </div>
       </section>
       <section class="legend-section gesture-guide">
-        <h3>Hand Gestures Quick Reference</h3>
-        <p class="legend-intro">Show these clear hand signs to your webcam for ~400ms to trigger instant actions without touching keyboard or mouse:</p>
+        <h3>مرجع سريع للإيماءات باليد</h3>
+        <p class="legend-intro">اعرض هاد الإشارات واضحة قدام الكاميرا تقريباً 400 مللي ثانية باش تطلق العملية بلا لوحة مفاتيح ولا ماوس:</p>
         <div class="gesture-grid">
-          <div class="gesture-card"><span class="g-icon">✋</span><div class="g-info"><strong>Open Palm</strong><span>Stop speech, cancel listening & silence audio</span></div></div>
-          <div class="gesture-card"><span class="g-icon">👍</span><div class="g-info"><strong>Thumbs Up</strong><span>Confirm / Send affirmative "Yes"</span></div></div>
-          <div class="gesture-card"><span class="g-icon">👎</span><div class="g-info"><strong>Thumbs Down</strong><span>Cancel / Send negative "No"</span></div></div>
-          <div class="gesture-card"><span class="g-icon">✌️</span><div class="g-info"><strong>Victory / Peace</strong><span>Capture snapshot & visual AI inspection</span></div></div>
-          <div class="gesture-card"><span class="g-icon">☝️</span><div class="g-info"><strong>Point Up</strong><span>Wake microphone / Start voice listening</span></div></div>
-          <div class="gesture-card"><span class="g-icon">✊</span><div class="g-info"><strong>Closed Fist</strong><span>Pause YouTube music & system media</span></div></div>
-          <div class="gesture-card"><span class="g-icon">🤟</span><div class="g-info"><strong>Jarvis Salute</strong><span>Request system health & status briefing</span></div></div>
+          <div class="gesture-card"><span class="g-icon">✋</span><div class="g-info"><strong>كف مفتوح</strong><span>وقف النطق، إلغاء الاستماع، وتسكيت الصوت</span></div></div>
+          <div class="gesture-card"><span class="g-icon">👍</span><div class="g-info"><strong>إبهام لأعلى</strong><span>تأكيد / إرسال «نعم»</span></div></div>
+          <div class="gesture-card"><span class="g-icon">👎</span><div class="g-info"><strong>إبهام لأسفل</strong><span>إلغاء / إرسال «لا»</span></div></div>
+          <div class="gesture-card"><span class="g-icon">✌️</span><div class="g-info"><strong>علامة النصر</strong><span>التقاط صورة وفحصها بالذكاء البصري</span></div></div>
+          <div class="gesture-card"><span class="g-icon">☝️</span><div class="g-info"><strong>إشارة للأعلى</strong><span>إيقاظ الميكروفون / بدء الاستماع</span></div></div>
+          <div class="gesture-card"><span class="g-icon">✊</span><div class="g-info"><strong>قبضة مغلوبة</strong><span>توقيف موسيقى يوتيوب ووسائط النظام</span></div></div>
+          <div class="gesture-card"><span class="g-icon">🤟</span><div class="g-info"><strong>تحية أتوليا</strong><span>طلب تقرير مختصر على حالة النظام</span></div></div>
         </div>
       </section>
     </div>
   </dialog>
   <div id="gesture-toast" class="gesture-toast" aria-live="assertive" hidden></div>
-  <aside class="system-dashboard" id="system-dashboard" aria-label="Atulya system status">
-    <header class="system-dashboard-header"><span class="system-pulse" aria-hidden="true"></span><div><strong>SYSTEM</strong><small id="system-overview">CONNECTING</small></div></header>
+  <aside class="system-dashboard" id="system-dashboard" aria-label="حالة نظام أتوليا">
+    <header class="system-dashboard-header"><span class="system-pulse" aria-hidden="true"></span><div><strong>النظام</strong><small id="system-overview">كيتصل</small></div></header>
     <div class="system-status-grid">
-      <section class="system-tile" data-status-key="service"><span>SERVICE</span><strong>Connecting</strong></section>
-      <section class="system-tile" data-status-key="model"><span>MODEL</span><strong>Connecting</strong></section>
-      <section class="system-tile system-meter" data-status-key="cpu"><span>CPU</span><strong>—</strong></section>
-      <section class="system-tile system-meter" data-status-key="memory"><span>MEMORY</span><strong>—</strong></section>
-      <section class="system-tile system-tile-wide system-meter" data-status-key="network"><span>NETWORK</span><strong>—</strong></section>
-      <section class="system-tile system-tile-wide system-meter" data-status-key="host"><span>HOST</span><strong>—</strong></section>
-      <section class="system-tile system-tile-wide" data-status-key="tools"><span>TOOLS · ACTIVITY</span><strong>—</strong></section>
-      <section class="system-tile" data-status-key="voice"><span>VOICE · STT</span><strong>Connecting</strong></section>
-      <section class="system-tile" data-status-key="speech"><span>SPEECH · TTS</span><strong>Browser</strong></section>
-      <section class="system-tile" data-status-key="vision"><span>VISION</span><strong>Off</strong></section>
-      <section class="system-tile" data-status-key="gesture"><span>GESTURE</span><strong>Off</strong></section>
-      <section class="system-tile system-tile-wide" data-status-key="telegram"><span>TELEGRAM</span><strong>Checking</strong></section>
-      <section class="system-tile system-tile-wide" data-status-key="reminder"><span>NEXT REMINDER</span><strong>None scheduled</strong></section>
-      <section class="system-tile system-tile-wide" data-status-key="calendar"><span>NEXT MEETING</span><strong>None scheduled</strong></section>
-      <section class="system-tile system-tile-wide system-issue" data-status-key="issue"><span>ISSUES</span><strong>Checking</strong></section>
+      <section class="system-tile" data-status-key="service"><span>الخدمة</span><strong>كيتصل</strong></section>
+      <section class="system-tile" data-status-key="model"><span>النموذج</span><strong>كيتصل</strong></section>
+      <section class="system-tile system-meter" data-status-key="cpu"><span>المعالج</span><strong>—</strong></section>
+      <section class="system-tile system-meter" data-status-key="memory"><span>الذاكرة</span><strong>—</strong></section>
+      <section class="system-tile system-tile-wide system-meter" data-status-key="network"><span>الشبكة</span><strong>—</strong></section>
+      <section class="system-tile system-tile-wide system-meter" data-status-key="host"><span>الجهاز</span><strong>—</strong></section>
+      <section class="system-tile system-tile-wide" data-status-key="tools"><span>الأدوات · النشاط</span><strong>—</strong></section>
+      <section class="system-tile" data-status-key="voice"><span>الصوت · التعرف</span><strong>كيتصل</strong></section>
+      <section class="system-tile" data-status-key="speech"><span>النطق · تحويل النص لصوت</span><strong>المتصفح</strong></section>
+      <section class="system-tile" data-status-key="vision"><span>الرؤية</span><strong>موقوفة</strong></section>
+      <section class="system-tile" data-status-key="gesture"><span>الإيماءة</span><strong>موقوفة</strong></section>
+      <section class="system-tile system-tile-wide" data-status-key="telegram"><span>تيليجرام</span><strong>كيتحقق</strong></section>
+      <section class="system-tile system-tile-wide" data-status-key="reminder"><span>التذكير الجاي</span><strong>ما كاين</strong></section>
+      <section class="system-tile system-tile-wide" data-status-key="calendar"><span>الاجتماع الجاي</span><strong>ما كاين</strong></section>
+      <section class="system-tile system-tile-wide system-issue" data-status-key="issue"><span>المشاكل</span><strong>كيتحقق</strong></section>
     </div>
   </aside>
-  <button class="layout-focus-exit" id="layout-focus-exit" type="button" hidden>EXIT FOCUS · ESC</button>
-  <button class="layout-voice-toggle" id="layout-voice-toggle" type="button" hidden aria-label="Start live voice conversation">VOICE</button>
-  <button class="layout-chat-toggle" id="layout-chat-toggle" type="button" hidden aria-label="Show the chat">CHAT</button>
+  <button class="layout-focus-exit" id="layout-focus-exit" type="button" hidden>خروج من التركيز · ESC</button>
+  <button class="layout-voice-toggle" id="layout-voice-toggle" type="button" hidden aria-label="ابدا المحادثة الصوتية المباشرة">صوت</button>
+  <button class="layout-chat-toggle" id="layout-chat-toggle" type="button" hidden aria-label="اعرض المحادثة">محادثة</button>
   <div class="layout-toast" id="layout-toast" role="status" aria-live="polite" hidden></div>
   <dialog class="auth-dialog" id="auth-dialog" aria-labelledby="auth-title">
     <div class="auth-card">
       <div class="panel-mark" aria-hidden="true"><i></i><i></i><i></i></div>
-      <strong id="auth-title">SIGN IN TO ATULYA</strong>
-      <p id="auth-message">Use your passkey, or enter your username or email.</p>
+      <strong id="auth-title">تسجيل الدخول لأتوليا</strong>
+      <p id="auth-message">استعمل الـ passkey، ولا أدخل اسم المستخدم ولا الإيميل.</p>
       <label class="auth-setup-token" id="auth-setup-token-wrap" hidden>
-        <span>ADMIN SETUP TOKEN</span>
-        <input id="auth-setup-token" aria-label="Administrator setup token" type="password" autocomplete="one-time-code" spellcheck="false">
+        <span>رمز إعداد المدير</span>
+        <input id="auth-setup-token" aria-label="رمز إعداد المدير" type="password" autocomplete="one-time-code" spellcheck="false">
       </label>
 
       <div class="auth-step" id="auth-step-start">
-        <button id="auth-activate" class="auth-primary" type="button">CONTINUE WITH PASSKEY</button>
-        <button id="auth-voice-unlock" class="auth-code-start" type="button" hidden>UNLOCK WITH VOICE</button>
-        <a id="auth-google" class="auth-code-start auth-google" href="/api/auth/google/start" hidden>CONTINUE WITH GOOGLE</a>
-        <div class="auth-or"><span>or</span></div>
+        <button id="auth-activate" class="auth-primary" type="button">متابعة بالـ passkey</button>
+        <button id="auth-voice-unlock" class="auth-code-start" type="button" hidden>فتح بالصوت</button>
+        <a id="auth-google" class="auth-code-start auth-google" href="/api/auth/google/start" hidden>متابعة بـ Google</a>
+        <div class="auth-or"><span>ولا</span></div>
         <form class="auth-password" id="auth-identify">
-          <input id="auth-username" aria-label="username or email" autocomplete="username webauthn" placeholder="username or email" spellcheck="false" autocapitalize="none" required>
-          <button type="submit">CONTINUE</button>
+          <input id="auth-username" aria-label="اسم المستخدم ولا الإيميل" autocomplete="username webauthn" placeholder="اسم المستخدم ولا الإيميل" spellcheck="false" autocapitalize="none" required>
+          <button type="submit">متابعة</button>
         </form>
-        <button id="auth-signup-start" class="auth-link" type="button">Create an account</button>
+        <button id="auth-signup-start" class="auth-link" type="button">إنشاء حساب</button>
       </div>
 
       <div class="auth-step" id="auth-step-methods" hidden>
-        <p class="auth-who">Signing in as <b id="auth-who"></b> <button id="auth-change-user" class="auth-link" type="button">change</button></p>
-        <button id="auth-code-start" class="auth-primary" type="button">SEND APPROVAL TO MY DEVICES</button>
+        <p class="auth-who">تسجيل الدخول باسم <b id="auth-who"></b> <button id="auth-change-user" class="auth-link" type="button">تبديل</button></p>
+        <button id="auth-code-start" class="auth-primary" type="button">إرسال موافقة لأجهزتي</button>
         <div class="auth-code" id="auth-code" hidden>
-          <p id="auth-code-status">Sending…</p>
-          <input id="auth-code-input" aria-label="6-digit code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code">
-          <div><button id="auth-code-submit" type="button">CONFIRM</button><button id="auth-code-resend" type="button">RESEND</button></div>
+          <p id="auth-code-status">كيبعت…</p>
+          <input id="auth-code-input" aria-label="رمز من 6 أرقام" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="رمز من 6 أرقام">
+          <div><button id="auth-code-submit" type="button">تأكيد</button><button id="auth-code-resend" type="button">إعادة الإرسال</button></div>
         </div>
-        <button id="auth-use-password" class="auth-code-start" type="button">USE PASSWORD</button>
+        <button id="auth-use-password" class="auth-code-start" type="button">استعمال كلمة المرور</button>
         <form class="auth-password" id="auth-password-form" hidden>
           <div class="password-field">
-            <input id="auth-password" aria-label="password" type="password" autocomplete="current-password" placeholder="password">
-            <button id="auth-password-toggle" type="button" aria-label="Show password" aria-pressed="false">👁</button>
+            <input id="auth-password" aria-label="كلمة المرور" type="password" autocomplete="current-password" placeholder="كلمة المرور">
+            <button id="auth-password-toggle" type="button" aria-label="إظهار كلمة المرور" aria-pressed="false">👁</button>
           </div>
-          <button type="submit">SIGN IN</button>
+          <button type="submit">دخول</button>
         </form>
       </div>
 
       <form class="auth-password" id="auth-signup-form" hidden>
-        <input id="signup-name" aria-label="your name" autocomplete="name" placeholder="your name" maxlength="80" required>
-        <input id="signup-email" aria-label="email" type="email" autocomplete="email" placeholder="email" required>
+        <input id="signup-name" aria-label="اسمك" autocomplete="name" placeholder="اسمك" maxlength="80" required>
+        <input id="signup-email" aria-label="الإيميل" type="email" autocomplete="email" placeholder="الإيميل" required>
         <div class="password-field">
-          <input id="signup-password" aria-label="new password" type="password" autocomplete="new-password" placeholder="new password (10+ characters)" required>
-          <button class="password-eye" type="button" aria-label="Show password">👁</button>
+          <input id="signup-password" aria-label="كلمة مرور جديدة" type="password" autocomplete="new-password" placeholder="كلمة مرور جديدة (10 أحرف على الأقل)" required>
+          <button class="password-eye" type="button" aria-label="إظهار كلمة المرور">👁</button>
         </div>
-        <small id="signup-strength" class="signup-strength">Use 10+ characters with a mix of letters, numbers and symbols.</small>
-        <button type="submit">CREATE ACCOUNT</button>
-        <button id="auth-signup-back" class="auth-link" type="button">Back to sign in</button>
+        <small id="signup-strength" class="signup-strength">استعمل 10 أحرف أو أكثر مع حروف وأرقام ورموز.</small>
+        <button type="submit">إنشاء الحساب</button>
+        <button id="auth-signup-back" class="auth-link" type="button">العودة للتسجيل</button>
       </form>
 
       <details class="auth-invite">
-        <summary>I have an invitation code</summary>
+        <summary>عندي رمز دعوة</summary>
         <label class="auth-setup-token" id="auth-invite-wrap">
-          <span>INVITATION CODE</span>
-          <input id="auth-invite-token" aria-label="invitation code" type="password" autocomplete="one-time-code" spellcheck="false">
+          <span>رمز الدعوة</span>
+          <input id="auth-invite-token" aria-label="رمز الدعوة" type="password" autocomplete="one-time-code" spellcheck="false">
         </label>
-        <button id="auth-join" type="button">JOIN WITH PASSKEY</button>
+        <button id="auth-join" type="button">الانضمام بالـ passkey</button>
       </details>
-      <p class="auth-footnote">Passkeys use your fingerprint, face or screen lock. Your password manager may sync them across devices; Atulya stores only the public key.</p>
+      <p class="auth-footnote">الـ passkey كيستعمل بصمة الإصبع ولا الوجه ولا قفل الشاشة. مدير كلمات المرور يقدر يزامنها بين الأجهزة؛ أتوليا كتخزن غير المفتاح العمومي.</p>
     </div>
   </dialog>
   <dialog class="history-dialog user-dialog" id="users-dialog" aria-labelledby="users-title">
-    <header><strong id="users-title">LOCAL USERS</strong><button id="close-users" type="button" aria-label="Close">×</button></header>
-    <p class="history-warning">Invitations expire after 24 hours. Each person enrolls their own passkey on this device.</p>
+    <header><strong id="users-title">المستعملون المحليون</strong><button id="close-users" type="button" aria-label="إغلاق">×</button></header>
+    <p class="history-warning">الدعوات كتنقضي من بعد 24 ساعة. كل واحد كيسجّل الـ passkey ديالو على هاد الجهاز.</p>
     <form id="invite-user-form" class="invite-user-form">
-      <label>DISPLAY NAME<input id="invite-display-name" maxlength="80" required autocomplete="off"></label>
-      <button type="submit">CREATE INVITATION</button>
+      <label>الاسم المعروض<input id="invite-display-name" maxlength="80" required autocomplete="off"></label>
+      <button type="submit">إنشاء دعوة</button>
     </form>
     <div id="invite-result" class="invite-result" hidden></div>
     <div id="signups-list" class="users-list"></div>
@@ -210,100 +210,100 @@
     <div id="security-log" class="users-list"></div>
   </dialog>
   <dialog class="history-dialog user-dialog" id="content-dialog" aria-labelledby="content-title">
-    <header><strong id="content-title">AGE &amp; CONTENT</strong><button id="close-content" type="button" aria-label="Close">×</button></header>
-    <p class="history-warning">Your age is self-declared and decides what Atulya will discuss. It is set once; after that only the administrator can change it. Until it is set, child-safe settings apply.</p>
+    <header><strong id="content-title">العمر والمحتوى</strong><button id="close-content" type="button" aria-label="إغلاق">×</button></header>
+    <p class="history-warning">العمر كيعلنو صاحبو وكيحدد ما كتناقشو أتوليا. كيتضبط مرة وحدة؛ من بعدها غير المدير يقدر يبدّلو. قبل ما يتضبط، كيتطبّق إعداد آمن للأطفال.</p>
     <p id="content-state" class="history-warning" aria-live="polite"></p>
     <form id="birth-date-form" class="invite-user-form" hidden>
-      <label>DATE OF BIRTH<input id="birth-date" type="date" required></label>
-      <button type="submit">SAVE</button>
+      <label>تاريخ الولادة<input id="birth-date" type="date" required></label>
+      <button type="submit">حفظ</button>
     </form>
-    <label id="adult-content-row" class="invite-user-form" hidden><input id="adult-content" type="checkbox"> Allow adult topics (legal ones only; illegal content is always refused)</label>
+    <label id="adult-content-row" class="invite-user-form" hidden><input id="adult-content" type="checkbox"> السماح بمواضيع للبالغين (القانونية غير؛ المحتوى غير القانوني مرفوض دايماً)</label>
   </dialog>
   <div class="session-stack">
    <div class="vision-preview" id="camera-preview">
       <div class="camera-region">
-        <video class="camera-feed" id="camera-feed" autoplay muted playsinline aria-label="Local camera preview"></video>
-        <button class="camera-toggle" id="camera-toggle" type="button" aria-pressed="false" aria-label="Toggle camera preview">
+        <video class="camera-feed" id="camera-feed" autoplay muted playsinline aria-label="معاينة الكاميرا المحلية"></video>
+        <button class="camera-toggle" id="camera-toggle" type="button" aria-pressed="false" aria-label="تشغيل ولا إيقاف معاينة الكاميرا">
           <span class="viewfinder" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="viewfinder-core"></span></span>
-          <span class="preview-label"><span>CAMERA PREVIEW</span><b><i></i> CAMERA STARTING</b></span>
+          <span class="preview-label"><span>معاينة الكاميرا</span><b><i></i> الكاميرا كتبدأ</b></span>
         </button>
         <div class="gesture-hud" id="gesture-hud" aria-live="polite">
           <div class="gesture-hud-badge">
             <span class="gesture-hud-icon" id="gesture-hud-icon">✋</span>
             <div class="gesture-hud-details">
-              <div class="gesture-hud-title"><strong id="gesture-hud-name">Scanning</strong> <span class="gesture-hud-confidence" id="gesture-hud-score"></span></div>
-              <div class="gesture-hud-action" id="gesture-hud-action">Ready for hand gestures</div>
+              <div class="gesture-hud-title"><strong id="gesture-hud-name">كيبحث على اليد</strong> <span class="gesture-hud-confidence" id="gesture-hud-score"></span></div>
+              <div class="gesture-hud-action" id="gesture-hud-action">جاهز للإيماءات باليد</div>
             </div>
           </div>
           <div class="gesture-hud-meter" id="gesture-hud-meter"><div class="gesture-hud-progress" id="gesture-hud-progress"></div></div>
         </div>
-        <select class="camera-device" id="camera-device" aria-label="Select camera" hidden></select>
+        <select class="camera-device" id="camera-device" aria-label="اختر الكاميرا" hidden></select>
       </div>
-      <section class="gesture-region" id="gesture-region" data-state="setup" aria-label="Gesture recognition preparing" title="Hold thumbs up to send Yes, thumbs down to send No, or open palm to stop voice.">
-        <span class="gesture-copy" id="gesture-copy" aria-live="polite"><span>GESTURE</span><b id="gesture-result">PREPARING</b></span>
+      <section class="gesture-region" id="gesture-region" data-state="setup" aria-label="التعرف على الإيماءات كيتجهّز" title="ارفع إبهامك للإجابة بنعم، أنزلو للإجابة بلا، وافتح كفّك باش توقف الصوت.">
+        <span class="gesture-copy" id="gesture-copy" aria-live="polite"><span>إيماءة</span><b id="gesture-result">كيتجهّز</b></span>
       </section>
     </div>
-  <aside class="assistant-panel" aria-label="Atulya live session">
+  <aside class="assistant-panel" aria-label="جلسة أتوليا المباشرة">
     <header class="panel-header">
       <div class="panel-mark" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="panel-title"><strong>ATULYA</strong><span>LIVE SESSION</span></div>
-      <span class="connection-dot" id="connection-dot" aria-label="Connecting"></span>
-      <div class="history-tools" aria-label="Conversation controls">
-        <button id="talk-mode" type="button" title="Conversation mode: full-screen hologram, hands-free voice">TALK</button>
-        <button id="new-conversation" type="button" title="Start a new conversation">NEW</button>
-        <button id="open-history" type="button" title="Browse saved conversations">HISTORY</button>
-        <button id="voice-replies" type="button" title="Speak replies on/off">🔊</button>
+      <div class="panel-title"><strong>ATULYA</strong><span>جلسة مباشرة</span></div>
+      <span class="connection-dot" id="connection-dot" aria-label="كيتصل"></span>
+      <div class="history-tools" aria-label="التحكم فالمحادثة">
+        <button id="talk-mode" type="button" title="وضع المحادثة: هولوغرام بملء الشاشة وصوت بلا يدين">تكلّم</button>
+        <button id="new-conversation" type="button" title="ابدا محادثة جديدة">جديد</button>
+        <button id="open-history" type="button" title="تصفح المحادثات المحفوظة">السجل</button>
+        <button id="voice-replies" type="button" title="تشغيل ولا إيقاف نطق الجواب">🔊</button>
         <details class="account-menu">
-          <summary title="Account and settings" aria-label="Account and settings">⋮</summary>
+          <summary title="الحساب والإعدادات" aria-label="الحساب والإعدادات">⋮</summary>
           <div class="account-menu-items">
-            <button id="add-passkey" type="button" title="Add a passkey for this device" hidden>ADD PASSKEY</button>
-            <button id="open-device-connections" type="button" title="Device status and approvals">DEVICES & CONNECTION</button>
-            <button id="pair-device" type="button" title="Generate a pairing token for a laptop or phone">PAIR DEVICE</button>
-            <button id="signed-in-devices" type="button" title="See every device signed in and sign any of them out">SIGNED-IN DEVICES</button>
-            <button id="link-device" type="button" title="Sign in and add a passkey on another phone or computer">LINK ANOTHER DEVICE</button>
-            <button id="add-voice-unlock" type="button" title="Unlock this device by saying a phrase" hidden>VOICE UNLOCK</button>
-            <button id="manage-users" type="button" title="Manage accounts" hidden>USERS</button>
-            <button id="open-content-settings" type="button" title="Your age and content settings">AGE &amp; CONTENT</button>
-            <button id="open-plugins" type="button" title="Enable or disable built-in tools">TOOLS</button>
-            <button id="scene-view" type="button" title="Hologram framing on phones: close-up or the whole scene like the website">VIEW: CLOSE-UP</button>
-            <button id="reload-app" type="button" title="Reload Atulya (gets the newest version)">RELOAD</button>
-            <span id="voice-engine" class="menu-note" aria-live="polite">VOICE: …</span>
-            <button id="sign-out" type="button" title="Sign out of this device" hidden>SIGN OUT</button>
+            <button id="add-passkey" type="button" title="زِد passkey لهاد الجهاز" hidden>زِد passkey</button>
+            <button id="open-device-connections" type="button" title="حالة الأجهزة والموافقات">الأجهزة والاتصالات</button>
+            <button id="pair-device" type="button" title="أنشئ رمز ربط للابتوب ولا الجوال">ربط جهاز</button>
+            <button id="signed-in-devices" type="button" title="شوف كل الأجهزة المسجّلة وافصل منها">الأجهزة المسجّلة</button>
+            <button id="link-device" type="button" title="سجّل الدخول وزِد passkey على جوال ولا كمبيوتر آخر">ربط جهاز آخر</button>
+            <button id="add-voice-unlock" type="button" title="افتح هاد الجهاز بعبارة صوتية" hidden>فتح بالصوت</button>
+            <button id="manage-users" type="button" title="إدارة الحسابات" hidden>المستعملون</button>
+            <button id="open-content-settings" type="button" title="إعدادات العمر والمحتوى">العمر والمحتوى</button>
+            <button id="open-plugins" type="button" title="تشغيل ولا إيقاف الأدوات المدمجة">الأدوات</button>
+            <button id="scene-view" type="button" title="تأطير الهولوغرام على الجوال: تقريب ولا المشهد كامل">العرض: تقريب</button>
+            <button id="reload-app" type="button" title="إعادة تحميل أتوليا (لأحدث نسخة)">إعادة تحميل</button>
+            <span id="voice-engine" class="menu-note" aria-live="polite">الصوت: …</span>
+            <button id="sign-out" type="button" title="الخروج من هاد الجهاز" hidden>خروج</button>
           </div>
         </details>
       </div>
     </header>
-    <div class="channel-status" aria-label="Available interaction modes">
-      <span class="channel-chip state-setup" id="text-channel" data-channel-name="Text" aria-label="Text channel setup required">TEXT</span>
-      <span class="channel-chip state-setup" id="voice-channel" data-channel-name="Voice" aria-label="Voice channel setup required">VOICE</span>
-      <span class="channel-chip state-off" id="vision-channel" data-channel-name="Vision" title="Vision is used on a message only while the camera is on" aria-label="Vision channel off">VISION</span>
-      <span class="channel-chip state-setup" id="gesture-channel" data-channel-name="Gesture" title="Gesture recognition is preparing" aria-label="Gesture channel setup required">GESTURE</span>
+    <div class="channel-status" aria-label="أنماط التفاعل المتاحة">
+      <span class="channel-chip state-setup" id="text-channel" data-channel-name="نص" aria-label="قناة النص كيتطلب الإعداد">نص</span>
+      <span class="channel-chip state-setup" id="voice-channel" data-channel-name="صوت" aria-label="قناة الصوت كيتطلب الإعداد">صوت</span>
+      <span class="channel-chip state-off" id="vision-channel" data-channel-name="رؤية" title="الرؤية كتستعمل فالرسالة غير إلا كانت الكاميرا شغالة" aria-label="قناة الرؤية موقوفة">رؤية</span>
+      <span class="channel-chip state-setup" id="gesture-channel" data-channel-name="إيماءة" title="التعرف على الإيماءات كيتجهّز" aria-label="قناة الإيماءات كيتطلب الإعداد">إيماءة</span>
     </div>
     <div class="session-state" id="session-state" data-tone="busy">
       <span class="status-orb" aria-hidden="true"><i></i><i></i><i></i></span>
-      <div class="status-copy"><span id="assistant-status">Connecting</span><span id="assistant-detail" aria-live="polite">Connecting to Atulya.</span></div>
+      <div class="status-copy"><span id="assistant-status">كيتصل</span><span id="assistant-detail" aria-live="polite">كيتصل بـ أتوليا.</span></div>
     </div>
     <div id="chat-messages" class="chat-messages" aria-live="polite" aria-relevant="additions"></div>
-    <div id="wave-control" class="wave-control" role="button" tabindex="0" aria-label="Start live voice conversation" title="Activate once to allow microphone access. After that, phrases send automatically after a pause.">
+    <div id="wave-control" class="wave-control" role="button" tabindex="0" aria-label="ابدا المحادثة الصوتية المباشرة" title="فعّل مرة وحدة باش تسمح للميكروفون. من بعد العبارات كتبعتو تلقائياً بعد السكوت.">
       <canvas id="voice-wave" aria-hidden="true"></canvas>
-      <span class="wave-help" id="wave-help">ACTIVATE ONCE · THEN AUTO SEND</span>
+      <span class="wave-help" id="wave-help">فعّل مرة وحدة · من بعد إرسال تلقائي</span>
     </div>
     <form id="chat-form" class="chat-form" autocomplete="off">
-      <label class="visually-hidden" for="chat-prompt">Message Atulya</label>
-      <input id="chat-prompt" aria-label="Type a message" name="message" type="text" maxlength="20000" placeholder="Type a message…" autocomplete="off">
+      <label class="visually-hidden" for="chat-prompt">رسالة لأتوليا</label>
+      <input id="chat-prompt" aria-label="اكتب رسالة" name="message" type="text" maxlength="20000" placeholder="اكتب رسالة…" autocomplete="off">
     </form>
-    <p class="panel-footnote" id="history-status" data-state="waiting">LOCAL HISTORY · CONNECTING</p>
+    <p class="panel-footnote" id="history-status" data-state="waiting">السجل المحلي · كيتصل</p>
   </aside>
   </div>
   <dialog id="history-dialog" class="history-dialog" aria-labelledby="history-title">
-    <header><strong id="history-title">CONVERSATION ARCHIVE</strong><button id="close-history" type="button" aria-label="Close archive">×</button></header>
-    <p class="history-warning">Saved locally on this device. Admin access uses a passkey.</p>
+    <header><strong id="history-title">أرشيف المحادثات</strong><button id="close-history" type="button" aria-label="إغلاق الأرشيف">×</button></header>
+    <p class="history-warning">محفوظ محلياً على هاد الجهاز. دخول المدير كيستعمل passkey.</p>
     <div id="history-list" class="history-list"></div>
-    <footer><button id="open-history-selected" type="button">OPEN SELECTED</button><button id="export-history" type="button">EXPORT</button><button id="delete-history" type="button">DELETE</button></footer>
+    <footer><button id="open-history-selected" type="button">فتح المحدد</button><button id="export-history" type="button">تصدير</button><button id="delete-history" type="button">حذف</button></footer>
   </dialog>
   <dialog id="plugin-dialog" class="history-dialog" aria-labelledby="plugin-title">
-    <header><strong id="plugin-title">BUILT-IN TOOLS</strong><button id="close-plugins" type="button" aria-label="Close tools">×</button></header>
-    <p class="history-warning">These fixed local plugins power matching commands in WebUI and Telegram. Network tools may access the internet.</p>
+    <header><strong id="plugin-title">الأدوات المدمجة</strong><button id="close-plugins" type="button" aria-label="إغلاق الأدوات">×</button></header>
+    <p class="history-warning">هاد الإضافات المحلية الثابتة كتشغّل الأوامر المطابقة فالواجهة وتيليجرام. أدوات الشبكة يقدرو يوصلو للإنترنت.</p>
     <div id="plugin-list" class="history-list"></div>
   </dialog>
   <script src="./content-settings.js?v=2" defer></script>

@@ -37,6 +37,21 @@ class DarijaPolicyTest(unittest.TestCase):
         self.assertIn(original, out["messages"][0]["content"])
         self.assertEqual(len(out["messages"]), 2)
 
+    def test_arabic_only_prompt_still_gets_the_effective_directive(self):
+        import local_brain
+
+        # Le prompt Atulya dit « دارجة » en arabe : le routeur ne doit pas en
+        # déduire que la consigne française efficace est déjà présente.
+        arabic = "جاوب بالدارجة المغربية بحروف عربية، ما تبدّلش اللغة."
+        body = {"messages": [
+            {"role": "system", "content": arabic},
+            {"role": "user", "content": "salam"},
+        ]}
+        out = local_brain.apply_language_policy(body)
+        self.assertIn("arabe marocain", out["messages"][0]["content"])
+        self.assertIn("lettres arabes", out["messages"][0]["content"])
+        self.assertIn(arabic, out["messages"][0]["content"])
+
     def test_does_not_duplicate_on_repeated_calls(self):
         import local_brain
 

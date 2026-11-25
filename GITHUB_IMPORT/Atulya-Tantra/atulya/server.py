@@ -2622,8 +2622,8 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                     if issue_state["issue"] and issue_state["issue"].get("source") == "chat":
                         issue_state["issue"] = None
                 except BrainError:
-                    issue_state["issue"] = {"message": "The model stream ended unexpectedly.", "source": "chat"}
-                    yield f"data: {json.dumps({'error': 'The reply stopped unexpectedly. Please retry or type a correction.'})}\n\n"
+                    issue_state["issue"] = {"message": "تدفق النموذج توقف فجأة.", "source": "chat"}
+                    yield f"data: {json.dumps({'error': 'الجواب توقف فجأة. حاول مرة اخرى ولا صيّح الرسالة.'})}\n\n"
 
             return StreamingResponse(
                 stream_events(), media_type="text/event-stream",

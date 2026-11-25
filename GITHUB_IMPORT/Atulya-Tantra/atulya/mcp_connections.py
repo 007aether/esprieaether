@@ -6,24 +6,19 @@ import json
 import os
 import re
 from pathlib import Path
-from urllib.parse import urlsplit
 from uuid import uuid4
+
+from atulya.urls import MCP_POLICY
 
 
 def _validate_url(url: str) -> None:
     """Accept HTTPS remotes or loopback HTTP local servers, never anything else.
 
     The hostname comes from urlsplit, so `localhost`, `127.1`, IPv4-mapped IPv6
-    and userinfo tricks cannot masquerade as a loopback address.
+    and userinfo tricks cannot masquerade as a loopback address. Ports and
+    empty query/fragment separators are checked by the shared URL policy.
     """
-    parts = urlsplit(url)
-    loopback_http = parts.scheme == "http" and parts.hostname in {"127.0.0.1", "::1"}
-    remote_https = parts.scheme == "https"
-    if (not (loopback_http or remote_https) or not parts.hostname
-            or parts.username is not None or parts.password is not None
-            or parts.query or parts.fragment):
-        raise ValueError("Use an HTTPS MCP endpoint, or a loopback HTTP MCP endpoint "
-                         "(127.0.0.1 or ::1), without credentials or query parameters")
+    MCP_POLICY.parse(url)
 
 
 class MCPConnections:

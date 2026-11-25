@@ -107,7 +107,7 @@
   function showGestureToast(icon, name, action) {
     const toast = document.getElementById("gesture-toast");
     if (!toast) return;
-    toast.innerHTML = `<span class="toast-glow">⚡</span> <strong>${icon} ${name}</strong> <span class="toast-sep">➜</span> <span>${action}</span>`;
+    toast.innerHTML = darija(`<span class="toast-glow">⚡</span> <strong>${icon} ${darija(name)}</strong> <span class="toast-sep">➜</span> <span>${darija(action)}</span>`);
     toast.hidden = false;
     toast.classList.remove("fade-out");
     toast.classList.add("active");
@@ -129,10 +129,10 @@
 
     if (!categoryName || !GESTURE_DEFINITIONS[categoryName]) {
       hud.classList.remove("detected", "holding");
-      if (iconEl) iconEl.textContent = "✋";
-      if (nameEl) nameEl.textContent = "Scanning for hand";
-      if (scoreEl) scoreEl.textContent = "";
-      if (actionEl) actionEl.textContent = "Ready for hand gestures";
+      if (iconEl) iconEl.textContent = darija("✋");
+      if (nameEl) nameEl.textContent = darija("Scanning for hand");
+      if (scoreEl) scoreEl.textContent = darija("");
+      if (actionEl) actionEl.textContent = darija("Ready for hand gestures");
       if (progressEl) progressEl.style.width = "0%";
       return;
     }
@@ -143,15 +143,15 @@
     else hud.classList.remove("holding");
 
     if (iconEl) iconEl.textContent = def.icon;
-    if (nameEl) nameEl.textContent = def.name;
-    if (scoreEl) scoreEl.textContent = `· ${Math.round(score * 100)}%`;
-    if (actionEl) actionEl.textContent = `Action: ${def.action}`;
+    if (nameEl) nameEl.textContent = darija(def.name);
+    if (scoreEl) scoreEl.textContent = darija(`· ${Math.round(score * 100)}%`);
+    if (actionEl) actionEl.textContent = darija(`Action: ${def.action}`);
     if (progressEl) progressEl.style.width = `${Math.min(100, Math.max(0, holdProgress))}%`;
   }
 
   function showGestureResult(label) {
     const result = $("#gesture-result");
-    if (result) result.textContent = label;
+    if (result) result.textContent = darija(label);
   }
   let microphoneContext;
   let microphoneAnalyser;
@@ -180,7 +180,7 @@
     const tile = document.querySelector(`[data-status-key="${name}"]`);
     if (!tile) return;
     tile.dataset.state = state;
-    tile.querySelector("strong").textContent = label;
+    tile.querySelector("strong").textContent = darija(label);
     const level = Number(arguments[3]);
     if (Number.isFinite(level)) tile.style.setProperty("--level", `${Math.max(0, Math.min(100, level))}%`);
   }
@@ -192,7 +192,7 @@
       const data = await response.json();
       gestureAssetsReady = data.gesture?.state === "ready" || gestureModelReady;
       systemDashboard.dataset.state = "online";
-      systemOverview.textContent = "LIVE";
+      systemOverview.textContent = darija("LIVE");
       for (const key of ["service", "model", "cpu", "memory", "network", "host", "tools", "voice", "vision", "gesture", "telegram", "reminder", "calendar", "issue"]) {
         const item = data[key] || {};
         let label = item.label || "Unavailable";
@@ -243,7 +243,7 @@
       setSystemTile("speech", speechState, speechLabel);
     } catch {
       systemDashboard.dataset.state = "offline";
-      systemOverview.textContent = "SERVICE UNREACHABLE";
+      systemOverview.textContent = darija("SERVICE UNREACHABLE");
       setSystemTile("service", "off", "Offline");
       setSystemTile("issue", "error", "Cannot reach Atulya service");
     }
@@ -257,13 +257,337 @@
     node.classList.add(`state-${state}`);
     const channelName = node.dataset.channelName || node.textContent.trim();
     const stateLabel = { ready: "ready", live: "active", setup: "setup required", off: "off" }[state] || state;
-    node.setAttribute("aria-label", `${channelName} channel ${stateLabel}`);
+    node.setAttribute("aria-label", `${darija(channelName)} · ${darija(stateLabel)}`);
+  }
+
+  // Les libellés affichés sont en darija ; les comparaisons internes restent en anglais.
+  const DARIJA_UI = Object.freeze({
+    "Connecting": "كيتصل",
+    "Connecting to Atulya.": "كيتصل بـ أتوليا.",
+    "Ready": "جاهز",
+    "Listening": "كيسمع",
+    "Speaking": "كيتكلّم",
+    "Thinking": "كيتفكّر",
+    "Understanding": "كيفهم",
+    "Working": "كيدير",
+    "Cancelling": "كيلغي",
+    "Layout updated": "التخطيط تبدّل",
+    "Camera preview on": "معاينة الكاميرا شغالة",
+    "Camera preview off": "معاينة الكاميرا موقوفة",
+    "Chat unavailable": "المحادثة غير متاحة",
+    "Voice unavailable": "الصوت غير متاح",
+    "Reply unavailable": "الجواب غير متاح",
+    "Service unavailable": "الخدمة غير متاحة",
+    "Microphone unavailable": "الميكروفون غير متاح",
+    "Microphone error": "خطأ فالميكروفون",
+    "No voice heard": "ما سمعنى حتى شي صوت",
+    "Allow microphone": "خلّي الميكروفون",
+    "Voice paused": "الصوت موقوف",
+    "Say “Hey Atulya”": "قول « يا أتوليا »",
+    "Yes?": "نعم؟",
+    "I missed that": "ما فهمتش",
+    "Backup passkey added": "الـ passkey الاحتياطي تزاد",
+    "Passkey not added": "الـ passkey ما تزادش",
+    "Passkey retained": "الـ passkey باقي",
+    "User not disabled": "المستعمل ما تعطّلش",
+    "Device link not created": "الربط بالجهاز ما تصلّحش",
+    "Invitation not created": "الدعوة ما تصلّحاتش",
+    "Text chat is offline right now. The scene remains available.": "المحادثة النصية موقوفة دابا. المشهد باقي متاح.",
+    "Text chat is ready. Voice input and speech are currently offline.": "المحادثة النصية جاهزة. الصوت والنطق موقوفين دابا.",
+    "Atulya is ready for your next message.": "أتوليا جاهزة لرسالتك الجاية.",
+    "Interrupted. Go ahead.": "وقّفت. كمل كيما بغيتي.",
+    "This browser cannot play the reply aloud. The text reply is still here.": "المتصفح ما كيقدرش ينطق الجواب. الجواب المكتوب باقي هنا.",
+    "The browser couldn't play the reply aloud. The text reply is still here.": "المتصفح ما قدرش ينطق الجواب. الجواب المكتوب باقي هنا.",
+    "The browser couldn't start speech playback. The text reply is still here.": "المتصفح ما قدرش يبدا النطق. الجواب المكتوب باقي هنا.",
+    "Running the approved action.": "كندير العملية اللي وافقت عليها.",
+    "Cancelling the request.": "كيلغي الطلب.",
+    "Working on your message.": "كخدّم على رسالتك.",
+    "Atulya replied in chat.": "أتوليا جاوبت فالمحادثة.",
+    "Try speaking again or type below.": "حاول تهضر مرة اخرى ولا اكتب من تحت.",
+    "Turning your speech into text.": "كحوّل كلامك لنص.",
+    "Waiting for the wake word. Everything stays on this device.": "كنستنى كلمة الإيقاظ. كلشي باقي فالجهاز.",
+    "I'm listening.": "كيسمعك.",
+    "Speech recognition failed. You can type below.": "التعرف على الصوت فشل. تقدر تكتب من تحت.",
+    "Speak naturally. I'll answer when you pause.": "تكلّم كيف كتسول، وغادي نجاوبك إلا سكتّي.",
+    "Speak naturally. Each turn sends after a pause; Atulya then listens again.": "تكلّم كيف كتسول؛ كل جولة كتبعت إلا سكتّي، ومن بعد أتوليا كترجع كتسمع.",
+    "Allow the microphone for Atulya in Android settings, then tap the wave.": "خلّي الميكروفون لأتوليا فإعدادات أندرويد، من بعد اضغط على الموجة.",
+    "The phone's speech service is not responding. Tap the wave to try again.": "خدمة النطق فالجوال ما كجاوبش. اضغط على الموجة باش تحاول مرة اخرى.",
+    "Local speech input is not ready. Restart Atulya after voice setup completes.": "إدخال الصوت المحلي ماجاهزش. أعد تشغيل أتوليا من بعد ما يكمّل إعداد الصوت.",
+    "This browser can't record microphone audio. You can type below.": "المتصفح ما كيقدرش يسجّل الصوت. تقدر تكتب من تحت.",
+    "This browser can't measure microphone input. You can type below.": "المتصفح ما كيقدرش يقيس الصوت. تقدر تكتب من تحت.",
+    "Grant microphone access once. Speech sends automatically after each pause.": "عطي الإذن للميكروفون مرة وحدة. الكلام كيبعت تلقائياً من بعد كل سكوت.",
+    "Allow microphone access or type below.": "خلّي الميكروفون ولا اكتب من تحت.",
+    "Atulya could not be reached. Restart the app and try again.": "ما قدرناش نتصلو بأتوليا. أعد تشغيل التطبيق وحاول مرة اخرى.",
+    "Please sign in again to continue.": "سجّل الدخول مرة اخرى باش تكمل.",
+    "Atulya was just updated. Reload the page once to continue.": "أتوليا تحدثت دابا. أعد تحميل الصفحة مرة وحدة باش تكمل.",
+    "Chat is unavailable right now. You can still use the scene and camera preview.": "المحادثة غير متاحة دابا. تقدر تستعمل المشهد ومعاينة الكاميرا.",
+    "Atulya couldn't complete that message. Please try again.": "أتوليا ما قدرتش تكمل الجواب. حاول مرة اخرى.",
+    "Atulya returned an empty response.": "أتوليا رجّعات جواب فاضي.",
+    "Atulya could not complete that reply.": "أتوليا ما قدرتش تكمل الجواب.",
+    "This device can now use another passkey to unlock Atulya.": "الجهاز دابا يقدر يستعمل passkey اخرى باش يفتح أتوليا.",
+    "Try again or use a different passkey device.": "حاول مرة اخرى ولا استعمل جهاز passkey مختلف.",
+    "Keep another passkey enrolled first.": "خلي passkey اخرى مسجّلة أولاً.",
+    "Check the values and try again.": "تحقق من القيم وحاول مرة اخرى.",
+    "Try again.": "حاول مرة اخرى.",
+    "Status unavailable": "الحالة غير متاحة",
+    "Unavailable": "غير متاح",
+    "Online": "متصل",
+    "Pairing needed": "كيتطلب الربط",
+    "Scanning for hand": "كيبحث على اليد",
+    "Model ready · awaiting camera": "الموديل جاهز · كيستنى الكاميرا",
+    "Gestures off": "الإيماءات موقوفة",
+    "Ready for hand gestures": "جاهز للإيماءات باليد",
+    "CAMERA OFF": "الكاميرا موقوفة",
+    "PREPARING": "كيتجهّز",
+    "LIVE": "مباشر",
+    "LIVE VOICE · AUTO SEND AFTER A PAUSE": "صوت مباشر · إرسال تلقائي بعد السكوت",
+    "ATULYA SPEAKING · MIC PAUSED": "أتوليا كتكلّم · الميكروفون موقوف",
+    "PROCESSING · LISTENING RESUMES AUTOMATICALLY": "كيدير · كيرجع كيسمع تلقائياً",
+    "MIC ACCESS NEEDED · ALLOW IN BROWSER": "كيتطلب الإذن للميكروفون · خلّيه فالمتصفح",
+    "AUTO START · WAITING FOR PERMISSION": "بداية تلقائية · كيستنى الإذن",
+    "Stop live voice conversation": "وقف المحادثة الصوتية المباشرة",
+    "Start live voice conversation": "ابدا المحادثة الصوتية المباشرة",
+    "Live voice is on. Each phrase sends after a pause. Activate here or press Escape to stop.": "الصوت المباشر شغال. كل عبارة كتبعت بعد السكوت. اضغط هنا ولا Escape باش توقف.",
+    "Microphone starts automatically after browser permission. Each phrase then sends after a pause.": "الميكروفون كيبدا تلقائياً من بعد إذن المتصفح. كل عبارة كتبعت من بعد السكوت.",
+    "ready": "جاهز",
+    "active": "شغّال",
+    "setup required": "كيتطلب الإعداد",
+    "off": "موقوف",
+    "Text": "نص",
+    "Voice": "صوت",
+    "Vision": "رؤية",
+    "Gesture": "إيماءة",
+    "SERVICE UNREACHABLE": "الخدمة غير قابلة للوصول",
+    "Cannot reach Atulya service": "ما قدرناش نتصلو بخدمة أتوليا",
+    "Atulya service unavailable": "خدمة أتوليا غير متاحة",
+    "Atulya service online": "خدمة أتوليا متصلة",
+    "No active issues": "ما كاينشي مشكل ناشط",
+    "Camera off": "الكاميرا موقوفة",
+    "Camera live": "الكاميرا مباشرة",
+    "Camera unavailable": "الكاميرا غير متاحة",
+    "Start camera preview": "ابدأ معاينة الكاميرا",
+    "Stop camera preview": "وقف معاينة الكاميرا",
+    "Camera access was denied. Allow it for this site in browser settings, then reload.": "الإذن للكاميرا مرفوض. خلّيها للموقع من إعدادات المتصفح، من بعد أعد التحميل.",
+    "Model ready · camera off": "الموديل جاهز · الكاميرا موقوفة",
+    "Gesture model needs setup": "موديل الإيماءات كيتطلب الإعداد",
+    "Gesture processing failed repeatedly. Turn gestures off and on to retry; camera preview remains available.": "معالجة الإيماءات فشلت بزربات. اطفئها و شغّلها من جديد؛ معاينة الكاميرا باقية.",
+    "Voice stopped by open palm.": "الصوت توقف بالكف المفتوح.",
+    "Browser voice": "صوت المتصفح",
+    "Unknown": "غير معروف",
+    "Offline": "غير متصل",
+    "Whisper · local": "Whisper · محلي",
+    "Supertonic 3 · local": "Supertonic 3 · محلي",
+    "Not configured": "غير مضبوط",
+    "No upcoming meetings": "ما كاين اجتماعات جاية",
+    "Delivery unavailable · Telegram Not configured": "التوصيل غير متاح · تيليجرام غير مضبوط",
+    "The model stream ended unexpectedly.": "تدفق النموذج توقف فجأة.",
+    "MODEL ERROR": "النموذج فيه خطأ",
+    "RETRY NEEDED": "كيتطلب إعادة المحاولة",
+    "Frame recognition failed": "التعرف على الإطار فشل",
+    "SCANNING": "كيبحث",
+    "CAMERA LIVE": "الكاميرا مباشرة",
+    "CAMERA STARTING": "الكاميرا كتبدأ",
+    "TRIGGERED": "تنفّذ",
+    "Open Palm": "كف مفتوح",
+    "Thumbs Up": "إبهام لأعلى",
+    "Thumbs Down": "إبهام لأسفل",
+    "Victory / Peace": "علامة النصر",
+    "Pointing Up": "إشارة للأعلى",
+    "Closed Fist": "قبضة مغلوبة",
+    "Jarvis Salute": "تحية أتوليا",
+    "Stop Speech & Voice": "وقف النطق والصوت",
+    "Confirm / Send 'Yes'": "تأكيد / إرسال «نعم»",
+    "Cancel / Send 'No'": "إلغاء / إرسال «لا»",
+    "Capture & Inspect Scene": "التقاط وفحص المشهد",
+    "Wake Mic / Listen": "إيقاظ الميكروفون / الاستماع",
+    "Pause Media & Silence": "توقيف الوسائط وتسكيت الصوت",
+    "System Health Briefing": "تقرير حالة النظام",
+    "No saved conversations yet.": "ما كاينشي محادثات محفوظة.",
+    "Saved conversation": "محادثة محفوظة",
+    "NEW LOCAL CONVERSATION": "محادثة محلية جديدة",
+    "SAVING CONVERSATION…": "كتحفظ المحادثة…",
+    "CONVERSATION SAVED · ALL YOUR DEVICES": "المحادثة تحفظت · كل أجهزتك",
+    "SYNCED · ALL YOUR DEVICES": "تزامنات · كل أجهزتك",
+    "HISTORY OFFLINE · WILL SYNC": "الأرشيف غير متصل · غادي يتزامن",
+    "LOCAL": "محلي",
+    "APPROVAL NEEDED": "كيتطلب الموافقة",
+    "Approval needed": "كيتطلب الموافقة",
+    "APPROVE": "وافق",
+    "DENY": "ارفض",
+    "SIGN-IN REQUEST": "طلب تسجيل دخول",
+    "ADD A PASSKEY?": "زيد passkey؟",
+    "ADD PASSKEY": "زيد passkey",
+    "SIGNED-IN DEVICES": "الأجهزة المسجّلة",
+    "SIGN OUT ALL OTHER DEVICES": "افصل كل الأجهزة الأخرى",
+    "SIGN OUT": "خروج",
+    "CAMERA OFF · RETRY": "الكاميرا موقوفة · حاول مرة اخرى",
+    "CAMERA LIVE": "الكاميرا مباشرة",
+    "CAMERA NEEDS ACCESS": "الكاميرا كيتطلب الإذن",
+    "CAMERA OFF": "الكاميرا موقوفة",
+    "This browser cannot access a camera": "المتصفح ما كيقدرش يوصل للكاميرا",
+    "This browser cannot access a camera. Try a current desktop browser.": "المتصفح ما كيقدرش يوصل للكاميرا. جرّب متصفح مكتبي محدّث.",
+    "Camera access requires localhost or a secure HTTPS page.": "الوصول للكاميرا كيتطلب localhost ولا صفحة HTTPS آمنة.",
+    "No camera profile could be opened.": "ما قدرناش نفتحو أي إعداد للكاميرا.",
+    "No camera was found. Connect one or continue without the preview.": "ما لقيناش كاميرا. وصل وحدة ولا كمل بلا معاينة.",
+    "The camera is busy or failed to start. Close other apps using it, then retry.": "الكاميرا مشغولة ولا ما بديتش. أغلق التطبيقات اللي كتستعملها وحاول مرة اخرى.",
+    "The camera could not start. Check this site's camera permission and try again.": "الكاميرا ما بديتش. تحقق من إذن الكاميرا للموقع وحاول مرة اخرى.",
+    "Gesture recognition active. Show open palm to stop speech, thumbs up for Yes, thumbs down for No, peace/victory to inspect scene.": "التعرف على الإيماءات شغال. اعرض كف مفتوح باش توقف النطق، إبهام لأعلى لـ «نعم»، إبهام لأسفل لـ «لا»، وعلامة النصر باش تفحص المشهد.",
+    "Replies are spoken — tap to mute": "الجوابات كتنطق — اضغط باش تسكّت",
+    "Muted — tap to speak replies": "مكتوم — اضغط باش ينطق الجوابات",
+    "STOP VOICE": "وقف الصوت",
+    "VOICE": "صوت",
+    "VOICE: SERVER RECOGNIZER": "الصوت: التعرف على السيرفر",
+    "VOICE: PHONE RECOGNIZER": "الصوت: التعرف على الجوال",
+    "VOICE: BROWSER RECOGNIZER": "الصوت: التعرف على المتصفح",
+    "Open website": "افتح الموقع",
+    "Gestures: Inactive · Click to turn on": "الإيماءات: موقوفة · اضغط باش تشغّلها",
+    "Gestures: Active · Click to turn off": "الإيماءات: شغالة · اضغط باش تطفئها",
+    "Camera: Starting…": "الكاميرا: كتبدأ…",
+    "Camera: Live · Click to turn off": "الكاميرا: مباشرة · اضغط باش توقفها",
+    "Camera: Inactive · Click to turn on": "الكاميرا: موقوفة · اضغط باش تشغّلها",
+    "Telegram sign-in failed.": "تسجيل الدخول عبر تيليجرام فشل.",
+    "CREATE ADMIN PASSKEY": "أنشئ passkey للمدير",
+    "ADD PASSKEY FOR THIS DEVICE": "زيد passkey لهاد الجهاز",
+    "SIGN IN WITH PASSKEY": "سجّل الدخول بـ passkey",
+    "Atulya could not check sign-in status.": "أتوليا ما قدرتش تتحقق من حالة تسجيل الدخول.",
+    "Sign-in was denied or locked. Start again.": "تسجيل الدخول مرفوض ولا مقفول. ابدأ من جديد.",
+    "The code expired. Start again.": "الرمز انقضى. ابدأ من جديد.",
+    "Enter the code from Telegram, or approve on a signed-in device.": "أدخل الرمز من تيليجرام، ولا وافق من جهاز مسجّل الدخول.",
+    "CREATE YOUR ACCOUNT": "أنشئ حسابك",
+    "SIGN IN TO ATULYA": "سجّل الدخول لأتوليا",
+    "Your account is ready once the owner approves it.": "حسابك جاهز من بعد ما يوافق عليه المالك.",
+    "Choose how to confirm it's you.": "اختر كيفاش تؤكد أنك أنت.",
+    "Sending a code…": "كيبعت الرمز…",
+    "That code didn't match. Check it and try again.": "الرمز ما مطابقش. تحقق منه وحاول مرة اخرى.",
+    "LISTENING… SAY YOUR PHRASE": "كيسمع… قول العبارة ديالك",
+    "CHECKING…": "كيتحقق…",
+    "Microphone unavailable here.": "الميكروفون غير متاح هنا.",
+    "UNLOCK WITH VOICE": "فتح بالصوت",
+    "Hide password": "أخفِ كلمة المرور",
+    "Show password": "إظهار كلمة المرور",
+    "Follow your device prompt to create the admin passkey.": "اتبع طلب جهازك باش تصنع passkey للمدير.",
+    "Confirm with your device passkey.": "أكد بـ passkey ديال جهازك.",
+    "Passkey sign-in failed. Try again.": "تسجيل الدخول بـ passkey فشل. حاول مرة اخرى.",
+    "Follow your device prompt to create your private passkey.": "اتبع طلب جهازك باش تصنع passkey خاص بك.",
+    "Invitation enrollment failed. Check the code and try again.": "تسجيل الدعوة فشل. تحقق من الرمز وحاول مرة اخرى.",
+    "VIEW: WIDE": "العرض: واسع",
+    "VIEW: CLOSE-UP": "العرض: تقريب",
+    "Strong password ✓": "كلمة مرور قوية ✓",
+    "Add another kind: uppercase, number or symbol": "زيد نوع اخر: حرف كبير، رقم ولا رمز",
+    "Local accounts are unavailable.": "الحسابات المحلية غير متاحة.",
+    "Close": "إغلاق",
+    "COPY LINK": "انسخ الرابط",
+    "COPIED": "تن نسخ",
+    "SELECT LINK TO COPY": "اختر الرابط باش تنسخو",
+    "COPY CODE": "انسخ الرمز",
+    "SELECT CODE TO COPY": "اختر الرمز باش تنسخو",
+    "SIGN-IN REQUEST": "طلب تسجيل دخول",
+    "Passkey added. This device now signs in with one touch.": "الـ passkey تزاد. هاد الجهاز دابا كيدخل بلمسة وحدة.",
+    "Passkey not added. Try again from the menu (PASSKEY +).": "الـ passkey ما تزادش. حاول مرة اخرى من القائمة (PASSKEY +).",
+    "You already have an account. Confirm it's you to sign in.": "عندك حساب أصلاً. أكد أنك أنت باش تدخل.",
+    "ADMIN": "مدير",
+    "USER": "مستعمل",
+    "ADMIN SETUP TOKEN": "رمز إعداد المدير",
+    "Invitation pending": "الدعوة كتستنى",
+    "Today": "اليوم",
+    "messages": "رسائل",
+    "PAIRING TOKEN": "رمز الربط",
+    "Disable": "عطّل",
+    "Enable": "شغّل",
+    "Loading…": "كيتحمّل…",
+    "Could not load your sign-ins.": "ما قدرناش نحمّلو جلسات الدخول ديالك.",
+    "NOT NOW": "ماشي دابا",
+    "Next time, unlock this device with your fingerprint, face or PIN instead of a password or code.": "المرة الجاية، افتح هاد الجهاز ببصمة الإصبع ولا الوجه ولا PIN بدل كلمة المرور ولا الرمز.",
+    "Pairing failed": "الربط فشل",
+    "fingerprint, face or PIN": "بصمة الإصبع، الوجه ولا PIN",
+    "Privacy & Safety": "الخصوصية والسلامة",
+    "Alerts on": "التنبيهات شغالة",
+    "Age": "العمر",
+    "tool calls": "استدعاءات أدوات",
+    "Pairing token for": "رمز الربط لـ",
+    "On the device run:": "على الجهاز نفّذ:",
+    "I'll speak my replies.": "غادي ننطق الجوابات ديالي.",
+    "Muted. I'll reply in text only.": "مكتوم. غادي نجاوب غير بالكتابة.",
+    "Gestures: Active & Scanning · Click to turn off": "الإيماءات: شغالة وكتبحث · اضغط باش تطفئها",
+    "Gestures: Standby (Waiting for camera) · Click to turn off": "الإيماءات: كتستنى (كتستنى الكاميرا) · اضغط باش تطفئها",
+    "Live voice stopped.": "الصوت المباشر توقف.",
+    "Remote first-time setup is locked. Configure ATULYA_ADMIN_SETUP_TOKEN on the server, then reload this page.": "الإعداد الأولي عن بُعد مقفول.اضبط ATULYA_ADMIN_SETUP_TOKEN على السيرفر، من بعد أعد تحميل الصفحة.",
+    "Create the first administrator passkey to protect Atulya on this device.": "أنشئ أول passkey للمدير باش تحمي أتوليا على هاد الجهاز.",
+    "Sign in with your fingerprint, face or screen lock, or with your username.": "سجّل الدخول ببصمة الإصبع، الوجه، قفل الشاشة، ولا باسم المستخدم ديالك.",
+    "Account created. It becomes active as soon as it's verified.": "الحساب تإنشاء. غادي يتفعّل من بعد ما يتحقق.",
+    "Sign-up failed.": "إنشاء الحساب فشل.",
+    "Your Google account is waiting for the owner's approval.": "حساب Google ديالك كيتستنى موافقة المالك.",
+    "Google sign-in failed. Try again or use another way.": "تسجيل الدخول بـ Google فشل. حاول مرة اخرى ولا استعمل طريقة اخرى.",
+    "Google sign-in took too long. Try again.": "تسجيل الدخول بـ Google طال بزاف. حاول مرة اخرى.",
+    "Could not sign out other devices.": "ما قدرناش نفصلو الأجهزة الأخرى.",
+    "Sign out every other phone, computer and browser? They will need to sign in again.": "تفصل كل الجوالات والكمبيوترات والمتصفحات الأخرى؟ غادي يحتاجو يسجلو الدخول من جديد.",
+    "Passkey not added. Try again from the menu (PASSKEY +).": "الـ passkey ما تزادش. حاول مرة اخرى من القائمة (PASSKEY +).",
+    "fingerprint, face or screen lock": "بصمة الإصبع، الوجه ولا قفل الشاشة",
+  });
+  const DARIJA_KEYS = Object.keys(DARIJA_UI).sort((a, b) => b.length - a.length);
+
+  function darija(value) {
+    const text = String(value ?? "");
+    if (Object.prototype.hasOwnProperty.call(DARIJA_UI, text)) return DARIJA_UI[text];
+    const connected = text.match(/^Connected to (.+)\. Type or allow microphone access to start voice automatically\.$/);
+    if (connected) return `تصلّمتي مع ${connected[1]}. اكتب رسالة ولا خلّي الميكروفون يبدأ تلقائياً.`;
+    const provider = text.match(/^Configured model provider · (.+)$/);
+    if (provider) return `مزوّد النموذج المضبوط · ${provider[1]}`;
+    const tools = text.match(/^(\d+) tools ready · none used yet$/);
+    if (tools) return `${tools[1]} أداة جاهزة · ما استعملت حتى واحدة`;
+    const meeting = text.match(/^Meeting reminder: (.+)$/);
+    if (meeting) return `تذكير اجتماع: ${darija(meeting[1])}`;
+    const action = text.match(/^Action: (.+)$/);
+    if (action) return `العملية: ${darija(action[1])}`;
+    const cameraNumber = text.match(/^Camera (\d+)$/);
+    if (cameraNumber) return `كاميرا ${cameraNumber[1]}`;
+    const commands = text.match(/^Commands: (.+)$/);
+    if (commands) return `الأوامر: ${darija(commands[1])}`;
+    const signInFrom = text.match(/^Someone wants to sign in from (.+)\.$/);
+    if (signInFrom) return `شي واحد بغى يدخل من ${signInFrom[1]}.`;
+    const resend = text.match(/^You can resend in (\d+)s\.$/);
+    if (resend) return `تقدر تعيد الإرسال من بعد ${resend[1]} ثانية.`;
+    const approveOn = text.match(/^Approve on (.+) — or type the 6-digit code from Telegram\. Expires in 5 minutes\.$/);
+    if (approveOn) return `وافق من ${approveOn[1]} — ولا أدخل الرمز من 6 أرقام من تيليجرام. كينقضي من بعد 5 دقائق.`;
+    const signedIn = text.match(/^(\d+) signed in\. Sign out anything you don't recognise\.$/);
+    if (signedIn) return `${signedIn[1]} مسجّلين. افصل أي واحد ما كتعرفوش.`;
+    const signedOut = text.match(/^Signed out (\d+) other device\(s\)\.$/);
+    if (signedOut) return `فصلت ${signedOut[1]} من الأجهزة الأخرى.`;
+    const passkeyCount = text.match(/^(\d+) passkey\(s\)$/);
+    if (passkeyCount) return `${passkeyCount[1]} passkey`;
+    const pairMinutes = text.match(/^Open this on your phone or other computer within (\d+) minutes to add a passkey for your account:$/);
+    if (pairMinutes) return `افتح هادشي من جوالك ولا كمبيوتر آخر خلال ${pairMinutes[1]} دقيقة باش تزيد passkey لحسابك:`;
+    const shareCode = text.match(/^Share this one-time code with (.+) \(expires in 24 hours\):$/);
+    if (shareCode) return `شارك هاد الرمز لمرة وحدة مع ${shareCode[1]} (كينقضي من بعد 24 ساعة):`;
+    const tooShort = text.match(/^Too short \((\d+)\/10\)$/);
+    if (tooShort) return `قصيرة بزاف (${tooShort[1]}/10)`;
+    const usage = text.match(/^Today: (\d+)\/(\S+) messages · (\d+)\/(\S+) tool calls · Age: (.+) \((.+)\)( · alerts on)?$/);
+    if (usage) return `اليوم: ${usage[1]}/${usage[2]} رسائل · ${usage[3]}/${usage[4]} استدعاءات أدوات · العمر: ${darija(usage[5])} (${darija(usage[6])})${usage[7] ? " · التنبيهات شغالة" : ""}`;
+    let out = text.replace(/ · TRIGGERED$/, " · تنفّذ")
+      .replace(/ · on device\b/g, " · على الجهاز")
+      .replace(/ · focus /g, " · تركيز ")
+      .replace(/ · Internet access/g, " · الوصول للإنترنت")
+      .replace(/ · Local only/g, " · محلي فقط")
+      .replace(/ · THIS DEVICE/g, " · هاد الجهاز")
+      .replace(/ · alert sent/g, " · تم إرسال تنبيه")
+      .replace(/ · WARNING: the log was altered/g, " · تحذير: السجل تبدّل")
+      .replace(/ · waiting for approval/g, " · كيتستنى الموافقة")
+      .replace(/ via /g, " عبر ")
+      .replace(/ sign-in\b/g, " تسجيل الدخول")
+      .replace(/ unknown network/g, " شبكة غير معروفة")
+      .replace(/ signed in /g, " سجّل الدخول ")
+      .replace(/ last used /g, " آخر استعمال ")
+      .replace(/ passkey\(s\)/g, " passkey")
+      .replace(/Today: /g, "اليوم: ")
+      .replace(/ messages · /g, " رسائل · ");
+    for (const key of DARIJA_KEYS) out = out.split(key).join(DARIJA_UI[key]);
+    return out;
   }
 
   function setPhase(next, label, detail = "") {
     phase = next;
-    status.textContent = label;
-    statusDetail.textContent = detail;
+    status.textContent = darija(label);
+    statusDetail.textContent = darija(detail);
     if (next === "listening" || next === "speaking") voiceHistory.length = 0;
     const tone = /UNAVAILABLE|ERROR|OFFLINE|FAILED|MISSED/i.test(label)
       ? "error"
@@ -276,16 +600,16 @@
     if (typeof window.__HUM_SET_STATE === "function") window.__HUM_SET_STATE(next);
     else window.dispatchEvent(new CustomEvent("atulya:state", { detail: next }));
     waveform.dataset.phase = next;
-    waveform.setAttribute("aria-label", voiceSessionActive ? "Stop live voice conversation" : "Start live voice conversation");
-    waveform.title = voiceSessionActive
+    waveform.setAttribute("aria-label", darija(voiceSessionActive ? "Stop live voice conversation" : "Start live voice conversation"));
+    waveform.title = darija(voiceSessionActive
       ? "Live voice is on. Each phrase sends after a pause. Activate here or press Escape to stop."
-      : "Microphone starts automatically after browser permission. Each phrase then sends after a pause.";
-    waveHelp.textContent = listening
+      : "Microphone starts automatically after browser permission. Each phrase then sends after a pause.");
+    waveHelp.textContent = darija(listening
       ? "LIVE VOICE · AUTO SEND AFTER A PAUSE"
       : speaking ? "ATULYA SPEAKING · MIC PAUSED"
         : voiceSessionActive ? "PROCESSING · LISTENING RESUMES AUTOMATICALLY"
           : voiceBrowserBlocked ? "MIC ACCESS NEEDED · ALLOW IN BROWSER"
-            : "AUTO START · WAITING FOR PERMISSION";
+            : "AUTO START · WAITING FOR PERMISSION");
     if (voiceChannel) {
       const voiceBusy = /ALLOW MICROPHONE|PREPARING|UNDERSTANDING/i.test(label);
       const voiceLive = (listening && label === "Listening") || (speaking && label === "Speaking");
@@ -297,7 +621,7 @@
     }
     if (connectionDot) {
       connectionDot.classList.toggle("offline", label === "Service unavailable");
-      connectionDot.setAttribute("aria-label", label === "Service unavailable" ? "Atulya service unavailable" : "Atulya service online");
+      connectionDot.setAttribute("aria-label", darija(label === "Service unavailable" ? "Atulya service unavailable" : "Atulya service online"));
     }
     syncLayoutControls();
   }
@@ -500,7 +824,7 @@
     if (!entries.length) {
       const empty = document.createElement("p");
       empty.className = "history-warning";
-      empty.textContent = "No saved conversations yet.";
+      empty.textContent = darija("No saved conversations yet.");
       historyList.append(empty);
       return;
     }
@@ -509,13 +833,13 @@
       row.className = "history-entry";
       const choose = document.createElement("button");
       choose.type = "button";
-      choose.textContent = entry.title || "Saved conversation";
+      choose.textContent = darija(entry.title || "Saved conversation");
       choose.setAttribute("aria-current", String(entry.id === selectedArchiveId));
       choose.addEventListener("click", () => { selectedArchiveId = entry.id; drawArchiveList(false); });
       choose.addEventListener("dblclick", () => { void openArchiveConversation(); });
       const date = document.createElement("small");
       const parsed = new Date(entry.updated);
-      date.textContent = Number.isNaN(parsed.getTime()) ? "LOCAL" : parsed.toLocaleString([], { dateStyle: "short", timeStyle: "short" });
+      date.textContent = darija(Number.isNaN(parsed.getTime()) ? "LOCAL" : parsed.toLocaleString([], { dateStyle: "short", timeStyle: "short" }));
       row.append(choose, date);
       historyList.append(row);
     }
@@ -528,7 +852,7 @@
     messagesNode.replaceChildren();
     try { localStorage.setItem("atulya.conversation.id", conversationId); } catch { /* Keep the generated ID for this page only. */ }
     historyReady = true;
-    historyStatus.textContent = "NEW LOCAL CONVERSATION";
+    historyStatus.textContent = darija("NEW LOCAL CONVERSATION");
     historyStatus.dataset.state = "saved";
     rememberArchive(conversationId);
     historyDialog?.close();
@@ -586,14 +910,14 @@
       row.className = "plugin-entry";
       const description = document.createElement("span");
       const title = document.createElement("strong");
-      title.textContent = `${plugin.category.toUpperCase()} · ${plugin.name}`;
+      title.textContent = darija(`${plugin.category.toUpperCase()} · ${plugin.name}`);
       const detail = document.createElement("small");
-      detail.textContent = `Commands: ${(plugin.commands || []).join(", ")}${plugin.permissions?.includes("network") ? " · Internet access" : " · Local only"}`;
+      detail.textContent = darija(`Commands: ${(plugin.commands || []).join(", ")}${plugin.permissions?.includes("network") ? " · Internet access" : " · Local only"}`);
       description.append(title, detail);
       const toggle = document.createElement("input");
       toggle.type = "checkbox";
       toggle.checked = Boolean(plugin.enabled);
-      toggle.setAttribute("aria-label", `${plugin.enabled ? "Disable" : "Enable"} ${plugin.name}`);
+      toggle.setAttribute("aria-label", darija(`${plugin.enabled ? "Disable" : "Enable"} ${plugin.name}`));
       toggle.addEventListener("change", async () => {
         toggle.disabled = true;
         try {
@@ -604,7 +928,7 @@
           if (!result.ok) throw new Error("Save failed");
           const body = await result.json();
           plugin.enabled = body.plugin.enabled;
-          toggle.setAttribute("aria-label", `${plugin.enabled ? "Disable" : "Enable"} ${plugin.name}`);
+          toggle.setAttribute("aria-label", darija(`${plugin.enabled ? "Disable" : "Enable"} ${plugin.name}`));
         } catch {
           toggle.checked = !toggle.checked;
           showLayoutToast(`Could not update ${plugin.name}.`);
@@ -618,7 +942,7 @@
 
   function saveMessage(message) {
     if (!historyReady) return;
-    historyStatus.textContent = "SAVING CONVERSATION…";
+    historyStatus.textContent = darija("SAVING CONVERSATION…");
     historyWrites = historyWrites.catch(() => {}).then(async () => {
       const response = await fetch(`/api/conversations/${encodeURIComponent(conversationId)}/messages`, {
       method: "POST",
@@ -627,10 +951,10 @@
       keepalive: true,
       });
       if (!response.ok) throw new Error("History save failed");
-      historyStatus.textContent = "CONVERSATION SAVED · ALL YOUR DEVICES";
+      historyStatus.textContent = darija("CONVERSATION SAVED · ALL YOUR DEVICES");
       historyStatus.dataset.state = "saved";
     }).catch(() => {
-      historyStatus.textContent = "HISTORY OFFLINE · WILL SYNC";
+      historyStatus.textContent = darija("HISTORY OFFLINE · WILL SYNC");
       historyStatus.dataset.state = "error";
     });
   }
@@ -664,19 +988,19 @@
     const card = document.createElement("div");
     card.className = "chat-message action-card";
     card.setAttribute("role", "group");
-    card.setAttribute("aria-label", "Approval needed");
+    card.setAttribute("aria-label", darija("Approval needed"));
     const title = document.createElement("strong");
-    title.textContent = "APPROVAL NEEDED";
+    title.textContent = darija("APPROVAL NEEDED");
     const summary = document.createElement("span");
-    summary.textContent = action.summary;
+    summary.textContent = darija(action.summary);
     const buttons = document.createElement("div");
     const approve = document.createElement("button");
     approve.type = "button";
-    approve.textContent = "APPROVE";
+    approve.textContent = darija("APPROVE");
     approve.className = "approve";
     const deny = document.createElement("button");
     deny.type = "button";
-    deny.textContent = "DENY";
+    deny.textContent = darija("DENY");
     approve.addEventListener("click", () => decideAction(action.id, true));
     deny.addEventListener("click", () => decideAction(action.id, false));
     buttons.append(approve, deny);
@@ -768,11 +1092,11 @@
       }
       if (conversation.length > 38) conversation.splice(0, conversation.length - 38);
       historyReady = true;
-      historyStatus.textContent = "SYNCED · ALL YOUR DEVICES";
+      historyStatus.textContent = darija("SYNCED · ALL YOUR DEVICES");
       historyStatus.dataset.state = "saved";
     } catch {
       historyReady = true;
-      historyStatus.textContent = "HISTORY OFFLINE · WILL SYNC";
+      historyStatus.textContent = darija("HISTORY OFFLINE · WILL SYNC");
       historyStatus.dataset.state = "error";
     }
   }
@@ -830,9 +1154,9 @@
     if (cameraFeed) cameraFeed.srcObject = null;
     cameraPreview?.classList.remove("is-live");
     cameraToggle?.setAttribute("aria-pressed", "false");
-    cameraToggle?.setAttribute("aria-label", "Start camera preview");
+    cameraToggle?.setAttribute("aria-label", darija("Start camera preview"));
     const label = cameraToggle?.querySelector(".preview-label b");
-    if (label) label.innerHTML = "<i></i> CAMERA OFF · RETRY";
+    if (label) label.innerHTML = darija("<i></i> CAMERA OFF · RETRY");
     if (visionChannel) setChannelState(visionChannel, "off");
     const gestureChannel = $("#gesture-channel");
     if (gestureChannel) setChannelState(gestureChannel, gestureAssetsReady ? "ready" : "setup");
@@ -856,7 +1180,7 @@
       for (const [index, device] of devices.entries()) {
         const option = document.createElement("option");
         option.value = device.deviceId;
-        option.textContent = device.label || `Camera ${index + 1}`;
+        option.textContent = device.label || darija(`Camera ${index + 1}`);
         cameraDevice.append(option);
       }
       cameraDevice.hidden = devices.length < 2;
@@ -924,9 +1248,9 @@
         if (visionChannel) setChannelState(visionChannel, "live");
         if (cameraToggle) {
           cameraToggle.setAttribute("aria-pressed", "true");
-          cameraToggle.setAttribute("aria-label", "Stop camera preview");
+          cameraToggle.setAttribute("aria-label", darija("Stop camera preview"));
           const label = cameraToggle.querySelector(".preview-label b");
-          if (label) label.innerHTML = "<i></i> CAMERA LIVE";
+          if (label) label.innerHTML = darija("<i></i> CAMERA LIVE");
         }
         stream.getVideoTracks().forEach((track) => track.addEventListener("ended", stopCamera, { once: true }));
         const cameraSettings = stream.getVideoTracks()[0]?.getSettings?.() || {};
@@ -941,11 +1265,11 @@
         const resolvedCameraIssue = cameraIssue;
         cameraIssue = "";
         const issueLabel = document.querySelector('[data-status-key="issue"] strong');
-        if (resolvedCameraIssue && issueLabel?.textContent === resolvedCameraIssue) setSystemTile("issue", "ready", "No active issues");
+        if (resolvedCameraIssue && issueLabel?.textContent === darija(resolvedCameraIssue)) setSystemTile("issue", "ready", "No active issues");
         const label = cameraToggle?.querySelector(".preview-label b");
-        if (label) label.textContent = `CAMERA LIVE${cameraFormat ? ` · ${cameraFormat}` : ""}`;
+        if (label) label.textContent = darija(`CAMERA LIVE${cameraFormat ? ` · ${cameraFormat}` : ""}`);
         setSystemTile("vision", "live", `Camera live${cameraFormat ? ` · ${cameraFormat}` : " · on device"}${cameraFocus ? ` · focus ${cameraFocus}` : ""}${cameraDeviceLabel ? ` · ${cameraDeviceLabel}` : ""}`);
-        if (status.textContent === "Camera unavailable") restoreIdlePhase();
+        if (status.textContent === darija("Camera unavailable")) restoreIdlePhase();
         if (gesturesEnabled) await initializeGestureRecognition();
         return true;
       } catch (error) {
@@ -983,7 +1307,7 @@
   function setCameraError(label, detail) {
     cameraIssue = detail;
     const cameraLabel = cameraToggle?.querySelector(".preview-label b");
-    if (cameraLabel) cameraLabel.innerHTML = "<i></i> CAMERA NEEDS ACCESS";
+    if (cameraLabel) cameraLabel.innerHTML = darija("<i></i> CAMERA NEEDS ACCESS");
     setSystemTile("vision", "error", label);
     setSystemTile("issue", "error", detail);
     if (visionChannel) setChannelState(visionChannel, "off");
@@ -1031,7 +1355,7 @@
       const gestureChannel = $("#gesture-channel");
       if (gestureRegion) {
         gestureRegion.dataset.state = "live";
-        gestureRegion.setAttribute("aria-label", "Gesture recognition active. Show open palm to stop speech, thumbs up for Yes, thumbs down for No, peace/victory to inspect scene.");
+        gestureRegion.setAttribute("aria-label", darija("Gesture recognition active. Show open palm to stop speech, thumbs up for Yes, thumbs down for No, peace/victory to inspect scene."));
       }
       showGestureResult("SCANNING");
       syncGestureButton();
@@ -1048,7 +1372,7 @@
       if (gestureChannel) setChannelState(gestureChannel, "setup");
       setSystemTile("gesture", "error", gestureIssue);
       const copy = $("#gesture-copy");
-      if (copy) copy.title = gestureIssue;
+      if (copy) copy.title = darija(gestureIssue);
       document.dispatchEvent(new CustomEvent("atulya-device-status", { detail: { gesture: gestureIssue } }));
     }
   }
@@ -1220,7 +1544,7 @@
     if (!button) return;
     button.textContent = voiceReplies ? "🔊" : "🔇";
     button.setAttribute("aria-pressed", String(voiceReplies));
-    button.title = voiceReplies ? "Replies are spoken — tap to mute" : "Muted — tap to speak replies";
+    button.title = darija(voiceReplies ? "Replies are spoken — tap to mute" : "Muted — tap to speak replies");
   }
   window.setTimeout(() => {
     updateVoiceRepliesButton();
@@ -1369,7 +1693,8 @@
     }
     const utterance = new SpeechSynthesisUtterance(text);
     const hindi = /\p{Script=Devanagari}/u.test(text);
-    const targetLanguage = hindi ? "hi-IN" : "en-IN";
+    const arabic = /\p{Script=Arabic}/u.test(text);
+    const targetLanguage = hindi ? "hi-IN" : arabic ? "ar-MA" : "en-IN";
     utterance.lang = targetLanguage;
     activeUtterance = utterance;
     preferMaleVoice(utterance, targetLanguage);
@@ -1431,8 +1756,9 @@
     const returningSession = messagesNode.querySelectorAll(".chat-message.user, .chat-message.assistant").length > 0;
     // A restored conversation already has its history on screen: greet by voice only, don't add another bubble.
     const hour = new Date().getHours();
-    const timeGreet = hour < 12 ? "Good morning." : hour < 17 ? "Good afternoon." : "Good evening.";
-    const greeting = returningSession ? "Welcome back." : timeGreet;
+    // قاعدة واحدة : Atulya كتهضر غير بالدارجة بحروف عربية، حتى فالتحية المكتوبة محلياً.
+    const timeGreet = hour < 12 ? "صباح الخير." : "مساء الخير.";
+    const greeting = returningSession ? "مرحبا بعودتك." : timeGreet;
     if (!returningSession) {
       const greetingBubble = appendMessage("assistant", greeting, null, true);
       conversation.push({ role: "assistant", content: greeting });
@@ -1532,7 +1858,7 @@
         speechAnalyser.connect(speechAudioContext.destination);
         activeAudio.onplay = () => {
           speaking = true;
-          setPhase("speaking", "Speaking", "Speaking with Atulya's local Hindi/English voice.");
+          setPhase("speaking", "Speaking", "كيتنطق بالصوت المحلي ديال أتوليا.");
           refreshWave();
         };
         const cleanup = () => {
@@ -1676,8 +2002,8 @@
   function syncLayoutControls() {
     if (layoutVoiceToggle) {
       layoutVoiceToggle.hidden = !document.body.classList.contains("panel-chat-hidden");
-      layoutVoiceToggle.textContent = voiceSessionActive ? "STOP VOICE" : "VOICE";
-      layoutVoiceToggle.setAttribute("aria-label", voiceSessionActive ? "Stop live voice conversation" : "Start live voice conversation");
+      layoutVoiceToggle.textContent = darija(voiceSessionActive ? "STOP VOICE" : "VOICE");
+      layoutVoiceToggle.setAttribute("aria-label", darija(voiceSessionActive ? "Stop live voice conversation" : "Start live voice conversation"));
     }
     if (layoutChatToggle) layoutChatToggle.hidden = !document.body.classList.contains("panel-chat-hidden");
   }
@@ -1731,7 +2057,7 @@
       if (url.protocol !== "https:" || url.username || url.password) return;
       const card = document.createElement("article"); card.className = "chat-message notice";
       const link = document.createElement("a"); link.href = url.href;
-      link.textContent = action.label || "Open website";
+      link.textContent = darija(action.label || "Open website");
       link.target = /Android/i.test(navigator.userAgent) || window.AtulyaNative ? "_self" : "_blank";
       link.rel = "noopener noreferrer";
       card.append(link); messagesNode.append(card); messagesNode.scrollTop = messagesNode.scrollHeight;
@@ -1903,7 +2229,7 @@
       voiceReplies = !/^(?:mute|voice off|stop speaking replies)$/.test(muteCommand[0]);
       setVoiceOption("atulya.voice.replies", voiceReplies);
       updateVoiceRepliesButton();
-      const reply = voiceReplies ? "I'll speak my replies." : "Muted. I'll reply in text only.";
+      const reply = darija(voiceReplies ? "I'll speak my replies." : "Muted. I'll reply in text only.");
       appendMessage("assistant", reply);
       setPhase("idle", "Ready", reply);
       return;
@@ -2216,7 +2542,7 @@
         if (!window.AtulyaNative) { // browser recognizer unavailable here (offline, blocked): use the server's
           nativeVoice = null;
           const engine = document.getElementById("voice-engine");
-          if (engine) engine.textContent = "VOICE: SERVER RECOGNIZER";
+          if (engine) engine.textContent = darija("VOICE: SERVER RECOGNIZER");
           voiceSessionActive = true;
           startListening(true);
           return;
@@ -2230,8 +2556,8 @@
   // Which recognizer this device uses (shown in the ⋮ menu; the emulator test reads it too).
   {
     const engine = document.getElementById("voice-engine");
-    if (engine) engine.textContent = window.AtulyaNative ? "VOICE: PHONE RECOGNIZER"
-      : nativeVoice ? "VOICE: BROWSER RECOGNIZER" : "VOICE: SERVER RECOGNIZER";
+    if (engine) engine.textContent = darija(window.AtulyaNative ? "VOICE: PHONE RECOGNIZER"
+      : nativeVoice ? "VOICE: BROWSER RECOGNIZER" : "VOICE: SERVER RECOGNIZER");
   }
 
   async function startListening(resume = false) {
@@ -2340,8 +2666,8 @@
     button.dataset.status = status;
     const pip = button.querySelector(".status-pip");
     if (pip) pip.className = `status-pip ${status}`;
-    button.title = !gesturesEnabled ? "Gestures: Inactive · Click to turn on" :
-      (active ? "Gestures: Active & Scanning · Click to turn off" : "Gestures: Standby (Waiting for camera) · Click to turn off");
+    button.title = darija(!gesturesEnabled ? "Gestures: Inactive · Click to turn on" :
+      (active ? "Gestures: Active & Scanning · Click to turn off" : "Gestures: Standby (Waiting for camera) · Click to turn off"));
   }
 
   function syncCameraButton(starting = false) {
@@ -2353,8 +2679,8 @@
     button.dataset.status = status;
     const pip = button.querySelector(".status-pip");
     if (pip) pip.className = `status-pip ${status}`;
-    button.title = starting ? "Camera: Starting…" :
-      (active ? "Camera: Live · Click to turn off" : "Camera: Inactive · Click to turn on");
+    button.title = darija(starting ? "Camera: Starting…" :
+      (active ? "Camera: Live · Click to turn off" : "Camera: Inactive · Click to turn on"));
   }
 
   $("#quick-gesture")?.addEventListener("click", async () => {
@@ -2499,7 +2825,7 @@
         visionReady = Boolean(health.vision_ready);
         const name = health.assistant_name || "Atulya";
         healthLoaded = true;
-        if (connectionDot) connectionDot.setAttribute("aria-label", "Atulya service online");
+        if (connectionDot) connectionDot.setAttribute("aria-label", darija("Atulya service online"));
         if (!brainReady) {
           setPhase("idle", "Chat unavailable", "Text chat is offline right now. The scene remains available.");
         } else if (!voiceReady) {
@@ -2540,7 +2866,7 @@
         body: JSON.stringify({ init_data: webApp.initData }), cache: "no-store",
       });
       const body = await response.json().catch(() => ({}));
-      if (!response.ok && authMessage) authMessage.textContent = body.detail || "Telegram sign-in failed.";
+      if (!response.ok && authMessage) authMessage.textContent = darija(body.detail || "Telegram sign-in failed.");
       return response.ok;
     } catch { return false; }
   }
@@ -2572,12 +2898,12 @@
       if (addPasskeyButton) addPasskeyButton.hidden = true;
       if (manageUsersButton) manageUsersButton.hidden = true;
       if (signOutButton) signOutButton.hidden = true;
-      if (authMessage) authMessage.textContent = auth.setup_token_required && !auth.setup_token_configured
+      if (authMessage) authMessage.textContent = darija(auth.setup_token_required && !auth.setup_token_configured
         ? "Remote first-time setup is locked. Configure ATULYA_ADMIN_SETUP_TOKEN on the server, then reload this page."
         : authSetupRequired
         ? "Create the first administrator passkey to protect Atulya on this device."
-        : "Sign in with your fingerprint, face or screen lock, or with your username.";
-      if (authActivate) authActivate.textContent = authSetupRequired ? "CREATE ADMIN PASSKEY" : deviceLinkToken ? "ADD PASSKEY FOR THIS DEVICE" : "SIGN IN WITH PASSKEY";
+        : "Sign in with your fingerprint, face or screen lock, or with your username.");
+      if (authActivate) authActivate.textContent = darija(authSetupRequired ? "CREATE ADMIN PASSKEY" : deviceLinkToken ? "ADD PASSKEY FOR THIS DEVICE" : "SIGN IN WITH PASSKEY");
       const voiceButton = document.getElementById("auth-voice-unlock");
       if (voiceButton) {
         let hasKey = false;
@@ -2589,7 +2915,7 @@
       if (!authDialog.open) authDialog.showModal();
     } catch (error) {
       document.body.classList.add("auth-required");
-      if (authMessage) authMessage.textContent = error.message || "Atulya could not check sign-in status.";
+      if (authMessage) authMessage.textContent = darija(error.message) || "Atulya could not check sign-in status.";
       if (!authDialog.open) authDialog.showModal();
     }
   }
@@ -2673,7 +2999,7 @@
     }
     if (body.state === "denied" || body.state === "expired") {
       window.clearInterval(loginPoll);
-      codeStatus.textContent = body.state === "denied" ? "Sign-in was denied or locked. Start again." : "The code expired. Start again.";
+      codeStatus.textContent = darija(body.state === "denied" ? "Sign-in was denied or locked. Start again." : "The code expired. Start again.");
     }
     return false;
   }
@@ -2685,7 +3011,7 @@
     if (!saved?.id || Date.now() - saved.at > 5 * 60 * 1000 || !codeBox) return;
     loginRequestId = saved.id;
     codeBox.hidden = false;
-    codeStatus.textContent = "Enter the code from Telegram, or approve on a signed-in device.";
+    codeStatus.textContent = darija("Enter the code from Telegram, or approve on a signed-in device.");
     window.clearInterval(loginPoll);
     loginPoll = window.setInterval(async () => {
       if (!loginRequestId) return;
@@ -2712,9 +3038,9 @@
     document.getElementById("auth-step-methods").hidden = step !== "methods";
     document.getElementById("auth-signup-form").hidden = step !== "signup";
     const title = document.getElementById("auth-title");
-    if (title && !authSetupRequired) title.textContent = step === "signup" ? "CREATE YOUR ACCOUNT" : "SIGN IN TO ATULYA";
+    if (title && !authSetupRequired) title.textContent = darija(step === "signup" ? "CREATE YOUR ACCOUNT" : "SIGN IN TO ATULYA");
     const subtitle = document.getElementById("auth-message");
-    if (subtitle && !authSetupRequired && step === "signup") subtitle.textContent = "Your account is ready once the owner approves it.";
+    if (subtitle && !authSetupRequired && step === "signup") subtitle.textContent = darija("Your account is ready once the owner approves it.");
   }
   document.getElementById("auth-identify")?.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -2724,7 +3050,7 @@
     document.getElementById("auth-password-form").hidden = true;
     codeBox.hidden = true;
     showAuthStep("methods");
-    if (authMessage) authMessage.textContent = "Choose how to confirm it's you.";
+    if (authMessage) authMessage.textContent = darija("Choose how to confirm it's you.");
   });
   document.getElementById("auth-change-user")?.addEventListener("click", () => showAuthStep("start"));
   document.getElementById("auth-use-password")?.addEventListener("click", () => {
@@ -2736,14 +3062,14 @@
   let lastCodeRequest = 0;
   document.getElementById("auth-code-resend")?.addEventListener("click", () => {
     const wait = 30 - Math.floor((Date.now() - lastCodeRequest) / 1000);
-    if (wait > 0) { codeStatus.textContent = `You can resend in ${wait}s.`; return; }
+    if (wait > 0) { codeStatus.textContent = darija(`You can resend in ${wait}s.`); return; }
     document.getElementById("auth-code-start").click();
   });
 
   document.getElementById("auth-code-start")?.addEventListener("click", async () => {
     lastCodeRequest = Date.now();
     codeBox.hidden = false;
-    codeStatus.textContent = "Sending a code…";
+    codeStatus.textContent = darija("Sending a code…");
     try {
       const response = await fetch("/api/auth/login-requests", {
         method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -2753,7 +3079,7 @@
       if (!response.ok) throw new Error(body.detail || "Could not start sign-in.");
       loginRequestId = body.id;
       try { sessionStorage.setItem("atulya.loginRequest", JSON.stringify({ id: body.id, at: Date.now() })); } catch { /* ignore */ }
-      codeStatus.textContent = `Approve on ${body.channels.join(" or ")} — or type the 6-digit code from Telegram. Expires in 5 minutes.`;
+      codeStatus.textContent = darija(`Approve on ${body.channels.join(" or ")} — or type the 6-digit code from Telegram. Expires in 5 minutes.`);
       codeInput.focus();
       window.clearInterval(loginPoll);
       loginPoll = window.setInterval(async () => {
@@ -2761,7 +3087,7 @@
         await finishCodeLogin(await fetch(`/api/auth/login-requests/${encodeURIComponent(loginRequestId)}`, { cache: "no-store" }));
       }, 2000);
     } catch (error) {
-      codeStatus.textContent = error.message;
+      codeStatus.textContent = darija(error.message);
     }
   });
 
@@ -2771,7 +3097,7 @@
       method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({ code: codeInput.value }), cache: "no-store",
     }));
-    if (!ok) codeStatus.textContent = "That code didn't match. Check it and try again.";
+    if (!ok) codeStatus.textContent = darija("That code didn't match. Check it and try again.");
   });
   codeInput?.addEventListener("keydown", (event) => { if (event.key === "Enter") document.getElementById("auth-code-submit").click(); });
 
@@ -2787,8 +3113,8 @@
         shownLoginRequests.add(item.id);
         const card = document.createElement("div");
         card.className = "chat-message action-card";
-        card.innerHTML = "<strong>SIGN-IN REQUEST</strong><span></span><div><button class=\"approve\" type=\"button\">APPROVE</button><button type=\"button\">DENY</button></div>";
-        card.querySelector("span").textContent = `Someone wants to sign in from ${item.label}.`;
+        card.innerHTML = darija("<strong>SIGN-IN REQUEST</strong><span></span><div><button class=\"approve\" type=\"button\">APPROVE</button><button type=\"button\">DENY</button></div>");
+        card.querySelector("span").textContent = darija(`Someone wants to sign in from ${item.label}.`);
         const [approve, deny] = card.querySelectorAll("button");
         const decide = async (yes) => {
           approve.disabled = deny.disabled = true;
@@ -2843,13 +3169,13 @@
     const key = readVoiceKey();
     if (!key) return;
     voiceUnlockButton.disabled = true;
-    voiceUnlockButton.textContent = "LISTENING… SAY YOUR PHRASE";
+    voiceUnlockButton.textContent = darija("LISTENING… SAY YOUR PHRASE");
     try {
       const form = new FormData();
       form.append("unlock_id", key.id);
       form.append("device_secret", key.secret);
       form.append("audio", await recordSeconds(4), "phrase.webm");
-      voiceUnlockButton.textContent = "CHECKING…";
+      voiceUnlockButton.textContent = darija("CHECKING…");
       const response = await fetch("/api/auth/voice-unlock", { method: "POST", body: form });
       const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.detail || "That didn't unlock.");
@@ -2857,10 +3183,10 @@
       document.body.classList.remove("auth-required");
       await refreshAuthState();
     } catch (error) {
-      if (authMessage) authMessage.textContent = error.message || "Microphone unavailable here.";
+      if (authMessage) authMessage.textContent = darija(error.message) || "Microphone unavailable here.";
     } finally {
       voiceUnlockButton.disabled = false;
-      voiceUnlockButton.textContent = "UNLOCK WITH VOICE";
+      voiceUnlockButton.textContent = darija("UNLOCK WITH VOICE");
     }
   });
 
@@ -2869,7 +3195,7 @@
     const show = field.type === "password";
     field.type = show ? "text" : "password";
     event.currentTarget.setAttribute("aria-pressed", String(show));
-    event.currentTarget.setAttribute("aria-label", show ? "Hide password" : "Show password");
+    event.currentTarget.setAttribute("aria-label", darija(show ? "Hide password" : "Show password"));
     event.currentTarget.textContent = show ? "🙈" : "👁";
     field.focus();
   });
@@ -2892,21 +3218,21 @@
       document.body.classList.remove("auth-required");
       await refreshAuthState();
     } catch (error) {
-      if (authMessage) authMessage.textContent = error.message;
+      if (authMessage) authMessage.textContent = darija(error.message);
     }
   });
 
   authActivate?.addEventListener("click", async () => {
     authActivate.disabled = true;
     try {
-      if (authMessage) authMessage.textContent = authSetupRequired ? "Follow your device prompt to create the admin passkey." : "Confirm with your device passkey.";
+      if (authMessage) authMessage.textContent = darija(authSetupRequired ? "Follow your device prompt to create the admin passkey." : "Confirm with your device passkey.");
       await runPasskeyCeremony(authSetupRequired || deviceLinkToken ? "register" : "login");
       try { localStorage.setItem("atulya.passkeyHere", "1"); } catch { /* ignore */ }
       deviceLinkToken = "";
       if (authSetupToken) authSetupToken.value = "";
       await refreshAuthState();
     } catch (error) {
-      if (authMessage) authMessage.textContent = error.message || "Passkey sign-in failed. Try again.";
+      if (authMessage) authMessage.textContent = darija(error.message) || "Passkey sign-in failed. Try again.";
     } finally {
       authActivate.disabled = false;
     }
@@ -2915,12 +3241,12 @@
   authJoin?.addEventListener("click", async () => {
     authJoin.disabled = true;
     try {
-      if (authMessage) authMessage.textContent = "Follow your device prompt to create your private passkey.";
+      if (authMessage) authMessage.textContent = darija("Follow your device prompt to create your private passkey.");
       await runPasskeyCeremony("invite");
       if (authInviteToken) authInviteToken.value = "";
       await refreshAuthState();
     } catch (error) {
-      if (authMessage) authMessage.textContent = error.message || "Invitation enrollment failed. Check the code and try again.";
+      if (authMessage) authMessage.textContent = darija(error.message) || "Invitation enrollment failed. Check the code and try again.";
     } finally {
       authJoin.disabled = false;
     }
@@ -2934,7 +3260,7 @@
     window.setTimeout(() => {
       const card = document.createElement("div");
       card.className = "chat-message action-card";
-      card.innerHTML = "<strong>ADD A PASSKEY?</strong><span>Next time, unlock this device with your fingerprint, face or PIN instead of a password or code.</span><div><button class=\"approve\" type=\"button\">ADD PASSKEY</button><button type=\"button\">NOT NOW</button></div>";
+      card.innerHTML = darija("<strong>ADD A PASSKEY?</strong><span>Next time, unlock this device with your fingerprint, face or PIN instead of a password or code.</span><div><button class=\"approve\" type=\"button\">ADD PASSKEY</button><button type=\"button\">NOT NOW</button></div>");
       const [add, later] = card.querySelectorAll("button");
       add.addEventListener("click", async () => {
         add.disabled = later.disabled = true;
@@ -2942,9 +3268,9 @@
           await runPasskeyCeremony("register");
           try { localStorage.setItem("atulya.passkeyHere", "1"); } catch { /* ignore */ }
           card.dataset.state = "approved";
-          card.querySelector("span").textContent = "Passkey added. This device now signs in with one touch.";
+          card.querySelector("span").textContent = darija("Passkey added. This device now signs in with one touch.");
         } catch (error) {
-          card.querySelector("span").textContent = error.message || "Passkey not added. Try again from the menu (PASSKEY +).";
+          card.querySelector("span").textContent = darija(error.message || "Passkey not added. Try again from the menu (PASSKEY +).");
           add.disabled = later.disabled = false;
         }
       });
@@ -2973,7 +3299,7 @@
   const sceneViewButton = $("#scene-view");
   function applySceneView(wide) {
     document.body.classList.toggle("scene-wide", wide);
-    if (sceneViewButton) sceneViewButton.textContent = wide ? "VIEW: WIDE" : "VIEW: CLOSE-UP";
+    if (sceneViewButton) sceneViewButton.textContent = darija(wide ? "VIEW: WIDE" : "VIEW: CLOSE-UP");
     window.dispatchEvent(new Event("resize")); // the scene re-measures its box
   }
   applySceneView(readFlag("atulya.scene.wide", false));
@@ -2991,7 +3317,7 @@
   function appendUserAction(parent, label, action, danger = false) {
     const button = document.createElement("button");
     button.type = "button";
-    button.textContent = label;
+    button.textContent = darija(label);
     if (danger) button.dataset.danger = "true";
     button.addEventListener("click", action);
     parent.append(button);
@@ -3034,7 +3360,7 @@
     const value = event.target.value;
     const kinds = [/[a-z]/, /[A-Z]/, /\d/, /[^\w]/].filter((pattern) => pattern.test(value)).length;
     const hint = document.getElementById("signup-strength");
-    hint.textContent = value.length < 10 ? `Too short (${value.length}/10)` : kinds < 3 ? "Add another kind: uppercase, number or symbol" : "Strong password ✓";
+    hint.textContent = darija(value.length < 10 ? `Too short (${value.length}/10)` : kinds < 3 ? "Add another kind: uppercase, number or symbol" : "Strong password ✓");
     hint.dataset.ok = String(value.length >= 10 && kinds >= 3);
   });
   signupForm?.addEventListener("submit", async (event) => {
@@ -3051,12 +3377,12 @@
       document.getElementById("auth-username").value = email;
       document.getElementById("auth-who").textContent = email;
       showAuthStep("methods");
-      if (authMessage) authMessage.textContent = "You already have an account. Confirm it's you to sign in.";
+      if (authMessage) authMessage.textContent = darija("You already have an account. Confirm it's you to sign in.");
       return;
     }
-    if (authMessage) authMessage.textContent = response.ok
+    if (authMessage) authMessage.textContent = darija(response.ok
       ? "Account created. It becomes active as soon as it's verified."
-      : (body.detail || "Sign-up failed.");
+      : (body.detail || "Sign-up failed."));
     if (response.ok) { signupForm.reset(); showAuthStep("start"); }
   });
   fetch("/api/auth/options").then((r) => r.json()).then((options) => {
@@ -3067,11 +3393,11 @@
     const result = location.hash.match(/google=(ok|pending|failed|expired)/)?.[1];
     if (result) {
       history.replaceState(null, "", location.pathname + location.search);
-      if (result !== "ok" && authMessage) authMessage.textContent = {
+      if (result !== "ok" && authMessage) authMessage.textContent = darija({
         pending: "Your Google account is waiting for the owner's approval.",
         failed: "Google sign-in failed. Try again or use another way.",
         expired: "Google sign-in took too long. Try again.",
-      }[result];
+      }[result]);
     }
   }
 
@@ -3085,15 +3411,15 @@
       const row = document.createElement("div");
       row.className = "user-entry";
       const name = document.createElement("strong");
-      name.textContent = `${item.display_name} — waiting for approval`;
+      name.textContent = darija(`${item.display_name} — waiting for approval`);
       const info = document.createElement("small");
-      info.textContent = `${item.email} · via ${item.via}`;
+      info.textContent = darija(`${item.email} · via ${item.via}`);
       const approve = document.createElement("button");
       approve.type = "button";
-      approve.textContent = "APPROVE";
+      approve.textContent = darija("APPROVE");
       const deny = document.createElement("button");
       deny.type = "button";
-      deny.textContent = "DENY";
+      deny.textContent = darija("DENY");
       deny.dataset.danger = "true";
       const decide = async (yes) => {
         await fetch(`/api/auth/signups/${encodeURIComponent(item.user_id)}`, {
@@ -3126,15 +3452,15 @@
         const card = document.createElement("section");
         card.className = "user-entry";
         const title = document.createElement("strong");
-        title.textContent = `${user.display_name} · ${user.role === "admin" ? "ADMIN" : "USER"}`;
+        title.textContent = darija(`${user.display_name} · ${user.role === "admin" ? "ADMIN" : "USER"}`);
         const detail = document.createElement("small");
-        detail.textContent = user.credential_count ? `${user.credential_count} passkey(s)` : "Invitation pending";
+        detail.textContent = darija(user.credential_count ? `${user.credential_count} passkey(s)` : "Invitation pending");
         card.append(title, detail);
         for (const credential of credentialsByUser.get(user.id) || []) {
           const row = document.createElement("div");
           row.className = "credential-entry";
           const label = document.createElement("small");
-          label.textContent = `Passkey · ${new Date(credential.created_at * 1000).toLocaleDateString()}`;
+          label.textContent = darija(`Passkey · ${new Date(credential.created_at * 1000).toLocaleDateString()}`);
           row.append(label);
           appendUserAction(row, "REVOKE", async () => {
             const result = await fetch(`/api/auth/credentials/${encodeURIComponent(credential.credential_id)}`, { method: "DELETE" });
@@ -3155,9 +3481,7 @@
           const limits = user.limits || {};
           const settings = document.createElement("small");
           settings.className = "user-settings";
-          settings.textContent = `Today: ${usage.messages || 0}/${limits.messages_per_day ?? "∞"} messages · `
-            + `${usage.tools || 0}/${limits.tools_per_day ?? "∞"} tool calls · Age: ${user.age_group} (${user.age_source})`
-            + (user.notify_blocked ? " · alerts on" : "");
+          settings.textContent = darija(`Today: ${usage.messages || 0}/${limits.messages_per_day ?? "∞"} messages · ${usage.tools || 0}/${limits.tools_per_day ?? "∞"} tool calls · Age: ${user.age_group} (${user.age_source})${user.notify_blocked ? " · alerts on" : ""}`);
           card.append(settings);
           const send = async (path, payload, failure) => {
             const result = await fetch(path, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
@@ -3200,7 +3524,7 @@
       }
     } catch (error) {
       const message = document.createElement("p");
-      message.textContent = error.message || "Local accounts are unavailable.";
+      message.textContent = darija(error.message || "Local accounts are unavailable.");
       usersList.append(message);
     }
   }
@@ -3219,20 +3543,20 @@
       linkDialog.className = "device-link-dialog";
       const inviteResult = document.createElement("div");
       linkDialog.append(inviteResult);
-      const close = document.createElement("button"); close.textContent = "Close";
+      const close = document.createElement("button"); close.textContent = darija("Close");
       close.addEventListener("click", () => linkDialog.close()); linkDialog.append(close);
       linkDialog.addEventListener("close", () => linkDialog.remove());
       document.body.append(linkDialog); linkDialog.showModal();
       const label = document.createElement("span");
-      label.textContent = `Open this on your phone or other computer within ${body.expires_minutes} minutes to add a passkey for your account:`;
+      label.textContent = darija(`Open this on your phone or other computer within ${body.expires_minutes} minutes to add a passkey for your account:`);
       const code = document.createElement("code");
       code.textContent = body.url;
       const copy = document.createElement("button");
       copy.type = "button";
-      copy.textContent = "COPY LINK";
+      copy.textContent = darija("COPY LINK");
       copy.addEventListener("click", async () => {
-        try { await navigator.clipboard.writeText(body.url); copy.textContent = "COPIED"; }
-        catch { copy.textContent = "SELECT LINK TO COPY"; }
+        try { await navigator.clipboard.writeText(body.url); copy.textContent = darija("COPIED"); }
+        catch { copy.textContent = darija("SELECT LINK TO COPY"); }
       });
       inviteResult.append(label, code, copy);
     } catch (error) {
@@ -3254,15 +3578,15 @@
       inviteResult.hidden = false;
       inviteResult.replaceChildren();
       const label = document.createElement("span");
-      label.textContent = `Share this one-time code with ${body.display_name} (expires in 24 hours):`;
+      label.textContent = darija(`Share this one-time code with ${body.display_name} (expires in 24 hours):`);
       const code = document.createElement("code");
       code.textContent = body.invitation_token;
       const copy = document.createElement("button");
       copy.type = "button";
-      copy.textContent = "COPY CODE";
+      copy.textContent = darija("COPY CODE");
       copy.addEventListener("click", async () => {
-        try { await navigator.clipboard.writeText(body.invitation_token); copy.textContent = "COPIED"; }
-        catch { copy.textContent = "SELECT CODE TO COPY"; }
+        try { await navigator.clipboard.writeText(body.invitation_token); copy.textContent = darija("COPIED"); }
+        catch { copy.textContent = darija("SELECT CODE TO COPY"); }
       });
       inviteResult.append(label, code, copy);
       inviteDisplayName.value = "";
@@ -3286,12 +3610,12 @@
       const data = await r.json();
       if (!r.ok) throw new Error(data.detail || "Pairing failed");
       const dlg = document.createElement("dialog");
-      dlg.innerHTML = "<h3>Pairing token for " + name + "</h3><pre>" + data.token + "</pre><p>On the device run:<br>ATULYA_AGENT_TOKEN=" + data.token + " python -m tools.laptop_agent</p><button>Close</button>";
-      dlg.querySelector("button").onclick = () => dlg.close();
+      dlg.innerHTML = `<h3>${darija("Pairing token for")} ${darija(name)}</h3><pre>${data.token}</pre><p>${darija("On the device run:")}<br>ATULYA_AGENT_TOKEN=${data.token} python -m tools.laptop_agent</p><button>${darija("Close")}</button>`;
+      dlg.querySelector("button").addEventListener("click", () => dlg.close());
       document.body.append(dlg);
       dlg.showModal();
     } catch (e) {
-      alert("Pairing failed: " + e.message);
+      alert(darija("Pairing failed") + ": " + darija(e.message));
     }
   });
   // Every device signed in to this account: what, where, how, last used; sign one or all others out.
@@ -3299,15 +3623,15 @@
     const dialog = document.createElement("dialog");
     dialog.className = "device-link-dialog signed-in-devices";
     const title = document.createElement("h3");
-    title.textContent = "Signed-in devices";
+    title.textContent = darija("Signed-in devices");
     const list = document.createElement("div");
     const status = document.createElement("p");
     const others = document.createElement("button");
     others.type = "button";
-    others.textContent = "SIGN OUT ALL OTHER DEVICES";
+    others.textContent = darija("SIGN OUT ALL OTHER DEVICES");
     const close = document.createElement("button");
     close.type = "button";
-    close.textContent = "Close";
+    close.textContent = darija("Close");
     close.addEventListener("click", () => dialog.close());
     dialog.addEventListener("close", () => dialog.remove());
     dialog.append(title, list, status, others, close);
@@ -3317,23 +3641,23 @@
 
     async function draw() {
       list.replaceChildren();
-      status.textContent = "Loading…";
+      status.textContent = darija("Loading…");
       const response = await fetch("/api/auth/sessions", { headers: { Accept: "application/json" }, cache: "no-store" }).catch(() => null);
-      if (!response?.ok) { status.textContent = "Could not load your sign-ins."; return; }
+      if (!response?.ok) { status.textContent = darija("Could not load your sign-ins."); return; }
       const { sessions = [] } = await response.json();
-      status.textContent = `${sessions.length} signed in. Sign out anything you don't recognise.`;
+      status.textContent = darija(`${sessions.length} signed in. Sign out anything you don't recognise.`);
       for (const item of sessions) {
         const row = document.createElement("div");
         row.className = "chat-message action-card";
         const name = document.createElement("strong");
-        name.textContent = item.current ? `${item.label} · THIS DEVICE` : item.label;
+        name.textContent = darija(item.current ? `${item.label} · THIS DEVICE` : item.label);
         const detail = document.createElement("span");
-        detail.textContent = `${item.method || "sign-in"} · ${item.ip || "unknown network"} · signed in ${when(item.created_at)} · last used ${when(item.last_seen)}`;
+        detail.textContent = darija(`${item.method || "sign-in"} · ${item.ip || "unknown network"} · signed in ${when(item.created_at)} · last used ${when(item.last_seen)}`);
         row.append(name, detail);
         if (!item.current) {
           const out = document.createElement("button");
           out.type = "button";
-          out.textContent = "SIGN OUT";
+          out.textContent = darija("SIGN OUT");
           out.addEventListener("click", async () => {
             out.disabled = true;
             const done = await fetch(`/api/auth/sessions/${encodeURIComponent(item.id)}`, { method: "DELETE" }).catch(() => null);
@@ -3346,11 +3670,11 @@
     }
 
     others.addEventListener("click", async () => {
-      if (!confirm("Sign out every other phone, computer and browser? They will need to sign in again.")) return;
+      if (!confirm(darija("Sign out every other phone, computer and browser? They will need to sign in again."))) return;
       others.disabled = true;
       const response = await fetch("/api/auth/sessions/sign-out-others", { method: "POST" }).catch(() => null);
       const body = response?.ok ? await response.json() : null;
-      status.textContent = body ? `Signed out ${body.signed_out} other device(s).` : "Could not sign out other devices.";
+      status.textContent = darija(body ? `Signed out ${body.signed_out} other device(s).` : "Could not sign out other devices.");
       others.disabled = false;
       if (body) void draw();
     });

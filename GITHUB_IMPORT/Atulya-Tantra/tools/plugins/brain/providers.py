@@ -603,7 +603,7 @@ class AutomaticProvider:
                     if token:
                         yield token
             except Exception as exc:
-                raise ProviderError("The selected model stream ended unexpectedly.") from exc
+                raise ProviderError("تدفق النموذج المختار توقف فجأة.") from exc
             return
         if self._local_provider is not None:
             try:

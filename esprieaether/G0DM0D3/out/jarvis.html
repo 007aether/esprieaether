@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr">
+<html lang="ar-MA">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ESPRIEATHER — Centro de mando local</title>
+<title>ESPRIEATHER — لوحة القيادة المحلية</title>
 <style>
   :root { --bg:#04090f; --panel:#0a1622; --cyan:#48e6ff; --amber:#ffb347; --red:#ff5c6c; --green:#6cf0a8; }
   * { box-sizing:border-box }
@@ -72,42 +72,53 @@
            padding:6px 10px; cursor:pointer; font:inherit; letter-spacing:.08em }
   a { color:#48e6ff; text-decoration:none }
   .atulya-bar { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px }
+  .atulya-actions { display:flex; align-items:center; gap:10px }
   #atulyaFrame { width:100%; height:620px; border:1px solid #17435a; border-radius:8px; background:#04121b }
+  #atulyaDock { position:fixed; right:40px; top:80px; z-index:9999; width:min(920px,calc(100vw - 40px));
+                height:min(680px,calc(100vh - 120px)); display:flex; flex-direction:column;
+                border:1px solid #2c88a5; border-radius:10px; background:#04121b;
+                box-shadow:0 18px 60px rgba(0,0,0,.6); overflow:hidden }
+  #atulyaDock[hidden] { display:none }
+  #atulyaHandle { display:flex; align-items:center; gap:8px; padding:6px 10px; cursor:move; user-select:none;
+                  background:#0d2c3d; border-bottom:1px solid #2c88a5; font-size:11px; letter-spacing:.1em }
+  #atulyaHandle .spacer { flex:1 }
+  #atulyaDock iframe { flex:1; width:100%; height:auto; border:0; border-radius:0; background:#04121b }
+  #atulyaDock iframe[hidden] { display:none }
 </style>
 </head>
 <body>
 <header>
   <h1>ESPRIEATHER</h1>
-  <span class="tag">CENTRO DE MANDO LOCAL · 127.0.0.1 · SEM NUVEM · SEM CHAVE</span>
+  <span class="tag">لوحة القيادة المحلية · 127.0.0.1 · بلا سحابة · بلا مفتاح</span>
   <span class="tag" id="clock"></span>
-  <a class="tag" href="system.html">SYSTEM</a>
+  <a class="tag" href="system.html">النظام</a>
 </header>
 <div class="grid">
   <section class="card">
-    <h2>ESTADO DO SISTEMA</h2>
-    <div id="reactor" title="Indicador visual — nenhuma ação é executada daqui">
+    <h2>حالة النظام</h2>
+    <div id="reactor" title="مؤشر بصري — ما كيتنفذ من هنا أي فعل">
       <div class="core"></div>
-      <div id="satellites" aria-label="état réel des services">
-        <span id="sat-brain" class="sat" title="cerveau local">B</span>
-        <span id="sat-voice" class="sat" title="voix locale">V</span>
-        <span id="sat-services" class="sat" title="services locaux">S</span>
-        <span id="sat-network" class="sat" title="réseau">N</span>
+      <div id="satellites" aria-label="الحالة الحقيقية للخدمات">
+        <span id="sat-brain" class="sat" title="دماغ محلي">B</span>
+        <span id="sat-voice" class="sat" title="صوت محلي">V</span>
+        <span id="sat-services" class="sat" title="خدمات محلية">S</span>
+        <span id="sat-network" class="sat" title="الشبكة">N</span>
       </div>
     </div>
-    <div id="services" class="dim">a carregar…</div>
-    <div id="internet" class="dim">rede: a carregar…</div>
-    <div id="voice" class="dim">voz: a carregar…</div>
+    <div id="services" class="dim">كيتحمل…</div>
+    <div id="internet" class="dim">الشبكة: كيتحمل…</div>
+    <div id="voice" class="dim">الصوت: كيتحمل…</div>
   </section>
   <div class="right">
     <section class="card">
-      <h2>INTERFACE VOCALE · DEUX VISAGES LOCAUX</h2>
+      <h2>واجهة صوتية · وجهان محليان</h2>
       <div class="face-wrap">
-        <div id="face" title="Visage piloté par l'état vocal local — aucune commande">
-          <video id="camVideo" autoplay playsinline muted hidden aria-label="caméra locale"></video>
+        <div id="face" title="وجه محكوم بحالة الصوت المحلية — بلا أي أمر">
+          <video id="camVideo" autoplay playsinline muted hidden aria-label="كاميرا محلية"></video>
           <canvas id="camSample" width="32" height="32"></canvas>
-          <canvas id="faceCanvas" width="320" height="280" aria-label="visage holographique local"></canvas>
+          <canvas id="faceCanvas" width="320" height="280" aria-label="وجه هولوغرافي محلي"></canvas>
           <div id="facePortrait" hidden>
-            <svg viewBox="0 0 200 220" role="img" aria-label="portrait stylisé local">
+            <svg viewBox="0 0 200 220" role="img" aria-label="صورة محلية مرسومة">
               <defs>
                 <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0" stop-color="#173d52"/><stop offset="1" stop-color="#071924"/>
@@ -124,64 +135,110 @@
           </div>
         </div>
         <div class="face-info">
-          <div class="row"><span>état</span><span id="faceStage" class="dim">no_data_source</span></div>
-          <div class="row"><span>activité</span><span id="faceLevel" class="dim">0%</span></div>
+          <div class="row"><span>الحالة</span><span id="faceStage" class="dim">ما كاينش مصدر بيانات</span></div>
+          <div class="row"><span>النشاط</span><span id="faceLevel" class="dim">0%</span></div>
           <div class="bar"><i id="faceBar" style="width:0%"></i></div>
-          <div class="row"><span>rendu</span><button id="faceMode" type="button">portrait</button></div>
-          <div class="row"><span>caméra PC</span><button id="camToggle" type="button">activer</button></div>
-          <div class="row"><span>reconnaissance</span><button id="enrollBtn" type="button">enrôler</button></div>
-          <div class="row"><span>identité</span><span id="identity" class="dim">non enrôlé</span></div>
-          <div class="row"><span>données locales</span><button id="resetProfileBtn" type="button">supprimer le profil</button></div>
-          <div class="row"><span>autorisation</span><span id="camPermission" class="dim">à demander</span></div>
-          <div class="row"><span>source</span><span class="dim">state/voice_status.json</span></div>
+          <div class="row"><span>العرض</span><button id="faceMode" type="button">بورتريه</button></div>
+          <div class="row"><span>كاميرا الحاسوب</span><button id="camToggle" type="button">فعّل</button></div>
+          <div class="row"><span>التعرف</span><button id="enrollBtn" type="button">سجّل</button></div>
+          <div class="row"><span>الهوية</span><span id="identity" class="dim">غير مسجّل</span></div>
+          <div class="row"><span>بيانات محلية</span><button id="resetProfileBtn" type="button">احذف الملف الشخصي</button></div>
+          <div class="row"><span>الإذن</span><span id="camPermission" class="dim">كيتطلب طلب</span></div>
+          <div class="row"><span>المصدر</span><span class="dim">state/voice_status.json</span></div>
         </div>
       </div>
     </section>
     <section class="card">
-      <h2>ATENÇÃO NECESSÁRIA</h2>
-      <ul id="attention"><li class="dim">a carregar…</li></ul>
+      <h2>انتباه مطلوب</h2>
+      <ul id="attention"><li class="dim">كيتحمل…</li></ul>
     </section>
     <section class="card">
-      <h2>ROBÔS / CEREBRO LOCAL</h2>
-      <div id="robots" class="dim">a carregar…</div>
+      <h2>الروبوتات / الدماغ المحلي</h2>
+      <div id="robots" class="dim">كيتحمل…</div>
     </section>
     <section class="card">
-      <h2>REGISTRO DE EXECUÇÃO</h2>
-      <div id="ledger" class="dim">a carregar…</div>
+      <h2>سجل التنفيذ</h2>
+      <div id="ledger" class="dim">كيتحمل…</div>
     </section>
     <section class="card">
-      <h2>CAPACIDADES · ESTADO REAL</h2>
-      <div id="capabilities" class="dim">a carregar…</div>
+      <h2>الإمكانيات · الحالة الحقيقية</h2>
+      <div id="capabilities" class="dim">كيتحمل…</div>
     </section>
     <section class="card">
-      <h2>AÇÕES · DECISÃO EXPLÍCITA</h2>
-      <div id="approvals" class="dim">a carregar…</div>
+      <h2>الإجراءات · قرار صريح</h2>
+      <div id="approvals" class="dim">كيتحمل…</div>
     </section>
     <section class="card">
-      <h2>ATULYA · MÓDULO IMPORTADO</h2>
+      <h2>أتوليا · وحدة مستوردة</h2>
       <div class="atulya-bar">
-        <div id="atulya" class="dim">a carregar…</div>
-        <button id="atulyaOpen" type="button">abrir Atulya</button>
+        <div id="atulya" class="dim">كيتحمل…</div>
+        <div class="atulya-actions">
+          <button id="atulyaOpen" type="button">فتح أتوليا</button>
+          <a id="atulyaStandalone" class="tag" href="/atulya/" target="_blank" rel="noopener">صفحة مستقلة</a>
+        </div>
       </div>
-      <iframe id="atulyaFrame" title="Atulya local" allow="camera; microphone; geolocation" hidden></iframe>
+      <div id="atulyaDock" hidden>
+        <div id="atulyaHandle">
+          <span>أتوليا · نافذة عائمة</span>
+          <span class="spacer"></span>
+          <button id="atulyaDockStandalone" type="button" title="صفحة كاملة مستقلة">صفحة كاملة</button>
+          <button id="atulyaDockClose" type="button" title="إغلاق النافذة">×</button>
+        </div>
+        <iframe id="atulyaFrame" title="أتوليا محلي" allow="camera; microphone; geolocation" hidden></iframe>
+      </div>
     </section>
     <section class="card">
-      <h2>SENTINEL · ATIVIDADE LOCAL (SSE 1s)</h2>
+      <h2>الحارس · نشاط محلي (SSE 1 ثانية)</h2>
       <div class="sentinel-wrap">
-        <canvas id="sentinelCanvas" width="300" height="230" aria-label="holograma local dos agentes"></canvas>
+        <canvas id="sentinelCanvas" width="300" height="230" aria-label="هولوغرام محلي للوكلاء"></canvas>
         <div>
-          <div id="sentinelAgents" class="dim">a carregar…</div>
-          <canvas id="sentinelWave" width="600" height="54" aria-label="atividade recente"></canvas>
-          <div class="row"><span>fluxo</span><span id="sentinelState" class="dim">no_data_source</span></div>
+          <div id="sentinelAgents" class="dim">كيتحمل…</div>
+          <canvas id="sentinelWave" width="600" height="54" aria-label="نشاط أخير"></canvas>
+          <div class="row"><span>التدفق</span><span id="sentinelState" class="dim">no_data_source</span></div>
         </div>
       </div>
     </section>
   </div>
 </div>
-<div class="stamp" id="stamp">atualização: —</div>
+<div class="stamp" id="stamp">آخر تحديث: —</div>
 <script>
 (function () {
   "use strict";
+  var DARIJA = {
+    "no_data_source": "ما كاينش مصدر بيانات",
+    "idle": "خامل", "speaking": "كيجاوب", "listening": "كيسمع", "thinking": "كيفكر",
+    "hologram": "هولوغرام", "portrait": "بورتريه",
+    "activer": "فعّل", "arrêter": "أوقف", "camera": "الكاميرا",
+    "non enrôlé": "غير مسجّل", "profil local · caméra éteinte": "ملف محلي · الكاميرا مطفية",
+    "reconnu · ESPRIEATHER": "معروف · ESPRIEATHER", "inconnu": "مجهول",
+    "caméra active": "الكاميرا شغالة", "caméra éteinte": "الكاميرا مطفية",
+    "enrôlé · ESPRIEATHER": "مسجّل · ESPRIEATHER", "enrôlement incomplet": "التسجيل غير كامل",
+    "gérée par le navigateur": "كيديرو المتصفح", "accordée": "مسموح",
+    "à autoriser": "كيتطلب إذن", "à vérifier": "كيتحقق",
+    "refusée — autoriser depuis la barre d'adresse": "مرفوضة — خلّي الإذن من شريط العنوان",
+    "sem dados": "ما كاينش بيانات", "sem dado": "ما كاينش بيانات",
+    "tudo verde — nada a fazer": "كل شي أخضر — ما كاينشي باش تدير",
+    "error": "خطأ", "warning": "تحذير",
+    "sentinel": "الحارس", "python": "بايثون", "dashboard": "لوحة القيادة",
+    "cérebro local": "الدماغ المحلي", "indisponível": "غير متاح",
+    "grafo": "الرسم البياني", "nós": "عُقد", "arestas": "روابط",
+    "qualidade": "الجودة", "OPERACIONAL": "شغّال", "VERIFICAR": "كيتحقق",
+    "vault": "الخزنة", "fontes locais": "المصادر المحلية", "todas": "الكل",
+    "sucesso / falha / timeout": "نجاح / فشل / انتهاء المهلة",
+    "sem registro local (no_data_source)": "ما كاينش سجل محلي (ما كاينش مصدر بيانات)",
+    "público": "عام", "SEM INTERNET": "بلا إنترنت", "rede": "الشبكة",
+    "modo": "الوضع", "verificado": "متحقق", "voz": "الصوت",
+    "always_on_voice": "صوت دائم", "ouvi": "سمعت", "respondi": "جاوبت",
+    "état visage": "حالة الوجه",
+    "live_verified": "مُتحقق مباشرة", "implemented_unverified": "مُنفّذ غير متحقق",
+    "not_available": "غير متاح", "needs_user_data": "كيتطلب بياناتك",
+    "arquivos": "ملفات", "action": "إجراء",
+    "proposed": "مقترح", "denied": "مرفوض", "approved_once": "وافق مرة واحدة",
+    "approuver une fois": "وافق مرة واحدة", "refuser": "ارفض",
+    "active": "ناشط", "running": "شغال", "offline": "غير متصل", "absent": "غائب",
+    "API local indisponível": "الـ API المحلية غير متاحة", "atualização: ": "آخر تحديث: "
+  };
+  function tr(v) { var s = String(v == null ? "-" : v); return DARIJA[s] || s; }
   var ATT = "/jarvis/api/jarvis/attention";
   var SYS = "/jarvis/api/system/status";
   var CAP = "/jarvis/api/jarvis/capabilities";
@@ -199,9 +256,8 @@
   function setFace(v) {
     face.stage = (v && v.stage) || "idle";
     face.level = typeof (v && v.level) === "number" ? v.level : 0;
-    var label = face.stage === "speaking" ? "kayjawab" : face.stage === "listening" ? "kaysma3" :
-                face.stage === "thinking" ? "kayfekker" : "khadem";
-    $("faceStage").textContent = label + " · " + face.stage;
+    var label = tr(face.stage || "idle");
+    $("faceStage").textContent = label + " · " + tr(face.stage);
     $("faceStage").className = face.stage === "speaking" ? "ok" : face.stage === "idle" ? "dim" : "warn";
     $("faceLevel").textContent = Math.round(face.level * 100) + "%";
     $("faceBar").style.width = Math.round(face.level * 100) + "%";
@@ -257,7 +313,7 @@
     if (!canvas || !portrait || !button) return;
     canvas.hidden = faceMode !== "hologram";
     portrait.hidden = faceMode !== "portrait";
-    button.textContent = faceMode === "hologram" ? "portrait" : "hologram";
+    button.textContent = tr(faceMode === "hologram" ? "portrait" : "hologram");
   }
 
   /* Reconnaissance 100 % locale : caméra + micro du PC, empreintes gardées dans ce navigateur.
@@ -323,11 +379,11 @@
     if (el) { el.textContent = text; el.className = cls || "dim"; }
   }
   function refreshIdentity() {
-    if (!profile) { setIdentity("non enrôlé", "dim"); return; }
+    if (!profile) { setIdentity(tr("non enrôlé"), "dim"); return; }
     var f = faceSignature();
-    if (!f || !camStream) { setIdentity("profil local · caméra éteinte", "dim"); return; }
+    if (!f || !camStream) { setIdentity(tr("profil local · caméra éteinte"), "dim"); return; }
     var score = sim(f, profile.face || []);
-    setIdentity((score >= 0.82 ? "reconnu · ESPRIEATHER" : "inconnu") + " · " + score.toFixed(2),
+    setIdentity(tr(score >= 0.82 ? "reconnu · ESPRIEATHER" : "inconnu") + " · " + score.toFixed(2),
       score >= 0.82 ? "ok" : "warn");
   }
   function camOn() {
@@ -338,8 +394,8 @@
       camStream = s;
       var v = $("camVideo");
       v.srcObject = s; v.hidden = false;
-      $("camToggle").textContent = "arrêter";
-      setIdentity("caméra active", "dim");
+      $("camToggle").textContent = tr("arrêter");
+      setIdentity(tr("caméra active"), "dim");
       return s;
     });
   }
@@ -347,7 +403,7 @@
     if (camStream) { camStream.getTracks().forEach(function (t) { t.stop(); }); camStream = null; }
     var v = $("camVideo");
     if (v) { v.srcObject = null; v.hidden = true; }
-    $("camToggle").textContent = "activer";
+    $("camToggle").textContent = tr("activer");
   }
   function enroll() {
     var p = camStream ? Promise.resolve() : camOn();
@@ -361,35 +417,35 @@
       var face = faceSignature();
       profile = { face: face || [], voice: voice || [], enrolledAt: new Date().toISOString() };
       try { localStorage.setItem(PROF_KEY, JSON.stringify(profile)); } catch (e) {}
-      setIdentity(face && face.length ? "enrôlé · ESPRIEATHER" : "enrôlement incomplet",
+      setIdentity(tr(face && face.length ? "enrôlé · ESPRIEATHER" : "enrôlement incomplet"),
         face && face.length ? "ok" : "warn");
       refreshIdentity();
     }).catch(function (e) {
-      setIdentity("accès refusé: " + (e && e.name || "camera"), "warn");
+      setIdentity("الوصول مرفوض: " + tr(e && e.name || "camera"), "warn");
     });
   }
   function resetProfile() {
     try { localStorage.removeItem(PROF_KEY); } catch (e) {}
     profile = null;
-    setIdentity("profil local supprimé", "dim");
+    setIdentity(tr("profil local supprimé"), "dim");
   }
   function checkPermission() {
     var el = $("camPermission");
     if (!el) return;
-    if (!navigator.permissions || !navigator.permissions.query) { el.textContent = "gérée par le navigateur"; return; }
+    if (!navigator.permissions || !navigator.permissions.query) { el.textContent = tr("gérée par le navigateur"); return; }
     navigator.permissions.query({ name: "camera" }).then(function (p) {
-      el.textContent = p.state === "granted" ? "accordée" : p.state === "prompt" ? "à autoriser" :
-        "refusée — autoriser depuis la barre d'adresse";
-    }).catch(function () { el.textContent = "gérée par le navigateur"; });
+      el.textContent = p.state === "granted" ? tr("accordée") : p.state === "prompt" ? tr("à autoriser") :
+        tr("refusée — autoriser depuis la barre d'adresse");
+    }).catch(function () { el.textContent = tr("gérée par le navigateur"); });
   }
 
   function renderAttention(data) {
     var box = $("attention");
-    if (!data || !Array.isArray(data.items)) { box.innerHTML = '<li class="warn">sem dados</li>'; return; }
-    if (!data.items.length) { box.innerHTML = '<li class="ok">tudo verde — nada a fazer</li>'; return; }
+    if (!data || !Array.isArray(data.items)) { box.innerHTML = '<li class="warn">ما كاينش بيانات</li>'; return; }
+    if (!data.items.length) { box.innerHTML = '<li class="ok">كل شي أخضر — ما كاينشي باش تدير</li>'; return; }
     box.innerHTML = data.items.map(function (i) {
       var cls = i.level === "error" ? "err" : (i.level === "warning" ? "warn" : "dim");
-      return '<li><span class="' + cls + '">' + esc(i.level) + '</span> · ' + esc(i.reason) +
+      return '<li><span class="' + cls + '">' + esc(tr(i.level)) + '</span> · ' + esc(i.reason) +
              ' <span class="dim">/ ' + esc(i.detail) + '</span></li>';
     }).join("");
   }
@@ -398,23 +454,23 @@
     var r = data.robots || {}, b = data.brains || {}, g = data.graph || {};
     var q = r.quality || {};
     $("robots").innerHTML =
-      '<div class="row"><span>sentinel</span><span class="' + (r.sentinel && r.sentinel.ok ? "ok" : "warn") + '">' +
-        esc(r.sentinel && r.sentinel.summary || "sem dado") + '</span></div>' +
-      '<div class="row"><span>python</span><span class="' + (q.pythonOk ? "ok" : "warn") + '">' + esc(q.pythonRan) + "/87</span></div>" +
-      '<div class="row"><span>dashboard</span><span class="' + (q.dashboardPassed ? "ok" : "warn") + '">' + esc(q.dashboardPassed) + "/9</span></div>" +
-      '<div class="row"><span>cérebro local</span><span class="' + (b.available ? "ok" : "warn") + '">' +
-        esc(b.active || "indisponível") + ' (' + esc(b.count) + ')</span></div>' +
-      '<div class="row"><span>grafo</span><span>' + esc(g.nodes) + ' nós / ' + esc(g.edges) + ' arestas</span></div>';
+      '<div class="row"><span>الحارس</span><span class="' + (r.sentinel && r.sentinel.ok ? "ok" : "warn") + '">' +
+        esc(tr(r.sentinel && r.sentinel.summary || "sem dado")) + '</span></div>' +
+      '<div class="row"><span>بايثون</span><span class="' + (q.pythonOk ? "ok" : "warn") + '">' + esc(q.pythonRan) + "/87</span></div>" +
+      '<div class="row"><span>لوحة القيادة</span><span class="' + (q.dashboardPassed ? "ok" : "warn") + '">' + esc(q.dashboardPassed) + "/9</span></div>" +
+      '<div class="row"><span>الدماغ المحلي</span><span class="' + (b.available ? "ok" : "warn") + '">' +
+        esc(tr(b.active || "indisponível")) + ' (' + esc(b.count) + ')</span></div>' +
+      '<div class="row"><span>الرسم البياني</span><span>' + esc(g.nodes) + ' عُقد / ' + esc(g.edges) + ' روابط</span></div>';
 
     var led = (data.ledger || {});
     var ok = q.pythonOk && q.dashboardPassed && b.available;
     $("services").innerHTML =
-      '<div class="row"><span>qualidade</span><span class="' + (ok ? "ok" : "warn") + '">' +
-        (ok ? "OPERACIONAL" : "VERIFICAR") + '</span><div class="bar"><i style="width:' + (ok ? 100 : 40) + '%"></i></div></div>' +
-      '<div class="row"><span>vault</span><span class="' + (r.vault && r.vault.ok ? "ok" : "warn") + '">' +
+      '<div class="row"><span>الجودة</span><span class="' + (ok ? "ok" : "warn") + '">' +
+        (ok ? tr("OPERACIONAL") : tr("VERIFICAR")) + '</span><div class="bar"><i style="width:' + (ok ? 100 : 40) + '%"></i></div></div>' +
+      '<div class="row"><span>الخزنة</span><span class="' + (r.vault && r.vault.ok ? "ok" : "warn") + '">' +
         esc(r.vault && r.vault.ok ? " OK" : "?") + '</span></div>' +
-      '<div class="row"><span>fontes locais</span><span class="dim">' +
-        esc((r.backlog && r.backlog.missingSources || []).join(",") || "todas") + '</span></div>';
+      '<div class="row"><span>المصادر المحلية</span><span class="dim">' +
+        esc(tr((r.backlog && r.backlog.missingSources || []).join(",") || "todas")) + '</span></div>';
     $("reactor").style.filter = ok ? "none" : "hue-rotate(120deg)";
   }
 
@@ -422,26 +478,26 @@
     var s = led && led.stats || {};
     var recent = led && led.recent || [];
     $("ledger").innerHTML =
-      '<div class="row"><span>sucesso / falha / timeout</span><span class="ok">' +
+      '<div class="row"><span>نجاح / فشل / انتهاء المهلة</span><span class="ok">' +
         esc(s.succeeded) + ' / <span class="err">' + esc(s.failed) + '</span> / <span class="warn">' + esc(s.timed_out) + '</span></span></div>' +
       (led && led.available
         ? recent.slice(0, 5).map(function (r) {
             return '<li class="dim">' + esc(r.status) + ' · ' + esc(r.action) + ' · ' + esc(r.actor) + '</li>';
           }).join("")
-        : '<div class="dim">sem registro local (no_data_source)</div>');
+        : '<div class="dim">ما كاينش سجل محلي (ما كاينش مصدر بيانات)</div>');
   }
 
   function renderInternet(net) {
     var n = net || {};
     var up = n.available === true;
     var cls = up ? "ok" : "warn";
-    var label = up ? "INTERNET · " + esc(n.host || "público") : "SEM INTERNET";
+    var label = up ? "الإنترنت · " + esc(tr(n.host || "público")) : tr("SEM INTERNET");
     var reason = n.reason ? " · " + esc(n.reason) : "";
     $("internet").innerHTML =
-      '<div class="row"><span>rede</span><span class="' + cls + '">' + label + '</span></div>' +
-      '<div class="row"><span>modo</span><span class="dim">' + esc(n.mode || "no_data_source") +
+      '<div class="row"><span>الشبكة</span><span class="' + cls + '">' + label + '</span></div>' +
+      '<div class="row"><span>الوضع</span><span class="dim">' + esc(n.mode || "no_data_source") +
         (n.latencyMs != null ? " · " + esc(n.latencyMs) + "ms" : "") + '</span></div>' +
-      '<div class="row"><span>verificado</span><span class="dim">' +
+      '<div class="row"><span>متحقق</span><span class="dim">' +
         esc(n.checkedAt || "no_data_source") + reason + '</span></div>';
   }
 
@@ -449,11 +505,11 @@
     var x = v || {};
     var up = x.available === true;
     $("voice").innerHTML =
-      '<div class="row"><span>voz</span><span class="' + (up ? "ok" : "warn") + '">' +
-        (up ? esc(x.mode || "always_on_voice") : esc(x.reason || "no_data_source")) + '</span></div>' +
-      '<div class="row"><span>ouvi</span><span class="dim">' + esc(x.lastHeard || "—") + '</span></div>' +
-      '<div class="row"><span>respondi</span><span class="dim">' + esc(x.lastReply || "—") + '</span></div>' +
-      '<div class="row"><span>état visage</span><span class="dim">' + esc(x.stage || "idle") + '</span></div>';
+      '<div class="row"><span>الصوت</span><span class="' + (up ? "ok" : "warn") + '">' +
+        (up ? esc(tr(x.mode || "always_on_voice")) : esc(tr(x.reason || "no_data_source"))) + '</span></div>' +
+      '<div class="row"><span>سمعت</span><span class="dim">' + esc(x.lastHeard || "—") + '</span></div>' +
+      '<div class="row"><span>جاوبت</span><span class="dim">' + esc(x.lastReply || "—") + '</span></div>' +
+      '<div class="row"><span>حالة الوجه</span><span class="dim">' + esc(tr(x.stage || "idle")) + '</span></div>';
   }
 
   function renderCapabilities(data) {
@@ -464,14 +520,14 @@
         return esc(e.source) + "." + esc(e.field) + "=" + esc(e.value);
       }).join(" · ");
       return '<div class="row"><span>' + esc(c.id) + '</span><span class="' + cls(c.status) + '">' +
-        esc(c.status) + '</span></div><div class="dim" title="' + esc(c.next) + '">' + esc(proof) + '</div>';
-    }).join("") : '<div class="dim">no_data_source</div>';
+        esc(tr(c.status)) + '</span></div><div class="dim" title="' + esc(c.next) + '">' + esc(proof) + '</div>';
+    }).join("") : '<div class="dim">ما كاينش مصدر بيانات</div>';
   }
 
   function renderAtulya(data) {
     var box = $("atulya");
     if (!data || data.imported !== true) {
-      box.innerHTML = '<div class="dim">no_data_source</div>';
+      box.innerHTML = '<div class="dim">ما كاينش مصدر بيانات</div>';
       return;
     }
     var cls = function (s) {
@@ -481,9 +537,9 @@
     var list = Array.isArray(data.features) ? data.features : [];
     box.innerHTML = '<div class="row"><span>' + esc(data.source) + '</span><span class="ok">' +
       esc(data.version) + '</span></div><div class="dim">' + esc(data.fileCount) +
-      ' arquivos · ' + esc(data.launcher) + '</div>' + list.slice(0, 7).map(function (f) {
+      ' ملفات · ' + esc(data.launcher) + '</div>' + list.slice(0, 7).map(function (f) {
         return '<div class="row"><span>' + esc(f.id) + '</span><span class="' +
-          cls(f.status) + '">' + esc(f.status) + '</span></div>';
+          cls(f.status) + '">' + esc(tr(f.status)) + '</span></div>';
       }).join("");
   }
 
@@ -493,20 +549,20 @@
     var box = $("approvals");
     var items = data && Array.isArray(data.items) ? data.items : [];
     if (!data || data.available !== true || !items.length) {
-      box.innerHTML = '<div class="dim">' + esc(data && data.reason || "no_data_source") + '</div>';
+      box.innerHTML = '<div class="dim">' + esc(tr(data && data.reason || "no_data_source")) + '</div>';
       return;
     }
     box.innerHTML = items.slice(0, 6).map(function (a) {
       var canDecide = a.status === "proposed";
-      var act = esc(a.action || "action"), tgt = esc(a.target || "—");
+      var act = esc(tr(a.action || "action")), tgt = esc(a.target || "—");
       var row = '<div class="row"><span>' + act + ' · ' + tgt + '</span><span class="' +
         (a.status === "proposed" ? "warn" : a.status === "denied" ? "err" : "ok") + '">' +
-        esc(a.status) + '</span></div>';
+        esc(tr(a.status)) + '</span></div>';
       if (canDecide) {
         row += '<button type="button" class="decide" data-id="' + esc(a.id) +
-          '" data-decision="approved_once">approuver une fois</button>' +
+          '" data-decision="approved_once">وافق مرة واحدة</button>' +
           '<button type="button" class="decide" data-id="' + esc(a.id) +
-          '" data-decision="denied">refuser</button>';
+          '" data-decision="denied">ارفض</button>';
       }
       return row;
     }).join("");
@@ -531,7 +587,7 @@
     if (!box) return;
     var tools = frame && frame.tools || {};
     var keys = Object.keys(tools);
-    if (!keys.length) { box.innerHTML = '<div class="dim">no_data_source</div>'; return; }
+    if (!keys.length) { box.innerHTML = '<div class="dim">ما كاينش مصدر بيانات</div>'; return; }
     var order = ["opencode", "codex", "claude", "atulya"];
     keys.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
     box.innerHTML = keys.map(function (k) {
@@ -540,7 +596,7 @@
       var st = states.indexOf(t.state) >= 0 ? t.state : "offline";
       var pct = Math.round(typeof t.level === "number" ? t.level * 100 : 0);
       return '<div class="agent"><span class="dot ' + st + '"></span><span>' + esc(t.label || k) +
-             '</span><span class="dim">' + esc(st) + '</span><span class="' + (pct ? "ok" : "dim") +
+             '</span><span class="dim">' + esc(tr(st)) + '</span><span class="' + (pct ? "ok" : "dim") +
              '">' + pct + '%</span></div>';
     }).join("");
   }
@@ -548,12 +604,12 @@
   function connectSentinel() {
     var st = $("sentinelState");
     if (typeof EventSource !== "function") {
-      if (st) { st.textContent = "no_data_source"; st.className = "dim"; }
+      if (st) { st.textContent = tr("no_data_source"); st.className = "dim"; }
       return;
     }
     var es;
     try { es = new EventSource(SEN); } catch (e) {
-      if (st) { st.textContent = "no_data_source"; st.className = "dim"; }
+      if (st) { st.textContent = tr("no_data_source"); st.className = "dim"; }
       return;
     }
     es.onmessage = function (ev) {
@@ -571,12 +627,12 @@
       wave.push(Math.min(1, sum / Math.max(1, keys.length)));
       if (wave.length > 80) wave.shift();
       if (st) {
-        st.textContent = "flux local · " + new Date().toLocaleTimeString();
+        st.textContent = "تدفق محلي · " + new Date().toLocaleTimeString();
         st.className = "ok";
       }
     };
     es.onerror = function () {
-      if (st) { st.textContent = "no_data_source"; st.className = "dim"; }
+      if (st) { st.textContent = tr("no_data_source"); st.className = "dim"; }
     };
   }
 
@@ -653,7 +709,7 @@
       var el = $(id); if (!el) return;
       el.className = "sat " + (!known ? "dim" : ok ? "ok" : "warn");
       el.textContent = !known ? "?" : ok ? "+" : "-";
-      el.title = id + ": " + (!known ? "no_data_source" : ok ? "ok" : "à vérifier");
+      el.title = id + ": " + (!known ? tr("no_data_source") : ok ? "ok" : tr("à vérifier"));
     };
     set("sat-brain", b.available === true, b.available != null);
     set("sat-voice", v.running === true, v.available != null);
@@ -665,24 +721,24 @@
   function load() {
     fetch(APP, { cache: "no-store" }).then(function (r) { return r.json(); })
       .then(renderApprovals)
-      .catch(function () { $("approvals").textContent = "no_data_source"; });
+      .catch(function () { $("approvals").textContent = tr("no_data_source"); });
     fetch(CAP, { cache: "no-store" }).then(function (r) { return r.json(); })
       .then(renderCapabilities)
-      .catch(function () { $("capabilities").textContent = "no_data_source"; });
+      .catch(function () { $("capabilities").textContent = tr("no_data_source"); });
     fetch(ATU, { cache: "no-store" }).then(function (r) { return r.json(); })
       .then(renderAtulya)
-      .catch(function () { $("atulya").textContent = "no_data_source"; });
+      .catch(function () { $("atulya").textContent = tr("no_data_source"); });
     fetch(ATT, { cache: "no-store" }).then(function (r) { return r.json(); })
       .then(function (d) { lastAttention = d; renderAttention(d); renderLedger(d.ledger);
         renderInternet(d.internet); renderVoice(d.voice);
         var s = lastSystem; if (s) renderSatellites(s, d);
         var voice = d.voice || {}; if (voice.stage) setFace(voice); refreshIdentity(); })
-      .catch(function () { $("attention").innerHTML = '<li class="warn">API local indisponível</li>'; });
+      .catch(function () { $("attention").innerHTML = '<li class="warn">الـ API المحلية غير متاحة</li>'; });
     fetch(SYS, { cache: "no-store" }).then(function (r) { return r.json(); })
       .then(function (s) { lastSystem = s; renderSystem(s); var d = lastAttention;
         if (d) renderSatellites(s, d); })
-      .catch(function () { $("services").textContent = "API local indisponível"; });
-    $("stamp").textContent = "atualização: " + new Date().toLocaleTimeString();
+      .catch(function () { $("services").textContent = tr("API local indisponível"); });
+    $("stamp").textContent = "آخر تحديث: " + new Date().toLocaleTimeString();
   }
   try { faceMode = localStorage.getItem("sunnavok-face-mode-v1") || "hologram"; } catch (e) { faceMode = "hologram"; }
   applyFaceMode();
@@ -693,22 +749,61 @@
     applyFaceMode();
   });
   $("camToggle").addEventListener("click", function () {
-    if (camStream) { camOff(); setIdentity("caméra éteinte", "dim"); }
-    else camOn().catch(function (e) { setIdentity("accès refusé: " + (e && e.name || "camera"), "warn"); });
+    if (camStream) { camOff(); setIdentity(tr("caméra éteinte"), "dim"); }
+    else camOn().catch(function (e) { setIdentity("الوصول مرفوض: " + tr(e && e.name || "camera"), "warn"); });
   });
   $("enrollBtn").addEventListener("click", enroll);
   $("resetProfileBtn").addEventListener("click", resetProfile);
-  $("atulyaOpen").addEventListener("click", function () {
-    var frame = $("atulyaFrame");
-    if (frame.hidden) {
-      frame.src = "/atulya/";
-      frame.hidden = false;
-      $("atulyaOpen").textContent = "fechar Atulya";
-    } else {
-      frame.hidden = true;
-      frame.removeAttribute("src");
-      $("atulyaOpen").textContent = "abrir Atulya";
-    }
+  var atulyaFrame = $("atulyaFrame");
+  var atulyaDock = $("atulyaDock");
+  var atulyaDrag = null;
+  function restoreDockPosition() {
+    try {
+      var pos = JSON.parse(localStorage.getItem("sunnavok.atulya.dock") || "null");
+      if (pos && Number.isFinite(pos.left) && Number.isFinite(pos.top)) {
+        atulyaDock.style.left = Math.max(0, Math.min(window.innerWidth - atulyaDock.offsetWidth, pos.left)) + "px";
+        atulyaDock.style.top = Math.max(0, Math.min(window.innerHeight - 40, pos.top)) + "px";
+        atulyaDock.style.right = "auto";
+      }
+    } catch (e) {}
+  }
+  function closeAtulyaDock() {
+    atulyaDock.hidden = true;
+    atulyaFrame.hidden = true;
+    atulyaFrame.removeAttribute("src");
+    $("atulyaOpen").textContent = "فتح أتوليا";
+  }
+  function openAtulyaDock() {
+    if (!atulyaDock.hidden) { closeAtulyaDock(); return; }
+    var frame = atulyaFrame;
+    frame.src = "/atulya/";
+    frame.hidden = false;
+    atulyaDock.hidden = false;
+    $("atulyaOpen").textContent = "إغلاق أتوليا";
+    restoreDockPosition();
+  }
+  function openAtulyaStandalone() { window.open("/atulya/", "_blank", "noopener"); }
+  $("atulyaOpen").addEventListener("click", openAtulyaDock);
+  $("atulyaDockClose").addEventListener("click", closeAtulyaDock);
+  $("atulyaDockStandalone").addEventListener("click", openAtulyaStandalone);
+  $("atulyaStandalone").addEventListener("click", function (e) { e.preventDefault(); openAtulyaStandalone(); });
+  $("atulyaHandle").addEventListener("pointerdown", function (e) {
+    if (e.target.closest("button")) return;
+    atulyaDrag = { x: e.clientX, y: e.clientY, left: atulyaDock.offsetLeft, top: atulyaDock.offsetTop };
+    $("atulyaHandle").setPointerCapture(e.pointerId);
+  });
+  $("atulyaHandle").addEventListener("pointermove", function (e) {
+    if (!atulyaDrag) return;
+    var left = Math.max(0, Math.min(window.innerWidth - atulyaDock.offsetWidth, atulyaDrag.left + e.clientX - atulyaDrag.x));
+    var top = Math.max(0, Math.min(window.innerHeight - 40, atulyaDrag.top + e.clientY - atulyaDrag.y));
+    atulyaDock.style.left = left + "px";
+    atulyaDock.style.top = top + "px";
+    atulyaDock.style.right = "auto";
+  });
+  $("atulyaHandle").addEventListener("pointerup", function () {
+    if (!atulyaDrag) return;
+    atulyaDrag = null;
+    localStorage.setItem("sunnavok.atulya.dock", JSON.stringify({ left: atulyaDock.offsetLeft, top: atulyaDock.offsetTop }));
   });
   checkPermission();
   refreshIdentity();

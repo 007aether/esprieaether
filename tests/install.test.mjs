@@ -9,6 +9,8 @@ import { fileURLToPath } from 'node:url';
 import { NAME, BEGIN, END, locations, patchRea, planInstall, applyInstall } from '../install.mjs';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+// Un seul hachage des 766 fichiers du paquet : les tests ne modifient jamais la source d'origine.
+const packageCache = new Map();
 const rule = fs.readFileSync(path.join(root, 'integration/rea-companion.md'), 'utf8');
 const legacy = fs.readFileSync(path.join(root, 'integration/legacy-rea-companion.md'), 'utf8');
 const base = '---\nname: reverse-engineer-anything\ndescription: Test fixture\n---\n\n# REA\n\nKeep this introduction.\n\n## Existing workflow\n\nKeep this workflow.\n';
@@ -25,7 +27,7 @@ function fixture(t, includeRea = true) {
   const skillsDir = path.join(directory, 'skills with spaces ø');
   const reaSkill = path.join(skillsDir, 'reverse-engineer-anything', 'SKILL.md');
   if (includeRea) { fs.mkdirSync(path.dirname(reaSkill), { recursive: true }); fs.writeFileSync(reaSkill, base); }
-  return { directory, skillsDir, reaSkill, options: { client: 'generic', integration: 'on', skillsDir }, context: { packageRoot: root } };
+  return { directory, skillsDir, reaSkill, options: { client: 'generic', integration: 'on', skillsDir }, context: { packageRoot: root, packageCache } };
 }
 const plan = f => planInstall(f.options, f.context);
 

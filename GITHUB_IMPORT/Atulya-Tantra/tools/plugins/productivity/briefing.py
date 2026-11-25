@@ -66,24 +66,24 @@ async def build_briefing(city: str, calendar=None, owner: str = "web", user_id: 
 
     async def weather_section():
         if not city:
-            return "📍 Set your home city to include weather and local news."
+            return "📍 زيد مدينتك باش تضم الطقس والأخبار المحلية."
         try:
             place = await find_place(city)
             if not place:
-                return "🌦️ Weather: location not found."
+                return "🌦️ الطقس: ما لقيناش الموقع."
             return await forecast(place["latitude"], place["longitude"], place["label"], "today")
         except Exception:
-            return "🌦️ Weather temporarily unavailable."
+            return "🌦️ الطقس غير متاح مؤقتاً."
 
     weather, news = await asyncio.gather(weather_section(), briefing_news(city, topics, sources))
-    lines = ["🌅 Your morning briefing · " + datetime.now().astimezone().strftime("%a %d %b"), "", weather]
+    lines = ["🌅 تقرير صباحك · " + datetime.now().astimezone().strftime("%a %d %b"), "", weather]
     buttons = []
-    labels = {"local": "📍 Local", "india": "🇮🇳 India", "world": "🌍 World"}
+    labels = {"local": "📍 محلي", "india": "🇮🇳 الهند", "world": "🌍 العالم"}
     for group in news:
         lines.extend(["", labels.get(group["kind"], group.get("source") or group["kind"])])
         if not group["items"]:
-            lines.append("No recent city-matching headlines found." if group["status"] == "no_recent_matching_headlines"
-                         else "City not set." if group["status"] == "city_not_set" else "Feed unavailable.")
+            lines.append("ما لقيناش أخبار حديثة مرتبطة بالمدينة." if group["status"] == "no_recent_matching_headlines"
+                         else "المدينة غير مضبوطة." if group["status"] == "city_not_set" else "المصدر غير متاح.")
         for item in group["items"]:
             lines.append(f"• {item['title']} ({item['source']})")
             buttons.append({"label": f"{labels.get(group['kind'], group.get('source') or group['kind'])} · {item['title'][:45]}", "url": item["url"]})
@@ -92,13 +92,13 @@ async def build_briefing(city: str, calendar=None, owner: str = "web", user_id: 
             events = await asyncio.to_thread(calendar.list, owner, 50, user_id)
             today = datetime.now().astimezone().date()
             upcoming = [e for e in events if datetime.fromisoformat(e["starts_at"]).astimezone().date() == today]
-            lines.extend(["", "📅 Today"])
+            lines.extend(["", "📅 اليوم"])
             lines.extend(f"• {datetime.fromisoformat(e['starts_at']).astimezone().strftime('%H:%M')} · {e['title']}"
                          for e in upcoming[:3])
             if not upcoming:
-                lines.append("No saved meetings today.")
+                lines.append("ما كاينشي اجتماعات محفوظة اليوم.")
         except Exception:
-            lines.extend(["", "📅 Calendar unavailable."])
+            lines.extend(["", "📅 التقويم غير متاح."])
     return {"text": "\n".join(lines)[:3800], "links": buttons, "news": news}
 
 
@@ -110,9 +110,9 @@ def apply_briefing_schedule(data_dir, settings: dict) -> str:
     enabled = bool(settings.get("enabled", True) and settings.get("channel") != "off")
     try:
         store.edit("Morning briefing", when=settings["time"], enabled=enabled)
-        return "Updated the Morning briefing routine."
+        return "حدّثت روتين التقرير الصباحي."
     except ValueError:
         if not enabled:
-            return "Morning briefing is off. No routine was added."
+            return "التقرير الصباحي موقوف. ما تزاد أي روتين."
         store.add("Morning briefing", settings["time"], "weekdays", "briefing", "")
-        return "Added a weekday Morning briefing routine."
+        return "زيدت روتين التقرير الصباحي لأيام العمل."

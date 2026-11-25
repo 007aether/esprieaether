@@ -175,13 +175,23 @@ function proxyAtulya(req, res, stripPrefix = "") {
     // Le HUD ouvre /atulya/ : servir /index.html plutôt que / qui redirigerait vers le HUD.
     upstreamPath = !rest || rest === "/" ? "/index.html" : rest;
   }
+  const method = String(req.method || "GET").toUpperCase();
+  const requestHeaders = { ...req.headers, host: `${ATULYA_HOST}:${ATULYA_PORT}` };
+  if (["POST", "PUT", "PATCH", "DELETE"].includes(method)) {
+    // Le HUD et l'iframe partagent l'origine :3860 ; Atulya n'accepte les
+    // mutations que depuis sa propre origine loopback. Réécriture locale only.
+    const authority = ATULYA_HOST.includes(":") ? `[${ATULYA_HOST}]` : ATULYA_HOST;
+    requestHeaders.origin = `http://${authority}:${ATULYA_PORT}`;
+    requestHeaders["sec-fetch-site"] = "same-origin";
+    delete requestHeaders.referer;
+  }
   const upstream = http.request(
     {
       host: ATULYA_HOST,
       port: ATULYA_PORT,
       method: req.method,
       path: upstreamPath,
-      headers: { ...req.headers, host: `${ATULYA_HOST}:${ATULYA_PORT}` },
+      headers: requestHeaders,
       timeout: stream ? 0 : 15000,
     },
     (atuRes) => {
@@ -244,6 +254,21 @@ function proxyAtulya(req, res, stripPrefix = "") {
   req.pipe(upstream);
 }
 
+// Cache paresseux des fichiers statiques : une seule lecture tant que taille/mtime/ctime
+// ne changent pas. Les en-têtes restent no-store, donc aucun cache côté navigateur.
+const STATIC_CACHE = new Map();
+const NOT_FOUND = path.join(ROOT, "404.html");
+
+function cachedRead(file, info = fs.statSync(file)) {
+  if (!info.isFile()) return null;
+  const cached = STATIC_CACHE.get(file);
+  if (cached && cached.size === info.size && cached.mtimeMs === info.mtimeMs
+      && cached.ctimeMs === info.ctimeMs) return cached.body;
+  const body = fs.readFileSync(file);
+  STATIC_CACHE.set(file, { size: info.size, mtimeMs: info.mtimeMs, ctimeMs: info.ctimeMs, body });
+  return body;
+}
+
 const server = http.createServer((req, res) => {
   const url = req.url || "/";
   if (url === "/sentinel/events" || url === "/sentinel/health") {
@@ -274,8 +299,12 @@ const server = http.createServer((req, res) => {
   }
   let file = target;
   try {
-    if (fs.statSync(file).isDirectory()) file = path.join(file, "index.html");
-    const body = fs.readFileSync(file);
+    const info = fs.statSync(file);
+    if (info.isDirectory()) {
+      file = path.join(file, "index.html");
+    }
+    const body = cachedRead(file);
+    if (!body) throw new Error("not a regular file");
     res.writeHead(200, {
       "Content-Type": MIME[path.extname(file).toLowerCase()] || "application/octet-stream",
       "Cache-Control": "no-store",
@@ -285,10 +314,10 @@ const server = http.createServer((req, res) => {
     });
     res.end(body);
   } catch {
-    const notFound = path.join(ROOT, "404.html");
-    if (fs.existsSync(notFound)) {
+    if (fs.existsSync(NOT_FOUND)) {
+      const body = cachedRead(NOT_FOUND);
       res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
-      res.end(fs.readFileSync(notFound));
+      res.end(body || "not found");
     } else {
       res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
       res.end("not found");

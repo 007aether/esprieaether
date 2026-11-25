@@ -16,6 +16,8 @@ const baseline = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json')));
 const current = baseline.version, future = `${current.split('.')[0]}.${Number(current.split('.')[1]) + 1}.0`;
 const now = 1800000000000;
 const baseRea = '---\nname: reverse-engineer-anything\ndescription: Fixture\n---\n\n# REA\n\n## Workflow\nKeep this.\n';
+// Un seul hachage du paquet source, partagé par toutes les fixtures du fichier.
+const packageCache = new Map();
 
 // ZIP generator is independent of the production parser; Python builder is checked separately.
 function crc32(data) {
@@ -23,10 +25,21 @@ function crc32(data) {
   for (const b of data) { crc ^= b; for (let i = 0; i < 8; i++) crc = (crc >>> 1) ^ ((crc & 1) ? 0xedb88320 : 0); }
   return (crc ^ 0xffffffff) >>> 0;
 }
+const packedCache = new Map();
+function packedEntry(value) {
+  const key = hash(value);
+  let entry = packedCache.get(key);
+  if (!entry) {
+    const data = Buffer.from(value);
+    entry = { data, packed: deflateRawSync(data), crc: crc32(data) };
+    packedCache.set(key, entry);
+  }
+  return entry;
+}
 function zipEntries(entries) {
   const locals = [], central = []; let offset = 0;
   for (const [name, value, mode = 0o100644] of entries) {
-    const filename = Buffer.from(name), data = Buffer.from(value), packed = deflateRawSync(data), crc = crc32(data);
+    const filename = Buffer.from(name), { data, packed, crc } = packedEntry(value);
     const local = Buffer.alloc(30); local.writeUInt32LE(0x04034b50); local.writeUInt16LE(20, 4); local.writeUInt16LE(8, 8);
     local.writeUInt32LE(crc, 14); local.writeUInt32LE(packed.length, 18); local.writeUInt32LE(data.length, 22); local.writeUInt16LE(filename.length, 26);
     const dir = Buffer.alloc(46); dir.writeUInt32LE(0x02014b50); dir.writeUInt16LE(0x314, 4); dir.writeUInt16LE(20, 6); dir.writeUInt16LE(8, 10);
@@ -36,8 +49,9 @@ function zipEntries(entries) {
   const directory = Buffer.concat(central), end = Buffer.alloc(22); end.writeUInt32LE(0x06054b50); end.writeUInt16LE(entries.length, 8); end.writeUInt16LE(entries.length, 10); end.writeUInt32LE(directory.length, 12); end.writeUInt32LE(offset, 16);
   return Buffer.concat([...locals, directory, end]);
 }
+const baseFiles = new Map(Object.keys(baseline.files).map(p => [p, fs.readFileSync(path.join(root, p))]));
 function packageZip(version = future, packageOverrides = {}) {
-  const files = new Map(Object.keys(baseline.files).map(p => [p, fs.readFileSync(path.join(root, p))]));
+  const files = new Map(baseFiles);
   files.set('package.json', Buffer.from(JSON.stringify({ ...JSON.parse(files.get('package.json')), version, ...packageOverrides })));
   files.set(`skills/${NAME}/SKILL.md`, Buffer.concat([files.get(`skills/${NAME}/SKILL.md`), Buffer.from('\nUpdated fixture.\n')]));
   // The updater must not execute the downloaded root installer.
@@ -57,7 +71,7 @@ function fixture(t, integration = 'off', client = 'generic') {
   const skillsDir = path.join(dir, 'skills with spaces ø'), reaSkill = path.join(skillsDir, 'reverse-engineer-anything', 'SKILL.md');
   fs.mkdirSync(path.dirname(reaSkill), { recursive: true }); fs.writeFileSync(reaSkill, baseRea);
   const options = { skillsDir, client, integration, reaSkill };
-  const installed = applyInstall(planInstall(options, { packageRoot: root }));
+  const installed = applyInstall(planInstall(options, { packageRoot: root, packageCache }));
   const context = { skillRoot: installed.companion, now };
   return { dir, options, context, installed, reaSkill, location: stateLocation(installed.companion) };
 }
@@ -652,7 +666,7 @@ test('recovering a missing rule does not grant update approval or network author
   fs.writeFileSync(f.reaSkill, baseRea);
   assert.equal((await check(f, n.context)).status, 'integration-needs-attention');
   const saved = fs.readFileSync(f.location.file);
-  applyInstall(planInstall(f.options, { packageRoot: root }));
+  applyInstall(planInstall(f.options, { packageRoot: root, packageCache }));
   for (const approvalId of [undefined, 'wrong']) await assert.rejects(runUpdate('apply', { approvalId, allowFreeNetwork: true }, n.context), /approval must match/);
   for (const allowFreeNetwork of [undefined, false, 'true', 1]) await assert.rejects(runUpdate('apply', { approvalId: offer.approvalId, allowFreeNetwork }, n.context), /No-charge/);
   assert.deepEqual(fs.readFileSync(f.location.file), saved); assert.equal(n.calls.length, 1);
@@ -667,8 +681,8 @@ test('verified recovery after an REA newline change needs explicit baseline re-e
   const before = fs.readFileSync(f.location.file), saved = JSON.parse(before);
   fs.writeFileSync(f.reaSkill, baseRea);
   assert.equal((await check(f, n.context)).integrationHealth, 'missing-block');
-  applyInstall(planInstall(f.options, { packageRoot: root }));
-  assert.equal(applyInstall(planInstall({ ...f.options, check: true }, { packageRoot: root })).status, 'verified');
+  applyInstall(planInstall(f.options, { packageRoot: root, packageCache }));
+  assert.equal(applyInstall(planInstall({ ...f.options, check: true }, { packageRoot: root, packageCache })).status, 'verified');
   assert.equal((await check(f, n.context)).integrationHealth, 'changed-block');
   assert.deepEqual(fs.readFileSync(f.location.file), before);
   await assert.rejects(runUpdate('apply', { approvalId: offer.approvalId, allowFreeNetwork: true }, n.context), /Managed REA rule changed/);
@@ -699,12 +713,12 @@ test('scoped repair after simulated REA refresh clears warning without resetting
   const before = fs.readFileSync(f.location.file), refreshed = baseRea + '\nNew upstream content to retain.\n';
   fs.writeFileSync(f.reaSkill, refreshed);
   assert.equal((await runUpdate('check', {}, n.context)).integrationHealth, 'missing-block');
-  const plan = planInstall(f.options, { packageRoot: root });
+  const plan = planInstall(f.options, { packageRoot: root, packageCache });
   assert.equal(plan.skillChanged, false); assert.equal(plan.ruleChanged, true);
   const repaired = applyInstall(plan);
   assert.equal(fs.readFileSync(path.join(repaired.backupDirectory, 'rea-before.md'), 'utf8'), refreshed);
   assert.ok(fs.readFileSync(f.reaSkill, 'utf8').endsWith('New upstream content to retain.\n'));
-  assert.equal(applyInstall(planInstall({ ...f.options, check: true }, { packageRoot: root })).status, 'verified');
+  assert.equal(applyInstall(planInstall({ ...f.options, check: true }, { packageRoot: root, packageCache })).status, 'verified');
   assert.equal((await check(f, n.context)).status, 'not-due');
   assert.deepEqual(fs.readFileSync(f.location.file), before); assert.equal(n.calls.length, 1);
 });

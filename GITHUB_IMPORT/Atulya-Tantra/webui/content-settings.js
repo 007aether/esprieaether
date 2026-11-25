@@ -2,33 +2,46 @@
 // this page only shows the current state and sends the user's own choices.
 (() => {
   const $ = (selector) => document.querySelector(selector);
+  const WORD_DARIJA = Object.freeze({
+    "admin": "مدير", "user": "مستعمل", "child": "طفل", "adult": "بالغ",
+    "alert sent": "تم إرسال تنبيه", "blocked": "ممنوع", "allowed": "مسموح",
+    "sign-in": "تسجيل الدخول", "approval": "موافقة", "device": "جهاز",
+    "granted": "ممنوح", "denied": "مرفوض", "failed": "فشل",
+  });
+  function darija(value) {
+    let out = String(value ?? "");
+    for (const [key, translation] of Object.entries(WORD_DARIJA)) {
+      out = out.replace(new RegExp(`\\b${key}\\b`, "g"), translation);
+    }
+    return out;
+  }
   const dialog = $("#content-dialog");
   const state = $("#content-state");
   const dobForm = $("#birth-date-form");
   const dobInput = $("#birth-date");
   const adultRow = $("#adult-content-row");
   const adultBox = $("#adult-content");
-  const LEVELS = { child: "Child-safe", adult: "Adult", adult_open: "Adult, adult topics allowed" };
+  const LEVELS = { child: "آمن للأطفال", adult: "بالغ", adult_open: "بالغ، مواضيع البالغين مسموحة" };
 
   async function json(path, options = {}) {
     const response = await fetch(path, { headers: { "Content-Type": "application/json", Accept: "application/json" }, ...options });
     const body = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(typeof body.detail === "string" ? body.detail : "Request failed.");
+    if (!response.ok) throw new Error(typeof body.detail === "string" ? body.detail : "الطلب فشل.");
     return body;
   }
 
   async function refresh() {
     try {
       const settings = await json("/api/profile/content");
-      state.textContent = `Current setting: ${LEVELS[settings.level] || settings.level}`
-        + (settings.age_source === "admin" ? " (set by the administrator)" : "")
-        + (settings.has_birth_date ? "" : ". Add your date of birth to change it.");
+      state.textContent = `الإعداد الحالي: ${LEVELS[settings.level] || settings.level}`
+        + (settings.age_source === "admin" ? " (حدّده المدير)" : "")
+        + (settings.has_birth_date ? "" : ". زيد تاريخ ولادتك باش تبدّلو.");
       dobForm.hidden = settings.has_birth_date || settings.age_source === "role";
       dobInput.max = new Date().toISOString().slice(0, 10);
       adultRow.hidden = settings.age_group !== "adult";
       adultBox.checked = Boolean(settings.adult_content);
     } catch (error) {
-      state.textContent = error.message;
+      state.textContent = darija(error.message);
     }
   }
 
@@ -41,11 +54,11 @@
 
   dobForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
-    if (!window.confirm(`Save ${dobInput.value} as your date of birth? You can't change it yourself afterwards.`)) return;
+    if (!window.confirm(`احفظ ${dobInput.value} كتاريخ ولادتك؟ ما كتقدرش تبدّلو بنفسك من بعد.`)) return;
     try {
       await json("/api/profile/birth-date", { method: "PUT", body: JSON.stringify({ birth_date: dobInput.value }) });
     } catch (error) {
-      state.textContent = error.message;
+      state.textContent = darija(error.message);
       return;
     }
     await refresh();
@@ -55,7 +68,7 @@
     try {
       await json("/api/profile/adult-content", { method: "PUT", body: JSON.stringify({ enabled: adultBox.checked }) });
     } catch (error) {
-      state.textContent = error.message;
+      state.textContent = darija(error.message);
     }
     await refresh();
   });
@@ -69,11 +82,11 @@
       const body = await json("/api/content-events");
       if (!body.events.length) return;
       const title = document.createElement("strong");
-      title.textContent = "BLOCKED REQUESTS (child accounts)";
+      title.textContent = "الطلبات الممنوعة (حسابات الأطفال)";
       events.append(title);
       for (const item of body.events.slice(0, 30)) {
         const row = document.createElement("small");
-        row.textContent = `${new Date(item.at * 1000).toLocaleString()} · ${item.user_id} · ${item.category}${item.alerted ? " · alert sent" : ""}`;
+        row.textContent = `${new Date(item.at * 1000).toLocaleString()} · ${darija(item.user_id)} · ${darija(item.category)}${item.alerted ? " · تم إرسال تنبيه" : ""}`;
         events.append(row);
       }
     } catch { /* not an administrator */ }
@@ -86,12 +99,12 @@
     try {
       const body = await json("/api/security-log?limit=40");
       const title = document.createElement("strong");
-      title.textContent = `SECURITY LOG${body.intact ? "" : " · WARNING: the log was altered"}`;
+      title.textContent = `سجل الأمان${body.intact ? "" : " · تحذير: السجل تبدّل"}`;
       securityLog.append(title);
       for (const item of body.events) {
         const row = document.createElement("small");
-        row.textContent = `${new Date(item.at * 1000).toLocaleString()} · ${item.kind} · ${item.actor} · ${item.action}`
-          + `${item.target ? ` · ${item.target}` : ""} · ${item.outcome}${item.ip ? ` · ${item.ip}` : ""}`;
+        row.textContent = `${new Date(item.at * 1000).toLocaleString()} · ${darija(item.kind)} · ${darija(item.actor)} · ${darija(item.action)}`
+          + `${item.target ? ` · ${darija(item.target)}` : ""} · ${darija(item.outcome)}${item.ip ? ` · ${item.ip}` : ""}`;
         securityLog.append(row);
       }
     } catch { /* not an administrator */ }

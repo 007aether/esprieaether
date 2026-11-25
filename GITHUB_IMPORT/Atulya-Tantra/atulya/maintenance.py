@@ -8,12 +8,28 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
+
+
+def node_executable() -> str | None:
+    """Résolveur local : variable explicite, PATH, puis runtime Node embarqué."""
+    configured = os.getenv("ATULYA_NODE_BIN", "").strip()
+    if configured and Path(configured).is_file():
+        return configured
+    found = shutil.which("node")
+    if found:
+        return found
+    bundled = Path(__file__).resolve().parents[2] / ".tools" / "node-v26.13.1" / (
+        "node.exe" if os.name == "nt" else "node"
+    )
+    return str(bundled) if bundled.is_file() else None
+
 
 def owner_messages_auto(data_dir) -> bool:
     """True only when the owner switched outside actions off the extra confirm."""
@@ -140,14 +156,16 @@ class Maintenance:
             if name.endswith(".js"):
                 staged = self.directory / f"{proposal_id}.js"
                 staged.write_text(content, encoding="utf-8")
+                node = node_executable()
+                if node is None:
+                    staged.unlink(missing_ok=True)
+                    raise ValueError("Node is unavailable; cannot verify this proposal")
                 try:
-                    result = subprocess.run(["node", "--check", str(staged)], capture_output=True,
+                    result = subprocess.run([node, "--check", str(staged)], capture_output=True,
                                             text=True, timeout=15)
                     if result.returncode:
                         raise ValueError("JavaScript syntax check failed; proposal was not saved")
                     check = "JavaScript syntax passed; browser review required"
-                except FileNotFoundError as exc:
-                    raise ValueError("Node is unavailable; cannot verify this proposal") from exc
                 finally:
                     staged.unlink(missing_ok=True)
             proposal = {"id": proposal_id, "path": name, "reason": reason[:1000],

@@ -15,11 +15,14 @@ const hash = data => crypto.createHash('sha256').update(data).digest('hex');
 const exists = p => { try { fs.lstatSync(p); return true; } catch (e) { if (e.code === 'ENOENT') return false; throw e; } };
 const normalize = text => text.replace(/\r\n/g, '\n');
 
-function noLinks(p) {
+function noLinks(p, seen) {
   for (let current = path.resolve(p); ; current = path.dirname(current)) {
+    // Un ancêtre déjà vérifié lors de ce même paquet est forcément sans lien.
+    if (seen && seen.has(current)) break;
     if (exists(current) && fs.lstatSync(current).isSymbolicLink()) {
       throw new Error(`Refusing a symbolic link or junction: ${current}. Use its explicit real path.`);
     }
+    if (seen) seen.add(current);
     if (path.dirname(current) === current) break;
   }
 }
@@ -56,8 +59,10 @@ function skillName(text) {
   return match[1] || match[2] || match[3];
 }
 
-function packageFiles(root) {
-  noLinks(root);
+function packageFiles(root, cache) {
+  if (cache && cache.has(root)) return cache.get(root);
+  const seen = new Set();
+  noLinks(root, seen);
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
   if (manifest.name !== NAME || typeof manifest.version !== 'string' || !manifest.files || Array.isArray(manifest.files)) {
     throw new Error('Invalid package manifest.');
@@ -68,7 +73,7 @@ function packageFiles(root) {
       throw new Error(`Unsafe package path: ${relative}`);
     }
     const absolute = path.join(root, ...relative.split('/'));
-    noLinks(absolute);
+    noLinks(absolute, seen);
     const data = fs.readFileSync(absolute);
     if (!/^[a-f0-9]{64}$/.test(digest) || hash(data) !== digest) throw new Error(`Package checksum mismatch: ${relative}`);
     files.set(relative, data);
@@ -77,7 +82,9 @@ function packageFiles(root) {
     if (!files.has(required)) throw new Error(`Missing package file: ${required}`);
   }
   if (skillName(utf8(files.get(`skills/${NAME}/SKILL.md`))) !== NAME) throw new Error('Companion skill identity mismatch.');
-  return { manifest, files };
+  const result = { manifest, files };
+  if (cache) cache.set(root, result);
+  return result;
 }
 
 export function locations(options, context = {}) {
@@ -169,7 +176,7 @@ const sameTree = (a, b) => a.size === b.size && [...a].every(([p, data]) => b.ha
 export function planInstall(options, context = {}) {
   options = { ...options, client: normalizeClient(options.client) };
   const root = path.resolve(context.packageRoot || ROOT);
-  const { manifest, files } = packageFiles(root);
+  const { manifest, files } = packageFiles(root, context.packageCache);
   const selected = locations(options, context);
   if (containsPath(selected.destination, root) || containsPath(root, selected.destination)) throw new Error('Installation destination must not overlap the package source directory.');
   const original = selected.reaSkill ? fs.readFileSync(selected.reaSkill) : null;

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr">
+<html lang="ar-MA">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ESPRIEATHER — SYSTEM SERVICES</title>
+<title>ESPRIEATHER — خدمات النظام</title>
 <style>
   :root { --bg:#04090f; --panel:#0a1622; --cyan:#48e6ff; --amber:#ffb347; --red:#ff5c6c; --green:#6cf0a8; }
   * { box-sizing:border-box }
@@ -46,39 +46,61 @@
 <body>
 <header>
   <h1>ESPRIEATHER</h1>
-  <span class="tag">SYSTEM SERVICES · 127.0.0.1 · LOCAL · WITHOUT CLOUD</span>
+  <span class="tag">خدمات النظام · 127.0.0.1 · محلي · بلا سحابة</span>
   <span class="tag" id="clock"></span>
-  <a class="tag" href="jarvis.html">VOICE</a>
+  <a class="tag" href="jarvis.html">الصوت</a>
 </header>
 <div class="wrap">
   <section class="card">
-    <h2>RÉACTEUR</h2>
-    <div id="reactor" title="Visualisation — no execution control">
+    <h2>المفاعل</h2>
+    <div id="reactor" title="عرض بصري — بلا تحكم في التنفيذ">
       <div class="core"></div>
-      <div id="satellites" aria-label="état réel des services">
-        <span id="sat-brain" class="sat" title="cerveau local">B</span>
-        <span id="sat-voice" class="sat" title="voix locale">V</span>
-        <span id="sat-services" class="sat" title="services locaux">S</span>
-        <span id="sat-network" class="sat" title="réseau">N</span>
+      <div id="satellites" aria-label="الحالة الحقيقية للخدمات">
+        <span id="sat-brain" class="sat" title="دماغ محلي">B</span>
+        <span id="sat-voice" class="sat" title="صوت محلي">V</span>
+        <span id="sat-services" class="sat" title="خدمات محلية">S</span>
+        <span id="sat-network" class="sat" title="الشبكة">N</span>
       </div>
     </div>
-    <div id="status" class="dim">état: chargement…</div>
-    <div class="row"><span>horodatage</span><span class="dim" id="checked">—</span></div>
+    <div id="status" class="dim">الحالة: كيتحمل…</div>
+    <div class="row"><span>الطابع الزمني</span><span class="dim" id="checked">—</span></div>
   </section>
   <div class="tiles">
-    <section class="card"><h2>SERVICES</h2><div id="services" class="dim">chargement…</div></section>
-    <section class="card"><h2>ROBOTS / CERVEAU</h2><div id="robots" class="dim">chargement…</div></section>
-    <section class="card"><h2>ATTENTION</h2><ul id="attention"><li class="dim">chargement…</li></ul></section>
-    <section class="card"><h2>REGISTRE</h2><div id="ledger" class="dim">chargement…</div></section>
-    <section class="card"><h2>RÉSEAU</h2><div id="internet" class="dim">chargement…</div></section>
-    <section class="card"><h2>VOIX</h2><div id="voice" class="dim">chargement…</div></section>
-    <section class="card"><h2>MESURE CERVEAU LOCAL</h2><div id="brainMetrics" class="dim">no_data_source</div></section>
+    <section class="card"><h2>الخدمات</h2><div id="services" class="dim">كيتحمل…</div></section>
+    <section class="card"><h2>الروبوتات / الدماغ</h2><div id="robots" class="dim">كيتحمل…</div></section>
+    <section class="card"><h2>انتباه</h2><ul id="attention"><li class="dim">كيتحمل…</li></ul></section>
+    <section class="card"><h2>السجل</h2><div id="ledger" class="dim">كيتحمل…</div></section>
+    <section class="card"><h2>الشبكة</h2><div id="internet" class="dim">كيتحمل…</div></section>
+    <section class="card"><h2>الصوت</h2><div id="voice" class="dim">كيتحمل…</div></section>
+    <section class="card"><h2>قياس الدماغ المحلي</h2><div id="brainMetrics" class="dim">ما كاينش مصدر بيانات</div></section>
   </div>
 </div>
-<div class="stamp" id="stamp">mise à jour: —</div>
+<div class="stamp" id="stamp">آخر تحديث: —</div>
 <script>
 (function () {
   "use strict";
+  var DARIJA = {
+    "no_data_source": "ما كاينش مصدر بيانات",
+    "error": "خطأ", "warning": "تحذير", "idle": "خامل",
+    "rien à signaler": "ما كاينشي باش نبلغ",
+    "global": "عام", "NOMINAL": "طبيعي", "À VÉRIFIER": "كيتحقق", "VÉRIFIER": "كيتحقق",
+    "succès / échec / timeout": "نجاح / فشل / انتهاء المهلة",
+    "en cours": "كيدير", "registre": "السجل", "réseau": "الشبكة",
+    "hôte": "المضيف", "vérifié": "متحقق", "mode": "الوضع", "état": "الحالة",
+    "daemon": "الخادم", "actif": "ناشط", "arrêté": "موقف", "activité": "النشاط",
+    "qualité": "الجودة", "OPERATIONNEL": "شغّال", "python": "بايثون",
+    "dashboard": "لوحة القيادة", "vault": "الخزنة",
+    "sources manquantes": "المصادر الناقصة", "aucune": "لا شيء",
+    "cerveau actif": "الدماغ الناشط", "modèles": "النماذج",
+    "graphe": "الرسم البياني", "nœuds": "عُقد", "liens": "روابط",
+    "sentinel": "الحارس", "mesure": "القياس", "raison": "السبب",
+    "aucune réponse locale mesurée": "ما كاين أي جواب محلي مقيس",
+    "modèle": "النموذج", "vitesse": "السرعة", "réponse": "الجواب",
+    "complétion": "الإكمال", "mesuré": "مقيس",
+    "à vérifier": "كيتحقق", "API locale indisponible": "الـ API المحلية غير متاحة",
+    "mise à jour: ": "آخر تحديث: "
+  };
+  function tr(v) { var s = String(v == null ? "—" : v); return DARIJA[s] || s; }
   var ATT = "/jarvis/api/jarvis/attention";
   var SYS = "/jarvis/api/system/status";
   var lastSystem = null;
@@ -92,42 +114,42 @@
     var items = d && Array.isArray(d.items) ? d.items : [];
     $("attention").innerHTML = items.length ? items.slice(0, 8).map(function (i) {
       var cls = i.level === "error" ? "err" : i.level === "warning" ? "warn" : "dim";
-      return '<li><span class="' + cls + '">' + esc(i.level) + '</span> · ' + esc(i.reason) +
+      return '<li><span class="' + cls + '">' + esc(tr(i.level)) + '</span> · ' + esc(i.reason) +
              ' <span class="dim">/ ' + esc(i.detail) + '</span></li>';
-    }).join("") : '<li class="ok">rien à signaler</li>';
+    }).join("") : '<li class="ok">ما كاينشي باش نبلغ</li>';
     $("checked").textContent = esc(d && d.checkedAt || "no_data_source");
     var good = d && d.needsAttention === false;
-    $("status").innerHTML = row("global", good ? "NOMINAL" : "À VÉRIFIER", good ? "ok" : "warn");
+    $("status").innerHTML = row(tr("global"), good ? tr("NOMINAL") : tr("À VÉRIFIER"), good ? "ok" : "warn");
     $("reactor").style.filter = good ? "none" : "hue-rotate(120deg)";
     var led = d && d.ledger || {}, s = led.stats || {};
     $("ledger").innerHTML = led.available
-      ? row("succès / échec / timeout", esc(s.succeeded) + " / " + esc(s.failed) + " / " + esc(s.timed_out), "ok") +
-        row("en cours", esc(s.running), s.running ? "warn" : "ok") +
+      ? row(tr("succès / échec / timeout"), esc(s.succeeded) + " / " + esc(s.failed) + " / " + esc(s.timed_out), "ok") +
+        row(tr("en cours"), esc(s.running), s.running ? "warn" : "ok") +
         (led.recent || []).slice(0, 4).map(function (r) {
           return row(r.status, r.action + " / " + r.actor, r.status === "succeeded" ? "dim" : "warn");
         }).join("")
-      : row("registre", "no_data_source", "warn");
+      : row(tr("registre"), tr("no_data_source"), "warn");
     var n = d && d.internet || {};
-    $("internet").innerHTML = row("réseau", n.available ? esc(n.mode || "internet") : "no_data_source",
-      n.available ? "ok" : "warn") + row("hôte", n.host || "—") + row("vérifié", n.checkedAt || "—");
+    $("internet").innerHTML = row(tr("réseau"), n.available ? esc(tr(n.mode || "internet")) : tr("no_data_source"),
+      n.available ? "ok" : "warn") + row(tr("hôte"), n.host || "—") + row(tr("vérifié"), n.checkedAt || "—");
     var v = d && d.voice || {};
     var pct = Math.round((Number(v.level) || 0) * 100);
-    $("voice").innerHTML = row("mode", v.available ? esc(v.mode) : "no_data_source", v.available ? "ok" : "warn") +
-      row("état", esc(v.stage || "idle")) + row("daemon", v.running ? "actif" : "arrêté", v.running ? "ok" : "warn") +
-      row("activité", pct + "%") + '<div class="bar"><i style="width:' + pct + '%"></i></div>';
+    $("voice").innerHTML = row(tr("mode"), v.available ? esc(v.mode) : tr("no_data_source"), v.available ? "ok" : "warn") +
+      row(tr("état"), esc(tr(v.stage || "idle"))) + row(tr("daemon"), v.running ? tr("actif") : tr("arrêté"), v.running ? "ok" : "warn") +
+      row(tr("activité"), pct + "%") + '<div class="bar"><i style="width:' + pct + '%"></i></div>';
   }
 
   function renderSystem(s) {
     var r = s && s.robots || {}, q = r.quality || {}, b = s && s.brains || {}, g = s && s.graph || {};
     var ok = Boolean(q.pythonOk && q.dashboardPassed && b.available);
-    $("services").innerHTML = row("qualité", ok ? "OPERATIONNEL" : "VÉRIFIER", ok ? "ok" : "warn") +
-      row("python", esc(q.pythonRan || "—")) + row("dashboard", esc(q.dashboardPassed)) +
+    $("services").innerHTML = row(tr("qualité"), ok ? tr("OPERATIONNEL") : tr("VÉRIFIER"), ok ? "ok" : "warn") +
+      row(tr("python"), esc(q.pythonRan || "—")) + row(tr("dashboard"), esc(q.dashboardPassed)) +
       '<div class="bar"><i style="width:' + (ok ? 100 : 40) + '%"></i></div>' +
-      row("vault", r.vault && r.vault.ok ? "OK" : "no_data_source", r.vault && r.vault.ok ? "ok" : "warn") +
-      row("sources manquantes", (r.backlog && r.backlog.missingSources || []).join(",") || "aucune");
-    $("robots").innerHTML = row("cerveau actif", b.active || "no_data_source", b.available ? "ok" : "warn") +
-      row("modèles", esc(b.count || 0)) + row("graphe", esc(g.nodes || 0) + " nœuds / " + esc(g.edges || 0) + " liens") +
-      row("sentinel", r.sentinel && r.sentinel.ok ? "OK" : "no_data_source", r.sentinel && r.sentinel.ok ? "ok" : "warn");
+      row(tr("vault"), r.vault && r.vault.ok ? "OK" : tr("no_data_source"), r.vault && r.vault.ok ? "ok" : "warn") +
+      row(tr("sources manquantes"), tr((r.backlog && r.backlog.missingSources || []).join(",") || "aucune"));
+    $("robots").innerHTML = row(tr("cerveau actif"), tr(b.active || "no_data_source"), b.available ? "ok" : "warn") +
+      row(tr("modèles"), esc(b.count || 0)) + row(tr("graphe"), esc(g.nodes || 0) + " عُقد / " + esc(g.edges || 0) + " روابط") +
+      row(tr("sentinel"), r.sentinel && r.sentinel.ok ? "OK" : tr("no_data_source"), r.sentinel && r.sentinel.ok ? "ok" : "warn");
   }
 
   function renderSatellites(s, d) {
@@ -137,7 +159,7 @@
       var el = $(id); if (!el) return;
       el.className = "sat " + (!known ? "dim" : ok ? "ok" : "warn");
       el.textContent = !known ? "?" : ok ? "+" : "-";
-      el.title = id + ": " + (!known ? "no_data_source" : ok ? "ok" : "à vérifier");
+      el.title = id + ": " + (!known ? tr("no_data_source") : ok ? "ok" : tr("à vérifier"));
     };
     set("sat-brain", b.available === true, b.available != null);
     set("sat-voice", v.running === true, v.available != null);
@@ -149,16 +171,16 @@
   function renderBrainMetrics(m) {
     var x = m || {};
     if (x.available !== true || !isFinite(Number(x.tokensPerSecond))) {
-      $("brainMetrics").innerHTML = row("mesure", "no_data_source", "warn") +
-        row("raison", esc(x.reason || "aucune réponse locale mesurée"));
+      $("brainMetrics").innerHTML = row(tr("mesure"), tr("no_data_source"), "warn") +
+        row(tr("raison"), esc(tr(x.reason || "aucune réponse locale mesurée")));
       return;
     }
     $("brainMetrics").innerHTML =
-      row("modèle", esc(x.model || "—"), "ok") +
-      row("vitesse", esc(Math.round(Number(x.tokensPerSecond) * 100) / 100) + " /s", "ok") +
-      row("réponse", esc(x.elapsedMs) + " ms") +
-      row("complétion", esc(x.completionTokens)) +
-      row("mesuré", esc(x.checkedAt || "—"));
+      row(tr("modèle"), esc(x.model || "—"), "ok") +
+      row(tr("vitesse"), esc(Math.round(Number(x.tokensPerSecond) * 100) / 100) + " /s", "ok") +
+      row(tr("réponse"), esc(x.elapsedMs) + " ms") +
+      row(tr("complétion"), esc(x.completionTokens)) +
+      row(tr("mesuré"), esc(x.checkedAt || "—"));
   }
 
   function load() {
@@ -166,12 +188,12 @@
     fetch(ATT, { cache: "no-store" }).then(function (r) { return r.json(); })
       .then(function (d) { lastAttention = d; renderAttention(d);
         var s = lastSystem; if (s) renderSatellites(s, d); })
-      .catch(function () { $("attention").innerHTML = '<li class="warn">API locale indisponible</li>'; });
+      .catch(function () { $("attention").innerHTML = '<li class="warn">الـ API المحلية غير متاحة</li>'; });
     fetch(SYS, { cache: "no-store" }).then(function (r) { return r.json(); })
       .then(function (s) { lastSystem = s; renderSystem(s); renderBrainMetrics(s.brainMetrics);
         var d = lastAttention; if (d) renderSatellites(s, d); })
-      .catch(function () { $("services").textContent = "API locale indisponible"; });
-    $("stamp").textContent = "mise à jour: " + new Date().toLocaleTimeString();
+      .catch(function () { $("services").textContent = tr("API locale indisponible"); });
+    $("stamp").textContent = "آخر تحديث: " + new Date().toLocaleTimeString();
   }
   $("clock").textContent = new Date().toLocaleString();
   load();

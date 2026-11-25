@@ -13,7 +13,7 @@ def test_briefing_settings_round_trip_and_schedule(tmp_path):
     assert saved["city"] == "Pune"
     note = apply_briefing_schedule(tmp_path, saved)
     item = RoutineStore(tmp_path).list_items()[0]
-    assert item["when"] == "07:15" and item["enabled"] is True and "Added" in note
+    assert item["when"] == "07:15" and item["enabled"] is True and "زيدت" in note
     off = store.set_briefing("admin", channel="off")
     apply_briefing_schedule(tmp_path, off)
     assert RoutineStore(tmp_path).list_items()[0]["enabled"] is False

@@ -58,8 +58,10 @@ def apply_language_policy(payload: dict) -> dict:
         out["messages"] = [{"role": "system", "content": DARIJA_DIRECTIVE}]
         return out
     messages = [dict(m) for m in messages if isinstance(m, dict)]
-    joined = " ".join(str(m.get("content") or "") for m in messages).lower()
-    if "darija" in joined or "دارجة" in joined or "arabe marocain" in joined:
+    # Seule la consigne française testée sur le modèle est fiable : un prompt
+    # qui contient seulement « دارجة » ne doit pas faire sauter l'injection.
+    joined = " ".join(str(m.get("content") or "") for m in messages)
+    if DARIJA_DIRECTIVE in joined:
         out["messages"] = messages
         return out
     if messages and messages[0].get("role") == "system":

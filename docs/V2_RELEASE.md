@@ -1,4 +1,4 @@
-# ESPRIEATHER v2.1.5 — version locale complète
+# ESPRIEATHER v2.1.6 — version locale complète
 
 ## Nouveautés issues du reverse-engineering des 20 dépôts
 
@@ -69,8 +69,51 @@
   (music, TTS, device companion, skills) peuvent être appliquées sans click,
   avec rollback si les tests échouent ; WebUI, brain, auth et setup exigent
   toujours une approbation. Aucun SMS, appel ou action d'appareil envoyé.
-- **Packaging v2.1.5** : `package.json` et `manifest.json` en `2.1.5`, ajout au
+- **Packaging v2.1.6** : `package.json` et `manifest.json` en `2.1.6`, ajout au
   manifest des modules locaux, des outils Atulya et des rapports d'analyse.
+- **Répondeur unique (J97/J98)** : le superviseur 24/7 garde Atulya et le HUD en
+  vie, et désactive le daemon vocal JARVIS hérité par défaut (`voice=atulya-only`).
+  `ESPRIE_LEGACY_VOICE=1` le réactive explicitement ; la persona Atulya ne dit plus
+  « in the style of Jarvis ». Aucun SMS, appel ou action d'appareil déclenché.
+- **Darija renforcée (J99)** : la bulle d'accueil est `صباح الخير.` /
+  `مساء الخير.` / `مرحبا بعودتك.` ; la voix du navigateur détecte l'écriture arabe
+  et choisit `ar-MA` au lieu de `en-IN`. Le routeur `:31416` n'injecte plus la
+  consigne darija qu'une fois, même si le prompt contient déjà « دارجة ».
+- **Prompts plus courts** : persona 1704 → 1020 caractères, profil 885 → 493
+  (total 2591 → 1515), une seule règle d'honnêteté et une seule règle de longueur.
+- **URL centralisées** : `atulya/urls.py` valide aussi bien MCP que
+  `ATULYA_LANDING_URL` et `public_origin` ; ports invalides et `?`/`#` vides refusés.
+- **Tests plus rapides** : hachage partagé du paquet source, `noLinks` à visite
+  unique et entries ZIP compressées mises en cache. `install.test.mjs` et
+  `update.test.mjs` passent de 331 s à 159 s sans retirer aucun test.
+- **Cache du pont HUD** : les fichiers statiques sont lus une seule fois tant que
+  taille, mtime et ctime ne changent pas ; `no-store`, 403/404 et en-têtes de
+  sécurité inchangés.
+- **Node local et MCP stdio** : `maintenance.py` résout Node depuis
+  `ATULYA_NODE_BIN`, puis le `PATH`, puis `.tools\node-v26.13.1` embarqué. Le test
+  MCP transmet explicitement `PYTHONPATH` au sous-processus, car le SDK MCP ne
+  l'hérite pas par défaut.
+- **Origine du pont (J100)** : les méthodes `POST`/`PUT`/`PATCH`/`DELETE` relayées
+  vers Atulya portent désormais `Origin: http://127.0.0.1:8501` et
+  `Sec-Fetch-Site: same-origin`. Sans cela l'iframe servie sur `:3860` recevait
+  un `403` sur `/api/chat`.
+- **Interface entièrement en darija (J101/J104)** : les libellés du HUD Atulya,
+  les phases, les messages d'erreur de flux, les panneaux (réglages, appareils,
+  outils, musique, rappels, connexions) et le briefing du matin sont traduits
+  en arabe marocain. Les pages de supervision `jarvis.html` et `system.html`
+  sont aussi entièrement en darija, avec un dictionnaire `tr()` pour les statuts
+  dynamiques (`no_data_source`, `live_verified`, `proposed`, etc.). Les
+  identifiants DOM et les noms de variables JS ne changent pas ; les valeurs
+  dynamiques passent par `darija()` ou `tr()` avant affichage.
+- **Page autonome + fenêtre flottante (J102)** : `/atulya/` sert la page complète
+  en local, et le HUD propose Atulya dans une fenêtre déplaçable, sans `onclick`,
+  sans `POST` littéral et sans CDN.
+- **Preuve d'éveil vocal (J103)** : `atulya-wake --evidence` écrit
+  `wake_selfcheck.json` en local avec `ok`, `hits`, `peak`, `device` et `ts`.
+  `api/server.mjs` n'accorde `live_verified` que sur un dossier frais (TTL 7 jours)
+  avec `ok=true` et `hits>0` ; sinon la capacité reste `implemented_unverified`.
+- **Traduction des documents de test** : les assertions de `briefing_settings`
+  suivent le nouveau libellé darija du briefing matinal.
 
 ## Vérifications réelles (25/11/2026)
 
@@ -80,15 +123,41 @@
 | MCP local | `initialize` + `tools/list` + `tools/call` via stdio, `calculate("6*7") = 42` | `live_verified` |
 | Mémoire vault | 212 notes indexées, requête « vision mmproj barge-in Atulya » | `live_verified` |
 | Cerveau / voix / parole | `:8501/api/health` + `:31416` | `live_verified` |
+| Accueil darija | `GET :3860/atulya/assistant.js` → 200 ; `مساء الخير.` présent, `Good evening.` absent | `live_verified` |
+| Répondeur unique | superviseur 24/7 en `voice=atulya-only`, daemon JARVIS hérité arrêté | `live_verified` |
 | Modèle chat | 1 396 198 496 octets, SHA-256 `57a10858…a1d8` | intact |
 | Barge-in | aucun événement `barge_in` réel enregistré | `implemented_unverified` |
-| Éveil vocal | 17 modèles présents, pas d'essai micro réel | `implemented_unverified` |
+| Éveil vocal | essai micro réel 12 s sur `hey_jarvis_v0.1.onnx` : `hits=0`, `peak=0.053711` (seuil 0.18), entrée `1` = `Microphone (Realtek(R) Audio), MME` ; mesure séparée `peak=0.011353`, `RMS=0.000767` → `wake_selfcheck.json` `ok=false` | `implemented_unverified` |
+| Interface darija | HUD, panneaux, musique, réglages et briefing sans libellés anglais visibles | `live_verified` |
+| Page autonome / fenêtre flottante | `/atulya/` local + fenêtre déplaçable, sans CDN ni `onclick` | `live_verified` |
 | Approbation HUD | aucun `PUT` loopback réel dans `action_audit.jsonl` | `implemented_unverified` |
 | Sources documentaires | aucun dossier `legal`/`fiscal`/`travail` fourni | `needs_user_data` |
+| MCP externe | aucun endpoint HTTPS externe fiable ni octroi outil-par-outil fourni | `needs_user_data` |
 
 ## Tests
 
-- Node : **1030 pass / 0 fail** (`tests\*.test.mjs`).
-- Python unittest : **246 tests OK**.
-- Atulya pytest : **529 passed, 3 skipped**, 16 subtests passés (dont handshake MCP stdio et boucle locale HUD).
-- Aucun commit, push, upload, token cloud ou clé externe.
+- Node : **1052 pass / 0 fail** sur 68 fichiers `tests\*.test.mjs`,
+  dont le test d'origine du pont `J100` et le nouveau contrôle darija des
+  pages `jarvis.html` / `system.html`.
+- Node ciblé (pont, darija, install/update) : **155/155**.
+- Python unittest : **246 tests OK** sur le routeur local `:31416`.
+- Atulya pytest : **553 passed, 3 skipped**, 16 subtests passés (0 fail).
+- Aucun upload, token cloud ou clé externe.
+
+## شنو ناقص (MADA YANKOSONA)
+
+> كل اللي كيتطلب بيانات ديالك أو جهاز حقيقي، ما تدارش بلا طلب صريح منك.
+
+| العنصر | الحالة | شنو كيتطلب باش يتحقق |
+|---|---|---|
+| `external_mcp` | `needs_user_data` | عنوان HTTPS خارجي حقيقي + منح كل أداة علىحدة بعد `Test & discover tools`. |
+| `documentary-sources` | `needs_user_data` | مسارات حقيقية لملفات `legal` / `fiscal` / `travail` باش يتحسب SHA-256 ديالها. |
+| APK / جهاز `iip` | `needs_user_data` | APK أو ربط جهاز أندرويد؛ الجهاز دابا `offline`، `seen=0`، وطلب `ping` مصفوف بلا إيصال. ما تدار أي فعل جهاز. |
+| `barge-in` | `implemented_unverified` | حدث `barge_in` حقيقي أثناء الكلام؛ الميكرو ما عطاش إشارة فوق العتبة 0.18. |
+| `atulya-wake` | `implemented_unverified` | كلمة إيقاظ حقيقية تطلع `hits>0` فـ `wake_selfcheck.json`؛ التجربة الأخيرة 12 ثانية عطات `hits=0`. |
+| موافقة HUD | `implemented_unverified` | `PUT` loopback حقيقي على `/api/jarvis/approvals/<id>` مسجل فـ `action_audit.jsonl`. |
+| `/api/chat` غير-streaming | نقطة معروفة | `timeout=15000` كيرجّع `503` تحت الحمل؛ الـ UI كيستعمل streaming. الرفع لـ `120000` ما وافق عليهش، فما تبدّلش. |
+| محادثة كاملة بمصادقة | غير متحقق | كيتطلب passkey ديال المالك؛ تحققنا غير بـ `401 {"detail":"Sign in with your Atulya passkey to continue."}` بدل `403`. هاد الـ `401` هو بوابة المصادقة العادية على `/api/*` (ما كاينش خطأ)، والـ `/api/health` كيرجّع `200`. |
+| حزمة pytest قديمة (root) | خارج release gate | 45 passed / 7 failed بسبب مسارات وصلاحيات قديمة (`C:/Users/ESPRIEAETHER/...`)؛ ماشي من هاد الإصدار. |
+
+اللي تقدر تعطيني دابا: عنوان MCP خارجي، مسارات المستندات، APK/جهاز مربوط، ولا passkey للتحقق من المحادثة. غير ما تعطينيش كلمات مرور ولا أسرار فالملفات.

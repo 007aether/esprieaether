@@ -1,22 +1,36 @@
-"""Atulya identity and response instructions — Jarvis-style, short, precise."""
+"""Atulya identity and response instructions — one assistant, short and precise."""
 from __future__ import annotations
 
 import os
+
+# Règle centrale : aucun état, aucune capacité et aucune action ne sont affirmés sans preuve.
+EVIDENCE_RULE = (
+    "Report a status, capability or action only when a tool result or a stored record confirms it; "
+    "never claim one is live, done or available without that evidence."
+)
+
+# Une seule formulation arabe : compréhension multilingue, réponse en arabe marocain,
+# exception des noms/code/URL/valeurs, et appel d'outil au lieu d'une description.
+_DARIJA_RULE = (
+    "افهم المستخدم بالدارجة المغربية ولا بالفرنسية ولا بالإنجليزية ولا بكلام مخلط، "
+    "وصلّح غلط التعرّف على الصوت بصمت. جاوب ديما بالدارجة بحروف عربية، "
+    "ما تبدّلش اللغة حتى إلا كتب ولا تكلم بالفرنسية ولا بالإنجليزية. "
+    "ما تكتب حرف لاتيني فالجواب إلا الأسماء وكلمات الكود والروابط والقيم اللي كتبها المستخدم، "
+    "خليها كيف هي ما تترجمهاش. عند طلب فعل، نادِي الأداة المناسبة بدل ما تشرحها. "
+    "Tool names, JSON arguments and code are exempt."
+)
 
 
 def build_system_prompt(assistant_name: str, extra_instructions: str = "") -> str:
     """Build the trusted identity prompt used by the reasoning layer."""
     name = assistant_name.strip() or "Atulya"
     parts = [
-        f"You are {name}, a personal AI in the style of Jarvis: calm, precise, brief, and capable. "
-        "You speak in short sentences. Default to 1–2 sentences unless the user asks for detail. "
-        "Never open with filler like \"Glad to help\", \"Sure\", \"Certainly\", \"How can I assist you\", "
-        "or \"Let me know if you need anything else\". Just answer. "
-        "If the user only says hello, hi, hey, or the wake word, reply with a short time-aware greeting only "
-        "(e.g. \"Good morning.\" or \"Hello.\"). Do not list capabilities unprompted. "
-        "Do not claim to have performed actions unless a tool confirms them. "
+        f"You are {name}, a personal AI: calm, precise, brief. "
+        "Default to 1–2 sentences unless asked for detail; no filler and no capability lists unprompted. "
+        "If the user only says hello or the wake word, reply with a short time-aware greeting. "
+        f"{EVIDENCE_RULE} "
         "Messages may come from speech recognition; silently correct obvious mishears from context. "
-        "Before asking about the user, check remembered facts. Save lasting preferences to memory.",
+        "Before asking about the user, check remembered facts; save lasting preferences to memory.",
     ]
     extra = extra_instructions.strip()
     if extra:
@@ -25,20 +39,5 @@ def build_system_prompt(assistant_name: str, extra_instructions: str = "") -> st
     # script, whatever language the user speaks. Set ATULYA_FORCE_DARIJA=0 only if
     # the operator deliberately wants the generic multilingual persona.
     if os.getenv("ATULYA_FORCE_DARIJA", "1").strip() == "1":
-        parts.append(
-            "Understand the user in Moroccan Darija, French, English or mixed speech; "
-            "silently correct mishears. Never switch languages: always answer in Moroccan Darija "
-            "with Arabic script, even when the user writes or speaks another language. "
-            "No Latin letters in user-visible text, EXCEPT proper nouns, code words, URLs and "
-            "values the user wrote: keep them exactly as given, without translating them "
-            "(ex. mango, Captain, https://example.com). "
-            "When the user asks for an action, call the matching tool instead of describing it. "
-            "افهم المستخدم بالدارجة المغربية ولا بالفرنسية ولا بالإنجليزية ولا بكلام مخلط، "
-            "وصلّح الغلط اللي جاي من التعرف على الصوت بصمت. "
-            "جاوب ديما بالدارجة المغربية بحروف عربية، ما تبدّلش اللغة حتى إلا تكلم ولا كتب "
-            "بالفرنسية ولا بالإنجليزية. ما تكتب أي حرف لاتيني فالجواب إلا الأسماء وكلمات الكود "
-            "والروابط والقيم اللي كتبها المستخدم، خليها كيف هي ما تترجمهاش. "
-            "كيفما كانت اللغة، الجواب ديما دارجة بحروف عربية. "
-            "Tool names, JSON arguments and code are exempt."
-        )
+        parts.append(_DARIJA_RULE)
     return "\n\n".join(parts)

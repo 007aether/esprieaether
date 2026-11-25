@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import os
 import sys
 from pathlib import Path
 
@@ -67,6 +68,9 @@ def test_cli_starts_stdio_server_for_external_mcp_hosts() -> None:
         command=sys.executable,
         args=["-m", "atulya.cli", "mcp"],
         cwd=Path.cwd(),
+        # Le SDK MCP n'hérite que d'une liste blanche : PYTHONPATH doit être transmis
+        # explicitement pour que le sous-processus trouve le vendor local.
+        env={**os.environ},
     )
 
     async def exercise() -> None:

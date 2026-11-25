@@ -21,6 +21,9 @@ if ($interval -lt 10) { $interval = 60 }
 # Un seul timeout client pour Jarvis et Atulya : aucun appel n'attend 180s ou 900s.
 $localTimeout = [int]($env:ESPRIE_LOCAL_TIMEOUT -as [int])
 if ($localTimeout -lt 30) { $localTimeout = 120 }
+# Une seule voix par défaut : Atulya répond. L'ancien daemon vocal JARVIS reste
+# disponible uniquement si le propriétaire le demande explicitement (=1).
+$legacyVoice = $env:ESPRIE_LEGACY_VOICE -eq '1'
 
 $createdNew = $false
 $mutex = [System.Threading.Mutex]::new($false, 'SUNNAVOK_KEEPALIVE_7X24', [ref]$createdNew)
@@ -150,14 +153,23 @@ function Invoke-Pass {
         $fixed++
     }
 
-    $voice = Get-CimInstance Win32_Process -Filter "Name='python.exe'" -ErrorAction SilentlyContinue |
-        Where-Object { $_.CommandLine -like '*voice_daemon.py*' }
-    if (-not $voice) {
-        Start-Managed @{ Name='voice-daemon'; Port=0; Exe=$py; Args=@('voice_daemon.py'); Cwd=$base }
-        $fixed++
+    if ($legacyVoice) {
+        $voice = Get-CimInstance Win32_Process -Filter "Name='python.exe'" -ErrorAction SilentlyContinue |
+            Where-Object { $_.CommandLine -like '*voice_daemon.py*' }
+        if (-not $voice) {
+            Start-Managed @{ Name='voice-daemon'; Port=0; Exe=$py; Args=@('voice_daemon.py'); Cwd=$base }
+            $fixed++
+        }
+        $voiceState = $(if ($voice) { 'ok' } else { 'started' })
+    } else {
+        # Un daemon hérité encore vivant produirait un second answer audible : on l'arrête.
+        $legacy = Get-CimInstance Win32_Process -Filter "Name='python.exe'" -ErrorAction SilentlyContinue |
+            Where-Object { $_.CommandLine -like "*$base*voice_daemon.py*" }
+        foreach ($proc in $legacy) { Stop-Process -Id $proc.ProcessId -Force -ErrorAction SilentlyContinue }
+        $voiceState = 'atulya-only'
     }
 
-    Log ("PASS up={0} down={1} restarted={2} robots={3} voice={4}" -f $up, $down, $fixed, $(if ($daemon) { 'ok' } else { 'started' }), $(if ($voice) { 'ok' } else { 'started' }))
+    Log ("PASS up={0} down={1} restarted={2} robots={3} voice={4}" -f $up, $down, $fixed, $(if ($daemon) { 'ok' } else { 'started' }), $voiceState)
 }
 
 Log 'SUPERVISOR start (24/7, loopback only, no secrets)'

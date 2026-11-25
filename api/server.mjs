@@ -24,6 +24,7 @@ const DEFAULT_MCP_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'mcp_selfcheck.
 const DEFAULT_VAULT_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'vault_memory_selfcheck.json');
 const DEFAULT_EGRESS_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'egress_selfcheck.json');
 const DEFAULT_BARGE_REVIEW = join(ROOT, 'esprieaether', 'state', 'barge_in_review.json');
+const DEFAULT_WAKE_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'wake_selfcheck.json');
 const VOICE_STAGES = new Set(['idle', 'listening', 'thinking', 'speaking']);
 const REPORT_FILES = {
   quality: 'quality_guard_report.json',
@@ -704,7 +705,8 @@ async function probeAtulyaHealth() {
 export async function buildAtulya(vendorDir = DEFAULT_ATULYA_DIR, probe = probeAtulyaHealth,
                                   visionEvidencePath = DEFAULT_VISION_EVIDENCE,
                                   mcpEvidencePath = DEFAULT_MCP_EVIDENCE,
-                                  vaultEvidencePath = DEFAULT_VAULT_EVIDENCE) {
+                                  vaultEvidencePath = DEFAULT_VAULT_EVIDENCE,
+                                   wakeEvidencePath = DEFAULT_WAKE_EVIDENCE) {
   const add = (list, id, status, source, field, value, next, verifiedAt = null) => {
     const stamp = verifiedStamp(status, verifiedAt);
     list.push({
@@ -796,6 +798,7 @@ export async function buildAtulya(vendorDir = DEFAULT_ATULYA_DIR, probe = probeA
   // Le simple fichier mmproj ne prouve pas une inférence : seule une réponse
   // locale récente du serveur llama.cpp autorise live_verified (TTL 7 jours).
   const visionProof = await readJsonFile(visionEvidencePath);
+  const wakeProof = await readJsonFile(wakeEvidencePath);
   const visionLive = Boolean(visionProof && visionProof.ok === true
     && typeof visionProof.answer === 'string' && visionProof.answer.trim()
     && isFreshLine(visionProof));
@@ -816,10 +819,17 @@ export async function buildAtulya(vendorDir = DEFAULT_ATULYA_DIR, probe = probeA
   } catch {
     wake = false;
   }
-  add(features, 'atulya-wake', wake ? 'implemented_unverified' : 'not_available',
-    live ? healthSource : 'GITHUB_IMPORT/Atulya-Tantra/models/voice/wake',
-    'wake_word_models', wake ? 'present' : 'absent',
-    'Faire un essai réel de mot réveil puis vérifier l’événement dans voice_inbox.jsonl');
+  const wakeLive = Boolean(wakeProof && wakeProof.ok === true
+    && Number(wakeProof.hits) > 0 && isFreshLine(wakeProof));
+  add(features, 'atulya-wake',
+    wakeLive ? 'live_verified' : (wake ? 'implemented_unverified' : 'not_available'),
+    wakeLive ? 'wake_selfcheck.json'
+      : (live ? healthSource : 'GITHUB_IMPORT/Atulya-Tantra/models/voice/wake'),
+    wakeLive ? 'hits' : 'wake_word_models',
+    wakeLive ? String(wakeProof.hits) : (wake ? 'present' : 'absent'),
+    wakeLive ? 'Preuve locale: détection récente par le micro, sans envoi réseau'
+      : 'Faire un essai réel de mot réveil puis vérifier wake_selfcheck.json',
+    wakeLive ? lineStamp(wakeProof) : null);
   const mcpProof = await readJsonFile(mcpEvidencePath);
   const mcpLive = Boolean(mcpProof && mcpProof.ok === true
     && Array.isArray(mcpProof.tools) && mcpProof.tools.length

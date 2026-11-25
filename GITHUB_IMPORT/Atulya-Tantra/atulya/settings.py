@@ -7,6 +7,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from atulya.urls import LANDING_POLICY, PUBLIC_ORIGIN_POLICY
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
@@ -56,22 +58,7 @@ class Settings:
         """The start page may only point at a loopback JARVIS HUD."""
         if not self.landing_url:
             return
-        parsed = urlsplit(self.landing_url)
-        try:
-            parsed_port = parsed.port
-        except ValueError as exc:
-            raise ValueError("ATULYA_LANDING_URL contains an invalid port") from exc
-        if (
-            parsed.scheme not in {"http", "https"}
-            or parsed.hostname not in {"127.0.0.1", "::1"}
-            or parsed_port is None
-            or not 1 <= parsed_port <= 65535
-            or parsed.username is not None
-            or parsed.password is not None
-            or parsed.query
-            or parsed.fragment
-        ):
-            raise ValueError("ATULYA_LANDING_URL must be a loopback HTTP(S) URL without credentials or query parameters")
+        LANDING_POLICY.parse(self.landing_url)
 
     @classmethod
     def from_environment(cls) -> "Settings":
@@ -89,23 +76,7 @@ class Settings:
             raise ValueError("ATULYA_HOST must stay loopback; put a TLS reverse proxy in front of Atulya")
         public_origin = os.environ.get("ATULYA_PUBLIC_ORIGIN", "").strip().rstrip("/")
         if public_origin:
-            parsed = urlsplit(public_origin)
-            try:
-                parsed_port = parsed.port
-            except ValueError as exc:
-                raise ValueError("ATULYA_PUBLIC_ORIGIN contains an invalid port") from exc
-            if (
-                parsed.scheme not in {"http", "https"}
-                or not parsed.hostname
-                or (parsed_port is not None and not 1 <= parsed_port <= 65535)
-                or parsed.username is not None
-                or parsed.password is not None
-                or parsed.path not in {"", "/"}
-                or parsed.query
-                or parsed.fragment
-                or (parsed.scheme != "https" and parsed.hostname not in {"localhost", "127.0.0.1", "::1"})
-            ):
-                raise ValueError("ATULYA_PUBLIC_ORIGIN must be an HTTPS origin (HTTP is allowed only for localhost)")
+            parsed = PUBLIC_ORIGIN_POLICY.parse(public_origin)
             public_origin = f"{parsed.scheme}://{parsed.netloc}"
         trusted_proxy_ips = os.environ.get("ATULYA_TRUSTED_PROXY_IPS", "127.0.0.1,::1").strip()
         if not trusted_proxy_ips or trusted_proxy_ips == "*":

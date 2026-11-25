@@ -1,7 +1,7 @@
 """Run the hands-free voice loop on this PC.
 
   python -m tools.voice_loop --pair "Desk PC"        # once: create this PC's voice token (stored in data/)
-  python -m tools.voice_loop --wake-test             # print WAKE scores; nothing is sent anywhere
+  python -m tools.voice_loop --wake-test --evidence PATH   # local WAKE scores + dated proof
   python -m tools.voice_loop [--url http://127.0.0.1:8000] [--language en]
 
 Per-turn timings go to logs/voice_loop.log.
@@ -10,10 +10,12 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import json
 import logging
 import os
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -47,20 +49,25 @@ def pair(name: str, owner: str) -> int:
     return 0
 
 
-def wake_test(seconds: float, device) -> int:
+def wake_test(seconds: float, device, evidence_path: str | None = None) -> int:
     from .audio_io import Mic
     from .wake import WakeDetector
 
     detector = WakeDetector()
-    print(f"Listening for the wake word with {Path(detector.model_path).name} for {seconds:.0f} s...")
+    model = Path(detector.model_path).name
+    print(f"Listening for the wake word with {model} for {seconds:.0f} s...")
     mic = Mic(device).start()
     hits = 0
+    peak = 0.0
     deadline = time.monotonic() + seconds
     try:
         while time.monotonic() < deadline:
             frame = mic.read()
             if frame is None:
                 continue
+            if frame.size:
+                frame_peak = max(abs(int(frame.max())), abs(int(frame.min()))) / 32768.0
+                peak = max(peak, frame_peak)
             score = detector.feed(frame)
             if score is not None:
                 hits += 1
@@ -69,6 +76,20 @@ def wake_test(seconds: float, device) -> int:
     finally:
         mic.stop()
     print(f"{hits} wake detections")
+    if evidence_path:
+        path = Path(evidence_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        proof = {
+            "ok": hits > 0,
+            "hits": hits,
+            "peak": round(peak, 6),
+            "model": model,
+            "seconds": seconds,
+            "device": str(device) if device is not None else None,
+            "ts": datetime.now(timezone.utc).isoformat(),
+        }
+        path.write_text(json.dumps(proof, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"Evidence written to {path}")
     return 0
 
 
@@ -113,6 +134,7 @@ def main() -> int:
     parser.add_argument("--device", default=None, help="Input device index or name (python -m sounddevice lists them)")
     parser.add_argument("--output-device", default=None)
     parser.add_argument("--wake-test", action="store_true")
+    parser.add_argument("--evidence", metavar="PATH", help="write a dated local wake-proof JSON")
     parser.add_argument("--seconds", type=float, default=60)
     parser.add_argument("--pair", metavar="NAME")
     parser.add_argument("--owner", default="admin")
@@ -125,7 +147,7 @@ def main() -> int:
     if args.pair:
         return pair(args.pair, args.owner)
     if args.wake_test:
-        return wake_test(args.seconds, args.device)
+        return wake_test(args.seconds, args.device, args.evidence)
     try:
         return asyncio.run(run_loop(args))
     except KeyboardInterrupt:
