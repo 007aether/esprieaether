@@ -70,8 +70,8 @@
   avec rollback si les tests échouent ; WebUI, brain, auth et setup exigent
   toujours une approbation. Aucun SMS, appel ou action d'appareil envoyé.
 - **Packaging v2.1.6** : `package.json` et `manifest.json` en `2.1.6`,
-  **782 fichiers** inventoriés, ajout au manifest des modules locaux, des outils
-  Atulya et des rapports d'analyse.
+  **806 fichiers** inventoriés, ajout au manifest des modules locaux, des quatre
+  agents, du script de tournée, des outils Atulya et des rapports d'analyse.
 - **Répondeur unique (J97/J98)** : le superviseur 24/7 garde Atulya et le HUD en
   vie, et désactive le daemon vocal JARVIS hérité par défaut (`voice=atulya-only`).
   `ESPRIE_LEGACY_VOICE=1` le réactive explicitement ; la persona Atulya ne dit plus
@@ -138,6 +138,43 @@
 - **Traduction des documents de test** : les assertions de `briefing_settings`
   suivent le nouveau libellé darija du briefing matinal.
 
+## Quatre agents locaux et tournée quotidienne (J117–J126)
+
+- **Veille GitHub en lecture seule** (`esprieaether/src/github_scout.py`) : une
+  seule sortie HTTPS, l'hôte exact `api.github.com`, sans jeton ni secret lu ou
+  écrit. 1000 dépôts réels en 10 pages × 4 requêtes, espacement et reprises sur
+  403/429, échantillon et sujets sanitisés dans `github_scout_report.json`. TDD
+  RED 1 → GREEN 7/7, plus 3 contrôles CLI/limite de débit (J124/J126).
+- **Docteur local réparateur** (`esprieaether/src/doctor_agent.py`) : détecte
+  dans `state/` et dans `propose_fixes`, propose des patchs littéraux uniques,
+  applique via `tmp + os.replace` uniquement dans `state/` ou les 3 fichiers de
+  la liste blanche, et avertit Atulya dans la même passe
+  (`doctor_notices.jsonl`). Aucun `pkill`, redémarrage, commit, push ni réseau.
+  Exécution réelle : `detected=2`, `fixed=2`, `needsRestart=false`. Le défaut
+  réel `item["severity"]` de `self_improve.py` a été corrigé en
+  `item.get("severity") or "routine"` et ajouté à chaque sortie. TDD RED → GREEN
+  9/9 + 4 contrôles d'auto-réparation (J123).
+- **Ingénierie inverse locale** (`esprieaether/src/rea_agent.py`) : 7960 fichiers
+  analysés en local, blueprint dans `docs/rea/`, wrappers compatibles
+  (`doctor`, `investigate`, `status_report`, `inventory`) sans subprocess ni
+  réseau. TDD RED → GREEN 6/6 + 4/4 compatibilité.
+- **Apprentissage enrichi** (`esprieaether/src/learning_agent.py`) : lit aussi
+  `github_scout_report.json` comme source locale, passe par `policy_gate`
+  avec `internet=false`, masque les secrets et ne propose aucune exécution.
+  Passe réelle : 73 leçons, 6 sources (J122).
+- **Tournée quotidienne** (`esprieaether/src/daily_orchestrator.py`) : ordre
+  `github-scout` → `doctor` → `rea` → `learning`, date-gate 24 h, chaque agent
+  dans son propre `try`, écriture atomique de `daily_orchestrator_report.json`.
+  Aucun réseau ajouté, aucun commit/push/redémarrage. TDD RED → GREEN 6/6 +
+  contrôle CLI cp1252 (J125).
+- **Registre et HUD** : `AGENTS`, `AGENT_DUTIES`, `AGENT_REPORTS` et
+  `/agents/{id}/run` (lecture du seul selfcheck public) dans `espria_system.py` ;
+  trois capacités `github-scout`, `doctor`, `rea` avec preuve fraîche TTL 7 jours
+  et dégradation honnête dans `api/server.mjs`. TDD RED → GREEN 3/3 + 3/3.
+- **Ordonnanceur actif** : tâche locale `SUNNAVOK_DAILY_AGENTS` enregistrée à
+  05:00 chaque jour, qui appelle `esprieaether/scripts/daily_agents.ps1 -Once`
+  sous mutex, sans Telegram ni push ni action d'appareil.
+
 ## Vérifications réelles (25/11/2026)
 
 | Élément | Preuve | Statut |
@@ -156,19 +193,29 @@
 | Approbation HUD | aucun `PUT` loopback réel dans `action_audit.jsonl` | `implemented_unverified` |
 | Sources documentaires | 6 PDF réels `legal`/`fiscal`/`travail` ingérés depuis GitHub (lecture seule) | `live_verified` |
 | MCP externe | aucun endpoint HTTPS externe fiable ni octroi outil-par-outil fourni | `needs_user_data` |
+| Veille GitHub (26/11) | `github_scout_report.json` `ok=true`, `scanned=1000`, 4 requêtes, `checked_at=2026-11-26T04:24:44Z`, lecture seule de `api.github.com`, aucun jeton | `live_verified` |
+| Docteur local (26/11) | `doctor_selfcheck.json` `ok=true`, `status=live_verified`, `detected=2`, `fixed=2`, `codeFixed=0` (correctif déjà appliqué), `needsRestart=false`, 2 avis locaux dans `doctor_notices.jsonl` | `live_verified` |
+| Ingénierie inverse (26/11) | `rea_selfcheck.json` `ok=true`, `files=7960`, blueprint `docs/rea/esprieaether/blueprint.md`, wrappers sans subprocess | `live_verified` |
+| Apprentissage (26/11) | `learning_selfcheck.json` `learnedCount=73`, 6 sources dont `github_scout_report.json`, `engine=local_only` | `live_verified` |
+| Tournée quotidienne (26/11) | `daily_orchestrator_report.json` `status=live_verified`, 4 agents, date-gate 24 h, tâche `SUNNAVOK_DAILY_AGENTS` à 05:00 et passe `-Once` journalisée dans `daily_agents.log` | `live_verified` |
+| HUD des nouveaux agents | 13 capacités après rechargement de `:5100` : `github-scout`, `doctor`, `rea` ajoutés aux 10 existantes avec preuve TTL 7 jours | en attente de rechargement |
 
 ## Tests
 
-- Node : **1066 pass / 0 fail** sur 70 fichiers `tests\*.test.mjs` (dont J114 et J115),
-  dont le test d'origine du pont `J100`, le contrôle darija des pages
-  `jarvis.html` / `system.html`, le délai `120000` du relais, la fermeture
-  clavier de la fenêtre flottante, les contrôles J106/J108, le contrôle J110
-  des services en démarrage manuel et les 2 contrôles J111 du relais et du
-  lanceur Claude Code local.
+- Node : **1069 pass / 0 fail** sur 71 fichiers `tests\*.test.mjs` (dont J114,
+  J115 et les 3 contrôles `jarvis_new_agents.test.mjs`), dont le test d'origine
+  du pont `J100`, le contrôle darija des pages `jarvis.html` / `system.html`,
+  le délai `120000` du relais, la fermeture clavier de la fenêtre flottante,
+  les contrôles J106/J108, le contrôle J110 des services en démarrage manuel,
+  les 2 contrôles J111 du relais et du lanceur Claude Code local, et les
+  contrôles d'installation du manifeste à 806 fichiers.
 - Node ciblé (pont, darija, install/update) : **157/157** (155 + les 2 contrôles J106/J108).
-- Python unittest : **259 tests OK / 0 fail** (246 + J110 + J111 + J112 + J114), dont le service
-  sentinel qui ne traite plus `dsh_bridge` et `llm_gateway` comme des erreurs,
-  la journalisation sans secret des parts FreeLLMAPI et les cartes `active` de `/api/health`.
+- Python unittest : **305 tests OK / 0 fail**, dont 259 tests de base (J110 à
+  J114), 9 contrôles du docteur, 4 contrôles d'auto-réparation (J123), 7 contrôles
+  de la veille GitHub (dont CLI cp1252 et reprise 403/429), 6 contrôles de
+  l'ordonnanceur, 6 contrôles `rea` + 4 compatibilité, 4 contrôles du registre
+  des agents et 2 contrôles d'apprentissage depuis la veille (J122). Aucun test
+  supprimé ni affaibli.
 - Atulya pytest : **566 passed, 3 skipped**, 16 subtests passés (0 fail),
   dont les 7 contrôles darija (J105) et les 6 nouveaux contrôles J106/J109
   (journal sans secret, reprise de flux, erreurs d'outils, plafond de résultat,
@@ -200,5 +247,9 @@
 | حصة FreeLLMAPI / Claude Code (J111) | `live_verified` | بعد إعادة تحميل mock والتجميع، `/health` وSSE ديال `:8766` كيبانو فيهم `FRELLMAPI` و`CLAUDE CODE` مع `shares`؛ `/freellm/health` و`/freellm/stats` خدمو على `:3860`؛ `start_claude_code_local.ps1` رجّع `OK` بموديل `claude-sonnet-4-5` بلا اتصال خارجي. |
 | بطاقات الخدمات (J112) | `live_verified` | `/api/health` الحي ولا كيرجّع `jarvis=active`، `jarvis_backend=active`، `jarvis_backend_provider=local-brain`، `ollama_reason=active` و`web=active`. |
 | وكيل التعلّم المحلي (J114) | `live_verified` فالـ selfcheck | `learning_selfcheck.json` فيه `engine=local_only`، `learnedCount=70`، 6 مصادر محلية (`run_ledger.json`, `action_audit.jsonl`, `voice_inbox.jsonl`, `action_requests.json`, `sources_intake.jsonl`, `vault_memory`). التعلّم كيقرأ غير، كيمرّر عبر `policy_gate` بـ `internet=false`، كيخفي الأسرار قبل التخزين، وما كيقترح أي تنفيذ. `/api/jarvis/learning` والقدرة `local-learning` تّختارو بـ TDD (RED 3/3 ثم GREEN 3/3)؛ أُعيد تحميل `:5100` بموافقة صريحة وبانو فالـ HUD الحي. |
+| الوكلاء الجدد (J117–J126) | `live_verified` فالـ selfchecks | `github_scout_report.json` (1000 مستودع، قراءة فقط)، `doctor_selfcheck.json` (2 إصلاحات، بلا إعادة تشغيل)، `rea_selfcheck.json` (7960 ملف)، `learning_selfcheck.json` (73 درس، 6 مصادر)، و`daily_orchestrator_report.json` (4 agents، date-gate 24 h). تّسجلو فـ `AGENTS`/`AGENT_DUTIES` وفـ `/agents/{id}/run` قراءة فقط. |
+| الجدولة اليومية | `live_verified` محلياً | المهمة `SUNNAVOK_DAILY_AGENTS` كتدير passe واحدة كل نهار على 05:00 عبر `daily_agents.ps1 -Once` تحت mutex؛ كيمرّر على الطبيب والهندسة العكسية والتعلّم، بلا Telegram ولا push ولا شبكة غير GitHub القراءة. ما تدار أي فعل جهاز. |
+| تنظيف سر قديم (26/11) | `live_verified` | كلمة مرور كانت مكتوبة فـ `aether-v7/src/esprie/tools.py` و`browser_automation.py` تّشالت من ملفات الشغل؛ ولاّت تُقرأ وقت التشغيل من `ESPRIE_EMAIL` / `ESPRIE_PASSWORD`. ما كُتب أي سر فأي ملف جديد. السر باقي فـ git history القديم، ومحوه كيتطلب rewrite تاريخي بموافقة منفصلة. |
+| HUD بـ 13 قدرة | `implemented_unverified` فالملفات | `api/server.mjs` و`espria_system.py` فيهما `github-scout` و`doctor` و`rea` بـ evidence وTTL 7 أيام؛ خدمة `:5100` الشغّالة مازالة كتعطي 10 قدرات لأن الكود القديم محمّل فالذاكرة. إعادة التحميل كتطلب موافقة صريحة جديدة. |
 
-اللي باقي غير commit/push للتغييرات، وأعطيتني عليها موافقة صريحة. الـ passkey تّأكدات، وخدمة `:5100` أُعيد تحميلها وبانو فيها الـ 10 قدرات كلها `live_verified`، بما فيهم `local-learning` و`chat-auth`. ما طلبنا منك لا كلمة مرور ولا سر، وما كتبنا أي سر فأي ملف.
+اللي باقي غير: (1) إعادة تحميل `:5100` باش يظهرو الـ 13 قدرة فالـ HUD الحي، و(2) commit/push للتغييرات الجديدة. كيهربو على موافقة صريحة منك، والجولة اليومية تفعّلت من دابا بـ `SUNNAVOK_DAILY_AGENTS` على الساعة 05:00. الـ passkey تّأكدات، والـ 10 قدرات القديمة كلها `live_verified`، بما فيهم `local-learning` و`chat-auth`. ما طلبنا منك لا كلمة مرور ولا سر، وما كتبنا أي سر فأي ملف، وما وقّعنا ولا دفعنا ولا أعدنا تحميل أي خدمة بلا إذن جديد.

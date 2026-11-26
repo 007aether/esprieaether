@@ -198,6 +198,28 @@ def _source_lessons(state: Path) -> List[dict]:
     return lessons
 
 
+def _scout_lessons(state: Path) -> List[dict]:
+    """Retient les sujets et langages vus dans la veille GitHub (lecture seule)."""
+    report = _read_json(state / "github_scout_report.json")
+    if not isinstance(report, dict) or report.get("ok") is not True:
+        return []
+    lessons = []
+    scanned = _scrub(report.get("scanned"))
+    if scanned and scanned != "0":
+        lessons.append(_lesson("scout", "github_scout_report.json",
+                               f"projets examinés={scanned} en lecture seule"))
+    for key in ("topics", "languages"):
+        values = report.get(key)
+        if not isinstance(values, list):
+            continue
+        for value in values[:3]:
+            text = _scrub(value)
+            if text:
+                lessons.append(_lesson("scout", "github_scout_report.json",
+                                       f"{key[:-1]}={text}"))
+    return lessons
+
+
 def _vault_lesson(vault_dir: Union[str, Path]) -> tuple[Optional[str], List[dict]]:
     try:
         from vault_memory import VaultMemory
@@ -257,6 +279,7 @@ def learn(state_dir: Union[str, Path] = DEFAULT_STATE_DIR, *,
         ("brain_errors.jsonl", _error_lessons),
         ("action_requests.json", _request_lessons),
         ("sources_intake.jsonl", _source_lessons),
+        ("github_scout_report.json", _scout_lessons),
     ):
         if (state / path).exists():
             found = builder(state)

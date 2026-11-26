@@ -27,6 +27,9 @@ const DEFAULT_BARGE_REVIEW = join(ROOT, 'esprieaether', 'state', 'barge_in_revie
 const DEFAULT_WAKE_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'wake_selfcheck.json');
 const DEFAULT_LEARNING_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'learning_selfcheck.json');
 const DEFAULT_CHAT_AUTH_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'chat_auth_selfcheck.json');
+const DEFAULT_SCOUT_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'github_scout_report.json');
+const DEFAULT_DOCTOR_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'doctor_selfcheck.json');
+const DEFAULT_REA_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'rea_selfcheck.json');
 const VOICE_STAGES = new Set(['idle', 'listening', 'thinking', 'speaking']);
 const MANUAL_DOWN_SERVICES = new Set(['dsh_bridge', 'llm_gateway']);
 const REPORT_FILES = {
@@ -576,6 +579,9 @@ export async function buildCapabilities(
     bargeReviewPath = DEFAULT_BARGE_REVIEW,
     learningPath = DEFAULT_LEARNING_EVIDENCE,
     chatAuthPath = DEFAULT_CHAT_AUTH_EVIDENCE,
+    githubScoutPath = DEFAULT_SCOUT_EVIDENCE,
+    doctorPath = DEFAULT_DOCTOR_EVIDENCE,
+    reaPath = DEFAULT_REA_EVIDENCE,
   } = {}
 ) {
   if (actionRequestsPath === DEFAULT_ACTION_REQUESTS) await ensureActionRequests(actionRequestsPath);
@@ -589,6 +595,9 @@ export async function buildCapabilities(
   const bargeReview = await readJsonFile(bargeReviewPath);
   const learning = await readJsonFile(learningPath);
   const chatAuth = await readJsonFile(chatAuthPath);
+  const scout = await readJsonFile(githubScoutPath);
+  const doctor = await readJsonFile(doctorPath);
+  const rea = await readJsonFile(reaPath);
   const invalidBarge = new Set(
     (Array.isArray(bargeReview?.invalidTimestamps) ? bargeReview.invalidTimestamps : [])
       .map((value) => Date.parse(value)).filter(Number.isFinite)
@@ -772,6 +781,35 @@ export async function buildCapabilities(
     add('chat-auth', 'not_available', chatAuthEvidence,
       'Enregistrer un passkey puis prouver une conversation complète avec /api/chat');
   }
+
+  const agentProof = (id, report, source, fields, next) => {
+    const evidence = report
+      ? fields.map(([field, read]) => ({ source, field, value: read(report) }))
+      : [{ source, field: 'selfcheck', value: 'no_data_source' }];
+    if (report && report.ok === true && report.status === 'live_verified'
+        && isFreshLine(report)) {
+      add(id, 'live_verified', evidence, next, lineStamp(report));
+    } else if (report) {
+      add(id, 'implemented_unverified', evidence, next, lineStamp(report));
+    } else {
+      add(id, 'not_available', evidence, next);
+    }
+  };
+  agentProof('github-scout', scout, 'github_scout_report.json', [
+    ['scanned', (row) => Number(row.scanned) || 0],
+    ['queries', (row) => Number(Array.isArray(row.queries) ? row.queries.length : row.queries) || 0],
+    ['status', (row) => String(row.status || '')],
+  ], 'Relancer la veille GitHub en lecture seule');
+  agentProof('doctor', doctor, 'doctor_selfcheck.json', [
+    ['detected', (row) => Number(row.detected) || 0],
+    ['fixed', (row) => Number(row.fixed) || 0],
+    ['status', (row) => String(row.status || '')],
+  ], 'Relancer la détection locale puis vérifier les correctifs');
+  agentProof('rea', rea, 'rea_selfcheck.json', [
+    ['files', (row) => Number(row.files) || 0],
+    ['entrypoints', (row) => Number(row.entrypoints) || 0],
+    ['status', (row) => String(row.status || '')],
+  ], 'Relancer l’analyse inverse locale sans modifier le code');
 
   return {
     checkedAt: new Date().toISOString(),

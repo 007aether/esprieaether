@@ -223,16 +223,19 @@ def propose_fixes(learned):
     """Propose fixes for learned errors."""
     fixes = []
     for item in learned:
-        if item["severity"] == "critical":
+        severity = item.get("severity") or "routine"
+        if severity == "critical":
             fixes.append({
                 "action": "immediate",
+                "severity": severity,
                 "pattern": item["pattern"],
                 "fix": item["fix"],
                 "priority": 1,
             })
-        elif item["severity"] == "high":
+        elif severity == "high":
             fixes.append({
                 "action": "urgent",
+                "severity": severity,
                 "pattern": item["pattern"],
                 "fix": item["fix"],
                 "priority": 2,
@@ -240,6 +243,7 @@ def propose_fixes(learned):
         else:
             fixes.append({
                 "action": "routine",
+                "severity": severity,
                 "pattern": item["pattern"],
                 "fix": item["fix"],
                 "priority": 3,

@@ -8,6 +8,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import hmac
+import json
 import os
 import secrets
 import sqlite3
@@ -570,6 +571,9 @@ AGENTS = {
     "L1": "Fiscalité",
     "L2": "Travail",
     "director": "EsprieAether — Directeur exécutif",
+    "doctor": "Doctor — détection et correction locale",
+    "rea": "REA — ingénierie inverse locale",
+    "github-scout": "Veille GitHub — lecture seule",
 }
 
 # Rôle + travail concret de chaque agent. Les agents documentaires ne produisent
@@ -583,6 +587,17 @@ AGENT_DUTIES = {
     "L1": ("Vérifier les pièces fiscales déposées localement, sans inventer de barème.", "documents"),
     "L2": ("Vérifier les documents de travail déposés localement, sans inventer de règle.", "documents"),
     "director": ("Consolider l'état réel des agents, services et KPI du système.", "system"),
+    "doctor": ("Détecter les erreurs locales, appliquer un correctif sûr et prévenir Atulya aussitôt.", "selfcheck"),
+    "rea": ("Lire le code local et produire un blueprint d'ingénierie inverse, sans le modifier.", "selfcheck"),
+    "github-scout": ("Explorer jusqu'à 1000 dépôts GitHub par jour en lecture seule et en tirer des leçons publiques.", "selfcheck"),
+}
+
+# Rapports publics locales produits par les trois nouveaux agents. Aucune
+# affirmation n'est faite sans fichier de preuve daté présent dans ``state``.
+AGENT_REPORTS = {
+    "doctor": "doctor_selfcheck.json",
+    "rea": "rea_selfcheck.json",
+    "github-scout": "github_scout_report.json",
 }
 
 
@@ -623,6 +638,45 @@ async def list_agents() -> list[dict]:
 async def run_agent(agent_id: str) -> dict:
     if agent_id not in AGENTS:
         raise HTTPException(status_code=404, detail="Agent inconnu")
+    if agent_id in AGENT_REPORTS:
+        name = AGENT_REPORTS[agent_id]
+        path = STATE_DIR / name
+        data = None
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError, TypeError):
+            data = None
+        if not isinstance(data, dict):
+            return {
+                "agent": agent_id,
+                "role": AGENTS[agent_id],
+                "duty": AGENT_DUTIES[agent_id][0],
+                "status": "no_data_source",
+                "source": f"state/{name}",
+                "summary": {},
+                "work": {"scope": "selfcheck", "source": f"state/{name}",
+                         "checked_dir": str(STATE_DIR), "files_found": 0},
+                "message": "Aucun rapport de preuve local ; aucune affirmation.",
+            }
+        status = data.get("status") or (
+            "live_verified" if data.get("ok") else "no_data_source")
+        summary = {
+            key: value for key, value in data.items()
+            if key in {"checked_at", "checkedAt", "ok", "status", "scanned",
+                       "detected", "fixed", "files", "entrypoints",
+                       "learnedCount", "next"}
+        }
+        return {
+            "agent": agent_id,
+            "role": AGENTS[agent_id],
+            "duty": AGENT_DUTIES[agent_id][0],
+            "status": status,
+            "source": f"state/{name}",
+            "summary": summary,
+            "work": {"scope": "selfcheck", "source": f"state/{name}",
+                     "checked_dir": str(STATE_DIR), "files_found": 1},
+            "message": "Rapport local lu tel quel ; aucune action effectuée par cette lecture.",
+        }
     if agent_id in AGENT_SOURCE_DIRS:
         directory = AGENT_SOURCE_DIRS[agent_id]
         files = _source_files(agent_id)

@@ -1,5 +1,5 @@
 """AETHER v9 — Tool registry (كل module = أداة)"""
-import subprocess, sys, json, sqlite3
+import os, subprocess, sys, json, sqlite3
 from pathlib import Path
 from ..config import V7, DB_PATH, EARNINGS_DB
 
@@ -186,14 +186,18 @@ def browser_navigate(url):
     from src.esprie.browser_automation import navigate
     return {"navigated": url}
 
-def browser_signup(url, email="007aether@gmail.com", password="Bbj351872@#"):
-    """Automatically signup on a website."""
+def browser_signup(url, email=None, password=None):
+    """Automatically signup on a website (identifiants depuis l'environnement)."""
     from src.esprie.browser_automation import signup_site
+    email = email or os.getenv("ESPRIE_EMAIL", "")
+    password = password or os.getenv("ESPRIE_PASSWORD", "")
     return {"signup": signup_site(url, email, password)}
 
-def browser_login(url, email="007aether@gmail.com", password="Bbj351872@#"):
-    """Auto-login to a website."""
+def browser_login(url, email=None, password=None):
+    """Auto-login to a website (identifiants depuis l'environnement)."""
     from src.esprie.browser_automation import auto_login
+    email = email or os.getenv("ESPRIE_EMAIL", "")
+    password = password or os.getenv("ESPRIE_PASSWORD", "")
     return {"login": auto_login(url, email, password)}
 
 def browser_scrape(url):

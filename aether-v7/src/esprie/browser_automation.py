@@ -1,6 +1,7 @@
 """ESPRIEAETHER Browser Automation Module
 Firefox + Selenium for autonomous web navigation, signups, and site interaction.
-Uses 007aether@gmail.com / Bbj351872@# credentials stored in encrypted vault.
+Les identifiants sont lus depuis l'environnement (ESPRIE_EMAIL / ESPRIE_PASSWORD),
+jamais écrits dans un fichier.
 """
 import os
 import time
@@ -17,9 +18,9 @@ from selenium.webdriver.firefox.service import Service
 
 log = logging.getLogger("browser_auto")
 
-# Email credentials from encrypted vault (decrypted at runtime)
-EMAIL = "007aether@gmail.com"
-PASSWORD = "Bbj351872@#"
+# Identifiants lus à l'exécution ; aucun secret n'est écrit dans le dépôt.
+EMAIL = os.getenv("ESPRIE_EMAIL", "")
+PASSWORD = os.getenv("ESPRIE_PASSWORD", "")
 
 # Firefox profile for persistent sessions
 FIREFOX_PROFILE = "/home/aether/.config/firefox-aether"
