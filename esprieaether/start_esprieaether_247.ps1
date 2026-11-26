@@ -26,6 +26,9 @@ try {
     ) -WindowStyle Hidden | Out-Null
     Write-Output "EsprieAether 24/7 demarre via $supervisor"
 } finally {
-    $gate.ReleaseMutex()
+    # PowerShell peut exécuter ce bloc sur un autre thread que celui qui a
+    # créé le mutex : une libération explicite lève alors ApplicationException
+    # et fait échouer le lanceur alors que le superviseur est bien démarré.
+    # La fermeture du handle + la fin du processus libèrent le verrou.
     $gate.Dispose()
 }

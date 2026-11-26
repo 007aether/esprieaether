@@ -21,6 +21,10 @@ if ($interval -lt 10) { $interval = 60 }
 # Un seul timeout client pour Jarvis et Atulya : aucun appel n'attend 180s ou 900s.
 $localTimeout = [int]($env:ESPRIE_LOCAL_TIMEOUT -as [int])
 if ($localTimeout -lt 30) { $localTimeout = 120 }
+# Le routeur local file les appels sur un seul slot : sa file doit être un peu
+# plus courte que le timeout client, sinon le client abandonne avant le 429.
+$queueTimeout = [int]($env:LOCAL_BRAIN_QUEUE_TIMEOUT -as [int])
+if ($queueTimeout -lt 30) { $queueTimeout = $localTimeout - 20 }
 # Une seule voix par défaut : Atulya répond. L'ancien daemon vocal JARVIS reste
 # disponible uniquement si le propriétaire le demande explicitement (=1).
 $legacyVoice = $env:ESPRIE_LEGACY_VOICE -eq '1'
@@ -124,7 +128,7 @@ $services = @(
     # Demarrage manuel uniquement : l'ancien lancement automatique échouait chaque minute
     # (ArgumentList vide) et interrompait toute la tournée de superviseur.
     @{ Name='freellmapi';     Port=31415; Exe='C:\Users\aether\Downloads\FreeLLMAPI-0.16.37-win\FreeLLMAPI.exe'; Args=@(); Cwd='C:\Users\aether\Downloads\FreeLLMAPI-0.16.37-win'; SkipStart=$true },
-    @{ Name='local-brain';    Port=31416; Exe=$py;   Args=@('-m','src.local_brain'); Cwd=$base },
+    @{ Name='local-brain';    Port=31416; Exe=$py;   Args=@('-m','src.local_brain'); Cwd=$base; Env=@{ LOCAL_BRAIN_QUEUE_TIMEOUT="$queueTimeout" } },
     @{ Name='atulya';         Port=8501;  Exe=$py;   Args=@('-m','atulya.cli','serve'); Cwd=$root; Env=@{
         PYTHONPATH=$vendor;
         ATULYA_DATA_DIR=(Join-Path $base 'state\atulya');

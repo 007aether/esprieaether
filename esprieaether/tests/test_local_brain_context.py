@@ -32,7 +32,9 @@ class LocalBrainContextTest(unittest.TestCase):
     def test_chat_queue_is_bounded_for_single_slot_server(self):
         self.assertGreaterEqual(local_brain.MAX_CONCURRENT_CHATS, 1)
         self.assertLessEqual(local_brain.MAX_CONCURRENT_CHATS, 2)
-        self.assertLessEqual(local_brain.CHAT_QUEUE_TIMEOUT, 10)
+        self.assertGreaterEqual(local_brain.CHAT_QUEUE_TIMEOUT, 60)
+        self.assertLessEqual(local_brain.CHAT_QUEUE_TIMEOUT, 120)
+        self.assertLess(local_brain.CHAT_QUEUE_TIMEOUT, local_brain.CHAT_TIMEOUT)
 
     def test_opencode_declares_a_context_the_local_server_can_honor(self):
         cfg = json.loads(CONFIG.read_text(encoding="utf-8"))

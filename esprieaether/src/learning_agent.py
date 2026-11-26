@@ -238,6 +238,46 @@ def _scout_lessons(state: Path) -> List[dict]:
     return lessons
 
 
+def _week_lessons(state: Path) -> List[dict]:
+    """Retient la fenêtre de 7 jours de la veille GitHub, sans aucun appel réseau."""
+    report = _read_json(state / "github_week_report.json")
+    if not isinstance(report, dict) or report.get("errors"):
+        return []
+    items = report.get("items")
+    if not isinstance(items, list):
+        return []
+    since = _scrub(report.get("since"))
+    if not since and not _scrub(report.get("digest")):
+        return []
+    lessons = []
+    if since:
+        lessons.append(_lesson("week", "github_week_report.json",
+                               f"fenêtre depuis={since} dépôts={len(items)}"))
+    for key, label in (("latestCreated", "plus récent"), ("latestPushed", "dernier push")):
+        entry = report.get(key)
+        if not isinstance(entry, dict):
+            continue
+        name = _scrub(entry.get("name"))
+        primary = "pushedAt" if key == "latestPushed" else "createdAt"
+        secondary = "createdAt" if key == "latestPushed" else "pushedAt"
+        moment = _scrub(entry.get(primary) or entry.get(secondary))
+        if name:
+            lessons.append(_lesson("week", "github_week_report.json",
+                                   f"{label}={name} à={moment}"))
+    ranked = sorted(
+        (item for item in items if isinstance(item, dict)),
+        key=lambda item: str(item.get("createdAt") or ""),
+        reverse=True,
+    )[:3]
+    for item in ranked:
+        name = _scrub(item.get("name"))
+        created = _scrub(item.get("createdAt"))
+        if name:
+            lessons.append(_lesson("week", "github_week_report.json",
+                                   f"dépôt={name} créé={created}"))
+    return lessons
+
+
 def _vault_lesson(vault_dir: Union[str, Path]) -> tuple[Optional[str], List[dict]]:
     try:
         from vault_memory import VaultMemory
@@ -298,6 +338,7 @@ def learn(state_dir: Union[str, Path] = DEFAULT_STATE_DIR, *,
         ("action_requests.json", _request_lessons),
         ("sources_intake.jsonl", _source_lessons),
         ("github_scout_report.json", _scout_lessons),
+        ("github_week_report.json", _week_lessons),
     ):
         if (state / path).exists():
             found = builder(state)

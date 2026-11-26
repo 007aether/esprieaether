@@ -22,6 +22,11 @@ class StartupGateTest(unittest.TestCase):
         self.assertGreater(mutex, -1)
         self.assertLess(mutex, spawn)
 
+    def test_launcher_never_releases_mutex_from_another_thread(self):
+        text = LAUNCHER.read_text(encoding="utf-8")
+        self.assertNotIn("ReleaseMutex", text)
+        self.assertIn("$gate.Dispose()", text)
+
     def test_every_startup_entry_delegates_to_the_single_launcher(self):
         launcher = str(LAUNCHER)
         for name in ("EsprieAether247.bat", "SUNNAVOK-KeepAlive.cmd"):

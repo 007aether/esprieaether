@@ -55,6 +55,44 @@ class LearningScoutTest(unittest.TestCase):
             self.assertIn("topic=ai:338", memory)
             self.assertNotIn("token=", memory.lower())
 
+    def test_learn_inclut_la_fenetre_github_7_jours(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            state = Path(tmp)
+            (state / "github_week_report.json").write_text(json.dumps({
+                "checkedAt": "2026-11-26T05:55:20Z",
+                "since": "2026-11-19",
+                "target": "https://api.github.com",
+                "queries": ["ai agent"],
+                "items": [
+                    {"name": "owner/old", "createdAt": "2026-11-20T00:00:00Z"},
+                    {"name": "owner/new", "createdAt": "2026-11-26T05:50:12Z"},
+                ],
+                "errors": [],
+                "latestCreated": {"name": "owner/new", "createdAt": "2026-11-26T05:50:12Z"},
+                "latestPushed": {"name": "owner/push", "pushedAt": "2026-11-26T05:55:27Z"},
+                "digest": "abc123",
+            }), encoding="utf-8")
+            report = learning_agent.learn(state_dir=state, vault_dir=None)
+            self.assertTrue(report["ok"])
+            self.assertIn("github_week_report.json", report["sources"])
+            details = " ".join(str(row["detail"]) for row in report["lessons"])
+            self.assertIn("fenêtre depuis=2026-11-19", details)
+            self.assertIn("owner/new", details)
+            self.assertIn("owner/push", details)
+            memory = (state / "learning_memory.jsonl").read_text(encoding="utf-8")
+            self.assertIn("github_week_report.json", memory)
+            self.assertNotIn("token=", memory.lower())
+
+    def test_fenetre_avec_erreurs_najoute_pas_de_lecon(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            state = Path(tmp)
+            (state / "github_week_report.json").write_text(json.dumps({
+                "since": "2026-11-19", "items": [{"name": "owner/repo"}],
+                "errors": ["boom"], "digest": "abc123",
+            }), encoding="utf-8")
+            report = learning_agent.learn(state_dir=state, vault_dir=None)
+            self.assertNotIn("github_week_report.json", report["sources"])
+
     def test_veille_vide_najoute_pas_de_lecon(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             state = Path(tmp)

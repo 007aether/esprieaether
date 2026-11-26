@@ -34,8 +34,11 @@ THREADS = int(os.getenv("LOCAL_BRAIN_THREADS", "6"))
 CHAT_TIMEOUT = float(os.getenv("LOCAL_BRAIN_CHAT_TIMEOUT", "900"))
 # llama-server tourne avec un seul slot (-np 1) : on file les appels au lieu de
 # laisser ThreadingHTTPServer engorger le CPU et renvoyer des 503 trompeurs.
+# Sous pression RAM (vision chargée), une réponse met ~48s : une file de 5s
+# renvoyait un 429 « local model busy » à la moindre demande concurrente.
+# La file attend donc jusqu'au timeout client moins une marge (voir keep_alive.ps1).
 MAX_CONCURRENT_CHATS = max(1, int(os.getenv("LOCAL_BRAIN_MAX_CONCURRENT", "1")))
-CHAT_QUEUE_TIMEOUT = float(os.getenv("LOCAL_BRAIN_QUEUE_TIMEOUT", "5"))
+CHAT_QUEUE_TIMEOUT = float(os.getenv("LOCAL_BRAIN_QUEUE_TIMEOUT", "100"))
 chat_slots = threading.BoundedSemaphore(MAX_CONCURRENT_CHATS)
 
 # قاعدة اللغة مفروضة فالـ routeur باش أي client (OpenCode، صوت، curl) يردّ بالدارجة.
