@@ -2,12 +2,32 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-26T01:12:16.866025+00:00",
+  "cloud_last_run": "2026-11-26T15:52:24.160928+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Bitcoin Thanksgiving: Down 34%, Tether&#8217;s 20% Fee and Airdrop Updates",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "1Password Breach: What Crypto Users Should Do Before the Phishing Emails Land",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "SpaceX Airdrop: Two Free Shares for Every Active Trump Account",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Ukraine Crypto Law: Legal Again, This Time With a Tax Bill",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Delegate NFTs for Airdrop Claims Without Touching Your Cold Wallet",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -28,26 +48,6 @@
     },
     {
       "title": "Bybit Referral Code AATRADE: Welcome Rewards Up to $30k, Plus the Bybit EU Code",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Who Is Jeff Yan? The Hyperliquid Founder Who Gave Away Billions",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Chainflip Hack: $12 Million Gone and the Bounty Deadline Has Passed",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Ansem Hacked? His Pump Wallet Dumped ANSEM and the Coin Halved",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Jensen Huang Reinstated: What Nvidia Announced",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Buy GRAM (Toncoin) for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
