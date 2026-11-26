@@ -231,9 +231,14 @@ test('J90: vault-memory est live_verified seulement avec un index local récent'
 test('J78: GET /api/jarvis/atulya répond en loopback', async (t) => {
   const server = createDashboardServer({ log: () => {} });
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
-  t.after(() => new Promise((resolve) => server.close(resolve)));
+  t.after(() => new Promise((resolve) => {
+    server.closeAllConnections?.();
+    server.close(resolve);
+  }));
   const base = `http://127.0.0.1:${server.address().port}`;
-  const response = await fetch(`${base}/api/jarvis/atulya`);
+  const response = await fetch(`${base}/api/jarvis/atulya`, {
+    headers: { connection: 'close' },
+  });
   assert.equal(response.status, 200);
   const body = await response.json();
   assert.equal(body.source, 'atulyaai/Atulya-Tantra');

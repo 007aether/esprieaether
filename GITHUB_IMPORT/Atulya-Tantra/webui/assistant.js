@@ -2849,7 +2849,7 @@
     refreshSystemStatus();
     window.setInterval(() => {
       if (document.visibilityState === "visible") refreshSystemStatus();
-    }, 3000); // live CPU/RAM/network meters
+    }, 10000); // live CPU/RAM/network meters
   }
 
   // Inside the Telegram Mini App, sign in with Telegram's signed identity (passkeys don't work there).
@@ -3131,7 +3131,7 @@
       }
     } catch { /* offline; try again next tick */ }
   }
-  window.setInterval(checkPendingLogins, 3000);
+  window.setInterval(checkPendingLogins, 10000);
 
 
   // ---- Voice unlock (trusted device + spoken phrase) -------------------------------

@@ -184,6 +184,11 @@ class SessionAuthMiddleware:
         "/api/agents/inbox",
     }
 
+    # Read-only readiness probes must stay fast even when the local auth/SQLite
+    # thread pool is busy. IP bans protect sign-in and private API routes; they
+    # still apply to every other /api/ path, including public login endpoints.
+    FAST_PUBLIC_PATHS = frozenset({"/api/health", "/api/auth/status"})
+
     # The PC voice loop has no browser session: a paired device with the "voice_loop" ability may
     # call only these routes, as its owner, and only when that owner is an admin (PLAN M1-3 / R4).
     # It can never approve or deny a pending action.
@@ -254,7 +259,7 @@ class SessionAuthMiddleware:
         path = scope.get("path", "")
         client = scope.get("client")
         client_ip = str(client[0]) if client else ""
-        if path.startswith("/api/") and client_ip and await asyncio.to_thread(self.auth_store.ip_banned, client_ip):
+        if path not in self.FAST_PUBLIC_PATHS and path.startswith("/api/") and client_ip and await asyncio.to_thread(self.auth_store.ip_banned, client_ip):
             response = JSONResponse({"detail": "Too many failed attempts from your network. Try again later."},
                                     status_code=403)
             await response(scope, receive, send)

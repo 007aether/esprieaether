@@ -8,6 +8,7 @@ import os
 import re
 import threading
 import wave
+from functools import lru_cache
 from pathlib import Path
 
 from .providers import VoiceError
@@ -33,7 +34,9 @@ def _file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+@lru_cache(maxsize=8)
 def model_assets_ready(models_dir: Path) -> bool:
+    """Hash local TTS assets once per server run; a changed asset needs a restart."""
     model_dir = models_dir / "voice" / "tts" / "supertonic-3-int8" / TTS_MODEL_FOLDER
     return all(
         (model_dir / filename).is_file() and _file_sha256(model_dir / filename) == digest

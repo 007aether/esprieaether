@@ -17,5 +17,8 @@ if (args.length > 1 || args.some(arg => !['--help', '--preflight-only', '--run-t
     process.exitCode = result.exit;
   };
   if (args.includes('--preflight-only') || (!probe.complete && !args.includes('--run-tests'))) finish(summarize(probe, null, null));
-  else finish(await runTests(probe, { cwd: fileURLToPath(new URL('../', import.meta.url)) }));
+  else finish(await runTests(probe, {
+    cwd: fileURLToPath(new URL('../', import.meta.url)),
+    args: ['--test', '--test-reporter=tap', 'tests'],
+  }));
 }

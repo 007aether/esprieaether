@@ -156,7 +156,7 @@ test('store parent links and relative paths are rejected before writing', t => {
 });
 test('CLI reports usage, reference comparisons and input errors with appropriate exits', t => {
   const cli = path.join(repo, 'evals/reference/check.mjs');
-  const invoke = args => spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8', timeout: 15000, windowsHide: true });
+  const invoke = args => spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8', timeout: 120000, windowsHide: true });
   assert.equal(invoke([]).status, 2);
   assert.equal(invoke(['--reference', 'extra']).status, 2);
   const dir = fixture(t), config = path.join(dir, 'command.json');

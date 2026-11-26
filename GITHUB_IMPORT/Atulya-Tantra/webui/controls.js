@@ -762,7 +762,7 @@
       if (error.status === 401) { shown.clear(); $("#reminder-notices").replaceChildren(); }
     } finally { polling = false; }
   }
-  window.setInterval(pollReminders, 3000);
+  window.setInterval(pollReminders, 10000);
   document.addEventListener("visibilitychange", () => { void pollReminders(); });
   async function implementationPanel() {
     open("سجل العمل: مكتمل، ناشط وغير مكتمل");

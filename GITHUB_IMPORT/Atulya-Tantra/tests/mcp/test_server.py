@@ -74,7 +74,7 @@ def test_cli_starts_stdio_server_for_external_mcp_hosts() -> None:
     )
 
     async def exercise() -> None:
-        async with Client(params, read_timeout_seconds=5) as client:
+        async with Client(params, read_timeout_seconds=30) as client:
             listed = await client.list_tools()
             names = {tool.name for tool in listed.tools}
             assert "what_can_you_do" in names

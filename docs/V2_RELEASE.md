@@ -203,14 +203,17 @@
 
 ## Tests
 
-- Node : **1079 pass / 0 fail** sur les fichiers `tests\*.test.mjs` (dont J114,
-  J115, les 3 contrôles `jarvis_new_agents.test.mjs`, les 5 de `gsm_capability`
-  et les 3 de `health_provider`), dont le test d'origine
-  du pont `J100`, le contrôle darija des pages `jarvis.html` / `system.html`,
-  le délai `120000` du relais, la fermeture clavier de la fenêtre flottante,
-  les contrôles J106/J108, le contrôle J110 des services en démarrage manuel,
-  les 2 contrôles J111 du relais et du lanceur Claude Code local, et les
-  contrôles d'installation du manifeste à 811 fichiers.
+- Node : **1091 pass / 0 fail** sur les fichiers `tests\*.test.mjs` (dont J114,
+  J115, les 3 contrôles `jarvis_new_agents.test.mjs`, les 5 de `gsm_capability`,
+  les 3 de `health_provider`, les 4 du bot autonome J131, le contrôle J132 du
+  wrapper `npm test`, le contrôle J133 de fermeture keep-alive et les 2 gardes
+  J134/J135 des délais sous charge, le garde J136 du scan de secrets et les 3
+  gardes J137/J139 de réactivité d’Atulya), dont le test
+  d'origine du pont `J100`, le contrôle darija des pages `jarvis.html` /
+  `system.html`, le délai `120000` du relais, la fermeture clavier de la fenêtre
+  flottante, les contrôles J106/J108, le contrôle J110 des services en démarrage
+  manuel, les 2 contrôles J111 du relais et du lanceur Claude Code local, et les
+  contrôles d'installation du manifeste à 817 fichiers.
 - Node ciblé (pont, darija, install/update) : **157/157** (155 + les 2 contrôles J106/J108).
 - Python unittest : **324 tests OK / 0 fail** à la deuxième passe (la première
   a eu un `test_voice_daemon` transitoire, vert seul et vert à la reprise), dont
@@ -226,7 +229,38 @@
   compression de l'historique). Passe rejouée dans le `.venv` local avec
   `webauthn` installé et le Node local `.tools\node-v26.13.1` sur `PATH` ;
   le premier essai sans ce Node avait donné un faux `test_web_ui_still_needs_approval`
-  (« Node is unavailable »), corrigé par le `PATH` sans toucher au code.
+  (« Node is unavailable »), corrigé par le `PATH` sans toucher au code. Le premier
+  essai avec le `.venv` de `esprieaether` avait donné `No module named pytest` :
+  la passe valide utilise bien `GITHUB_IMPORT\Atulya-Tantra\.venv`.
+- Bot autonome local (J131) : `scripts\autonomous_checks.mjs` enchaîne Node,
+  unittest, pytest Atulya, scan ADB des 20 S8 en lecture seule, sonde des
+  endpoints et régénération du manifeste, puis écrit
+  `esprieaether\state\autonomous_report.json` avec les seuls statuts autorisés.
+  TDD RED `ERR_MODULE_NOT_FOUND` puis GREEN 4/4. Aucun SMS, appel, root, APK ni
+  écriture appareil. `--autonomous` ne commit/pousse et ne recharge `:5100`/`:5000`
+  que si tout est vert ; les quatre permissions ont été données explicitement.
+  Tâche planifiée `aut_2170a49bf001xRhAu3IvEM95mr` à 06:00 chaque matin
+  (`Africa/Casablanca`).
+- Correctifs J132/J133 : `scripts\run-checks.mjs` cible uniquement `tests/` au lieu
+  de balayer les sauvegardes `BACKUP_*` (faux `browser.mjs` / fixtures bloqués),
+  et le serveur de test JARVIS libère ses connexions keep-alive avant `close()`.
+  Deux tests de garde TDD (RED puis GREEN), manifeste régénéré après chaque
+  modification de source.
+- Correctifs J134/J135 : le client MCP stdio d'Atulya passe de 5 à 30 secondes et
+  le CLI de référence de 15 à 120 secondes ; sous charge ces délais donnaient des
+  `MCPError: Request 'initialize' timed out` et `status=null !== 0` sans défaut
+  de logique. Deux gardes TDD (RED puis GREEN) et test ciblé vert à chaque fois.
+- Garde J136 : le scan de secrets du bot ignore ses propres littéraux de test
+  (`const SECRET`, `api_key: abc123`, `token=abc`) sans ignorer les vraies clés.
+  TDD RED puis GREEN 5/5, ce qui débloque le commit/push automatique.
+- Réactivité Atulya (J137/J139) : `/api/health` et `/api/auth/status` ne passent
+  plus par la base SQLite d’interdiction d’IP ; les sondes WebUI passent de 3 à
+  10 secondes ; surtout `model_assets_ready()` met en cache les empreintes
+  SHA-256 des 7 fichiers du modèle TTS au lieu de les recalculer à chaque appel.
+  Mesure locale après redémarrage : `/api/health` de **600–6700 ms** avant à
+  **11–156 ms** après, `/api/auth/status` de **~1200 ms** à **~20 ms**.
+  Trois gardes TDD (RED puis GREEN), `tests/voice/test_tts.py` 3/3 vert et
+  redémarrage de `:8501` avec le même environnement local.
 - Aucun upload, token cloud ou clé externe.
 
 ## شنو ناقص (MADA YANKOSONA)
@@ -259,5 +293,11 @@
 | عُقد GSM الخفيفة (J130) | `live_verified` فالـ state | `gsm_workers.json` : `ok=true`، `online=20`، `succeeded=60`، `tasks=status,battery,props`، `errors=[]`، `readOnly=true`، `gateway=http://127.0.0.1:31416`، `checkedAt=2026-11-26T07:50:25Z`. ولا APK، ولا root، ولا تثبيت، ولا مكالمة/SMS. الأفكار من PhoneBorg (Apache-2.0) و`llama-cpp-android-node` استُعملت للفكرة غير كُنسخ منها شيء. |
 | تجربة موديل صغير على جهاز واحد (J130) | `needs_user_data` | `gsm_model_trial.json` : `ready=false`، `reason=binaire llama.cpp arm64 ELF local absent; GGUF local <= 600 Mo absent`، `checkedAt=2026-11-26T07:50:16Z`. أصغر GGUF محلي كاين **1331 MB** (Qwen 2B Q4)، كبير على RAM المتاحة؛ ما كاين لا NDK ولا بinaire arm64. ما تدار أي download، والخطوة كتطلب توفير الملفات محلياً ثم benchmark على جهاز واحد. |
 | بطاقة `jarvis_backend_provider` (J129) | `live_verified` | `/health` كيرجّع `local-brain` كاسم مزوّد؛ الواجهة ولا كتعرضو بـ ℹ️ معلومة محايدة وما كتحسبوش فعدّاد الخدمات (6/6 بدل 6/7). ما بقاتش كبان 🔴. |
+| البوت المحلي المستقل (J131) | `live_verified` فالجولة النهائية | `scripts/autonomous_checks.mjs` كيجرب Node وPython وAtulya و20 GSM (قراءة فقط) وكيكتب `autonomous_report.json` بـ statuses مسموحين. `(RED 4/4 → GREEN 4/4)`. scheduled `aut_2170a49bf001xRhAu3IvEM95mr` كل نهار 06:00 بتوقيت الدار البيضاء. كيعمل commit/push وإعادة تحميل غير إلا كانت الجولة كلها خضراء، وبموافقة صريحة منك. الحالة الحية كتتحقق فالجولة النهائية. |
+| `npm test` ما كيباليش BACKUP (J132) | `implemented_unverified` فالملفات | `scripts/run-checks.mjs` ولا كيعطي `tests/` صراحة؛ قبل كان كيكتشف 2060 اختبار من `BACKUP_20261121` وكيعلق على fixtures ديال stdin. اختبار حارس TDD RED ثم GREEN. |
+| إغلاق خادم اختبار JARVIS (J133) | `implemented_unverified` فالملفات | `tests/jarvis_atulya.test.mjs` كيستعمل `closeAllConnections()` و`connection: close`؛ قبل كان kipqa msawwar فـ `server.close` b keep-alive. اختبار حارس TDD RED ثم GREEN. |
+| المدد تحت الضغط (J134/J135) | `live_verified` بعد اختبارات موجهة | MCP stdio ولّى `read_timeout_seconds=30` وCLI المرجع `timeout: 120000`؛ قبل كانو 5 و15 ثانية وكيطيحو فـ `initialize timed out` / `status=null`. حارسان TDD RED ثم GREEN، والاختبار الموجه رجع أخضر. |
+| فحص الأسرار فالبوت (J136) | `live_verified` بعد اختبار موجه | البوت ولا كيميّز بين literals ديال الاختبار والسر الحقيقي؛ قبل كان كيمنع commit بـ 3 أسطر falses. حارس TDD RED ثم GREEN 5/5. |
+| استجابة Atulya (J137/J139) | `live_verified` بعد قياس حي | `/api/health` و`/api/auth/status` ولاو كيتجاوزوا SQLite فالسondes، وSHA-256 ديال 7 ملفات TTS ولا كيتحسب غير مرة. القياس: health من 600–6700ms لـ 11–156ms، auth/status من ~1200ms لـ ~20ms. سondes الواجهة من 3s لـ 10s. 3 حوارس TDD RED ثم GREEN، و`:8501` أُعيد تحميله بنفس البيئة المحلية. |
 
-اللي باقي غير commit/push للتغييرات الجديدة؛ ما خذتش موافقة عليهم دابا. `:5100` و`:5000` أُعيد تحميلهم بموافقة صريحة: الـ HUD ولا كيعطي 15 قدرة، وصفحة `/health` ولا كتعرض `jarvis_backend_provider` كـ ℹ️ معلومة. الـ 20 S8 ولاو مسجّلين كـ endpoints خفيفة للـ brain المحلي بـ سندات قراءة فقط؛ الـ model trial باقي `needs_user_data` بصدق لأن الملفات الصغيرة غير موجودة محلياً. الجولة اليومية تفعّلت من دابا بـ `SUNNAVOK_DAILY_AGENTS` على الساعة 05:00. الـ passkey تّأكدات، والـ 10 قدرات القديمة كلها `live_verified`، بما فيهم `local-learning` و`chat-auth`. ما طلبنا منك لا كلمة مرور ولا سر، وما كتبنا أي سر فأي ملف، وما تدار أي SMS ولا مكالمة ولا فعل جهاز غير قراءة الحالة.
+التغييرات الجديدة كتدير commit/push بوتوماتيكيا بعد الجولة الخضراء، بموافقة صريحة منك. `:5100` و`:5000` أُعيد تحميلهم بموافقة صريحة: الـ HUD ولا كيعطي 15 قدرة، وصفحة `/health` ولا كتعرض `jarvis_backend_provider` كـ ℹ️ معلومة. الـ 20 S8 ولاو مسجّلين كـ endpoints خفيفة للـ brain المحلي بـ سندات قراءة فقط؛ الـ model trial باقي `needs_user_data` بصدق لأن الملفات الصغيرة غير موجودة محلياً. الجولة اليومية تفعّلت من دابا بـ `SUNNAVOK_DAILY_AGENTS` على الساعة 05:00. الـ passkey تّأكدات، والـ 10 قدرات القديمة كلها `live_verified`، بما فيهم `local-learning` و`chat-auth`. ما طلبنا منك لا كلمة مرور ولا سر، وما كتبنا أي سر فأي ملف، وما تدار أي SMS ولا مكالمة ولا فعل جهاز غير قراءة الحالة.
