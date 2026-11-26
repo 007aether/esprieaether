@@ -631,10 +631,44 @@ class AuthStore:
             )
         return token
 
-    def user_for_session(self, token: str | None) -> str | None:
-        if not token or len(token) > 128 or not token.isascii() or not all(
+    @staticmethod
+    def _valid_session_token(token: str | None) -> bool:
+        return bool(token and len(token) <= 128 and token.isascii() and all(
             character.isalnum() or character in "-_" for character in token
-        ):
+        ))
+
+    def auth_status_snapshot(self, token: str | None) -> dict:
+        """Toutes les lectures de /api/auth/status dans une seule connexion SQLite."""
+        now = int(time.time())
+        with self._session() as db:
+            credential_count = int(db.execute(
+                "SELECT (SELECT COUNT(*) FROM credentials) + (SELECT COUNT(*) FROM passwords)"
+            ).fetchone()[0])
+            password_login = db.execute("SELECT 1 FROM passwords LIMIT 1").fetchone() is not None
+            row = None
+            if self._valid_session_token(token):
+                row = db.execute(
+                    "SELECT s.user_id, s.last_seen FROM sessions s JOIN users u ON u.id=s.user_id "
+                    "WHERE s.token_hash=? AND s.expires_at>? AND u.disabled_at IS NULL",
+                    (self._token_hash(token), now),
+                ).fetchone()
+                if row and now - int(row["last_seen"] or 0) > 300:
+                    db.execute("UPDATE sessions SET last_seen=? WHERE token_hash=?", (now, self._token_hash(token)))
+            user_id = str(row["user_id"]) if row else None
+            user_row = db.execute(
+                "SELECT * FROM users WHERE id=? AND disabled_at IS NULL", (user_id,)
+            ).fetchone() if user_id else None
+            result = {
+                "credential_count": credential_count,
+                "password_login": password_login,
+                "user_id": user_id,
+                "display_name": user_row["display_name"] if user_row else None,
+                "is_admin": bool(user_row and user_row["role"] == "admin"),
+            }
+        return result
+
+    def user_for_session(self, token: str | None) -> str | None:
+        if not self._valid_session_token(token):
             return None
         now = int(time.time())
         with self._session() as db:

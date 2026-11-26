@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""J118 — ordonnanceur local quotidien des quatre agents.
+"""J118/J141 — ordonnanceur local quotidien des cinq agents.
 
 Une seule journée au plus par intervalle de 24 h. Les quatre agents sont
 appelés en local, chacun dans son propre ``try`` : une panne n'empêche pas
@@ -34,6 +34,8 @@ TASKS = [
      "label": "الهندسة العكسية"},
     {"id": "learning", "module": "learning_agent", "func": "learn",
      "label": "وكيل التعلّم"},
+    {"id": "conversation-report", "module": "conversation_report_agent", "func": "run",
+     "label": "وكيل التقارير فـ Atulya"},
 ]
 
 _SECRET = re.compile(

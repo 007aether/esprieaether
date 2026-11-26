@@ -698,12 +698,30 @@ def gesture_asset_status(models_dir: Path) -> dict:
                      "Gesture runtime needs setup" if model_ready else "Gesture model needs setup"}
 
 
+def voice_prefix_enabled(config: Settings) -> bool:
+    """Le cache KV vocal ne sert que le runtime llama local, jamais un gateway distant."""
+    if not (config.models_dir / "chat").is_dir():
+        return False
+    provider = (config.model_provider or "").strip().lower()
+    if provider not in {"", "local", "llama", "llama.cpp", "llama-cpp"}:
+        return False
+    base = (config.model_base_url or "").strip()
+    if base:
+        try:
+            port = urlsplit(base).port
+        except ValueError:
+            return False
+        if port is not None and port != 11435:
+            return False
+    return True
+
+
 def create_app(settings: Settings | None = None) -> FastAPI:
     """Create the API app; API routes take precedence over the static page."""
     config = settings or Settings.from_environment()
     brain = _make_brain(config)
     webui_channel = WebUIChannel(brain) if brain is not None else None
-    local_model_present = (config.models_dir / "chat").is_dir()
+    voice_prefix_active = voice_prefix_enabled(config)
     voice = LocalVoice(
         config.models_dir,
         stt_model=os.environ.get("ATULYA_STT_MODEL", "base").strip() or "base",
@@ -823,6 +841,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.add_middleware(LocalApiSecurityMiddleware)
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=config.trusted_hosts)
     app.state.settings = config
+    app.state.voice_prefix_enabled = voice_prefix_active
     app.state.auth_store = auth_store
     app.state.brain = brain
     app.state.webui_channel = webui_channel
@@ -1247,20 +1266,21 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/api/auth/status")
     async def auth_status(request: Request) -> JSONResponse:
         token = request.cookies.get(SESSION_COOKIE)
-        user_id = await asyncio.to_thread(auth_store.user_for_session, token)
+        snapshot = await asyncio.to_thread(auth_store.auth_status_snapshot, token)
+        setup_required = snapshot["credential_count"] == 0
         return JSONResponse(
             {
-                "setup_required": await asyncio.to_thread(auth_store.credential_count) == 0,
+                "setup_required": setup_required,
                 "setup_token_required": bool(
                     config.public_origin
                     and urlsplit(config.public_origin).hostname not in {"localhost", "127.0.0.1", "::1"}
-                    and await asyncio.to_thread(auth_store.credential_count) == 0
+                    and setup_required
                 ),
                 "setup_token_configured": bool(config.admin_setup_token),
-                "password_login": await asyncio.to_thread(auth_store.has_password),
-                "authenticated": user_id is not None,
-                "user": (await asyncio.to_thread(auth_store.user, user_id))["display_name"] if user_id else None,
-                "is_admin": bool(user_id and await asyncio.to_thread(auth_store.is_admin, user_id)),
+                "password_login": snapshot["password_login"],
+                "authenticated": snapshot["user_id"] is not None,
+                "user": snapshot["display_name"],
+                "is_admin": snapshot["is_admin"],
             },
             headers={"Cache-Control": "no-store"},
         )
@@ -2003,19 +2023,24 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
             raise HTTPException(status_code=503, detail="Gesture recognition model is not installed.")
         return FileResponse(model_path, media_type="application/octet-stream", filename="gesture_recognizer.task")
 
-    def host_numbers() -> dict[str, object] | None:
-        """Raw host metrics for gauges; None (not made-up numbers) when unavailable."""
+    def host_snapshot() -> dict | None:
+        """Une seule lecture psutil par requête ; None quand elle est indisponible."""
         try:
-            host = sysmon.snapshot(str(config.data_dir))
+            return sysmon.snapshot(str(config.data_dir))
         except Exception:
+            return None
+
+    def host_numbers(host: dict | None = None) -> dict[str, object] | None:
+        """Raw host metrics for gauges; None (not made-up numbers) when unavailable."""
+        host = host_snapshot() if host is None else host
+        if host is None:
             return None
         return {key: host.get(key) for key in (
             "cpu_percent", "memory_percent", "memory_used_gb", "memory_total_gb", "disk_percent")}
 
-    def system_tiles() -> dict[str, dict[str, object]]:
-        try:
-            host = sysmon.snapshot(str(config.data_dir))
-        except Exception:
+    def system_tiles(host: dict | None = None) -> dict[str, dict[str, object]]:
+        host = host_snapshot() if host is None else host
+        if host is None:
             return {}
         def level(percent: float) -> str:
             return "error" if percent >= 90 else "busy" if percent >= 75 else "ready"
@@ -2059,6 +2084,7 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
         owner_id = str(http_request.state.user_id)
         if not await asyncio.to_thread(auth_store.is_admin, owner_id):
             raise HTTPException(status_code=403, detail="System status is for the owner only.")
+        host = await asyncio.to_thread(host_snapshot)
         scheduled_reminders = await run_in_threadpool(reminders.list_for_user, owner_id, 1)
         next_reminder = scheduled_reminders[0] if scheduled_reminders else None
         meetings = []
@@ -2101,8 +2127,8 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                 "starts_at": "" if not meetings else str(meetings[0]["starts_at"]),
                 "due": due_meeting,
             },
-            **system_tiles(),
-            "system": host_numbers(),
+            **system_tiles(host),
+            "system": host_numbers(host),
             "issue": {
                 "state": "error" if issue_state["issue"] else "clear",
                 "label": issue_state["issue"]["message"] if issue_state["issue"] else "No active issues",
@@ -2417,8 +2443,8 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                 command_reply = await command_plugins.dispatch(
                     latest_user,
                     PluginContext(
-                        WEB_OWNER, personal_memory, calendar, str(http_request.state.user_id), history=history,
-                        is_admin=await asyncio.to_thread(auth_store.is_admin, str(http_request.state.user_id)),
+                        WEB_OWNER, personal_memory, calendar, chat_user, history=history,
+                        is_admin=chat_admin,
                     ),
                 )
             except PluginExecutionError:
@@ -2470,7 +2496,7 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                 )
                 messages.insert(0, memory_context)
             action_view = action_queue.view()
-            owner = await asyncio.to_thread(auth_store.is_admin, str(http_request.state.user_id))
+            owner = chat_admin
             if owner:
                 other = await asyncio.to_thread(history.recent_elsewhere, "admin", request.conversation_id)
                 if other:
@@ -2627,7 +2653,7 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                     while ui_actions:
                         yield f"data: {json.dumps({'ui': ui_actions.pop(0)})}\n\n"
                     yield f"data: {json.dumps({'done': True, 'provider': brain.provider_name, 'model': brain.model_name})}\n\n"
-                    if request.mode == "voice" and local_model_present:
+                    if request.mode == "voice" and voice_prefix_active:
                         # Keep the voice prefix's KV cache across restarts (PLAN M1-B2).
                         from tools.plugins.brain.local_llm import LocalLlamaRuntime
                         asyncio.get_running_loop().run_in_executor(None, LocalLlamaRuntime.save_voice_prefix_once)

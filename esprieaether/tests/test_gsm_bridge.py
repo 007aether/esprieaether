@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
+from unittest import mock
 from pathlib import Path
 
 SRC = Path(__file__).resolve().parents[1] / "src"
@@ -230,6 +231,45 @@ class GsmBridgeTest(unittest.TestCase):
             report = gsm_bridge.scan(state_dir=Path(tmp), adb=ADB, runner=no_devices)
         self.assertEqual(report["status"], "needs_user_data")
         self.assertEqual(report["online"], 0)
+
+    def test_port_adb_local_est_5038_et_surchargeable(self) -> None:
+        with mock.patch.dict("os.environ", {}, clear=True):
+            self.assertEqual(gsm_bridge.adb_port(), "5038")
+            self.assertEqual(gsm_bridge.adb_env()["ANDROID_ADB_SERVER_PORT"], "5038")
+        with mock.patch.dict("os.environ", {"ESPRIE_GSM_ADB_PORT": "5040"}):
+            self.assertEqual(gsm_bridge.adb_port(), "5040")
+            self.assertEqual(gsm_bridge.adb_env()["ANDROID_ADB_SERVER_PORT"], "5040")
+
+    def test_run_transmet_le_port_adb_sans_changer_les_arguments(self) -> None:
+        proc = mock.Mock(returncode=0, stdout="ok", stderr="")
+        argv = [ADB, "-s", "serial-1", "shell", "dumpsys", "battery"]
+        with mock.patch.object(gsm_bridge.subprocess, "run", return_value=proc) as run:
+            output = gsm_bridge._run(argv, 8, None)
+        self.assertEqual(output, "ok")
+        self.assertEqual(run.call_args.kwargs["env"]["ANDROID_ADB_SERVER_PORT"], "5038")
+        self.assertEqual(run.call_args.args[0], argv)
+
+    def test_scan_publie_les_etats_adb_et_le_port(self) -> None:
+        devices = """List of devices attached
+9887a839464e323432     device product:dreamqltesq model:SM_G950U transport_id:1
+ce0517153333862301     device product:dreamltexx model:SM_G950F transport_id:2
+ce071717c2d7403f0c     offline
+deadbeef00000000     unauthorized
+"""
+
+        def runner(argv, timeout):
+            if "devices" in argv:
+                return devices
+            return fake_runner([])(argv, timeout)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            report = gsm_bridge.scan(state_dir=Path(tmp), adb=ADB, runner=runner)
+            saved = json.loads((Path(tmp) / "gsm_status.json").read_text(encoding="utf-8"))
+        self.assertEqual(report["adbPort"], "5038")
+        self.assertEqual(report["adbStates"], {"device": 2, "offline": 1, "unauthorized": 1})
+        self.assertEqual(report["online"], 2)
+        self.assertEqual(saved["adbStates"]["unauthorized"], 1)
+        self.assertEqual(saved["adbPort"], "5038")
 
 
 if __name__ == "__main__":

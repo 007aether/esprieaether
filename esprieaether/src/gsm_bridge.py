@@ -24,6 +24,7 @@ DEFAULT_ADB = Path(
         r"C:\Program Files (x86)\panda_android\tools\adb.exe",
     )
 )
+DEFAULT_ADB_PORT = "5038"
 INVENTORY_CMD = (
     "getprop ro.build.version.release; getprop ro.build.version.sdk; "
     "getprop ro.product.cpu.abi; id; free -m | head -2; "
@@ -70,6 +71,18 @@ def _stamp(moment: datetime) -> str:
     return moment.isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
+def adb_port() -> str:
+    """Port du serveur ADB local, configurable sans quitter le lecture seule."""
+    return os.environ.get("ESPRIE_GSM_ADB_PORT", DEFAULT_ADB_PORT)
+
+
+def adb_env() -> dict:
+    """Environnement des sous-processus adb, sans toucher aux appareils."""
+    env = os.environ.copy()
+    env["ANDROID_ADB_SERVER_PORT"] = adb_port()
+    return env
+
+
 def adb_path(explicit: Union[str, Path, None] = None) -> Optional[Path]:
     """Résout l'adb local, sans jamais télécharger quoi que ce soit."""
     if explicit is not None:
@@ -91,6 +104,7 @@ def _run(argv: List[str], timeout: int, runner: Optional[Runner]) -> str:
         raise RuntimeError("commande adb non autorisée (lecture seule)")
     proc = subprocess.run(
         argv, capture_output=True, text=True, errors="replace", timeout=timeout,
+        env=adb_env(),
     )
     if proc.returncode != 0:
         raise RuntimeError((proc.stderr or proc.stdout).strip()[:300] or "adb a échoué")
@@ -379,6 +393,7 @@ def scan(
     errors: List[str] = []
     online = 0
     discovered = 0
+    adb_states = {"device": 0, "offline": 0, "unauthorized": 0}
     statuses: List[dict] = []
 
     if device_list is None:
@@ -388,6 +403,9 @@ def scan(
         try:
             rows = parse_devices(_run([str(device_list), "devices", "-l"], 10, runner))
             discovered = len(rows)
+            for row in rows:
+                if row["state"] in adb_states:
+                    adb_states[row["state"]] += 1
             ready = [row for row in rows if row["state"] == "device"]
             online = len(ready)
             for row in ready:
@@ -425,6 +443,8 @@ def scan(
         "checkedAt": _stamp(checked),
         "expiresAt": _stamp(checked + timedelta(days=TTL_DAYS)),
         "adb": str(device_list) if device_list else None,
+        "adbPort": adb_port(),
+        "adbStates": adb_states,
         "discovered": discovered,
         "online": online,
         "devices": statuses,

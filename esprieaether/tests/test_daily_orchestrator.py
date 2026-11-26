@@ -1,4 +1,4 @@
-"""J118 — TDD : ordonnanceur local quotidien des quatre agents (sans réseau)."""
+"""J118/J141 — TDD : ordonnanceur local quotidien des cinq agents (sans réseau)."""
 from __future__ import annotations
 
 import io
@@ -31,16 +31,18 @@ class DailyOrchestratorTests(unittest.TestCase):
                     raise RuntimeError("panne locale simulée")
                 return {"ok": True, "status": "live_verified", "id": name}
             return runner
-        return {name: make(name) for name in ("github-scout", "doctor", "rea", "learning")}
+        return {name: make(name) for name in (
+            "github-scout", "doctor", "rea", "learning", "conversation-report")}
 
-    def test_run_once_appelle_les_quatre_agents_et_ecrit_le_rapport(self) -> None:
+    def test_run_once_appelle_les_cinq_agents_et_ecrit_le_rapport(self) -> None:
         from daily_orchestrator import run_once
         report = run_once(self.state, runners=self._runners(), now=NOW)
         self.assertTrue(report["ok"])
         self.assertEqual(report["status"], "live_verified")
         self.assertEqual([t["id"] for t in report["tasks"]],
-                         ["github-scout", "doctor", "rea", "learning"])
-        self.assertEqual(self.calls, ["github-scout", "doctor", "rea", "learning"])
+                         ["github-scout", "doctor", "rea", "learning", "conversation-report"])
+        self.assertEqual(self.calls,
+                         ["github-scout", "doctor", "rea", "learning", "conversation-report"])
         raw = (self.state / "daily_orchestrator_report.json").read_text(encoding="utf-8")
         saved = json.loads(raw)
         self.assertEqual(saved["checked_at"], "2026-11-26T12:00:00+00:00")
@@ -74,16 +76,17 @@ class DailyOrchestratorTests(unittest.TestCase):
         second = run_due(self.state, runners=self._runners(), now=NOW + timedelta(hours=2))
         self.assertFalse(second["ran"])
         self.assertEqual(second["report"]["status"], "live_verified")
-        self.assertEqual(len(self.calls), 4)
+        self.assertEqual(len(self.calls), 5)
 
     def test_liste_des_taches_est_locale_et_ordonee(self) -> None:
         from daily_orchestrator import TASKS
         self.assertEqual([t["id"] for t in TASKS],
-                         ["github-scout", "doctor", "rea", "learning"])
+                         ["github-scout", "doctor", "rea", "learning", "conversation-report"])
         for task in TASKS:
             self.assertTrue(task["module"].startswith("esprieaether.") or
                             task["module"] in {"github_scout", "doctor_agent",
-                                               "rea_agent", "learning_agent"})
+                                               "rea_agent", "learning_agent",
+                                               "conversation_report_agent"})
             self.assertNotIn("http", task["module"])
 
     def test_main_affiche_un_resume_par_arabe(self) -> None:

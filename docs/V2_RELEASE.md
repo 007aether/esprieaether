@@ -261,6 +261,24 @@
   **11–156 ms** après, `/api/auth/status` de **~1200 ms** à **~20 ms**.
   Trois gardes TDD (RED puis GREEN), `tests/voice/test_tts.py` 3/3 vert et
   redémarrage de `:8501` avec le même environnement local.
+- GSM local et Atulya (J140) : le port ADB local est fixé à 5038 (surchargeable
+  par `ESPRIE_GSM_ADB_PORT`) et transmis au sous-processus sans modifier les
+  arguments en lecture seule ; `gsm_status.json` publie `adbPort` et
+  `adbStates`. Côté Atulya, `/api/auth/status` lit un seul snapshot SQLite au
+  lieu de six connexions, le cache KV vocal ne cible que le runtime llama local
+  (11435) et jamais le gateway `31416`, `/api/status` ne collecte qu'une fois
+  les métriques hôte, et `/api/chat` ne vérifie `is_admin` qu'une fois.
+  Douze gardes TDD (RED puis GREEN), Python **327 OK** et Atulya
+  **575 passed / 3 skipped**.
+- Wakil / rapport local (J141) : `conversation_report_agent.py` lit une liste
+  blanche de fichiers `state`, masque les secrets, écrit un rapport honnête dans
+  la conversation `wakil_reports` de l'archive Atulya (rôle `assistant`) et
+  dépose les suggestions dans `action_requests.json` au état `proposed`.
+  Rien n'est exécuté automatiquement : la décision se fait dans le HUD.
+  Le rapport est limité à une fois par 24 h et le cinquième agent est branché
+  sur `daily_orchestrator.py`. Cinq gardes TDD (RED puis GREEN) plus les cinq
+  gardes de l'ordonnanceur mis à jour ; un passage réel a écrit 1 message et
+  4 propositions `proposed` visibles sur `/api/jarvis/approvals`.
 - Aucun upload, token cloud ou clé externe.
 
 ## شنو ناقص (MADA YANKOSONA)
@@ -299,5 +317,7 @@
 | المدد تحت الضغط (J134/J135) | `live_verified` بعد اختبارات موجهة | MCP stdio ولّى `read_timeout_seconds=30` وCLI المرجع `timeout: 120000`؛ قبل كانو 5 و15 ثانية وكيطيحو فـ `initialize timed out` / `status=null`. حارسان TDD RED ثم GREEN، والاختبار الموجه رجع أخضر. |
 | فحص الأسرار فالبوت (J136) | `live_verified` بعد اختبار موجه | البوت ولا كيميّز بين literals ديال الاختبار والسر الحقيقي؛ قبل كان كيمنع commit بـ 3 أسطر falses. حارس TDD RED ثم GREEN 5/5. |
 | استجابة Atulya (J137/J139) | `live_verified` بعد قياس حي | `/api/health` و`/api/auth/status` ولاو كيتجاوزوا SQLite فالسondes، وSHA-256 ديال 7 ملفات TTS ولا كيتحسب غير مرة. القياس: health من 600–6700ms لـ 11–156ms، auth/status من ~1200ms لـ ~20ms. سondes الواجهة من 3s لـ 10s. 3 حوارس TDD RED ثم GREEN، و`:8501` أُعيد تحميله بنفس البيئة المحلية. |
+| GSM وAtulya (J140) | `live_verified` بعد اختبارات وسموك حي | منفذ ADB تثبّت على 5038 و كيتورّث للـ subprocess بلا ما نبدّل argv القراءة، و`gsm_status.json` ولا كيعرض `adbPort` و`adbStates` (20/0/0). Atulya ولا كيقرا `auth/status` بـ snapshot واحد، وprefix الصوت كيبقى غير للـ runtime المحلي 11435، و`/api/status` كياخد snapshot واحد، و`is_admin` ولا مرة واحدة فـ `/api/chat`. 12 حارس TDD RED ثم GREEN، Python 327 OK وAtulya 575 pass/3 skipped. |
+| وكيل التقارير (J141) | `live_verified` بعد تشغيل محلي حقيقي | `wakil_reports` فـ أرشيف Atulya كيستقبل تقرير شامل من 17 ملف state + المانيفست، مرة كل 24 ساعة. المقترحات كيبقاو `proposed` فـ HUD حتى توافق؛ ما كاين أي تنفيذ ولا شبكة ولا سر. 10 حوارس TDD خضرة، وتمرير حي رجّع 1 رسالة و4 مقترحات معلّقة. |
 
 التغييرات الجديدة كتدير commit/push بوتوماتيكيا بعد الجولة الخضراء، بموافقة صريحة منك. `:5100` و`:5000` أُعيد تحميلهم بموافقة صريحة: الـ HUD ولا كيعطي 15 قدرة، وصفحة `/health` ولا كتعرض `jarvis_backend_provider` كـ ℹ️ معلومة. الـ 20 S8 ولاو مسجّلين كـ endpoints خفيفة للـ brain المحلي بـ سندات قراءة فقط؛ الـ model trial باقي `needs_user_data` بصدق لأن الملفات الصغيرة غير موجودة محلياً. الجولة اليومية تفعّلت من دابا بـ `SUNNAVOK_DAILY_AGENTS` على الساعة 05:00. الـ passkey تّأكدات، والـ 10 قدرات القديمة كلها `live_verified`، بما فيهم `local-learning` و`chat-auth`. ما طلبنا منك لا كلمة مرور ولا سر، وما كتبنا أي سر فأي ملف، وما تدار أي SMS ولا مكالمة ولا فعل جهاز غير قراءة الحالة.
