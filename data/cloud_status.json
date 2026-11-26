@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-25T16:14:50.599755+00:00",
+  "cloud_last_run": "2026-11-26T01:12:16.866025+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Secure Your Crypto Exchange Account: The 10-Step Lockdown",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "FinCEN Breach: The Agency Holding Your Exchange Reports Got Hacked",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Section 301 Tariffs: Trump&#8217;s Tariff Comeback and What It Means for Bitcoin",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "How to Buy GRAM (Toncoin) for the First Time",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Is a Crypto Exchange Safe? The 10-Point Checklist I Run Before Depositing",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Kicked Out of Trump Gala: My VIP Night Ended in a Rainy Parking Lot",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "When to Quit an Airdrop Farm (and When to Stay)",
       "source": "https://airdropalert.com/feed"
     },
     {
