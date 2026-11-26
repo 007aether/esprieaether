@@ -12,6 +12,9 @@ sys.path.insert(0, str(BASE_DIR))
 
 _STATE_TMP = tempfile.TemporaryDirectory()
 os.environ["ESPRIA_STATE_DIR"] = _STATE_TMP.name
+# Test isolé : les vraies sources documentaires peuvent exister sur la machine ;
+# on pointe vers un dossier vide pour garder le scénario « aucune source ».
+os.environ["AGENT_SOURCES_DIR"] = str(Path(_STATE_TMP.name) / "sources-empty")
 os.environ["WEB_SECRET_KEY"] = "test-secret-not-a-real-key"
 os.environ["FREELLMAPI_KEY"] = "test-key-placeholder"
 

@@ -154,27 +154,28 @@
 | Interface darija | HUD, panneaux, musique, réglages et briefing sans libellés anglais visibles | `live_verified` |
 | Page autonome / fenêtre flottante | `/atulya/` local + fenêtre déplaçable, sans CDN ni `onclick` | `live_verified` |
 | Approbation HUD | aucun `PUT` loopback réel dans `action_audit.jsonl` | `implemented_unverified` |
-| Sources documentaires | aucun dossier `legal`/`fiscal`/`travail` fourni | `needs_user_data` |
+| Sources documentaires | 6 PDF réels `legal`/`fiscal`/`travail` ingérés depuis GitHub (lecture seule) | `live_verified` |
 | MCP externe | aucun endpoint HTTPS externe fiable ni octroi outil-par-outil fourni | `needs_user_data` |
 
 ## Tests
 
-- Node : **1060 pass / 0 fail** sur 68 fichiers `tests\*.test.mjs`,
+- Node : **1066 pass / 0 fail** sur 70 fichiers `tests\*.test.mjs` (dont J114 et J115),
   dont le test d'origine du pont `J100`, le contrôle darija des pages
   `jarvis.html` / `system.html`, le délai `120000` du relais, la fermeture
   clavier de la fenêtre flottante, les contrôles J106/J108, le contrôle J110
   des services en démarrage manuel et les 2 contrôles J111 du relais et du
   lanceur Claude Code local.
 - Node ciblé (pont, darija, install/update) : **157/157** (155 + les 2 contrôles J106/J108).
-- Python unittest : **253 tests OK / 0 fail** (246 + J110 + J111 + J112), dont le service
+- Python unittest : **259 tests OK / 0 fail** (246 + J110 + J111 + J112 + J114), dont le service
   sentinel qui ne traite plus `dsh_bridge` et `llm_gateway` comme des erreurs,
   la journalisation sans secret des parts FreeLLMAPI et les cartes `active` de `/api/health`.
 - Atulya pytest : **566 passed, 3 skipped**, 16 subtests passés (0 fail),
   dont les 7 contrôles darija (J105) et les 6 nouveaux contrôles J106/J109
   (journal sans secret, reprise de flux, erreurs d'outils, plafond de résultat,
-  compression de l'historique). La dernière re-vérification pytest est bloquée
-  par l'absence du module local `webauthn` dans cet interpréteur, sans lien avec
-  ces changements ; le résultat 566 reste celui de la passe validée.
+  compression de l'historique). Passe rejouée dans le `.venv` local avec
+  `webauthn` installé et le Node local `.tools\node-v26.13.1` sur `PATH` ;
+  le premier essai sans ce Node avait donné un faux `test_web_ui_still_needs_approval`
+  (« Node is unavailable »), corrigé par le `PATH` sans toucher au code.
 - Aucun upload, token cloud ou clé externe.
 
 ## شنو ناقص (MADA YANKOSONA)
@@ -184,7 +185,7 @@
 | العنصر | الحالة | شنو كيتطلب باش يتحقق |
 |---|---|---|
 | `external_mcp` | `needs_user_data` | عنوان HTTPS خارجي حقيقي + منح كل أداة علىحدة بعد `Test & discover tools`. |
-| `documentary-sources` | `needs_user_data` | مسارات حقيقية لملفات `legal` / `fiscal` / `travail` باش يتحسب SHA-256 ديالها. |
+| `documentary-sources` | `live_verified` | 6 ملفات حقيقية من GitHub (قراءة فقط) تّدخلو بـ `sources_intake.py`؛ `backlog_scout_report.json` كيقول `missing_sources=[]` و`checked_at=2026-11-26T03:48:47Z`. `legal/legal_rapport.pdf`، `fiscal/{CGI-2025,LOI de finances 2026,PCM}.pdf`، `travail/{Code du travail,Guide}.pdf`؛ الشّا ديال كل واحد محفوظ فـ `sources_intake.jsonl`. |
 | APK / جهاز `iip` | `needs_user_data` | APK أو ربط جهاز أندرويد؛ الجهاز دابا `offline`، `seen=0`، وطلب `ping` مصفوف بلا إيصال. ما تدار أي فعل جهاز. |
 | `barge-in` | `live_verified` | سطر `barge_in` فـ `voice_inbox.jsonl` بـ `2026-11-26T02:55:19Z`؛ صوتك (عبر ميكرو المتصفح، RMS `0.0468`) قطّع WAV محلي بـ SAPI كان كيتشغّل فالمتصفح. |
 | سجل توقف الجواب | `implemented_unverified` | أول توقف حقيقي كيكتب سطر فـ `brain_errors.jsonl`؛ الاختبارات غطّات الحالات، ولكن ما وقعش توقف جديد فالسيرفر الحي بعد TDD. |
@@ -194,9 +195,10 @@
 | عدّاد `failed_runs` / `timed_out_runs` التراكمي | `live_verified` | ولا معلومة فالـ dashboard؛ الإنذار كيبقى للفشل القريب غير (تحقّق بعد إعادة تحميل `api/server.mjs`). |
 | self-heal ديال الـ supervisor | `live_verified` | `keep_alive.ps1` تحمّل بموافقة صريحة؛ `ReleaseMutex` وقت الإقلاع ما منعش المشرف من الخدمة. |
 | `/api/chat` غير-streaming | تحسّن بعد موافقة | الـ `timeout` ولا `120000` فـ `serve_g0dm0d3.mjs`، الـ UI كيستعمل streaming. |
-| محادثة كاملة بمصادقة | غير متحقق | كيتطلب passkey ديال المالك؛ تحققنا غير بـ `401 {"detail":"Sign in with your Atulya passkey to continue."}` بدل `403`. هاد الـ `401` هو بوابة المصادقة العادية على `/api/*` (ما كاينش خطأ)، والـ `/api/health` كيرجّع `200`. |
-| حزمة unittest محلية (root) | تحقّق بعد J112 | **253 passed / 0 fail**؛ كان فيها اختبار واحد كيتوقع صيغة فرنسية قديمة فـ `persona.py`، تصلّح باش يقرأ الدارجة بحروف عربية. |
+| محادثة كاملة بمصادقة (J115) | `live_verified` | بعد إيماءة passkey ديالك فـ `http://localhost:8501/index.html`، `/api/auth/status` ولا كيرجّع `authenticated=true`, `user=Admin`, `is_admin=true`. جرّينا جولين بـ `stream=true` فـ `/api/chat` على `conversation_id=mada_yankosona_20261126`، وكل جول رجّع `200` مع `done=true` و`provider=Configured model provider` و`model=dolphin3` (محلي، بلا شبكة). `chat_auth_selfcheck.json` فيه `method=passkey`, `turns=2`, `checkedAt=2026-11-26T03:49:59Z`، بلا cookie ولا token مكتوبين. القدرة `chat-auth` و`/api/jarvis/chat-auth` تّختارو بـ TDD (RED 3/3 ثم GREEN 3/3)؛ أُعيد تحميل `:5100` بموافقة صريحة وبانو فالـ HUD الحي. |
+| حزمة unittest محلية (root) | تحقّق بعد J112 | **253 passed / 0 fail**؛ كان فيها اختبار واحد كيتوقع صيغة فرنسية قديمة فـ `persona.py`، تصلّح باش يقرأ الدارجة بحروف عربية. Atulya pytest ولا **566 passed / 3 skipped** بـ `.venv` محلي و Node على `PATH`. |
 | حصة FreeLLMAPI / Claude Code (J111) | `live_verified` | بعد إعادة تحميل mock والتجميع، `/health` وSSE ديال `:8766` كيبانو فيهم `FRELLMAPI` و`CLAUDE CODE` مع `shares`؛ `/freellm/health` و`/freellm/stats` خدمو على `:3860`؛ `start_claude_code_local.ps1` رجّع `OK` بموديل `claude-sonnet-4-5` بلا اتصال خارجي. |
 | بطاقات الخدمات (J112) | `live_verified` | `/api/health` الحي ولا كيرجّع `jarvis=active`، `jarvis_backend=active`، `jarvis_backend_provider=local-brain`، `ollama_reason=active` و`web=active`. |
+| وكيل التعلّم المحلي (J114) | `live_verified` فالـ selfcheck | `learning_selfcheck.json` فيه `engine=local_only`، `learnedCount=70`، 6 مصادر محلية (`run_ledger.json`, `action_audit.jsonl`, `voice_inbox.jsonl`, `action_requests.json`, `sources_intake.jsonl`, `vault_memory`). التعلّم كيقرأ غير، كيمرّر عبر `policy_gate` بـ `internet=false`، كيخفي الأسرار قبل التخزين، وما كيقترح أي تنفيذ. `/api/jarvis/learning` والقدرة `local-learning` تّختارو بـ TDD (RED 3/3 ثم GREEN 3/3)؛ أُعيد تحميل `:5100` بموافقة صريحة وبانو فالـ HUD الحي. |
 
-اللي تقدر تعطيني دابا: عنوان MCP خارجي، مسارات المستندات، APK/جهاز مربوط، ولا passkey للتحقق من المحادثة. غير ما تعطينيش كلمات مرور ولا أسرار فالملفات.
+اللي باقي غير commit/push للتغييرات، وأعطيتني عليها موافقة صريحة. الـ passkey تّأكدات، وخدمة `:5100` أُعيد تحميلها وبانو فيها الـ 10 قدرات كلها `live_verified`، بما فيهم `local-learning` و`chat-auth`. ما طلبنا منك لا كلمة مرور ولا سر، وما كتبنا أي سر فأي ملف.

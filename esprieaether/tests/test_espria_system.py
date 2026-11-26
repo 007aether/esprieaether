@@ -17,6 +17,8 @@ sys.path.insert(0, str(BASE_DIR))
 
 _TMP = tempfile.TemporaryDirectory()
 os.environ["ESPRIA_STATE_DIR"] = _TMP.name
+# Test isolé : ne pas dépendre des sources réelles éventuellement ingérées.
+os.environ["AGENT_SOURCES_DIR"] = str(Path(_TMP.name) / "sources-empty")
 os.environ["WEB_SECRET_KEY"] = "test-secret-not-a-real-key"
 os.environ["FREELLMAPI_KEY"] = "test-key-placeholder"
 os.environ["FREE_LLM_BASE_URL"] = "http://127.0.0.1:31415"

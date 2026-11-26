@@ -25,6 +25,8 @@ const DEFAULT_VAULT_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'vault_memory
 const DEFAULT_EGRESS_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'egress_selfcheck.json');
 const DEFAULT_BARGE_REVIEW = join(ROOT, 'esprieaether', 'state', 'barge_in_review.json');
 const DEFAULT_WAKE_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'wake_selfcheck.json');
+const DEFAULT_LEARNING_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'learning_selfcheck.json');
+const DEFAULT_CHAT_AUTH_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'chat_auth_selfcheck.json');
 const VOICE_STAGES = new Set(['idle', 'listening', 'thinking', 'speaking']);
 const MANUAL_DOWN_SERVICES = new Set(['dsh_bridge', 'llm_gateway']);
 const REPORT_FILES = {
@@ -116,6 +118,64 @@ function lineStamp(row) {
     if (typeof value === 'string' && Number.isFinite(Date.parse(value))) return value;
   }
   return null;
+}
+
+const LEARNING_SECRET = /(api[_-]?key|token|password|secret|authorization|bearer)\s*[=:]\s*["']?[^,\s"'}\]]+/gi;
+function scrubLearning(text) {
+  return String(text || '').replace(LEARNING_SECRET, '$1=<redacted>').slice(0, 400);
+}
+
+/** Projection publique d'un rapport d'apprentissage : champs blanchis uniquement. */
+function publicLearning(report) {
+  if (!report || report.ok !== true) {
+    return {
+      available: false,
+      reason: report ? 'no_fresh_evidence' : 'no_data_source',
+      checkedAt: report ? lineStamp(report) : null,
+    };
+  }
+  const lessons = Array.isArray(report.lessons) ? report.lessons.slice(0, 10) : [];
+  return {
+    available: true,
+    checkedAt: lineStamp(report),
+    status: String(report.status || 'implemented_unverified'),
+    engine: 'local_only',
+    learnedCount: Number.isFinite(Number(report.learnedCount)) ? Number(report.learnedCount) : 0,
+    sources: (Array.isArray(report.sources) ? report.sources : []).slice(0, 12).map((v) => scrubLearning(v)),
+    lessons: lessons.map((item) => ({
+      kind: scrubLearning(item && item.kind).slice(0, 40),
+      source: scrubLearning(item && item.source).slice(0, 40),
+      detail: scrubLearning(item && item.detail),
+    })),
+    topNote: typeof report.topNote === 'string' ? report.topNote.slice(0, 120) : null,
+    policy: report.policy && typeof report.policy === 'object'
+      ? {
+        allowed: Boolean(report.policy.allowed),
+        mode: String(report.policy.mode || ''),
+        reason: scrubLearning(report.policy.reason),
+      }
+      : null,
+  };
+}
+
+/** Projection publique de la preuve de conversation authentifiée. */
+function publicChatAuth(report) {
+  if (!report || report.ok !== true) {
+    return {
+      available: false,
+      reason: report ? 'no_fresh_evidence' : 'no_data_source',
+      checkedAt: report ? lineStamp(report) : null,
+    };
+  }
+  return {
+    available: true,
+    checkedAt: lineStamp(report),
+    method: String(report.method || ''),
+    authenticated: Boolean(report.authenticated),
+    turns: Number.isFinite(Number(report.turns)) ? Number(report.turns) : 0,
+    conversationId: typeof report.conversationId === 'string'
+      ? report.conversationId.slice(0, 80) : null,
+  };
 }
 
 /** Une ligne périmée n'est pas une preuve : on cherche la dernière ligne fraîche. */
@@ -514,6 +574,8 @@ export async function buildCapabilities(
     voiceInboxPath = DEFAULT_VOICE_INBOX,
     egressPath = DEFAULT_EGRESS_EVIDENCE,
     bargeReviewPath = DEFAULT_BARGE_REVIEW,
+    learningPath = DEFAULT_LEARNING_EVIDENCE,
+    chatAuthPath = DEFAULT_CHAT_AUTH_EVIDENCE,
   } = {}
 ) {
   if (actionRequestsPath === DEFAULT_ACTION_REQUESTS) await ensureActionRequests(actionRequestsPath);
@@ -525,6 +587,8 @@ export async function buildCapabilities(
   const voice = await readJsonFile(voiceStatusPath);
   const egress = await readJsonFile(egressPath);
   const bargeReview = await readJsonFile(bargeReviewPath);
+  const learning = await readJsonFile(learningPath);
+  const chatAuth = await readJsonFile(chatAuthPath);
   const invalidBarge = new Set(
     (Array.isArray(bargeReview?.invalidTimestamps) ? bargeReview.invalidTimestamps : [])
       .map((value) => Date.parse(value)).filter(Number.isFinite)
@@ -669,6 +733,44 @@ export async function buildCapabilities(
   } else {
     add('local-egress-guard', 'not_available', egressEvidence,
       'Produire une preuve de sortie locale avec le selfcheck egress');
+  }
+
+  const learningEvidence = learning ? [
+    { source: 'learning_selfcheck.json', field: 'engine', value: String(learning.engine || '') },
+    { source: 'learning_selfcheck.json', field: 'learnedCount', value: Number(learning.learnedCount) || 0 },
+    { source: 'learning_selfcheck.json', field: 'sources', value: (learning.sources || []).join(',') },
+  ] : [
+    { source: 'learning_selfcheck.json', field: 'selfcheck', value: 'no_data_source' },
+  ];
+  if (learning && learning.ok === true && learning.engine === 'local_only'
+      && isFreshLine(learning)) {
+    add('local-learning', 'live_verified', learningEvidence,
+      'Relancer l’apprentissage après de nouvelles actions locales', lineStamp(learning));
+  } else if (learning) {
+    add('local-learning', 'implemented_unverified', learningEvidence,
+      'Relancer le selfcheck d’apprentissage local', lineStamp(learning));
+  } else {
+    add('local-learning', 'not_available', learningEvidence,
+      'Produire une preuve d’apprentissage local avec learning_agent.py');
+  }
+
+  const chatAuthEvidence = chatAuth ? [
+    { source: 'chat_auth_selfcheck.json', field: 'method', value: String(chatAuth.method || '') },
+    { source: 'chat_auth_selfcheck.json', field: 'authenticated', value: Boolean(chatAuth.authenticated) },
+    { source: 'chat_auth_selfcheck.json', field: 'turns', value: Number(chatAuth.turns) || 0 },
+  ] : [
+    { source: 'chat_auth_selfcheck.json', field: 'selfcheck', value: 'no_data_source' },
+  ];
+  if (chatAuth && chatAuth.ok === true && chatAuth.method === 'passkey'
+      && chatAuth.authenticated === true && isFreshLine(chatAuth)) {
+    add('chat-auth', 'live_verified', chatAuthEvidence,
+      'Refaire une conversation avec passkey avant expiration de la preuve', lineStamp(chatAuth));
+  } else if (chatAuth) {
+    add('chat-auth', 'implemented_unverified', chatAuthEvidence,
+      'Renouveler la session passkey puis vérifier /api/chat', lineStamp(chatAuth));
+  } else {
+    add('chat-auth', 'not_available', chatAuthEvidence,
+      'Enregistrer un passkey puis prouver une conversation complète avec /api/chat');
   }
 
   return {
@@ -924,6 +1026,8 @@ export function createDashboardServer({
   voiceInboxPath = DEFAULT_VOICE_INBOX,
   egressPath = DEFAULT_EGRESS_EVIDENCE,
   bargeReviewPath = DEFAULT_BARGE_REVIEW,
+  learningPath = DEFAULT_LEARNING_EVIDENCE,
+  chatAuthPath = DEFAULT_CHAT_AUTH_EVIDENCE,
   atulyaDir = DEFAULT_ATULYA_DIR,
   voice = {},
   log = defaultLog,
@@ -980,8 +1084,22 @@ export function createDashboardServer({
             brainMetricsPath, actionRequestsPath, actionAuditPath, voiceStatusPath, voiceInboxPath,
             egressPath,
             bargeReviewPath,
+            learningPath,
+            chatAuthPath,
           })), requestId,
         });
+        return;
+      }
+
+      if (pathname === '/api/jarvis/learning' && req.method === 'GET') {
+        const report = await readJsonFile(learningPath);
+        send(res, 200, { ...publicLearning(report), requestId });
+        return;
+      }
+
+      if (pathname === '/api/jarvis/chat-auth' && req.method === 'GET') {
+        const proof = await readJsonFile(chatAuthPath);
+        send(res, 200, { ...publicChatAuth(proof), requestId });
         return;
       }
 
