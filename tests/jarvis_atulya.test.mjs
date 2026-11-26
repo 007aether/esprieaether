@@ -98,7 +98,8 @@ test('J80: atulya-core est live_verified seulement avec une preuve HTTP locale',
   const live = await buildAtulya(VENDOR, async () => ({
     status: 'ok', brain_configured: true,
     voice_ready: false, speech_ready: false, vision_ready: false,
-  }), join(ROOT, 'state', '__no_vision_evidence__.json'));
+  }), join(ROOT, 'state', '__no_vision_evidence__.json'), undefined, undefined,
+    join(ROOT, 'state', '__no_wake_evidence__.json'));
   const core = live.features.find((item) => item.id === 'atulya-core');
   assert.equal(core.status, 'live_verified');
   assert.equal(core.evidence[0].source, 'GET http://127.0.0.1:8501/api/health');
@@ -131,7 +132,8 @@ test('J87: les flags réels de /api/health remplacent l’inventaire des fichier
   const ready = await buildAtulya(VENDOR, async () => ({
     status: 'ok', brain_configured: true,
     voice_ready: true, speech_ready: true, vision_ready: true,
-  }), join(ROOT, 'state', '__no_vision_evidence__.json'));
+  }), join(ROOT, 'state', '__no_vision_evidence__.json'), undefined, undefined,
+    join(ROOT, 'state', '__no_wake_evidence__.json'));
   for (const id of ['atulya-voice', 'atulya-speech']) {
     const item = ready.features.find((entry) => entry.id === id);
     assert.equal(item.status, 'live_verified', `${id} devrait être live_verified`);

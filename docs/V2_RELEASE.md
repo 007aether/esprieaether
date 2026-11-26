@@ -149,8 +149,8 @@
 | Accueil darija | `GET :3860/atulya/assistant.js` → 200 ; `مساء الخير.` présent, `Good evening.` absent | `live_verified` |
 | Répondeur unique | superviseur 24/7 en `voice=atulya-only`, daemon JARVIS hérité arrêté | `live_verified` |
 | Modèle chat | 1 396 198 496 octets, SHA-256 `57a10858…a1d8` | intact |
-| Barge-in | aucun événement `barge_in` réel enregistré | `implemented_unverified` |
-| Éveil vocal | essai micro réel 12 s sur `hey_jarvis_v0.1.onnx` : `hits=0`, `peak=0.053711` (seuil 0.18), entrée `1` = `Microphone (Realtek(R) Audio), MME` ; mesure séparée `peak=0.011353`, `RMS=0.000767` → `wake_selfcheck.json` `ok=false` | `implemented_unverified` |
+| Barge-in | `voice_inbox.jsonl` : `reason=barge_in` à `2026-11-26T02:55:19Z` (voix réelle captée par le micro du navigateur, WAV SAPI local lu dans le navigateur puis interrompu) | `live_verified` |
+| Éveil vocal | `wake_selfcheck.json` `ok=true`, `hits=1`, score `0.7876` à `2.4 s`, `peak=0.266724` sur 11,9 s de micro navigateur (`getUserMedia`, 16 kHz) lu par `hey_jarvis_v0.1.onnx` ; STT local : « Hi Jarvis. » Aucun envoi réseau. | `live_verified` |
 | Interface darija | HUD, panneaux, musique, réglages et briefing sans libellés anglais visibles | `live_verified` |
 | Page autonome / fenêtre flottante | `/atulya/` local + fenêtre déplaçable, sans CDN ni `onclick` | `live_verified` |
 | Approbation HUD | aucun `PUT` loopback réel dans `action_audit.jsonl` | `implemented_unverified` |
@@ -186,9 +186,9 @@
 | `external_mcp` | `needs_user_data` | عنوان HTTPS خارجي حقيقي + منح كل أداة علىحدة بعد `Test & discover tools`. |
 | `documentary-sources` | `needs_user_data` | مسارات حقيقية لملفات `legal` / `fiscal` / `travail` باش يتحسب SHA-256 ديالها. |
 | APK / جهاز `iip` | `needs_user_data` | APK أو ربط جهاز أندرويد؛ الجهاز دابا `offline`، `seen=0`، وطلب `ping` مصفوف بلا إيصال. ما تدار أي فعل جهاز. |
-| `barge-in` | `implemented_unverified` | حدث `barge_in` حقيقي أثناء الكلام؛ الميكرو ما عطاش إشارة فوق العتبة 0.18. |
+| `barge-in` | `live_verified` | سطر `barge_in` فـ `voice_inbox.jsonl` بـ `2026-11-26T02:55:19Z`؛ صوتك (عبر ميكرو المتصفح، RMS `0.0468`) قطّع WAV محلي بـ SAPI كان كيتشغّل فالمتصفح. |
 | سجل توقف الجواب | `implemented_unverified` | أول توقف حقيقي كيكتب سطر فـ `brain_errors.jsonl`؛ الاختبارات غطّات الحالات، ولكن ما وقعش توقف جديد فالسيرفر الحي بعد TDD. |
-| `atulya-wake` | `implemented_unverified` | كلمة إيقاظ حقيقية تطلع `hits>0` فـ `wake_selfcheck.json`؛ التجربة الأخيرة 12 ثانية عطات `hits=0`. |
+| `atulya-wake` | `live_verified` | `wake_selfcheck.json` : `ok=true`, `hits=1`, score `0.7876` فـ `2.4 s`، `peak=0.266724`؛ كلمة «Hey Jarvis» قلتيها و الميكرو ديال المتصفح سجّلها محلياً بلا شبكة. |
 | موافقة HUD | `live_verified` | `action_audit.jsonl` فيه `act-9ec94b52eb`: `proposed->approved_once` فـ `2026-11-25T09:03:37.179Z` من `hud`. |
 | تنبيهات `guard_failed/python` و`guard_failed/endpoints` | `live_verified` | من بعد إعادة التحميل بموافقة صريحة، `quality_guard_report.json` ولا `checks.endpoints=true` و`guard_failed/python` و`guard_failed/endpoints` و`SYS_01/SYS_02` اختفاو. |
 | عدّاد `failed_runs` / `timed_out_runs` التراكمي | `live_verified` | ولا معلومة فالـ dashboard؛ الإنذار كيبقى للفشل القريب غير (تحقّق بعد إعادة تحميل `api/server.mjs`). |
