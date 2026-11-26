@@ -34,6 +34,12 @@ class NewAgentsRegistryTest(unittest.TestCase):
             self.assertIn(agent_id, registry)
             self.assertTrue(registry[agent_id]["mission"])
 
+    def test_registry_publishes_gsm_fleet_agents(self) -> None:
+        registry = {row["id"]: row for row in self.client.get("/agents").json()}
+        for agent_id in ("gsm-fleet", "gsm-model-trial"):
+            self.assertIn(agent_id, registry)
+            self.assertTrue(registry[agent_id]["mission"])
+
     def test_agent_reads_only_its_own_public_selfcheck(self) -> None:
         report = {"ok": True, "status": "live_verified", "checked_at": "2026-11-26T12:00:00+00:00",
                   "detected": 3, "fixed": 2, "next": "sans redémarrage"}

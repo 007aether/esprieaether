@@ -574,6 +574,8 @@ AGENTS = {
     "doctor": "Doctor — détection et correction locale",
     "rea": "REA — ingénierie inverse locale",
     "github-scout": "Veille GitHub — lecture seule",
+    "gsm-fleet": "Flotte GSM — endpoints légers locaux",
+    "gsm-model-trial": "Essai on-device — un seul S8",
 }
 
 # Rôle + travail concret de chaque agent. Les agents documentaires ne produisent
@@ -590,6 +592,8 @@ AGENT_DUTIES = {
     "doctor": ("Détecter les erreurs locales, appliquer un correctif sûr et prévenir Atulya aussitôt.", "selfcheck"),
     "rea": ("Lire le code local et produire un blueprint d'ingénierie inverse, sans le modifier.", "selfcheck"),
     "github-scout": ("Explorer jusqu'à 1000 dépôts GitHub par jour en lecture seule et en tirer des leçons publiques.", "selfcheck"),
+    "gsm-fleet": ("Utiliser les 20 S8 comme endpoints légers du brain local, par lectures ADB sans APK ni root.", "selfcheck"),
+    "gsm-model-trial": ("Préparer un essai on-device sur un seul S8 avec des fichiers locaux, sans téléchargement.", "selfcheck"),
 }
 
 # Rapports publics locales produits par les trois nouveaux agents. Aucune
@@ -598,6 +602,8 @@ AGENT_REPORTS = {
     "doctor": "doctor_selfcheck.json",
     "rea": "rea_selfcheck.json",
     "github-scout": "github_scout_report.json",
+    "gsm-fleet": "gsm_status.json",
+    "gsm-model-trial": "gsm_model_trial.json",
 }
 
 

@@ -34,12 +34,23 @@ BATTERY = """Current Battery Service state:
   status: 2
 """
 
+INVENTORY = """9
+28
+arm64-v8a
+uid=2000(shell) gid=2000(shell) groups=2000(shell),1004(input)
+		total        used        free      shared     buffers
+Mem:             3347       2828         519           1          25
+/dev/block/dm-1  53G  3.3G   50G   7% /data
+"""
+
 
 def fake_runner(calls):
     def run(argv, timeout):
         calls.append(list(argv))
         if argv[-1] == "-l" and "devices" in argv:
             return DEVICES
+        if argv[-1] == gsm_bridge.INVENTORY_CMD:
+            return INVENTORY
         if argv[-2:] == ["shell", "getprop"]:
             return PROPS
         if argv[-3:] == ["shell", "dumpsys", "battery"]:
@@ -87,6 +98,54 @@ class GsmBridgeTest(unittest.TestCase):
         self.assertEqual(saved["status"], "live_verified")
         self.assertNotIn("token=", json.dumps(saved).lower())
 
+    def test_scan_juge_la_capacite_reelle_des_telephones(self) -> None:
+        calls = []
+        with tempfile.TemporaryDirectory() as tmp:
+            report = gsm_bridge.scan(state_dir=Path(tmp), adb=ADB, runner=fake_runner(calls))
+        row = report["devices"][0]
+        self.assertEqual(row["android"], "9")
+        self.assertEqual(row["sdk"], "28")
+        self.assertEqual(row["abi"], "arm64-v8a")
+        self.assertFalse(row["root"])
+        self.assertEqual(row["free_mb"], 519)
+        self.assertEqual(row["storage_gb"], 50)
+        self.assertFalse(row["termux"])
+        self.assertEqual(report["android"], "9")
+        self.assertEqual(report["free_mb_min"], 519)
+        self.assertEqual(report["storage_gb_min"], 50)
+        self.assertEqual(report["root_count"], 0)
+        self.assertEqual(report["termux_count"], 0)
+
+    def test_scan_publie_un_plan_de_worker_leger(self) -> None:
+        calls = []
+        with tempfile.TemporaryDirectory() as tmp:
+            report = gsm_bridge.scan(state_dir=Path(tmp), adb=ADB, runner=fake_runner(calls))
+        worker = report["worker"]
+        self.assertEqual(worker["mode"], "thin_endpoint")
+        self.assertEqual(worker["ready"], 2)
+        self.assertTrue(worker["readOnly"])
+        self.assertEqual(set(worker["tasks"]), {"status", "battery", "props"})
+        self.assertTrue(worker["gateway"].startswith("http://127.0.0.1:"))
+        self.assertFalse(worker["heavyInference"])
+
+    def test_dispatch_refuse_une_tache_daction(self) -> None:
+        with self.assertRaises(ValueError):
+            gsm_bridge.dispatch_task(ADB, "serial-1", "sms", fake_runner([]))
+
+    def test_dispatch_execute_une_lecture_seule(self) -> None:
+        calls = []
+
+        def runner(argv, timeout):
+            calls.append(list(argv))
+            return BATTERY
+
+        result = gsm_bridge.dispatch_task(ADB, "serial-1", "battery", runner)
+        self.assertEqual(result["task"], "battery")
+        self.assertEqual(result["serial"], "serial-1")
+        self.assertIn("level: 87", result["output"])
+        self.assertTrue(result["readOnly"])
+        self.assertEqual(calls[0][3:], ["shell", "dumpsys", "battery"])
+
     def test_scan_nenvoie_aucune_commande_daction(self) -> None:
         calls = []
         with tempfile.TemporaryDirectory() as tmp:
@@ -96,7 +155,64 @@ class GsmBridgeTest(unittest.TestCase):
             self.assertNotIn("sms", tail)
             self.assertNotIn("call", tail)
             self.assertNotIn("input text", tail)
-            self.assertTrue(set(argv[3:]).issubset({"devices", "-l", "shell", "getprop", "dumpsys", "battery"}))
+            allowed = {"devices", "-l", "shell", "getprop", "dumpsys", "battery", gsm_bridge.INVENTORY_CMD}
+            self.assertTrue(set(argv[3:]).issubset(allowed))
+
+    def test_probe_fleet_execute_les_taches_de_lecture(self) -> None:
+        calls = []
+        with tempfile.TemporaryDirectory() as tmp:
+            report = gsm_bridge.probe_fleet(
+                state_dir=Path(tmp), adb=ADB, runner=fake_runner(calls),
+                serials=["serial-1", "serial-2"], tasks=("battery",),
+            )
+            saved = json.loads((Path(tmp) / "gsm_workers.json").read_text(encoding="utf-8"))
+        self.assertEqual(report["status"], "live_verified")
+        self.assertEqual(report["online"], 2)
+        self.assertTrue(report["readOnly"])
+        self.assertEqual(len(report["samples"]), 2)
+        self.assertEqual(saved["status"], "live_verified")
+        for argv in calls:
+            self.assertTrue(set(argv[3:]).issubset({
+                "shell", "getprop", "dumpsys", "battery", gsm_bridge.INVENTORY_CMD,
+            }))
+
+    def test_probe_fleet_sans_appareil_demande_les_donnees(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            report = gsm_bridge.probe_fleet(
+                state_dir=Path(tmp), adb=ADB, runner=fake_runner([]), serials=[]
+            )
+        self.assertEqual(report["status"], "needs_user_data")
+        self.assertEqual(report["online"], 0)
+
+    def test_model_preflight_sans_prerequis_demande_des_donnees(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            report = gsm_bridge.model_preflight(
+                state_dir=Path(tmp), binary_dirs=[], model_dirs=[]
+            )
+            saved = json.loads((Path(tmp) / "gsm_model_trial.json").read_text(encoding="utf-8"))
+        self.assertEqual(report["status"], "needs_user_data")
+        self.assertFalse(report["ready"])
+        self.assertIn("arm64", report["reason"])
+        self.assertEqual(saved["status"], "needs_user_data")
+
+    def test_model_preflight_avec_prerequis_reste_non_verifie(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            runtime = root / "runtime"
+            models = root / "models"
+            runtime.mkdir()
+            models.mkdir()
+            binary = runtime / "llama-cli-arm64"
+            binary.write_bytes(b"\x7fELFlocal")
+            model = models / "tiny-Q4.gguf"
+            model.write_bytes(b"GGUF" + b"\0" * 128)
+            report = gsm_bridge.model_preflight(
+                state_dir=root, binary_dirs=[runtime], model_dirs=[models]
+            )
+        self.assertEqual(report["status"], "implemented_unverified")
+        self.assertTrue(report["ready"])
+        self.assertTrue(report["binary"].endswith("llama-cli-arm64"))
+        self.assertTrue(report["model"].endswith("tiny-Q4.gguf"))
 
     def test_scan_sans_adb_est_not_available(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

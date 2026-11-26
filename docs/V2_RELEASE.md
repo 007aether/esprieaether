@@ -199,12 +199,12 @@
 | Ingénierie inverse (26/11) | `rea_selfcheck.json` `ok=true`, `files=7960`, blueprint `docs/rea/esprieaether/blueprint.md`, wrappers sans subprocess | `live_verified` |
 | Apprentissage (26/11) | `learning_selfcheck.json` `learnedCount=96`, 6 sources dont `github_scout_report.json`, `engine=local_only` ; le top 3 des sujets/langages est appris avec ses comptages (`topic=ai:338`, `language=Python:463`, …) | `live_verified` |
 | Tournée quotidienne (26/11) | `daily_orchestrator_report.json` `status=live_verified`, 4 agents, date-gate 24 h, tâche `SUNNAVOK_DAILY_AGENTS` à 05:00 et passe `-Once` journalisée dans `daily_agents.log` | `live_verified` |
-| HUD des nouveaux agents | `:5100` بعد إعادة التحميل كيرجّع **14 قدرة**: `github-scout`، `doctor`، `rea`، `gsm-fleet` مضافين للـ 10 القديمة بـ evidence وTTL 7 أيام | `live_verified` |
+| HUD des nouveaux agents | `:5100` بعد إعادة تحميل بموافقة كيرجّع **15 قدرة**: `github-scout`، `doctor`، `rea`، `gsm-fleet`، `gsm-model-trial` مضافين للـ 10 القديمة بـ evidence وTTL 7 أيام | `live_verified` |
 
 ## Tests
 
-- Node : **1077 pass / 0 fail** sur les fichiers `tests\*.test.mjs` (dont J114,
-  J115, les 3 contrôles `jarvis_new_agents.test.mjs`, les 3 de `gsm_capability`
+- Node : **1079 pass / 0 fail** sur les fichiers `tests\*.test.mjs` (dont J114,
+  J115, les 3 contrôles `jarvis_new_agents.test.mjs`, les 5 de `gsm_capability`
   et les 3 de `health_provider`), dont le test d'origine
   du pont `J100`, le contrôle darija des pages `jarvis.html` / `system.html`,
   le délai `120000` du relais, la fermeture clavier de la fenêtre flottante,
@@ -212,12 +212,14 @@
   les 2 contrôles J111 du relais et du lanceur Claude Code local, et les
   contrôles d'installation du manifeste à 811 fichiers.
 - Node ciblé (pont, darija, install/update) : **157/157** (155 + les 2 contrôles J106/J108).
-- Python unittest : **315 tests OK / 0 fail**, dont 259 tests de base (J110 à
-  J114), 9 contrôles du docteur, 4 contrôles d'auto-réparation (J123), 7 contrôles
-  de la veille GitHub (dont CLI cp1252 et reprise 403/429), 6 contrôles de
-  l'ordonnanceur, 6 contrôles `rea` + 4 compatibilité, 4 contrôles du registre
-  des agents et 3 contrôles d'apprentissage depuis la veille (J122/J127, listes et comptages). Aucun test
-  supprimé ni affaibli.
+- Python unittest : **324 tests OK / 0 fail** à la deuxième passe (la première
+  a eu un `test_voice_daemon` transitoire, vert seul et vert à la reprise), dont
+  259 tests de base (J110 à J114), 9 contrôles du docteur, 4 contrôles
+  d'auto-réparation (J123), 7 contrôles de la veille GitHub (dont CLI cp1252 et
+  reprise 403/429), 6 contrôles de l'ordonnanceur, 6 contrôles `rea` + 4
+  compatibilité, 5 contrôles du registre des agents, 14 contrôles du pont GSM
+  (J129/J130) et 3 contrôles d'apprentissage depuis la veille (J122/J127, listes
+  et comptages). Aucun test supprimé ni affaibli.
 - Atulya pytest : **566 passed, 3 skipped**, 16 subtests passés (0 fail),
   dont les 7 contrôles darija (J105) et les 6 nouveaux contrôles J106/J109
   (journal sans secret, reprise de flux, erreurs d'outils, plafond de résultat,
@@ -252,8 +254,10 @@
 | الوكلاء الجدد (J117–J126) | `live_verified` فالـ selfchecks | `github_scout_report.json` (1000 مستودع، قراءة فقط)، `doctor_selfcheck.json` (2 إصلاحات، بلا إعادة تشغيل)، `rea_selfcheck.json` (7960 ملف)، `learning_selfcheck.json` (73 درس، 6 مصادر)، و`daily_orchestrator_report.json` (4 agents، date-gate 24 h). تّسجلو فـ `AGENTS`/`AGENT_DUTIES` وفـ `/agents/{id}/run` قراءة فقط. |
 | الجدولة اليومية | `live_verified` محلياً | المهمة `SUNNAVOK_DAILY_AGENTS` كتدير passe واحدة كل نهار على 05:00 عبر `daily_agents.ps1 -Once` تحت mutex؛ كيمرّر على الطبيب والهندسة العكسية والتعلّم، بلا Telegram ولا push ولا شبكة غير GitHub القراءة. ما تدار أي فعل جهاز. |
 | تنظيف سر قديم (26/11) | `live_verified` | كلمة مرور كانت مكتوبة فـ `aether-v7/src/esprie/tools.py` و`browser_automation.py` تّشالت من ملفات الشغل؛ ولاّت تُقرأ وقت التشغيل من `ESPRIE_EMAIL` / `ESPRIE_PASSWORD`. ما كُتب أي سر فأي ملف جديد. السر باقي فـ git history القديم، ومحوه كيتطلب rewrite تاريخي بموافقة منفصلة. |
-| HUD بـ 14 قدرة | `live_verified` بعد إعادة تحميل بموافقة | `api/server.mjs` و`espria_system.py` فيهما `github-scout` و`doctor` و`rea` و`gsm-fleet` بـ evidence وTTL 7 أيام؛ `:5100` ولا كيرجّع 14 قدرة، منهم `gsm-fleet` بـ `online=20` و`readOnly=true`. |
-| فلوت GSM المحلي (J129) | `live_verified` فالـ state | `gsm_status.json` : `ok=true`، `online=20`، `discovered=20`، `errors=[]`، `readOnly=true`، `checkedAt=2026-11-26T07:12:53Z`. 20 جهاز Samsung S8/S8+ عبر `adb.exe` المحلي، COM43–COM60. غير `sms` ولا `call` ولا `input text`؛ `SIM=ABSENT` على أغلبية الأجهزة (معلومة، لا فعل). |
+| HUD بـ 15 قدرة | `live_verified` بعد إعادة تحميل بموافقة | `api/server.mjs` و`espria_system.py` فيهما `github-scout` و`doctor` و`rea` و`gsm-fleet` و`gsm-model-trial` بـ evidence وTTL 7 أيام؛ `:5100` ولا كيرجّع 15 قدرة، منهم `gsm-fleet` بـ `online=20` و`probeStatus=live_verified` و`gsm-model-trial` بـ `needs_user_data`. |
+| فلوت GSM المحلي (J129/J130) | `live_verified` فالـ state | `gsm_status.json` : `ok=true`، `online=20`، `errors=[]`، `readOnly=true`، `worker.mode=thin_endpoint`، `worker.ready=20`، `checkedAt=2026-11-26T07:50:04Z`. 20 جهاز Samsung S8/S8+ عبر `adb.exe` المحلي، COM43–COM60. الجرد: Android **9** (SDK 28)، `arm64-v8a`، `root_count=0`، `termux_count=0`، RAM فارغة **175–517 MB**، تخزين **50 GB**. غير `sms` ولا `call` ولا `input text`؛ `SIM=ABSENT` على أغلبية الأجهزة. |
+| عُقد GSM الخفيفة (J130) | `live_verified` فالـ state | `gsm_workers.json` : `ok=true`، `online=20`، `succeeded=60`، `tasks=status,battery,props`، `errors=[]`، `readOnly=true`، `gateway=http://127.0.0.1:31416`، `checkedAt=2026-11-26T07:50:25Z`. ولا APK، ولا root، ولا تثبيت، ولا مكالمة/SMS. الأفكار من PhoneBorg (Apache-2.0) و`llama-cpp-android-node` استُعملت للفكرة غير كُنسخ منها شيء. |
+| تجربة موديل صغير على جهاز واحد (J130) | `needs_user_data` | `gsm_model_trial.json` : `ready=false`، `reason=binaire llama.cpp arm64 ELF local absent; GGUF local <= 600 Mo absent`، `checkedAt=2026-11-26T07:50:16Z`. أصغر GGUF محلي كاين **1331 MB** (Qwen 2B Q4)، كبير على RAM المتاحة؛ ما كاين لا NDK ولا بinaire arm64. ما تدار أي download، والخطوة كتطلب توفير الملفات محلياً ثم benchmark على جهاز واحد. |
 | بطاقة `jarvis_backend_provider` (J129) | `live_verified` | `/health` كيرجّع `local-brain` كاسم مزوّد؛ الواجهة ولا كتعرضو بـ ℹ️ معلومة محايدة وما كتحسبوش فعدّاد الخدمات (6/6 بدل 6/7). ما بقاتش كبان 🔴. |
 
-اللي باقي غير commit/push للتغييرات الجديدة. `:5100` و`:5000` أُعيد تحميلهم بموافقة صريحة: الـ HUD ولا كيعطي 14 قدرة، وصفحة `/health` ولا كتعرض `jarvis_backend_provider` كـ ℹ️ معلومة. الجولة اليومية تفعّلت من دابا بـ `SUNNAVOK_DAILY_AGENTS` على الساعة 05:00. الـ passkey تّأكدات، والـ 10 قدرات القديمة كلها `live_verified`، بما فيهم `local-learning` و`chat-auth`. ما طلبنا منك لا كلمة مرور ولا سر، وما كتبنا أي سر فأي ملف، وما تدار أي SMS ولا مكالمة ولا فعل جهاز غير قراءة الحالة.
+اللي باقي غير commit/push للتغييرات الجديدة؛ ما خذتش موافقة عليهم دابا. `:5100` و`:5000` أُعيد تحميلهم بموافقة صريحة: الـ HUD ولا كيعطي 15 قدرة، وصفحة `/health` ولا كتعرض `jarvis_backend_provider` كـ ℹ️ معلومة. الـ 20 S8 ولاو مسجّلين كـ endpoints خفيفة للـ brain المحلي بـ سندات قراءة فقط؛ الـ model trial باقي `needs_user_data` بصدق لأن الملفات الصغيرة غير موجودة محلياً. الجولة اليومية تفعّلت من دابا بـ `SUNNAVOK_DAILY_AGENTS` على الساعة 05:00. الـ passkey تّأكدات، والـ 10 قدرات القديمة كلها `live_verified`، بما فيهم `local-learning` و`chat-auth`. ما طلبنا منك لا كلمة مرور ولا سر، وما كتبنا أي سر فأي ملف، وما تدار أي SMS ولا مكالمة ولا فعل جهاز غير قراءة الحالة.

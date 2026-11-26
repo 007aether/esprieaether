@@ -31,6 +31,8 @@ const DEFAULT_SCOUT_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'github_scout
 const DEFAULT_DOCTOR_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'doctor_selfcheck.json');
 const DEFAULT_REA_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'rea_selfcheck.json');
 const DEFAULT_GSM_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_status.json');
+const DEFAULT_WORKER_PROBE_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_workers.json');
+const DEFAULT_MODEL_TRIAL_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_model_trial.json');
 const VOICE_STAGES = new Set(['idle', 'listening', 'thinking', 'speaking']);
 const MANUAL_DOWN_SERVICES = new Set(['dsh_bridge', 'llm_gateway']);
 const REPORT_FILES = {
@@ -584,6 +586,8 @@ export async function buildCapabilities(
     doctorPath = DEFAULT_DOCTOR_EVIDENCE,
     reaPath = DEFAULT_REA_EVIDENCE,
     gsmPath = DEFAULT_GSM_EVIDENCE,
+    workerProbePath = DEFAULT_WORKER_PROBE_EVIDENCE,
+    modelTrialPath = DEFAULT_MODEL_TRIAL_EVIDENCE,
   } = {}
 ) {
   if (actionRequestsPath === DEFAULT_ACTION_REQUESTS) await ensureActionRequests(actionRequestsPath);
@@ -601,6 +605,8 @@ export async function buildCapabilities(
   const doctor = await readJsonFile(doctorPath);
   const rea = await readJsonFile(reaPath);
   const gsm = await readJsonFile(gsmPath);
+  const workerProbe = await readJsonFile(workerProbePath);
+  const modelTrial = await readJsonFile(modelTrialPath);
   const invalidBarge = new Set(
     (Array.isArray(bargeReview?.invalidTimestamps) ? bargeReview.invalidTimestamps : [])
       .map((value) => Date.parse(value)).filter(Number.isFinite)
@@ -817,8 +823,31 @@ export async function buildCapabilities(
     ['online', (row) => Number(row.online) || 0],
     ['discovered', (row) => Number(row.discovered) || 0],
     ['readOnly', (row) => row.readOnly === true],
+    ['workerMode', (row) => String(row.worker?.mode || '')],
+    ['workersReady', (row) => Number(row.worker?.ready) || 0],
+    ['probeStatus', (row) => String(workerProbe?.status || 'no_probe')],
     ['status', (row) => String(row.status || '')],
   ], 'Relancer le scan GSM local en lecture seule (adb devices/getprop)');
+  const modelEvidence = modelTrial
+    ? [
+      { source: 'gsm_model_trial.json', field: 'status', value: String(modelTrial.status || '') },
+      { source: 'gsm_model_trial.json', field: 'ready', value: modelTrial.ready === true },
+      { source: 'gsm_model_trial.json', field: 'target', value: String(modelTrial.target || 'un seul appareil') },
+    ]
+    : [{ source: 'gsm_model_trial.json', field: 'selfcheck', value: 'no_data_source' }];
+  if (modelTrial?.status === 'needs_user_data') {
+    add('gsm-model-trial', 'needs_user_data', modelEvidence,
+      'Fournir localement un llama.cpp arm64 ELF et un GGUF <=600 Mo', lineStamp(modelTrial));
+  } else if (modelTrial) {
+    agentProof('gsm-model-trial', modelTrial, 'gsm_model_trial.json', [
+      ['status', (row) => String(row.status || '')],
+      ['ready', (row) => row.ready === true],
+      ['target', (row) => String(row.target || 'un seul appareil')],
+    ], 'Benchmarker un seul S8 avec les fichiers locaux avant toute généralisation');
+  } else {
+    add('gsm-model-trial', 'not_available', modelEvidence,
+      'Produire un état local gsm_model_trial.json sans téléchargement');
+  }
 
   return {
     checkedAt: new Date().toISOString(),
