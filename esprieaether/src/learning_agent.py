@@ -198,6 +198,14 @@ def _source_lessons(state: Path) -> List[dict]:
     return lessons
 
 
+def _count(value: object) -> int:
+    """Convertit un comptage en entier sans jamais lever d'exception."""
+    try:
+        return int(str(value))
+    except (TypeError, ValueError):
+        return 0
+
+
 def _scout_lessons(state: Path) -> List[dict]:
     """Retient les sujets et langages vus dans la veille GitHub (lecture seule)."""
     report = _read_json(state / "github_scout_report.json")
@@ -210,13 +218,23 @@ def _scout_lessons(state: Path) -> List[dict]:
                                f"projets examinés={scanned} en lecture seule"))
     for key in ("topics", "languages"):
         values = report.get(key)
-        if not isinstance(values, list):
-            continue
-        for value in values[:3]:
-            text = _scrub(value)
-            if text:
-                lessons.append(_lesson("scout", "github_scout_report.json",
-                                       f"{key[:-1]}={text}"))
+        label = key[:-1]
+        if isinstance(values, dict):
+            # Le rapport réel stocke des comptages ; on retient le top 3.
+            ranked = sorted(
+                ((_scrub(name), _scrub(count)) for name, count in values.items()),
+                key=lambda pair: (-_count(pair[1]), pair[0]),
+            )[:3]
+            for name, count in ranked:
+                if name and count and count != "0":
+                    lessons.append(_lesson("scout", "github_scout_report.json",
+                                           f"{label}={name}:{count}"))
+        elif isinstance(values, list):
+            for value in values[:3]:
+                text = _scrub(value)
+                if text:
+                    lessons.append(_lesson("scout", "github_scout_report.json",
+                                           f"{label}={text}"))
     return lessons
 
 
