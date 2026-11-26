@@ -8,7 +8,7 @@
   <div class="card stat">
     <div class="stat-label">الخدمات</div>
     <div class="stat-value" id="services-active">—</div>
-    <div class="stat-sub">نشطة / 4</div>
+    <div class="stat-sub">نشطة / <span id="services-total">4</span></div>
   </div>
   <div class="card stat">
     <div class="stat-label">Guardian</div>
@@ -83,13 +83,20 @@ async function loadHealth() {
       return;
     }
 
-    // 1. الخدمات
+    // 1. الخدمات — اسم المزوّد معلومة، ليس حالة خدمة : لا أحمر ولا عدّاد.
     const services = d.services || {};
-    const active = Object.values(services).filter(s => s === 'active').length;
-    document.getElementById('services-active').textContent = active;
+    const INFO_KEYS = new Set(['jarvis_backend_provider']);
+    const statusEntries = Object.entries(services).filter(([name]) => !INFO_KEYS.has(name));
+    const active = statusEntries.filter(([, st]) => st === 'active').length;
+    document.getElementById('services-active').textContent = String(active);
+    document.getElementById('services-total').textContent = String(statusEntries.length);
 
     let html = '';
     for (const [name, st] of Object.entries(services)) {
+      if (INFO_KEYS.has(name)) {
+        html += `<div class="info-row"><span>ℹ️ مزوّد الخلفية (${name})</span><b>${st}</b></div>`;
+        continue;
+      }
       const emoji = st === 'active' ? '🟢' : '🔴';
       html += `<div class="info-row"><span>${emoji} ${name}</span><b>${st}</b></div>`;
     }

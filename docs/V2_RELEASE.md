@@ -70,7 +70,7 @@
   avec rollback si les tests échouent ; WebUI, brain, auth et setup exigent
   toujours une approbation. Aucun SMS, appel ou action d'appareil envoyé.
 - **Packaging v2.1.6** : `package.json` et `manifest.json` en `2.1.6`,
-  **806 fichiers** inventoriés, ajout au manifest des modules locaux, des quatre
+  **811 fichiers** inventoriés, ajout au manifest des modules locaux, des quatre
   agents, du script de tournée, des outils Atulya et des rapports d'analyse.
 - **Répondeur unique (J97/J98)** : le superviseur 24/7 garde Atulya et le HUD en
   vie, et désactive le daemon vocal JARVIS hérité par défaut (`voice=atulya-only`).
@@ -199,19 +199,20 @@
 | Ingénierie inverse (26/11) | `rea_selfcheck.json` `ok=true`, `files=7960`, blueprint `docs/rea/esprieaether/blueprint.md`, wrappers sans subprocess | `live_verified` |
 | Apprentissage (26/11) | `learning_selfcheck.json` `learnedCount=96`, 6 sources dont `github_scout_report.json`, `engine=local_only` ; le top 3 des sujets/langages est appris avec ses comptages (`topic=ai:338`, `language=Python:463`, …) | `live_verified` |
 | Tournée quotidienne (26/11) | `daily_orchestrator_report.json` `status=live_verified`, 4 agents, date-gate 24 h, tâche `SUNNAVOK_DAILY_AGENTS` à 05:00 et passe `-Once` journalisée dans `daily_agents.log` | `live_verified` |
-| HUD des nouveaux agents | 13 capacités après rechargement de `:5100` : `github-scout`, `doctor`, `rea` ajoutés aux 10 existantes avec preuve TTL 7 jours | en attente de rechargement |
+| HUD des nouveaux agents | `:5100` بعد إعادة التحميل كيرجّع **14 قدرة**: `github-scout`، `doctor`، `rea`، `gsm-fleet` مضافين للـ 10 القديمة بـ evidence وTTL 7 أيام | `live_verified` |
 
 ## Tests
 
-- Node : **1069 pass / 0 fail** sur 71 fichiers `tests\*.test.mjs` (dont J114,
-  J115 et les 3 contrôles `jarvis_new_agents.test.mjs`), dont le test d'origine
+- Node : **1077 pass / 0 fail** sur les fichiers `tests\*.test.mjs` (dont J114,
+  J115, les 3 contrôles `jarvis_new_agents.test.mjs`, les 3 de `gsm_capability`
+  et les 3 de `health_provider`), dont le test d'origine
   du pont `J100`, le contrôle darija des pages `jarvis.html` / `system.html`,
   le délai `120000` du relais, la fermeture clavier de la fenêtre flottante,
   les contrôles J106/J108, le contrôle J110 des services en démarrage manuel,
   les 2 contrôles J111 du relais et du lanceur Claude Code local, et les
-  contrôles d'installation du manifeste à 806 fichiers.
+  contrôles d'installation du manifeste à 811 fichiers.
 - Node ciblé (pont, darija, install/update) : **157/157** (155 + les 2 contrôles J106/J108).
-- Python unittest : **306 tests OK / 0 fail**, dont 259 tests de base (J110 à
+- Python unittest : **315 tests OK / 0 fail**, dont 259 tests de base (J110 à
   J114), 9 contrôles du docteur, 4 contrôles d'auto-réparation (J123), 7 contrôles
   de la veille GitHub (dont CLI cp1252 et reprise 403/429), 6 contrôles de
   l'ordonnanceur, 6 contrôles `rea` + 4 compatibilité, 4 contrôles du registre
@@ -251,6 +252,8 @@
 | الوكلاء الجدد (J117–J126) | `live_verified` فالـ selfchecks | `github_scout_report.json` (1000 مستودع، قراءة فقط)، `doctor_selfcheck.json` (2 إصلاحات، بلا إعادة تشغيل)، `rea_selfcheck.json` (7960 ملف)، `learning_selfcheck.json` (73 درس، 6 مصادر)، و`daily_orchestrator_report.json` (4 agents، date-gate 24 h). تّسجلو فـ `AGENTS`/`AGENT_DUTIES` وفـ `/agents/{id}/run` قراءة فقط. |
 | الجدولة اليومية | `live_verified` محلياً | المهمة `SUNNAVOK_DAILY_AGENTS` كتدير passe واحدة كل نهار على 05:00 عبر `daily_agents.ps1 -Once` تحت mutex؛ كيمرّر على الطبيب والهندسة العكسية والتعلّم، بلا Telegram ولا push ولا شبكة غير GitHub القراءة. ما تدار أي فعل جهاز. |
 | تنظيف سر قديم (26/11) | `live_verified` | كلمة مرور كانت مكتوبة فـ `aether-v7/src/esprie/tools.py` و`browser_automation.py` تّشالت من ملفات الشغل؛ ولاّت تُقرأ وقت التشغيل من `ESPRIE_EMAIL` / `ESPRIE_PASSWORD`. ما كُتب أي سر فأي ملف جديد. السر باقي فـ git history القديم، ومحوه كيتطلب rewrite تاريخي بموافقة منفصلة. |
-| HUD بـ 13 قدرة | `implemented_unverified` فالملفات | `api/server.mjs` و`espria_system.py` فيهما `github-scout` و`doctor` و`rea` بـ evidence وTTL 7 أيام؛ خدمة `:5100` الشغّالة مازالة كتعطي 10 قدرات لأن الكود القديم محمّل فالذاكرة. إعادة التحميل كتطلب موافقة صريحة جديدة. |
+| HUD بـ 14 قدرة | `live_verified` بعد إعادة تحميل بموافقة | `api/server.mjs` و`espria_system.py` فيهما `github-scout` و`doctor` و`rea` و`gsm-fleet` بـ evidence وTTL 7 أيام؛ `:5100` ولا كيرجّع 14 قدرة، منهم `gsm-fleet` بـ `online=20` و`readOnly=true`. |
+| فلوت GSM المحلي (J129) | `live_verified` فالـ state | `gsm_status.json` : `ok=true`، `online=20`، `discovered=20`، `errors=[]`، `readOnly=true`، `checkedAt=2026-11-26T07:12:53Z`. 20 جهاز Samsung S8/S8+ عبر `adb.exe` المحلي، COM43–COM60. غير `sms` ولا `call` ولا `input text`؛ `SIM=ABSENT` على أغلبية الأجهزة (معلومة، لا فعل). |
+| بطاقة `jarvis_backend_provider` (J129) | `live_verified` | `/health` كيرجّع `local-brain` كاسم مزوّد؛ الواجهة ولا كتعرضو بـ ℹ️ معلومة محايدة وما كتحسبوش فعدّاد الخدمات (6/6 بدل 6/7). ما بقاتش كبان 🔴. |
 
-اللي باقي غير: (1) إعادة تحميل `:5100` باش يظهرو الـ 13 قدرة فالـ HUD الحي، و(2) commit/push للتغييرات الجديدة. كيهربو على موافقة صريحة منك، والجولة اليومية تفعّلت من دابا بـ `SUNNAVOK_DAILY_AGENTS` على الساعة 05:00. الـ passkey تّأكدات، والـ 10 قدرات القديمة كلها `live_verified`، بما فيهم `local-learning` و`chat-auth`. ما طلبنا منك لا كلمة مرور ولا سر، وما كتبنا أي سر فأي ملف، وما وقّعنا ولا دفعنا ولا أعدنا تحميل أي خدمة بلا إذن جديد.
+اللي باقي غير commit/push للتغييرات الجديدة. `:5100` و`:5000` أُعيد تحميلهم بموافقة صريحة: الـ HUD ولا كيعطي 14 قدرة، وصفحة `/health` ولا كتعرض `jarvis_backend_provider` كـ ℹ️ معلومة. الجولة اليومية تفعّلت من دابا بـ `SUNNAVOK_DAILY_AGENTS` على الساعة 05:00. الـ passkey تّأكدات، والـ 10 قدرات القديمة كلها `live_verified`، بما فيهم `local-learning` و`chat-auth`. ما طلبنا منك لا كلمة مرور ولا سر، وما كتبنا أي سر فأي ملف، وما تدار أي SMS ولا مكالمة ولا فعل جهاز غير قراءة الحالة.

@@ -30,6 +30,7 @@ const DEFAULT_CHAT_AUTH_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'chat_aut
 const DEFAULT_SCOUT_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'github_scout_report.json');
 const DEFAULT_DOCTOR_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'doctor_selfcheck.json');
 const DEFAULT_REA_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'rea_selfcheck.json');
+const DEFAULT_GSM_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_status.json');
 const VOICE_STAGES = new Set(['idle', 'listening', 'thinking', 'speaking']);
 const MANUAL_DOWN_SERVICES = new Set(['dsh_bridge', 'llm_gateway']);
 const REPORT_FILES = {
@@ -582,6 +583,7 @@ export async function buildCapabilities(
     githubScoutPath = DEFAULT_SCOUT_EVIDENCE,
     doctorPath = DEFAULT_DOCTOR_EVIDENCE,
     reaPath = DEFAULT_REA_EVIDENCE,
+    gsmPath = DEFAULT_GSM_EVIDENCE,
   } = {}
 ) {
   if (actionRequestsPath === DEFAULT_ACTION_REQUESTS) await ensureActionRequests(actionRequestsPath);
@@ -598,6 +600,7 @@ export async function buildCapabilities(
   const scout = await readJsonFile(githubScoutPath);
   const doctor = await readJsonFile(doctorPath);
   const rea = await readJsonFile(reaPath);
+  const gsm = await readJsonFile(gsmPath);
   const invalidBarge = new Set(
     (Array.isArray(bargeReview?.invalidTimestamps) ? bargeReview.invalidTimestamps : [])
       .map((value) => Date.parse(value)).filter(Number.isFinite)
@@ -810,6 +813,12 @@ export async function buildCapabilities(
     ['entrypoints', (row) => Number(row.entrypoints) || 0],
     ['status', (row) => String(row.status || '')],
   ], 'Relancer l’analyse inverse locale sans modifier le code');
+  agentProof('gsm-fleet', gsm, 'gsm_status.json', [
+    ['online', (row) => Number(row.online) || 0],
+    ['discovered', (row) => Number(row.discovered) || 0],
+    ['readOnly', (row) => row.readOnly === true],
+    ['status', (row) => String(row.status || '')],
+  ], 'Relancer le scan GSM local en lecture seule (adb devices/getprop)');
 
   return {
     checkedAt: new Date().toISOString(),
