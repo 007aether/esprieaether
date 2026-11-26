@@ -17,6 +17,11 @@ const SENT_HOST = process.env.ESPRIE_SENTINEL_HOST || "127.0.0.1";
 const SENT_PORT = Number(process.env.ESPRIE_SENTINEL_PORT || 8766);
 const ATULYA_HOST = process.env.ATULYA_HOST || "127.0.0.1";
 const ATULYA_PORT = Number(process.env.ATULYA_PORT || 8501);
+const FREELLM_HOST = process.env.FREELLMAPI_HOST || "127.0.0.1";
+const FREELLM_PORT = Number(process.env.FREELLMAPI_PORT || 31415);
+const FREELLM_KEY_FILE = path.resolve(HERE, "..", "state", "freellmapi.key");
+const SHARE_LEDGER = path.resolve(HERE, "..", "state", "model_share.jsonl");
+const FRELLM_TRACE = path.resolve(HERE, "..", "state", "freellm_requests.log");
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -86,6 +91,163 @@ function proxyApi(req, res) {
     }
   });
   req.pipe(upstream);
+}
+
+// Relais local vers FreeLLMAPI : injecte la clé à l'exécution et compte les
+// requêtes par consommateur dans un journal sans secret, jamais dans un log.
+function loadFreeLLMKey() {
+  const configured = process.env.FREELLMAPI_KEY;
+  if (configured) return configured;
+  try {
+    return fs.readFileSync(FREELLM_KEY_FILE, "utf8").trim();
+  } catch {
+    return "";
+  }
+}
+
+function recordShare(consumer, ok) {
+  if (consumer !== "atulya" && consumer !== "claude_code") return;
+  const entry = {
+    ts: new Date().toISOString(),
+    consumer,
+    model: null,
+    ok: Boolean(ok),
+  };
+  try {
+    fs.appendFileSync(SHARE_LEDGER, JSON.stringify(entry) + "\n", "utf8");
+  } catch {
+    /* le journal est best-effort, jamais une raison de casser la requête */
+  }
+}
+
+function shareStats() {
+  const counts = { atulya: 0, claude_code: 0 };
+  try {
+    for (const line of fs.readFileSync(SHARE_LEDGER, "utf8").split("\n")) {
+      if (!line.trim()) continue;
+      try {
+        const entry = JSON.parse(line);
+        if (entry.consumer in counts) counts[entry.consumer] += 1;
+      } catch { /* ligne partielle ignorée */ }
+    }
+  } catch { /* absence de journal = zéro requête */ }
+  return { source: "freellm-relay", counts };
+}
+
+function proxyFreeLLM(req, res) {
+  const raw = req.url || "/";
+  const upstreamPath = raw.replace(/^\/freellm/, "") || "/";
+  try {
+    const headerNames = Object.keys(req.headers).sort().join(",");
+    fs.appendFileSync(
+      FRELLM_TRACE,
+      `${new Date().toISOString()} ${req.method} ${upstreamPath.split("?")[0]} ` +
+      `headers=${headerNames}\n`,
+      "utf8"
+    );
+  } catch { /* trace best-effort, sans valeurs ni secrets */ }
+  if (upstreamPath === "/health") {
+    json(res, 200, {
+      status: "ok", source: "freellm-relay",
+      upstream: `${FREELLM_HOST}:${FREELLM_PORT}`,
+    });
+    return;
+  }
+  if (upstreamPath === "/stats") {
+    json(res, 200, shareStats());
+    return;
+  }
+  const explicit = req.headers["x-esprie-consumer"];
+  const consumer = (explicit === "atulya" || explicit === "claude_code")
+    ? explicit
+    : (upstreamPath.startsWith("/v1/messages") ? "claude_code" : "atulya");
+  const countable = upstreamPath.startsWith("/v1/messages")
+    || upstreamPath.startsWith("/v1/chat/completions");
+  const chunks = [];
+  req.on("data", (chunk) => chunks.push(chunk));
+  req.on("end", () => {
+    let body = Buffer.concat(chunks);
+    try {
+      const meta = JSON.parse(body.toString("utf8"));
+      fs.appendFileSync(
+        FRELLM_TRACE,
+        `${new Date().toISOString()} body keys=${Object.keys(meta).sort().join(",")} ` +
+        `stream=${meta.stream} model=${meta.model}\n`,
+        "utf8"
+      );
+      if (upstreamPath.startsWith("/v1/messages") && meta && typeof meta === "object") {
+        // Certains champs Claude Code ne sont pas pris en charge par la passerelle
+        // locale et bloquent la réponse : on les retire sans toucher au prompt.
+        delete meta.thinking;
+        delete meta.context_management;
+        delete meta.tools;
+        meta.stream = false;
+        body = Buffer.from(JSON.stringify(meta), "utf8");
+        fs.appendFileSync(
+          FRELLM_TRACE,
+          `${new Date().toISOString()} body normalized keys=${Object.keys(meta).sort().join(",")} ` +
+          `stream=${meta.stream}\n`,
+          "utf8"
+        );
+      }
+    } catch { /* corps non-JSON ou trace indisponible : on continue */ }
+    const key = loadFreeLLMKey();
+    // En-têtes minimaux : Claude Code ajoute des en-têtes expérimentaux qui
+    // font échouer la passerelle locale. Rien n'est transmis en clair.
+    const headers = {
+      host: `${FREELLM_HOST}:${FREELLM_PORT}`,
+      "content-type": req.headers["content-type"] || "application/json",
+      "anthropic-version": req.headers["anthropic-version"] || "2023-06-01",
+      accept: req.headers.accept || "application/json",
+    };
+    headers["content-length"] = String(body.length);
+    if (key) {
+      headers["x-api-key"] = key;
+      headers.authorization = `Bearer ${key}`;
+    }
+    const upstream = http.request(
+      {
+        host: FREELLM_HOST,
+        port: FREELLM_PORT,
+        method: req.method,
+        path: upstreamPath,
+        headers,
+        timeout: 120000,
+      },
+      (upRes) => {
+        const out = { ...upRes.headers };
+        delete out["access-control-allow-origin"];
+        delete out["content-length"];
+        try {
+          fs.appendFileSync(
+            FRELLM_TRACE,
+            `${new Date().toISOString()} upstream_status=${upRes.statusCode} ` +
+            `type=${out["content-type"] || "-"}\n`,
+            "utf8"
+          );
+        } catch { /* trace best-effort */ }
+        res.writeHead(upRes.statusCode || 502, out);
+        upRes.pipe(res);
+        upRes.on("end", () => {
+          if (countable) recordShare(consumer, (upRes.statusCode || 502) < 400);
+        });
+      }
+    );
+    upstream.on("timeout", () => upstream.destroy(new Error("freellm_timeout")));
+    upstream.on("error", (err) => {
+      if (countable) recordShare(consumer, false);
+      if (!res.headersSent) {
+        json(res, 503, {
+          error: "freellm_unavailable",
+          reason: err.message === "freellm_timeout" ? "timeout" : "connection_refused",
+          upstream: `${FREELLM_HOST}:${FREELLM_PORT}`,
+        });
+      } else {
+        res.end();
+      }
+    });
+    upstream.end(body);
+  });
 }
 
 // Le HUD /jarvis.html lit l'API SUNNAVOK (:5100) via ce relais local.
@@ -273,6 +435,10 @@ const server = http.createServer((req, res) => {
   const url = req.url || "/";
   if (url === "/sentinel/events" || url === "/sentinel/health") {
     proxySentinel(req, res);
+    return;
+  }
+  if (url === "/freellm/health" || url.startsWith("/freellm/")) {
+    proxyFreeLLM(req, res);
     return;
   }
   if (url === "/v1/health" || url.startsWith("/v1/")) {

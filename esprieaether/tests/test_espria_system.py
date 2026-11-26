@@ -142,6 +142,24 @@ class EspriaSystemTest(unittest.TestCase):
         self.assertEqual(status["provider"], expected)
         self.assertNotIn("key", str(status.get("api_key_configured", "")))
 
+    def test_03b_freellm_requests_are_counted_for_share(self):
+        payload = {
+            "model": "gemini-flash-lite-latest",
+            "choices": [{"message": {"role": "assistant", "content": "PONG"}}],
+            "usage": {"prompt_tokens": 1, "completion_tokens": 1, "total_tokens": 2},
+        }
+        with patch.object(espria_system.llm, "_local_available", return_value=False), \
+             patch.object(espria_system.llm, "_post", return_value=_FakeResponse(payload)), \
+             patch.object(espria_system, "_record_share") as share:
+            self.client.post("/chat/completions", json={"prompt": "ping"})
+        share.assert_called_once_with("atulya", espria_system.FREELLMAPI_MODEL, True)
+
+        with patch.object(espria_system.llm, "_local_available", return_value=False), \
+             patch.object(espria_system.llm, "_post", side_effect=RuntimeError("offline")), \
+             patch.object(espria_system, "_record_share") as share:
+            self.client.post("/chat/completions", json={"prompt": "ping"})
+        share.assert_called_once_with("atulya", espria_system.FREELLMAPI_MODEL, False)
+
     def test_04_github_readiness_never_pushes(self):
         response = self.client.get("/github/push-status")
         self.assertEqual(response.status_code, 200)

@@ -21,6 +21,15 @@ HOME = Path.home()
 ROOT = Path(__file__).resolve().parents[1]
 PORT = int(os.environ.get("ESPRIE_SENTINEL_PORT", "8766"))
 HOST = "127.0.0.1"
+APPDATA = Path(os.getenv("APPDATA", HOME / "AppData" / "Roaming")) if os.name == "nt" else HOME / ".config"
+LOCALAPPDATA = Path(os.getenv("LOCALAPPDATA", HOME / "AppData" / "Local")) if os.name == "nt" else HOME / ".local" / "share"
+FRELLM_HOME = APPDATA / "FreeLLMAPI"
+CLAUDE_CODE_HOME = LOCALAPPDATA / "Claude-3p" / "claude-code"
+if not CLAUDE_CODE_HOME.exists():
+    CLAUDE_CODE_HOME = HOME / ".claude"
+CLAUDE_SESSIONS = LOCALAPPDATA / "Claude-3p" / "claude-code-sessions"
+SHARE_LEDGER = ROOT / "state" / "model_share.jsonl"
+SHARE_CONSUMERS = ("atulya", "claude_code")
 
 # Un agent = (1) un processus reconnaissance, (2) une empreinte de fichiers locaux.
 # Les motifs évitent les simples chemins (ex. "Documents\Codex") pour ne pas
@@ -52,19 +61,39 @@ TOOLS = {
             (HOME / ".codex", ".codex-global-state.json"),
         ],
     },
+    "freellmapi": {
+        "label": "FRELLMAPI",
+        "home": FRELLM_HOME,
+        "proc_in": [r"(?i)[\\/]FreeLLMAPI(?:\.exe)?\b"],
+        "proc_ex": [r"(?i)local_sentinel"],
+        "signals": [
+            (FRELLM_HOME, "logs/freeapi.log"),
+            (FRELLM_HOME, "freeapi.db-wal"),
+            (FRELLM_HOME, "DIPS-wal"),
+        ],
+    },
     "claude": {
         "label": "CLAUDE CODE",
-        "home": HOME / ".claude",
+        "home": CLAUDE_CODE_HOME,
         "proc_in": [
             r"(?i)[\\/]claude(?:\.exe)?\b",
+            r"(?i)[\\/]claude-code[\\/]",
+            r"(?i)[\\/]claude-code-vm[\\/]",
             r"(?i)@anthropic-ai[\\/]claude-code",
-            r"(?i)claude-code\b",
         ],
-        "proc_ex": [r"(?i)claude-code-syntax", r"(?i)local_sentinel"],
+        "proc_ex": [
+            r"(?i)[\\/]WindowsApps[\\/]Claude",
+            r"(?i)[\\/]Claude-3p[\\/]app[\\/]Claude\.exe",
+            r"(?i)--restarted-by-app",
+            r"(?i)--type=(crashpad-handler|gpu-process|renderer|utility)",
+            r"(?i)claude-code-syntax",
+            r"(?i)local_sentinel",
+        ],
         "signals": [
             (HOME / ".claude", "sessions/**/*.jsonl"),
             (HOME / ".claude", "projects/*/*.jsonl"),
             (HOME / ".claude", "history.jsonl"),
+            (CLAUDE_SESSIONS, "**/*.jsonl"),
         ],
     },
     "atulya": {
@@ -103,7 +132,48 @@ STATE = {
     "cpu_measured": False,
     "tools": {},
     "summary": {},
+    "share": {},
 }
+
+
+def read_share() -> dict:
+    """Part réelle des requêtes, lue dans un journal local sans secret."""
+    counts = {key: 0 for key in SHARE_CONSUMERS}
+    failed = {key: 0 for key in SHARE_CONSUMERS}
+    updated = None
+    try:
+        lines = SHARE_LEDGER.read_text(encoding="utf-8").splitlines()[-5000:]
+    except OSError:
+        lines = []
+    for line in lines:
+        try:
+            entry = json.loads(line)
+        except (ValueError, TypeError):
+            continue
+        consumer = entry.get("consumer")
+        if consumer not in counts:
+            continue
+        counts[consumer] += 1
+        if not entry.get("ok", True):
+            failed[consumer] += 1
+        updated = entry.get("ts") or updated
+    total = sum(counts.values())
+    if total:
+        shares = {key: round(counts[key] * 100 / total, 1) for key in SHARE_CONSUMERS}
+    else:
+        try:
+            atulya = max(0, min(100, int(os.getenv("FREELLMAPI_SHARE_ATULYA", "60"))))
+        except ValueError:
+            atulya = 60
+        shares = {"atulya": atulya, "claude_code": 100 - atulya}
+    return {
+        "source": "local_share_ledger",
+        "counts": counts,
+        "failed": failed,
+        "shares": shares,
+        "total": total,
+        "updated_at": updated,
+    }
 
 
 def match_command(command: str) -> set[str]:
@@ -208,6 +278,7 @@ def collector(interval: float = 1.0) -> None:
         current = snapshot_signals()
         changed = diff_snapshots(previous, current)
         previous = current
+        share = read_share()
         tools = {}
         for key, cfg in TOOLS.items():
             events = changed.get(key, 0)
@@ -223,6 +294,12 @@ def collector(interval: float = 1.0) -> None:
                 "lastActive": LAST_ACTIVE[key],
                 "events": events,
             }
+            if key == "freellmapi":
+                tools[key]["share"] = share["shares"]["atulya"]
+                tools[key]["shareLabel"] = "حصة JARVIS"
+            if key == "claude":
+                tools[key]["share"] = share["shares"]["claude_code"]
+                tools[key]["shareLabel"] = "حصة CLAUDE"
         summary = {
             "active": sum(1 for t in tools.values() if t["state"] == "active"),
             "running": sum(1 for t in tools.values() if t["state"] == "running"),
@@ -234,6 +311,7 @@ def collector(interval: float = 1.0) -> None:
             STATE["ts"] = now
             STATE["tools"] = tools
             STATE["summary"] = summary
+            STATE["share"] = share
         time.sleep(interval)
 
 
@@ -254,7 +332,8 @@ class Handler(BaseHTTPRequestHandler):
             with LOCK:
                 payload = dict(STATE)
             self._send(200, {"status": "ok", "source": payload["source"],
-                             "ts": payload["ts"], "summary": payload["summary"]})
+                             "ts": payload["ts"], "summary": payload["summary"],
+                             "share": payload.get("share", {})})
             return
         if self.path.startswith("/events"):
             self.send_response(200)

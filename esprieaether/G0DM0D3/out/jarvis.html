@@ -588,16 +588,19 @@
     var tools = frame && frame.tools || {};
     var keys = Object.keys(tools);
     if (!keys.length) { box.innerHTML = '<div class="dim">ما كاينش مصدر بيانات</div>'; return; }
-    var order = ["opencode", "codex", "claude", "atulya"];
+    var order = ["opencode", "codex", "claude", "freellmapi", "atulya"];
     keys.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
     box.innerHTML = keys.map(function (k) {
       var t = tools[k] || {};
       var states = ["active", "running", "offline", "absent"];
       var st = states.indexOf(t.state) >= 0 ? t.state : "offline";
       var pct = Math.round(typeof t.level === "number" ? t.level * 100 : 0);
+      var share = typeof t.share === "number"
+        ? '<span class="dim">' + esc(t.shareLabel || "حصة") + ' ' + Math.round(t.share) + '%</span>'
+        : '';
       return '<div class="agent"><span class="dot ' + st + '"></span><span>' + esc(t.label || k) +
              '</span><span class="dim">' + esc(tr(st)) + '</span><span class="' + (pct ? "ok" : "dim") +
-             '">' + pct + '%</span></div>';
+             '">' + pct + '%</span>' + share + '</div>';
     }).join("");
   }
 

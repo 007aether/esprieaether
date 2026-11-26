@@ -677,10 +677,11 @@ def api_health():
             backend = "local-brain"
         services = {
             "ollama": "active" if ollama_online else "inactive",
-            "ollama_reason": ("service local actif" if ollama_online else
-                              "fallback inutilisé : moteur local prioritaire (llama.cpp)"),
+            "ollama_reason": ("active" if ollama_online else
+                              "احتياطي غير مستعمل : المحرك المحلي أولاً (llama.cpp)"),
             "web": "active",
-            "jarvis_backend": backend or "unknown",
+            "jarvis_backend": "active" if (brain_available or ollama_online) else "inactive",
+            "jarvis_backend_provider": backend or "unknown",
             "jarvis_backend_status": "active" if (brain_available or ollama_online) else "inactive",
             "jarvis": "active" if (brain_available or ollama_online) else "inactive",
         }

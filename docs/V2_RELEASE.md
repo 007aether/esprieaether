@@ -133,6 +133,8 @@
   FreeLLMAPI reste hors démarrage automatique tant que le propriétaire ne le
   demande pas explicitement.
 - **تنبيهات اللوحة (J110)** : `guard_failed/python` كان جاي من اختبار قديم كيتوقع صيغة فرنسية فـ `persona.py`؛ تصلّح باش يتحقق من الدارجة بحروف عربية. `guard_failed/endpoints` وخدمات `down` كانو كيعتابرو `dsh_bridge` و`llm_gateway` أخطاء، وهم خدمات ببدء يدوي/مستقل؛ ولا كيتسجلو كـ `manual_services_down` معلومة غير خطأ. العدّاد التراكمي `failed_runs` و`timed_out_runs` ولا معلومة، والإنذار كيبقى غير للفشل القريب فـ `run_needs_attention`. التعديلات كتطلب إعادة تحميل الحارس والمشغل باش تبان فاللوحة.
+- **حصة FreeLLMAPI وCLAUDE CODE (J111)** : المرحّل المحلي `/freellm/*` كيقرأ المفتاح وقت التشغيل من `state/freellmapi.key` (ما كيكتبو فأي ملف)، كيمنع التليمتري والطلبات غير الضرورية، وكيعطي Claude Code غير الحقول المدعومة (`stream=false` بلا `thinking` ولا `context_management`) باش ما يعلّقش. كل طلب `/v1/messages` ولا `/v1/chat/completions` كيتسجّل فـ `state/model_share.jsonl` غير بـ `ts` و`consumer` و`model` و`ok`، بلا prompt ولا توكن. السينتيل كيعرض `FRELLMAPI` و`CLAUDE CODE` مع نسبة الحصة فـ SSE وHUD. مشغّل `start_claude_code_local.ps1` كيقرأ المفتاح فالجلسة غير.
+- **بطاقات الخدمات (J112)** : `/api/health` ولا كيرجّع `jarvis_backend` و`ollama_reason` بقيمة `active` (بدل `local-brain` و`service local actif` اللي كانو كيبانو حمر فالواجهة). اسم المزوّد تنتقل لـ `jarvis_backend_provider`، والرسالة الاحتياطية ولا بالدارجة بحروف عربية.
 - **Traduction des documents de test** : les assertions de `briefing_settings`
   suivent le nouveau libellé darija du briefing matinal.
 
@@ -157,14 +159,16 @@
 
 ## Tests
 
-- Node : **1058 pass / 0 fail** sur 68 fichiers `tests\*.test.mjs`,
+- Node : **1060 pass / 0 fail** sur 68 fichiers `tests\*.test.mjs`,
   dont le test d'origine du pont `J100`, le contrôle darija des pages
   `jarvis.html` / `system.html`, le délai `120000` du relais, la fermeture
-  clavier de la fenêtre flottante, les contrôles J106/J108 et le contrôle J110
-  des services en démarrage manuel.
+  clavier de la fenêtre flottante, les contrôles J106/J108, le contrôle J110
+  des services en démarrage manuel et les 2 contrôles J111 du relais et du
+  lanceur Claude Code local.
 - Node ciblé (pont, darija, install/update) : **157/157** (155 + les 2 contrôles J106/J108).
-- Python unittest : **250 tests OK / 0 fail** (246 + J110), dont le service
-  sentinel qui ne traite plus `dsh_bridge` et `llm_gateway` comme des erreurs.
+- Python unittest : **253 tests OK / 0 fail** (246 + J110 + J111 + J112), dont le service
+  sentinel qui ne traite plus `dsh_bridge` et `llm_gateway` comme des erreurs,
+  la journalisation sans secret des parts FreeLLMAPI et les cartes `active` de `/api/health`.
 - Atulya pytest : **566 passed, 3 skipped**, 16 subtests passés (0 fail),
   dont les 7 contrôles darija (J105) et les 6 nouveaux contrôles J106/J109
   (journal sans secret, reprise de flux, erreurs d'outils, plafond de résultat,
@@ -186,11 +190,13 @@
 | سجل توقف الجواب | `implemented_unverified` | أول توقف حقيقي كيكتب سطر فـ `brain_errors.jsonl`؛ الاختبارات غطّات الحالات، ولكن ما وقعش توقف جديد فالسيرفر الحي بعد TDD. |
 | `atulya-wake` | `implemented_unverified` | كلمة إيقاظ حقيقية تطلع `hits>0` فـ `wake_selfcheck.json`؛ التجربة الأخيرة 12 ثانية عطات `hits=0`. |
 | موافقة HUD | `live_verified` | `action_audit.jsonl` فيه `act-9ec94b52eb`: `proposed->approved_once` فـ `2026-11-25T09:03:37.179Z` من `hud`. |
-| تنبيهات `guard_failed/python` و`guard_failed/endpoints` | `implemented_unverified` | الإصلاحات تكتبو، ولكن الحارس والمشغل الحي مازالو كيقراو الكود القديم؛ كيتطلب إعادة تحميل بلا restart بلا موافقة صريحة. |
-| عدّاد `failed_runs` / `timed_out_runs` التراكمي | `implemented_unverified` | ولا معلومة فالـ dashboard؛ الإنذار كيبقى للفشل القريب غير. كيتطلب إعادة تحميل `api/server.mjs`. |
-| self-heal ديال الـ supervisor | `implemented_unverified` | إعادة تحميل `keep_alive.ps1` باش يقرأ الإصلاح الجديد؛ ما تدارش restart بلا موافقة صريحة. |
+| تنبيهات `guard_failed/python` و`guard_failed/endpoints` | `live_verified` | من بعد إعادة التحميل بموافقة صريحة، `quality_guard_report.json` ولا `checks.endpoints=true` و`guard_failed/python` و`guard_failed/endpoints` و`SYS_01/SYS_02` اختفاو. |
+| عدّاد `failed_runs` / `timed_out_runs` التراكمي | `live_verified` | ولا معلومة فالـ dashboard؛ الإنذار كيبقى للفشل القريب غير (تحقّق بعد إعادة تحميل `api/server.mjs`). |
+| self-heal ديال الـ supervisor | `live_verified` | `keep_alive.ps1` تحمّل بموافقة صريحة؛ `ReleaseMutex` وقت الإقلاع ما منعش المشرف من الخدمة. |
 | `/api/chat` غير-streaming | تحسّن بعد موافقة | الـ `timeout` ولا `120000` فـ `serve_g0dm0d3.mjs`، الـ UI كيستعمل streaming. |
 | محادثة كاملة بمصادقة | غير متحقق | كيتطلب passkey ديال المالك؛ تحققنا غير بـ `401 {"detail":"Sign in with your Atulya passkey to continue."}` بدل `403`. هاد الـ `401` هو بوابة المصادقة العادية على `/api/*` (ما كاينش خطأ)، والـ `/api/health` كيرجّع `200`. |
-| حزمة unittest محلية (root) | تحقّق بعد J110 | **250 passed / 0 fail**؛ كان فيها اختبار واحد كيتوقع صيغة فرنسية قديمة فـ `persona.py`، تصلّح باش يقرأ الدارجة بحروف عربية. |
+| حزمة unittest محلية (root) | تحقّق بعد J112 | **253 passed / 0 fail**؛ كان فيها اختبار واحد كيتوقع صيغة فرنسية قديمة فـ `persona.py`، تصلّح باش يقرأ الدارجة بحروف عربية. |
+| حصة FreeLLMAPI / Claude Code (J111) | `live_verified` | بعد إعادة تحميل mock والتجميع، `/health` وSSE ديال `:8766` كيبانو فيهم `FRELLMAPI` و`CLAUDE CODE` مع `shares`؛ `/freellm/health` و`/freellm/stats` خدمو على `:3860`؛ `start_claude_code_local.ps1` رجّع `OK` بموديل `claude-sonnet-4-5` بلا اتصال خارجي. |
+| بطاقات الخدمات (J112) | `live_verified` | `/api/health` الحي ولا كيرجّع `jarvis=active`، `jarvis_backend=active`، `jarvis_backend_provider=local-brain`، `ollama_reason=active` و`web=active`. |
 
 اللي تقدر تعطيني دابا: عنوان MCP خارجي، مسارات المستندات، APK/جهاز مربوط، ولا passkey للتحقق من المحادثة. غير ما تعطينيش كلمات مرور ولا أسرار فالملفات.

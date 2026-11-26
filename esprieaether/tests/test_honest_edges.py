@@ -126,12 +126,21 @@ class HonestEdgesTest(unittest.TestCase):
              patch.object(web_interface, "get_ollama_status", return_value={"status": "offline"}):
             body = self.client.get("/api/health").get_json()
         self.assertEqual(body["services"]["web"], "active")
-        self.assertEqual(body["services"]["jarvis_backend"], "local-brain")
+        self.assertEqual(body["services"]["jarvis_backend"], "active")
+        self.assertEqual(body["services"]["jarvis_backend_provider"], "local-brain")
         self.assertEqual(body["services"]["jarvis_backend_status"], "active")
         self.assertEqual(body["services"]["ollama"], "inactive")
-        self.assertIn("fallback", body["services"]["ollama_reason"])
+        self.assertIn("احتياطي", body["services"]["ollama_reason"])
+        self.assertNotIn("fallback", body["services"]["ollama_reason"])
         self.assertNotIn("11434", body["services"]["ollama_reason"])
         self.assertEqual(body["services"]["jarvis"], "active")
+
+    def test_health_marks_ollama_reason_active_when_engine_online(self):
+        with patch.object(web_interface, "get_ollama_status", return_value={"status": "online"}):
+            body = self.client.get("/api/health").get_json()
+        self.assertEqual(body["services"]["ollama"], "active")
+        self.assertEqual(body["services"]["ollama_reason"], "active")
+        self.assertEqual(body["services"]["jarvis_backend"], "active")
         self.assertTrue(body["autonomous"]["stale"])
         self.assertGreater(body["autonomous"]["last_run_age_seconds"], 0)
 

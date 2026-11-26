@@ -71,6 +71,15 @@ def _load_llm_key() -> str:
 FREELLMAPI_KEY = _load_llm_key()
 
 
+def _record_share(consumer: str, model: str | None, ok: bool) -> None:
+    """Trace locale de la part de requêtes FreeLLMAPI, sans secret ni contenu."""
+    try:
+        from src import freellm_share
+        freellm_share.record(consumer, model, ok)
+    except Exception:
+        pass
+
+
 def _load_secret() -> str:
     configured = os.getenv("WEB_SECRET_KEY")
     if configured:
@@ -302,21 +311,22 @@ class EspriaLLM:
         if not self.api_key:
             result.update(status="no_api_key", text="Clé FreeLLMAPI absente (variable FREELLMAPI_KEY).")
             return result
+        freellm_payload = {
+            "model": model or self.model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+        }
         try:
-            response = self._post(
-                {
-                    "model": model or self.model,
-                    "messages": messages,
-                    "max_tokens": max_tokens,
-                }
-            )
+            response = self._post(freellm_payload)
             response.raise_for_status()
             data = response.json()
             result["text"] = data["choices"][0]["message"]["content"]
             result["model"] = data.get("model", result["model"])
             result["usage"] = data.get("usage", result["usage"])
             result["routed_via"] = data.get("_routed_via")
+            _record_share("atulya", freellm_payload["model"], True)
         except Exception as exc:
+            _record_share("atulya", freellm_payload["model"], False)
             result.update(status="error", text=f"[LLM error: {type(exc).__name__}]")
         return result
 
