@@ -19,6 +19,9 @@ const ATULYA_HOST = process.env.ATULYA_HOST || "127.0.0.1";
 const ATULYA_PORT = Number(process.env.ATULYA_PORT || 8501);
 const FREELLM_HOST = process.env.FREELLMAPI_HOST || "127.0.0.1";
 const FREELLM_PORT = Number(process.env.FREELLMAPI_PORT || 31415);
+// J159 — TTS local Atulya : même origine pour le HUD, aucun tiers, aucune clé.
+const VOICE_HOST = process.env.ATULYA_VOICE_HOST || "127.0.0.1";
+const VOICE_PORT = Number(process.env.ATULYA_VOICE_PORT || 5105);
 const FREELLM_KEY_FILE = path.resolve(HERE, "..", "state", "freellmapi.key");
 const SHARE_LEDGER = path.resolve(HERE, "..", "state", "model_share.jsonl");
 const FRELLM_TRACE = path.resolve(HERE, "..", "state", "freellm_requests.log");
@@ -285,6 +288,41 @@ function proxyDashboard(req, res) {
   req.pipe(upstream);
 }
 
+// J159 — /local-voice/... -> /... sur le service TTS loopback :5105.
+// Le navigateur ne parle qu'à cette origine ; le WAV ne quitte jamais la machine.
+function proxyLocalVoice(req, res) {
+  const upstream = http.request(
+    {
+      host: VOICE_HOST,
+      port: VOICE_PORT,
+      method: req.method,
+      path: (req.url || "/").replace(/^\/local-voice/, "") || "/",
+      headers: { ...req.headers, host: `${VOICE_HOST}:${VOICE_PORT}` },
+      timeout: 60000,
+    },
+    (voiceRes) => {
+      const headers = { ...voiceRes.headers };
+      delete headers["access-control-allow-origin"];
+      delete headers["content-length"];
+      res.writeHead(voiceRes.statusCode || 502, headers);
+      voiceRes.pipe(res);
+    }
+  );
+  upstream.on("timeout", () => upstream.destroy(new Error("local_voice_timeout")));
+  upstream.on("error", (err) => {
+    if (!res.headersSent) {
+      json(res, 503, {
+        error: "local_voice_unavailable",
+        reason: err.message === "local_voice_timeout" ? "timeout" : "connection_refused",
+        upstream: `${VOICE_HOST}:${VOICE_PORT}`,
+      });
+    } else {
+      res.end();
+    }
+  });
+  req.pipe(upstream);
+}
+
 // Flux SSE de la sentinelle locale : même origine pour le HUD, aucun appel externe.
 // Le préfixe est retiré : /sentinel/events -> /events sur :8766. Pas de timeout :
 // un flux événementiel reste ouvert par définition.
@@ -447,6 +485,10 @@ const server = http.createServer((req, res) => {
   }
   if (url.startsWith("/jarvis/")) {
     proxyDashboard(req, res);
+    return;
+  }
+  if (url === "/local-voice" || url.startsWith("/local-voice/")) {
+    proxyLocalVoice(req, res);
     return;
   }
   if (url === "/atulya" || url.startsWith("/atulya/")) {

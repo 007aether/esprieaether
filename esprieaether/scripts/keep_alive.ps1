@@ -130,6 +130,8 @@ $services = @(
     @{ Name='integrations';   Port=5102;  Exe=$py;   Args=@('src\integrations_adapter.py'); Cwd=$base },
     @{ Name='kanban';         Port=5103;  Exe=$py;   Args=@('src\veritas_kanban.py'); Cwd=$base },
     @{ Name='homedock';       Port=5104;  Exe=$py;   Args=@('src\homedock_dashboard.py'); Cwd=$base },
+    # J159 — voix locale du HUD : WAV Supertonic en loopback, sans clé ni cloud.
+    @{ Name='atulya-voice';   Port=5105;  Exe=$py;   Args=@('src\atulya_voice.py'); Cwd=$base },
     # :11435 et :31415 restent malgré le doublon apparent : dépendances réelles
     # (agent_mesh/self_improve/colibri_launcher et espria_system FREELLMAPI_BASE).
     @{ Name='ai-router';      Port=11435; Exe=$py;   Args=@('src\ai_router.py'); Cwd=$base },
@@ -167,6 +169,7 @@ $services = @(
 $httpChecks = @{
     5000 = '/'
     5100 = '/'
+    5105 = '/health'
     8501 = '/api/health'
     8766 = '/health'
     3860 = '/v1/health'
