@@ -194,7 +194,7 @@ def test_provider_failure_does_not_expose_secret_in_response_status_or_logs(
     assert "ما قدرش مزود النموذج" in response_text
 
 
-def test_local_runtime_failure_returns_honest_state_report(
+def test_local_runtime_failure_generic_question_does_not_invent_state_report(
     project_temp_dir: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     class FailingLocalProvider:
@@ -217,15 +217,49 @@ def test_local_runtime_failure_returns_honest_state_report(
         transport = httpx.ASGITransport(app=app)
         async with httpx.AsyncClient(transport=transport, base_url="http://localhost") as client:
             authenticate_test_admin(client, app)
-            return await client.post("/api/chat", json={"messages": [{"role": "user", "content": "test"}]})
+            return await client.post("/api/chat", json={"messages": [{"role": "user", "content": "Home Depot on demo"}]})
 
     response = asyncio.run(exercise())
     assert response.status_code == 200
-    assert response.json()["route"] == "local_fallback"
-    assert "الحالة العامة" in response.json()["text"]
+    body = response.json()
+    assert body["route"] == "model_busy"
+    assert "الحالة العامة" not in body["text"]
+    assert "ما كنخترعش" in body["text"]
 
 
-def test_local_runtime_empty_reply_is_replaced_by_state_report(
+def test_status_phrase_still_uses_local_state_report(
+    project_temp_dir: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    class FailingLocalProvider:
+        name = "Local model"
+        model = "dolphin3"
+
+        async def complete(self, _messages: list[Message]) -> str:
+            raise AssertionError("a status phrase must not reach the model")
+
+    settings = Settings(
+        assistant_name="Atulya", host="127.0.0.1", port=8501,
+        data_dir=project_temp_dir / "data", models_dir=project_temp_dir / "models",
+        model_provider="openai-compatible", model_name="dolphin3",
+        model_base_url="http://127.0.0.1:31416/v1", model_api_key="",
+    )
+    monkeypatch.setattr(server, "_make_brain", lambda _settings: Brain(FailingLocalProvider(), assistant_name="Atulya"))
+    app = server.create_app(settings)
+
+    async def exercise() -> httpx.Response:
+        transport = httpx.ASGITransport(app=app)
+        async with httpx.AsyncClient(transport=transport, base_url="http://localhost") as client:
+            authenticate_test_admin(client, app)
+            return await client.post("/api/chat", json={"messages": [{"role": "user", "content": "Checking the systems."}]})
+
+    response = asyncio.run(exercise())
+    assert response.status_code == 200
+    body = response.json()
+    assert body["route"] == "web_intent"
+    assert "الحالة العامة" in body["text"]
+
+
+def test_local_runtime_empty_reply_is_not_a_state_report(
     project_temp_dir: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     from tools.plugins.brain.engine import STREAM_UNAVAILABLE
@@ -254,5 +288,7 @@ def test_local_runtime_empty_reply_is_replaced_by_state_report(
 
     response = asyncio.run(exercise())
     assert response.status_code == 200
-    assert response.json()["provider"] == "Local deterministic"
-    assert "الحالة العامة" in response.json()["text"]
+    body = response.json()
+    assert body["provider"] == "Local fallback"
+    assert "الحالة العامة" not in body["text"]
+    assert "ما كنخترعش" in body["text"]

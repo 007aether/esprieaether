@@ -2455,15 +2455,25 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
         from tools.plugins.web_intents import (
             match_intent as match_web_intent,
             execute_intent as execute_web_intent,
+            is_status_request,
             local_status_text,
+            model_busy_text,
         )
         web_intent = match_web_intent(latest_user) if not request.image and request.mode != "voice" else None
-        # Le repli « état local » ne s'applique qu'au moteur loopback réel : les
+        # Le repli « état local » ne s'applique qu'au moteur loopback réel : les
         # tests et les fournisseurs externes gardent le message d'erreur d'origine.
         local_runtime_fallback = (
             config.model_provider == "openai-compatible"
             and str(config.model_base_url or "").startswith(("http://127.0.0.1:", "http://localhost:"))
         )
+        status_requested = is_status_request(latest_user)
+
+        def _fallback_reply() -> tuple[str, str, str]:
+            # Un rapport d'état n'est rendu que si l'utilisateur l'a demandé.
+            # Toute autre question reçoit un aveu court, jamais un état inventé.
+            if status_requested:
+                return local_status_text(config.data_dir), "Local deterministic", "local_fallback"
+            return model_busy_text(), "Local fallback", "model_busy"
         if webui_channel is None and voice_intent is None and web_intent is None:
             raise HTTPException(
                 status_code=503,
@@ -2637,7 +2647,8 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
             if not request.stream:
                 reply = await brain.respond_with_tools(messages, toolbox, system_instructions=style)
                 if local_runtime_fallback and reply.text.strip() == STREAM_UNAVAILABLE:
-                    reply = BrainReply(local_status_text(config.data_dir), "Local deterministic", "")
+                    text, provider, _route = _fallback_reply()
+                    reply = BrainReply(text, provider, "")
         except ValueError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
         except BrainError as exc:
@@ -2647,20 +2658,23 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                 elapsed_ms=int((time.monotonic() - chat_started) * 1000),
             )
             # Le modèle local lent/indisponible ne doit jamais laisser l'utilisateur
-            # sans réponse : on rend un état véridique lu dans les fichiers state.
+            # sans réponse : aveu court, ou état véridique seulement si demandé.
             if local_runtime_fallback:
-                return {"text": local_status_text(config.data_dir), "provider": "Local deterministic",
-                        "model": "", "route": "local_fallback"}
+                text, provider, route = _fallback_reply()
+                return {"text": text, "provider": provider, "model": "", "route": route}
             issue_state["issue"] = {"message": str(exc), "source": "chat"}
             raise HTTPException(status_code=503, detail=str(exc)) from exc
         if request.stream:
             async def stream_events():
                 ui_actions: list[str] = []
+                fallback_done: dict | None = None
                 _toolkit.UI_ACTIONS.set(ui_actions)
                 try:
                     async for chunk in webui_channel.stream(messages, toolbox=toolbox, system_instructions=style):
                         if local_runtime_fallback and chunk == STREAM_UNAVAILABLE:
-                            chunk = local_status_text(config.data_dir)
+                            text, provider, route = _fallback_reply()
+                            chunk = text
+                            fallback_done = {'done': True, 'provider': provider, 'model': '', 'route': route}
                         for action in action_view.drain_new():
                             yield f"data: {json.dumps({'confirm': {'id': action.id, 'summary': action.summary}})}\n\n"
                         while ui_actions:
@@ -2670,7 +2684,9 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                         yield f"data: {json.dumps({'confirm': {'id': action.id, 'summary': action.summary}})}\n\n"
                     while ui_actions:
                         yield f"data: {json.dumps({'ui': ui_actions.pop(0)})}\n\n"
-                    yield f"data: {json.dumps({'done': True, 'provider': brain.provider_name, 'model': brain.model_name})}\n\n"
+                    done_event = fallback_done or {'done': True, 'provider': brain.provider_name,
+                                                   'model': brain.model_name}
+                    yield f"data: {json.dumps(done_event, ensure_ascii=False)}\n\n"
                     if request.mode == "voice" and voice_prefix_active:
                         # Keep the voice prefix's KV cache across restarts (PLAN M1-B2).
                         from tools.plugins.brain.local_llm import LocalLlamaRuntime
@@ -2683,9 +2699,9 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                         elapsed_ms=int((time.monotonic() - chat_started) * 1000),
                     )
                     if local_runtime_fallback:
-                        fallback = local_status_text(config.data_dir)
-                        yield f"data: {json.dumps({'text': fallback}, ensure_ascii=False)}\n\n"
-                        yield f"data: {json.dumps({'done': True, 'provider': 'Local deterministic', 'model': '', 'route': 'local_fallback'}, ensure_ascii=False)}\n\n"
+                        text, provider, route = _fallback_reply()
+                        yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
+                        yield f"data: {json.dumps({'done': True, 'provider': provider, 'model': '', 'route': route}, ensure_ascii=False)}\n\n"
                     else:
                         issue_state["issue"] = {"message": "تدفق النموذج توقف فجأة.", "source": "chat"}
                         yield f"data: {json.dumps({'error': 'الجواب توقف فجأة. حاول مرة اخرى ولا صيّح الرسالة.'})}\n\n"

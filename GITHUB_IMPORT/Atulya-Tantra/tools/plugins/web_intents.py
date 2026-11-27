@@ -74,6 +74,22 @@ def _safe_https(url: str) -> str | None:
     return url if is_public_https_url(url) else None
 
 
+_MODEL_BUSY_TEXT = (
+    "ما قدرتش نجاوب على هاد السؤال دابا: النموذج المحلي ما رجعش نتيجة. "
+    "ما كنخترعش جواب. أقدر نعطيك تقرير الحالة من ملفات state المحلية يلا طلبتيه."
+)
+
+
+def model_busy_text() -> str:
+    """Réponse honnête quand le modèle local échoue sur une question ordinaire."""
+    return _MODEL_BUSY_TEXT
+
+
+def is_status_request(text: str) -> bool:
+    """Vrai seulement pour une demande explicite d'état du système."""
+    return bool(_STATUS.fullmatch(" ".join(text.strip().split())))
+
+
 def local_status_text(state_dir=None) -> str:
     """Réponse courte et véridique, lue uniquement dans les fichiers state locaux."""
     from conversation_report_agent import build
