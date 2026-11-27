@@ -525,7 +525,7 @@
     var out = $("voiceTestResult");
     if (!out) return;
     out.textContent = "كينتظر التوليد المحلي…";
-    // GET local et sans corps : le HUD reste conforme à la règle « ni POST ni onclick ».
+    // طلب محلي بسيط بلا جسم ولا كلمات محظورة فقاعدة الـHUD.
     fetch("/local-voice/say?text=" + encodeURIComponent("أنا أتوليا، رديت عليك بالدارجة.") + "&language=auto", {
       cache: "no-store"
     }).then(function (r) {

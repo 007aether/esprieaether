@@ -17,7 +17,7 @@
 1. **سياسة Autoplay:** Chrome كيمنع `audio.play()` قبل أول ضغطة/تفعيل من المستخدم. الجواب الأول كان كيضيع بصمت.
 2. **`AudioContext` suspended:** `playBlob` كان كيخلق `AudioContext`، كيعاود `resume()`، وكيمرّر الصوت عبر `createMediaElementSource`. على Chrome/Windows هادشي كيقطع الصوت حتى واخا التوليد ناجح.
 3. **ما كاينش صوت `ar-MA`:** الحاسوب فيه غير `Microsoft Zira Desktop` بـ`en-US`. عند سقوط التوليد المحلي، `speakWithBrowser` كان كيختار `ar-MA` اللي ما كاينة، فكيبقى صامت.
-4. **`voice_inbox.jsonl` ما كيعطيش دليل حالي:** 216 سطر نطق، آخر واحد من `2026-11-25`، ومن بعدو `empty_transcript` بالجملة. يعني الإثبات القديم ما كي доказаش أن الصوت كيطلع دابا.
+4. **`voice_inbox.jsonl` ما كيعطيش دليل حالي:** 216 سطر نطق، آخر واحد من `2026-11-25`، ومن بعدو `empty_transcript` بالجملة. يعني الإثبات القديم ما كيدعمش أن الصوت كيطلع دابا.
 
 ## 3. الإصلاحات اللي تّطبّقات
 
@@ -30,11 +30,11 @@
 
 ### HUD — `esprieaether/G0DM0D3/out/jarvis.html`
 - كبسة «شغّل جملة» فبطاقة الصوت، بضغطة صريحة من المالك.
-- `fetch("/local-voice/say")` كيجيب WAV محلي، و`new Audio(url).play()` كيلعبّو فنفس التاب. الحالة كتكتب فـ`voiceTestResult` بلا ادّعاء أنك سمعتها.
+- `fetch("/local-voice/say?text=…&language=auto")` بـGET (بلا POST ولا onclick، حفاظاً على قاعدة HUD) كيجيب WAV محلي، و`new Audio(url).play()` كيلعبّو فنفس التاب. الحالة كتكتب فـ`voiceTestResult` بلا ادّعاء أنك سمعتها.
 
 ### خدمة صوت محلية — `esprieaether/src/atulya_voice.py`
 - `:5105`، loopback فقط. كتستعمل نفس موديل Supertonic int8 الموجود محلياً، بلا سحابة ولا مفتاح ولا `subprocess`.
-- `POST /say` كيرجّع `audio/wav`، مع cache حسب بصمة النص/اللغة.
+- `GET /say?text=…&language=auto` كيرجّع `audio/wav` (و`POST /say` باقي مدعوم للتوافق)، مع cache حسب بصمة النص/اللغة.
 - `GET /health` كيقول `live_verified` غير يلا الموديل جاهز.
 - `GET /evidence` وكتابة `state/voice_output_evidence.json` كيعطو دليل العينة: `status=implemented_unverified` و`playback=owner_confirmation_pending` (ما كنقولوش «سمعت» بلا تأكيد منك).
 

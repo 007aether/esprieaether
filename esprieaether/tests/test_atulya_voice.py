@@ -8,6 +8,7 @@ import unittest
 import wave
 from pathlib import Path
 from unittest import mock
+from urllib.parse import quote
 
 SRC = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(SRC))
@@ -97,6 +98,14 @@ class AtulyaVoiceTest(unittest.TestCase):
         self.assertEqual(proof["playback"], "owner_confirmation_pending")
         self.assertEqual(saved, proof)
         self.assertIn("127.0.0.1", proof["source"])
+
+    def test_route_get_say_sans_corps_ni_post(self):
+        text, language = atulya_voice.say_query(
+            "/say?text=" + quote("أنا أتوليا، رديت عليك بالدارجة.") + "&language=auto"
+        )
+        self.assertEqual(text, "أنا أتوليا، رديت عليك بالدارجة.")
+        self.assertEqual(language, "auto")
+        self.assertEqual(atulya_voice.say_query("/say"), ("", "auto"))
 
     def test_health_est_honnête(self):
         with mock.patch.object(atulya_voice, "engine", return_value=FakeEngine()):

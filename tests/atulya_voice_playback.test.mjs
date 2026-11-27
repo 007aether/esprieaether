@@ -51,8 +51,9 @@ test('J159: le HUD propose un test de voix locale sur un clic explicite', async 
   const hud = await readFile(HUD, 'utf8');
   assert.match(hud, /id="voiceTestBtn"/);
   assert.match(hud, /\$\("voiceTestBtn"\)\.addEventListener\("click", testLocalVoice\)/);
-  assert.match(hud, /fetch\("\/local-voice\/say"/);
+  assert.match(hud, /fetch\("\/local-voice\/say\?text=" \+/);
   assert.match(hud, /new Audio\(url\)/);
+  assert.doesNotMatch(hud, /\bPOST\b/);
   assert.doesNotMatch(hud, /https?:\/\/(?!127\.0\.0\.1|localhost)/);
 });
 
