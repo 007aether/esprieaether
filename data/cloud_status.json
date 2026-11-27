@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-27T01:11:49.095067+00:00",
+  "cloud_last_run": "2026-11-27T15:40:28.724731+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Solana $65 Support Held Three Times, Then Came the Black Friday Flash Crash",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Black Friday Crypto Deals: What I&#8217;d Buy and What I&#8217;d Skip",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Monero Delisting: KuCoin Drops XMR and Half the Spot Market Goes With It",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "How to Secure Your Crypto Exchange Account: The 10-Step Lockdown",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "FinCEN Breach: The Agency Holding Your Exchange Reports Got Hacked",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Section 301 Tariffs: Trump&#8217;s Tariff Comeback and What It Means for Bitcoin",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Zcash Below $700: ZEC Walks Through My Buy Ladder Before the Vote Ends",
       "source": "https://airdropalert.com/feed"
     },
     {
