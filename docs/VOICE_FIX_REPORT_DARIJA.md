@@ -40,12 +40,12 @@
 
 ### الربط والمراقبة
 - `esprieaether/scripts/serve_g0dm0d3.mjs`: `/local-voice/*` كيترحّل لـ`:5105` على نفس الأصل — ما كاينش CORS ولا طلب خارجي.
-- `esprieaether/scripts/keep_alive.ps1`: خدمة `atulya-voice` على `:5105` ولاUnder supervisor مع فحص `/health`.
+- `esprieaether/scripts/keep_alive.ps1`: خدمة `atulya-voice` على `:5105` ولا تحت المراقبة مع فحص `/health`.
 - `docs/V2_RELEASE.md`: سجل J159 مضاف.
 
 ## 4. الدليل الحي (محلي، بلا خدمة خارجية)
 - `/health` على `:5105` و`/local-voice/health` على `:3860`: `ok=true`, `engine=supertonic-3-int8-local`.
-- `POST /local-voice/say` بالدارجة: `200`, `audio/wav`, `252446` بايت، `magic=RIFF`.
+- `GET /local-voice/say?text=…&language=auto` بالدارجة عبر بروكسي HUD: `200`, `audio/wav`, `252446` بايت، `magic=RIFF`.
 - تحليل العينة: 44100Hz، 2.86s، `peak=13093`, `rms=1813.3`, `nonSilent=true`.
 - الواجهة المحمّلة فعلاً: `assistant.js` على `:8501` فيه `soundUnlocked` و`playback blocked`؛ `jarvis.html` على `:3860` فيه `voiceTestBtn`.
 - تشغيل العينة عبر `System.Media.SoundPlayer` محلياً رجّع `playback_api=ok` (هادشي كثبت أن مسار السبيكرات والـ API ديال التشغيل كيخدم، ماشي أنك نتا سمعتها).
