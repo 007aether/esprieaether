@@ -518,6 +518,7 @@ def _make_brain(settings: Settings) -> Brain | None:
             base_url=os.environ.get("ATULYA_FREELLM_BASE_URL", "http://127.0.0.1:31415/v1"),
             api_key=_freellm_key(),
             client=http_client,
+            send_tools=False,
         )
         local_base = os.environ.get("ATULYA_LOCAL_BASE_URL", "http://127.0.0.1:31416/v1")
         fallback = OpenAICompatibleProvider(

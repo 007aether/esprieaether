@@ -113,6 +113,7 @@ class OpenAICompatibleProvider:
         timeout_seconds: float | None = None,
         max_tokens: int | None = None,
         client: httpx.AsyncClient | None = None,
+        send_tools: bool = True,
     ) -> None:
         if not base_url.strip():
             raise ValueError("A model API base URL is required")
@@ -131,6 +132,7 @@ class OpenAICompatibleProvider:
         if max_tokens is not None and max_tokens < 1:
             raise ValueError("max_tokens must be positive")
         self._max_tokens = max_tokens
+        self._send_tools = send_tools
         # Set after a provider rejects the `tools` field so later turns skip it.
         self._tools_unsupported = False
 
@@ -170,7 +172,7 @@ class OpenAICompatibleProvider:
             "messages": [self._wire_message(item) for item in messages],
             "stream": stream,
         }
-        if tools and not self._tools_unsupported:
+        if tools and self._send_tools and not self._tools_unsupported:
             payload["tools"] = (compact_local_tool_schemas(tools)
                                 if self._base_url.startswith(("http://127.0.0.1:", "http://localhost:"))
                                 else list(tools))

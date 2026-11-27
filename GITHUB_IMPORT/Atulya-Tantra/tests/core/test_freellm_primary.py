@@ -1,6 +1,7 @@
 """FreeLLMAPI en premier, cerveau GGUF local en repli automatique (J150)."""
 from atulya import server
 from atulya.settings import Settings
+from tools.plugins.brain import Message, OpenAICompatibleProvider
 
 
 def _settings():
@@ -26,6 +27,8 @@ def test_freellm_primary_keeps_a_local_fallback(monkeypatch):
     assert primary._base_url == "http://127.0.0.1:31415/v1"
     assert primary._model == "gemini-flash-lite"
     assert primary._api_key == "local-test-key"
+    # Un prompt court fait démarrer le routeur « auto » bien avant 6 s.
+    assert primary._send_tools is False
     fallback = provider._local_provider
     assert fallback._base_url == "http://127.0.0.1:31416/v1"
     assert fallback._max_tokens == 24
@@ -33,6 +36,20 @@ def test_freellm_primary_keeps_a_local_fallback(monkeypatch):
     # « auto » a mis ~4,3 s au test réel : ne pas abandonner avant 6 s.
     assert provider._attempt_timeout >= 6
     assert provider._provider_budget <= 8
+
+
+def test_primary_payload_has_no_tools(monkeypatch):
+    provider = OpenAICompatibleProvider(
+        name="FreeLLMAPI", model="auto", base_url="http://127.0.0.1:31415/v1",
+        send_tools=False,
+    )
+    payload = provider._payload([Message(role="user", content="hi")], stream=True,
+                                tools=[{"type": "function", "function": {"name": "x"}}])
+    assert "tools" not in payload
+    assert OpenAICompatibleProvider(
+        model="auto", base_url="http://127.0.0.1:31415/v1"
+    )._payload([Message(role="user", content="hi")], stream=True,
+               tools=[{"type": "function", "function": {"name": "x"}}]).get("tools")
 
 
 def test_default_model_is_auto_router(monkeypatch):
