@@ -819,15 +819,23 @@ export async function buildCapabilities(
     ['entrypoints', (row) => Number(row.entrypoints) || 0],
     ['status', (row) => String(row.status || '')],
   ], 'Relancer l’analyse inverse locale sans modifier le code');
-  agentProof('gsm-fleet', gsm, 'gsm_status.json', [
-    ['online', (row) => Number(row.online) || 0],
-    ['discovered', (row) => Number(row.discovered) || 0],
-    ['readOnly', (row) => row.readOnly === true],
-    ['workerMode', (row) => String(row.worker?.mode || '')],
-    ['workersReady', (row) => Number(row.worker?.ready) || 0],
-    ['probeStatus', (row) => String(workerProbe?.status || 'no_probe')],
-    ['status', (row) => String(row.status || '')],
-  ], 'Relancer le scan GSM local en lecture seule (adb devices/getprop)');
+  const gsmCancelled = gsm?.cancelled === true || gsm?.status === 'not_available';
+  if (gsmCancelled) {
+    add('gsm-fleet', 'not_available', [
+      { source: 'gsm_status.json', field: 'status', value: 'not_available' },
+      { source: 'gsm_status.json', field: 'reason', value: String(gsm?.reason || 'capacité annulée par le propriétaire') },
+    ], 'Capacité annulée par le propriétaire — aucun GSM requis');
+  } else {
+    agentProof('gsm-fleet', gsm, 'gsm_status.json', [
+      ['online', (row) => Number(row.online) || 0],
+      ['discovered', (row) => Number(row.discovered) || 0],
+      ['readOnly', (row) => row.readOnly === true],
+      ['workerMode', (row) => String(row.worker?.mode || '')],
+      ['workersReady', (row) => Number(row.worker?.ready) || 0],
+      ['probeStatus', (row) => String(workerProbe?.status || 'no_probe')],
+      ['status', (row) => String(row.status || '')],
+    ], 'Relancer le scan GSM local en lecture seule (adb devices/getprop)');
+  }
   const modelEvidence = modelTrial
     ? [
       { source: 'gsm_model_trial.json', field: 'status', value: String(modelTrial.status || '') },
@@ -835,7 +843,12 @@ export async function buildCapabilities(
       { source: 'gsm_model_trial.json', field: 'target', value: String(modelTrial.target || 'un seul appareil') },
     ]
     : [{ source: 'gsm_model_trial.json', field: 'selfcheck', value: 'no_data_source' }];
-  if (modelTrial?.status === 'needs_user_data') {
+  if (modelTrial?.cancelled === true || modelTrial?.status === 'not_available') {
+    add('gsm-model-trial', 'not_available', [
+      { source: 'gsm_model_trial.json', field: 'status', value: 'not_available' },
+      { source: 'gsm_model_trial.json', field: 'reason', value: String(modelTrial?.reason || 'capacité annulée par le propriétaire') },
+    ], 'Capacité annulée par le propriétaire — aucun GSM requis');
+  } else if (modelTrial?.status === 'needs_user_data') {
     add('gsm-model-trial', 'needs_user_data', modelEvidence,
       'Fournir localement un llama.cpp arm64 ELF et un GGUF <=600 Mo', lineStamp(modelTrial));
   } else if (modelTrial) {

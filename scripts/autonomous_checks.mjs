@@ -39,47 +39,12 @@ function sanitize(text) {
   return String(text ?? '').replace(SECRET, '$1=***').replace(/\s+/g, ' ').trim();
 }
 
-function check(list, field, ok, value) {
-  list.push({ field, ok: Boolean(ok), value: sanitize(value) });
-}
+// J144 — le propriétaire a annulé GSM/Panda : le bot n'exige plus 20 S8 et
+// n'interroge plus ADB. Les capacités restent publiées comme not_available,
+// jamais comme une preuve verte inventée.
+export const GSM_CANCELLED_REASON = 'capacité GSM annulée par le propriétaire — aucun appareil requis';
 
-export function validateGsmEvidence({ gsm, workers, trial }, now = Date.now()) {
-  const checks = [];
-  const gsmReport = gsm || {};
-  const workerReport = workers || {};
-  const trialReport = trial || {};
-
-  check(checks, 'gsm.status', gsmReport.status === 'live_verified', gsmReport.status);
-  check(checks, 'gsm.online', gsmReport.online === 20, gsmReport.online);
-  check(checks, 'gsm.errors', Array.isArray(gsmReport.errors) && gsmReport.errors.length === 0, gsmReport.errors?.length);
-  check(checks, 'gsm.readOnly', gsmReport.readOnly === true, gsmReport.readOnly);
-  check(checks, 'gsm.workerMode', gsmReport.worker?.mode === 'thin_endpoint', gsmReport.worker?.mode);
-  check(checks, 'gsm.workersReady', gsmReport.worker?.ready === 20, gsmReport.worker?.ready);
-  check(checks, 'gsm.fresh', freshEnough(gsmReport.checkedAt, now), gsmReport.checkedAt);
-
-  check(checks, 'workers.status', workerReport.status === 'live_verified', workerReport.status);
-  check(checks, 'workers.online', workerReport.online === 20, workerReport.online);
-  check(checks, 'workers.succeeded', Number(workerReport.succeeded) >= 20, workerReport.succeeded);
-  check(checks, 'workers.errors', Array.isArray(workerReport.errors) && workerReport.errors.length === 0, workerReport.errors?.length);
-  check(checks, 'workers.readOnly', workerReport.readOnly === true, workerReport.readOnly);
-  check(checks, 'workers.fresh', freshEnough(workerReport.checkedAt, now), workerReport.checkedAt);
-
-  check(checks, 'trial.status', STATUSES.has(trialReport.status), trialReport.status);
-  check(checks, 'evidence.noSecret', !hasSecret(JSON.stringify({ gsmReport, workerReport, trialReport })), 'false');
-
-  const ok = checks.every((item) => item.ok);
-  return {
-    status: ok ? 'live_verified' : 'implemented_unverified',
-    checks,
-    online: Number(gsmReport.online) || 0,
-    succeeded: Number(workerReport.succeeded) || 0,
-    readOnly: gsmReport.readOnly === true && workerReport.readOnly === true,
-    gsmCheckedAt: gsmReport.checkedAt || null,
-    workersCheckedAt: workerReport.checkedAt || null,
-  };
-}
-
-export function buildReport({ runs = [], evidence, trial = {}, now = Date.now() }) {
+export function buildReport({ runs = [], now = Date.now() } = {}) {
   const suites = runs.map((run) => ({
     name: run.name,
     label: run.label || run.name,
@@ -92,16 +57,8 @@ export function buildReport({ runs = [], evidence, trial = {}, now = Date.now() 
     .filter((suite) => suite.status !== 'live_verified')
     .map((suite) => ({ name: suite.name, status: suite.status, reason: suite.summary }));
 
-  if (evidence?.status !== 'live_verified') {
-    missing.push({ name: 'gsm-evidence', status: evidence?.status || 'not_available', reason: 'preuve datée ou lecture seule invalide' });
-  }
-  if (STATUSES.has(trial.status) && trial.status !== 'live_verified') {
-    missing.push({ name: 'gsm-model-trial', status: trial.status, reason: sanitize(trial.reason) });
-  }
-
   const overall = suites.length > 0
     && suites.every((suite) => suite.status === 'live_verified')
-    && evidence?.status === 'live_verified'
     ? 'live_verified'
     : 'implemented_unverified';
 
@@ -112,28 +69,21 @@ export function buildReport({ runs = [], evidence, trial = {}, now = Date.now() 
     overall,
     suites,
     gsm: {
-      status: evidence?.status || 'not_available',
-      online: evidence?.online || 0,
-      succeeded: evidence?.succeeded || 0,
-      readOnly: Boolean(evidence?.readOnly),
-      checkedAt: evidence?.gsmCheckedAt || null,
-      probeCheckedAt: evidence?.workersCheckedAt || null,
+      status: 'not_available',
+      online: 0,
+      succeeded: 0,
+      readOnly: false,
+      checkedAt: null,
+      probeCheckedAt: null,
+      reason: GSM_CANCELLED_REASON,
     },
     modelTrial: {
-      status: STATUSES.has(trial.status) ? trial.status : 'not_available',
-      ready: trial.ready === true,
-      reason: sanitize(trial.reason),
+      status: 'not_available',
+      ready: false,
+      reason: GSM_CANCELLED_REASON,
     },
     missing,
   };
-}
-
-function readJson(file) {
-  try {
-    return JSON.parse(fs.readFileSync(file, 'utf8'));
-  } catch {
-    return null;
-  }
 }
 
 function summarize(name, result) {
@@ -149,15 +99,6 @@ function summarize(name, result) {
   if (name === 'atulya') {
     const match = output.match(/(\d+) passed, (\d+) skipped/);
     if (match) return `passed=${match[1]} skipped=${match[2]}`;
-  }
-  if (name === 'gsm-scan' || name === 'gsm-probe') {
-    const firstLine = String(result.stdout || '').trim().split(/\r?\n/)[0] || '';
-    try {
-      const row = JSON.parse(firstLine);
-      return `status=${row.status} online=${row.online ?? '-'} succeeded=${row.succeeded ?? '-'} errors=${row.errors?.length ?? '-'}`;
-    } catch {
-      // fall through to the raw line
-    }
   }
   if (name === 'manifest') {
     const match = output.match(/Manifest: (\d+) files, version ([\d.]+)/);
@@ -182,8 +123,6 @@ const COMMANDS = [
   { name: 'node', label: 'Node — suite locale', command: process.execPath, args: ['--test', '--test-reporter=tap', 'tests'], cwd: root, env: process.env, timeout: 1_800_000 },
   { name: 'python', label: 'Python — unittest esprieaether', command: pythonEspria, args: ['-m', 'unittest', 'discover', '-s', 'tests', '-q'], cwd: espria, env: pyEnv, timeout: 300_000 },
   { name: 'atulya', label: 'Atulya — pytest local', command: pythonAtulya, args: ['-m', 'pytest', '-q', 'tests'], cwd: atulya, env: atulyaEnv, timeout: 600_000 },
-  { name: 'gsm-scan', label: 'GSM — scan ADB lecture seule', command: pythonEspria, args: ['-m', 'src.gsm_bridge'], cwd: espria, env: pyEnv, timeout: 600_000 },
-  { name: 'gsm-probe', label: 'GSM — sonde 20 endpoints', command: pythonEspria, args: ['-m', 'src.gsm_bridge', '--probe'], cwd: espria, env: pyEnv, timeout: 600_000 },
   { name: 'manifest', label: 'Manifeste local', command: process.execPath, args: ['scripts/manifest.mjs'], cwd: root, env: process.env, timeout: 120_000 },
 ];
 
@@ -309,16 +248,12 @@ async function maintain(report) {
 
 async function main() {
   if (process.argv.includes('--help')) {
-    console.log('SUNNAVOK autonomous checks: Node + Python + Atulya + 20 GSM en lecture seule + manifeste. --autonomous ajoute commit/push et rechargement uniquement si tout est vert. Jamais SMS, appel ni écriture appareil.');
+    console.log('SUNNAVOK autonomous checks: Node + Python + Atulya + manifeste, 100% local. GSM et Panda annulés par le propriétaire : aucun scan ADB, aucun appareil requis. --autonomous ajoute commit/push et rechargement uniquement si tout est vert.');
     return;
   }
 
   const runs = runAll();
-  const gsm = readJson(path.join(state, 'gsm_status.json'));
-  const workers = readJson(path.join(state, 'gsm_workers.json'));
-  const trial = readJson(path.join(state, 'gsm_model_trial.json')) || {};
-  const evidence = validateGsmEvidence({ gsm, workers, trial });
-  const report = buildReport({ runs, evidence, trial, now: Date.now() });
+  const report = buildReport({ runs, now: Date.now() });
   if (process.argv.includes('--autonomous')) await maintain(report);
   const reportPath = path.join(state, 'autonomous_report.json');
   fs.mkdirSync(state, { recursive: true });
@@ -326,8 +261,8 @@ async function main() {
 
   console.log(`التقرير: ${reportPath}`);
   console.log(`الحالة العامة: ${report.overall}`);
-  console.log(`GSM: ${report.gsm.status} online=${report.gsm.online} succeeded=${report.gsm.succeeded} readOnly=${report.gsm.readOnly}`);
-  console.log(`الموديل الصغير: ${report.modelTrial.status} — ${report.modelTrial.reason || 'بدون سبب'}`);
+  console.log(`GSM: ${report.gsm.status} — ${report.gsm.reason}`);
+  console.log(`الموديل الصغير: ${report.modelTrial.status} — ${report.modelTrial.reason}`);
   if (report.missing.length > 0) {
     console.log(`ناقص: ${report.missing.map((item) => `${item.name}(${item.status})`).join(', ')}`);
   }

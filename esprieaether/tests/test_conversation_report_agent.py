@@ -66,6 +66,27 @@ class ConversationReportAgentTests(unittest.TestCase):
         self.assertIn("الحالة العامة", text)
         self.assertIn("GSM", text)
 
+    def test_gsm_annule_ne_propose_plus_de_lien_ni_de_modele(self) -> None:
+        from conversation_report_agent import build
+        self._write("gsm_status.json", {
+            "status": "not_available", "cancelled": True, "online": 0,
+            "reason": "capacité GSM annulée par le propriétaire", "checkedAt": "2026-11-26T11:00:00Z",
+        })
+        self._write("gsm_workers.json", {
+            "status": "not_available", "cancelled": True, "online": 0, "succeeded": 0,
+            "checkedAt": "2026-11-26T11:00:00Z",
+        })
+        self._write("gsm_model_trial.json", {
+            "status": "not_available", "cancelled": True, "ready": False,
+            "reason": "capacité GSM annulée par le propriétaire", "checkedAt": "2026-11-26T11:00:00Z",
+        })
+        report = build(self.state, now=NOW)
+        self.assertTrue(report["gsm"]["cancelled"])
+        self.assertEqual(report["gsm"]["model"]["status"], "not_available")
+        actions = {item["action"] for item in report["suggestions"]}
+        self.assertNotIn("gsm_relink_readonly", actions)
+        self.assertNotIn("provide_on_device_model_locally", actions)
+
     def test_run_ecrit_un_message_et_des_propositions_sans_executer(self) -> None:
         from atulya.history import ConversationHistory
         from conversation_report_agent import CONVERSATION_ID, run

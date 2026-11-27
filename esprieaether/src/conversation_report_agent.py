@@ -115,6 +115,11 @@ def build(state_dir=DEFAULT_STATE_DIR, *, now: Optional[datetime] = None) -> dic
     trial = sources["model_trial"] or {}
     overall = normalize_status(bot.get("overall"))
     gsm = {
+        # الإلغاء صريح في ملفات state؛ ما نعيدش اقتراح ربط GSM بعد قرار المالك.
+        "cancelled": any(
+            bool((sources[key] or {}).get("cancelled"))
+            for key in ("gsm_scan", "gsm_probe", "model_trial")
+        ),
         "scan": {
             "status": _status(sources["gsm_scan"], moment),
             "online": scan.get("online", 0),
@@ -202,13 +207,15 @@ def _manifest_count(manifest: dict) -> int:
 def make_suggestions(bot: dict, gsm: dict, manifest: dict) -> List[dict]:
     """اقتراحات عملية، كلها محلية وقابلة للرفض، بدون أي تنفيذ تلقائي."""
     ideas: List[dict] = []
-    if gsm["scan"]["online"] < 20 or gsm["probe"]["status"] != "live_verified":
+    if not gsm.get("cancelled") and (
+        gsm["scan"]["online"] < 20 or gsm["probe"]["status"] != "live_verified"
+    ):
         ideas.append({
             "action": "gsm_relink_readonly",
             "target": f"adb:{gsm['scan']['adbPort']}",
             "reason": "ربط 20 S8 بمنفذ ADB المحلي ثم إعادة المسح قراءة فقط.",
         })
-    if gsm["model"]["status"] == "needs_user_data":
+    if not gsm.get("cancelled") and gsm["model"]["status"] == "needs_user_data":
         ideas.append({
             "action": "provide_on_device_model_locally",
             "target": "un seul S8",
