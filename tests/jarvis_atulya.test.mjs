@@ -90,7 +90,10 @@ test('J108: le superviseur n envoie pas d ArgumentList vide et isole les pannes 
   assert.match(keeper, /\$argList = @\(\$svc\.Args/);
   assert.match(keeper, /if \(\$argList\.Count -gt 0\)/);
   assert.match(keeper, /START_FAILED/);
-  assert.match(keeper, /SkipStart=\$true/);
+  assert.match(keeper, /ContainsKey\('SkipStart'\)/);
+  // J150 : le propriétaire a choisi FreeLLMAPI d'abord ; :31415 est supervisé.
+  assert.match(keeper, /ATULYA_FREELLM_PRIMARY='1'/);
+  assert.doesNotMatch(keeper, /Name='freellmapi'[^\n]*SkipStart=\$true/);
   assert.doesNotMatch(keeper, /Start-Process -FilePath \$svc\.Exe -ArgumentList @\(\$svc\.Args\)/);
 });
 

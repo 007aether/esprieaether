@@ -137,7 +137,7 @@ $services = @(
     @{ Name='agent-mesh';     Port=11437; Exe=$py;   Args=@('src\agent_mesh.py'); Cwd=$base },
     # Demarrage manuel uniquement : l'ancien lancement automatique échouait chaque minute
     # (ArgumentList vide) et interrompait toute la tournée de superviseur.
-    @{ Name='freellmapi';     Port=31415; Exe='C:\Users\aether\Downloads\FreeLLMAPI-0.16.37-win\FreeLLMAPI.exe'; Args=@(); Cwd='C:\Users\aether\Downloads\FreeLLMAPI-0.16.37-win'; SkipStart=$true },
+    @{ Name='freellmapi';     Port=31415; Exe='C:\Users\aether\Downloads\FreeLLMAPI-0.16.37-win\FreeLLMAPI.exe'; Args=@(); Cwd='C:\Users\aether\Downloads\FreeLLMAPI-0.16.37-win' },
     @{ Name='local-brain';    Port=31416; Exe=$py;   Args=@('-m','src.local_brain'); Cwd=$base; Env=@{ LOCAL_BRAIN_QUEUE_TIMEOUT="$queueTimeout" } },
     @{ Name='atulya';         Port=8501;  Exe=$py;   Args=@('-m','atulya.cli','serve'); Cwd=$root; Env=@{
         PYTHONPATH=$vendor;
@@ -149,6 +149,11 @@ $services = @(
         ATULYA_TURN_TIMEOUT="$turnTimeout";
         ATULYA_ATTEMPT_TIMEOUT="$attemptTimeout";
         ATULYA_LOCAL_MAX_TOKENS='24';
+        # FreeLLMAPI en premier ; le GGUF local prend le relais sans réseau.
+        ATULYA_FREELLM_PRIMARY='1';
+        ATULYA_FREELLM_BASE_URL='http://127.0.0.1:31415/v1';
+        ATULYA_FREELLM_MODEL='auto';
+        ATULYA_FREELLM_KEY_FILE=(Join-Path $base 'state\freellmapi.key');
         ESPRIE_LOCAL_TIMEOUT="$localTimeout";
         ATULYA_FORCE_DARIJA='1';
         ATULYA_LANDING_URL='http://127.0.0.1:3860/jarvis.html';

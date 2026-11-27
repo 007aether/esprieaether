@@ -493,8 +493,49 @@ def _local_max_tokens(base_url: str) -> int | None:
         return 24
 
 
+def _freellm_key() -> str:
+    """Clé locale déjà présente sur la machine, jamais écrite dans le dépôt."""
+    key = os.environ.get("FREELLMAPI_KEY", "").strip()
+    if key:
+        return key
+    key_file = os.environ.get("ATULYA_FREELLM_KEY_FILE", "")
+    if not key_file:
+        return ""
+    try:
+        return Path(key_file).read_text(encoding="utf-8").strip()
+    except OSError:
+        return ""
+
+
 def _make_brain(settings: Settings) -> Brain | None:
     provider = settings.model_provider
+    if os.environ.get("ATULYA_FREELLM_PRIMARY", "") == "1":
+        # FreeLLMAPI d'abord ; le GGUF local prend le relais sans réseau.
+        http_client = _provider_http_client()
+        primary = OpenAICompatibleProvider(
+            name="FreeLLMAPI",
+            model=os.environ.get("ATULYA_FREELLM_MODEL", "auto"),
+            base_url=os.environ.get("ATULYA_FREELLM_BASE_URL", "http://127.0.0.1:31415/v1"),
+            api_key=_freellm_key(),
+            client=http_client,
+        )
+        local_base = os.environ.get("ATULYA_LOCAL_BASE_URL", "http://127.0.0.1:31416/v1")
+        fallback = OpenAICompatibleProvider(
+            name="Local brain",
+            model=os.environ.get("ATULYA_LOCAL_MODEL", "dolphin3"),
+            base_url=local_base,
+            api_key="",
+            client=http_client,
+            max_tokens=_local_max_tokens(local_base),
+        )
+        return Brain(AutomaticProvider(
+            [primary],
+            local_provider=fallback,
+            hedge_delay_seconds=0.5,
+            attempt_timeout_seconds=6.0,
+            provider_budget_seconds=7.0,
+            http_client=http_client,
+        ))
     if settings.model_provider_auto:
         cloud_providers = []
         http_client = None
