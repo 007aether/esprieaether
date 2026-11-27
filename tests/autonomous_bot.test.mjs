@@ -7,6 +7,8 @@ import {
   freshEnough,
   hasSecret,
   buildReport,
+  readGsmEvidence,
+  GSM_ENABLED_REASON,
 } from '../scripts/autonomous_checks.mjs';
 
 const NOW = Date.parse('2026-11-26T09:00:00Z');
@@ -20,15 +22,18 @@ test('J131: le bot n’utilise que les statuts autorisés', () => {
   assert.equal(hasSecret('online: 20'), false);
 });
 
-test('J152: GSM réactivé reste needs_user_data sans appareil, jamais vert', () => {
+const GREEN_RUNS = [
+  { name: 'node', exit: 0, summary: 'tests=1091 pass=1091 fail=0' },
+  { name: 'python', exit: 0, summary: 'tests=332 OK' },
+  { name: 'atulya', exit: 0, summary: 'passed=582 skipped=3' },
+  { name: 'manifest', exit: 0, summary: 'files=823 version=2.1.6' },
+];
+
+test('J152: GSM réactivé reste needs_user_data sans preuve fraîche, jamais vert', () => {
   const report = buildReport({
-    runs: [
-      { name: 'node', exit: 0, summary: 'tests=1091 pass=1091 fail=0' },
-      { name: 'python', exit: 0, summary: 'tests=332 OK' },
-      { name: 'atulya', exit: 0, summary: 'passed=582 skipped=3' },
-      { name: 'manifest', exit: 0, summary: 'files=823 version=2.1.6' },
-    ],
+    runs: GREEN_RUNS,
     now: NOW,
+    gsmEvidence: { status: 'needs_user_data', enabled: true, online: 0, readOnly: false, reason: GSM_ENABLED_REASON },
   });
   assert.equal(report.overall, 'live_verified');
   assert.deepEqual(report.missing, []);
@@ -39,6 +44,60 @@ test('J152: GSM réactivé reste needs_user_data sans appareil, jamais vert', ()
   assert.equal(report.modelTrial.status, 'needs_user_data');
   assert.match(report.gsm.reason, /réactivée par le propriétaire/i);
   assert.ok(!report.suites.some((suite) => suite.name.startsWith('gsm-')));
+});
+
+test('J153: une preuve ADB fraîche et vérifiée monte gsm-fleet en live_verified', () => {
+  const report = buildReport({
+    runs: GREEN_RUNS,
+    now: NOW,
+    gsmEvidence: {
+      ok: true, status: 'live_verified', online: 10, discovered: 10,
+      errors: [], readOnly: true, checkedAt: '2026-11-26T08:50:00Z',
+      reason: 'scan ADB local en lecture seule',
+    },
+    modelTrialEvidence: { status: 'needs_user_data', ready: false, checkedAt: '2026-11-26T08:50:00Z' },
+  });
+  assert.equal(report.gsm.status, 'live_verified');
+  assert.equal(report.gsm.online, 10);
+  assert.equal(report.gsm.succeeded, 10);
+  assert.equal(report.gsm.readOnly, true);
+  assert.equal(report.gsm.checkedAt, '2026-11-26T08:50:00Z');
+  assert.equal(report.modelTrial.status, 'needs_user_data');
+  assert.ok(freshEnough(report.gsm.checkedAt, NOW));
+  assert.ok(['live_verified', 'implemented_unverified', 'not_available', 'needs_user_data'].includes(report.gsm.status));
+});
+
+test('J153: une preuve GSM périmée ne devient jamais verte', () => {
+  const report = buildReport({
+    runs: GREEN_RUNS,
+    now: NOW,
+    gsmEvidence: {
+      ok: true, status: 'live_verified', online: 20, readOnly: true,
+      checkedAt: '2026-11-01T00:00:00Z', reason: 'ancien scan',
+    },
+  });
+  assert.equal(report.gsm.status, 'needs_user_data');
+  assert.equal(report.gsm.online, 0);
+  assert.match(report.gsm.reason, /périmée/i);
+});
+
+test('J153: readGsmEvidence lit le state local sans lancer de scan', async () => {
+  const { mkdtemp, writeFile, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const dir = await mkdtemp(join(tmpdir(), 'sunnavok-gsm-evidence-'));
+  try {
+    await writeFile(join(dir, 'gsm_status.json'), JSON.stringify({
+      ok: true, status: 'live_verified', online: 10, readOnly: true,
+      checkedAt: '2026-11-26T08:50:00Z',
+    }));
+    const evidence = readGsmEvidence(dir, NOW);
+    assert.equal(evidence.gsmEvidence.online, 10);
+    assert.equal(evidence.gsmEvidence.fresh, true);
+    assert.equal(evidence.modelTrialEvidence, null);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });
 
 test('J144: une suite locale rouge reste implemented_unverified', () => {

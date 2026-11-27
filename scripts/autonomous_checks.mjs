@@ -39,12 +39,32 @@ function sanitize(text) {
   return String(text ?? '').replace(SECRET, '$1=***').replace(/\s+/g, ' ').trim();
 }
 
-// J152 — le propriétaire a réactivé GSM/Panda et les actions appareil le 27/11.
-// Le bot ne lance toujours aucun scan ADB et n'exige pas 20 S8 : sans appareil
-// local la capacité reste needs_user_data, jamais une preuve verte inventée.
-export const GSM_ENABLED_REASON = 'capacité GSM réactivée par le propriétaire — aucun appareil détecté';
+// J152/J153 — le propriétaire a réactivé GSM/Panda et les actions appareil le 27/11.
+// Le bot ne lance aucun scan ADB : il lit uniquement une preuve locale datée
+// écrite par gsm_bridge.scan(). Sans preuve fraîche, la capacité reste
+// needs_user_data — jamais une preuve verte inventée.
+export const GSM_ENABLED_REASON = 'capacité GSM réactivée par le propriétaire';
 
-export function buildReport({ runs = [], now = Date.now() } = {}) {
+function readStateJson(file) {
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch {
+    return null;
+  }
+}
+
+export function readGsmEvidence(stateDir = state, now = Date.now()) {
+  const gsm = readStateJson(path.join(stateDir, 'gsm_status.json'));
+  const modelTrial = readStateJson(path.join(stateDir, 'gsm_model_trial.json'));
+  return {
+    gsmEvidence: gsm ? { ...gsm, fresh: freshEnough(gsm.checkedAt, now) } : null,
+    modelTrialEvidence: modelTrial ? { ...modelTrial, fresh: freshEnough(modelTrial.checkedAt, now) } : null,
+  };
+}
+
+export function buildReport({
+  runs = [], now = Date.now(), gsmEvidence = null, modelTrialEvidence = null,
+} = {}) {
   const suites = runs.map((run) => ({
     name: run.name,
     label: run.label || run.name,
@@ -62,6 +82,29 @@ export function buildReport({ runs = [], now = Date.now() } = {}) {
     ? 'live_verified'
     : 'implemented_unverified';
 
+  const gsmStale = Boolean(gsmEvidence) && (gsmEvidence.fresh === false
+    || (Boolean(gsmEvidence.checkedAt) && !freshEnough(gsmEvidence.checkedAt, now)));
+  const gsmFresh = Boolean(gsmEvidence) && !gsmStale;
+  const gsmVerified = Boolean(gsmFresh && gsmEvidence.status === 'live_verified'
+    && gsmEvidence.ok === true && Number(gsmEvidence.online) > 0
+    && gsmEvidence.readOnly === true && Array.isArray(gsmEvidence.errors)
+    && gsmEvidence.errors.length === 0);
+  const gsmStatus = !gsmEvidence || gsmStale ? 'needs_user_data'
+    : gsmEvidence.status === 'not_available' ? 'not_available'
+      : gsmVerified ? 'live_verified' : 'needs_user_data';
+  const gsmReason = gsmVerified
+    ? String(gsmEvidence.reason || 'scan ADB local en lecture seule vérifié')
+    : gsmStale ? `${GSM_ENABLED_REASON} — preuve locale périmée`
+      : gsmEvidence && gsmEvidence.reason ? String(gsmEvidence.reason) : GSM_ENABLED_REASON;
+
+  const modelStale = Boolean(modelTrialEvidence) && (modelTrialEvidence.fresh === false
+    || (Boolean(modelTrialEvidence.checkedAt) && !freshEnough(modelTrialEvidence.checkedAt, now)));
+  const modelFresh = Boolean(modelTrialEvidence) && !modelStale;
+  const modelVerified = Boolean(modelFresh && modelTrialEvidence.status === 'live_verified');
+  const modelStatus = !modelTrialEvidence || modelStale ? 'needs_user_data'
+    : modelTrialEvidence.status === 'not_available' ? 'not_available'
+      : modelVerified ? 'live_verified' : 'needs_user_data';
+
   return {
     generatedAt: new Date(now).toISOString(),
     bot: 'SUNNAVOK — vérification locale autonome',
@@ -69,20 +112,22 @@ export function buildReport({ runs = [], now = Date.now() } = {}) {
     overall,
     suites,
     gsm: {
-      status: 'needs_user_data',
+      status: gsmStatus,
       enabled: true,
-      online: 0,
-      succeeded: 0,
-      readOnly: false,
-      checkedAt: null,
-      probeCheckedAt: null,
-      reason: GSM_ENABLED_REASON,
+      online: gsmVerified ? Number(gsmEvidence.online) : 0,
+      succeeded: gsmVerified ? Number(gsmEvidence.online) : 0,
+      readOnly: gsmVerified,
+      checkedAt: gsmVerified ? gsmEvidence.checkedAt : null,
+      probeCheckedAt: gsmVerified ? (gsmEvidence.probeCheckedAt || null) : null,
+      reason: gsmReason,
     },
     modelTrial: {
-      status: 'needs_user_data',
+      status: modelStatus,
       enabled: true,
-      ready: false,
-      reason: GSM_ENABLED_REASON,
+      ready: Boolean(modelVerified && modelTrialEvidence.ready === true),
+      reason: modelVerified ? String(modelTrialEvidence.reason || 'essai modèle local vérifié')
+        : modelStale ? `${GSM_ENABLED_REASON} — preuve locale périmée`
+          : modelFresh && modelTrialEvidence.reason ? String(modelTrialEvidence.reason) : GSM_ENABLED_REASON,
     },
     missing,
   };
@@ -250,12 +295,13 @@ async function maintain(report) {
 
 async function main() {
   if (process.argv.includes('--help')) {
-    console.log('SUNNAVOK autonomous checks: Node + Python + Atulya + manifeste, 100% local. GSM et Panda annulés par le propriétaire : aucun scan ADB, aucun appareil requis. --autonomous ajoute commit/push et rechargement uniquement si tout est vert.');
+    console.log('SUNNAVOK autonomous checks: Node + Python + Atulya + manifeste, 100% local. GSM/Panda réactivés par le propriétaire : le bot ne lance aucun scan ADB, il lit seulement une preuve locale datée (<=7 jours). --autonomous ajoute commit/push et rechargement uniquement si tout est vert.');
     return;
   }
 
   const runs = runAll();
-  const report = buildReport({ runs, now: Date.now() });
+  const evidence = readGsmEvidence(state, Date.now());
+  const report = buildReport({ runs, now: Date.now(), ...evidence });
   if (process.argv.includes('--autonomous')) await maintain(report);
   const reportPath = path.join(state, 'autonomous_report.json');
   fs.mkdirSync(state, { recursive: true });

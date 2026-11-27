@@ -204,6 +204,8 @@ function Invoke-Pass {
 
     # J152 — développement automatique : un seul cycle toutes les 5 minutes.
     # Le garde-fou (tests verts + chemins protégés) vit dans src/auto_dev.py.
+    # Le venv Python de cette machine crée un processus intermédiaire + un enfant
+    # avec la même ligne de commande : ne PAS traiter le second comme un doublon.
     $evolve = Get-CimInstance Win32_Process -Filter "Name='python.exe'" -ErrorAction SilentlyContinue |
         Where-Object { $_.CommandLine -like '*autonome_evolve.py*--daemon*' }
     if (-not $evolve) {

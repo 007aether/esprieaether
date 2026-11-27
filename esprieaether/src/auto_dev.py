@@ -30,11 +30,14 @@ BANNED_NAMES = frozenset({
 BANNED_DIRS = frozenset({".tools", ".venv", "node_modules", "models", "state", ".git"})
 BANNED_SUFFIX = (".key", ".pem", ".pfx", ".p12")
 
+# Chaque suite tourne depuis son propre root : les tests Node sont à la racine
+# du dépôt, les tests unittest dans esprieaether/. Les lancer tous depuis ROOT
+# faisait échouer l'import `tests.test_github_projects` et bloquait le commit.
 CHECKS = (
     ("node", str(DEFAULT_NODE), ["--test", "tests/autonomous_bot.test.mjs",
-                                "tests/gsm_capability.test.mjs"]),
+                                "tests/gsm_capability.test.mjs"], str(ROOT)),
     ("python", str(DEFAULT_PYTHON), ["-m", "unittest", "tests.test_github_projects",
-                                    "tests.test_auto_dev"]),
+                                    "tests.test_auto_dev"], str(BASE_DIR)),
 )
 
 _secret = re.compile(r"(?i)\b(?:token|password|secret|api[_-]?key)\b\s*[:=]\s*\S+")
@@ -78,12 +81,13 @@ def changed_files(root: Path, git_exe: str, runner) -> list[str]:
 def verify(root: Path, runner) -> dict:
     results = []
     ok = True
-    for name, exe, args in CHECKS:
+    for name, exe, args, suite_cwd in CHECKS:
         if not Path(exe).exists():
             results.append({"name": name, "ok": False, "detail": "runner_missing"})
             ok = False
             continue
-        proc = runner([exe] + args, cwd=str(root), capture_output=True, text=True, timeout=300)
+        proc = runner([exe] + args, cwd=suite_cwd, capture_output=True, text=True,
+                      encoding="utf-8", errors="replace", timeout=300)
         passed = int(getattr(proc, "returncode", 1)) == 0
         ok = ok and passed
         results.append({"name": name, "ok": passed,

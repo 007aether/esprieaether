@@ -62,7 +62,7 @@ AGENTS_FILE = ROOT / "src" / "agent_kernel.py"
 
 # Load state
 if STATE_FILE.exists():
-    with open(STATE_FILE, 'r') as f:
+    with open(STATE_FILE, 'r', encoding='utf-8') as f:
         state = json.load(f)
 else:
     state = {
@@ -87,7 +87,7 @@ else:
 # Save state helper
 def save_state():
     """Save autonomous state."""
-    with open(STATE_FILE, 'w') as f:
+    with open(STATE_FILE, 'w', encoding='utf-8') as f:
         json.dump(state, f, indent=2, default=str)
 
 # Logging
@@ -96,7 +96,7 @@ def log(msg, level="INFO"):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     log_msg = f"[{timestamp}] [{level}] {msg}"
     print(log_msg)
-    with open(LOG_FILE, 'a') as f:
+    with open(LOG_FILE, 'a', encoding='utf-8') as f:
         f.write(log_msg + "\n")
 
 # Service health check
@@ -171,7 +171,7 @@ def diagnose_system():
 
     # Check error logs
     if ERROR_LOG_FILE.exists():
-        with open(ERROR_LOG_FILE, 'r') as f:
+        with open(ERROR_LOG_FILE, 'r', encoding='utf-8') as f:
             error_lines = f.readlines()
         if error_lines:
             diagnoses.append({
@@ -274,7 +274,7 @@ def check_architecture():
     # Load agent count if available
     if AGENTS_FILE.exists():
         try:
-            with open(AGENTS_FILE, 'r') as f:
+            with open(AGENTS_FILE, 'r', encoding='utf-8') as f:
                 content = f.read()
             if "AGENTS" in content:
                 arch["agent_count"] = len([l for l in content.split('\n') if 'agent' in l.lower()])
@@ -387,7 +387,7 @@ def generate_report():
 """
 
     print(report)
-    with open(LOG_FILE, 'a') as f:
+    with open(LOG_FILE, 'a', encoding='utf-8') as f:
         f.write(report + "\n")
 
     return report
@@ -512,7 +512,7 @@ def start_godmod3_ui():
         proc = subprocess.Popen(
             ["npm", "start"],
             cwd=ROOT.parent / "G0DM0D3",
-            stdout=open(ROOT.parent / "data" / "godmod3.log", "w"),
+            stdout=open(ROOT.parent / "data" / "godmod3.log", "w", encoding='utf-8'),
             stderr=subprocess.STDOUT,
             env={**os.environ, "PORT": "7860"},
             start_new_session=True

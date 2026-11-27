@@ -1,43 +1,25 @@
 {
-  "current_cycle": 983,
-  "total_cycles": 949,
+  "current_cycle": 988,
+  "total_cycles": 954,
   "diagnoses": [
     {
       "type": "service_down",
       "services": {
-        "web": {
-          "port": 5000,
-          "path": "/health",
-          "status": false,
-          "local": true
-        },
         "cloud_desktop": {
           "port": 5001,
           "path": "/health",
           "status": false,
           "local": true
         },
-        "sunna": {
-          "port": 5100,
-          "path": "/health",
+        "ollama": {
+          "port": 11434,
+          "path": "/api/tags",
           "status": false,
           "local": true
         },
-        "integrations": {
-          "port": 5102,
-          "path": "/health",
-          "status": false,
-          "local": true
-        },
-        "kanban": {
-          "port": 5103,
-          "path": "/health",
-          "status": false,
-          "local": true
-        },
-        "homedock": {
-          "port": 5104,
-          "path": "/",
+        "jarvis": {
+          "port": 8000,
+          "path": "/api/health",
           "status": false,
           "local": true
         },
@@ -49,7 +31,7 @@
         }
       },
       "severity": "high",
-      "message": "7/12 services are down"
+      "message": "4/12 services are down"
     }
   ],
   "fixes_applied": [
@@ -18663,44 +18645,39 @@
       "action": "Applied self-improvement",
       "status": "applied",
       "timestamp": "2026-10-29T00:50:13.614973"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-11-27T11:19:13.820824"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-11-27T11:22:31.415620"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-11-27T11:24:34.594211"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-11-27T11:26:37.409689"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-11-27T11:28:42.084457"
     }
   ],
   "decisions": [
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-25T23:42:47.341047",
-      "reason": "System healthy, no urgent action needed"
-    },
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-25T23:47:56.757560",
-      "reason": "System healthy, no urgent action needed"
-    },
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-25T23:53:04.114060",
-      "reason": "System healthy, no urgent action needed"
-    },
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-25T23:58:11.438927",
-      "reason": "System healthy, no urgent action needed"
-    },
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-26T00:03:18.761453",
-      "reason": "System healthy, no urgent action needed"
-    },
     {
       "type": "monitoring",
       "action": "continue monitoring",
@@ -19659,9 +19636,159 @@
           "status": "applied"
         }
       ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-11-27T11:19:13.815139",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "failed"
+        },
+        {
+          "type": "restart_service",
+          "service": "ollama",
+          "action": "Restart ollama",
+          "stage": 1,
+          "status": "pending"
+        },
+        {
+          "type": "restart_service",
+          "service": "jarvis",
+          "action": "Restart jarvis",
+          "stage": 1,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-11-27T11:22:31.409398",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "failed"
+        },
+        {
+          "type": "restart_service",
+          "service": "ollama",
+          "action": "Restart ollama",
+          "stage": 1,
+          "status": "pending"
+        },
+        {
+          "type": "restart_service",
+          "service": "jarvis",
+          "action": "Restart jarvis",
+          "stage": 1,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-11-27T11:24:34.590157",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "failed"
+        },
+        {
+          "type": "restart_service",
+          "service": "ollama",
+          "action": "Restart ollama",
+          "stage": 1,
+          "status": "pending"
+        },
+        {
+          "type": "restart_service",
+          "service": "jarvis",
+          "action": "Restart jarvis",
+          "stage": 1,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-11-27T11:26:37.405586",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "failed"
+        },
+        {
+          "type": "restart_service",
+          "service": "ollama",
+          "action": "Restart ollama",
+          "stage": 1,
+          "status": "pending"
+        },
+        {
+          "type": "restart_service",
+          "service": "jarvis",
+          "action": "Restart jarvis",
+          "stage": 1,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-11-27T11:28:42.080192",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "failed"
+        },
+        {
+          "type": "restart_service",
+          "service": "ollama",
+          "action": "Restart ollama",
+          "stage": 1,
+          "status": "pending"
+        },
+        {
+          "type": "restart_service",
+          "service": "jarvis",
+          "action": "Restart jarvis",
+          "stage": 1,
+          "status": "pending"
+        }
+      ]
     }
   ],
-  "last_run": "2026-10-29T00:50:13.555454",
+  "last_run": "2026-11-27T11:28:42.078674",
   "status": "diagnosed",
   "local_pct": 100.0,
   "error_count": 0,

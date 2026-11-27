@@ -80,6 +80,21 @@ class AutoDevTest(unittest.TestCase):
             )
             self.assertEqual(result["status"], "disabled")
 
+    def test_each_suite_runs_from_its_own_root(self) -> None:
+        self.assertEqual(len(auto_dev.CHECKS[0]), 4)
+        self.assertEqual(auto_dev.CHECKS[0][3], str(auto_dev.ROOT))
+        self.assertEqual(auto_dev.CHECKS[1][3], str(auto_dev.BASE_DIR))
+        self.assertTrue(all(Path(cwd).is_absolute() for _, _, _, cwd in auto_dev.CHECKS))
+
+    def test_verify_decodes_runner_output_as_utf8(self) -> None:
+        seen = {}
+        def runner(cmd, **kwargs):
+            seen.update(kwargs)
+            return proc()
+        auto_dev.verify(Path("."), runner)
+        self.assertEqual(seen.get("encoding"), "utf-8")
+        self.assertEqual(seen.get("errors"), "replace")
+
     def test_report_uses_only_allowed_statuses(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             state = Path(tmp)
