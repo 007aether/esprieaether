@@ -1,6 +1,6 @@
 {
-  "current_cycle": 988,
-  "total_cycles": 954,
+  "current_cycle": 989,
+  "total_cycles": 955,
   "diagnoses": [
     {
       "type": "service_down",
@@ -18675,16 +18675,15 @@
       "action": "Applied self-improvement",
       "status": "applied",
       "timestamp": "2026-11-27T11:28:42.084457"
+    },
+    {
+      "type": "improvement",
+      "action": "Applied self-improvement",
+      "status": "applied",
+      "timestamp": "2026-11-27T11:30:07.214598"
     }
   ],
   "decisions": [
-    {
-      "type": "monitoring",
-      "action": "continue monitoring",
-      "confidence": 0.85,
-      "timestamp": "2026-10-26T00:08:26.122708",
-      "reason": "System healthy, no urgent action needed"
-    },
     {
       "type": "monitoring",
       "action": "continue monitoring",
@@ -19786,9 +19785,39 @@
           "status": "pending"
         }
       ]
+    },
+    {
+      "type": "repair",
+      "action": "apply auto-fixes",
+      "confidence": 0.75,
+      "timestamp": "2026-11-27T11:30:07.210168",
+      "reason": "High severity issues detected, applying fixes",
+      "fixes": [
+        {
+          "type": "restart_service",
+          "service": "cloud_desktop",
+          "action": "Restart cloud_desktop",
+          "stage": 1,
+          "status": "failed"
+        },
+        {
+          "type": "restart_service",
+          "service": "ollama",
+          "action": "Restart ollama",
+          "stage": 1,
+          "status": "pending"
+        },
+        {
+          "type": "restart_service",
+          "service": "jarvis",
+          "action": "Restart jarvis",
+          "stage": 1,
+          "status": "pending"
+        }
+      ]
     }
   ],
-  "last_run": "2026-11-27T11:28:42.078674",
+  "last_run": "2026-11-27T11:30:07.209022",
   "status": "diagnosed",
   "local_pct": 100.0,
   "error_count": 0,
