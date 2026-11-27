@@ -105,6 +105,18 @@
 
         <div class="card">
           <div class="row-between">
+            <h2>شبكة GSM (قراءة فقط)</h2>
+            <button type="button" class="btn ghost small" id="gsm-refresh">تحديث</button>
+          </div>
+          <p class="muted">الأجهزة والدليل كيجيو من <span class="ltr">gsm_status.json</span>؛ الدليل اللي فات 7 أيام ما كيتخضرش.</p>
+          <dl class="kv status-list" id="gsm-status" aria-live="polite">
+            <dt>الحالة</dt><dd>جارٍ القراءة…</dd>
+          </dl>
+          <p class="muted" id="gsm-alert"></p>
+        </div>
+
+        <div class="card">
+          <div class="row-between">
             <h2>سجل التدقيق (J)</h2>
             <button type="button" class="btn ghost small" id="audit-refresh">تحديث</button>
           </div>

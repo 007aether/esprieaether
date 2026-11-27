@@ -50,12 +50,17 @@ DEFAULT_GATEWAY = os.environ.get("ESPRIE_GSM_GATEWAY", "http://127.0.0.1:31416")
 MAX_MODEL_MB = 600
 MODEL_TRIAL_FILE = "gsm_model_trial.json"
 WORKER_PROBE_FILE = "gsm_workers.json"
+# Dossier de dépôt fourni par le propriétaire : aucun téléchargement, aucun secret.
+# Sous-dossiers recommandés : binary/ (ELF arm64) et models/ (GGUF <= 600 Mo).
+LOCAL_MODEL_DIR = DEFAULT_STATE_DIR / "gsm_model"
 DEFAULT_BINARY_DIRS = (
+    LOCAL_MODEL_DIR,
     BASE_DIR.parent / ".tools",
     BASE_DIR / "models",
     BASE_DIR.parent / "GITHUB_IMPORT" / "Atulya-Tantra" / "models" / "runtime" / "llama.cpp",
 )
 DEFAULT_MODEL_DIRS = (
+    LOCAL_MODEL_DIR,
     BASE_DIR / "models",
     BASE_DIR.parent / "GITHUB_IMPORT" / "Atulya-Tantra" / "models",
 )

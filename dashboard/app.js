@@ -620,6 +620,31 @@
     }
   }
 
+  async function refreshGsmStatus() {
+    const box = $('#gsm-status');
+    if (!box) return;
+    try {
+      const response = await fetch('/api/rest/gsm/status', { cache: 'no-store' });
+      if (!response.ok) throw new Error('gsm unavailable');
+      const gsm = await response.json();
+      const rows = [
+        ['الحالة', gsm.status],
+        ['الأجهزة', `${gsm.online ?? 0} متصل / ${gsm.discovered ?? 0} مكتشف`],
+        ['SIM جاهزة', String(gsm.simReady ?? 0)],
+        ['القراءة فقط', gsm.readOnly ? 'نعم' : 'لا'],
+        ['الموديل الصغير', gsm.modelTrial?.status || '—'],
+      ];
+      box.innerHTML = rows.map(([key, value]) => `<dt>${esc(key)}</dt><dd>${esc(value)}</dd>`).join('');
+      const alert = $('#gsm-alert');
+      if (alert) {
+        alert.textContent = gsm.alert === 'expired' ? 'الدليل قديم: كيحتاج فحص قراءة فقط جديد.'
+          : gsm.alert === 'no_evidence' ? 'ما كاينش دليل GSM محلي.' : '';
+      }
+    } catch {
+      box.innerHTML = '<dt>الحالة</dt><dd>تعذرت القراءة من الخادم</dd>';
+    }
+  }
+
   async function refreshAgentAudit() {
     const box = $('#agent-audit-feed');
     if (!box) return;
@@ -665,6 +690,7 @@
   }
 
   $('#status-refresh')?.addEventListener('click', refreshSystemStatus);
+  $('#gsm-refresh')?.addEventListener('click', refreshGsmStatus);
   $('#audit-refresh')?.addEventListener('click', refreshAgentAudit);
   $('#report-btn')?.addEventListener('click', async () => {
     const status = $('#export-status');
@@ -722,5 +748,6 @@
   renderHomeBatch();
   updateFacade();
   refreshSystemStatus();
+  refreshGsmStatus();
   refreshAgentAudit();
 })();

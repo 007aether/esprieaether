@@ -169,6 +169,10 @@
       <div id="approvals" class="dim">كيتحمل…</div>
     </section>
     <section class="card">
+      <h2>GSM · قراءة فقط</h2>
+      <div id="gsm" class="dim">كيتحمل…</div>
+    </section>
+    <section class="card">
       <h2>أتوليا · وحدة مستوردة</h2>
       <div class="atulya-bar">
         <div id="atulya" class="dim">كيتحمل…</div>
@@ -243,6 +247,7 @@
   var SYS = "/jarvis/api/system/status";
   var CAP = "/jarvis/api/jarvis/capabilities";
   var ATU = "/jarvis/api/jarvis/atulya";
+  var GSM = "/jarvis/api/rest/gsm/status";
   var SEN = "/sentinel/events";
   var sentinel = { ts: 0, tools: {} }, wave = [];
   var lastSystem = null, lastAttention = null;
@@ -543,6 +548,29 @@
       }).join("");
   }
 
+  function renderGsm(data) {
+    var box = $("gsm");
+    if (!box) return;
+    if (!data || data.status === undefined) {
+      box.innerHTML = '<div class="dim">الـ API المحلية غير متاحة</div>';
+      return;
+    }
+    var rows = [
+      ["الحالة", data.status],
+      ["الأجهزة", String(data.online || 0) + " متصل / " + String(data.discovered || 0) + " مكتشف"],
+      ["SIM جاهزة", String(data.simReady || 0)],
+      ["القراءة فقط", data.readOnly ? "نعم" : "لا"],
+      ["الموديل", data.modelTrial ? data.modelTrial.status : "-"]
+    ];
+    var html = rows.map(function (row) {
+      return '<div class="row"><span>' + esc(row[0]) + '</span><span class="' +
+        (row[1] === "live_verified" ? "ok" : "warn") + '">' + esc(tr(row[1])) + '</span></div>';
+    }).join("");
+    if (data.alert === "expired") html += '<div class="err">الدليل قديم: فحص قراءة فقط جديد مطلوب</div>';
+    if (data.alert === "no_evidence") html += '<div class="err">ما كاينش دليل GSM محلي</div>';
+    box.innerHTML = html;
+  }
+
   var APP = "/jarvis/api/jarvis/approvals";
   var APP_DECIDE = "/jarvis/api/jarvis/approvals/"; // décision loopback, jamais un service externe
   function renderApprovals(data) {
@@ -731,6 +759,9 @@
     fetch(ATU, { cache: "no-store" }).then(function (r) { return r.json(); })
       .then(renderAtulya)
       .catch(function () { $("atulya").textContent = tr("no_data_source"); });
+    fetch(GSM, { cache: "no-store" }).then(function (r) { return r.json(); })
+      .then(renderGsm)
+      .catch(function () { $("gsm").textContent = tr("no_data_source"); });
     fetch(ATT, { cache: "no-store" }).then(function (r) { return r.json(); })
       .then(function (d) { lastAttention = d; renderAttention(d); renderLedger(d.ledger);
         renderInternet(d.internet); renderVoice(d.voice);

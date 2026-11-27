@@ -196,6 +196,33 @@ class GsmBridgeTest(unittest.TestCase):
         self.assertIn("arm64", report["reason"])
         self.assertEqual(saved["status"], "needs_user_data")
 
+    def test_dossier_de_depot_local_est_dans_les_chemins_par_defaut(self) -> None:
+        self.assertEqual(gsm_bridge.LOCAL_MODEL_DIR, gsm_bridge.BASE_DIR / "state" / "gsm_model")
+        self.assertIn(gsm_bridge.LOCAL_MODEL_DIR, gsm_bridge.DEFAULT_BINARY_DIRS)
+        self.assertIn(gsm_bridge.LOCAL_MODEL_DIR, gsm_bridge.DEFAULT_MODEL_DIRS)
+
+    def test_modele_local_est_decouvert_sans_telechargement(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            state = root / "state"
+            binary_dir = state / "gsm_model" / "binary"
+            model_dir = state / "gsm_model" / "models"
+            binary_dir.mkdir(parents=True)
+            model_dir.mkdir(parents=True)
+            binary = binary_dir / "llama.cpp-arm64"
+            binary.write_bytes(b"\x7fELF" + b"\x00" * 12)
+            model = model_dir / "tiny.gguf"
+            model.write_bytes(b"\x00" * 1024)
+            with mock.patch.object(gsm_bridge, "DEFAULT_BINARY_DIRS", (binary_dir,)), \
+                    mock.patch.object(gsm_bridge, "DEFAULT_MODEL_DIRS", (model_dir,)):
+                report = gsm_bridge.model_preflight(state_dir=state)
+            self.assertEqual(report["status"], "implemented_unverified")
+            self.assertTrue(report["ready"])
+            self.assertEqual(report["binary"], str(binary))
+            self.assertEqual(report["model"], str(model))
+            self.assertNotIn("http", report["reason"])
+            self.assertTrue((state / gsm_bridge.MODEL_TRIAL_FILE).exists())
+
     def test_model_preflight_avec_prerequis_reste_non_verifie(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

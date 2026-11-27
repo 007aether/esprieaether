@@ -1,8 +1,9 @@
 import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   withTtlCache, readGsmSnapshot, readIntegrationCatalog, readHomedockWidgets,
 } from '../api/rest_services.mjs';
@@ -151,4 +152,12 @@ test('J155: la page d’accueil affiche un état GSM réel, pas une statique', a
   const script = await (await fetch(`${base}/app.js`)).text();
   assert.match(script, /\/api\/rest\/gsm\/status/);
   assert.match(script, /refreshGsmStatus/);
+});
+
+test('J155: le HUD :3860 affiche aussi l’état GSM en lecture seule', async () => {
+  const root = dirname(dirname(fileURLToPath(import.meta.url)));
+  const hud = await readFile(join(root, 'esprieaether', 'G0DM0D3', 'out', 'jarvis.html'), 'utf8');
+  assert.match(hud, /id="gsm"/);
+  assert.match(hud, /\/jarvis\/api\/rest\/gsm\/status/);
+  assert.match(hud, /function renderGsm\(/);
 });
