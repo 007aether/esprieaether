@@ -9,10 +9,15 @@ jamais au lanceur USB propriétaire.
 
 from __future__ import annotations
 
+import array
 import hashlib
+import io
 import json
+import math
 import sys
 import threading
+import wave
+from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Optional
@@ -29,6 +34,8 @@ from tools.plugins.voice.tts import LocalSupertonicTTS  # noqa: E402
 HOST = "127.0.0.1"
 PORT = 5105
 CACHE_DIR = BASE_DIR / "state" / "voice_say_cache"
+EVIDENCE_PATH = BASE_DIR / "state" / "voice_output_evidence.json"
+EVIDENCE_TEXT = "أنا أتوليا، رديت عليك بالدارجة."
 MAX_CHARS = 500
 MAX_BODY = 4096
 
@@ -74,6 +81,50 @@ def synthesize(text: str, language: str = "auto") -> bytes:
     return audio
 
 
+def wav_stats(audio: bytes) -> dict:
+    """Mesure le WAV produit, sans dépendance externe ni lecture sur les Haut-parleurs."""
+    with wave.open(io.BytesIO(audio), "rb") as reader:
+        count = reader.getnframes()
+        rate = reader.getframerate()
+        frames = reader.readframes(count)
+    samples = array.array("h")
+    samples.frombytes(frames[:len(frames) // 2 * 2])
+    peak = max((abs(value) for value in samples), default=0)
+    rms = math.sqrt(sum(value * value for value in samples) / len(samples)) if samples else 0.0
+    return {
+        "bytes": len(audio),
+        "sampleRate": rate,
+        "durationSec": round(count / rate, 2) if rate else 0,
+        "peak": peak,
+        "rms": round(rms, 1),
+        "nonSilent": bool(peak > 100 and rms > 10),
+    }
+
+
+def write_evidence() -> dict:
+    """Preuve locale fraîche : le moteur produit un WAV non silencieux.
+
+    Cela ne prétend PAS que le propriétaire a entendu le son : l'écoute reste à
+    confirmer par un clic dans le HUD ou l'interface Atulya.
+    """
+    audio = synthesize(EVIDENCE_TEXT)
+    evidence = {
+        "status": "implemented_unverified",
+        "checkedAt": datetime.now(timezone.utc).isoformat(),
+        "source": "127.0.0.1:5105/say",
+        "engine": "supertonic-3-int8-local",
+        "language": "darija",
+        "wav": wav_stats(audio),
+        "playback": "owner_confirmation_pending",
+        "reason": None,
+    }
+    EVIDENCE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    tmp = EVIDENCE_PATH.with_name(EVIDENCE_PATH.name + ".tmp")
+    tmp.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(EVIDENCE_PATH)
+    return evidence
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "ESPRIEATHER-LocalVoice/1.0"
 
@@ -95,17 +146,24 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(audio)
 
     def do_GET(self) -> None:  # noqa: N802
-        if self.path.split("?", 1)[0] != "/health":
-            self._json(404, {"ok": False, "reason": "not_found"})
+        route = self.path.split("?", 1)[0]
+        if route == "/health":
+            up = ready()
+            self._json(200, {
+                "ok": up,
+                "status": "live_verified" if up else "needs_user_data",
+                "engine": "supertonic-3-int8-local",
+                "readOnly": True,
+                "reason": None if up else "modele vocal local absent",
+            })
             return
-        up = ready()
-        self._json(200, {
-            "ok": up,
-            "status": "live_verified" if up else "needs_user_data",
-            "engine": "supertonic-3-int8-local",
-            "readOnly": True,
-            "reason": None if up else "modele vocal local absent",
-        })
+        if route == "/evidence":
+            try:
+                self._json(200, write_evidence())
+            except Exception as exc:
+                self._json(503, {"ok": False, "reason": type(exc).__name__})
+            return
+        self._json(404, {"ok": False, "reason": "not_found"})
 
     def do_POST(self) -> None:  # noqa: N802
         if self.path.split("?", 1)[0] != "/say":
@@ -134,6 +192,11 @@ class Handler(BaseHTTPRequestHandler):
 
 def main() -> int:
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    if ready():
+        try:
+            write_evidence()
+        except Exception:
+            pass  # le service reste disponible même si l'écriture de preuve échoue
     ThreadingHTTPServer((HOST, PORT), Handler).serve_forever()
     return 0
 

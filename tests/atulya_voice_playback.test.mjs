@@ -42,3 +42,26 @@ test('J159: la synthèse reste loopback, sans URL externe ni clé', () => {
   assert.doesNotMatch(block, /https?:\/\//);
   assert.doesNotMatch(block, /api[_-]?key/i);
 });
+
+const HUD = join(ROOT, 'esprieaether', 'G0DM0D3', 'out', 'jarvis.html');
+const SERVE = join(ROOT, 'esprieaether', 'scripts', 'serve_g0dm0d3.mjs');
+const KEEPALIVE = join(ROOT, 'esprieaether', 'scripts', 'keep_alive.ps1');
+
+test('J159: le HUD propose un test de voix locale sur un clic explicite', async () => {
+  const hud = await readFile(HUD, 'utf8');
+  assert.match(hud, /id="voiceTestBtn"/);
+  assert.match(hud, /\$\("voiceTestBtn"\)\.addEventListener\("click", testLocalVoice\)/);
+  assert.match(hud, /fetch\("\/local-voice\/say"/);
+  assert.match(hud, /new Audio\(url\)/);
+  assert.doesNotMatch(hud, /https?:\/\/(?!127\.0\.0\.1|localhost)/);
+});
+
+test('J159: le relais HUD reste loopback et le service est supervisé', async () => {
+  const serve = await readFile(SERVE, 'utf8');
+  assert.match(serve, /function proxyLocalVoice\(/);
+  assert.match(serve, /ATULYA_VOICE_PORT \|\| 5105/);
+  assert.match(serve, /url\.startsWith\("\/local-voice\/"\)/);
+  const keepalive = await readFile(KEEPALIVE, 'utf8');
+  assert.match(keepalive, /Name='atulya-voice';\s+Port=5105/);
+  assert.match(keepalive, /5105 = '\/health'/);
+});

@@ -1,6 +1,7 @@
 """J159 — TDD : voix locale d'Atulya pour le HUD, sans cloud ni secret."""
 
 import io
+import json
 import sys
 import tempfile
 import unittest
@@ -69,6 +70,33 @@ class AtulyaVoiceTest(unittest.TestCase):
                 mock.patch.object(atulya_voice, "engine", return_value=fake):
             with self.assertRaises(Exception):
                 atulya_voice.synthesize("اختبار")
+
+    def test_mesure_wav_sans_confondre_silence_et_son(self):
+        silent = atulya_voice.wav_stats(fake_wav())
+        self.assertEqual(silent["peak"], 0)
+        self.assertFalse(silent["nonSilent"])
+        output = io.BytesIO()
+        with wave.open(output, "wb") as writer:
+            writer.setnchannels(1)
+            writer.setsampwidth(2)
+            writer.setframerate(16000)
+            writer.writeframes(b"\xff\x1f" * 1600)
+        tone = atulya_voice.wav_stats(output.getvalue())
+        self.assertTrue(tone["nonSilent"])
+        self.assertGreater(tone["rms"], 10)
+
+    def test_preuve_locale_reste_honnête_sur_l_écoute(self):
+        fake = FakeEngine()
+        with tempfile.TemporaryDirectory() as tmp, \
+                mock.patch.object(atulya_voice, "CACHE_DIR", Path(tmp)), \
+                mock.patch.object(atulya_voice, "EVIDENCE_PATH", Path(tmp) / "evidence.json"), \
+                mock.patch.object(atulya_voice, "engine", return_value=fake):
+            proof = atulya_voice.write_evidence()
+            saved = json.loads((Path(tmp) / "evidence.json").read_text(encoding="utf-8"))
+        self.assertEqual(proof["status"], "implemented_unverified")
+        self.assertEqual(proof["playback"], "owner_confirmation_pending")
+        self.assertEqual(saved, proof)
+        self.assertIn("127.0.0.1", proof["source"])
 
     def test_health_est_honnête(self):
         with mock.patch.object(atulya_voice, "engine", return_value=FakeEngine()):
