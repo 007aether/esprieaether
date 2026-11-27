@@ -202,6 +202,14 @@ function Invoke-Pass {
         if (Start-Tracked @{ Name='robot-daemon'; Port=0; Exe=$py; Args=@('robot_daemon.py','--interval','60'); Cwd=$base }) { $fixed++ }
     }
 
+    # J158 — veilleuse GSM : scan ADB lecture seule UNIQUEMENT si la preuve est
+    # absente ou périmée. Aucun SMS, appel, APK ou commande vers le lanceur USB.
+    $gsmWatch = Get-CimInstance Win32_Process -Filter "Name='python.exe'" -ErrorAction SilentlyContinue |
+        Where-Object { $_.CommandLine -like '*gsm_watcher.py*' }
+    if (-not $gsmWatch) {
+        if (Start-Tracked @{ Name='gsm-watcher'; Port=0; Exe=$py; Args=@('src\gsm_watcher.py','--daemon'); Cwd=$base; Env=@{ PYTHONIOENCODING='utf-8' } }) { $fixed++ }
+    }
+
     # J152 — développement automatique : un seul cycle toutes les 5 minutes.
     # Le garde-fou (tests verts + chemins protégés) vit dans src/auto_dev.py.
     # Le venv Python de cette machine crée un processus intermédiaire + un enfant
