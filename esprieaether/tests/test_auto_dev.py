@@ -64,10 +64,28 @@ class AutoDevTest(unittest.TestCase):
             verbs = [next(token for token in cmd[2:] if token in {"add", "commit", "push"})
                      for cmd in git_calls]
             self.assertEqual(verbs, ["add", "commit", "push"])
+            add_call = next(cmd for cmd in git_calls if "add" in cmd)
+            self.assertIn("src/auto_dev.py", add_call)
+            self.assertNotIn("-A", add_call)
+
+    def test_runtime_state_is_not_committed(self) -> None:
+        def runner(cmd, **kwargs):
+            return proc(stdout="?? esprieaether/data/autonome_evolve_state.json\0?? src/auto_dev.py\0")
+        self.assertEqual(auto_dev.changed_files(Path("."), "git.exe", runner),
+                         ["src/auto_dev.py"])
 
     def test_next_j_reads_git_subjects(self) -> None:
         runner = lambda cmd, **k: proc(stdout="J150: old\nJ151: newer\nrandom\n")
         self.assertEqual(auto_dev.next_j(Path("."), "git.exe", runner), 152)
+
+    def test_git_output_is_decoded_as_utf8(self) -> None:
+        seen = []
+        def runner(cmd, **kwargs):
+            seen.append(kwargs)
+            return proc(stdout="J152: auto-dev — tests verts\n")
+        self.assertEqual(auto_dev.next_j(Path("."), "git.exe", runner), 153)
+        self.assertEqual(seen[0].get("encoding"), "utf-8")
+        self.assertEqual(seen[0].get("errors"), "replace")
 
     def test_autonomy_gate_disables_by_default(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

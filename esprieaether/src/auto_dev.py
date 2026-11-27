@@ -30,6 +30,14 @@ BANNED_NAMES = frozenset({
 BANNED_DIRS = frozenset({".tools", ".venv", "node_modules", "models", "state", ".git"})
 BANNED_SUFFIX = (".key", ".pem", ".pfx", ".p12")
 
+# État d'exécution écrit à chaque cycle par autonome_evolve.py : le committer
+# produirait un commit vide de code toutes les 5 minutes.
+RUNTIME_IGNORE = frozenset({
+    "esprieaether/data/autonome_evolve_state.json",
+    "esprieaether/data/autonome_evolve.log",
+    "esprieaether/data/autonome_errors.log",
+})
+
 # Chaque suite tourne depuis son propre root : les tests Node sont à la racine
 # du dépôt, les tests unittest dans esprieaether/. Les lancer tous depuis ROOT
 # faisait échouer l'import `tests.test_github_projects` et bloquait le commit.
@@ -76,7 +84,8 @@ def changed_files(root: Path, git_exe: str, runner) -> list[str]:
             continue
         name = entry[3:] if len(entry) > 3 and entry[2] == " " else entry
         names.append(name.strip())
-    return [name for name in names if name]
+    return [name for name in names
+            if name and name.replace("\\", "/") not in RUNTIME_IGNORE]
 
 
 def verify(root: Path, runner) -> dict:
@@ -122,7 +131,7 @@ def commit_and_push(root: Path, git_exe: str, message: str, runner, status=None)
     if not checks["ok"]:
         return {"status": "blocked", "reason": "tests_failed", "checks": checks["checks"],
                 "paths": paths, "checkedAt": _now()}
-    for verb, args in (("add", ["add", "-A"]),
+    for verb, args in (("add", ["add", "--"] + paths),
                        ("commit", ["commit", "-m", message]),
                        ("push", ["push"])):
         proc = runner(
