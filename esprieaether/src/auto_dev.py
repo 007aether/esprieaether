@@ -67,7 +67,8 @@ def protected(paths: list[str]) -> str | None:
 def changed_files(root: Path, git_exe: str, runner) -> list[str]:
     proc = runner(
         [str(git_exe), "-c", "safe.directory=*", "status", "--porcelain=v1", "-z"],
-        cwd=str(root), capture_output=True, text=True, timeout=60,
+        cwd=str(root), capture_output=True, text=True,
+        encoding="utf-8", errors="replace", timeout=60,
     )
     names = []
     for entry in str(proc.stdout or "").split("\0"):
@@ -98,7 +99,8 @@ def verify(root: Path, runner) -> dict:
 def next_j(root: Path, git_exe: str, runner) -> int:
     proc = runner(
         [str(git_exe), "-c", "safe.directory=*", "log", "-50", "--format=%s"],
-        cwd=str(root), capture_output=True, text=True, timeout=60,
+        cwd=str(root), capture_output=True, text=True,
+        encoding="utf-8", errors="replace", timeout=60,
     )
     numbers = []
     for line in str(proc.stdout or "").splitlines():
@@ -125,7 +127,8 @@ def commit_and_push(root: Path, git_exe: str, message: str, runner, status=None)
                        ("push", ["push"])):
         proc = runner(
             [str(git_exe), "-c", "safe.directory=*"] + args,
-            cwd=str(root), capture_output=True, text=True, timeout=180,
+            cwd=str(root), capture_output=True, text=True,
+            encoding="utf-8", errors="replace", timeout=180,
         )
         if int(getattr(proc, "returncode", 1)) != 0:
             return {"status": "failed", "step": verb, "detail": _clean(
