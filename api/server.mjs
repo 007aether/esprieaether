@@ -5,7 +5,10 @@ import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { CONDITIONS, OWNERS, errorEnvelope, normalizeState, validateState } from '../shared/contract.mjs';
-import { readBoard, addBoardItem, moveBoardItem } from './rest_services.mjs';
+import {
+  readBoard, addBoardItem, moveBoardItem, withTtlCache,
+  readGsmSnapshot, readIntegrationCatalog, readHomedockWidgets,
+} from './rest_services.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_DASHBOARD_DIR = join(ROOT, 'dashboard');
@@ -34,6 +37,10 @@ const DEFAULT_REA_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'rea_selfcheck.
 const DEFAULT_GSM_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_status.json');
 const DEFAULT_WORKER_PROBE_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_workers.json');
 const DEFAULT_MODEL_TRIAL_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_model_trial.json');
+const DEFAULT_INTEGRATIONS_DIR = join(ROOT, 'esprieaether', 'integrations');
+// L'inventaire Atulya (18k fichiers + stat par fichier) est la cause du HUD lent.
+// On le mémoïse 30 s ; les preuves de capacité, elles, restent recalculées à chaque appel.
+const ATULYA_INVENTORY_TTL_MS = 30_000;
 const DEFAULT_KANBAN_PATH = join(ROOT, 'esprieaether', 'state', 'sunna-kanban', 'Coordination', 'kanban.md');
 const VOICE_STAGES = new Set(['idle', 'listening', 'thinking', 'speaking']);
 const MANUAL_DOWN_SERVICES = new Set(['dsh_bridge', 'llm_gateway']);
@@ -911,6 +918,53 @@ async function probeAtulyaHealth() {
   }
 }
 
+/** J154 — inventaire coûteux, séparé des preuves pour pouvoir être mémoïsé 30 s. */
+async function readAtulyaInventory(vendorDir) {
+  const result = {
+    fileCount: 0, totalBytes: 0, core: false, voice: false, mcp: false,
+    skills: false, pc: false, cloud: false, external: false, version: 'unknown',
+  };
+  try {
+    const entries = await readdir(vendorDir, { recursive: true, withFileTypes: true });
+    const files = entries.filter((entry) => entry.isFile());
+    const fullPath = (entry) => entry.parentPath
+      ? join(entry.parentPath, entry.name)
+      : join(vendorDir, entry.name);
+    result.fileCount = files.length;
+    const sizes = await Promise.all(files.map(async (entry) => {
+      try { return (await stat(fullPath(entry))).size; } catch { return 0; }
+    }));
+    result.totalBytes = sizes.reduce((sum, size) => sum + size, 0);
+    const names = new Set(files.map((entry) => entry.name));
+    const paths = new Set(files.map((entry) => String(entry.parentPath || '').replace(/\\/g, '/')));
+    result.core = files.some((entry) => String(entry.parentPath || '').replace(/\\/g, '/').endsWith('/atulya')
+      && entry.name === 'server.py');
+    result.skills = Array.from(paths).some((path) => path.endsWith('/tools'));
+    result.voice = names.has('voice_context.py') || names.has('openwakeword') || false;
+    result.mcp = names.has('mcp_connections.py');
+    result.skills = result.skills || names.has('proactive.py');
+    result.pc = names.has('Connect-This-PC.cmd');
+    const reqs = files.find((entry) => entry.name === 'requirements.lock.txt');
+    const cli = files.find((entry) => entry.name === 'cli.py');
+    const auth = files.find((entry) => entry.name === 'google_auth.py');
+    const reqText = reqs ? await readFile(fullPath(reqs), 'utf8') : '';
+    const cliText = cli ? await readFile(fullPath(cli), 'utf8') : '';
+    if (/openwakeword|faster-whisper/i.test(reqText)) result.voice = true;
+    if (/^mcp==/mi.test(reqText)) result.mcp = true;
+    result.cloud = /cloudflare|remote/i.test(cliText);
+    result.external = Boolean(auth) || /TELEGRAM_BOT_TOKEN/i.test(cliText);
+    const initFile = files.find((entry) => entry.name === '__init__.py');
+    if (initFile) {
+      const initText = await readFile(fullPath(initFile), 'utf8');
+      const match = initText.match(/__version__\s*=\s*["']([^"']+)["']/);
+      if (match) result.version = match[1];
+    }
+  } catch {
+    result.fileCount = 0;
+  }
+  return result;
+}
+
 /** J78/J80 — inventaire local du dépôt Atulya-Tantra importé, sans secret ni réseau. */
 export async function buildAtulya(vendorDir = DEFAULT_ATULYA_DIR, probe = probeAtulyaHealth,
                                   visionEvidencePath = DEFAULT_VISION_EVIDENCE,
@@ -925,60 +979,9 @@ export async function buildAtulya(vendorDir = DEFAULT_ATULYA_DIR, probe = probeA
     });
   };
   const features = [];
-  let fileCount = 0;
-  let totalBytes = 0;
-  let entries = [];
-  let core = false;
-  let voice = false;
-  let mcp = false;
-  let skills = false;
-  let pc = false;
-  let cloud = false;
-  let external = false;
-  let version = 'unknown';
-
-  try {
-    entries = await readdir(vendorDir, { recursive: true, withFileTypes: true });
-    const files = entries.filter((entry) => entry.isFile());
-    const fullPath = (entry) => entry.parentPath
-      ? join(entry.parentPath, entry.name)
-      : join(vendorDir, entry.name);
-    fileCount = files.length;
-    const sizes = await Promise.all(files.map(async (entry) => {
-      try {
-        return (await stat(fullPath(entry))).size;
-      } catch {
-        return 0;
-      }
-    }));
-    totalBytes = sizes.reduce((sum, size) => sum + size, 0);
-    const names = new Set(files.map((entry) => entry.name));
-    const paths = new Set(files.map((entry) => String(entry.parentPath || '').replace(/\\/g, '/')));
-    core = files.some((entry) => String(entry.parentPath || '').replace(/\\/g, '/').endsWith('/atulya')
-      && entry.name === 'server.py');
-    skills = Array.from(paths).some((path) => path.endsWith('/tools'));
-    voice = names.has('voice_context.py') || names.has('openwakeword') || false;
-    mcp = names.has('mcp_connections.py');
-    skills = skills || names.has('proactive.py');
-    pc = names.has('Connect-This-PC.cmd');
-    const reqs = files.find((entry) => entry.name === 'requirements.lock.txt');
-    const cli = files.find((entry) => entry.name === 'cli.py');
-    const auth = files.find((entry) => entry.name === 'google_auth.py');
-    const reqText = reqs ? await readFile(fullPath(reqs), 'utf8') : '';
-    const cliText = cli ? await readFile(fullPath(cli), 'utf8') : '';
-    if (/openwakeword|faster-whisper/i.test(reqText)) voice = true;
-    if (/^mcp==/mi.test(reqText)) mcp = true;
-    cloud = /cloudflare|remote/i.test(cliText);
-    external = Boolean(auth) || /TELEGRAM_BOT_TOKEN/i.test(cliText);
-    const initFile = files.find((entry) => entry.name === '__init__.py');
-    if (initFile) {
-      const initText = await readFile(fullPath(initFile), 'utf8');
-      const match = initText.match(/__version__\s*=\s*["']([^"']+)["']/);
-      if (match) version = match[1];
-    }
-  } catch {
-    fileCount = 0;
-  }
+  const inv = await withTtlCache(`atulya:${vendorDir}`,
+    () => readAtulyaInventory(vendorDir), { ttlMs: ATULYA_INVENTORY_TTL_MS });
+  const { fileCount, totalBytes, core, voice, mcp, skills, pc, cloud, external, version } = inv;
 
   // live_verified uniquement avec une réponse locale réelle et un cerveau configuré.
   let live = null;
@@ -1127,6 +1130,10 @@ export function createDashboardServer({
   chatAuthPath = DEFAULT_CHAT_AUTH_EVIDENCE,
   atulyaDir = DEFAULT_ATULYA_DIR,
   kanbanPath = DEFAULT_KANBAN_PATH,
+  gsmStatusPath = DEFAULT_GSM_EVIDENCE,
+  gsmWorkersPath = DEFAULT_WORKER_PROBE_EVIDENCE,
+  gsmModelTrialPath = DEFAULT_MODEL_TRIAL_EVIDENCE,
+  integrationsDir = DEFAULT_INTEGRATIONS_DIR,
   voice = {},
   log = defaultLog,
 } = {}) {
@@ -1245,6 +1252,24 @@ export function createDashboardServer({
         const state = await readState(statePath);
         const status = await buildSystemStatus(reportsDir);
         send(res, 200, buildExecutiveReport(state, status), 'text/markdown; charset=utf-8');
+        return;
+      }
+
+      // J154 REST phase 2 : GSM, integrations et homedock lisent les fichiers locaux.
+      if (pathname === '/api/rest/gsm/status' && req.method === 'GET') {
+        const snapshot = await readGsmSnapshot({ gsmStatusPath, gsmWorkersPath, gsmModelTrialPath });
+        send(res, 200, { ...snapshot, requestId });
+        return;
+      }
+
+      if (pathname === '/api/rest/integrations/list' && req.method === 'GET') {
+        send(res, 200, { ...(await readIntegrationCatalog(integrationsDir)), requestId });
+        return;
+      }
+
+      if (pathname === '/api/rest/homedock/widgets' && req.method === 'GET') {
+        const widgets = await readHomedockWidgets({ reportsDir, gsmStatusPath, kanbanPath });
+        send(res, 200, { ...widgets, requestId });
         return;
       }
 

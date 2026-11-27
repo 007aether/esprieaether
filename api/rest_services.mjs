@@ -1,9 +1,10 @@
 // passerelle REST locale — remplace les petits services Python à fichiers.
 // Même format de board que esprieaether/src/veritas_kanban.py (markdown simple).
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { dirname } from 'node:path';
+import { readFile, readdir, writeFile, mkdir } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
 
 export const KANBAN_COLS = ['todo', 'doing', 'done'];
+export const EVIDENCE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 const SEED = [
   '# 📋 Sunna Kanban',
@@ -113,4 +114,146 @@ export async function moveBoardItem(boardPath, input = {}) {
   board[to].push(found.item);
   await persist(boardPath, board);
   return board;
+}
+
+/* ---- J154 : phase 2 de la passerelle REST, fichiers locaux uniquement ---- */
+
+const TTL_CACHE = new Map();
+
+/** Mémoïse une lecture coûteuse sans jamais déclarer live_verified. */
+export async function withTtlCache(key, loader, {
+  cache = TTL_CACHE, ttlMs = 30_000, now = Date.now,
+} = {}) {
+  const at = now();
+  const hit = cache.get(key);
+  if (hit && at >= hit.at && at - hit.at < ttlMs) return hit.value;
+  const value = await loader();
+  cache.set(key, { at, value });
+  return value;
+}
+
+export function clearTtlCache(key, cache = TTL_CACHE) {
+  if (key === undefined) cache.clear();
+  else cache.delete(key);
+}
+
+async function readJson(path) {
+  if (!path) return null;
+  try {
+    const raw = await readFile(path, 'utf8');
+    return raw.trim() ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function isFreshEvidence(row, { ttlMs = EVIDENCE_TTL_MS, now = Date.now } = {}) {
+  const stamp = row && (row.checkedAt || row.checked_at || row.verifiedAt || row.updatedAt);
+  const parsed = typeof stamp === 'string' ? Date.parse(stamp) : NaN;
+  const at = now();
+  return Number.isFinite(parsed) && parsed <= at + 5 * 60 * 1000 && at - parsed <= ttlMs;
+}
+
+/**
+ * Vue GSM locale en lecture seule. Une preuve périmée OU absente ne devient
+ * jamais live_verified : on dégrade et on lève une alerte explicite.
+ */
+export async function readGsmSnapshot({ gsmStatusPath, gsmWorkersPath, gsmModelTrialPath }) {
+  const gsm = await readJson(gsmStatusPath);
+  const workers = await readJson(gsmWorkersPath);
+  const trial = await readJson(gsmModelTrialPath);
+  const fresh = Boolean(gsm && isFreshEvidence(gsm));
+  const alert = !gsm ? 'no_evidence' : (fresh ? null : 'expired');
+  const status = !gsm ? 'needs_user_data'
+    : (gsm.status === 'live_verified' && !fresh ? 'implemented_unverified' : gsm.status);
+  const devices = Array.isArray(gsm?.devices) ? gsm.devices.map((device) => ({
+    serial: device?.serial || '',
+    model: device?.model || '',
+    simState: device?.sim_state || device?.simState || '',
+    batteryLevel: Number.isFinite(device?.battery_level) ? device.battery_level : null,
+    abi: device?.abi || '',
+    root: Boolean(device?.root),
+    termux: Boolean(device?.termux),
+  })) : [];
+  return {
+    status,
+    fresh,
+    alert,
+    online: Number.isFinite(gsm?.online) ? gsm.online : 0,
+    discovered: Number.isFinite(gsm?.discovered) ? gsm.discovered : devices.length,
+    readOnly: gsm?.readOnly === true,
+    simReady: devices.filter((device) => device.simState === 'READY').length,
+    checkedAt: gsm?.checkedAt || gsm?.checked_at || null,
+    expiresAt: gsm?.expiresAt || null,
+    devices,
+    workers: {
+      status: workers?.status || 'needs_user_data',
+      online: Number.isFinite(workers?.online) ? workers.online : 0,
+      succeeded: Number.isFinite(workers?.succeeded) ? workers.succeeded : 0,
+      errors: Array.isArray(workers?.errors) ? workers.errors.length : 0,
+    },
+    modelTrial: {
+      status: trial?.status || 'needs_user_data',
+      ready: Boolean(trial?.ready),
+      reason: trial?.reason || '',
+      binary: trial?.binary || null,
+      model: trial?.model || null,
+      maxModelMb: Number.isFinite(trial?.maxModelMb) ? trial.maxModelMb : 600,
+      expiresAt: trial?.expiresAt || null,
+    },
+  };
+}
+
+/** Inventaire des projets importés : aucune commande n'est lancée. */
+export async function readIntegrationCatalog(integrationsDir) {
+  let entries = [];
+  try {
+    entries = await readdir(integrationsDir, { withFileTypes: true });
+  } catch {
+    return { count: 0, integrations: [] };
+  }
+  const integrations = [];
+  for (const entry of entries) {
+    if (!entry.isDirectory() || entry.name.startsWith('.')) continue;
+    let names = [];
+    try {
+      names = await readdir(join(integrationsDir, entry.name));
+    } catch {
+      names = [];
+    }
+    const set = new Set(names);
+    const stack = set.has('package.json') ? 'node'
+      : (set.has('requirements.txt') || set.has('pyproject.toml') || set.has('setup.py')) ? 'python'
+        : set.has('go.mod') ? 'go'
+          : set.has('Cargo.toml') ? 'rust' : 'unknown';
+    integrations.push({ name: entry.name, stack, status: 'present' });
+  }
+  integrations.sort((a, b) => a.name.localeCompare(b.name));
+  return { count: integrations.length, integrations };
+}
+
+export async function readHomedockWidgets({ reportsDir, gsmStatusPath, kanbanPath }) {
+  let files = [];
+  try {
+    files = await readdir(reportsDir);
+  } catch {
+    files = [];
+  }
+  const gsm = await readJson(gsmStatusPath);
+  let text = '';
+  try {
+    text = await readFile(kanbanPath, 'utf8');
+  } catch {
+    text = '';
+  }
+  const board = parseBoard(text);
+  return {
+    reports: files.filter((name) => name.endsWith('.json')).length,
+    gsm: {
+      status: gsm?.status || 'needs_user_data',
+      online: Number.isFinite(gsm?.online) ? gsm.online : 0,
+    },
+    kanban: Object.fromEntries(KANBAN_COLS.map((col) => [col, (board[col] || []).length])),
+    checkedAt: gsm?.checkedAt || null,
+  };
 }
