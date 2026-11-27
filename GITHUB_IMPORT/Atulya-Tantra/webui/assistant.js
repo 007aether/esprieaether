@@ -167,6 +167,11 @@
   let voiceRequest = 0;
   let voiceReady = false;
   let localTtsReady = false;
+  // J159 — Chrome refuse toute lecture audio avant le premier geste de
+  // l'utilisateur. On retient la première réponse et on la joue au premier
+  // clic/frappe au lieu de la perdre silencieusement.
+  let soundUnlocked = false;
+  let pendingSpeech = null;
   let voiceBrowserBlocked = false;
   let phase = "idle";
   let syntheticPhase = 0;
@@ -1683,6 +1688,10 @@
   }
 
   function speakWithBrowser(rawText, detail = "Using the browser's built-in speech voice.") {
+    if (!soundUnlocked) {
+      pendingSpeech = { kind: "browser", text: rawText, detail };
+      return;
+    }
     const text = speakableText(rawText);
     if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
       speaking = false;
@@ -1745,8 +1754,14 @@
     if (preferred) {
       utterance.voice = preferred;
       utterance.lang = preferred.lang;
-    } else if (matching[0]) {
-      utterance.lang = matching[0].lang;
+    } else {
+      // J159 — Windows n'a souvent que Zira (en-US) : sans voix ar-MA, on
+      // utilisait une langue sans voix installée et la réponse restait silencieuse.
+      const fallback = matching[0] || voices[0];
+      if (fallback) {
+        utterance.voice = fallback;
+        utterance.lang = fallback.lang;
+      }
     }
   }
 
@@ -1846,31 +1861,31 @@
       if (!response.ok) throw new Error("Local speech generation failed");
       return response.blob();
     });
+    // J159 — lecture directe : créer un AudioContext suspendu et faire passer
+    // le <audio> par createMediaElementSource coupait le son sur Chrome/Windows.
     const playBlob = (blob) => new Promise((resolve, reject) => {
-      activeAudioUrl = URL.createObjectURL(blob);
-      activeAudio = new Audio(activeAudioUrl);
-      speechAudioContext ||= new (window.AudioContext || window.webkitAudioContext)();
-      speechAudioContext.resume().then(() => {
-        const source = speechAudioContext.createMediaElementSource(activeAudio);
-        speechAnalyser = speechAudioContext.createAnalyser();
-        speechAnalyser.fftSize = 512;
-        source.connect(speechAnalyser);
-        speechAnalyser.connect(speechAudioContext.destination);
-        activeAudio.onplay = () => {
-          speaking = true;
-          setPhase("speaking", "Speaking", "كيتنطق بالصوت المحلي ديال أتوليا.");
-          refreshWave();
-        };
-        const cleanup = () => {
-          activeAudio = undefined;
-          speechAnalyser = undefined;
-          if (activeAudioUrl) URL.revokeObjectURL(activeAudioUrl);
-          activeAudioUrl = undefined;
-        };
-        activeAudio.onended = () => { cleanup(); resolve(); };
-        activeAudio.onerror = () => { cleanup(); reject(new Error("playback failed")); };
-        return activeAudio.play();
-      }).catch(reject);
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      activeAudio = audio;
+      activeAudioUrl = url;
+      speechAnalyser = undefined;
+      const cleanup = () => {
+        activeAudio = undefined;
+        speechAnalyser = undefined;
+        if (activeAudioUrl === url) URL.revokeObjectURL(url);
+        activeAudioUrl = undefined;
+      };
+      audio.onplay = () => {
+        speaking = true;
+        setPhase("speaking", "Speaking", "كيتنطق بالصوت المحلي ديال أتوليا.");
+        refreshWave();
+      };
+      audio.onended = () => { cleanup(); resolve(); };
+      audio.onerror = () => { cleanup(); reject(new Error("playback failed")); };
+      const started = audio.play();
+      if (started && typeof started.catch === "function") {
+        started.catch(() => { cleanup(); reject(new Error("playback blocked")); });
+      }
     });
     const done = (async () => {
       while (true) {
@@ -1951,7 +1966,23 @@
     return [sentences, rest];
   }
 
+  function unlockSound() {
+    if (soundUnlocked) return;
+    soundUnlocked = true;
+    try { window.speechSynthesis?.resume?.(); } catch { /* le moteur vocal peut être absent */ }
+    const queued = pendingSpeech;
+    pendingSpeech = null;
+    if (queued?.kind === "browser") speakWithBrowser(queued.text, queued.detail);
+    else if (queued?.kind === "local") speak(queued.text);
+  }
+  document.addEventListener("pointerdown", unlockSound, { passive: true });
+  document.addEventListener("keydown", unlockSound);
+
   function speak(text) {
+    if (!soundUnlocked) {
+      pendingSpeech = { kind: "local", text };
+      return Promise.resolve();
+    }
     if (!localTtsReady) {
       speakWithBrowser(text, "Speaking with this browser's built-in voice.");
       return;
