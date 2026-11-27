@@ -81,12 +81,14 @@ def capture_order(data_dir, user_id: str, text: str) -> str:
 
 
 def lessons_for_prompt(data_dir, user_id: str) -> str:
-    items = Lessons(data_dir).active(user_id) if data_dir else []
+    # Le petit modèle local évalue chaque token du prompt : on garde les trois
+    # règles les plus récentes, chacune courte, pour rester sous la deadline.
+    items = Lessons(data_dir).active(user_id)[-3:] if data_dir else []
     if not items:
         return ""
     lines = ["Rules learned from this user. Follow them on this reply. They override an old refusal:"]
-    lines.extend(f"- ({item['id']}) {item['text']}" for item in items)
-    return "\n".join(lines)
+    lines.extend(f"- ({item['id']}) {' '.join(str(item['text']).split())[:100]}" for item in items)
+    return "\n".join(lines)[:500]
 
 
 def learn_from_failures(data_dir) -> list[str]:

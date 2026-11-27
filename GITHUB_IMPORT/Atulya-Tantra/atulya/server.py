@@ -483,6 +483,16 @@ class SpeechRequest(BaseModel):
     mode: Literal["text", "voice"] = "text"
 
 
+def _local_max_tokens(base_url: str) -> int | None:
+    """Plafond de réponse du petit modèle local (~4 tokens/s sur cette machine)."""
+    if not base_url.startswith(("http://127.0.0.1:", "http://localhost:")):
+        return None
+    try:
+        return max(8, min(256, int(os.environ.get("ATULYA_LOCAL_MAX_TOKENS", "24"))))
+    except ValueError:
+        return 24
+
+
 def _make_brain(settings: Settings) -> Brain | None:
     provider = settings.model_provider
     if settings.model_provider_auto:
@@ -600,7 +610,10 @@ def _make_brain(settings: Settings) -> Brain | None:
                 ),
                 assistant_name=settings.assistant_name,
             )
-        client = OpenAICompatibleProvider(name=name, model=model, base_url=base_url, api_key=api_key)
+        client = OpenAICompatibleProvider(
+            name=name, model=model, base_url=base_url, api_key=api_key,
+            max_tokens=_local_max_tokens(base_url),
+        )
     else:
         raise ValueError("ATULYA_MODEL_PROVIDER must be 'auto', 'local', 'ollama', 'openai-compatible', 'openrouter', 'nvidia', 'gemini', or 'deepseek'")
     return Brain(client, assistant_name=settings.assistant_name)

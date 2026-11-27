@@ -119,6 +119,40 @@ def test_stalled_local_model_is_bounded(tmp_path, monkeypatch):
     assert _records(path), "l'expiration doit être journalisée"
 
 
+def test_timeout_retries_with_a_lite_prompt_before_giving_up(tmp_path, monkeypatch):
+    path = _journal(tmp_path, monkeypatch)
+    monkeypatch.setenv("ATULYA_TURN_TIMEOUT", "6")
+    monkeypatch.setenv("ATULYA_ATTEMPT_TIMEOUT", "2")
+
+    class ToolsFirstProvider:
+        name = model = "tools-first"
+
+        async def stream(self, messages, tools=None):
+            if tools:
+                await asyncio.sleep(10)
+            yield "جواب من الموديل."
+
+    class TwoRoundToolbox:
+        MAX_ROUNDS = 2
+        schemas = [{"type": "function", "function": {"name": "noop"}}]
+
+        def instructions(self):
+            return "You have tools."
+
+        async def call(self, name, arguments):
+            return ""
+
+    started = __import__("time").monotonic()
+    text = asyncio.run(_collect(Brain(ToolsFirstProvider()).stream(
+        [Message(role="user", content="平平平平平平平")],
+        toolbox=TwoRoundToolbox())))
+    elapsed = __import__("time").monotonic() - started
+
+    assert text == "جواب من الموديل."
+    assert elapsed < 5, f"le retry léger doit rester sous la deadline globale: {elapsed:.1f}s"
+    assert _records(path), "le timeout de la première tentative doit être journalisé"
+
+
 class FailingToolbox:
     MAX_ROUNDS = 2
     schemas = [{"type": "function", "function": {"name": "bad"}}]

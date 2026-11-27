@@ -8,6 +8,7 @@ import os
 import re
 import time
 from collections.abc import Sequence
+from dataclasses import replace
 
 from atulya.persona import build_system_prompt
 from .diagnostics import clean_text, record_brain_failure
@@ -36,6 +37,18 @@ def instant_ack(text: str) -> str:
         if pattern.search(text):
             return phrase + " "
     return ""
+
+
+def _lite_messages(messages: Sequence[Message]) -> list[Message]:
+    """Deuxième tentative : prompt court et aucun schéma d'outil."""
+    lite: list[Message] = []
+    for position, item in enumerate(messages):
+        if position == 0 and item.role == "system":
+            text = " ".join(item.content.split())[:1200]
+            lite.append(replace(item, content=text))
+        else:
+            lite.append(item)
+    return lite
 
 
 DEFAULT_FILLER = "لحظة من فضلك."
@@ -233,6 +246,7 @@ class Brain:
         fed back. The final round is sent without tools so the model must answer.
         """
         deadline = time.monotonic() + _env_limit("ATULYA_TURN_TIMEOUT", 45, 3, 600)
+        attempt_budget = _env_limit("ATULYA_ATTEMPT_TIMEOUT", 6, 2, 600)
         stream_method = getattr(self._provider, "stream", None)
         stream_accepts_tools = stream_method is not None and any(
             parameter.name == "tools" or parameter.kind == inspect.Parameter.VAR_KEYWORD
@@ -263,20 +277,24 @@ class Brain:
                     calls: list[ToolCall] = []
                     text_parts: list[str] = []
                     started = time.monotonic()
+                    attempt_deadline = min(deadline, started + attempt_budget)
+                    lite = attempt == 1
+                    attempt_messages = _lite_messages(messages) if lite else messages
+                    attempt_tools = toolbox.schemas if use_tools and stream_accepts_tools and not lite else None
 
                     async def completion_stream():
-                        yield await self._provider.complete(messages)
+                        yield await self._provider.complete(attempt_messages)
 
                     stream = (
                         completion_stream() if stream_method is None else
-                        stream_method(messages, tools=toolbox.schemas) if use_tools and stream_accepts_tools else
-                        stream_method(messages)
+                        stream_method(attempt_messages, tools=attempt_tools) if attempt_tools else
+                        stream_method(attempt_messages)
                     )
                     text_filter = TextCallFilter()
                     try:
                         iterator = stream.__aiter__()
                         while True:
-                            remaining = deadline - time.monotonic()
+                            remaining = attempt_deadline - time.monotonic()
                             if remaining <= 0:
                                 raise ProviderError("انتهت مهلة النموذج المحلي")
                             try:

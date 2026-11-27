@@ -5,6 +5,7 @@ import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { CONDITIONS, OWNERS, errorEnvelope, normalizeState, validateState } from '../shared/contract.mjs';
+import { readBoard, addBoardItem, moveBoardItem } from './rest_services.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_DASHBOARD_DIR = join(ROOT, 'dashboard');
@@ -33,6 +34,7 @@ const DEFAULT_REA_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'rea_selfcheck.
 const DEFAULT_GSM_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_status.json');
 const DEFAULT_WORKER_PROBE_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_workers.json');
 const DEFAULT_MODEL_TRIAL_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_model_trial.json');
+const DEFAULT_KANBAN_PATH = join(ROOT, 'esprieaether', 'state', 'sunna-kanban', 'Coordination', 'kanban.md');
 const VOICE_STAGES = new Set(['idle', 'listening', 'thinking', 'speaking']);
 const MANUAL_DOWN_SERVICES = new Set(['dsh_bridge', 'llm_gateway']);
 const REPORT_FILES = {
@@ -1118,6 +1120,7 @@ export function createDashboardServer({
   learningPath = DEFAULT_LEARNING_EVIDENCE,
   chatAuthPath = DEFAULT_CHAT_AUTH_EVIDENCE,
   atulyaDir = DEFAULT_ATULYA_DIR,
+  kanbanPath = DEFAULT_KANBAN_PATH,
   voice = {},
   log = defaultLog,
 } = {}) {
@@ -1236,6 +1239,37 @@ export function createDashboardServer({
         const state = await readState(statePath);
         const status = await buildSystemStatus(reportsDir);
         send(res, 200, buildExecutiveReport(state, status), 'text/markdown; charset=utf-8');
+        return;
+      }
+
+      // J1 REST : les petits services à fichiers passent par la passerelle Node.
+      if (pathname === '/api/rest/kanban/board' && req.method === 'GET') {
+        send(res, 200, { board: await readBoard(kanbanPath), requestId });
+        return;
+      }
+
+      if ((pathname === '/api/rest/kanban/add' || pathname === '/api/rest/kanban/move')
+          && req.method === 'POST') {
+        if (!requireLoopbackOrigin(req, res, requestId)) return;
+        let payload;
+        try {
+          payload = JSON.parse(await readBody(req));
+        } catch (error) {
+          status = error && error.code === 'BODY_TOO_LARGE' ? 413 : 400;
+          send(res, status, errorEnvelope(status === 413 ? 'BODY_TOO_LARGE' : 'JSON_INVALID', 'Corps JSON invalide', requestId));
+          return;
+        }
+        try {
+          const board = pathname.endsWith('/add')
+            ? await addBoardItem(kanbanPath, payload)
+            : await moveBoardItem(kanbanPath, payload);
+          send(res, 200, { ok: true, board, requestId });
+        } catch (error) {
+          const code = error && error.code;
+          status = code === 'NOT_FOUND' ? 404
+            : (code === 'BAD_TITLE' || code === 'BAD_COLUMN') ? 400 : 500;
+          send(res, status, errorEnvelope(code || 'REST_ERROR', (error && error.message) || 'REST error', requestId));
+        }
         return;
       }
 

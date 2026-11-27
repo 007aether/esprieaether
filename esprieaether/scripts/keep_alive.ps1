@@ -30,6 +30,11 @@ if ($queueTimeout -lt 30) { $queueTimeout = $localTimeout - 20 }
 $turnTimeout = [int]($env:ATULYA_TURN_TIMEOUT -as [int])
 if ($turnTimeout -lt 12) { $turnTimeout = 12 }
 if ($turnTimeout -gt 120) { $turnTimeout = 120 }
+# Chaque tentative de génération est plus courte que le tour entier : en cas de
+# blocage du petit modèle, la seconde tentative part avec un prompt allégé.
+$attemptTimeout = [int]($env:ATULYA_ATTEMPT_TIMEOUT -as [int])
+if ($attemptTimeout -lt 3) { $attemptTimeout = 6 }
+if ($attemptTimeout -gt $turnTimeout) { $attemptTimeout = $turnTimeout }
 # Une seule voix par défaut : Atulya répond. L'ancien daemon vocal JARVIS reste
 # disponible uniquement si le propriétaire le demande explicitement (=1).
 $legacyVoice = $env:ESPRIE_LEGACY_VOICE -eq '1'
@@ -142,6 +147,8 @@ $services = @(
         ATULYA_MODEL_BASE_URL='http://127.0.0.1:31416/v1';
         ATULYA_MODEL_TIMEOUT="$localTimeout";
         ATULYA_TURN_TIMEOUT="$turnTimeout";
+        ATULYA_ATTEMPT_TIMEOUT="$attemptTimeout";
+        ATULYA_LOCAL_MAX_TOKENS='24';
         ESPRIE_LOCAL_TIMEOUT="$localTimeout";
         ATULYA_FORCE_DARIJA='1';
         ATULYA_LANDING_URL='http://127.0.0.1:3860/jarvis.html';

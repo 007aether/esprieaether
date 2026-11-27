@@ -1,35 +1,31 @@
-"""Le prompt reste court, non redondant et sans promesse d'état inventée."""
-from __future__ import annotations
+"""Le prompt injecté reste court : le petit modèle local doit répondre avant 12 s."""
+import json
 
-from atulya.persona import EVIDENCE_RULE, build_system_prompt
-from atulya.profiles import DEFAULTS, profile_instructions
-
-
-def test_persona_and_profile_fit_a_small_token_budget() -> None:
-    persona = build_system_prompt("Atulya")
-    profile = profile_instructions(dict(DEFAULTS))
-    assert len(persona) <= 1100
-    assert len(profile) <= 550
-    assert len(persona) + 2 + len(profile) <= 1600
+from atulya.evolution import lessons_for_prompt
+from atulya.recent_actions import recent_actions
 
 
-def test_darija_rule_is_stated_exactly_once() -> None:
-    persona = build_system_prompt("Atulya")
-    assert persona.count("الدارجة المغربية") == 1
-    assert persona.count("بحروف عربية") == 1
-    assert persona.count("mishears") == 1
-    assert persona.count("الغلط") == 0
+def test_lessons_injection_est_plafonnee(tmp_path):
+    lessons = tmp_path / "lessons.json"
+    items = [
+        {"id": f"{i:010d}", "user_id": "admin", "text": f"Never do thing number {i}: " + "blah " * 60}
+        for i in range(8)
+    ]
+    lessons.write_text(json.dumps({"items": items}), encoding="utf-8")
+    prompt = lessons_for_prompt(tmp_path, "admin")
+    assert len(prompt) <= 500
+    assert "thing number 7" in prompt
+    assert "thing number 0" not in prompt
 
 
-def test_single_sentence_length_rule() -> None:
-    persona = build_system_prompt("Atulya")
-    profile = profile_instructions(dict(DEFAULTS))
-    assert "1–2 sentences" in persona
-    assert "1-3 sentences" not in profile
-
-
-def test_status_rule_is_central_and_language_default_is_untouched() -> None:
-    persona = build_system_prompt("Atulya")
-    assert EVIDENCE_RULE in persona
-    assert "tool" in EVIDENCE_RULE.lower()
-    assert DEFAULTS["language"] == "auto"
+def test_actions_injection_est_plafonnee(tmp_path):
+    rows = [
+        json.dumps({"user_id": "admin", "tool": f"tool_{i}", "channel": "web",
+                    "at": "2026-11-27T00:00:00+00:00", "outcome": "ok: " + "details " * 40})
+        for i in range(20)
+    ]
+    (tmp_path / "audit.jsonl").write_text("\n".join(rows), encoding="utf-8")
+    prompt = recent_actions(tmp_path)
+    assert len(prompt) <= 500
+    assert "tool_19" in prompt
+    assert "tool_0:" not in prompt

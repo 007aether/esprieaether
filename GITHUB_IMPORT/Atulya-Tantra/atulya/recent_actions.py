@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 
-def recent_actions(data_dir, limit: int = 6) -> str:
+def recent_actions(data_dir, limit: int = 3) -> str:
     path = Path(data_dir) / "audit.jsonl"
     try:
         lines = path.read_text(encoding="utf-8", errors="replace").splitlines()[-40:]
@@ -25,6 +25,6 @@ def recent_actions(data_dir, limit: int = 6) -> str:
     shown = []
     for row in rows[-limit:]:
         shown.append(
-            f"- {row.get('at', '')} {row.get('channel', '')} {row.get('tool')}: {str(row.get('outcome') or '')[:80]}"
+            f"- {row.get('at', '')} {row.get('channel', '')} {row.get('tool')}: {str(row.get('outcome') or '')[:50]}"
         )
     return "Actions already taken on the web, Telegram, and routines. Do not deny these:\n" + "\n".join(shown)

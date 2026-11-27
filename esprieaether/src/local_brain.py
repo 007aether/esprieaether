@@ -254,6 +254,26 @@ class Handler(BaseHTTPRequestHandler):
     def _json(self, obj: dict, status: int = 200, headers: dict | None = None) -> None:
         self._send(json.dumps(obj, ensure_ascii=False).encode("utf-8"), status, headers=headers)
 
+    def _stream(self, response, status: int = 200) -> None:
+        """Relaye les lignes SSE dès qu'elles arrivent (chunked), sans bufferiser."""
+        self.send_response(status)
+        self.send_header("Content-Type", "text/event-stream; charset=utf-8")
+        self.send_header("Cache-Control", "no-cache")
+        self.send_header("X-Accel-Buffering", "no")
+        self.send_header("Transfer-Encoding", "chunked")
+        self.end_headers()
+        try:
+            while True:
+                line = response.readline()
+                if not line:
+                    break
+                self.wfile.write(f"{len(line):X}\r\n".encode("ascii") + line + b"\r\n")
+                self.wfile.flush()
+            self.wfile.write(b"0\r\n\r\n")
+            self.wfile.flush()
+        except (BrokenPipeError, ConnectionResetError):
+            pass  # le client a arrêté d'écouter : on libère le slot quand même
+
     def do_GET(self):
         if self.path == "/health":
             models = available_models()
@@ -308,17 +328,26 @@ class Handler(BaseHTTPRequestHandler):
                 headers={"Content-Type": "application/json"},
                 method="POST",
             )
+            streaming = bool(payload.get("stream"))
+            response = None
             try:
-                with urllib.request.urlopen(request, timeout=CHAT_TIMEOUT) as response:
-                    raw = response.read()
-                    status = response.status
+                response = urllib.request.urlopen(request, timeout=CHAT_TIMEOUT)
+                status = response.status
             except urllib.error.HTTPError as exc:
-                raw = exc.read()
+                response = exc
                 status = exc.code
             except Exception as exc:
                 self._json({"error": {"message": type(exc).__name__}}, 502)
                 return
-            self._send(raw, status)
+            try:
+                if streaming:
+                    self._stream(response, status)
+                else:
+                    self._send(response.read(), status)
+            finally:
+                close = getattr(response, "close", None)
+                if close is not None:
+                    close()
         finally:
             chat_slots.release()
 

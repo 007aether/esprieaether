@@ -28,6 +28,47 @@ def _text_tool_messages(messages, tools):
     return [Message(role="system", content=prompt), *messages]
 
 
+def compact_local_tool_schemas(schemas: Sequence[dict] | None) -> list[dict]:
+    """Raccourcit les schémas pour le petit modèle local, sans changer les noms.
+
+    Un modèle 3B met ~16 s pour évaluer 73 schémas verbeux, puis ~3 s avec des
+    descriptions courtes et les mêmes paramètres. Rien n'est retiré : seules les
+    descriptions sont tronquées, les noms, types, énumérations et champs requis
+    restent intactes pour que l'appel d'outil soit toujours valide.
+    """
+    compacted: list[dict] = []
+    for schema in schemas or ():
+        if not isinstance(schema, dict):
+            compacted.append(schema)
+            continue
+        fn = schema.get("function")
+        if not isinstance(fn, dict) or not fn.get("name"):
+            compacted.append(schema)
+            continue
+        # Aucune description sur le provider loopback : 73 schémas verbeux
+        # coûtent ~17 s au modèle 3B, contre ~3 s sans description.
+        short_fn: dict = {"name": fn["name"]}
+        params = fn.get("parameters")
+        short_params: dict = {"type": "object"}
+        if isinstance(params, dict):
+            props = params.get("properties")
+            if isinstance(props, dict) and props:
+                short_props: dict = {}
+                for key, value in props.items():
+                    if not isinstance(value, dict):
+                        continue
+                    item: dict = {"type": value.get("type", "string")}
+                    if "enum" in value:
+                        item["enum"] = value["enum"]
+                    short_props[key] = item
+                short_params["properties"] = short_props
+            if params.get("required"):
+                short_params["required"] = params["required"]
+        short_fn["parameters"] = short_params
+        compacted.append({"type": "function", "function": short_fn})
+    return compacted
+
+
 async def _provider_stream(provider, messages, tools=None):
     method = getattr(provider, "stream", None)
     accepts_tools = method is not None and any(
@@ -130,7 +171,9 @@ class OpenAICompatibleProvider:
             "stream": stream,
         }
         if tools and not self._tools_unsupported:
-            payload["tools"] = list(tools)
+            payload["tools"] = (compact_local_tool_schemas(tools)
+                                if self._base_url.startswith(("http://127.0.0.1:", "http://localhost:"))
+                                else list(tools))
         if self._max_tokens is not None:
             payload["max_tokens"] = self._max_tokens
         if self._base_url.startswith(("http://127.0.0.1:", "http://localhost:")):
