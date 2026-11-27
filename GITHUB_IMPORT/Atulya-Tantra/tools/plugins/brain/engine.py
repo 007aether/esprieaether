@@ -148,7 +148,10 @@ class Brain:
         for attempt in range(2):
             started = time.monotonic()
             try:
-                text = await self._provider.complete(messages)
+                text = await asyncio.wait_for(
+                    self._provider.complete(messages),
+                    timeout=_env_limit("ATULYA_TURN_TIMEOUT", 45, 3, 600),
+                )
                 break
             except ProviderError as exc:
                 self._record(exc, stage="respond", elapsed_ms=int((time.monotonic() - started) * 1000),
@@ -229,6 +232,7 @@ class Brain:
         text immediately; requested tools run concurrently and their results are
         fed back. The final round is sent without tools so the model must answer.
         """
+        deadline = time.monotonic() + _env_limit("ATULYA_TURN_TIMEOUT", 45, 3, 600)
         stream_method = getattr(self._provider, "stream", None)
         stream_accepts_tools = stream_method is not None and any(
             parameter.name == "tools" or parameter.kind == inspect.Parameter.VAR_KEYWORD
@@ -270,7 +274,17 @@ class Brain:
                     )
                     text_filter = TextCallFilter()
                     try:
-                        async for chunk in stream:
+                        iterator = stream.__aiter__()
+                        while True:
+                            remaining = deadline - time.monotonic()
+                            if remaining <= 0:
+                                raise ProviderError("انتهت مهلة النموذج المحلي")
+                            try:
+                                chunk = await asyncio.wait_for(iterator.__anext__(), timeout=remaining)
+                            except StopAsyncIteration:
+                                break
+                            except asyncio.TimeoutError as exc:
+                                raise ProviderError("انتهت مهلة النموذج المحلي") from exc
                             if isinstance(chunk, ToolCall):
                                 if use_tools:
                                     calls.append(chunk)

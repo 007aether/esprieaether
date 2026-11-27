@@ -25,6 +25,11 @@ if ($localTimeout -lt 30) { $localTimeout = 120 }
 # plus courte que le timeout client, sinon le client abandonne avant le 429.
 $queueTimeout = [int]($env:LOCAL_BRAIN_QUEUE_TIMEOUT -as [int])
 if ($queueTimeout -lt 30) { $queueTimeout = $localTimeout - 20 }
+# Plafond global d'un tour de chat : le petit modèle local ne doit jamais
+# laisser la conversation pendre 80 s ni répondre « réessayez » sans état.
+$turnTimeout = [int]($env:ATULYA_TURN_TIMEOUT -as [int])
+if ($turnTimeout -lt 12) { $turnTimeout = 12 }
+if ($turnTimeout -gt 120) { $turnTimeout = 120 }
 # Une seule voix par défaut : Atulya répond. L'ancien daemon vocal JARVIS reste
 # disponible uniquement si le propriétaire le demande explicitement (=1).
 $legacyVoice = $env:ESPRIE_LEGACY_VOICE -eq '1'
@@ -136,6 +141,7 @@ $services = @(
         ATULYA_MODEL_NAME='dolphin3';
         ATULYA_MODEL_BASE_URL='http://127.0.0.1:31416/v1';
         ATULYA_MODEL_TIMEOUT="$localTimeout";
+        ATULYA_TURN_TIMEOUT="$turnTimeout";
         ESPRIE_LOCAL_TIMEOUT="$localTimeout";
         ATULYA_FORCE_DARIJA='1';
         ATULYA_LANDING_URL='http://127.0.0.1:3860/jarvis.html';

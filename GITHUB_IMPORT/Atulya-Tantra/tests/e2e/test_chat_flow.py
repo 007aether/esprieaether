@@ -192,3 +192,67 @@ def test_provider_failure_does_not_expose_secret_in_response_status_or_logs(
     response_text, status_text, logs = asyncio.run(exercise())
     assert "sk-test-secret-value" not in response_text + status_text + logs
     assert "ما قدرش مزود النموذج" in response_text
+
+
+def test_local_runtime_failure_returns_honest_state_report(
+    project_temp_dir: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    class FailingLocalProvider:
+        name = "Local model"
+        model = "dolphin3"
+
+        async def complete(self, _messages: list[Message]) -> str:
+            raise RuntimeError("local model stalled")
+
+    settings = Settings(
+        assistant_name="Atulya", host="127.0.0.1", port=8501,
+        data_dir=project_temp_dir / "data", models_dir=project_temp_dir / "models",
+        model_provider="openai-compatible", model_name="dolphin3",
+        model_base_url="http://127.0.0.1:31416/v1", model_api_key="",
+    )
+    monkeypatch.setattr(server, "_make_brain", lambda _settings: Brain(FailingLocalProvider(), assistant_name="Atulya"))
+    app = server.create_app(settings)
+
+    async def exercise() -> httpx.Response:
+        transport = httpx.ASGITransport(app=app)
+        async with httpx.AsyncClient(transport=transport, base_url="http://localhost") as client:
+            authenticate_test_admin(client, app)
+            return await client.post("/api/chat", json={"messages": [{"role": "user", "content": "test"}]})
+
+    response = asyncio.run(exercise())
+    assert response.status_code == 200
+    assert response.json()["route"] == "local_fallback"
+    assert "الحالة العامة" in response.json()["text"]
+
+
+def test_local_runtime_empty_reply_is_replaced_by_state_report(
+    project_temp_dir: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from tools.plugins.brain.engine import STREAM_UNAVAILABLE
+
+    class EmptyLocalProvider:
+        name = "Local model"
+        model = "dolphin3"
+
+        async def stream(self, _messages: list[Message]):
+            yield STREAM_UNAVAILABLE
+
+    settings = Settings(
+        assistant_name="Atulya", host="127.0.0.1", port=8501,
+        data_dir=project_temp_dir / "data", models_dir=project_temp_dir / "models",
+        model_provider="openai-compatible", model_name="dolphin3",
+        model_base_url="http://127.0.0.1:31416/v1", model_api_key="",
+    )
+    monkeypatch.setattr(server, "_make_brain", lambda _settings: Brain(EmptyLocalProvider(), assistant_name="Atulya"))
+    app = server.create_app(settings)
+
+    async def exercise() -> httpx.Response:
+        transport = httpx.ASGITransport(app=app)
+        async with httpx.AsyncClient(transport=transport, base_url="http://localhost") as client:
+            authenticate_test_admin(client, app)
+            return await client.post("/api/chat", json={"messages": [{"role": "user", "content": "test"}]})
+
+    response = asyncio.run(exercise())
+    assert response.status_code == 200
+    assert response.json()["provider"] == "Local deterministic"
+    assert "الحالة العامة" in response.json()["text"]

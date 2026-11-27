@@ -98,6 +98,27 @@ def test_midstream_failure_yields_recovery_without_duplicate_text(tmp_path, monk
     assert record["retry"] is False
 
 
+def test_stalled_local_model_is_bounded(tmp_path, monkeypatch):
+    path = _journal(tmp_path, monkeypatch)
+    monkeypatch.setenv("ATULYA_TURN_TIMEOUT", "3")
+
+    class StalledProvider:
+        name = model = "stalled"
+
+        async def stream(self, messages, tools=None):
+            yield "كنفحص الأنظمة. "
+            await asyncio.sleep(30)
+            yield "جاهز."
+
+    text = asyncio.run(_collect(Brain(StalledProvider()).stream(
+        [Message(role="user", content="أهلا")])))
+
+    assert "كنفحص الأنظمة." in text
+    assert "جاهز." not in text
+    assert ("الجواب توقف" in text) or ("ما قدرتش" in text)
+    assert _records(path), "l'expiration doit être journalisée"
+
+
 class FailingToolbox:
     MAX_ROUNDS = 2
     schemas = [{"type": "function", "function": {"name": "bad"}}]

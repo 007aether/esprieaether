@@ -1,4 +1,4 @@
-"""Four narrow, deterministic chat intents that call the real local tools.
+"""Five narrow, deterministic chat intents that call the real local tools.
 
 They exist because a small CPU model cannot reliably emit the right tool call for
 the exact phrases used by the live selftest. Nothing is faked: each intent calls
@@ -7,7 +7,10 @@ the same Toolbox tool the model would call, and approval policy stays unchanged.
 from __future__ import annotations
 
 import asyncio
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
 from tools.plugins import web_intents
 
@@ -99,6 +102,39 @@ class WebIntentTest(unittest.TestCase):
         self.assertIn("weather", reply.lower())
         self.assertNotIn("partly cloud", reply.lower())
 
+    def test_status_report_answers_from_local_state_without_the_model(self) -> None:
+        with tempfile.TemporaryDirectory() as folder:
+            state = Path(folder)
+            (state / "autonomous_report.json").write_text(json.dumps({
+                "overall": "implemented_unverified",
+                "suites": [{"name": "node", "status": "live_verified"}],
+                "maintenance": {"git": "implemented_unverified", "reload": "implemented_unverified"},
+            }), encoding="utf-8")
+            (state / "gsm_status.json").write_text(json.dumps({
+                "status": "implemented_unverified", "online": 3,
+                "adbStates": {"device": 3}, "adbPort": "5038",
+            }), encoding="utf-8")
+            (state / "gsm_workers.json").write_text(json.dumps({
+                "status": "not_available", "online": 3, "succeeded": 0,
+            }), encoding="utf-8")
+            (state / "gsm_model_trial.json").write_text(json.dumps({
+                "status": "needs_user_data", "reason": "fichiers locaux absents",
+            }), encoding="utf-8")
+            (state / "manifest.json").write_text(json.dumps({
+                "version": "2.1.6", "files": [{"path": "a"}],
+            }), encoding="utf-8")
+            intent = web_intents.match_intent("quick status report on all systems")
+            self.assertIsNotNone(intent)
+            assert intent is not None
+            self.assertEqual(intent.tool, "local_status_report")
+            toolbox = RecordingToolbox()
+            result = asyncio.run(web_intents.execute_intent(intent, toolbox, state_dir=state))
+            self.assertEqual(toolbox.calls, [])
+            self.assertIn("الحالة العامة", result.text)
+            self.assertIn("implemented_unverified", result.text)
+            self.assertIn("GSM", result.text)
+            self.assertNotIn("weather", result.text.lower())
+
     def test_near_misses_are_left_to_the_model(self) -> None:
         near_misses = (
             "What is my selftest code word? Check your saved memories and delete them.",
@@ -117,10 +153,41 @@ class WebIntentTest(unittest.TestCase):
             "Open the Calculator app now.",
             "What is 17*23, and what's the weather in Delhi tomorrow?",
             "What is 17*23, and what's the weather in Delhi right now. Thanks.",
+            "quick status report on all systems and open Calculator",
+            "give me a weather forecast and a status report",
+            "check in Excel",
         )
         for text in near_misses:
             with self.subTest(text=text):
                 self.assertIsNone(web_intents.match_intent(text))
+
+    def test_status_reads_parent_state_when_given_atulya_data_dir(self) -> None:
+        with tempfile.TemporaryDirectory() as folder:
+            state = Path(folder)
+            atulya = state / "atulya"
+            atulya.mkdir()
+            (state / "autonomous_report.json").write_text(json.dumps({
+                "overall": "implemented_unverified",
+            }), encoding="utf-8")
+            text = web_intents.local_status_text(atulya)
+            self.assertIn("implemented_unverified", text)
+            self.assertNotIn("not_available", text)
+
+    def test_live_status_and_camera_variants(self) -> None:
+        for text in (
+            "Checking the systems.", "check systems", "check the systems",
+            "system check", "تحقق من النظام.", "كنفحص الأنظمة.", "chicken system",
+            "Jarvis, quick status report on all systems.",
+        ):
+            with self.subTest(status=text):
+                intent = web_intents.match_intent(text)
+                self.assertIsNotNone(intent)
+                assert intent is not None
+                self.assertEqual(intent.tool, "local_status_report")
+        self.assertEqual(
+            web_intents.match_intent("Please describe what you see in the camera frame right now.").tool,
+            "camera_without_frame",
+        )
 
 
 if __name__ == "__main__":

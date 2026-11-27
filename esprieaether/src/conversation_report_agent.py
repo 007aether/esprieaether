@@ -147,7 +147,7 @@ def build(state_dir=DEFAULT_STATE_DIR, *, now: Optional[datetime] = None) -> dic
                            f"{gsm['probe']['online']}"),
         ("موديل على الجهاز", gsm["model"]["status"] + (
             f" — {gsm['model']['reason']}" if gsm["model"]["reason"] else "")),
-        ("المانيفست", f"v{manifest.get('version', '?')} — {len(manifest.get('files') or [])} ملف"),
+        ("المانيفست", f"v{manifest.get('version', '?')} — {_manifest_count(manifest)} ملف"),
     ]
     for key, label in (("agents", "الوكلاء اليوميون"), ("brain", "الدماغ المحلي"),
                        ("brain_proof", "إثبات الدماغ"), ("quality", "جودة"),
@@ -179,7 +179,7 @@ def build(state_dir=DEFAULT_STATE_DIR, *, now: Optional[datetime] = None) -> dic
         "overall": overall,
         "sources": {key: _status(value, moment) for key, value in sources.items()},
         "gsm": gsm,
-        "manifest": {"version": manifest.get("version", ""), "files": len(manifest.get("files") or [])},
+        "manifest": {"version": manifest.get("version", ""), "files": _manifest_count(manifest)},
         "suggestions": suggestions,
         "text": text,
     }
@@ -187,6 +187,16 @@ def build(state_dir=DEFAULT_STATE_DIR, *, now: Optional[datetime] = None) -> dic
 
 def _scrub(text: str) -> str:
     return _SECRET.sub("[redacted]", text)
+
+
+def _manifest_count(manifest: dict) -> int:
+    """Le manifest généré stocke ``files`` comme table path -> sha256."""
+    files = manifest.get("files") or []
+    if isinstance(files, dict):
+        return len(files)
+    if isinstance(files, list):
+        return len(files)
+    return 0
 
 
 def make_suggestions(bot: dict, gsm: dict, manifest: dict) -> List[dict]:

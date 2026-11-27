@@ -133,6 +133,43 @@ class WebIntentFlowTest(unittest.TestCase):
 
             asyncio.run(exercise())
 
+    def test_status_report_is_instant_and_never_calls_the_model(self) -> None:
+        with TemporaryDirectory(prefix="atulya-status-", dir=Path.cwd()) as tmp:
+            root = Path(tmp)
+            data = root / "data"
+            models = root / "models"
+            models.mkdir()
+            data.mkdir()
+            (data / "autonomous_report.json").write_text(json.dumps({
+                "overall": "implemented_unverified",
+                "suites": [{"name": "node", "status": "live_verified"}],
+            }), encoding="utf-8")
+            settings = Settings(
+                assistant_name="Atulya", host="127.0.0.1", port=8501,
+                data_dir=data, models_dir=models,
+                model_provider="", model_name="", model_base_url="", model_api_key="",
+            )
+            provider = NoModelProvider()
+            with patch.object(server, "_make_brain", lambda _settings: Brain(provider, assistant_name="Atulya")):
+                app = server.create_app(settings)
+
+            async def exercise() -> None:
+                transport = httpx.ASGITransport(app=app)
+                async with httpx.AsyncClient(transport=transport, base_url="http://localhost") as client:
+                    token = app.state.auth_store.create_session("admin")
+                    client.cookies.set("atulya_session", token)
+                    saved = await client.post("/api/chat", json={
+                        "conversation_id": "status_e2e",
+                        "messages": [{"role": "user", "content": "quick status report on all systems"}],
+                    })
+                    self.assertEqual(saved.status_code, 200, saved.text)
+                    self.assertEqual(saved.json()["route"], "web_intent")
+                    self.assertIn("الحالة العامة", saved.json()["text"])
+                    self.assertIn("implemented_unverified", saved.json()["text"])
+                    self.assertEqual(provider.calls, 0)
+
+            asyncio.run(exercise())
+
 
 if __name__ == "__main__":
     unittest.main()

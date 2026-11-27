@@ -307,7 +307,8 @@ class SessionAuthMiddleware:
             await send(message)
         await self._audited(scope, receive, authenticated_send, user_id, admin_route=admin_route)
 
-from tools.plugins.brain import AutomaticProvider, Brain, BrainError, Message, OllamaProvider, OpenAICompatibleProvider
+from tools.plugins.brain import AutomaticProvider, Brain, BrainError, BrainReply, Message, OllamaProvider, OpenAICompatibleProvider
+from tools.plugins.brain.engine import STREAM_UNAVAILABLE
 from tools.plugins.brain.diagnostics import record_brain_failure
 from tools.plugins.communications.channels import WebUIChannel
 from tools.plugins.communications.channels.telegram import TelegramChannel
@@ -2454,8 +2455,15 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
         from tools.plugins.web_intents import (
             match_intent as match_web_intent,
             execute_intent as execute_web_intent,
+            local_status_text,
         )
         web_intent = match_web_intent(latest_user) if not request.image and request.mode != "voice" else None
+        # Le repli « état local » ne s'applique qu'au moteur loopback réel : les
+        # tests et les fournisseurs externes gardent le message d'erreur d'origine.
+        local_runtime_fallback = (
+            config.model_provider == "openai-compatible"
+            and str(config.model_base_url or "").startswith(("http://127.0.0.1:", "http://localhost:"))
+        )
         if webui_channel is None and voice_intent is None and web_intent is None:
             raise HTTPException(
                 status_code=503,
@@ -2537,6 +2545,7 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                         result = await execute_web_intent(
                             web_intent, toolbox,
                             profile_get=lambda: profiles.get(str(http_request.state.user_id)),
+                            state_dir=config.data_dir,
                         )
                         return {
                             "text": result.text,
@@ -2627,6 +2636,8 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                     style = f"{style}\n{learned}"
             if not request.stream:
                 reply = await brain.respond_with_tools(messages, toolbox, system_instructions=style)
+                if local_runtime_fallback and reply.text.strip() == STREAM_UNAVAILABLE:
+                    reply = BrainReply(local_status_text(config.data_dir), "Local deterministic", "")
         except ValueError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
         except BrainError as exc:
@@ -2635,6 +2646,11 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                 model=brain.model_name if brain else "",
                 elapsed_ms=int((time.monotonic() - chat_started) * 1000),
             )
+            # Le modèle local lent/indisponible ne doit jamais laisser l'utilisateur
+            # sans réponse : on rend un état véridique lu dans les fichiers state.
+            if local_runtime_fallback:
+                return {"text": local_status_text(config.data_dir), "provider": "Local deterministic",
+                        "model": "", "route": "local_fallback"}
             issue_state["issue"] = {"message": str(exc), "source": "chat"}
             raise HTTPException(status_code=503, detail=str(exc)) from exc
         if request.stream:
@@ -2643,6 +2659,8 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                 _toolkit.UI_ACTIONS.set(ui_actions)
                 try:
                     async for chunk in webui_channel.stream(messages, toolbox=toolbox, system_instructions=style):
+                        if local_runtime_fallback and chunk == STREAM_UNAVAILABLE:
+                            chunk = local_status_text(config.data_dir)
                         for action in action_view.drain_new():
                             yield f"data: {json.dumps({'confirm': {'id': action.id, 'summary': action.summary}})}\n\n"
                         while ui_actions:
@@ -2664,8 +2682,13 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                         exc, stage="chat_stream", provider=brain.provider_name, model=brain.model_name,
                         elapsed_ms=int((time.monotonic() - chat_started) * 1000),
                     )
-                    issue_state["issue"] = {"message": "تدفق النموذج توقف فجأة.", "source": "chat"}
-                    yield f"data: {json.dumps({'error': 'الجواب توقف فجأة. حاول مرة اخرى ولا صيّح الرسالة.'})}\n\n"
+                    if local_runtime_fallback:
+                        fallback = local_status_text(config.data_dir)
+                        yield f"data: {json.dumps({'text': fallback}, ensure_ascii=False)}\n\n"
+                        yield f"data: {json.dumps({'done': True, 'provider': 'Local deterministic', 'model': '', 'route': 'local_fallback'}, ensure_ascii=False)}\n\n"
+                    else:
+                        issue_state["issue"] = {"message": "تدفق النموذج توقف فجأة.", "source": "chat"}
+                        yield f"data: {json.dumps({'error': 'الجواب توقف فجأة. حاول مرة اخرى ولا صيّح الرسالة.'})}\n\n"
 
             return StreamingResponse(
                 stream_events(), media_type="text/event-stream",
