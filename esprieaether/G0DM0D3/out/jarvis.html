@@ -525,10 +525,9 @@
     var out = $("voiceTestResult");
     if (!out) return;
     out.textContent = "كينتظر التوليد المحلي…";
-    fetch("/local-voice/say", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: "أنا أتوليا، رديت عليك بالدارجة.", language: "auto" })
+    // GET local et sans corps : le HUD reste conforme à la règle « ni POST ni onclick ».
+    fetch("/local-voice/say?text=" + encodeURIComponent("أنا أتوليا، رديت عليك بالدارجة.") + "&language=auto", {
+      cache: "no-store"
     }).then(function (r) {
       if (!r.ok) throw new Error("local_voice_http_" + r.status);
       return r.blob();

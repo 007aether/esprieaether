@@ -18,6 +18,7 @@ import sys
 import threading
 import wave
 from datetime import datetime, timezone
+from urllib.parse import parse_qs, urlsplit
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Optional
@@ -101,6 +102,12 @@ def wav_stats(audio: bytes) -> dict:
     }
 
 
+def say_query(path: str) -> tuple[str, str]:
+    """Paramètres de /say?text=…&language=… , sans corps ni JSON."""
+    query = parse_qs(urlsplit(path).query)
+    return (query.get("text") or [""])[0], (query.get("language") or ["auto"])[0]
+
+
 def write_evidence() -> dict:
     """Preuve locale fraîche : le moteur produit un WAV non silencieux.
 
@@ -156,6 +163,15 @@ class Handler(BaseHTTPRequestHandler):
                 "readOnly": True,
                 "reason": None if up else "modele vocal local absent",
             })
+            return
+        if route == "/say":
+            text, language = say_query(self.path)
+            try:
+                self._wav(synthesize(text, language))
+            except VoiceError as exc:
+                self._json(400, {"ok": False, "reason": str(exc)[:160]})
+            except Exception as exc:
+                self._json(503, {"ok": False, "reason": type(exc).__name__})
             return
         if route == "/evidence":
             try:
