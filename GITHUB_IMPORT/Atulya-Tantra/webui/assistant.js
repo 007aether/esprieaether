@@ -1687,6 +1687,20 @@
       .trim();
   }
 
+  // J159 — le premier geste de l'utilisateur débloque la lecture audio ; sans
+  // cela Chrome garde le son suspendu et la première réponse reste silencieuse.
+  function unlockSound() {
+    if (soundUnlocked) return;
+    soundUnlocked = true;
+    try { window.speechSynthesis?.resume?.(); } catch { /* moteur vocal absent */ }
+    const queued = pendingSpeech;
+    pendingSpeech = null;
+    if (queued?.kind === "browser") speakWithBrowser(queued.text, queued.detail);
+    else if (queued?.kind === "local") speak(queued.text);
+  }
+  document.addEventListener("pointerdown", unlockSound, { passive: true });
+  document.addEventListener("keydown", unlockSound);
+
   function speakWithBrowser(rawText, detail = "Using the browser's built-in speech voice.") {
     if (!soundUnlocked) {
       pendingSpeech = { kind: "browser", text: rawText, detail };
@@ -1965,18 +1979,6 @@
     }
     return [sentences, rest];
   }
-
-  function unlockSound() {
-    if (soundUnlocked) return;
-    soundUnlocked = true;
-    try { window.speechSynthesis?.resume?.(); } catch { /* le moteur vocal peut être absent */ }
-    const queued = pendingSpeech;
-    pendingSpeech = null;
-    if (queued?.kind === "browser") speakWithBrowser(queued.text, queued.detail);
-    else if (queued?.kind === "local") speak(queued.text);
-  }
-  document.addEventListener("pointerdown", unlockSound, { passive: true });
-  document.addEventListener("keydown", unlockSound);
 
   function speak(text) {
     if (!soundUnlocked) {

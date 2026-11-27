@@ -26,6 +26,7 @@
 - `playBlob()`: تشغيل مباشر بـ`new Audio(url)`؛ ما بقاش `AudioContext`، ولا `resume().then()`، ولا `createMediaElementSource`. أي فشل كيبان كـ`playback blocked` عوض الصمت.
 - `preferMaleVoice()`: كيلاقي أي صوت مثبّت (`matching[0] || voices[0]`) قبل ما يبقى بلا صوت، خصوصاً فاش `ar-MA` غائب.
 - `/api/voice/synthesize` باقي loopback، بلا URL خارجي ولا مفتاح.
+- أثر جانبي تّصلح: كود `unlockSound` نُقّل قبل `speakWithBrowser` باش ما يدخلش فالمقطع اللي كيختبره `tests/voice/test_web_speech_split.py` فـNode بلا DOM.
 
 ### HUD — `esprieaether/G0DM0D3/out/jarvis.html`
 - كبسة «شغّل جملة» فبطاقة الصوت، بضغطة صريحة من المالك.
@@ -51,7 +52,7 @@
 - `state/voice_output_evidence.json`: `implemented_unverified` + `owner_confirmation_pending`.
 
 ## 5. الجولات والاختبارات
-تُحدَّث الأرقام بعد آخر جولة كاملة.
+تُحدَّث الأرقام بعد آخر جولة كاملة. تّصلحت مهلة `tests/core/test_optional_voice_import.py` من 30 لـ90 ثانية لأن استيراد `atulya.server` بلا numpy كياخد ~28 ثانية، و30 كانت كتفشل فالضغط بلا ما يبدّل المتن المُختبر.
 
 ## 6. اللي ما تّدارش، وعلاش
 - ما فتحتش الميكروفون، وما شغّلتش `voice_daemon.py`، وما لمستش الـlock القديم: الدايمون مطفّى افتراضياً بقرار سابق.

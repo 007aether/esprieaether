@@ -15,6 +15,8 @@ def without_numpy(name, *args, **kwargs):
 builtins.__import__ = without_numpy
 import atulya.server
 """],
-        capture_output=True, text=True, timeout=30,
+        # J159: l'import sans numpy prenait ~28 s seul ; 30 s tombait en timeout
+        # quand une autre suite locale tournait en parallèle. L'assertion reste la même.
+        capture_output=True, text=True, timeout=90,
     )
     assert result.returncode == 0, result.stderr
