@@ -21,7 +21,7 @@ test('J159: la lecture ne dépend plus d’un AudioContext suspendu', () => {
   const end = source.indexOf('const done =', start);
   assert.ok(start > 0 && end > start, 'bloc playBlob introuvable');
   const block = source.slice(start, end);
-  assert.match(block, /activeAudio\.play\(\)/);
+  assert.match(block, /(?:activeAudio|audio)\.play\(\)/);
   assert.doesNotMatch(block, /resume\(\)\.then/);
   assert.doesNotMatch(block, /createMediaElementSource/);
 });
