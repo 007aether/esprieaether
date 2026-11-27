@@ -20,7 +20,7 @@ test('J131: le bot n’utilise que les statuts autorisés', () => {
   assert.equal(hasSecret('online: 20'), false);
 });
 
-test('J144: le rapport est vert sans aucun scan GSM', () => {
+test('J152: GSM réactivé reste needs_user_data sans appareil, jamais vert', () => {
   const report = buildReport({
     runs: [
       { name: 'node', exit: 0, summary: 'tests=1091 pass=1091 fail=0' },
@@ -32,10 +32,12 @@ test('J144: le rapport est vert sans aucun scan GSM', () => {
   });
   assert.equal(report.overall, 'live_verified');
   assert.deepEqual(report.missing, []);
-  assert.equal(report.gsm.status, 'not_available');
+  assert.equal(report.gsm.status, 'needs_user_data');
+  assert.equal(report.gsm.enabled, true);
+  assert.equal(report.gsm.readOnly, false);
   assert.equal(report.gsm.online, 0);
-  assert.equal(report.modelTrial.status, 'not_available');
-  assert.match(report.gsm.reason, /annulée par le propriétaire/i);
+  assert.equal(report.modelTrial.status, 'needs_user_data');
+  assert.match(report.gsm.reason, /réactivée par le propriétaire/i);
   assert.ok(!report.suites.some((suite) => suite.name.startsWith('gsm-')));
 });
 
@@ -47,6 +49,7 @@ test('J144: une suite locale rouge reste implemented_unverified', () => {
   assert.equal(report.overall, 'implemented_unverified');
   assert.ok(report.missing.some((item) => item.name === 'node'));
   assert.ok(!report.missing.some((item) => item.name.startsWith('gsm-')));
+  assert.equal(report.gsm.status, 'needs_user_data');
 });
 
 test('J144: le bot ne lance plus ni scan ADB ni sonde de 20 endpoints', () => {
@@ -54,7 +57,7 @@ test('J144: le bot ne lance plus ni scan ADB ni sonde de 20 endpoints', () => {
   assert.ok(!source.includes('gsm-scan'));
   assert.ok(!source.includes('gsm-probe'));
   assert.ok(!source.includes('src.gsm_bridge'));
-  assert.match(source, /annulée par le propriétaire/);
+  assert.match(source, /réactivée par le propriétaire/);
 });
 
 test('J136: le scan de secrets ignore les littéraux de test', () => {

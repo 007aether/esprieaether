@@ -202,6 +202,14 @@ function Invoke-Pass {
         if (Start-Tracked @{ Name='robot-daemon'; Port=0; Exe=$py; Args=@('robot_daemon.py','--interval','60'); Cwd=$base }) { $fixed++ }
     }
 
+    # J152 — développement automatique : un seul cycle toutes les 5 minutes.
+    # Le garde-fou (tests verts + chemins protégés) vit dans src/auto_dev.py.
+    $evolve = Get-CimInstance Win32_Process -Filter "Name='python.exe'" -ErrorAction SilentlyContinue |
+        Where-Object { $_.CommandLine -like '*autonome_evolve.py*--daemon*' }
+    if (-not $evolve) {
+        if (Start-Tracked @{ Name='auto-evolve'; Port=0; Exe=$py; Args=@('src\autonome_evolve.py','--daemon'); Cwd=$base; Env=@{ SUNNAVOK_AUTO_COMMIT_PUSH='1'; PYTHONIOENCODING='utf-8' } }) { $fixed++ }
+    }
+
     if ($legacyVoice) {
         $voice = Get-CimInstance Win32_Process -Filter "Name='python.exe'" -ErrorAction SilentlyContinue |
             Where-Object { $_.CommandLine -like '*voice_daemon.py*' }
@@ -217,7 +225,7 @@ function Invoke-Pass {
         $voiceState = 'atulya-only'
     }
 
-    Log ("PASS up={0} down={1} restarted={2} robots={3} voice={4}" -f $up, $down, $fixed, $(if ($daemon) { 'ok' } else { 'started' }), $voiceState)
+    Log ("PASS up={0} down={1} restarted={2} robots={3} voice={4} evolve={5}" -f $up, $down, $fixed, $(if ($daemon) { 'ok' } else { 'started' }), $voiceState, $(if ($evolve) { 'ok' } else { 'started' }))
 }
 
 Log 'SUPERVISOR start (24/7, loopback only, no secrets)'

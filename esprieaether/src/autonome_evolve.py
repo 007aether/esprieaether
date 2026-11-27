@@ -450,7 +450,15 @@ def run_cycle():
     generate_report()
 
     # Update state
-    state["current_cycle"] += 1
+    # 6.5 — Développement automatique : uniquement si les tests ci-dessus sont
+    # verts et si aucun chemin protégé n'est modifié (voir src/auto_dev.py).
+    try:
+        import auto_dev
+        dev = auto_dev.maybe_commit_push()
+        log(f"  Auto-dev: {dev.get('status')}", "INFO")
+    except Exception as e:
+        log(f"  Auto-dev error: {e}", "ERROR")
+
     state["current_cycle"] += 1
     state["total_cycles"] += 1
     save_state()

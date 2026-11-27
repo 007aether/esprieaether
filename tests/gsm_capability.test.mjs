@@ -68,6 +68,31 @@ test('J144: une capacité GSM annulée est not_available, jamais verte', async (
   }
 });
 
+test('J152: GSM réactivé sans appareil est needs_user_data, jamais vert', async () => {
+  const fx = await fixture();
+  try {
+    const stamp = new Date().toISOString();
+    await writeFile(fx.paths.gsmPath, JSON.stringify({
+      ok: true, status: 'needs_user_data', cancelled: false,
+      reason: 'capacité GSM réactivée par le propriétaire — aucun appareil détecté',
+      online: 0, discovered: 0, errors: [], readOnly: false, checkedAt: stamp,
+    }));
+    await writeFile(fx.paths.modelTrialPath, JSON.stringify({
+      status: 'needs_user_data', cancelled: false, ready: false,
+      reason: 'capacité GSM réactivée par le propriétaire — aucun appareil détecté',
+      checkedAt: stamp,
+    }));
+    const caps = await buildCapabilities(fx.dir, fx.paths);
+    const row = find(caps);
+    const model = findModel(caps);
+    assert.equal(row.status, 'needs_user_data');
+    assert.equal(model.status, 'needs_user_data');
+    assert.doesNotMatch(row.next, /annulée par le propriétaire/);
+  } finally {
+    await rm(fx.dir, { recursive: true, force: true });
+  }
+});
+
 test('J144: aucune preuve annulée ne fait monter une capacité inventée', async () => {
   const fx = await fixture();
   try {

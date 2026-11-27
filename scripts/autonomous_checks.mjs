@@ -39,10 +39,10 @@ function sanitize(text) {
   return String(text ?? '').replace(SECRET, '$1=***').replace(/\s+/g, ' ').trim();
 }
 
-// J144 — le propriétaire a annulé GSM/Panda : le bot n'exige plus 20 S8 et
-// n'interroge plus ADB. Les capacités restent publiées comme not_available,
-// jamais comme une preuve verte inventée.
-export const GSM_CANCELLED_REASON = 'capacité GSM annulée par le propriétaire — aucun appareil requis';
+// J152 — le propriétaire a réactivé GSM/Panda et les actions appareil le 27/11.
+// Le bot ne lance toujours aucun scan ADB et n'exige pas 20 S8 : sans appareil
+// local la capacité reste needs_user_data, jamais une preuve verte inventée.
+export const GSM_ENABLED_REASON = 'capacité GSM réactivée par le propriétaire — aucun appareil détecté';
 
 export function buildReport({ runs = [], now = Date.now() } = {}) {
   const suites = runs.map((run) => ({
@@ -69,18 +69,20 @@ export function buildReport({ runs = [], now = Date.now() } = {}) {
     overall,
     suites,
     gsm: {
-      status: 'not_available',
+      status: 'needs_user_data',
+      enabled: true,
       online: 0,
       succeeded: 0,
       readOnly: false,
       checkedAt: null,
       probeCheckedAt: null,
-      reason: GSM_CANCELLED_REASON,
+      reason: GSM_ENABLED_REASON,
     },
     modelTrial: {
-      status: 'not_available',
+      status: 'needs_user_data',
+      enabled: true,
       ready: false,
-      reason: GSM_CANCELLED_REASON,
+      reason: GSM_ENABLED_REASON,
     },
     missing,
   };

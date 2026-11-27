@@ -827,6 +827,12 @@ export async function buildCapabilities(
       { source: 'gsm_status.json', field: 'status', value: 'not_available' },
       { source: 'gsm_status.json', field: 'reason', value: String(gsm?.reason || 'capacité annulée par le propriétaire') },
     ], 'Capacité annulée par le propriétaire — aucun GSM requis');
+  } else if (gsm?.status === 'needs_user_data') {
+    add('gsm-fleet', 'needs_user_data', [
+      { source: 'gsm_status.json', field: 'status', value: 'needs_user_data' },
+      { source: 'gsm_status.json', field: 'enabled', value: gsm.enabled === true },
+      { source: 'gsm_status.json', field: 'reason', value: String(gsm?.reason || '') },
+    ], 'Connecter localement un appareil Android pour vérifier la capacité GSM', lineStamp(gsm));
   } else {
     agentProof('gsm-fleet', gsm, 'gsm_status.json', [
       ['online', (row) => Number(row.online) || 0],
