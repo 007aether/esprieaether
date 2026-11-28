@@ -645,6 +645,27 @@
     }
   }
 
+  async function refreshGsmCompute() {
+    const box = $('#gsm-compute');
+    if (!box) return;
+    try {
+      const response = await fetch('/api/rest/gsm/compute', { cache: 'no-store' });
+      if (!response.ok) throw new Error('compute unavailable');
+      const c = await response.json();
+      const fleet = c.fleet || {};
+      const rows = [
+        ['قدرة الحوسبة', c.status || '—'],
+        ['عمال أحياء', `${fleet.liveWorkers ?? 0} / الهدف ${fleet.targetDevices ?? 20}`],
+        ['SIM جاهزة', String(fleet.simReady ?? 0)],
+        ['إنترنت مُبلَّغ', String(fleet.internetReported ?? 0)],
+        ['زيادة RAM', c.capabilities?.ramExtensionPossible ? 'نعم' : 'لا — التلفون ما كيزيدش RAM'],
+      ];
+      box.innerHTML = rows.map(([key, value]) => `<dt>${esc(key)}</dt><dd>${esc(value)}</dd>`).join('');
+    } catch {
+      box.innerHTML = '<dt>قدرة الحوسبة</dt><dd>ما كاينش دليل محلي</dd>';
+    }
+  }
+
   async function refreshAgentAudit() {
     const box = $('#agent-audit-feed');
     if (!box) return;
@@ -690,7 +711,10 @@
   }
 
   $('#status-refresh')?.addEventListener('click', refreshSystemStatus);
-  $('#gsm-refresh')?.addEventListener('click', refreshGsmStatus);
+  $('#gsm-refresh')?.addEventListener('click', () => {
+    refreshGsmStatus();
+    refreshGsmCompute();
+  });
   $('#audit-refresh')?.addEventListener('click', refreshAgentAudit);
   $('#report-btn')?.addEventListener('click', async () => {
     const status = $('#export-status');
@@ -749,5 +773,6 @@
   updateFacade();
   refreshSystemStatus();
   refreshGsmStatus();
+  refreshGsmCompute();
   refreshAgentAudit();
 })();

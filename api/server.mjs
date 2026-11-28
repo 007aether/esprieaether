@@ -39,6 +39,7 @@ const DEFAULT_REA_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'rea_selfcheck.
 const DEFAULT_GSM_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_status.json');
 const DEFAULT_WORKER_PROBE_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_workers.json');
 const DEFAULT_MODEL_TRIAL_EVIDENCE = join(ROOT, 'esprieaether', 'state', 'gsm_model_trial.json');
+const DEFAULT_GSM_COMPUTE = join(ROOT, 'esprieaether', 'state', 'gsm_compute.json');
 const DEFAULT_INTEGRATIONS_DIR = join(ROOT, 'esprieaether', 'integrations');
 // L'inventaire Atulya (18k fichiers + stat par fichier) est la cause du HUD lent.
 // On le mémoïse 30 s ; les preuves de capacité, elles, restent recalculées à chaque appel.
@@ -1176,6 +1177,7 @@ export function createDashboardServer({
   gsmStatusPath = DEFAULT_GSM_EVIDENCE,
   gsmWorkersPath = DEFAULT_WORKER_PROBE_EVIDENCE,
   gsmModelTrialPath = DEFAULT_MODEL_TRIAL_EVIDENCE,
+  gsmComputePath = DEFAULT_GSM_COMPUTE,
   integrationsDir = DEFAULT_INTEGRATIONS_DIR,
   voice = {},
   log = defaultLog,
@@ -1302,6 +1304,15 @@ export function createDashboardServer({
       if (pathname === '/api/rest/gsm/status' && req.method === 'GET') {
         const snapshot = await readGsmSnapshot({ gsmStatusPath, gsmWorkersPath, gsmModelTrialPath });
         send(res, 200, { ...snapshot, requestId });
+        return;
+      }
+
+      // J195 : capacite de calcul GSM — fichier local ecrit par gsm_compute.py, jamais de reseau.
+      if (pathname === '/api/rest/gsm/compute' && req.method === 'GET') {
+        const compute = await readJsonFile(gsmComputePath);
+        send(res, 200, compute
+          ? { ...compute, requestId }
+          : { status: 'needs_user_data', ok: false, reason: 'no_local_compute_evidence', requestId });
         return;
       }
 
