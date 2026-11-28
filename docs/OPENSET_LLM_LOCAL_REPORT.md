@@ -24,6 +24,15 @@
 - `wsl --status` كيرجع «النظام الفرعي Windows لـLinux غير مثبّت».
 - المعطيات المحلية: AMD Ryzen 5 4500U (6 نوى، Zen 2 / AVX2 بلا AVX-512)، RAM 15.4GB، قرص C فاضي 72.8GB. يعني كيدخل فالحد الأدنى (8GB RAM و~15GB قرص)، وكناخدو مسار الـ256-bit kernels، مع 10GB WSL2 موصى بها.
 
+## حالة التثبيت بعد موافقة المالك (2026-11-28 ~07:20Z)
+
+- `wsl --install` رجع بـtimeout فتحميل حزمة WSL 3.0.5 (مرة بالStore ومرة بـ`--web-download`)؛ الرسالة: «Le délai de l'opération est dépassé — Téléchargement en cours : Sous-système Windows pour Linux 3.0.5».
+- فحص الميزات (dism، صلاحية مرتفعة): `VirtualMachinePlatform=Activé`، `Microsoft-Windows-Subsystem-Linux=Désactivé`، `Microsoft-Hyper-V-All=Désactivé`.
+- فعّلنا `Microsoft-Windows-Subsystem-Linux` بـ`/NoRestart`؛ خرج بـ`EXIT=3010` يعني **كيتطلب إعادة تشغيل**.
+- تحميل يدوي لحزمة `wsl.3.0.5.0.x64.msi` (367,788,032 بايت) من GitHub Releases جاري فـ`%TEMP%\opencode\`؛ نتحقق من الحجم قبل التثبيت.
+- Docker مثبّت (29.9.3) لكن daemon موقف، وHyper-V موقوف؛ ما كاينش بديل جاهز بلا WSL.
+- winget كيشوف `Canonical.Ubuntu.2404` (الإصدار 2404.0.5.0)؛ نستعملو باش ننزّل distro بلا Store.
+
 ## شنو غنوليو عندنا إلا وافقت
 
 1. نثبّت WSL2 + Ubuntu 24.04، ونضبط `.wslconfig` بـ`memory=10GB` (عمل نظام بصريحة؛ ما نبدأش بلا موافقتك).
