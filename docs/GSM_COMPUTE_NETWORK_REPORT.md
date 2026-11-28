@@ -89,3 +89,19 @@
 
 الاختبارات: 55 Python passed + 8 subtests، و`py_compile` نجح على العامل المولّد.
 
+## 8. إعادة تشغيل الخدمات بعد ريستارت السيرفر (J201)
+
+الريستارت أوقف تحميل الموديل، الـfinalizer، جسر `:8080`، `jarvis:8000` وخادم ADB `:5038`.
+رجّعناهم بالرابط الحقيقي المتحقق من Hugging Face API:
+`prism-ml/Ternary-Bonsai-2-27B-gguf/Ternary-Bonsai-2-27B-PTQ1_0.gguf` — الحجم
+`5946648928` والـSHA `53107f530aa...` مطابقان لملف الحالة.
+
+`esprieaether/bots/self_heal.py` كان فيه مسارات hardcoded للمستخدم `ESPRIEAETHER`
+وسكريبت `src/jarvis_api.py` غير موجود ومسار ollama وهمي. تصلّح:
+- `_python()` يكتشف الـvenv المحلي، `_ollama()` يكتشف التثبيت المحلي فقط.
+- `jarvis` كيستعمل `src/jarvis_api_minimal.py` الموجود فعلاً.
+- `cloud:5001` كيتفحص `/` لأن `/health` كيرجّع 404.
+- stdout وstderr كيتكتبو فملفين منفصلين، و`ollama` كيظهر `unavailable` ما كيتسمّىش `up`.
+
+النتيجة الحية: 9 خدمات `up`، `ollama` `unavailable`. 5 اختبارات Python نجحو.
+

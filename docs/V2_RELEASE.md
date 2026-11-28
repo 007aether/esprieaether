@@ -343,4 +343,5 @@
 | مؤشر openset-llm فـHUD + ETA حقيقي (J193) | Node 10/10، Python 7/7، smoke حي على :8501 | «فين وصل التحميل» كيعطي النسبة والسرعة والوقت الباقي؛ HUD كيعرض نفس الحالة من الملف المحلي. |
 | منسّق قدرة GSM (J195) | Python 43/43 + 8 subtests، Node 11/11، مسح ADB حي 12 جهاز | `gsm_compute.json` + `/api/rest/gsm/compute` + مؤشر Dashboard؛ `not_available` بلا وكيل حوسبة، و`live_verified` ممنوع بلا benchmark حديث. |
 | تحضير Termux/GSM (J199) | Python 55/55 + 8 subtests، خطة 12 جهاز `pending` بلا تنفيذ | `esprieaether/scripts/gsm_termux_prepare.py` → `state/gsm_termux_plan/`؛ `touping.exe` ممنوع صراحة، كل جهاز كيحتاج `approved_once` + SIM READY. |
+| إعادة تشغيل الخدمات (J201) | self_heal 9/9 خدمة متاحة + ollama `unavailable` بصدق، 5 tests Python | `curl -C -` و`:8080` و`jarvis:8000` وADB `:5038` رجعو شغّالين؛ مسارات `ESPRIEAETHER` تبدّلت بمسارات محلية، رابط التحميل تحقق من HF API بالـSHA. |
 
