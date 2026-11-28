@@ -29,7 +29,9 @@
 - `wsl --install` رجع بـtimeout فتحميل حزمة WSL 3.0.5 (مرة بالStore ومرة بـ`--web-download`)؛ الرسالة: «Le délai de l'opération est dépassé — Téléchargement en cours : Sous-système Windows pour Linux 3.0.5».
 - فحص الميزات (dism، صلاحية مرتفعة): `VirtualMachinePlatform=Activé`، `Microsoft-Windows-Subsystem-Linux=Désactivé`، `Microsoft-Hyper-V-All=Désactivé`.
 - فعّلنا `Microsoft-Windows-Subsystem-Linux` بـ`/NoRestart`؛ خرج بـ`EXIT=3010` يعني **كيتطلب إعادة تشغيل**.
-- تحميل يدوي لحزمة `wsl.3.0.5.0.x64.msi` (367,788,032 بايت) من GitHub Releases جاري فـ`%TEMP%\opencode\`؛ نتحقق من الحجم قبل التثبيت.
+- تحميل يدوي لحزمة `wsl.3.0.5.0.x64.msi` (367,788,032 بايت) من GitHub Releases كمل بـBITS، وتثبّتت بـ`msiexec /quiet /norestart` (EXIT=0)； `wsl --version` كيرجع 3.0.5.0.
+- `.wslconfig` تكتب بـ`memory=10GB`, `processors=6`, `swap=2GB`, `localhostForwarding=true`.
+- تحميل rootfs Ubuntu 24.04 (`ubuntu-24.04-server-cloudimg-amd64-root.tar.xz`, 227,213,232 بايت، SHA256 المتوقع `ec6972af…`) جاري بـBITS باش نستوردو بـ`wsl --import`.
 - Docker مثبّت (29.9.3) لكن daemon موقف، وHyper-V موقوف؛ ما كاينش بديل جاهز بلا WSL.
 - winget كيشوف `Canonical.Ubuntu.2404` (الإصدار 2404.0.5.0)؛ نستعملو باش ننزّل distro بلا Store.
 
