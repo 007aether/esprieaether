@@ -415,11 +415,13 @@ export async function publicVoice({
   } catch {
     lastAction = null;
   }
-  if (!row && !running && !status && !lastAction) {
+  // Le résultat d'action PC n'est pas une source vocale : il reste visible dans
+  // le HUD mais ne doit pas faire croire que le daemon/le micro est disponible.
+  if (!row && !running && !status) {
     return {
       available: false, reason: 'no_data_source', running: false, mode: null,
       lastAt: null, lastHeard: '', lastReply: '', lastOk: null,
-      stage: null, level: null, statusAt: null, lastAction: null,
+      stage: null, level: null, statusAt: null, lastAction,
     };
   }
   return {
