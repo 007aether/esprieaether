@@ -14,6 +14,7 @@ $base = Join-Path $root 'esprieaether'
 $vendor = Join-Path $root 'GITHUB_IMPORT\Atulya-Tantra'
 $py   = Join-Path $base '.venv\Scripts\python.exe'
 $node = Join-Path $root '.tools\node-v26.13.1\node.exe'
+$adb  = 'C:\Program Files (x86)\panda_android\tools\adb.exe'
 $logDir = Join-Path $base 'state'
 $logFile = Join-Path $logDir 'keep_alive.log'
 $interval = [int]($env:SUNNAVOK_KEEPALIVE_INTERVAL -as [int])
@@ -124,6 +125,8 @@ function Start-Tracked([hashtable]$svc) {
 
 $services = @(
     @{ Name='flask-web';      Port=5000;  Exe=$py;   Args=@('start_web_server.py'); Cwd=$base },
+    # J202 — JARVIS OSINT minimal : présent mais pas supervisé auparavant.
+    @{ Name='jarvis';         Port=8000;  Exe=$py;   Args=@('src\jarvis_api_minimal.py'); Cwd=$base },
     @{ Name='gateway';        Port=5001;  Exe=$py;   Args=@('-m','uvicorn','espria_system:app','--host','127.0.0.1','--port','5001'); Cwd=$base },
     @{ Name='cloud-desktop';  Port=5002;  Exe=$py;   Args=@('src\cloud_desktop_agent.py'); Cwd=$base },
     @{ Name='dashboard-node'; Port=5100;  Exe=$node; Args=@('api\server.mjs'); Cwd=$root },
@@ -163,11 +166,14 @@ $services = @(
     } },
     @{ Name='sentinel';       Port=8766;  Exe=$py;   Args=@('scripts\local_sentinel.py'); Cwd=$base; Env=@{ ESPRIE_SENTINEL_PORT='8766' } },
     @{ Name='g0dm0d3-ui';     Port=3860;  Exe=$node; Args=@('scripts\serve_g0dm0d3.mjs'); Cwd=$base },
-    @{ Name='g0dm0d3-api';    Port=7860;  Exe=$node; Args=@('node_modules\tsx\dist\cli.mjs','api\server.ts'); Cwd=(Join-Path $base 'G0DM0D3'); Env=@{ PORT='7860'; G0DM0D3_API_HOST='127.0.0.1' } }
+    @{ Name='g0dm0d3-api';    Port=7860;  Exe=$node; Args=@('node_modules\tsx\dist\cli.mjs','api\server.ts'); Cwd=(Join-Path $base 'G0DM0D3'); Env=@{ PORT='7860'; G0DM0D3_API_HOST='127.0.0.1' } },
+    # J202 — serveur ADB locale : aucun appareil n'est commandé, seul le daemon est relancé s'il tombe.
+    @{ Name='adb-server';     Port=5038;  Exe=$adb;  Args=@('start-server'); Cwd=(Split-Path $adb); Env=@{ ANDROID_ADB_SERVER_PORT='5038' } }
 )
 
 $httpChecks = @{
     5000 = '/'
+    8000 = '/health'
     5100 = '/'
     5105 = '/health'
     8501 = '/api/health'
