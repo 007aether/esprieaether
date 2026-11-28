@@ -45,7 +45,12 @@ _OVERVIEW = re.compile(
     re.I | re.S,
 )
 _ASK = re.compile(
-    r"^(?:سول|اسأل|سائل|ask)\s+(?:أوبن\s*كود|وبن\s*كود|open\s*code|opencode)\s*[:،,]?\s*(.{3,500}?)\s*[.!?؟]?$",
+    r"^(?:(?:سول|اسأل|سائل|ask)\s+)?"
+    r"(?:أوبن\s*كود|وبن\s*كود|open\s*code|opencode)\s*[:،,]?\s*(.{3,500}?)\s*[.!?؟]?$",
+    re.I,
+)
+_BARE_OPENCODE = re.compile(
+    r"^(?:أوبن\s*كود|وبن\s*كود|open\s*code|opencode)\s*[.!?؟]?$",
     re.I,
 )
 _READ = re.compile(
@@ -100,6 +105,8 @@ def match_intent(text: str) -> BridgeIntent | None:
         return BridgeIntent("knowledge", "")
     if _WHO.fullmatch(value) or _CAN.fullmatch(value):
         return BridgeIntent("who" if _WHO.fullmatch(value) else "capabilities", "")
+    if _BARE_OPENCODE.fullmatch(value):
+        return BridgeIntent("hint", "")
     if match := _ASK.fullmatch(value):
         return BridgeIntent("ask", _scrub(match.group(1)).strip())
     if _READ.fullmatch(value):
@@ -152,6 +159,9 @@ def execute_intent(intent: BridgeIntent, state_dir=None) -> str:
         return _CAN_TEXT
     if intent.kind == "knowledge":
         return _KNOWLEDGE_TEXT
+    if intent.kind == "hint":
+        return ("ما كاين سؤال واضح معا «أوبن كود». قول «سول أوبن كود: …» باش نسجّلو، "
+                "ولا «شنو قال أوبن كود» باش نقرا الجواب المسجّل.")
     folder = bridge_dir(state_dir)
     if intent.kind == "overview":
         answer = _latest_answer(folder)

@@ -99,6 +99,11 @@ class LocalBridgeFlowTest(unittest.TestCase):
                             "messages": [{"role": "user", "content": "chi projet ijema33 kolechi widifo l esprieaether"}]})
                         self.assertEqual(unified.json()["route"], "github_catalog")
                         self.assertIn("affaan-m/ECC", unified.json()["text"])
+
+                        openset = await client.post("/api/chat", json={
+                            "messages": [{"role": "user", "content": "شنو هو openset-llm"}]})
+                        self.assertEqual(openset.json()["route"], "openset_llm")
+                        self.assertIn("opensetlabs/openset-llm", openset.json()["text"])
                         self.assertEqual(provider.calls, 0)
 
             asyncio.run(exercise())

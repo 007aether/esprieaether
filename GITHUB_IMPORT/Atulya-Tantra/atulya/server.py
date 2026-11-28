@@ -2526,10 +2526,16 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
             match_intent as match_catalog_intent,
             execute_intent as execute_catalog_intent,
         )
+        from tools.plugins.openset_llm import (
+            match_intent as match_openset_intent,
+            execute_intent as execute_openset_intent,
+        )
         web_intent = match_web_intent(latest_user) if not request.image and request.mode != "voice" else None
         pc_intent = None if web_intent is not None or request.image else match_pc_intent(latest_user)
         catalog_intent = match_catalog_intent(latest_user) if not request.image and request.mode != "voice" else None
-        bridge_intent = match_bridge_intent(latest_user) if not request.image and catalog_intent is None else None
+        openset_intent = match_openset_intent(latest_user) if not request.image and request.mode != "voice" else None
+        bridge_intent = (match_bridge_intent(latest_user)
+                         if not request.image and catalog_intent is None and openset_intent is None else None)
         # Le repli « état local » ne s'applique qu'au moteur loopback réel : les
         # tests et les fournisseurs externes gardent le message d'erreur d'origine.
         local_runtime_fallback = (
@@ -2545,7 +2551,7 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
                 return local_status_text(config.data_dir), "Local deterministic", "local_fallback"
             return model_busy_text(), "Local fallback", "model_busy"
         if (webui_channel is None and voice_intent is None and web_intent is None
-                and bridge_intent is None and catalog_intent is None):
+                and bridge_intent is None and catalog_intent is None and openset_intent is None):
             raise HTTPException(
                 status_code=503,
                 detail="Chat is unavailable right now. Please try again later.",
@@ -2690,6 +2696,27 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
 
                 return StreamingResponse(
                     pc_direct_events(), media_type="text/event-stream",
+                    headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+                )
+            if openset_intent is not None:
+                # J184 — chapitre local sur openset-llm : aucun appel réseau, aucun état vivant affirmé.
+                async def openset_direct_result():
+                    text = await asyncio.to_thread(execute_openset_intent, openset_intent)
+                    return {
+                        "text": text, "provider": "Local deterministic",
+                        "model": "", "route": "openset_llm",
+                    }
+
+                if not request.stream:
+                    return await openset_direct_result()
+
+                async def openset_direct_events():
+                    result = await openset_direct_result()
+                    yield f"data: {json.dumps({'text': result['text']}, ensure_ascii=False)}\n\n"
+                    yield f"data: {json.dumps({'done': True, 'provider': result['provider'], 'model': '', 'route': result['route']}, ensure_ascii=False)}\n\n"
+
+                return StreamingResponse(
+                    openset_direct_events(), media_type="text/event-stream",
                     headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
                 )
             if catalog_intent is not None:

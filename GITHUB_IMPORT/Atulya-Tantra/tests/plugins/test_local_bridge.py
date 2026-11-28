@@ -57,11 +57,16 @@ class LocalBridgeTest(unittest.TestCase):
         self.assertIsNotNone(asked)
         assert asked is not None
         self.assertEqual(asked.kind, "ask")
-        self.assertEqual(asked.target, "واش كاين خدمة؟")
+        self.assertEqual(asked.target, "واش كاين خدمة")
         read = local_bridge.match_intent("CHENO KANTAWRO")
         self.assertIsNotNone(read)
         assert read is not None
         self.assertEqual(read.kind, "read")
+        bare = local_bridge.match_intent("وبن كود")
+        self.assertIsNotNone(bare)
+        assert bare is not None
+        self.assertEqual(bare.kind, "hint")
+        self.assertIn("سول أوبن كود", local_bridge.execute_intent(bare, Path(tempfile.mkdtemp())))
 
     def test_capacites_sont_decrites_sans_etat_vivant_invente(self) -> None:
         intent = local_bridge.match_intent("شنو تقدر تدير؟")

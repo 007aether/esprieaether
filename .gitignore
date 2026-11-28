@@ -61,3 +61,5 @@ NUL
 **/.git/
 .git__commit_disabled/
 **/.git__commit_disabled/
+# J184 — clone local de openset-llm (code tiers, gardé hors du dépôt)
+GITHUB_IMPORT/openset-llm/

@@ -72,7 +72,7 @@ class PcIntentTest(unittest.TestCase):
         self.assertEqual(intent.target, "act-d41a4ce941")
         self.assertEqual(intent.mode, "approved_once")
 
-    def test_Confirm_مختصر_مقيد_بطلب_واحد_معلق(self) -> None:
+    def test_تأكيد_مختصر_مقيد_بطلب_واحد_معلق(self) -> None:
         intent = pc_intents.match_intent("أكدت")
         self.assertIsNotNone(intent)
         assert intent is not None
@@ -85,7 +85,7 @@ class PcIntentTest(unittest.TestCase):
             self.assertEqual(result["status"], "executed")
             self.assertEqual(gateway.last_result()["executed"], True)
 
-    def test_Confirm_مختصر_يرفض_عند_تعدد_الطلبات(self) -> None:
+    def test_تأكيد_مختصر_يرفض_عند_تعدد_الطلبات(self) -> None:
         intent = pc_intents.match_intent("أكدت")
         assert intent is not None
         with tempfile.TemporaryDirectory() as tmp:
@@ -97,7 +97,7 @@ class PcIntentTest(unittest.TestCase):
             self.assertEqual(len(gateway.browser_calls), 0)
             self.assertIn("أكدت act-", result["text"])
 
-    def test_Confirm_مختصر_ما ينفذش_بلا_طلب(self) -> None:
+    def test_تأكيد_مختصر_ما_ينفذش_بلا_طلب(self) -> None:
         intent = pc_intents.match_intent("أكدت")
         assert intent is not None
         with tempfile.TemporaryDirectory() as tmp:

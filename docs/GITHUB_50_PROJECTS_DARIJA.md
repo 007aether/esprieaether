@@ -454,3 +454,11 @@
 - النشر: 2026-02-22 | آخر تحديث: 2026-11-28 | آخر push: 2026-11-26
 - المواضيع: ai-agents, anti-detect, antidetect-browser, bot-detection, browser-automation, captcha-bypass, chromium, cloudflare, cloudflare-bypass, fingerprint, headless-browser, playwright
 - الرابط: https://github.com/CloakHQ/CloakBrowser
+
+## تحقق حي وتخصيص لـEsprieaether (J184)
+
+- تحقق GitHub API فـ2026-11-28T06:40:44+00:00: 50/50 مستودع قابل للقراءة، 0 محذوف، 0 معطّل، 1 مؤرشف (esengine/DeepSeek-Reasonix).
+- فرق النجوم +277 مقارنة باللقطة الأولى؛ آخر push ما تبدّلش. الدليل فـesprieaether/state/github_catalog_verification.json.
+- المشروع اللي كيجمع كلشي وكنخصّصو لـEsprieaether: **affaan-m/ECC** ( skills + instincts + memory + security = نفس طبقات أتوليا المحلية). قول «شنو المشروع اللي كيجمع كلشي» ولا «chi projet ijema33 kolechi widifo l esprieaether» باش جاوبك أتوليا من الكاتالوج.
+- هادي توصية محلية من وصف المستودع؛ ما كتعنيش إنّا نزّلنا كودو ولا إنو شغّال عندنا.
+

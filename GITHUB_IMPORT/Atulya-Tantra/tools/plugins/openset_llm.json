@@ -1,0 +1,25 @@
+{
+  "repo": "opensetlabs/openset-llm",
+  "url": "https://github.com/opensetlabs/openset-llm",
+  "license": "MIT",
+  "release": "v0.3.4",
+  "collectedAt": "2026-11-28T06:34:11+00:00",
+  "source": "GitHub REST API + README/install.sh (lecture seule)",
+  "localClone": "GITHUB_IMPORT/openset-llm",
+  "installed": false,
+  "summary": "محرك استدلال LLM محلي على CPU بلا GPU، بلا سحابة، وAPI متوافق مع OpenAI على /v1.",
+  "claimsFromRepo": [
+    "السرعة المعلنة 17–20 tok/s على Ice Lake/AVX-512 مع 8 نوى و8GB RAM",
+    "على AMD Zen 2 / AVX2 (مثل Ryzen 5 4500U): 6.1–7.7 tok/s بلا speculation، و5.8–7.2 tok/s مع ./serve",
+    "الموديل Bonsai-2-27B ternary بحجم ~6.2GB بعد التحضير، و7.3GB نزيل",
+    "يحتاج Linux أو WSL2 وx86-64 و8GB RAM و~15GB قرص فارغ أثناء التحضير",
+    "يستعمل patch على PrismML llama.cpp، speculative decoding، attention مدمج، وت resumed agent loops"
+  ],
+  "endpointProposal": {
+    "baseUrl": "http://127.0.0.1:8080/v1",
+    "model": "openset-llm",
+    "apiKey": "unused",
+    "enabled": false
+  },
+  "note": "ما تثبّتش محلياً: WSL2 غير مثبّت على هاد الجهاز، وinstall.sh كيقول Linux only. هادشي توثيق محلي، ما كيأكدش إن الخدمة شغّالة دابا ولا إن الأرقام تنقاسات عندنا."
+}
