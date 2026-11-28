@@ -31,7 +31,12 @@
 - فعّلنا `Microsoft-Windows-Subsystem-Linux` بـ`/NoRestart`؛ خرج بـ`EXIT=3010` يعني **كيتطلب إعادة تشغيل**.
 - تحميل يدوي لحزمة `wsl.3.0.5.0.x64.msi` (367,788,032 بايت) من GitHub Releases كمل بـBITS، وتثبّتت بـ`msiexec /quiet /norestart` (EXIT=0)； `wsl --version` كيرجع 3.0.5.0.
 - `.wslconfig` تكتب بـ`memory=10GB`, `processors=6`, `swap=2GB`, `localhostForwarding=true`.
-- تحميل rootfs Ubuntu 24.04 (`ubuntu-24.04-server-cloudimg-amd64-root.tar.xz`, 227,213,232 بايت، SHA256 المتوقع `ec6972af…`) جاري بـBITS باش نستوردو بـ`wsl --import`.
+- تحميل rootfs Ubuntu 24.04 (`ubuntu-24.04-server-cloudimg-amd64-root.tar.xz`, 227,213,232 بايت) كمل بـBITS، والـSHA256 مطابق تماماً (`ec6972af8ea2bd05c55299d204e5ae3f91769b84cfaec7395639d236a39f9a03`).
+- `wsl --import Ubuntu2404` نجح، و`Ubuntu 24.04.5 LTS / x86_64` كيجاوب. **WSL خدم بلا إعادة تشغيل.**
+- `.wslconfig` كيعطي 9948 MiB RAM، و`install.sh --check` أكّد مسار AVX2 (256-bit kernels) على Ryzen 5 4500U.
+- المحرك الجاهز `openset-llm-linux-x86_64.tar.gz` (19,098,202 بايت) تّنزّل وتحقّق بـSHA256SUMS (`04f086c5…`)، وتّستخرج فـ`/root/.openset-llm/bin` داخل WSL.
+- تحميل أوزان الموديل جاري بـBITS: `Ternary-Bonsai-2-27B-PTQ1_0.gguf` (~6GB) و`mtp-Qwen3.8-27B-Q4_0.gguf` (~1.4GB). هادشي كياخد ساعات على هاد الشبكة.
+- نقص صغير: `libgomp1` غير مثبت فالـrootfs؛ كنجرب `apt-get install` باش يشتغل `llama-cli`.
 - Docker مثبّت (29.9.3) لكن daemon موقف، وHyper-V موقوف؛ ما كاينش بديل جاهز بلا WSL.
 - winget كيشوف `Canonical.Ubuntu.2404` (الإصدار 2404.0.5.0)؛ نستعملو باش ننزّل distro بلا Store.
 
