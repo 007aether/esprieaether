@@ -7,6 +7,18 @@
   "source": "GitHub REST API + README/install.sh (lecture seule)",
   "localClone": "GITHUB_IMPORT/openset-llm",
   "installed": false,
+  "wslDistro": "Ubuntu2404",
+  "engineInstalled": true,
+  "engineVersion": "v0.3.4",
+  "enginePath": "/root/.openset-llm/bin",
+  "modelInstalled": false,
+  "modelFile": "/root/.openset-llm/models/model.gguf",
+  "modelDownload": {
+    "file": "Ternary-Bonsai-2-27B-PTQ1_0.gguf",
+    "bytes": 5946648928,
+    "sha256": "53107f530aa52eb00912263ab1ee29bd199261c87cd7b4ad4ca1318c1fe33ee3",
+    "source": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf"
+  },
   "summary": "محرك استدلال LLM محلي على CPU بلا GPU، بلا سحابة، وAPI متوافق مع OpenAI على /v1.",
   "claimsFromRepo": [
     "السرعة المعلنة 17–20 tok/s على Ice Lake/AVX-512 مع 8 نوى و8GB RAM",

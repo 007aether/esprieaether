@@ -36,7 +36,9 @@
 - `.wslconfig` كيعطي 9948 MiB RAM، و`install.sh --check` أكّد مسار AVX2 (256-bit kernels) على Ryzen 5 4500U.
 - المحرك الجاهز `openset-llm-linux-x86_64.tar.gz` (19,098,202 بايت) تّنزّل وتحقّق بـSHA256SUMS (`04f086c5…`)، وتّستخرج فـ`/root/.openset-llm/bin` داخل WSL.
 - تحميل أوزان الموديل جاري بـBITS: `Ternary-Bonsai-2-27B-PTQ1_0.gguf` (~6GB) و`mtp-Qwen3.8-27B-Q4_0.gguf` (~1.4GB). هادشي كياخد ساعات على هاد الشبكة.
-- نقص صغير: `libgomp1` غير مثبت فالـrootfs؛ كنجرب `apt-get install` باش يشتغل `llama-cli`.
+- `libgomp1` تثبّت يدوياً بـ`.deb` من أرشيف Ubuntu (SHA checksum غير مطلوب من dpkg؛ الحزمة رسمية)؛ `llama-cli --version` كيرجع `0.2.0-dev (commit e3de71522)` يعني المحرك شغّال فـWSL.
+- تحميل الموديل كيديرو الآن `curl -C -` فعملية منفصلة، بـSHA256 متوقع `53107f53…` وحجم `5,946,648,928` بايت. التحميل المتوازي توقّف فـCDN، والمtp sidecar (1.37GB) ما كيتحمّلش: أول تشغيل غيكون بـ`no-mtp` (plain decoding) على AVX2.
+- سكريبت `finalize_openset.ps1` جاهز: كينتظر التحميل، كيتحقق من الـSHA256، كينسخ الموديل فـWSL، كيشغّل `serve --no-webui --port 8080`، وكيتحقق من `/v1/models` و`chat/completions` قبل أي ربط مع أتوليا.
 - Docker مثبّت (29.9.3) لكن daemon موقف، وHyper-V موقوف؛ ما كاينش بديل جاهز بلا WSL.
 - winget كيشوف `Canonical.Ubuntu.2404` (الإصدار 2404.0.5.0)؛ نستعملو باش ننزّل distro بلا Store.
 
