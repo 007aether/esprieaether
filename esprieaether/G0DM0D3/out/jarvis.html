@@ -110,6 +110,9 @@
     <div id="voice" class="dim">الصوت: كيتحمل…</div>
     <div class="row"><span>تجربة الصوت المحلي</span><button id="voiceTestBtn" type="button">شغّل جملة</button></div>
     <div id="voiceTestResult" class="dim">الصوت كيخرج من هاد الحاسوب، بلا سحابة ولا مفتاح.</div>
+    <div id="pcAction" class="dim">آخر فعل: ما كاينش.</div>
+    <div class="row"><span>نطق نتيجة الفعل</span><button id="pcSpeakBtn" type="button">شغّل النتيجة</button></div>
+    <div id="pcSpeakResult" class="dim">النتيجة كتخرج من الصوت المحلي، بلا سحابة.</div>
   </section>
   <div class="right">
     <section class="card">
@@ -517,6 +520,14 @@
       '<div class="row"><span>سمعت</span><span class="dim">' + esc(x.lastHeard || "—") + '</span></div>' +
       '<div class="row"><span>جاوبت</span><span class="dim">' + esc(x.lastReply || "—") + '</span></div>' +
       '<div class="row"><span>حالة الوجه</span><span class="dim">' + esc(tr(x.stage || "idle")) + '</span></div>';
+    var act = x.lastAction;
+    var pcBox = $("pcAction");
+    if (pcBox) {
+      pcBox.textContent = act
+        ? ("آخر فعل: " + esc(act.kind || "—") + " · " + esc(tr(act.status || "—")) +
+           " · " + esc(act.text || "—"))
+        : "آخر فعل: ما كاينش.";
+    }
   }
 
   // J159 — اختبار صوت محلي بضغطة صريحة : الصوت كيولد فهاد الحاسوب وكيلعب ف نفس التاب.
@@ -539,6 +550,38 @@
       audio.onerror = function () { clean(); out.textContent = "التشغيل فشل — شوف حالة الصوت المحلي."; };
       return audio.play().then(function () {
         out.textContent = "تم التشغيل — أكّد بالسمع منك.";
+      }).catch(function () {
+        clean(); out.textContent = "المتصفح منع التشغيل؛ ضغط الكبسة مرة أخرى.";
+      });
+    }).catch(function (e) {
+      out.textContent = "خدمة الصوت المحلي غير متاحة: " + esc(e && e.message || "unknown");
+    });
+  }
+
+  // J171 — نطق نتيجة آخر فعل PC/Internet عبر نفس خدمة TTS المحلية.
+  function speakPcAction() {
+    var out = $("pcSpeakResult");
+    var box = $("pcAction");
+    if (!out) return;
+    var text = box ? box.textContent.replace(/^آخر فعل:\s*/, "") : "";
+    if (!text || text === "ما كاينش.") {
+      out.textContent = "ما كاينش نتيجة فعل لتنطقها.";
+      return;
+    }
+    out.textContent = "كينتظر التوليد المحلي…";
+    fetch("/local-voice/say?text=" + encodeURIComponent(text) + "&language=auto", {
+      cache: "no-store"
+    }).then(function (r) {
+      if (!r.ok) throw new Error("local_voice_http_" + r.status);
+      return r.blob();
+    }).then(function (blob) {
+      var url = URL.createObjectURL(blob);
+      var audio = new Audio(url);
+      var clean = function () { URL.revokeObjectURL(url); };
+      audio.onended = clean;
+      audio.onerror = function () { clean(); out.textContent = "التشغيل فشل."; };
+      return audio.play().then(function () {
+        out.textContent = "تم النطق — أكّد بالسمع منك.";
       }).catch(function () {
         clean(); out.textContent = "المتصفح منع التشغيل؛ ضغط الكبسة مرة أخرى.";
       });
@@ -819,6 +862,7 @@
   $("enrollBtn").addEventListener("click", enroll);
   $("resetProfileBtn").addEventListener("click", resetProfile);
   $("voiceTestBtn").addEventListener("click", testLocalVoice);
+  $("pcSpeakBtn").addEventListener("click", speakPcAction);
   var atulyaFrame = $("atulyaFrame");
   var atulyaDock = $("atulyaDock");
   var atulyaDrag = null;
