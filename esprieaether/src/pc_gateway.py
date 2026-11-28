@@ -25,12 +25,14 @@ _MODES = ("ask_each", "session", "auto")
 _DECISIONS = ("approved_once", "denied")
 _MAX_CHARS = 400
 
+_SECRET_ASSIGNMENT = re.compile(
+    r"\b(?:api[_-]?key|token|password|secret|authorization|bearer)\s*[=:]\s*\S+", re.I)
+
 # Lignes rouges fixées par le propriétaire, valables même en mode automatique.
 _RED_LINES: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("touping_executable", re.compile(r"touping\.exe", re.I)),
     ("secret_file", re.compile(r"(?:^|[\s\\/])(?:\.env|\.npmrc|\.ssh[\s\\/])", re.I)),
-    ("secret_assignment", re.compile(
-        r"\b(?:api[_-]?key|token|password|secret|authorization|bearer)\s*[=:]\s*\S+", re.I)),
+    ("secret_assignment", _SECRET_ASSIGNMENT),
     ("phone_action", re.compile(
         r"\b(?:sms|send\s+sms|call\b|dial\b|adb\s+shell\s+am\s+start|tel:)", re.I)),
     ("destructive", re.compile(
@@ -77,10 +79,7 @@ def is_public_web_url(url: str) -> bool:
 
 def _scrub(value: object) -> str:
     text = str(value or "")
-    for _name, pattern in _RED_LINES:
-        if pattern is _RED_LINES[2][1]:
-            text = pattern.sub("[redacted]", text)
-    return text[:_MAX_CHARS]
+    return _SECRET_ASSIGNMENT.sub("[redacted]", text)[:_MAX_CHARS]
 
 
 def _red_line(command: str) -> str | None:
@@ -224,8 +223,11 @@ class PcGateway:
             "id": "act-" + uuid.uuid4().hex[:10], "kind": kind, "target": target,
             "status": "proposed", "reason": None, "text": "", "mode": mode,
         }
+        row["text"] = (f"طلب موافقة ({row['id']}): {kind} — {_scrub(target)[:80]}. "
+                       f"قول «أكدت {row['id']}» باش ننفّذ، ولا «رفضت {row['id']}».")
         self._plans[row["id"]] = row
         self._audit(row, None, "proposed", actor)
+        self._write_last(row)
 
         if mode == "auto":
             self._audit(row, "proposed", "approved_once", actor)

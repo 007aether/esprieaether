@@ -61,6 +61,7 @@ class PcGatewayTest(unittest.TestCase):
         plan = self.gateway.request(
             "open_url", "https://www.youtube.com/results?search_query=rap+maroc")
         self.assertEqual(plan["status"], "proposed")
+        self.assertIn("أكدت", plan["text"])
         self.assertFalse(self.gateway.last_result()["executed"])
         self.assertEqual(self.gateway.browser_calls, [])
 
