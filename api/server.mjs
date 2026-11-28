@@ -19,6 +19,7 @@ const DEFAULT_INTERNET_PATH = join(ROOT, 'esprieaether', 'state', 'internet_stat
 const DEFAULT_VOICE_INBOX = join(ROOT, 'esprieaether', 'state', 'voice_inbox.jsonl');
 const DEFAULT_VOICE_LOCK = join(ROOT, 'esprieaether', 'state', 'voice_daemon.lock');
 const DEFAULT_VOICE_STATUS = join(ROOT, 'esprieaether', 'state', 'voice_status.json');
+const DEFAULT_PC_ACTION = join(ROOT, 'esprieaether', 'state', 'pc_action_last.json');
 const DEFAULT_BRAIN_METRICS = join(ROOT, 'esprieaether', 'state', 'brain_metrics.json');
 const DEFAULT_ACTION_REQUESTS = join(ROOT, 'esprieaether', 'state', 'action_requests.json');
 const DEFAULT_ACTION_AUDIT = join(ROOT, 'esprieaether', 'state', 'action_audit.jsonl');
@@ -369,6 +370,7 @@ export async function publicVoice({
   inboxPath = DEFAULT_VOICE_INBOX,
   lockPath = DEFAULT_VOICE_LOCK,
   statusPath = DEFAULT_VOICE_STATUS,
+  pcActionPath = DEFAULT_PC_ACTION,
 } = {}) {
   let status = null;
   try {
@@ -399,11 +401,25 @@ export async function publicVoice({
     pid = '';
   }
   const running = /^\d+$/.test(pid);
-  if (!row && !running && !status) {
+  let lastAction = null;
+  try {
+    const action = JSON.parse(await readFile(pcActionPath, 'utf8'));
+    lastAction = {
+      id: action.id ?? null,
+      kind: action.kind ?? null,
+      status: action.status ?? null,
+      executed: Boolean(action.executed),
+      text: redactPublic(action.text).slice(0, 200),
+      checkedAt: action.checkedAt ?? null,
+    };
+  } catch {
+    lastAction = null;
+  }
+  if (!row && !running && !status && !lastAction) {
     return {
       available: false, reason: 'no_data_source', running: false, mode: null,
       lastAt: null, lastHeard: '', lastReply: '', lastOk: null,
-      stage: null, level: null, statusAt: null,
+      stage: null, level: null, statusAt: null, lastAction: null,
     };
   }
   return {
@@ -418,6 +434,7 @@ export async function publicVoice({
     stage: status?.stage ?? null,
     level: status?.level ?? null,
     statusAt: status?.statusAt ?? null,
+    lastAction,
   };
 }
 

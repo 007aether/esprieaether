@@ -2514,7 +2514,12 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
             local_status_text,
             model_busy_text,
         )
+        from tools.plugins.pc_intents import (
+            match_intent as match_pc_intent,
+            execute_intent as execute_pc_intent,
+        )
         web_intent = match_web_intent(latest_user) if not request.image and request.mode != "voice" else None
+        pc_intent = None if web_intent is not None or request.image else match_pc_intent(latest_user)
         # Le repli « état local » ne s'applique qu'au moteur loopback réel : les
         # tests et les fournisseurs externes gardent le message d'erreur d'origine.
         local_runtime_fallback = (
@@ -2640,6 +2645,40 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
 
                 return StreamingResponse(
                     web_direct_events(), media_type="text/event-stream",
+                    headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+                )
+            if pc_intent is not None:
+                # J171 — action PC/Internet gouvernée : le texte vient de la
+                # passerelle réelle (audit + consentement), jamais du modèle.
+                async def pc_direct_result():
+                    from pc_gateway import gateway as pc_gateway_instance
+                    result = await asyncio.to_thread(
+                        execute_pc_intent, pc_intent, pc_gateway_instance())
+                    pending = result["status"] == "proposed"
+                    return {
+                        "text": result["text"],
+                        "provider": "Local governed PC action",
+                        "model": "",
+                        "route": "pc_intent",
+                        "ui": [],
+                        "receipt": result["receipt"],
+                        "confirm": ([{"id": result["id"], "summary": pc_intent.summary}]
+                                    if pending else []),
+                    }
+
+                if not request.stream:
+                    return await pc_direct_result()
+
+                async def pc_direct_events():
+                    result = await pc_direct_result()
+                    for action in result["confirm"]:
+                        yield f"data: {json.dumps({'confirm': action})}\n\n"
+                    if result["text"]:
+                        yield f"data: {json.dumps({'text': result['text']}, ensure_ascii=False)}\n\n"
+                    yield f"data: {json.dumps({'done': True, 'provider': result['provider'], 'model': '', 'route': result['route'], 'receipt': result['receipt']}, ensure_ascii=False)}\n\n"
+
+                return StreamingResponse(
+                    pc_direct_events(), media_type="text/event-stream",
                     headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
                 )
             if request.mode == "voice":
