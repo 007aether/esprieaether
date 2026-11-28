@@ -84,6 +84,11 @@ class LocalBridgeFlowTest(unittest.TestCase):
                         read = await client.post("/api/chat", json={
                             "messages": [{"role": "user", "content": "شنو قال أوبن كود؟"}]})
                         self.assertEqual(read.json()["text"], "الجواب المسجّل من OpenCode.")
+
+                        catalog = await client.post("/api/chat", json={
+                            "messages": [{"role": "user", "content": "عطيني المشاريع"}]})
+                        self.assertEqual(catalog.json()["route"], "github_catalog")
+                        self.assertIn("50 المشاريع", catalog.json()["text"])
                         self.assertEqual(provider.calls, 0)
 
             asyncio.run(exercise())

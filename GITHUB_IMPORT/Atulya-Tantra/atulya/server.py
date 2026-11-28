@@ -2522,9 +2522,14 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
             match_intent as match_bridge_intent,
             execute_intent as execute_bridge_intent,
         )
+        from tools.plugins.github_catalog import (
+            match_intent as match_catalog_intent,
+            execute_intent as execute_catalog_intent,
+        )
         web_intent = match_web_intent(latest_user) if not request.image and request.mode != "voice" else None
         pc_intent = None if web_intent is not None or request.image else match_pc_intent(latest_user)
-        bridge_intent = match_bridge_intent(latest_user) if not request.image else None
+        catalog_intent = match_catalog_intent(latest_user) if not request.image and request.mode != "voice" else None
+        bridge_intent = match_bridge_intent(latest_user) if not request.image and catalog_intent is None else None
         # Le repli « état local » ne s'applique qu'au moteur loopback réel : les
         # tests et les fournisseurs externes gardent le message d'erreur d'origine.
         local_runtime_fallback = (
@@ -2539,7 +2544,8 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
             if status_requested:
                 return local_status_text(config.data_dir), "Local deterministic", "local_fallback"
             return model_busy_text(), "Local fallback", "model_busy"
-        if webui_channel is None and voice_intent is None and web_intent is None and bridge_intent is None:
+        if (webui_channel is None and voice_intent is None and web_intent is None
+                and bridge_intent is None and catalog_intent is None):
             raise HTTPException(
                 status_code=503,
                 detail="Chat is unavailable right now. Please try again later.",
@@ -2684,6 +2690,27 @@ ul{{padding-left:1.2rem;line-height:1.6}}a{{color:#69eaff}}
 
                 return StreamingResponse(
                     pc_direct_events(), media_type="text/event-stream",
+                    headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+                )
+            if catalog_intent is not None:
+                # J182 — catalogue GitHub local : réponse déterministe, sans réseau.
+                async def catalog_direct_result():
+                    text = await asyncio.to_thread(execute_catalog_intent, catalog_intent)
+                    return {
+                        "text": text, "provider": "Local deterministic",
+                        "model": "", "route": "github_catalog",
+                    }
+
+                if not request.stream:
+                    return await catalog_direct_result()
+
+                async def catalog_direct_events():
+                    result = await catalog_direct_result()
+                    yield f"data: {json.dumps({'text': result['text']}, ensure_ascii=False)}\n\n"
+                    yield f"data: {json.dumps({'done': True, 'provider': result['provider'], 'model': '', 'route': result['route']}, ensure_ascii=False)}\n\n"
+
+                return StreamingResponse(
+                    catalog_direct_events(), media_type="text/event-stream",
                     headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
                 )
             if bridge_intent is not None:

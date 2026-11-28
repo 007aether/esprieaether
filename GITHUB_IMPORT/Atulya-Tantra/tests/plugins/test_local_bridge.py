@@ -19,6 +19,15 @@ class LocalBridgeTest(unittest.TestCase):
         self.assertIn("أتوليا", text)
         self.assertNotIn("live_verified", text)
 
+    def test_esprieaether_est_un_alias_d_atulya(self) -> None:
+        intent = local_bridge.match_intent("Esprieaether")
+        self.assertIsNotNone(intent)
+        assert intent is not None
+        self.assertEqual(intent.kind, "who")
+        text = local_bridge.execute_intent(intent, Path(tempfile.mkdtemp()))
+        self.assertIn("أتوليا", text)
+        self.assertIn("Esprieaether", text)
+
     def test_capacites_sont_decrites_sans_etat_vivant_invente(self) -> None:
         intent = local_bridge.match_intent("شنو تقدر تدير؟")
         self.assertIsNotNone(intent)

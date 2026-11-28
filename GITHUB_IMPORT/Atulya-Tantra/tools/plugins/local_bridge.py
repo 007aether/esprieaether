@@ -24,7 +24,8 @@ if str(_LOCAL_SRC) not in sys.path:
 from pc_gateway import _scrub  # noqa: E402  — même nettoyage que la passerelle PC
 
 _WHO = re.compile(
-    r"^(?:من\s+أنت|من\s+انت|شنو\s+أنت|شنو\s+انت|who\s+are\s+you|introduce\s+yourself)\s*[.!?؟]?$",
+    r"^(?:من\s+أنت|من\s+انت|شنو\s+أنت|شنو\s+انت|who\s+are\s+you|introduce\s+yourself"
+    r"|إسپريإيثر|اسپرياتر|esprieaether|esprie\s*aether)\s*[.!?؟]?$",
     re.I,
 )
 _CAN = re.compile(
@@ -41,7 +42,8 @@ _READ = re.compile(
 )
 
 _WHO_TEXT = (
-    "أنا أتوليا، مساعدك المحلي فهاد الجهاز. كنجاوبك بالدارجة بحروف عربية، "
+    "أنا أتوليا، مساعدك المحلي فهاد الجهاز، واللي كتسمّيه Esprieaether أنا بعيني. "
+    "كنجاوبك بالدارجة بحروف عربية، "
     "وما كنقولش إن فعل تّدار بلا دليل من ملف ولا نتيجة أداة."
 )
 _CAN_TEXT = (
