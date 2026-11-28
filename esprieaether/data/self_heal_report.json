@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-20T23:17:26.668555",
+  "checked_at": "2026-11-28T13:43:27.777309",
   "services": {
     "router": "up",
     "mesh": "up",
@@ -10,10 +10,10 @@
     "kanban": "up",
     "homedock": "up",
     "jarvis": "up",
-    "ollama": "down"
+    "ollama": "unavailable"
   },
   "restarts": [
-    "ollama:down -> down"
+    "ollama:down unavailable: ollama non installe localement"
   ],
   "changed": false
 }
