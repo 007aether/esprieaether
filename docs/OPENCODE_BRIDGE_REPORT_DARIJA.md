@@ -28,4 +28,6 @@
 ## 5. الاختبارات
 - Atulya: `tests/plugins/test_local_bridge.py` 8/8، `tests/core/test_darija_fillers.py` 6/6، `tests/plugins/test_pc_intents.py` 8/8، web_intents 18/27 subtests → المجموع 32 passed + 27 subtests فالجولة المستهدفة.
 - Esprieaether: `tests/test_opencode_bridge.py` 5/5.
+- E2E: `tests/e2e/test_local_bridge_flow.py` 1/1 (المحادثة كتكتب السؤال وتقرا الجواب بلا ما يمسّ النموذج).
+- دليل حي على `:8501` (بعد إعادة التحميل): «من أنت؟» رجّع `route=local_bridge`؛ «سول أوبن كود: واش كاين خدمة؟» رجّع `q-f3641c63` وسجّل السؤال؛ من بعد ما كتبت الجواب، «شنو قال أوبن كود؟» رجّع نفس الجواب من `answers.jsonl`؛ وHUD على `:3860` باقي كيعرض `lastAction=executed`.
 - الجولات الكاملة والدليل الحي مذكورين فآخر تحديث فـ`V2_RELEASE.md`.
