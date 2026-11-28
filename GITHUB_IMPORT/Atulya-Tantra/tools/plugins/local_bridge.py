@@ -45,7 +45,7 @@ _WHO_TEXT = (
     "وما كنقولش إن فعل تّدار بلا دليل من ملف ولا نتيجة أداة."
 )
 _CAN_TEXT = (
-    "فهاد الجهاز كاين محادثة وصوت محلي، فتح صفحات ويب، وأفعال PC محكومة بالموافقة. "
+    "فهاد الجهاز كاين محادثة وصوت محلي، فتح يوتيوب وصفحات ويب، وأفعال PC محكومة بالموافقة. "
     "ما كنرسلش SMS ولا كنلمس GSM بلا طلب صريح وتأكيد فكل مرة."
 )
 _NO_ANSWER = (
@@ -63,7 +63,7 @@ class BridgeIntent:
 def bridge_dir(state_dir=None) -> Path:
     """Dossier partagé, toujours hors du dépôt (state/ est en gitignore)."""
     if state_dir is not None:
-        return Path(state_dir) / "opencode_bridge"
+        return Path(state_dir)
     override = os.environ.get("ATULYA_OPENCODE_BRIDGE_DIR", "").strip()
     return Path(override) if override else _LOCAL_SRC.parent / "state" / "opencode_bridge"
 

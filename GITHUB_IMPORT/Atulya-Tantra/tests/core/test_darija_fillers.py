@@ -19,6 +19,11 @@ def test_instant_ack_comprend_les_mots_darija():
     assert engine.instant_ack("شنو الطقس اليوم؟").strip() == "كنشوف الطقس."
 
 
+def test_instant_ack_pont_opencode_est_en_darija():
+    assert engine.instant_ack("سول أوبن كود: واش كاين خدمة؟").strip() == "كنسجّل سؤالك."
+    assert engine.instant_ack("ask opencode: is the service up?").strip() == "كنسجّل سؤالك."
+
+
 def test_aucun_acquittement_ne_reste_en_anglais():
     for phrase in ALL_PHRASES:
         if not phrase:

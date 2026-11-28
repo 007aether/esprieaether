@@ -19,6 +19,8 @@ from .types import BrainError, BrainReply, Message, ProviderError, ToolCall
 
 # Instant acknowledgements from the user's words alone (no model round trip): spoken within ms.
 _INTENT_FILLERS = (
+    (re.compile(r"(?:سول|اسأل|ask)\s+(?:أوبن\s*كود|opencode|open\s*code)", re.I),
+     "كنسجّل سؤالك."),
     (re.compile(r"\b(weather|temperature|rain|forecast|humid|मौसम|बारिश|طقس|الطقس|جو|الجو|مطر|المطر)\b", re.I),
      "كنشوف الطقس."),
     (re.compile(r"\b(news|headlines|खबर|समाचार|أخبار|خبر)\b", re.I),
