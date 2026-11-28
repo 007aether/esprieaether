@@ -2,12 +2,24 @@
   "pc_last_seen": "2026-10-29T00:44:31.846091+00:00",
   "pc_ok": true,
   "cloud_ok": true,
-  "cloud_last_run": "2026-11-28T00:44:31.077577+00:00",
+  "cloud_last_run": "2026-11-28T14:36:48.905482+00:00",
   "note": "cloud node alive — PC reads this via git pull",
   "last_scan_count": 22,
   "last_scan": [
     {
       "title": "AirdropAlert",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "USD1 Depeg: Trump&#8217;s Stablecoin Slipped, and the Dolomite Loan Is Why I&#8217;m Not Surprised",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "Trading Fundamentals Part 39: Crypto Hedging Explained",
+      "source": "https://airdropalert.com/feed"
+    },
+    {
+      "title": "How to Buy ONDO for the First Time",
       "source": "https://airdropalert.com/feed"
     },
     {
@@ -36,18 +48,6 @@
     },
     {
       "title": "1Password Breach: What Crypto Users Should Do Before the Phishing Emails Land",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "SpaceX Airdrop: Two Free Shares for Every Active Trump Account",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "Ukraine Crypto Law: Legal Again, This Time With a Tax Bill",
-      "source": "https://airdropalert.com/feed"
-    },
-    {
-      "title": "How to Delegate NFTs for Airdrop Claims Without Touching Your Cold Wallet",
       "source": "https://airdropalert.com/feed"
     },
     {
