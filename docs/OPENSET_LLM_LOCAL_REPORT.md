@@ -62,3 +62,10 @@
 - فرق النجوم مقارنة مع لقطة 06:07: +277؛ آخر push ما تبدّلش لأي مشروع.
 - الدليل فـ`esprieaether/state/github_catalog_verification.json` (حالة محلية، ما دخلتش فالكوميت).
 - وكيل التطوير: `cycle=1206`، `status=diagnosed`، `local_pct=100`، `error_count=0`، و3 خدمات تحت: `cloud_desktop:5001`، `ollama:11434`، `jarvis:8000`. تقريرو `github_projects_report.json` كيعني 20 مشروعاً من اختيار المالك (تاريخ 2026-11-27)، ومستقل على كاتالوج الـ50.
+
+## تحسينات النظام أثناء التحميل (J193)
+- أتوليا كتفهم صيغ دارجة طبيعية لحالة التحميل: «واش تحمّل الموديل»، «فين وصل التحميل»، «كمّل التحميل»، و`kifach kayn l 7al openset llm` — كلشي بـ`route=openset_llm`.
+- الجواب كيحسب السرعة والوقت المقدّر الباقي من أول سطر «attempt have=…» فسجل `curl -C -`، يعني ETA مبني على قياس حقيقي لا على تخمين.
+- HUD `:3860` كيعرض الآن مؤشر `openset-llm` داخل «حالة النظام» من حقل جديد `openset` فـ`/api/system/status`، مقروء من ملف الحالة المحلي + حجم الملف على القرص، بلا شبكة وبلا `POST`/`onclick`.
+- الاختبارات: `test_openset_llm.py` 7 passed + 3 subtests، وHUD/API Node 10/10. الجولة الكاملة Node: 1113 test، 991 pass، 122 fail (كانت 125 قبل التحسين؛ الإخفاقات فملفات install/maintenance خارج هاد التغيير).
+
