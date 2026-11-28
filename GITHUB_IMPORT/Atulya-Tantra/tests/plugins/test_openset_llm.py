@@ -56,6 +56,14 @@ class OpenSetLlmTest(unittest.TestCase):
         assert intent is not None
         self.assertEqual(intent.kind, "status")
 
+    def test_status_darija_naturelle_sans_nom_moteur(self) -> None:
+        for phrase in ("واش تحمّل الموديل", "فين وصل التحميل", "كمّل التحميل"):
+            with self.subTest(phrase=phrase):
+                intent = openset_llm.match_intent(phrase)
+                self.assertIsNotNone(intent)
+                assert intent is not None
+                self.assertEqual(intent.kind, "status")
+
     def test_question_ordinaire_ne_devient_pas_openset(self) -> None:
         self.assertIsNone(openset_llm.match_intent("حالة الأنظمة"))
         self.assertIsNone(openset_llm.match_intent("عطيني المشاريع"))

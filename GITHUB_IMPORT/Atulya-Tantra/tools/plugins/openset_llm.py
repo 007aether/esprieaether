@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+from datetime import datetime, timezone
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -23,8 +24,13 @@ _ENGINE = r"openset[-\s]*llm"
 _WHAT = re.compile(rf"^(?:شنو\s+هو|ما\s+هو|what\s+is)\s+{_ENGINE}\s*[.!?؟]?$", re.I)
 _HOW = re.compile(rf"^(?:كيفاش|كيف|how)\s+(?:نستعمل|نشغّل|كيخدم|to\s+run|run)\s+{_ENGINE}\s*[.!?؟]?$", re.I)
 _STATUS = re.compile(
-    rf"^(?:شنو\s+حالة|حالة|status|kifach\s+kayn\s+l\s+7al)\s+"
-    rf"(?:تثبيت\s+)?{_ENGINE}\s*[.!?؟]?$",
+    rf"^(?:"
+    rf"(?:شنو\s+حالة|حالة|status|kifach\s+kayn\s+l\s+7al)\s+(?:تثبيت\s+)?{_ENGINE}"
+    rf"|(?:واش\s+)?(?:تحمّل|تحمل|جاهز|كيتحمّل|كمّل)\s+(?:الموديل|النموذج|الـ?تحميل)"
+    rf"|فين\s+وصل\s+(?:الـ?تحميل|الموديل|النموذج)"
+    rf"|شنو\s+حالة\s+(?:الـ?تحميل|الموديل|النموذج)"
+    rf"|كمّل\s+التحميل"
+    rf")\s*(?:{_ENGINE})?\s*[.!?؟]?$",
     re.I,
 )
 
@@ -59,6 +65,39 @@ def _human_bytes(value: int) -> str:
     return f"{value:.1f} GB"
 
 
+def _eta_text(path: str, have: int, expected: int) -> str:
+    """تقدير صادق من أول سطر «attempt have=...» فسجل التحميل، بلا شبكة."""
+    if not path or have <= 0 or have >= expected:
+        return ""
+    try:
+        lines = Path(str(path) + ".log").read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return ""
+    for line in lines:
+        match = re.match(r"^(\S+)\s+attempt=\d+\shave=(\d+)$", line.strip())
+        if not match:
+            continue
+        try:
+            started = datetime.fromisoformat(match.group(1))
+            base_bytes = int(match.group(2))
+        except ValueError:
+            return ""
+        if started.tzinfo is None:
+            started = started.replace(tzinfo=timezone.utc)
+        seconds = (datetime.now(timezone.utc) - started).total_seconds()
+        if seconds <= 0 or have <= base_bytes:
+            return ""
+        rate = (have - base_bytes) / seconds
+        if rate <= 0:
+            return ""
+        remaining = (expected - have) / rate
+        return (
+            f" | السرعة ~{_human_bytes(int(rate))}/ث، "
+            f"الوقت المقدّر الباقي ~{int(remaining // 3600)}س {int((remaining % 3600) // 60)}د"
+        )
+    return ""
+
+
 def _status_text() -> str:
     """حالة التثبيت من ملف حالة محلي + حجم الملف على القرص، بلا شبكة."""
     try:
@@ -84,7 +123,8 @@ def _status_text() -> str:
         f"حالة openset-llm عندنا: WSL `{distro}`، المحرك "
         f"{'مثبّت' if engine else 'غير مثبّت'} ({version})، "
         f"الموديل {'جاهز' if model else 'كيتحمّل'} "
-        f"({_human_bytes(have)} / {_human_bytes(expected)}، {pct:.1f}%).\n"
+        f"({_human_bytes(have)} / {_human_bytes(expected)}، {pct:.1f}%)"
+        f"{'' if model else _eta_text(str(path_value or ''), have, expected)}.\n"
         f"الـAPI على {endpoint}: "
         f"{'مُتحقق منه حياً' if live else 'ما تحققش حياً، وما بدّلتش موديل أتوليا'}.\n"
         f"ملاحظة: {_scrub(str(state.get('note') or ''))}"

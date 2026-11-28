@@ -21,6 +21,7 @@ const DEFAULT_VOICE_LOCK = join(ROOT, 'esprieaether', 'state', 'voice_daemon.loc
 const DEFAULT_VOICE_STATUS = join(ROOT, 'esprieaether', 'state', 'voice_status.json');
 const DEFAULT_PC_ACTION = join(ROOT, 'esprieaether', 'state', 'pc_action_last.json');
 const DEFAULT_BRAIN_METRICS = join(ROOT, 'esprieaether', 'state', 'brain_metrics.json');
+const DEFAULT_OPENSET_STATE = join(ROOT, 'esprieaether', 'state', 'openset_llm_install.json');
 const DEFAULT_ACTION_REQUESTS = join(ROOT, 'esprieaether', 'state', 'action_requests.json');
 const DEFAULT_ACTION_AUDIT = join(ROOT, 'esprieaether', 'state', 'action_audit.jsonl');
 const DEFAULT_ATULYA_DIR = join(ROOT, 'GITHUB_IMPORT', 'Atulya-Tantra');
@@ -235,6 +236,24 @@ export async function buildSystemStatus(reportsDir, brainMetricsPath = DEFAULT_B
     };
   const available = Object.values(raw).some((value) => value !== null);
 
+  // État d'installation openset-llm : fichier local + taille réelle sur disque, jamais de réseau.
+  const opensetRaw = await readJsonFile(DEFAULT_OPENSET_STATE);
+  let opensetHave = 0;
+  if (opensetRaw && typeof opensetRaw.downloadPath === 'string' && opensetRaw.downloadPath) {
+    try { opensetHave = (await stat(opensetRaw.downloadPath)).size; } catch { opensetHave = 0; }
+  }
+  const opensetExpected = Number(opensetRaw && opensetRaw.expectedBytes) || 0;
+  const openset = opensetRaw ? {
+    engineInstalled: opensetRaw.engineInstalled === true,
+    engineVersion: String(opensetRaw.engineVersion || ''),
+    modelInstalled: opensetRaw.modelInstalled === true || (opensetExpected > 0 && opensetHave >= opensetExpected),
+    endpointLive: opensetRaw.endpointLive === true,
+    endpointBaseUrl: String(opensetRaw.endpointBaseUrl || ''),
+    haveBytes: opensetHave,
+    expectedBytes: opensetExpected,
+    pct: opensetExpected > 0 ? Math.min(100, Math.round((opensetHave / opensetExpected) * 1000) / 10) : 0,
+  } : null;
+
   return {
     checkedAt: new Date().toISOString(),
     available,
@@ -269,6 +288,7 @@ export async function buildSystemStatus(reportsDir, brainMetricsPath = DEFAULT_B
       checkedAt: brains.checked_at ?? null,
     },
     brainMetrics,
+    openset,
     graph: {
       nodes: vault.nodes ?? quality.graph?.nodes ?? null,
       edges: vault.edges ?? quality.graph?.edges ?? null,
