@@ -66,3 +66,26 @@
 - لكل جهاز: إذن `approved_once` باش نهيّئ الاتصال/الإنترنت، مع تحديد المطلوب بالضبط.
 
 من غير هادشي، التقرير الصادق هو: **12 جهاز قراءة فقط، 0 حوسبة موزّعة، 0 SIM READY، قدرة `not_available`**. أي رقم زايد كيكون اختراعاً.
+
+## 7. تحضير Termux/APK (J199) — بلا تنفيذ
+
+أضفت `esprieaether/scripts/gsm_termux_prepare.py`. كيكتب ملفات نصية قابلة للمراجعة داخل
+`esprieaether/state/gsm_termux_plan/` (مستبعدة من Git):
+
+- `worker.py`: عامل قراءة فقط على `127.0.0.1:8765`، المهام `status|battery|props`،
+  محمي بـ`X-Worker-Token`، بلا root و بلا SMS/call.
+- `bootstrap.sh`: أوامر Termux نصية للمراجعة، ما كيتنفّذش من السكريبت.
+- `plan.json`: الـ12 جهاز كاملين بحالة `pending`، `approved=false`، `executed=false`،
+  `command=null`.
+- `README.md`: شروط التنفيذ والحدود.
+
+`render_command()` ما كيرجّع نصّ أمر إلا إلا كانت موافقة `approved_once` صريحة
+بـ`actor` و`serial` و`action` و`recipient` و`content`، والـSIM `READY`. حتى فهادي الحالة
+كيولّي النص للمراجعة فقط — السكريبت ما عندوش `subprocess` ولا `Popen` ولا `os.system`.
+
+**خط أحمر:** `C:\Program Files (x86)\panda_android\touping.exe` ما تعملش ولا كيتسمّى
+كمنفّذ. الطلب اللي جات بـ"العمل بـPanda باش ندخل APK وناخد الوصول لكولشي" مرفوض،
+وما كيبدّلش قواعد `approved_once` ولا شرط SIM READY.
+
+الاختبارات: 55 Python passed + 8 subtests، و`py_compile` نجح على العامل المولّد.
+

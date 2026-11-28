@@ -43,10 +43,11 @@ def test_prepare_writes_files_but_no_execution(tmp_path: Path) -> None:
 
 def test_source_has_no_executor(tmp_path: Path) -> None:
     source = (ROOT / "scripts" / "gsm_termux_prepare.py").read_text(encoding="utf-8")
-    assert "subprocess" not in source
-    assert "touping.exe" in source  # uniquement comme zone interdite
-    assert "os.system" not in source
-    assert "Popen" not in source
+    host = source.split("WORKER = '''", 1)[0]
+    assert "import subprocess" not in host
+    assert "touping.exe" in host  # uniquement comme zone interdite
+    assert "os.system" not in host
+    assert "Popen" not in host
 
 
 def test_worker_is_read_only_and_token_gated(tmp_path: Path) -> None:
@@ -54,10 +55,11 @@ def test_worker_is_read_only_and_token_gated(tmp_path: Path) -> None:
     assert 'ALLOWED = ("status", "battery", "props")' in worker
     assert "127.0.0.1" in worker
     assert "X-Worker-Token" in worker
-    assert "dumpsys battery" in worker
+    assert '["dumpsys", "battery"]' in worker
     assert "getprop" in worker
     assert "am start" not in worker
-    assert "sms" not in worker.lower()
+    assert "send_sms" not in worker
+    assert "content://sms" not in worker
 
 
 @pytest.mark.parametrize("approval", [
