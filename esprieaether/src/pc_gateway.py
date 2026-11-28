@@ -224,7 +224,8 @@ class PcGateway:
             "status": "proposed", "reason": None, "text": "", "mode": mode,
         }
         row["text"] = (f"طلب موافقة ({row['id']}): {kind} — {_scrub(target)[:80]}. "
-                       f"قول «أكدت {row['id']}» باش ننفّذ، ولا «رفضت {row['id']}».")
+                       f"قول «أكدت {row['id']}» باش ننفّذ، ولا «رفضت {row['id']}». "
+                       "وإذا كان هادشي الطلب الوحيد المعلّق، «أكدت» بوحدو كافي.")
         self._plans[row["id"]] = row
         self._audit(row, None, "proposed", actor)
         self._write_last(row)
@@ -237,6 +238,32 @@ class PcGateway:
             self._audit(row, "proposed", "approved_once", "session-grant")
             return self._execute(row)
         return dict(row)
+
+    def pending(self) -> list[dict]:
+        """طلبات اللي مازالة بانتظار قرار صريح (لا تنفيذ قبل القرار)."""
+        return [dict(row) for row in self._plans.values() if row.get("status") == "proposed"]
+
+    def decide_last(self, decision: str, *, actor: str = "owner") -> dict:
+        """«أكدت» بوحدو: مقبول غير إلا كان طلب واحد معلّق والهدف واضح.
+
+        التأكيد يبقى صريح فكل مرة (approved_once)؛ ما كاينش session ولا auto
+        مخفي، والخطوط الحمرا تّطبّقات فـrequest قبل ما يولي الطلب معلّق.
+        """
+        if decision not in _DECISIONS:
+            raise ValueError("invalid_decision")
+        waiting = self.pending()
+        if not waiting:
+            return {"id": "", "status": "refused", "reason": "no_pending",
+                    "text": "ما كاين حتى طلب معلّق باش تأكّدو."}
+        if len(waiting) != 1:
+            return {"id": "", "status": "refused", "reason": "ambiguous_pending",
+                    "text": (f"كاين {len(waiting)} طلبات معلّقين. قول «أكدت act-…» "
+                             "باش تعيّن واحدة بعينها.")}
+        row = waiting[0]
+        if row.get("kind") not in ("open_url", "run_command") or not str(row.get("target") or "").strip():
+            return {"id": str(row.get("id") or ""), "status": "refused",
+                    "reason": "unclear_target", "text": "الطلب المعلّق مافيهش هدف واضح؛ ما ننفّذش."}
+        return self.decide(str(row["id"]), decision, actor=actor)
 
     def decide(self, action_id: str, decision: str, *, actor: str = "hud") -> dict:
         if decision not in _DECISIONS:

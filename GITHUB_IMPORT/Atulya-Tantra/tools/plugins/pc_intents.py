@@ -26,6 +26,10 @@ _CONFIRM = re.compile(
     r"^(أكدت|وافقت|أوافق|approve|confirm|رفضت|deny|reject)\s+(act-[a-z0-9-]+)\s*[.!?؟]?$",
     re.I,
 )
+_CONFIRM_SHORT = re.compile(
+    r"^(أكدت|وافقت|أوافق|approve|confirm|رفضت|deny|reject)\s*[.!?؟]?$",
+    re.I,
+)
 _RUN = re.compile(
     r"^(?:دير\s+هادي|دير\s+هادشي|نفّذ|نفذ|شغّل\s+أمر|شغل\s+أمر|run\s+command|run)\s*[:،,]?\s*(.+)$",
     re.I,
@@ -70,6 +74,11 @@ def match_intent(text: str) -> PcIntent | None:
         decision = "denied" if word.startswith(("رفضت", "deny", "reject")) else "approved_once"
         return PcIntent("decide", match.group(2), f"قرار {decision} للفعل {match.group(2)}",
                         mode=decision)
+    if match := _CONFIRM_SHORT.fullmatch(value):
+        word = match.group(1).lower()
+        decision = "denied" if word.startswith(("رفضت", "deny", "reject")) else "approved_once"
+        return PcIntent("decide_last", decision, f"قرار {decision} للطلب المعلّق الوحيد",
+                        mode=decision)
     if match := _RUN.fullmatch(value):
         command = match.group(1).strip()
         # « بلا سؤال » / « فالجلسة » : le propriétaire choisit le mode.
@@ -104,6 +113,16 @@ def execute_intent(intent: PcIntent, gateway) -> dict:
             row = gateway.decide(intent.target, intent.mode)
         except ValueError as exc:
             row = {"text": "ما قدرتش أطبّق القرار: " + str(exc), "status": "refused", "id": ""}
+    elif intent.kind == "decide_last":
+        decide_last = getattr(gateway, "decide_last", None)
+        if decide_last is None:
+            row = {"text": "البوابة ما كتدعمش التأكيد المختصر دابا. قول «أكدت act-…».",
+                   "status": "refused", "id": ""}
+        else:
+            try:
+                row = decide_last(intent.target, actor="owner")
+            except ValueError as exc:
+                row = {"text": "ما قدرتش أطبّق القرار: " + str(exc), "status": "refused", "id": ""}
     else:
         row = gateway.request(intent.kind, intent.target, mode=intent.mode)
     return {

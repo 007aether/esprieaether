@@ -49,6 +49,19 @@ _COUNT = re.compile(
     r"(?:جبت|عندك|كاين|في الكاتالوج|فالكاتالوج)\s*[.!?؟]?$",
     re.I,
 )
+_UNIFIED = re.compile(
+    r"^(?:(?:شنو|أي)\s+(?:المشروع|مشروع)\s+(?:اللي\s+)?كيجمع\s+كلشي"
+    r"|.*\bijema(?:3|33)\s+kolechi\b.*"
+    r"|unified\s+project(?:\s+for\s+esprieaether)?)\s*[.!?؟]?$",
+    re.I | re.S,
+)
+_UNIFIED_PICK = "affaan-m/ECC"
+_UNIFIED_WHY = (
+    "كيجمع المهارات (skills)، والردود السريعة (instincts)، والذاكرة (memory)، "
+    "والأمان (security): يعني نفس طبقات أتوليا المحلية فمشروع واحد. "
+    "هادي توصية محلية مبنية على وصف المستودع فالكاتالوج، "
+    "ما كتعنيش إنّا نزّلنا الكود ولا إنو شغّال عندنا دابا."
+)
 
 
 @dataclass(frozen=True)
@@ -63,6 +76,8 @@ def match_intent(text: str) -> CatalogIntent | None:
         return None
     if _COUNT.fullmatch(value):
         return CatalogIntent("count", "")
+    if _UNIFIED.fullmatch(value):
+        return CatalogIntent("unified", "")
     if _LIST.fullmatch(value):
         return CatalogIntent("list", "")
     if match := _DETAIL.fullmatch(value):
@@ -139,6 +154,17 @@ def execute_intent(intent: CatalogIntent, catalog_path: Path | None = None) -> s
 
     if intent.kind == "count":
         return prefix + f"عندي {len(projects)} مشروع AI وتطوير فالكاتالوج المحلي."
+
+    if intent.kind == "unified":
+        project = _find(data, _UNIFIED_PICK)
+        if project is None:
+            return prefix + "ما لقيتش المشروع المختار فالكاتالوج المحلي."
+        return (
+            prefix
+            + f"المشروع اللي كيجمع كلشي، واللي كنخصّصو لـEsprieaether هو {_UNIFIED_PICK}. "
+            + _UNIFIED_WHY
+            + "\nقول «تفاصيل المشروع 2» باش تشوف الوصف والرخصة والرابط."
+        )
 
     if intent.kind == "list":
         lines = [

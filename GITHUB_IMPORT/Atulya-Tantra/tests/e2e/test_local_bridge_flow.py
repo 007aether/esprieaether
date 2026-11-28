@@ -89,6 +89,16 @@ class LocalBridgeFlowTest(unittest.TestCase):
                             "messages": [{"role": "user", "content": "عطيني المشاريع"}]})
                         self.assertEqual(catalog.json()["route"], "github_catalog")
                         self.assertIn("50 المشاريع", catalog.json()["text"])
+
+                        knowledge = await client.post("/api/chat", json={
+                            "messages": [{"role": "user", "content": "CHENO LMA3RIFA LI 3ANDAK"}]})
+                        self.assertEqual(knowledge.json()["route"], "local_bridge")
+                        self.assertIn("كاتالوج", knowledge.json()["text"])
+
+                        unified = await client.post("/api/chat", json={
+                            "messages": [{"role": "user", "content": "chi projet ijema33 kolechi widifo l esprieaether"}]})
+                        self.assertEqual(unified.json()["route"], "github_catalog")
+                        self.assertIn("affaan-m/ECC", unified.json()["text"])
                         self.assertEqual(provider.calls, 0)
 
             asyncio.run(exercise())

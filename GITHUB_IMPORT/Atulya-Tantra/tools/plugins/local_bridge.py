@@ -32,12 +32,25 @@ _CAN = re.compile(
     r"^(?:شنو\s+تقدر\s+تدير|شنو\s+كاين\s+فهاد\s+النظام|what\s+can\s+you\s+do)\s*[.!?؟]?$",
     re.I,
 )
+_KNOWLEDGE = re.compile(
+    r"^(?:.*\b(?:cheno\s+lma3rifa\s+li\s+3andak|lma3rifa\s+li\s+3andak)\b.*"
+    r"|شنو\s+(?:المعرفة|معرفة)\s+(?:اللي\s+)?عندك"
+    r"|وشنو\s+كاين\s+فالمعرفة"
+    r"|what\s+knowledge\s+do\s+you\s+have)\s*[.!?؟]?$",
+    re.I,
+)
+_OVERVIEW = re.compile(
+    r"^(?:(?:beritak\s+tedewi|قبل\s+ما\s+(?:تجاوب|ترد|تكتب))\b.*"
+    r"|.*\bcheno\s+kayn\s+f\s+nidam\b.*)\s*[.!?؟]?$",
+    re.I | re.S,
+)
 _ASK = re.compile(
-    r"^(?:سول|اسأل|سائل|ask)\s+(?:أوبن\s*كود|open\s*code|opencode)\s*[:،,]?\s*(.{3,500}?)\s*[.!?؟]?$",
+    r"^(?:سول|اسأل|سائل|ask)\s+(?:أوبن\s*كود|وبن\s*كود|open\s*code|opencode)\s*[:،,]?\s*(.{3,500}?)\s*[.!?؟]?$",
     re.I,
 )
 _READ = re.compile(
-    r"^(?:شنو\s+(?:قال|جاوب)|واش\s+جاوب|ردّ|رد|جواب)\s+(?:أوبن\s*كود|open\s*code|opencode)\s*[.!?؟]?$",
+    r"^(?:(?:شنو\s+(?:قال|جاوب)|واش\s+جاوب|ردّ|رد|جواب)\s+(?:أوبن\s*كود|وبن\s*كود|open\s*code|opencode)"
+    r"|cheno\s+kantawro)\s*[.!?؟]?$",
     re.I,
 )
 
@@ -49,6 +62,13 @@ _WHO_TEXT = (
 _CAN_TEXT = (
     "فهاد الجهاز كاين محادثة وصوت محلي، فتح يوتيوب وصفحات ويب، وأفعال PC محكومة بالموافقة. "
     "ما كنرسلش SMS ولا كنلمس GSM بلا طلب صريح وتأكيد فكل مرة."
+)
+_KNOWLEDGE_TEXT = (
+    "المعرفة المحلية اللي عندي: كاتالوج مؤرّخ لـ50 مستودع AI وتطوير من GitHub، "
+    "جسر أسئلة وأجوبة مع OpenCode فـstate/opencode_bridge، "
+    "دليل صوت موقّع منك، وبوابة أفعال PC/إنترنت محكومة. "
+    "كنجاوب من هاد الملفات المحلية، بلا سحابة ومفاتيح، "
+    "وما كنأكدش إن حاجة باقية شغّالة بلا دليل حي."
 )
 _NO_ANSWER = (
     "ما جاتنيش أي إجابة من OpenCode دابا. سجّل سؤالك فالملف المحلي "
@@ -74,6 +94,10 @@ def match_intent(text: str) -> BridgeIntent | None:
     value = " ".join(str(text or "").strip().split())
     if not value:
         return None
+    if _OVERVIEW.fullmatch(value):
+        return BridgeIntent("overview", "")
+    if _KNOWLEDGE.fullmatch(value):
+        return BridgeIntent("knowledge", "")
     if _WHO.fullmatch(value) or _CAN.fullmatch(value):
         return BridgeIntent("who" if _WHO.fullmatch(value) else "capabilities", "")
     if match := _ASK.fullmatch(value):
@@ -126,7 +150,17 @@ def execute_intent(intent: BridgeIntent, state_dir=None) -> str:
         return _WHO_TEXT
     if intent.kind == "capabilities":
         return _CAN_TEXT
+    if intent.kind == "knowledge":
+        return _KNOWLEDGE_TEXT
     folder = bridge_dir(state_dir)
+    if intent.kind == "overview":
+        answer = _latest_answer(folder)
+        return (
+            "بلا تكهّن: أنا أتوليا، واللي كتسمّيه Esprieaether أنا بعيني. "
+            "فالنظام كاين محادثة وصوت محلي، بوابة أفعال محكومة، جسر أوبن كود، "
+            "وكاتالوج مؤرّخ لـ50 مشروع AI وتطوير. "
+            "آخر جواب مسجّل من أوبن كود فالملف المحلي: " + (answer or "ما كاينش جواب مسجّل دابا.")
+        )
     if intent.kind == "ask":
         question_id = _write_question(folder, intent.target)
         return (f"سجّلت سؤالك ({question_id}) فالملف المحلي. "

@@ -72,6 +72,40 @@ class PcIntentTest(unittest.TestCase):
         self.assertEqual(intent.target, "act-d41a4ce941")
         self.assertEqual(intent.mode, "approved_once")
 
+    def test_Confirm_مختصر_مقيد_بطلب_واحد_معلق(self) -> None:
+        intent = pc_intents.match_intent("أكدت")
+        self.assertIsNotNone(intent)
+        assert intent is not None
+        self.assertEqual(intent.kind, "decide_last")
+        self.assertEqual(intent.target, "approved_once")
+        with tempfile.TemporaryDirectory() as tmp:
+            gateway = PcGateway(state_dir=Path(tmp), browser_open=lambda url: None)
+            self.assertEqual(gateway.request("open_url", pc_intents.YOUTUBE_HOME)["status"], "proposed")
+            result = pc_intents.execute_intent(intent, gateway)
+            self.assertEqual(result["status"], "executed")
+            self.assertEqual(gateway.last_result()["executed"], True)
+
+    def test_Confirm_مختصر_يرفض_عند_تعدد_الطلبات(self) -> None:
+        intent = pc_intents.match_intent("أكدت")
+        assert intent is not None
+        with tempfile.TemporaryDirectory() as tmp:
+            gateway = PcGateway(state_dir=Path(tmp), browser_open=lambda url: None)
+            gateway.request("open_url", pc_intents.YOUTUBE_HOME)
+            gateway.request("open_url", "https://www.youtube.com/results?search_query=rap+maroc")
+            result = pc_intents.execute_intent(intent, gateway)
+            self.assertEqual(result["status"], "refused")
+            self.assertEqual(len(gateway.browser_calls), 0)
+            self.assertIn("أكدت act-", result["text"])
+
+    def test_Confirm_مختصر_ما ينفذش_بلا_طلب(self) -> None:
+        intent = pc_intents.match_intent("أكدت")
+        assert intent is not None
+        with tempfile.TemporaryDirectory() as tmp:
+            gateway = PcGateway(state_dir=Path(tmp), browser_open=lambda url: None)
+            result = pc_intents.execute_intent(intent, gateway)
+            self.assertEqual(result["status"], "refused")
+            self.assertEqual(gateway.browser_calls, [])
+
     def test_url_private_refusee(self) -> None:
         self.assertIsNone(pc_intents.match_intent("افتح http://127.0.0.1:8501/"))
 

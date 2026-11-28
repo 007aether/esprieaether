@@ -68,6 +68,17 @@ class GithubCatalogTest(unittest.TestCase):
         assert intent is not None
         self.assertIn("ما لقيتش", github_catalog.execute_intent(intent, CATALOG))
 
+    def test_projet_unifie_dedie_a_esprieaether(self) -> None:
+        for question in ("شنو المشروع اللي كيجمع كلشي", "chi projet ijema33 kolechi widifo l esprieaether"):
+            intent = github_catalog.match_intent(question)
+            self.assertIsNotNone(intent, question)
+            assert intent is not None
+            self.assertEqual(intent.kind, "unified")
+            text = github_catalog.execute_intent(intent, CATALOG)
+            self.assertIn("affaan-m/ECC", text)
+            self.assertIn("Esprieaether", text)
+            self.assertIn("ما كتعنيش", text)
+
     def test_questions_ordinaires_ne_deviennent_pas_un_catalogue(self) -> None:
         self.assertIsNone(github_catalog.match_intent("حالة الأنظمة"))
         self.assertIsNone(github_catalog.match_intent("كيفاش كيخدم الصوت؟"))

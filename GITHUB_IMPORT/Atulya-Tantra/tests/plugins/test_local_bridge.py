@@ -28,6 +28,41 @@ class LocalBridgeTest(unittest.TestCase):
         self.assertIn("أتوليا", text)
         self.assertIn("Esprieaether", text)
 
+    def test_knowledge_avec_harf_latini_passe_par_le_local(self) -> None:
+        intent = local_bridge.match_intent("CHENO LMA3RIFA LI 3ANDAK")
+        self.assertIsNotNone(intent)
+        assert intent is not None
+        self.assertEqual(intent.kind, "knowledge")
+        text = local_bridge.execute_intent(intent, Path(tempfile.mkdtemp()))
+        self.assertIn("كاتالوج", text)
+        self.assertNotIn("live_verified", text)
+
+    def test_phrase_composee_avec_harf_latini_donne_un_apercu_honnete(self) -> None:
+        phrase = "BERITAK TEDEWI OTEKOL LI CHENO KAYN F NIDAM ET CHEKOUN NETA ET CHENO KANTAWRO"
+        intent = local_bridge.match_intent(phrase)
+        self.assertIsNotNone(intent)
+        assert intent is not None
+        self.assertEqual(intent.kind, "overview")
+        folder = Path(tempfile.mkdtemp())
+        (folder / "answers.jsonl").write_text(
+            json.dumps({"kind": "answer", "text": "الخدمة شغّالة محلياً."}, ensure_ascii=False) + "\n",
+            encoding="utf-8")
+        text = local_bridge.execute_intent(intent, folder)
+        self.assertIn("أتوليا", text)
+        self.assertIn("الخدمة شغّالة محلياً.", text)
+        self.assertNotIn("live_verified", text)
+
+    def test_alias_opencode_en_harf_latini(self) -> None:
+        asked = local_bridge.match_intent("وبن كود: واش كاين خدمة؟")
+        self.assertIsNotNone(asked)
+        assert asked is not None
+        self.assertEqual(asked.kind, "ask")
+        self.assertEqual(asked.target, "واش كاين خدمة؟")
+        read = local_bridge.match_intent("CHENO KANTAWRO")
+        self.assertIsNotNone(read)
+        assert read is not None
+        self.assertEqual(read.kind, "read")
+
     def test_capacites_sont_decrites_sans_etat_vivant_invente(self) -> None:
         intent = local_bridge.match_intent("شنو تقدر تدير؟")
         self.assertIsNotNone(intent)
