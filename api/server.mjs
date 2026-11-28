@@ -205,7 +205,11 @@ function isFreshLine(row) {
 }
 
 /** Agrège uniquement les champs publics des rapports des robots — jamais de secret. */
-export async function buildSystemStatus(reportsDir, brainMetricsPath = DEFAULT_BRAIN_METRICS) {
+export async function buildSystemStatus(
+  reportsDir,
+  brainMetricsPath = DEFAULT_BRAIN_METRICS,
+  opensetPath = DEFAULT_OPENSET_STATE,
+) {
   const raw = {};
   for (const [key, file] of Object.entries(REPORT_FILES)) {
     raw[key] = await readJsonFile(join(reportsDir, file));
@@ -237,7 +241,7 @@ export async function buildSystemStatus(reportsDir, brainMetricsPath = DEFAULT_B
   const available = Object.values(raw).some((value) => value !== null);
 
   // État d'installation openset-llm : fichier local + taille réelle sur disque, jamais de réseau.
-  const opensetRaw = await readJsonFile(DEFAULT_OPENSET_STATE);
+  const opensetRaw = await readJsonFile(opensetPath);
   let opensetHave = 0;
   if (opensetRaw && typeof opensetRaw.downloadPath === 'string' && opensetRaw.downloadPath) {
     try { opensetHave = (await stat(opensetRaw.downloadPath)).size; } catch { opensetHave = 0; }

@@ -88,3 +88,23 @@ test('D1/D2: system.html affiche satellites et mesure sans inventer de nombre', 
   assert.ok(!/onclick|POST/.test(html), 'aucune commande depuis le HUD');
   assert.ok(!html.includes('https://'), 'ressource externe');
 });
+
+test('D3: openset-llm publié depuis le fichier local, sans réseau ni secret', async () => {
+  const opensetPath = join(dir, 'state', 'openset_llm_install.json');
+  const modelPath = join(dir, 'state', 'bonsai.gguf');
+  await writeFile(modelPath, Buffer.alloc(2 * 1024 * 1024));
+  await writeFile(opensetPath, JSON.stringify({
+    engineInstalled: true, engineVersion: 'v0.3.4', modelInstalled: false,
+    endpointLive: false, endpointBaseUrl: 'http://127.0.0.1:8080/v1',
+    downloadPath: modelPath, expectedBytes: 8 * 1024 * 1024,
+  }), 'utf8');
+  const status = await buildSystemStatus(reportsDir, metricsPath, opensetPath);
+  assert.equal(status.openset.engineInstalled, true);
+  assert.equal(status.openset.modelInstalled, false);
+  assert.equal(status.openset.endpointLive, false);
+  assert.equal(status.openset.pct, 25);
+  assert.ok(!JSON.stringify(status.openset).includes('api_key'));
+  const html = await readFile(MAIN, 'utf8');
+  assert.ok(html.includes('id="openset"'), 'tuile openset absente du HUD');
+  assert.ok(/data\.openset/.test(html), 'tuile openset non branchée sur SYS');
+});

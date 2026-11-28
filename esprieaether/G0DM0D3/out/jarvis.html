@@ -482,6 +482,14 @@
         esc(r.vault && r.vault.ok ? " OK" : "?") + '</span></div>' +
       '<div class="row"><span>المصادر المحلية</span><span class="dim">' +
         esc(tr((r.backlog && r.backlog.missingSources || []).join(",") || "todas")) + '</span></div>';
+    var os = data.openset || null;
+    if (os) {
+      var osState = os.endpointLive ? "حيّ على " + esc(os.endpointBaseUrl)
+        : (os.modelInstalled ? "الموديل جاهز، الـAPI ما تحققش" : "كيتحمّل " + os.pct + "%");
+      $("openset").className = os.endpointLive ? "ok" : (os.modelInstalled ? "warn" : "dim");
+      $("openset").textContent = "openset-llm: " + osState + " (" +
+        Math.round(os.haveBytes / 1048576) + " / " + Math.round(os.expectedBytes / 1048576) + " MB)";
+    }
     $("reactor").style.filter = ok ? "none" : "hue-rotate(120deg)";
   }
 
