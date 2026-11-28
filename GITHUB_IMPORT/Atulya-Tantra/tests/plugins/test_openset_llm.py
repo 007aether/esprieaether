@@ -40,6 +40,22 @@ class OpenSetLlmTest(unittest.TestCase):
         self.assertIn("WSL2", text)
         self.assertIn("ما نزّلتش الموديل", text)
 
+    def test_status_donne_progression_reelle_sans_dire_live(self) -> None:
+        intent = openset_llm.match_intent("شنو حالة openset-llm")
+        self.assertIsNotNone(intent)
+        assert intent is not None
+        text = openset_llm.execute_intent(intent)
+        self.assertIn("Ubuntu2404", text)
+        self.assertIn("كيتحمّل", text)
+        self.assertIn("ما تحققش حياً", text)
+        self.assertNotIn("live_verified", text)
+
+    def test_status_latin_darija(self) -> None:
+        intent = openset_llm.match_intent("kifach kayn l 7al openset llm")
+        self.assertIsNotNone(intent)
+        assert intent is not None
+        self.assertEqual(intent.kind, "status")
+
     def test_question_ordinaire_ne_devient_pas_openset(self) -> None:
         self.assertIsNone(openset_llm.match_intent("حالة الأنظمة"))
         self.assertIsNone(openset_llm.match_intent("عطيني المشاريع"))

@@ -18,9 +18,15 @@ if str(_LOCAL_SRC) not in sys.path:
 from pc_gateway import _scrub  # noqa: E402
 
 _META = Path(__file__).with_name("openset_llm.json")
+_STATE = Path(__file__).resolve().parents[4] / "esprieaether" / "state" / "openset_llm_install.json"
 _ENGINE = r"openset[-\s]*llm"
 _WHAT = re.compile(rf"^(?:شنو\s+هو|ما\s+هو|what\s+is)\s+{_ENGINE}\s*[.!?؟]?$", re.I)
 _HOW = re.compile(rf"^(?:كيفاش|كيف|how)\s+(?:نستعمل|نشغّل|كيخدم|to\s+run|run)\s+{_ENGINE}\s*[.!?؟]?$", re.I)
+_STATUS = re.compile(
+    rf"^(?:شنو\s+حالة|حالة|status|kifach\s+kayn\s+l\s+7al)\s+"
+    rf"(?:تثبيت\s+)?{_ENGINE}\s*[.!?؟]?$",
+    re.I,
+)
 
 
 @dataclass(frozen=True)
@@ -36,6 +42,8 @@ def match_intent(text: str) -> OpenSetIntent | None:
         return OpenSetIntent("what")
     if _HOW.fullmatch(value):
         return OpenSetIntent("how")
+    if _STATUS.fullmatch(value):
+        return OpenSetIntent("status")
     return None
 
 
@@ -43,8 +51,50 @@ def _read() -> dict:
     return json.loads(_META.read_text(encoding="utf-8"))
 
 
+def _human_bytes(value: int) -> str:
+    for unit in ("B", "KB", "MB", "GB"):
+        if value < 1024 or unit == "GB":
+            return f"{value:.0f} {unit}" if unit == "B" else f"{value:.1f} {unit}"
+        value /= 1024
+    return f"{value:.1f} GB"
+
+
+def _status_text() -> str:
+    """حالة التثبيت من ملف حالة محلي + حجم الملف على القرص، بلا شبكة."""
+    try:
+        state = json.loads(_STATE.read_text(encoding="utf-8"))
+    except (OSError, ValueError, json.JSONDecodeError):
+        return "ما عنديش ملف حالة محلي على تثبيت openset-llm دابا."
+    engine = bool(state.get("engineInstalled"))
+    distro = _scrub(str(state.get("wslDistro") or "-"))
+    version = _scrub(str(state.get("engineVersion") or "-"))
+    expected = int(state.get("expectedBytes") or 0)
+    path_value = state.get("downloadPath")
+    have = 0
+    if isinstance(path_value, str) and path_value:
+        try:
+            have = int(Path(path_value).stat().st_size)
+        except OSError:
+            have = 0
+    pct = (100.0 * have / expected) if expected else 0.0
+    model = bool(state.get("modelInstalled")) or (bool(expected) and have >= expected)
+    live = bool(state.get("endpointLive"))
+    endpoint = _scrub(str(state.get("endpointBaseUrl") or "http://127.0.0.1:8080/v1"))
+    return (
+        f"حالة openset-llm عندنا: WSL `{distro}`، المحرك "
+        f"{'مثبّت' if engine else 'غير مثبّت'} ({version})، "
+        f"الموديل {'جاهز' if model else 'كيتحمّل'} "
+        f"({_human_bytes(have)} / {_human_bytes(expected)}، {pct:.1f}%).\n"
+        f"الـAPI على {endpoint}: "
+        f"{'مُتحقق منه حياً' if live else 'ما تحققش حياً، وما بدّلتش موديل أتوليا'}.\n"
+        f"ملاحظة: {_scrub(str(state.get('note') or ''))}"
+    )
+
+
 def execute_intent(intent: OpenSetIntent) -> str:
     """نصّ صادق من الملف المحلي غير، ما كيقولش إن المحرك شغّال دابا."""
+    if intent.kind == "status":
+        return _status_text()
     try:
         data = _read()
     except (OSError, ValueError, json.JSONDecodeError):
