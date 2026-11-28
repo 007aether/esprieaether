@@ -132,6 +132,28 @@ def write_evidence() -> dict:
     return evidence
 
 
+def confirm_playback() -> dict:
+    """Consigne la confirmation explicite du propriétaire après écoute réelle.
+
+    On ne passe en live_verified que si l'échantillon frais est non silencieux ;
+    la confirmation vient du propriétaire, pas d'une inférence faite par le bot.
+    """
+    evidence = write_evidence()
+    if not evidence["wav"]["nonSilent"]:
+        raise VoiceError("Aucun échantillon audible : confirmation refusée.")
+    evidence.update({
+        "status": "live_verified",
+        "playback": "owner_confirmed",
+        "ownerConfirmedAt": datetime.now(timezone.utc).isoformat(),
+        "confirmation": "propriétaire: « سمعتها »",
+        "reason": None,
+    })
+    tmp = EVIDENCE_PATH.with_name(EVIDENCE_PATH.name + ".tmp")
+    tmp.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(EVIDENCE_PATH)
+    return evidence
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "ESPRIEATHER-LocalVoice/1.0"
 

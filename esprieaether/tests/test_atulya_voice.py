@@ -26,6 +26,16 @@ def fake_wav():
     return output.getvalue()
 
 
+def tone_wav():
+    output = io.BytesIO()
+    with wave.open(output, "wb") as writer:
+        writer.setnchannels(1)
+        writer.setsampwidth(2)
+        writer.setframerate(16000)
+        writer.writeframes(b"\xff\x1f" * 1600)
+    return output.getvalue()
+
+
 class FakeEngine:
     def __init__(self, audio=None):
         self.ready = True
@@ -98,6 +108,28 @@ class AtulyaVoiceTest(unittest.TestCase):
         self.assertEqual(proof["playback"], "owner_confirmation_pending")
         self.assertEqual(saved, proof)
         self.assertIn("127.0.0.1", proof["source"])
+
+    def test_confirmation_du_proprietaire_passe_en_live_verified(self):
+        fake = FakeEngine(audio=tone_wav())
+        with tempfile.TemporaryDirectory() as tmp, \
+                mock.patch.object(atulya_voice, "CACHE_DIR", Path(tmp)), \
+                mock.patch.object(atulya_voice, "EVIDENCE_PATH", Path(tmp) / "evidence.json"), \
+                mock.patch.object(atulya_voice, "engine", return_value=fake):
+            proof = atulya_voice.confirm_playback()
+            saved = json.loads((Path(tmp) / "evidence.json").read_text(encoding="utf-8"))
+        self.assertEqual(proof["status"], "live_verified")
+        self.assertEqual(proof["playback"], "owner_confirmed")
+        self.assertTrue(proof["wav"]["nonSilent"])
+        self.assertIn("سمعتها", proof["confirmation"])
+        self.assertEqual(saved, proof)
+
+        silent = FakeEngine()
+        with tempfile.TemporaryDirectory() as tmp, \
+                mock.patch.object(atulya_voice, "CACHE_DIR", Path(tmp)), \
+                mock.patch.object(atulya_voice, "EVIDENCE_PATH", Path(tmp) / "evidence.json"), \
+                mock.patch.object(atulya_voice, "engine", return_value=silent):
+            with self.assertRaises(Exception):
+                atulya_voice.confirm_playback()
 
     def test_route_get_say_sans_corps_ni_post(self):
         text, language = atulya_voice.say_query(
