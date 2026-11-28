@@ -6,17 +6,18 @@
 
 | البند | القيمة | الدليل |
 |---|---|---|
-| الأجهزة المكتشفة | 10 (المستهدف 20) | `esprieaether/state/gsm_status.json` |
-| ADB online | 10، منفذ `5038`، قراءة فقط | نفس الملف، `checkedAt=2026-11-27T10:52:24Z`، دليل صالح حتى 2026-12-04 |
+| الأجهزة المكتشفة | **12** (المستهدف 20) | `esprieaether/state/gsm_status.json` |
+| ADB online | 12، منفذ `5038`، قراءة فقط | مسح حي جديد `checkedAt=2026-11-28T10:58:20Z` |
 | SIM READY | **0** — أغلبها `ABSENT` | `devices[].sim_state` |
 | إنترنت مُبلَّغ عنه | **0** — `network=Unknown` | `devices[].network` |
 | root / Termux | 0 / 0 | `root_count`, `termux_count` |
+| الذاكرة الحرة لكل جهاز | 111–305 MB | `devices[].free_mb` — ما تكفي حتى لتشغيل نموذج صغير |
 | عمّال حوسبة مسجّلون | **0** | `gsm_compute.json` الجديد |
 | قدرة الحوسبة | `not_available` | `esprieaether/src/gsm_compute.py` |
 | تجربة موديل على الجهاز | `needs_user_data` — ما كاينش ELF arm64 ولا GGUF ≤600MB | `gsm_model_trial.json` |
-| تناقض أدلة | `gsm_status online=10` مقابل `gsm_workers online=0` | كيتعرض فالحقل `contradictions`، ما تمسّحناش بالاختراع |
+| تناقض أدلة | `gsm_status online=12` مقابل `gsm_workers online=0` | كيتعرض فالحقل `contradictions`، ما تمسّحناش بالاختراع |
 
-`adb` غير موجود فـ`PATH` دابا، وعلى الشبكة المحلية ظهر عنوان واحد غيره (`192.168.1.148`)؛ يعني الـ10 كاينين فالدليل القديم، ماشي فالجلسة الحية الحالية.
+`adb` موجود فـ`C:\Program Files (x86)\panda_android\tools\adb.exe`، والخادم شغّال على المنفذ `5038`. الـ12 ظهرو فمسح حي جديد بـ`adb devices -l`، ماشي غير من الدليل القديم.
 
 ## 2. شنو كان موجودأصلاً
 
@@ -64,4 +65,4 @@
 - قرار صريح بالطريقة: Termux/APK على الأجهزة، ولا ADB TCP، ولا غير مراقبة read-only.
 - لكل جهاز: إذن `approved_once` باش نهيّئ الاتصال/الإنترنت، مع تحديد المطلوب بالضبط.
 
-من غير هادشي، التقرير الصادق هو: **10 أجهزة قراءة فقط، 0 حوسبة موزّعة، 0 SIM READY، قدرة `not_available`**. أي رقم زايد كيكون اختراعاً.
+من غير هادشي، التقرير الصادق هو: **12 جهاز قراءة فقط، 0 حوسبة موزّعة، 0 SIM READY، قدرة `not_available`**. أي رقم زايد كيكون اختراعاً.

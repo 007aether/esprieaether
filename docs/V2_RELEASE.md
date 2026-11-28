@@ -341,4 +341,5 @@
 | إصلاحات J184 (معرفة + تأكيد مختصر + openset-llm) | TDD 46 passed + 11 subtests، e2e 1/1، smoke حي 8 عبارات على :8501 | «CHENO LMA3RIFA LI 3ANDAK» والجملة المركّبة كيجاوو من local_bridge؛ «أكدت» بوحدو كيقبل غير طلب واحد معلّق وبرفض بلا طلب؛ كاتالوج 50 مشروع تتحقق 50/50 عبر GitHub API (1 مؤرشف)؛ openset-llm تّجاب وتّخزّن فمعرفة أتوليا بـroute openset_llm، بلا WSL ولا موديل ولا تغيير موديل حي. |
 | تحسين حالة openset-llm (J188) | TDD 6/6، smoke حي على :8501 بـroute openset_llm | «شنو حالة openset-llm» كيعطي نسبة التحميل الحقيقية من الملف المحلي، وكَيقول إن API ما تحققش وإن موديل أتوليا باقي على :31416. |
 | مؤشر openset-llm فـHUD + ETA حقيقي (J193) | Node 10/10، Python 7/7، smoke حي على :8501 | «فين وصل التحميل» كيعطي النسبة والسرعة والوقت الباقي؛ HUD كيعرض نفس الحالة من الملف المحلي. |
+| منسّق قدرة GSM (J195) | Python 43/43 + 8 subtests، Node 11/11، مسح ADB حي 12 جهاز | `gsm_compute.json` + `/api/rest/gsm/compute` + مؤشر Dashboard؛ `not_available` بلا وكيل حوسبة، و`live_verified` ممنوع بلا benchmark حديث. |
 
